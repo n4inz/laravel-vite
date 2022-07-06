@@ -132,270 +132,344 @@
            </ul>
         </div>
     </aside>
-    <article id="article" class="flex ml-56 space-x-2 mt-20 px-10">
-        <div class="w-[669px] space-y-2 ">
-            <div class="space-y-5 bg-bgbody p-8 rounded">
-                <div class=" flex space-x-2">
-                    <div class="w-2 h-6 bg-palet rounded-sm"></div>
-                    <span class="text-[#222222] font-semibold">Job Status</span>
+    <article id="article" class=" ml-56 space-x-2 mt-[85px] px-10 w-full">
+        <div class="h-20 xl:w-full bg-bgbody px-6 flex items-center justify-between rounded">
+            <div class="flex items-center">
+                <div class="h-8 w-[119px] bg-palet rounded-lg flex items-center justify-center space-x-2 hover:cursor-pointer">
+                    <div class="relative">
+                        <div class="w-[10.33px] h-[1px] bg-white"></div>
+                        <div class="absolute w-[10.33px] h-[1px] bg-white rotate-90"></div>
+                    </div>
+                    <div class="btn-create-list text-white ">Create a List</div>
                 </div>
-                <div class="flex space-x-4">
-                    <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                        <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4997 2.83325C10.5792 2.83325 9.83301 3.57944 9.83301 4.49992C9.83301 5.42039 10.5792 6.16658 11.4997 6.16658C12.4201 6.16658 13.1663 5.42039 13.1663 4.49992C13.1663 3.57944 12.4201 2.83325 11.4997 2.83325ZM8.83301 4.49992C8.83301 3.02716 10.0269 1.83325 11.4997 1.83325C12.9724 1.83325 14.1663 3.02716 14.1663 4.49992C14.1663 5.97268 12.9724 7.16658 11.4997 7.16658C10.0269 7.16658 8.83301 5.97268 8.83301 4.49992Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4997 9.83325C10.5792 9.83325 9.83301 10.5794 9.83301 11.4999C9.83301 12.4204 10.5792 13.1666 11.4997 13.1666C12.4201 13.1666 13.1663 12.4204 13.1663 11.4999C13.1663 10.5794 12.4201 9.83325 11.4997 9.83325ZM8.83301 11.4999C8.83301 10.0272 10.0269 8.83325 11.4997 8.83325C12.9724 8.83325 14.1663 10.0272 14.1663 11.4999C14.1663 12.9727 12.9724 14.1666 11.4997 14.1666C10.0269 14.1666 8.83301 12.9727 8.83301 11.4999Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.49967 2.83325C3.5792 2.83325 2.83301 3.57944 2.83301 4.49992C2.83301 5.42039 3.5792 6.16658 4.49967 6.16658C5.42015 6.16658 6.16634 5.42039 6.16634 4.49992C6.16634 3.57944 5.42015 2.83325 4.49967 2.83325ZM1.83301 4.49992C1.83301 3.02716 3.02692 1.83325 4.49967 1.83325C5.97243 1.83325 7.16634 3.02716 7.16634 4.49992C7.16634 5.97268 5.97243 7.16658 4.49967 7.16658C3.02692 7.16658 1.83301 5.97268 1.83301 4.49992Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.49967 9.83325C3.5792 9.83325 2.83301 10.5794 2.83301 11.4999C2.83301 12.4204 3.5792 13.1666 4.49967 13.1666C5.42015 13.1666 6.16634 12.4204 6.16634 11.4999C6.16634 10.5794 5.42015 9.83325 4.49967 9.83325ZM1.83301 11.4999C1.83301 10.0272 3.02692 8.83325 4.49967 8.83325C5.97243 8.83325 7.16634 10.0272 7.16634 11.4999C7.16634 12.9727 5.97243 14.1666 4.49967 14.1666C3.02692 14.1666 1.83301 12.9727 1.83301 11.4999Z" fill="white"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <span class="text-[#4F4F4F] text-xs font-semibold">Total</span>
-                        </div>
-                        <div>
-                            <span class="text-5xl font-bold">10</span>
-                        </div>
+    
+                <div class="relative w-80 left-1">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg width="15" height="15" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                        </svg>
                     </div>
-
-                    <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                        <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C2.72386 2.5 2.5 2.72386 2.5 3V13C2.5 13.2761 2.72386 13.5 3 13.5H13C13.2761 13.5 13.5 13.2761 13.5 13V3C13.5 2.72386 13.2761 2.5 13 2.5H3ZM1.5 3C1.5 2.17157 2.17157 1.5 3 1.5H13C13.8284 1.5 14.5 2.17157 14.5 3V13C14.5 13.8284 13.8284 14.5 13 14.5H3C2.17157 14.5 1.5 13.8284 1.5 13V3Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 4.33325C3.83301 4.05711 4.05687 3.83325 4.33301 3.83325H6.99967C7.27582 3.83325 7.49967 4.05711 7.49967 4.33325V6.99992C7.49967 7.27606 7.27582 7.49992 6.99967 7.49992H4.33301C4.05687 7.49992 3.83301 7.27606 3.83301 6.99992V4.33325ZM4.83301 4.83325V6.49992H6.49967V4.83325H4.83301Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 4.33325C8.5 4.05711 8.72386 3.83325 9 3.83325H11.6667C11.9428 3.83325 12.1667 4.05711 12.1667 4.33325C12.1667 4.60939 11.9428 4.83325 11.6667 4.83325H9C8.72386 4.83325 8.5 4.60939 8.5 4.33325Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 6.66675C8.5 6.39061 8.72386 6.16675 9 6.16675H11.6667C11.9428 6.16675 12.1667 6.39061 12.1667 6.66675C12.1667 6.94289 11.9428 7.16675 11.6667 7.16675H9C8.72386 7.16675 8.5 6.94289 8.5 6.66675Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H11.6663C11.9425 8.83325 12.1663 9.05711 12.1663 9.33325C12.1663 9.60939 11.9425 9.83325 11.6663 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 11.6667C3.83301 11.3906 4.05687 11.1667 4.33301 11.1667H11.6663C11.9425 11.1667 12.1663 11.3906 12.1663 11.6667C12.1663 11.9429 11.9425 12.1667 11.6663 12.1667H4.33301C4.05687 12.1667 3.83301 11.9429 3.83301 11.6667Z" fill="white"/>
-                            </svg> 
-                        </div>
-                        <div>
-                            <span class="text-[#4F4F4F] text-xs font-semibold">New</span>
-                        </div>
-                        <div>
-                            <span class="text-5xl font-bold">2</span>
-                        </div>
-                    </div>
-
-                    <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                        <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.8628 0.520022C7.95432 0.493314 8.05157 0.493326 8.14308 0.520059L14.1402 2.27194C14.3534 2.33423 14.5 2.52974 14.5 2.75188V6.34456C14.5 10.336 11.9457 13.8795 8.15893 15.1412C8.05635 15.1754 7.94545 15.1754 7.84286 15.1412C4.05512 13.8795 1.5 10.3352 1.5 6.3429V2.75188C1.5 2.52969 1.64663 2.33415 1.85992 2.2719L7.8628 0.520022ZM2.5 3.12682V6.3429C2.5 9.84893 4.70872 12.9676 8.00085 14.1381C11.292 12.9676 13.5 9.84968 13.5 6.34456V3.12672L8.00281 1.52088L2.5 3.12682Z" fill="white"/>
-                            </svg>    
-                        </div>
-                        <div>
-                            <span class="text-[#4F4F4F] text-xs font-semibold">Action</span>
-                        </div>
-                        <div>
-                            <span class="text-5xl font-bold">5</span>
-                        </div>
-                    </div>
-
-                    <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                        <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                            </svg> 
-                        </div>
-                        <div>
-                            <span class="text-[#4F4F4F] text-xs font-semibold">Over 1 week</span>
-                        </div>
-                        <div>
-                            <span class="text-5xl font-bold">2</span>
-                        </div>
-                    </div>
-
-                    <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                        <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <span class="text-[#4F4F4F] text-xs font-semibold">Over 2 week</span>
-                        </div>
-                        <div>
-                            <span class="text-5xl font-bold">3</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-bgbody  p-8 rounded">
-                <div class="flex justify-between">
-                    <div class="flex space-x-2 ">
-                        <div class="w-2 h-6 bg-[#3B83D7] rounded-sm"></div>
-                        <span class="text-[#222222] font-semibold">Agency Revenue</span>
-                    </div>
-                    <div class="">
-                        <select  class="block p-2 mb-6 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 outline-none ">
-                            <option selected>Last 5 days</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="overflow-hidden ">
-                    <canvas class="p-3" height="100" id="chartLine"></canvas>
+                    <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg outline-none  block w-full pl-10 p-2 " placeholder="Search for tasks, projects, ..." required>
                 </div>
             </div>
 
-            <div class="bg-bgbody p-8 rounded space-y-10">
-                <div class="flex space-x-2 ">
-                    <div class="w-2 h-6 bg-[#FEC001] rounded-sm"></div>
-                    <span class="text-[#222222] font-semibold">Favorite Links</span>
-                </div>
-                <div class="flex space-x-5">
-                    <div class="w-16 h-16 border border-palet rounded flex justify-center items-center">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.27275 28.0062V15.6425L3.43837 12.1346L0 10.188V25.8244C0 27.0316 0.978125 28.0062 2.18187 28.0062H7.27275Z" fill="#4285F4"/>
-                            <path d="M24.7275 28.0064H29.8184C31.0258 28.0064 32.0003 27.0281 32.0003 25.8245V10.1882L28.1058 12.4179L24.7275 15.6426V28.0064Z" fill="#34A853"/>
-                            <path d="M7.27273 15.6425L6.75098 10.8116L7.27273 6.18799L16 12.7335L24.7272 6.18799L25.3109 10.562L24.7272 15.6425L16 22.188L7.27273 15.6425Z" fill="#EA4335"/>
-                            <path d="M24.7275 6.18796V15.6425L32.0003 10.188V7.27884C32.0003 4.58071 28.9203 3.04259 26.764 4.66071L24.7275 6.18796Z" fill="#FBBC04"/>
-                            <path d="M0 10.188L3.34488 12.6968L7.27275 15.6425V6.18802L5.23625 4.66077C3.07625 3.04252 0 4.58077 0 7.27877V10.1879V10.188Z" fill="#C5221F"/>
-                        </svg> 
-                    </div>
-                    <div class="w-16 h-16 border border-palet rounded flex justify-center items-center">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.73014 20.165C6.73014 22.019 5.23176 23.5175 3.37776 23.5175C1.52377 23.5175 0.0253906 22.019 0.0253906 20.165C0.0253906 18.3111 1.52377 16.8127 3.37789 16.8127H6.73001V20.1651L6.73014 20.165ZM8.40639 20.165C8.40639 18.3111 9.90476 16.8127 11.7588 16.8127C13.6128 16.8127 15.1111 18.3111 15.1111 20.1651V28.546C15.1111 30.4 13.6128 31.8985 11.7586 31.8985C9.90489 31.8985 8.40639 30.4 8.40639 28.546V20.1651V20.165Z" fill="#E01E5A"/>
-                            <path d="M11.7587 6.70475C9.90475 6.70475 8.40625 5.20638 8.40625 3.35238C8.40625 1.49838 9.90487 0 11.7587 0C13.6126 0 15.1111 1.49838 15.1111 3.35238V6.70487H11.7586L11.7587 6.70475ZM11.7587 8.40637C13.6128 8.40637 15.1111 9.90475 15.1111 11.7587C15.1111 13.6128 13.6128 15.1111 11.7586 15.1111H3.3525C1.49837 15.1111 0 13.6128 0 11.7586C0 9.90487 1.49838 8.40637 3.35238 8.40637H11.7586H11.7587Z" fill="#36C5F0"/>
-                            <path d="M25.1935 11.7587C25.1935 9.90475 26.6919 8.40625 28.5457 8.40625C30.3997 8.40625 31.8983 9.90475 31.8983 11.7587C31.8983 13.6128 30.3997 15.1111 28.5457 15.1111H25.1935V11.7586V11.7587ZM23.5173 11.7587C23.5173 13.6128 22.0188 15.1111 20.1648 15.1111C18.3109 15.1111 16.8125 13.6128 16.8125 11.7586V3.3525C16.8125 1.49837 18.3109 0 20.1648 0C22.0186 0 23.5171 1.49838 23.5171 3.35238V11.7586L23.5173 11.7587Z" fill="#2EB67D"/>
-                            <path d="M20.1648 25.1937C22.0188 25.1937 23.5173 26.6921 23.5173 28.546C23.5173 30.4 22.0188 31.8985 20.1648 31.8985C18.3109 31.8985 16.8125 30.4 16.8125 28.546V25.1937H20.1649H20.1648ZM20.1648 23.5175C18.3109 23.5175 16.8125 22.019 16.8125 20.165C16.8125 18.3111 18.3109 16.8127 20.1649 16.8127H28.5711C30.4251 16.8127 31.9236 18.3111 31.9236 20.1651C31.9236 22.019 30.4251 23.5175 28.5711 23.5175H20.1649H20.1648Z" fill="#ECB22E"/>
-                        </svg>
-                    </div>
-                    <div class="w-16 h-16 border border-palet rounded flex justify-center items-center">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.73014 20.165C6.73014 22.019 5.23176 23.5175 3.37776 23.5175C1.52377 23.5175 0.0253906 22.019 0.0253906 20.165C0.0253906 18.3111 1.52377 16.8127 3.37789 16.8127H6.73001V20.1651L6.73014 20.165ZM8.40639 20.165C8.40639 18.3111 9.90476 16.8127 11.7588 16.8127C13.6128 16.8127 15.1111 18.3111 15.1111 20.1651V28.546C15.1111 30.4 13.6128 31.8985 11.7586 31.8985C9.90489 31.8985 8.40639 30.4 8.40639 28.546V20.1651V20.165Z" fill="#E01E5A"/>
-                            <path d="M11.7587 6.70475C9.90475 6.70475 8.40625 5.20638 8.40625 3.35238C8.40625 1.49838 9.90487 0 11.7587 0C13.6126 0 15.1111 1.49838 15.1111 3.35238V6.70487H11.7586L11.7587 6.70475ZM11.7587 8.40637C13.6128 8.40637 15.1111 9.90475 15.1111 11.7587C15.1111 13.6128 13.6128 15.1111 11.7586 15.1111H3.3525C1.49837 15.1111 0 13.6128 0 11.7586C0 9.90487 1.49838 8.40637 3.35238 8.40637H11.7586H11.7587Z" fill="#36C5F0"/>
-                            <path d="M25.1935 11.7587C25.1935 9.90475 26.6919 8.40625 28.5457 8.40625C30.3997 8.40625 31.8983 9.90475 31.8983 11.7587C31.8983 13.6128 30.3997 15.1111 28.5457 15.1111H25.1935V11.7586V11.7587ZM23.5173 11.7587C23.5173 13.6128 22.0188 15.1111 20.1648 15.1111C18.3109 15.1111 16.8125 13.6128 16.8125 11.7586V3.3525C16.8125 1.49837 18.3109 0 20.1648 0C22.0186 0 23.5171 1.49838 23.5171 3.35238V11.7586L23.5173 11.7587Z" fill="#2EB67D"/>
-                            <path d="M20.1648 25.1937C22.0188 25.1937 23.5173 26.6921 23.5173 28.546C23.5173 30.4 22.0188 31.8985 20.1648 31.8985C18.3109 31.8985 16.8125 30.4 16.8125 28.546V25.1937H20.1649H20.1648ZM20.1648 23.5175C18.3109 23.5175 16.8125 22.019 16.8125 20.165C16.8125 18.3111 18.3109 16.8127 20.1649 16.8127H28.5711C30.4251 16.8127 31.9236 18.3111 31.9236 20.1651C31.9236 22.019 30.4251 23.5175 28.5711 23.5175H20.1649H20.1648Z" fill="#ECB22E"/>
-                        </svg>
-                    </div>
-                    <div class="w-16 h-16 border border-palet rounded flex justify-center items-center relative">
-                        <div class="w-8 bg-palet h-[2px]"></div>
-                        <div class="absolute w-8 bg-palet h-[2px] rotate-90"></div>
-                    </div>
+            <div class="flex -space-x-4">
+                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
+                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
+                <div class="relative ">
+                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
+                    <a class="absolute top-0 flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-palet opacity-80 border-2 border-white rounded-full " href="#">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.0207 2.83337C8.29684 2.83374 8.52041 3.05789 8.52005 3.33403L8.50781 12.6674C8.50745 12.9435 8.2833 13.1671 8.00716 13.1667C7.73102 13.1663 7.50745 12.9422 7.50781 12.6661L7.52005 3.33272C7.52041 3.05658 7.74456 2.83301 8.0207 2.83337Z" fill="white"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.83301 8C2.83301 7.72386 3.05687 7.5 3.33301 7.5H12.6663C12.9425 7.5 13.1663 7.72386 13.1663 8C13.1663 8.27614 12.9425 8.5 12.6663 8.5H3.33301C3.05687 8.5 2.83301 8.27614 2.83301 8Z" fill="white"/>
+                        </svg>  
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="w-full space-y-2">
-            <div class="bg-bgbody p-8 rounded ">
-                <div class=" flex space-x-2">
-                    <div class="w-2 h-6 bg-[#FA9D6B] rounded-sm"></div>
-                    <span class="text-[#222222] font-semibold">Task</span>
-                </div>
-                <div class="text-[#827C7C] text-sm font-semibold py-5 border-b ">Past Due</div>
-                <div class="flex items-center space-x-3 mt-7">
-                    <div>
-                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
+
+        <div class="mt-[42px] w-full  ">
+            <div class="flex w-[1016px] space-x-5 overflow-auto overflow-y-hidden ">
+                
+                {{-- Potension Client --}}
+                <div>
+                    {{-- Tittle Card --}}
+                    <div class="w-[265px] flex justify-between">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-base">Potential Clients</span>
+                            <div class="flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">2</div>
+                        </div>
+                        <div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
                             </svg>
+                        </div>                   
+                    </div>
+                    <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
+    
+                    {{-- Card --}}
+                    <div class="w-[265px] h-[211px] bg-bgbody mt-3 rounded">
+                        <div class="flex items-center justify-between p-3">
+                            <div class="text-xs font-semibold text-[#2CA6A0]">#12548</div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                    <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                    <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="px-4">
+                            <div class="text-sm max-w-[200px] font-medium text-[#222222]">We must improve concierge process to a better</div> 
+                        </div>
+                        <div class="p-3">
+                            <div class="text-xs text-[#827C7C]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consectetur proin eget .</div>
+                        </div>
+                        <div class="w-[233px] h-[1px] bg-[#EFEFEF] mx-auto"></div>
+                        <div class="px-4 flex items-center justify-between mt-2">
+                            <div class="text-colorStatusCard1 status-card-job bg-colorStatusCard2 rounded-sm">Potencial Client</div>
+                            <div class="flex -space-x-2">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 space-x-4">
+                            <div>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 2.25C1.125 2.04289 1.29289 1.875 1.5 1.875H10.5C10.7071 1.875 10.875 2.04289 10.875 2.25C10.875 2.45711 10.7071 2.625 10.5 2.625H1.5C1.29289 2.625 1.125 2.45711 1.125 2.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 4.75C1.125 4.54289 1.29289 4.375 1.5 4.375H8.5C8.70711 4.375 8.875 4.54289 8.875 4.75C8.875 4.95711 8.70711 5.125 8.5 5.125H1.5C1.29289 5.125 1.125 4.95711 1.125 4.75Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 7.25C1.125 7.04289 1.29289 6.875 1.5 6.875H10.5C10.7071 6.875 10.875 7.04289 10.875 7.25C10.875 7.45711 10.7071 7.625 10.5 7.625H1.5C1.29289 7.625 1.125 7.45711 1.125 7.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9.75C1.125 9.54289 1.29289 9.375 1.5 9.375H8.5C8.70711 9.375 8.875 9.54289 8.875 9.75C8.875 9.95711 8.70711 10.125 8.5 10.125H1.5C1.29289 10.125 1.125 9.95711 1.125 9.75Z" fill="#827C7C"/>
+                                </svg>  
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.375C3.44568 1.375 1.375 3.44568 1.375 6V10.625H6C8.55432 10.625 10.625 8.55432 10.625 6C10.625 3.44568 8.55432 1.375 6 1.375ZM1 11L0.625 11V6C0.625 3.03147 3.03147 0.625 6 0.625C8.96853 0.625 11.375 3.03147 11.375 6C11.375 8.96853 8.96853 11.375 6 11.375H1.00004L1 11ZM1 11L1.00004 11.375C0.792933 11.375 0.625 11.2071 0.625 11L1 11Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 4.5C3.125 4.29289 3.29289 4.125 3.5 4.125H8C8.20711 4.125 8.375 4.29289 8.375 4.5C8.375 4.70711 8.20711 4.875 8 4.875H3.5C3.29289 4.875 3.125 4.70711 3.125 4.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 6.5C3.125 6.29289 3.29289 6.125 3.5 6.125H8C8.20711 6.125 8.375 6.29289 8.375 6.5C8.375 6.70711 8.20711 6.875 8 6.875H3.5C3.29289 6.875 3.125 6.70711 3.125 6.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 8.5C3.125 8.29289 3.29289 8.125 3.5 8.125H6C6.20711 8.125 6.375 8.29289 6.375 8.5C6.375 8.70711 6.20711 8.875 6 8.875H3.5C3.29289 8.875 3.125 8.70711 3.125 8.5Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">10</span>
+                            </div>
+    
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.82208 0.918491C8.59833 0.893451 9.45404 1.1454 10.1544 1.84572C10.8547 2.54605 11.1066 3.40176 11.0816 4.17801C11.057 4.94152 10.763 5.65647 10.3311 6.08837L6.79575 9.62377L6.53045 9.35874L6.26532 9.09354L9.80081 5.55805C10.076 5.28282 10.3124 4.76034 10.332 4.15383C10.3511 3.56006 10.1611 2.91317 9.62404 2.37605C9.08691 1.83894 8.44002 1.64895 7.84626 1.6681C7.23975 1.68767 6.71727 1.92406 6.44204 2.19928L1.66908 6.97225C1.55856 7.08277 1.37224 7.39679 1.33543 7.8017C1.30064 8.18449 1.39939 8.64711 1.84586 9.09357C2.29232 9.54003 2.75494 9.63879 3.13774 9.60399C3.54264 9.56718 3.85666 9.38087 3.96719 9.27034L8.56336 4.67414C8.66319 4.57433 8.76846 4.35733 8.78583 4.09678C8.80257 3.84563 8.73448 3.60783 8.56337 3.43673C8.39226 3.26562 8.15445 3.19751 7.90331 3.21426C7.64275 3.23163 7.42577 3.33689 7.32595 3.43672L3.96733 6.79534L3.70203 6.53031L3.4369 6.26511L6.7956 2.9064C6.79561 2.9064 6.7956 2.90641 6.7956 2.9064C7.04934 2.65266 7.45107 2.49274 7.85342 2.46592C8.26517 2.43847 8.73446 2.54716 9.09369 2.90639C9.09369 2.90639 9.09368 2.90638 9.09369 2.90639M9.09368 5.20448C9.09368 5.20449 9.09368 5.20448 9.09368 5.20448C9.34743 4.95075 9.50734 4.54902 9.53417 4.14667C9.56162 3.73492 9.45291 3.26561 9.09369 2.90639M9.09368 5.20448L4.49752 9.80068C4.25449 10.0437 3.77301 10.2993 3.20564 10.3509C2.61615 10.4045 1.92972 10.2381 1.31553 9.6239C0.701337 9.00971 0.534926 8.32328 0.588515 7.7338C0.640094 7.16643 0.895722 6.68495 1.13875 6.44192L5.91171 1.66895C6.34361 1.23706 7.05857 0.943121 7.82208 0.918491M3.70203 6.53031L3.4369 6.26511C3.29045 6.41156 3.29041 6.64903 3.43686 6.79547C3.58331 6.94192 3.82088 6.94178 3.96733 6.79534L3.70203 6.53031ZM6.26529 9.6239C6.11884 9.47745 6.11887 9.23998 6.26532 9.09354L6.53045 9.35874L6.79575 9.62377C6.6493 9.77022 6.41173 9.77035 6.26529 9.6239Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">2</span>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="text-sm  text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                        <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                    </div>
+    
                 </div>
-
-                <div class="flex items-center space-x-3 mt-7">
-                    <div>
-                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
+    
+                {{-- Interviewing --}}
+                <div>
+                    {{-- Tittle Card --}}
+                    <div class="w-[265px] flex justify-between">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-base">Interviewing</span>
+                            <div class="flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">3</div>
+                        </div>
+                        <div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
                             </svg>
+                        </div>                   
+                    </div>
+                    <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
+    
+                    {{-- Card --}}
+                    <div class="w-[265px] h-[211px] bg-bgbody mt-3 rounded">
+                        <div class="flex items-center justify-between p-3">
+                            <div class="text-xs font-semibold text-[#2CA6A0]">#12548</div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                    <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                    <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="px-4">
+                            <div class="text-sm max-w-[200px] font-medium text-[#222222]">We must improve concierge process to a better</div> 
+                        </div>
+                        <div class="p-3">
+                            <div class="text-xs text-[#827C7C]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consectetur proin eget .</div>
+                        </div>
+                        <div class="w-[233px] h-[1px] bg-[#EFEFEF] mx-auto"></div>
+                        <div class="px-4 flex items-center justify-between mt-2">
+                            <div class="text-white status-card-job bg-colorStatusCard1 rounded-sm">Interviewing</div>
+                            <div class="flex -space-x-2">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 space-x-4">
+                            <div>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 2.25C1.125 2.04289 1.29289 1.875 1.5 1.875H10.5C10.7071 1.875 10.875 2.04289 10.875 2.25C10.875 2.45711 10.7071 2.625 10.5 2.625H1.5C1.29289 2.625 1.125 2.45711 1.125 2.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 4.75C1.125 4.54289 1.29289 4.375 1.5 4.375H8.5C8.70711 4.375 8.875 4.54289 8.875 4.75C8.875 4.95711 8.70711 5.125 8.5 5.125H1.5C1.29289 5.125 1.125 4.95711 1.125 4.75Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 7.25C1.125 7.04289 1.29289 6.875 1.5 6.875H10.5C10.7071 6.875 10.875 7.04289 10.875 7.25C10.875 7.45711 10.7071 7.625 10.5 7.625H1.5C1.29289 7.625 1.125 7.45711 1.125 7.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9.75C1.125 9.54289 1.29289 9.375 1.5 9.375H8.5C8.70711 9.375 8.875 9.54289 8.875 9.75C8.875 9.95711 8.70711 10.125 8.5 10.125H1.5C1.29289 10.125 1.125 9.95711 1.125 9.75Z" fill="#827C7C"/>
+                                </svg>  
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.375C3.44568 1.375 1.375 3.44568 1.375 6V10.625H6C8.55432 10.625 10.625 8.55432 10.625 6C10.625 3.44568 8.55432 1.375 6 1.375ZM1 11L0.625 11V6C0.625 3.03147 3.03147 0.625 6 0.625C8.96853 0.625 11.375 3.03147 11.375 6C11.375 8.96853 8.96853 11.375 6 11.375H1.00004L1 11ZM1 11L1.00004 11.375C0.792933 11.375 0.625 11.2071 0.625 11L1 11Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 4.5C3.125 4.29289 3.29289 4.125 3.5 4.125H8C8.20711 4.125 8.375 4.29289 8.375 4.5C8.375 4.70711 8.20711 4.875 8 4.875H3.5C3.29289 4.875 3.125 4.70711 3.125 4.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 6.5C3.125 6.29289 3.29289 6.125 3.5 6.125H8C8.20711 6.125 8.375 6.29289 8.375 6.5C8.375 6.70711 8.20711 6.875 8 6.875H3.5C3.29289 6.875 3.125 6.70711 3.125 6.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 8.5C3.125 8.29289 3.29289 8.125 3.5 8.125H6C6.20711 8.125 6.375 8.29289 6.375 8.5C6.375 8.70711 6.20711 8.875 6 8.875H3.5C3.29289 8.875 3.125 8.70711 3.125 8.5Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">10</span>
+                            </div>
+    
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.82208 0.918491C8.59833 0.893451 9.45404 1.1454 10.1544 1.84572C10.8547 2.54605 11.1066 3.40176 11.0816 4.17801C11.057 4.94152 10.763 5.65647 10.3311 6.08837L6.79575 9.62377L6.53045 9.35874L6.26532 9.09354L9.80081 5.55805C10.076 5.28282 10.3124 4.76034 10.332 4.15383C10.3511 3.56006 10.1611 2.91317 9.62404 2.37605C9.08691 1.83894 8.44002 1.64895 7.84626 1.6681C7.23975 1.68767 6.71727 1.92406 6.44204 2.19928L1.66908 6.97225C1.55856 7.08277 1.37224 7.39679 1.33543 7.8017C1.30064 8.18449 1.39939 8.64711 1.84586 9.09357C2.29232 9.54003 2.75494 9.63879 3.13774 9.60399C3.54264 9.56718 3.85666 9.38087 3.96719 9.27034L8.56336 4.67414C8.66319 4.57433 8.76846 4.35733 8.78583 4.09678C8.80257 3.84563 8.73448 3.60783 8.56337 3.43673C8.39226 3.26562 8.15445 3.19751 7.90331 3.21426C7.64275 3.23163 7.42577 3.33689 7.32595 3.43672L3.96733 6.79534L3.70203 6.53031L3.4369 6.26511L6.7956 2.9064C6.79561 2.9064 6.7956 2.90641 6.7956 2.9064C7.04934 2.65266 7.45107 2.49274 7.85342 2.46592C8.26517 2.43847 8.73446 2.54716 9.09369 2.90639C9.09369 2.90639 9.09368 2.90638 9.09369 2.90639M9.09368 5.20448C9.09368 5.20449 9.09368 5.20448 9.09368 5.20448C9.34743 4.95075 9.50734 4.54902 9.53417 4.14667C9.56162 3.73492 9.45291 3.26561 9.09369 2.90639M9.09368 5.20448L4.49752 9.80068C4.25449 10.0437 3.77301 10.2993 3.20564 10.3509C2.61615 10.4045 1.92972 10.2381 1.31553 9.6239C0.701337 9.00971 0.534926 8.32328 0.588515 7.7338C0.640094 7.16643 0.895722 6.68495 1.13875 6.44192L5.91171 1.66895C6.34361 1.23706 7.05857 0.943121 7.82208 0.918491M3.70203 6.53031L3.4369 6.26511C3.29045 6.41156 3.29041 6.64903 3.43686 6.79547C3.58331 6.94192 3.82088 6.94178 3.96733 6.79534L3.70203 6.53031ZM6.26529 9.6239C6.11884 9.47745 6.11887 9.23998 6.26532 9.09354L6.53045 9.35874L6.79575 9.62377C6.6493 9.77022 6.41173 9.77035 6.26529 9.6239Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">2</span>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="text-sm text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                        <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                    </div>
+    
+    
                 </div>
-
-                <div class="flex items-center space-x-3 mt-7">
-                    <div>
-                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
+    
+                {{-- Trialing --}}
+                <div>
+                    {{-- Tittle Card --}}
+                    <div class="w-[265px] flex justify-between">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-base">Trialing</span>
+                            <div class="flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">4</div>
+                        </div>
+                        <div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
                             </svg>
+                        </div>                   
+                    </div>
+                    <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
+    
+                    {{-- Card --}}
+                    <div class="w-[265px] h-[211px] bg-bgbody mt-3 rounded">
+                        <div class="flex items-center justify-between p-3">
+                            <div class="text-xs font-semibold text-[#2CA6A0]">#12548</div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                    <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                    <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="px-4">
+                            <div class="text-sm max-w-[200px] font-medium text-[#222222]">We must improve concierge process to a better</div> 
+                        </div>
+                        <div class="p-3">
+                            <div class="text-xs text-[#827C7C]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consectetur proin eget .</div>
+                        </div>
+                        <div class="w-[233px] h-[1px] bg-[#EFEFEF] mx-auto"></div>
+                        <div class="px-4 flex items-center justify-between mt-2">
+                            <div class="text-white status-card-job bg-palet rounded-sm">Trialing</div>
+                            <div class="flex -space-x-2">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 space-x-4">
+                            <div>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 2.25C1.125 2.04289 1.29289 1.875 1.5 1.875H10.5C10.7071 1.875 10.875 2.04289 10.875 2.25C10.875 2.45711 10.7071 2.625 10.5 2.625H1.5C1.29289 2.625 1.125 2.45711 1.125 2.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 4.75C1.125 4.54289 1.29289 4.375 1.5 4.375H8.5C8.70711 4.375 8.875 4.54289 8.875 4.75C8.875 4.95711 8.70711 5.125 8.5 5.125H1.5C1.29289 5.125 1.125 4.95711 1.125 4.75Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 7.25C1.125 7.04289 1.29289 6.875 1.5 6.875H10.5C10.7071 6.875 10.875 7.04289 10.875 7.25C10.875 7.45711 10.7071 7.625 10.5 7.625H1.5C1.29289 7.625 1.125 7.45711 1.125 7.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9.75C1.125 9.54289 1.29289 9.375 1.5 9.375H8.5C8.70711 9.375 8.875 9.54289 8.875 9.75C8.875 9.95711 8.70711 10.125 8.5 10.125H1.5C1.29289 10.125 1.125 9.95711 1.125 9.75Z" fill="#827C7C"/>
+                                </svg>  
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.375C3.44568 1.375 1.375 3.44568 1.375 6V10.625H6C8.55432 10.625 10.625 8.55432 10.625 6C10.625 3.44568 8.55432 1.375 6 1.375ZM1 11L0.625 11V6C0.625 3.03147 3.03147 0.625 6 0.625C8.96853 0.625 11.375 3.03147 11.375 6C11.375 8.96853 8.96853 11.375 6 11.375H1.00004L1 11ZM1 11L1.00004 11.375C0.792933 11.375 0.625 11.2071 0.625 11L1 11Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 4.5C3.125 4.29289 3.29289 4.125 3.5 4.125H8C8.20711 4.125 8.375 4.29289 8.375 4.5C8.375 4.70711 8.20711 4.875 8 4.875H3.5C3.29289 4.875 3.125 4.70711 3.125 4.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 6.5C3.125 6.29289 3.29289 6.125 3.5 6.125H8C8.20711 6.125 8.375 6.29289 8.375 6.5C8.375 6.70711 8.20711 6.875 8 6.875H3.5C3.29289 6.875 3.125 6.70711 3.125 6.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 8.5C3.125 8.29289 3.29289 8.125 3.5 8.125H6C6.20711 8.125 6.375 8.29289 6.375 8.5C6.375 8.70711 6.20711 8.875 6 8.875H3.5C3.29289 8.875 3.125 8.70711 3.125 8.5Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">10</span>
+                            </div>
+    
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.82208 0.918491C8.59833 0.893451 9.45404 1.1454 10.1544 1.84572C10.8547 2.54605 11.1066 3.40176 11.0816 4.17801C11.057 4.94152 10.763 5.65647 10.3311 6.08837L6.79575 9.62377L6.53045 9.35874L6.26532 9.09354L9.80081 5.55805C10.076 5.28282 10.3124 4.76034 10.332 4.15383C10.3511 3.56006 10.1611 2.91317 9.62404 2.37605C9.08691 1.83894 8.44002 1.64895 7.84626 1.6681C7.23975 1.68767 6.71727 1.92406 6.44204 2.19928L1.66908 6.97225C1.55856 7.08277 1.37224 7.39679 1.33543 7.8017C1.30064 8.18449 1.39939 8.64711 1.84586 9.09357C2.29232 9.54003 2.75494 9.63879 3.13774 9.60399C3.54264 9.56718 3.85666 9.38087 3.96719 9.27034L8.56336 4.67414C8.66319 4.57433 8.76846 4.35733 8.78583 4.09678C8.80257 3.84563 8.73448 3.60783 8.56337 3.43673C8.39226 3.26562 8.15445 3.19751 7.90331 3.21426C7.64275 3.23163 7.42577 3.33689 7.32595 3.43672L3.96733 6.79534L3.70203 6.53031L3.4369 6.26511L6.7956 2.9064C6.79561 2.9064 6.7956 2.90641 6.7956 2.9064C7.04934 2.65266 7.45107 2.49274 7.85342 2.46592C8.26517 2.43847 8.73446 2.54716 9.09369 2.90639C9.09369 2.90639 9.09368 2.90638 9.09369 2.90639M9.09368 5.20448C9.09368 5.20449 9.09368 5.20448 9.09368 5.20448C9.34743 4.95075 9.50734 4.54902 9.53417 4.14667C9.56162 3.73492 9.45291 3.26561 9.09369 2.90639M9.09368 5.20448L4.49752 9.80068C4.25449 10.0437 3.77301 10.2993 3.20564 10.3509C2.61615 10.4045 1.92972 10.2381 1.31553 9.6239C0.701337 9.00971 0.534926 8.32328 0.588515 7.7338C0.640094 7.16643 0.895722 6.68495 1.13875 6.44192L5.91171 1.66895C6.34361 1.23706 7.05857 0.943121 7.82208 0.918491M3.70203 6.53031L3.4369 6.26511C3.29045 6.41156 3.29041 6.64903 3.43686 6.79547C3.58331 6.94192 3.82088 6.94178 3.96733 6.79534L3.70203 6.53031ZM6.26529 9.6239C6.11884 9.47745 6.11887 9.23998 6.26532 9.09354L6.53045 9.35874L6.79575 9.62377C6.6493 9.77022 6.41173 9.77035 6.26529 9.6239Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">2</span>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="text-sm text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                        <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                    </div>
+    
+    
                 </div>
-                <div class="text-[#827C7C] text-sm font-semibold py-5 border-b ">Friday</div>
-                <div class="flex items-center space-x-3 mt-7">
-                    <div>
-                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                            </svg>
+    
+                {{-- Completed --}}
+                <div>
+                    {{-- Tittle Card --}}
+                    <div class="w-[265px] flex justify-between">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-base">Completed</span>
+                            <div class="flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">2</div>
                         </div>
+                        <div>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                            </svg>
+                        </div>                   
                     </div>
-                    <div>
-                        <div class="text-sm text-[#222222] font-semibold">Follow up 2019</div>
-                        <div class="text-sm"><span class="text-[#FA9D6B] ">01/04/2022</span> / Jonathan Morrow</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-bgbody p-8 rounded ">
-                <div class=" flex space-x-2">
-                    <div class="w-2 h-6 bg-colorelips rounded-sm"></div>
-                    <span class="text-[#222222] font-semibold">Appointments</span>
-                </div>
-
-                <div class="flex items-center space-x-3 mt-7">
-                    <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16113 1.79653C9.74277 1.70983 10.3383 1.73824 10.9111 1.88187L10.9111 1.88187C11.6683 2.07176 12.3855 2.46301 12.9769 3.05431L12.6505 3.38067L12.9769 3.05431C13.5682 3.64562 13.9594 4.36283 14.1493 5.12015C14.293 5.69296 14.3214 6.28841 14.2347 6.87005C14.1971 7.12216 13.9622 7.29607 13.7101 7.25849C13.458 7.2209 13.2841 6.98606 13.3217 6.73394C13.3905 6.27201 13.3679 5.79911 13.254 5.34466L13.254 5.34464C13.1036 4.74491 12.7941 4.17695 12.3241 3.70703C11.8542 3.23711 11.2863 2.92761 10.6866 2.77723C10.2321 2.66327 9.75916 2.64066 9.29723 2.70952C9.04511 2.7471 8.81027 2.57319 8.77268 2.32107C8.7351 2.06896 8.90902 1.83411 9.16113 1.79653Z" fill="white"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.27539 3.99892C9.9728 3.89496 10.7108 4.11146 11.2489 4.64951L11.2489 4.64952C11.7869 5.1876 12.0034 5.92562 11.8994 6.62301C11.8619 6.87512 11.627 7.04903 11.3749 7.01145C11.1228 6.97387 10.9489 6.73902 10.9865 6.48691C11.0491 6.06638 10.9186 5.62472 10.5962 5.30225C10.5962 5.30224 10.5962 5.30224 10.5962 5.30224M10.5962 5.30224C10.2736 4.97974 9.83198 4.84923 9.41149 4.91191C9.15937 4.94949 8.92453 4.77558 8.88694 4.52347C8.84936 4.27135 9.02327 4.03651 9.27539 3.99892" fill="white"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.78537 3.62889C3.27893 3.62889 2.96302 4.0827 3.1077 4.51147C3.62644 6.04887 4.59312 8.36164 6.03477 9.80326L6.03477 9.80326C7.47639 11.2449 9.78916 12.2116 11.3266 12.7303L11.3266 12.7303C11.7553 12.875 12.2092 12.5591 12.2092 12.0527V10.4916C12.2092 10.4357 12.1789 10.3843 12.1301 10.3571L12.1301 10.3571L10.7703 9.60113C10.7259 9.57644 10.6721 9.57527 10.6267 9.59798L10.6267 9.598L9.17657 10.323C9.08589 10.3684 8.9828 10.3826 8.88323 10.3635L8.97017 9.91023C8.88323 10.3635 8.88309 10.3635 8.88294 10.3635L8.88262 10.3634L8.8819 10.3633L8.88018 10.3629L8.87554 10.362L8.86162 10.3591C8.85032 10.3567 8.83501 10.3533 8.81602 10.3488C8.77806 10.3398 8.72526 10.3264 8.66019 10.3077C8.53023 10.2701 8.35016 10.2108 8.14089 10.1216C7.72415 9.94403 7.18016 9.64322 6.68748 9.15056L6.68747 9.15056C6.19487 8.65795 5.89322 8.11317 5.7148 7.69583C5.62519 7.48623 5.56541 7.30582 5.52756 7.17564C5.50861 7.11046 5.49507 7.05757 5.486 7.01956C5.48146 7.00055 5.47803 6.98523 5.47559 6.97393L5.47266 6.96002L5.47172 6.95539L5.47138 6.95367L5.47124 6.95296L5.47118 6.95264C5.47115 6.9525 5.47112 6.95235 5.92417 6.86423L5.47112 6.95235C5.45168 6.85243 5.46583 6.74888 5.51136 6.65783L6.23653 5.20749L6.23654 5.20746C6.25923 5.16208 6.25809 5.1084 6.23343 5.06399L5.48072 3.7081C5.45356 3.65919 5.40204 3.62889 5.3462 3.62889H3.78537ZM6.41371 6.91718C6.41379 6.91743 6.41386 6.91769 6.41394 6.91795C6.44298 7.01784 6.4907 7.16252 6.56357 7.33297C6.7101 7.67574 6.95328 8.11094 7.34018 8.49784C7.34018 8.49784 7.34018 8.49784 7.34019 8.49784M7.34019 8.49784C7.72705 8.88469 8.16122 9.12689 8.50276 9.27244C8.67264 9.34483 8.81674 9.39208 8.91616 9.42078C8.91635 9.42084 8.91653 9.42089 8.91672 9.42094L10.2139 8.77239C10.2139 8.77238 10.2139 8.77238 10.2139 8.77237C10.532 8.61332 10.908 8.62157 11.2188 8.79435L11.0102 9.1696L11.2188 8.79435L12.5786 9.55033C12.9203 9.74032 13.1322 10.1006 13.1322 10.4916V12.0527C13.1322 13.1362 12.1092 13.9686 11.0314 13.605C9.47474 13.0797 6.98462 12.0586 5.38205 10.456C3.77946 8.85341 2.75832 6.36329 2.23307 4.80659L2.6405 4.66911L2.23306 4.80659C1.86942 3.72884 2.70187 2.70581 3.78537 2.70581H5.3462C5.73744 2.70581 6.09785 2.91802 6.28774 3.26L6.28776 3.26003L7.0405 4.61597L7.0405 4.61598C7.21295 4.92664 7.2211 5.30242 7.06215 5.6203C7.06215 5.62031 7.06214 5.62032 7.06214 5.62033L6.41371 6.91718" fill="white"/>
-                        </svg>   
-                    </div>
-   
-                    <div>
-                        <div class="text-sm text-[#222222] font-semibold">Jonathan Morrow</div>
-                        <div class="text-sm">01/04/2022 - 2:35PM</div>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3 mt-7">
-                    <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.8078 8.04062C12.8719 7.68906 12.9063 7.32969 12.9063 6.97031C12.9063 6.17344 12.75 5.4 12.4422 4.67344C12.1453 3.97031 11.7188 3.33906 11.1766 2.79688C10.6389 2.25785 10.0016 1.82852 9.30002 1.53281C8.5719 1.225 7.80002 1.06875 7.00314 1.06875C6.62814 1.06875 6.25158 1.10469 5.88595 1.175C5.38004 0.906911 4.81632 0.766385 4.24376 0.765625C3.31095 0.765625 2.43282 1.12969 1.77345 1.78906C1.44808 2.11276 1.1901 2.49775 1.01443 2.92177C0.838765 3.34578 0.748892 3.80041 0.75001 4.25938C0.75001 4.85313 0.903136 5.4375 1.18907 5.95312C1.13126 6.2875 1.10001 6.62969 1.10001 6.97031C1.10001 7.76719 1.25626 8.54062 1.56407 9.26719C1.86095 9.97031 2.28595 10.6016 2.82814 11.1438C3.37033 11.6859 4.00158 12.1109 4.7047 12.4078C5.43283 12.7156 6.2047 12.8719 7.00158 12.8719C7.34846 12.8719 7.69533 12.8406 8.03596 12.7797C8.55939 13.075 9.15002 13.2328 9.75471 13.2328C10.6875 13.2328 11.5656 12.8703 12.225 12.2094C12.886 11.55 13.2485 10.6719 13.2485 9.73906C13.25 9.14531 13.0969 8.55937 12.8078 8.04062ZM7.02658 10.5859C4.9297 10.5859 3.9922 9.55469 3.9922 8.78281C3.9922 8.38594 4.28439 8.10938 4.68752 8.10938C5.58439 8.10938 5.35314 9.39844 7.02658 9.39844C7.88439 9.39844 8.35783 8.93281 8.35783 8.45625C8.35783 8.17031 8.21721 7.85156 7.65158 7.7125L5.78595 7.24687C4.28439 6.87031 4.01095 6.05781 4.01095 5.29531C4.01095 3.71094 5.50314 3.11562 6.90471 3.11562C8.19533 3.11562 9.71721 3.82969 9.71721 4.77969C9.71721 5.1875 9.36408 5.42344 8.96096 5.42344C8.19533 5.42344 8.33596 4.36406 6.79377 4.36406C6.02814 4.36406 5.6047 4.71094 5.6047 5.20625C5.6047 5.70156 6.20939 5.85938 6.73439 5.97969L8.11564 6.28594C9.62815 6.62344 10.011 7.50625 10.011 8.3375C10.011 9.62344 9.0219 10.5859 7.02658 10.5859Z" fill="white"/>
-                        </svg>
-                    </div>
-   
-                    <div>
-                        <div class="text-sm text-[#222222] font-semibold">Jonathan Morrow</div>
-                        <div class="text-sm">01/04/2022 - 2:35PM</div>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3 mt-7">
-                    <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.8064 0.436249C12.8064 0.436249 14.1015 -0.0687513 13.9936 1.15768C13.9576 1.66269 13.6339 3.43019 13.382 5.34199L12.5186 11.0052C12.5186 11.0052 12.4467 11.8349 11.7991 11.9792C11.1516 12.1234 10.1803 11.4742 10.0004 11.3299C9.85647 11.2217 7.30227 9.59842 6.40287 8.80485C6.15103 8.58842 5.86323 8.15555 6.43883 7.65055L10.2162 4.04342C10.6479 3.61055 11.0796 2.60055 9.28087 3.82699L4.24437 7.25379C4.24437 7.25379 3.66877 7.61449 2.58953 7.28985L0.25114 6.56842C0.25114 6.56842 -0.612263 6.02735 0.862717 5.48625C4.46023 3.79089 8.88517 2.05945 12.8064 0.436249Z" fill="white"/>
-                        </svg>    
-                    </div>
-   
-                    <div>
-                        <div class="text-sm text-[#222222] font-semibold">Jonathan Morrow</div>
-                        <div class="text-sm">01/04/2022 - 2:35PM</div>
+                    <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
+    
+                    {{-- Card --}}
+                    <div class="w-[265px] h-[211px] bg-bgbody mt-3 rounded">
+                        <div class="flex items-center justify-between p-3">
+                            <div class="text-xs font-semibold text-[#2CA6A0]">#12548</div>
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                    <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                    <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="px-4">
+                            <div class="text-sm max-w-[200px] font-medium text-[#222222]">We must improve concierge process to a better</div> 
+                        </div>
+                        <div class="p-3">
+                            <div class="text-xs text-[#827C7C]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consectetur proin eget .</div>
+                        </div>
+                        <div class="w-[233px] h-[1px] bg-[#EFEFEF] mx-auto"></div>
+                        <div class="px-4 flex items-center justify-between mt-2">
+                            <div class="text-white status-card-job bg-palet rounded-sm">Accepted</div>
+                            <div class="flex -space-x-2">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
+                                <img class="w-6 h-6 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 space-x-4">
+                            <div>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 2.25C1.125 2.04289 1.29289 1.875 1.5 1.875H10.5C10.7071 1.875 10.875 2.04289 10.875 2.25C10.875 2.45711 10.7071 2.625 10.5 2.625H1.5C1.29289 2.625 1.125 2.45711 1.125 2.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 4.75C1.125 4.54289 1.29289 4.375 1.5 4.375H8.5C8.70711 4.375 8.875 4.54289 8.875 4.75C8.875 4.95711 8.70711 5.125 8.5 5.125H1.5C1.29289 5.125 1.125 4.95711 1.125 4.75Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 7.25C1.125 7.04289 1.29289 6.875 1.5 6.875H10.5C10.7071 6.875 10.875 7.04289 10.875 7.25C10.875 7.45711 10.7071 7.625 10.5 7.625H1.5C1.29289 7.625 1.125 7.45711 1.125 7.25Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9.75C1.125 9.54289 1.29289 9.375 1.5 9.375H8.5C8.70711 9.375 8.875 9.54289 8.875 9.75C8.875 9.95711 8.70711 10.125 8.5 10.125H1.5C1.29289 10.125 1.125 9.95711 1.125 9.75Z" fill="#827C7C"/>
+                                </svg>  
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 1.375C3.44568 1.375 1.375 3.44568 1.375 6V10.625H6C8.55432 10.625 10.625 8.55432 10.625 6C10.625 3.44568 8.55432 1.375 6 1.375ZM1 11L0.625 11V6C0.625 3.03147 3.03147 0.625 6 0.625C8.96853 0.625 11.375 3.03147 11.375 6C11.375 8.96853 8.96853 11.375 6 11.375H1.00004L1 11ZM1 11L1.00004 11.375C0.792933 11.375 0.625 11.2071 0.625 11L1 11Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 4.5C3.125 4.29289 3.29289 4.125 3.5 4.125H8C8.20711 4.125 8.375 4.29289 8.375 4.5C8.375 4.70711 8.20711 4.875 8 4.875H3.5C3.29289 4.875 3.125 4.70711 3.125 4.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 6.5C3.125 6.29289 3.29289 6.125 3.5 6.125H8C8.20711 6.125 8.375 6.29289 8.375 6.5C8.375 6.70711 8.20711 6.875 8 6.875H3.5C3.29289 6.875 3.125 6.70711 3.125 6.5Z" fill="#827C7C"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 8.5C3.125 8.29289 3.29289 8.125 3.5 8.125H6C6.20711 8.125 6.375 8.29289 6.375 8.5C6.375 8.70711 6.20711 8.875 6 8.875H3.5C3.29289 8.875 3.125 8.70711 3.125 8.5Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">10</span>
+                            </div>
+    
+                            <div class="flex items-center justify-center">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.82208 0.918491C8.59833 0.893451 9.45404 1.1454 10.1544 1.84572C10.8547 2.54605 11.1066 3.40176 11.0816 4.17801C11.057 4.94152 10.763 5.65647 10.3311 6.08837L6.79575 9.62377L6.53045 9.35874L6.26532 9.09354L9.80081 5.55805C10.076 5.28282 10.3124 4.76034 10.332 4.15383C10.3511 3.56006 10.1611 2.91317 9.62404 2.37605C9.08691 1.83894 8.44002 1.64895 7.84626 1.6681C7.23975 1.68767 6.71727 1.92406 6.44204 2.19928L1.66908 6.97225C1.55856 7.08277 1.37224 7.39679 1.33543 7.8017C1.30064 8.18449 1.39939 8.64711 1.84586 9.09357C2.29232 9.54003 2.75494 9.63879 3.13774 9.60399C3.54264 9.56718 3.85666 9.38087 3.96719 9.27034L8.56336 4.67414C8.66319 4.57433 8.76846 4.35733 8.78583 4.09678C8.80257 3.84563 8.73448 3.60783 8.56337 3.43673C8.39226 3.26562 8.15445 3.19751 7.90331 3.21426C7.64275 3.23163 7.42577 3.33689 7.32595 3.43672L3.96733 6.79534L3.70203 6.53031L3.4369 6.26511L6.7956 2.9064C6.79561 2.9064 6.7956 2.90641 6.7956 2.9064C7.04934 2.65266 7.45107 2.49274 7.85342 2.46592C8.26517 2.43847 8.73446 2.54716 9.09369 2.90639C9.09369 2.90639 9.09368 2.90638 9.09369 2.90639M9.09368 5.20448C9.09368 5.20449 9.09368 5.20448 9.09368 5.20448C9.34743 4.95075 9.50734 4.54902 9.53417 4.14667C9.56162 3.73492 9.45291 3.26561 9.09369 2.90639M9.09368 5.20448L4.49752 9.80068C4.25449 10.0437 3.77301 10.2993 3.20564 10.3509C2.61615 10.4045 1.92972 10.2381 1.31553 9.6239C0.701337 9.00971 0.534926 8.32328 0.588515 7.7338C0.640094 7.16643 0.895722 6.68495 1.13875 6.44192L5.91171 1.66895C6.34361 1.23706 7.05857 0.943121 7.82208 0.918491M3.70203 6.53031L3.4369 6.26511C3.29045 6.41156 3.29041 6.64903 3.43686 6.79547C3.58331 6.94192 3.82088 6.94178 3.96733 6.79534L3.70203 6.53031ZM6.26529 9.6239C6.11884 9.47745 6.11887 9.23998 6.26532 9.09354L6.53045 9.35874L6.79575 9.62377C6.6493 9.77022 6.41173 9.77035 6.26529 9.6239Z" fill="#827C7C"/>
+                                </svg>
+                                <span class="text-xs text-[#827C7C]">2</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

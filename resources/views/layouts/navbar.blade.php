@@ -1,6 +1,8 @@
-<nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
-    <div class="container flex flex-nowrap xl:flex-wrap justify-between items-center mx-auto">
-        <div class="flex items-center order-1  md:order-2">
+{{-- <nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded "> --}}
+<nav id="nav" class="fixed toggle-nav-show z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
+
+    <div class="container flex flex-nowrap xl:flex-wrap justify-between items-center mx-auto ">
+        <div class="flex items-center order-1  md:order-2 ">
             <div class="flex items-center justify-center space-x-11">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M17.25 11C17.25 10.5858 17.5858 10.25 18 10.25H22C22.4142 10.25 22.75 10.5858 22.75 11V19C22.75 19.4142 22.4142 19.75 22 19.75H19.8107L18.5303 21.0303C18.2374 21.3232 17.7626 21.3232 17.4697 21.0303L16.1893 19.75H11C10.5858 19.75 10.25 19.4142 10.25 19V15C10.25 14.5858 10.5858 14.25 11 14.25H17.25V11ZM18.75 11.75V15C18.75 15.4142 18.4142 15.75 18 15.75H11.75V18.25H16.5C16.6989 18.25 16.8897 18.329 17.0303 18.4697L18 19.4393L18.9697 18.4697C19.1103 18.329 19.3011 18.25 19.5 18.25H21.25V11.75H18.75Z" fill="#868B90"/>
@@ -44,13 +46,14 @@
             </div>
         </div>
         <div class=" items-center w-full flex md:w-auto md:order-1" >
-            <div id="search" class="relative w-80 left-1 ">
+            <div id="search" class="relative w-80">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg width="15" height="15" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
                     </svg>
+                        
                 </div>
-                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg outline-none  block w-full pl-10 p-2 " placeholder="Search anything" required>
+                <input type="text" id="simple-search" class="bg-gray-50 h-12 border border-gray-300 text-gray-900 text-base rounded-lg outline-none  block w-full pl-10 p-2 " placeholder="Search anything" required>
 
             </div>
         </div>

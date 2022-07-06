@@ -16,7 +16,9 @@ module.exports = {
         'hover' : '#DAF2F1',
         'bgbody' : '#FCFCFC',
         'textcolor' : '#868B90',
-        'colorelips': '#2CA6A0'
+        'colorelips': '#2CA6A0',
+        'colorStatusCard1' : '#FA9D6B',
+        'colorStatusCard2' : '#FFE2D2'
       },
       fontFamily: {
         roboto: ['Roboto', 'font-sans'],

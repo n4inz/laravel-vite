@@ -8,3 +8,31 @@
     font-weight: 500;
     font-size: 17px;
 }
+.btn-create-list{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.04em;
+}
+
+.status-card-job{
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.toggle-nav-show{
+    width: 82%;
+    margin-left: 18%;
+}
+
+.toggle-nav-hidden{
+    width: 95%;
+    margin-left: 5%;
+}
