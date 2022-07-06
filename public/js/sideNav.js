@@ -1,5 +1,3 @@
-
-
 const btnSidebarDesktop = document.querySelector('#btn-sidebar-desktop');
 const btnSidebarmobile = document.querySelector('#btn-sidebar-mobile');
 
@@ -22,7 +20,7 @@ btnSidebarDesktop.addEventListener('click', function () {
     sidebarMobile.classList.toggle('hidden');
     sidebarDesktop.classList.toggle('hidden');
 
-    nav.classList.remove('left-60');
+    // nav.classList.remove('left-60');
     nav.classList.add('left-20');
 
     search.classList.remove('left-1');
@@ -30,11 +28,7 @@ btnSidebarDesktop.addEventListener('click', function () {
     article.classList.remove('ml-56');
     article.classList.add('mx-auto');
 
-
-
-
-
-  
+ 
 });
 
 btnSidebarmobile.addEventListener('click', function () {
