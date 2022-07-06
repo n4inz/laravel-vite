@@ -1,4 +1,4 @@
-<nav id="nav" class="fixed left-0 xl:left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+<nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
     <div class="container flex flex-nowrap xl:flex-wrap justify-between items-center mx-auto">
         <div class="flex items-center order-1  md:order-2">
             <div class="flex items-center justify-center space-x-11">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class=" items-center w-full flex md:w-auto md:order-1" >
-            <div id="search" class="relative left-24 w-80 xl:left-1">
+            <div id="search" class="relative w-80 left-1 ">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                     <svg width="15" height="15" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
