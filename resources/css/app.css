@@ -40,3 +40,68 @@
 .togle-search{
     margin-left: 40px;
 }
+
+.overview-title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 34px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+
+.overview-status {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+
+.overview-status-field{
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+
+.overview-id-field{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+/* .space-x-id > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(58px * var(--tw-space-x-reverse));
+    margin-left: calc(58px * calc(1 - var(--tw-space-x-reverse)));
+} */
+
+.overview-assigned-field{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+
+.overview-label-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.07px;
+    color: #FFFFFF;
+}
+
