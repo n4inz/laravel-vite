@@ -21,16 +21,11 @@ const article = document.querySelector('#article');
 btnSidebarDesktop.addEventListener('click', function () {
     sidebarMobile.classList.toggle('hidden');
     sidebarDesktop.classList.toggle('hidden');
-
-    // nav.classList.toggle('w-[82%]');
-    // nav.classList.toggle('ml-[18%]');
-    // nav.classList.toggle('w-[95%]');
     nav.classList.remove('toggle-nav-show');
     nav.classList.add('toggle-nav-hidden');
 
+    search.classList.add('togle-search');
 
-    // search.classList.remove('left-[225px]');
-    search.classList.add('ml-10');
     article.classList.remove('ml-56');
     article.classList.add('mx-auto');
 
@@ -43,15 +38,7 @@ btnSidebarmobile.addEventListener('click', function () {
     nav.classList.add('toggle-nav-show');
     nav.classList.remove('toggle-nav-hidden');
     
-    // nav.classList.toggle('w-[95%]');
-    // nav.classList.toggle('ml-[5%]');
-    // nav.classList.toggle('w-[82%]');
-    // nav.classList.toggle('ml-[18%]');
-
-    
-
-    // search.classList.add('left-[225px]');
-    search.classList.remove('ml-10');
+    search.classList.remove('togle-search');
 
     article.classList.remove('mx-auto');
     article.classList.add('ml-56');

@@ -10,4 +10,9 @@ class JobboardController extends Controller
     {
         return view('jobboard');
     }
+
+    public function overview()
+    {
+        return view('detail_job_overview');
+    }
 }
