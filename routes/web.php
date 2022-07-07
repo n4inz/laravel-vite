@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('test', function(){
+    return view('welcome');
+});
+
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
 

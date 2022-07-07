@@ -16,10 +16,11 @@
 </head>
 <body class="bg-backround font-roboto">
     @include('layouts.navbar')
-    
-    <div>
 
+    <div>
+       
         @yield('container')
+        
     </div>
     <script src="{{ asset('js/sideNav.js') }}"></script>
 </body>
