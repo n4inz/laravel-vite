@@ -6,15 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
-    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
-   
+    {{-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" /> --}}
     {{-- <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script> --}}
+   
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    <style>
+        .ipt{
+            outline:none
+        }
+    </style>
 </head>
 <body>
 
-  
+    <label class="inline-flex items-center">
+        <input type="checkbox" class="form-checkbox text-green-500" checked>
+        <span class="ml-2">ssd</span>
+      </label>
 
+<input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 text-[#3BD7CF] border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
 
   <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
@@ -50,6 +59,24 @@
 <div class="flex items-center mr-4">
     <input style="color: #3BD7CF" id="sss-checkbox" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-200 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
 </div>
+
+<label class="checkbox">Satu
+    <input type="checkbox" checked="checked">
+    <span class="check"></span>
+</label>
+<label class="checkbox">Dua
+    <input type="checkbox">
+    <span class="check"></span>
+</label>
+<label class="checkbox">Tiga
+    <input type="checkbox">
+    <span class="check"></span>
+</label>
+<label class="checkbox">Empat
+    <input type="checkbox">
+    <span class="check"></span>
+</label>
+
 
 <script>
   const tabElements = [

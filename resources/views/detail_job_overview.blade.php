@@ -1285,7 +1285,7 @@
                                     </svg>    
                                 </div>
                             </div>
-                            <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="defaultModal">
+                            <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="modal-detail-talen">
                                 <span class="overview-attechment-btn-text">View more</span>
                             </button>
                         </div>
@@ -1303,7 +1303,7 @@
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
                                     <span class="text-[#222222] font-semibold">Talents outside of Ayi</span>
                                 </div>
-                                <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                     <span class="overview-send-job text-palet">+ Add Talent</span>
                                 </div>
                             </div>
@@ -1358,17 +1358,17 @@
                 </div>
             </div>
 
-            <!-- Main modal Talent -->
-            <div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
+            <!-- Main modal detail Talent -->
+            <div id="modal-detail-talen" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
                 <div class="relative p-4 w-full max-w-2xl">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow">
                         <!-- Modal header -->
                         <div class="flex items-center justify-between  px-8 h-14 rounded-t border-b dark:border-gray-600">
-                            <span class="overview-talent-modal-title">
+                            <span class="overview-talent-modal-title text-[#222222]">
                                 Send Talent to Client
                             </span>
-                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"  data-modal-toggle="defaultModal">
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"  data-modal-toggle="modal-detail-talen">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                             </button>
                         </div>
@@ -1382,7 +1382,7 @@
                                 </div>
                                 <input type="text" class="pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search" required>
                             </div>
-                            <div class="space-y-8 mt-8 h-80 overflow-y-auto ">
+                            <div class="space-y-8 mt-8 h-80 overflow-y-scroll ">
                                 <div class="flex items-center justify-between px-6">
                                     <div class="flex items-center space-x-2">
                                         <div class="">
@@ -1519,21 +1519,233 @@
                             </div>
                         </div>
                         <!-- Modal footer -->
-                        <div class="flex items-center justify-end px-12 bg-red-500 space-x-2 rounded-b  w-full h-[97px]">
-                            <div  class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md">
+                        <div class="flex items-center justify-end px-12 space-x-2 rounded-b  w-full h-[97px]">
+                            <button data-modal-toggle="modal-detail-talen" class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md">
                                 <span class="overview-attechment-btn-text">Cancel</span>
+                            </button>
+                            <div data-modal-toggle="modal-detail-talen" class="w-40 h-[42px]">
+                                <button  data-modal-toggle="modal-detail-choice"  data-modal-toggle="modal-detail-talen" class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                    <span  class="overview-attechment-btn-text">Next</span>
+                                </button>                          
                             </div>
-                            <div  class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
-                                <span class="overview-attechment-btn-text">Next</span>
-                            </div>
-
-                            {{-- <button data-modal-toggle="defaultModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">I accept</button>
-                            <button data-modal-toggle="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Decline</button> --}}
                         </div>
                     </div>
                 </div>
             </div>
-       
+
+            <!-- Main modal detail choice -->
+            <div id="modal-detail-choice" tabindex="-1" aria-hidden="true" class="hidden fixed top-5 right-0 left-0 z-50 w-[452px] mx-auto h-modal ">
+                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow ">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between  px-8 h-14 rounded-t border-b ">
+                            <span class="overview-talent-modal-title text-[#222222]">
+                                Choose Client
+                            </span>
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"  data-modal-toggle="modal-detail-choice">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div>
+                            <div class="relative flex items-center justify-center w-full py-[18px] px-6 border-b">
+                                <div class="flex absolute inset-y-0 left-8 items-center  pointer-events-none">
+                                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                                    </svg> 
+                                </div>
+                                <input type="text" class="pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search" required>
+                            </div>
+                            <div class="space-y-4 mt-8 h-80 overflow-y-auto ">
+                                <div class="flex items-center justify-between px-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="">
+                                            <input checked style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        </div>
+                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                        <div class="flex flex-col">
+                                            <span class="overview-name-talent text-colortext">Jonathan Morrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="">
+                                            <input type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 text-[#3BD7CF] border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        </div>
+                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                        <div class="flex flex-col">
+                                            <span class="overview-name-talent text-colortext">Jonathan Morrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="">
+                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        </div>
+                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                        <div class="flex flex-col">
+                                            <span class="overview-name-talent text-colortext">Jonathan Morrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="">
+                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        </div>
+                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                        <div class="flex flex-col">
+                                            <span class="overview-name-talent text-colortext">Jonathan Morrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="">
+                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        </div>
+                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                        <div class="flex flex-col">
+                                            <span class="overview-name-talent text-colortext">Jonathan Morrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-6">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="">
+                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        </div>
+                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                        <div class="flex flex-col">
+                                            <span class="overview-name-talent text-colortext">Jonathan Morrow</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center justify-end px-6 space-x-2 rounded-b  w-full h-[97px]">
+                            <button data-modal-toggle="modal-detail-choice" class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md">
+                                <span class="overview-attechment-btn-text">Cancel</span>
+                            </button>
+                            <button class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                <span class="overview-attechment-btn-text">Send</span>
+                            </button>                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main modal Add Talent -->
+            <div id="modal-add-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
+                <div class="p-4 w-[852px] h-screen">
+                    <div class="bg-white rounded-lg shadow ">
+                        <div class="text-center pt-10">
+                            <span class="overview-modal-add-talent-title mt-10 ml-10 text-[#222222]">Add New Talent</span>
+                        </div>
+                    
+                        <div class="px-[91px] mt-10">
+                            <div class="flex justify-center  items-center space-x-10">
+                                <div>
+                                    <div class="flex justify-center  items-center w-28 h-28 bg-hover rounded-full hover:cursor-pointer">
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 6C3 4.34315 4.34315 3 6 3H26C27.6569 3 29 4.34316 29 6V26C29 27.6569 27.6569 29 26 29H6C4.34316 29 3 27.6569 3 26V6ZM6 5C5.44772 5 5 5.44772 5 6V26C5 26.5523 5.44771 27 6 27H26C26.5523 27 27 26.5523 27 26V6C27 5.44771 26.5523 5 26 5H6Z" fill="#3BD7CF"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.66675 12C7.66675 9.60674 9.60686 7.66663 12.0001 7.66663C14.3933 7.66663 16.3334 9.60674 16.3334 12C16.3334 14.3932 14.3933 16.3333 12.0001 16.3333C9.60686 16.3333 7.66675 14.3932 7.66675 12ZM12.0001 9.66663C10.7114 9.66663 9.66675 10.7113 9.66675 12C9.66675 13.2886 10.7114 14.3333 12.0001 14.3333C13.2887 14.3333 14.3334 13.2886 14.3334 12C14.3334 10.7113 13.2887 9.66663 12.0001 9.66663Z" fill="#3BD7CF"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9978 16.5901C20.3795 16.2465 20.9594 16.248 21.3394 16.5934L28.6727 23.2601C29.0814 23.6316 29.1115 24.2641 28.74 24.6727C28.3685 25.0814 27.736 25.1115 27.3274 24.74L20.6634 18.6818L14.669 24.0767C14.2956 24.4128 13.7307 24.4196 13.3493 24.0926L9.29165 20.6147L4.60006 24.1334C4.15823 24.4647 3.53143 24.3752 3.20006 23.9334C2.86869 23.4915 2.95823 22.8647 3.40006 22.5334L8.73339 18.5334C9.10835 18.2522 9.62832 18.2691 9.98418 18.5741L13.984 22.0025L19.9978 16.5901Z" fill="#3BD7CF"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="w-full flex flex-col ">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="mb-6 w-[249px] ">
+                                            <label for="first-name" class="block mb-2 overview-modal-add-talent-text text-[#222222]">Full Name</label>
+                                            <div class="w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                                <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <div class="mb-6 w-[249px]">
+                                            <label for="last-name" class="block mb-2 overview-modal-add-talent-text text-[#222222]">DoB</label>
+                                            <div class="w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                                <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Last Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="mb-6 w-[249px]">
+                                            <label for="dob" class="block mb-2 overview-modal-add-talent-text text-[#222222]">DoB</label>
+                                            <div class="w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                                <input type="date" id="dob" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222] opacity-50">
+                                            </div>
+                                        </div>
+                                        <div class="mb-6 w-[249px]">
+                                            <label for="experience" class="block mb-2 overview-modal-add-talent-text text-[#222222]">Experience</label>
+                                            <div class="w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                                <input type="text" id="experience" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="10">
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <span class="overview-modal-add-talent-text">Your contact information</span>
+                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="Email">
+                                </div>
+                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="phone" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <span class="overview-modal-add-talent-text">Type of Help Needed</span>
+                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <span class="overview-modal-add-talent-text">Languages</span>
+                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <span class="overview-modal-add-talent-text">Address</span>
+                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <span class="overview-modal-add-talent-text">About talent</span>
+                                <div class="w-[670px] h-[148px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
+                                    <textarea id="message" rows="6" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="Enter referral"></textarea>
+                                    <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <span class="overview-modal-add-talent-text">Upload documents</span>
+                                <div class="w-[670px] h-[109px] flex flex-col items-center justify-center space-x-[10.25px] border border-dotted border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer">
+                                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="#827C7C"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="#827C7C"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="#827C7C"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="#827C7C"/>
+                                    </svg>
+                                    <span class="overview-modal-add-talent-upload-text text-[#827C7C]">Drop file here or click to upload.</span>
+                                </div>
+                            </div>
+    
+                            <div class="py-12">
+                                <button class="w-[670px] h-[40px] bg-palet rounded">
+                                    <span class="overview-talent-modal-title text-white">Add Talent</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </article>
 </main>

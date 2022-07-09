@@ -389,8 +389,42 @@
     font-size: 17px;
     line-height: 22px;
     letter-spacing: -0.41px;
-    color: #222222;
+
 }
 
+.overview-modal-add-talent-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
+    letter-spacing: 0.41px;
+}
 
+.overview-modal-add-talent-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 22px;
+}
+.overview-modal-add-talent-textarea-rule{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: right;
+    letter-spacing: -0.08px;
+    text-transform: uppercase;
+    color: #827C7C;
+}
+
+.overview-modal-add-talent-upload-text{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+}
 
