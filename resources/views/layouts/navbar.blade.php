@@ -53,7 +53,7 @@
                     </svg>
                         
                 </div>
-                <input type="text" id="simple-search" class="bg-gray-50 h-12 border border-gray-300 text-gray-900 text-base rounded-lg outline-none  block w-full pl-10 p-2 " placeholder="Search anything" required>
+                <input type="text" id="simple-search" class="bg-gray-50 h-12 border border-gray-300 text-gray-900 text-base rounded-lg outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" required>
 
             </div>
         </div>

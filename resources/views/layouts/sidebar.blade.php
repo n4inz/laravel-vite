@@ -99,7 +99,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('jobboard') }}" class="{{ request()->is('jobboard') || request()->is('overview') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duratihover:bg-hover " aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                <a href="{{ route('jobboard') }}" class="{{ request()->is('jobboard') || request()->is('overview') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duratihover:bg-hover " aria-controls="dropdown-example" >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 12C1.75 6.33909 6.33909 1.75 12 1.75C17.6609 1.75 22.25 6.33909 22.25 12C22.25 12.4142 21.9142 12.75 21.5 12.75H13C12.8619 12.75 12.75 12.8619 12.75 13V21.5C12.75 21.9142 12.4142 22.25 12 22.25C6.33909 22.25 1.75 17.6609 1.75 12ZM12 3.25C7.16751 3.25 3.25 7.16751 3.25 12C3.25 16.5798 6.7686 20.3379 11.25 20.7183V13C11.25 12.0335 12.0335 11.25 13 11.25H20.7183C20.3379 6.7686 16.5798 3.25 12 3.25Z" fill="{{ request()->is('jobboard') || request()->is('overview') ? '#3BD7CF': '#868B90' }}"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M14.25 15C14.25 14.5858 14.5858 14.25 15 14.25H21C21.4142 14.25 21.75 14.5858 21.75 15V21C21.75 21.4142 21.4142 21.75 21 21.75H15C14.5858 21.75 14.25 21.4142 14.25 21V15ZM15.75 15.75V20.25H20.25V15.75H15.75Z" fill="{{ request()->is('jobboard') || request()->is('overview') ? '#3BD7CF': '#868B90' }}"/>

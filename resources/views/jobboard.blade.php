@@ -19,7 +19,7 @@
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
                         </svg>
                     </div>
-                    <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg outline-none  block w-full pl-10 p-2 " placeholder="Search for tasks, projects, ..." required>
+                    <input type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search for tasks, projects, ..." required>
                 </div>
             </div>
 

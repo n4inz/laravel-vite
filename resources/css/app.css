@@ -105,3 +105,292 @@
     color: #FFFFFF;
 }
 
+.overview-tab{
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+
+.overview-send-job{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+}
+
+.overview-note{
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 34px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+    color: #222222;
+}
+
+.overview-note-body{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: #827C7C;
+}
+
+.overview-when{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: -0.505882px;
+    color: #9B9B9B;
+}
+
+.overview-ring-day{
+    border: 2px solid #FA9D6B;
+    border-radius: 7px;
+}
+
+.overview-text-day{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.505882px;
+    color: #FA9D6B;
+}
+
+.overview-text-muted{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: -0.505882px;
+    color: #DDDDDD;
+}
+
+.overview-table-header-day{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.505882px;
+    color: #9B9B9B;
+}
+
+.overview-tabel-body-day{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: -0.43px;
+    color: #4A4A4A;
+}
+.overview-show-more{
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    letter-spacing: 0.07px;
+    color: #FA9D6B;
+}
+
+.overview-name-talent{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+}
+
+.overview-live-talent{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+    color: #3BD7CF;
+}
+
+.overview-experiance-talent{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+    color: #827C7C;
+}
+
+.overview-add-talent{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+    letter-spacing: 0.07px;
+    color: #FFFFFF;
+}
+.overview-client-detail{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 34px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.337647px;
+    color: #222222;
+}
+.overview-client-detail-table{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: #222222;
+}
+.overview-comments-name{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+}
+
+.overview-comments-body{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+    color: #827C7C;
+}
+.overview-comments-reply{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+    color: #AFABAB;
+}
+.overview-comments-leave{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+}
+.overview-attechment-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+}
+.overview-attechment-size{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+}
+
+.overview-attechment-btn-text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+    color: #FFFFFF;
+}
+
+.overview-responsibilities-title{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.411029px;
+    color: #4A4A4A;
+}
+.overview-responsibilities-title-muted{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: -0.411029px;
+    color: #DDDDDD;
+}
+
+.task-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: #827C7C;
+}
+
+.task-text-body{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+}
+
+.task-btn-text{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+    color: #FFFFFF;
+}
+
+.overview-talent-status{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.07px;
+}
+.overview-talent-otside-text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.24px;
+}
+.overview-talent-modal-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: -0.41px;
+    color: #222222;
+}
+
+
+
