@@ -26,4 +26,15 @@ class UserTest extends TestCase
 
         $response->assertStatus(200);
     }
+    public function test_user_talent_view()
+    {
+        $response = $this->get('/user/talent');
+
+        $response->assertSeeText('Talents');
+        $response->assertSeeText('Jean-Paul Kueny');
+        $response->assertSeeText('+ Create');
+
+
+        $response->assertStatus(200);
+    }
 }
