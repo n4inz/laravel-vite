@@ -438,4 +438,21 @@
     letter-spacing: -0.24px;
 }
 
+.overview-send-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 41px;
+    letter-spacing: 0.41px;
+}
+
+.overview-send-price{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 0.38px;
+}
+
 

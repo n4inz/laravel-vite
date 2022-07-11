@@ -22,5 +22,8 @@ Route::get('test', function(){
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
 Route::get('/overview', [JobboardController::class, 'overview'])->name('jobboard.overview');
+Route::get('/send', [JobboardController::class, 'send'])->name('jobboard.send');
+Route::get('/apply', [JobboardController::class, 'apply'])->name('jobboard.apply');
+
 
 
