@@ -138,7 +138,14 @@
     font-size: 13px;
     line-height: 18px;
     letter-spacing: -0.08px;
-    color: #827C7C;
+}
+
+.overview-modal-detail-talent{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
 }
 
 .overview-when{
@@ -262,6 +269,9 @@
     font-size: 15px;
     line-height: 20px;
     letter-spacing: -0.24px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .overview-comments-body{
@@ -379,7 +389,7 @@
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     letter-spacing: -0.24px;
 }
@@ -427,4 +437,5 @@
     align-items: center;
     letter-spacing: -0.24px;
 }
+
 
