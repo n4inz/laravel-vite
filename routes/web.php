@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobboardController;
+use App\Http\Controllers\UserClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,11 @@ Route::get('test', function(){
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
 Route::get('/overview', [JobboardController::class, 'overview'])->name('jobboard.overview');
+Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
+Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_client.talent');
+
+Route::get('/send', [JobboardController::class, 'send'])->name('jobboard.send');
+Route::get('/apply', [JobboardController::class, 'apply'])->name('jobboard.apply');
+
 
 

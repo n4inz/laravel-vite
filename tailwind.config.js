@@ -9,6 +9,9 @@ module.exports = {
     // colors : {
     //   'regal-blue': '#243c5a',
     // },
+    // colors: {
+    //   nain: '#3BD7CF'
+    // },
     extend: {
       colors : {
         'backround' : '#E5E5E5',
