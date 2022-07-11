@@ -455,4 +455,32 @@
     letter-spacing: 0.38px;
 }
 
+.user-create-client-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.337647px;
+}
 
+.user-talent-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: -0.04em;
+}
+.user-talent-name{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: -0.41px;
+}
+.user-talent-live{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.361765px;
+}
