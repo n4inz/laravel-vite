@@ -301,9 +301,9 @@
                             </div>
                         </div>
                     </div>
-                    <button class="flex justify-center items-center w-full h-10 bg-palet rounded-md mt-8">
+                    <a href="{{ route('jobboard.apply') }}" class="flex justify-center items-center w-full h-10 bg-palet rounded-md mt-8">
                         <span class="overview-talent-modal-title text-[#FFFFFF]">Apply</span>
-                    </button>
+                    </a>
                     <div class="mt-8"></div>
                 </div>
             </div>
