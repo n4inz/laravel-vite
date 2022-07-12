@@ -8,12 +8,12 @@ class JobboardController extends Controller
 {
     public function index()
     {
-        return view('jobboard');
+        return view('jobboard.jobboard');
     }
 
     public function overview()
     {
-        return view('detail_job_overview');
+        return view('jobboard.detail_job_overview');
     }
 
     public function send()

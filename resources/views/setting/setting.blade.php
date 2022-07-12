@@ -181,7 +181,7 @@
                                 </div>
                                 <div>
                                     <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
                                         <input id="send-notification" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
                                     </div>
