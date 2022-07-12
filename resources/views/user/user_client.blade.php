@@ -74,7 +74,7 @@
                             <div class="px-4 mt-4 ">
                                 <label class="overview-status-field text-[#222222] mb-2">Description</label>
                                 <div class="w-[650px] h-[221px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
-                                    <textarea id="message" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="Enter your comment"></textarea>
+                                    <textarea id="message" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="Enter your comment"></textarea>
                                     <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
                                 </div>
                             </div>
