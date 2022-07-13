@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('setting_generals', function (Blueprint $table) {
+        Schema::create('setting_details', function (Blueprint $table) {
             $table->id();
-            $table->string('agency_name');
-            $table->string('url_ending_legal');
-            $table->string('company_description');
-            $table->string('avatar');
+            $table->string('service_type');
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting_generals');
+        Schema::dropIfExists('setting_details');
     }
 };

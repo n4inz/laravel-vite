@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('setting_generals', function (Blueprint $table) {
+        Schema::create('setting_users', function (Blueprint $table) {
             $table->id();
-            $table->string('agency_name');
-            $table->string('url_ending_legal');
-            $table->string('company_description');
-            $table->string('avatar');
+            $table->boolean('client');
+            $table->boolean('caregives');
+            $table->boolean('interested_public_pool');
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
-
             $table->foreign('users_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting_generals');
+        Schema::dropIfExists('setting_users');
     }
 };
