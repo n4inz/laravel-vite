@@ -34,35 +34,35 @@
                     <div>
                         <label for="last-name" class="invisible block overview-modal-add-talent-text text-[#222222] mb-2">Last Name</label>
                         <div class="flex items-center justify-center w-[327px] h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                            <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Lasr Name">
+                            <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Last Name">
                         </div>
                     </div>
                 </div>
                 <div class="mt-8">
                     <label for="" class="block overview-modal-add-talent-text text-[#222222] mb-2">Your contact information</label>
-                    <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                    <div class="flex items-center w-[670px] h-10 rounded border border-[#CCD3DC]">
                         <input type="email" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
                     </div>
-                    <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC] mt-[10px]">
+                    <div class="flex items-center w-[670px] h-10 rounded border border-[#CCD3DC] mt-[10px]">
                         <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Phone">
                     </div>
                 </div>
                 <div class="mt-8">
                     <label for="address" class="block overview-modal-add-talent-text text-[#222222] mb-2">Address</label>
-                    <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC] mt-[10px]">
+                    <div class="flex items-center w-[670px] h-10 rounded border border-[#CCD3DC] mt-[10px]">
                         <input type="text" id="address" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                     </div>
                 </div>
                 <div class="mt-8">
                     <span class="overview-modal-add-talent-text text-[#222222]">Description</span>
-                    <div class="w-full h-[148px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
+                    <div class="w-[670px] h-[148px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
                         <textarea id="message" rows="6" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="Enter your comment"></textarea>
                         <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
                     </div>
                 </div>
                 <div class="mt-8">
                     <span class="overview-modal-add-talent-text text-[#222222]">Upload documents</span>
-                    <div class="w-full h-[109px] flex flex-col items-center justify-center space-x-[10.25px] border border-dotted border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer">
+                    <div class="w-[670px] h-[109px] flex flex-col items-center justify-center space-x-[10.25px] border border-dotted border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer">
                         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="#827C7C"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="#827C7C"/>
@@ -72,7 +72,7 @@
                         <span class="overview-modal-add-talent-upload-text text-[#827C7C]">Drop file here or click to upload.</span>
                     </div>
                 </div>
-                <button class="w-full h-10 bg-palet rounded-lg mt-20 mb-8">
+                <button class="w-[670px] h-10 bg-palet rounded-lg mt-20 mb-8">
                     <span class="overview-talent-modal-title text-white">Send</span>
                 </button>
             </div>

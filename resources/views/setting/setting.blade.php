@@ -21,20 +21,20 @@
                                 <div>
                                     <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Agency Name</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="First Name">
+                                        <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="last-name" class="block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Lasr Name">
+                                        <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                             </div>
                             <div class="px-6 mt-4 ">
                                 <label class="overview-status-field text-[#222222] mb-2">Company Description</label>
-                                <div class="w-[650px] h-36 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
-                                    <textarea id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="Enter your comment"></textarea>
+                                <div class="w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
+                                    <textarea id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder=""></textarea>
                                     {{-- <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span> --}}
                                 </div>
                             </div>

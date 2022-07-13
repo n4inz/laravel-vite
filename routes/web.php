@@ -25,6 +25,13 @@ Route::get('test/multi-select', function(){
 });
 
 
+Route::get('/register', function(){
+    return view('authenticate.register');
+})->name('register');
+
+Route::get('/login', function(){
+    return view('authenticate.login');
+})->name('login');
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
