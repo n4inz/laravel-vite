@@ -16,10 +16,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Testing
 Route::get('test', function(){
     return view('welcome');
 });
+Route::get('test/multi-select', function(){
+    return view('testing.multi-select');
+});
+
+
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');

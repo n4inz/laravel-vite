@@ -968,7 +968,7 @@
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
                                         </svg>
                                     </div>
-                                    <input style="color: #3BD7CF" type="text" id="simple-search" class="bg-gray-200 border-none  text-[#AFABAB] text-xs rounded-lg w-full pl-10 p-2 outline-none focus:ring-0" placeholder="Search name task" required>
+                                    <input type="text" id="simple-search" class="bg-gray-200 border-none  text-colortext text-xs rounded-lg w-full pl-10 p-2 outline-none focus:ring-0" placeholder="Search name task" required>
                                 </div>
                             </div>
                             <div class="mt-[30px] px-4">
@@ -1903,15 +1903,47 @@
                             </div>
                             <div class="mt-6">
                                 <span class="overview-modal-add-talent-text text-[#222222]">Type of Help Needed</span>
-                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                <div class="multiSelect mt-2">
+                                    <select multiple class="multiSelect_field" data-placeholder="Add ss Browsers">
+                                        <option value="chrome">Nanny</option>
+                                        <option selected="select" value="firefox">Firefox</option>
+                                        <option value="opera">Sister</option>
+                                        <option value="safari">Maternity Care</option>
+                                    </select>
                                 </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconX">
+                                        <g stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </g>
+                                    </symbol>
+                                </svg>
+                                {{-- <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                </div> --}}
                             </div>
                             <div class="mt-6">
                                 <span class="overview-modal-add-talent-text text-[#222222]">Languages</span>
-                                <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                <div class="multiSelect mt-2">
+                                    <select multiple class="multiSelect_field" data-placeholder="Add ss Browsers">
+                                        <option value="chrome">English</option>
+                                        <option value="firefox">Chines</option>
+                                        <option value="opera">Indonesia</option>
+                                        <option value="safari">Russian</option>
+                                    </select>
                                 </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconX">
+                                        <g stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </g>
+                                    </symbol>
+                                </svg>
+                                {{-- <div class="w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none" placeholder="">
+                                </div> --}}
                             </div>
                             <div class="mt-6">
                                 <span class="overview-modal-add-talent-text text-[#222222]">Address</span>
