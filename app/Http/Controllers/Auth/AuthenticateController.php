@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +13,7 @@ class AuthenticateController extends Controller
 {
     public function login()
     {
+        return User::with('tenants')->get();
         return view('authenticate.login');
     }
 
@@ -27,8 +27,8 @@ class AuthenticateController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/');
+
+            return redirect()->intended('https://'.auth()->user()->tenants->domain);
         }
  
         return back()->withErrors([
@@ -39,14 +39,12 @@ class AuthenticateController extends Controller
 
     public function register()
     {
+        return Tenant::with('user')->get();
         return view('authenticate.register');
     }
 
     public function register_store(Request $request)
     {
-
-       
-
         $request->validate([
             'sub_domain' => 'required',
             'email' => 'required',
@@ -54,18 +52,16 @@ class AuthenticateController extends Controller
             'password_confirmation' => 'required_with:password|same:password|min:6'
         ]);
 
-       $id = Tenant::create([
+        $tenant = Tenant::create([
             'name' => $request->email,
             'domain' => $request->sub_domain.'.'.env('DOMAIN'),
-            'database' => env('DB_DATABASE')
+            'database' => $request->sub_domain
         ]);
 
-       $user = User::create([
+        $user = $tenant->user()->create([
             'email' =>  $request->email,
             'password' => Hash::make($request->password),
-            // 'tenants_id' => 1
         ]);
-
 
         Auth::login($user);
 

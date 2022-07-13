@@ -15,14 +15,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            // $table->integer('fk_tenants');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            // $table->integer('tenants_id');
-           
             $table->rememberToken();
+            $table->unsignedBigInteger('tenants_id');
             $table->timestamps();
+
+            // $table->foreign('tenants_id')
+            // ->references('id')->on('tenants')
+            // ->onDelete('cascade');
         });
     }
 

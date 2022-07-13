@@ -32,6 +32,6 @@ class LoginTest extends TestCase
 
         $this->assertAuthenticated();
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('https://test.'.env('DOMAIN'));
     }
 }
