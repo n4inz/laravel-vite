@@ -796,36 +796,36 @@
                     </div>
                     <div class="px-8 mt-[34px] flex items-center space-x-16">
                         <div class="flex items-center justify-center space-x-3">
-                            <input id="active" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                            <label for="active" class="overview-note-body text-colortext">Active</label>
+                            <input onclick="onlyOneStatus(this)" id="active" name="onlyOneStatus" checked style="color: #3BD7CF" type="checkbox" value="active" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                            <label for="active" class="overview-note-body text-colortext" >Active</label>
                         </div>
                         <div class="flex items-center justify-center space-x-3">
-                            <input id="active" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                            <label for="active" class="overview-note-body text-colortext">Archived</label>
+                            <input onclick="onlyOneStatus(this)" id="archived" name="onlyOneStatus" style="color: #3BD7CF" type="checkbox" value="archived" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                            <label for="archived" class="overview-note-body text-colortext">Archived</label>
                         </div>
                     </div>
                     <div class="px-8 mt-4">
                         <label for="family" class="mb-2 overview-note-body block text-colortext">Family*</label>
                         <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                            <input type="text" id="family" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full ml-3 outline-none " placeholder="Find & select user">
+                            <input type="text" id="family" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Find & select user">
                         </div>
                     </div>
                     <div class="px-8 mt-4">
                         <label for="title" class="mb-2 block overview-note-body text-colortext">Title*</label>
                         <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                            <input type="text" id="title" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full ml-3 outline-none " placeholder="">
+                            <input type="text" id="title" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                         </div>
                     </div>
                     <div class="px-8 mt-4">
                         <label for="description" class="mb-2 block overview-note-body text-colortext">Description*</label>
                         <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                            <input type="text" id="description" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full ml-3 outline-none " placeholder="">
+                            <input type="text" id="description" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                         </div>
                     </div>
                     <div class="px-8 mt-4">
                         <label for="id" class="mb-2 block overview-note-body text-colortext">ID*</label>
                         <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                            <input type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full ml-3 outline-none " placeholder="">
+                            <input type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                         </div>
                     </div>
                     <div class="px-8 mt-4">
@@ -838,8 +838,8 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99967 1.83325C4.59392 1.83325 1.83301 4.59416 1.83301 7.99992C1.83301 11.4057 4.59392 14.1666 7.99967 14.1666C11.4054 14.1666 14.1663 11.4057 14.1663 7.99992C14.1663 4.59416 11.4054 1.83325 7.99967 1.83325ZM0.833008 7.99992C0.833008 4.04188 4.04163 0.833252 7.99967 0.833252C11.9577 0.833252 15.1663 4.04188 15.1663 7.99992C15.1663 11.958 11.9577 15.1666 7.99967 15.1666C4.04163 15.1666 0.833008 11.958 0.833008 7.99992Z" fill="#222222"/>
                                 </svg> 
                             </div>
-                            <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded-r py-4">
-                                <input type="text" id="id" class="overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full ml-3 outline-none " placeholder="Enter Location">
+                            <div class="flex items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
+                                <input type="text" id="id" class="overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
                             </div>
                         </div>
                     </div>
@@ -1114,34 +1114,34 @@
                                         <label for="all-days" class="overview-note-body text-colortext">All days</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="monday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="monday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="monday" class="overview-note-body text-colortext">Monday</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="tuesday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="tuesday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="tuesday" class="overview-note-body text-colortext">Tuesday</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="Wednesday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="Wednesday" class="overview-note-body text-colortext">Wednesday</label>
+                                        <input id="wednesday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <label for="wednesday" class="overview-note-body text-colortext">Wednesday</label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="thursday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="thursday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="thursday" class="overview-note-body text-colortext">Thursday</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="friday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="friday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="friday" class="overview-note-body text-colortext">Friday</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="saturday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="saturday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="saturday" class="overview-note-body text-colortext">Saturday</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="Sunday" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="Sunday" class="overview-note-body text-colortext">Sunday</label>
+                                        <input id="sunday" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <label for="sunday" class="overview-note-body text-colortext">Sunday</label>
                                     </div>
                                 </div>
                             </div>
@@ -1149,13 +1149,13 @@
                                 <div>
                                     <label for="start-date" class="overview-note-body text-colortext mb-2 block">Start time*</label>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                        <input type="text" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                        <input type="time" id="start-date" class="overview-note-body block w-full border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="end-time*" class="overview-note-body text-colortext mb-2 block">End time*</label>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                        <input type="text" id="end-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                        <input type="time" id="end-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
@@ -1184,7 +1184,7 @@
                                         <label for="asap" class="overview-note-body text-colortext">ASAP</label>
                                     </div>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                        <input type="text" id="start-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                        <input type="date" id="start-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
@@ -1194,7 +1194,7 @@
                                         <label for="tbd" class="overview-note-body text-colortext">TBD</label>
                                     </div>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                        <input type="text" id="end-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                        <input type="date" id="end-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                     </div>
                                 </div>
         
@@ -1202,9 +1202,9 @@
                         </div>
                     </div>
         
-                    {{-- Salery --}}
+                    {{-- Salary --}}
                     <div class="px-8 mt-8 ">
-                        <span class="overview-comments-name text-colortext">Salery</span>
+                        <span class="overview-comments-name text-colortext">Salary</span>
                         <div class="mt-4 px-2 ">
                             <div class="flex space-x-2 ">
                                 <div>
@@ -1281,5 +1281,7 @@
             </div>
         </div>
     </article>
+    <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
+    <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
 </main>
 @endsection

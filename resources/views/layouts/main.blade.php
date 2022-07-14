@@ -14,7 +14,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> --}}
+    <script src="{{ asset('js/jQuery.js') }}"></script>
 </head>
 <body class="bg-backround font-roboto ">
     @include('layouts.navbar')
