@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="overflow-hidden ">
-                        {{-- <canvas class="p-3" height="100" id="chartLine"></canvas> --}}
+                        <canvas class="p-3" height="100" id="chartLine"></canvas>
                     </div>
                 </div>
     
