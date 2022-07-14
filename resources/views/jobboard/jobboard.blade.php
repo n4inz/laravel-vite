@@ -877,10 +877,6 @@
                                         <label for="sister" class="overview-note-body text-colortext">Sister</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="sister" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="sister" class="overview-note-body text-colortext">Sister</label>
-                                    </div>
-                                    <div class="flex items-center space-x-3 mt-[10px]">
                                         <input id="maternity-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="maternity-care" class="overview-note-body text-colortext">Maternity Care</label>
                                     </div>
