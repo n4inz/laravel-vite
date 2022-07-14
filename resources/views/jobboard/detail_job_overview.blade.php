@@ -567,7 +567,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-bgbody rounded mt-3 mb-7">
+                        <div class="bg-bgbody  rounded mt-3 mb-7">
                             <span class="overview-client-detail border-b border-b-[#ECECEC] px-4 pt-[18.5px] pb-[14.5px]">Comments</span>
                             <div class="p-4">
                                 {{-- Messages --}}
@@ -661,11 +661,16 @@
                             </div>
                             <div class="px-4 mt-6">
                                 <span class="overview-comments-leave text-colortext">Leave a Comments</span>
-                                <div class="w-full rounded-md p-4 text-xs">
-                                    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-[#F7F7F7] rounded border border-gray-300 outline-none" placeholder="Enter a comments"></textarea>
+                                <div class="w-full rounded-md text-xs ">
+                                    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-colortext bg-[#F7F7F7] rounded  border-none outline-none focus:ring-0" placeholder="Enter a comments"></textarea>
                                 </div>
                             </div>
-                            
+                            <div class="flex justify-end px-4 mt-2 mb-8">
+                                <button class="w-40 h-[42px] bg-palet rounded-md ">
+                                    <span class="overview-attechment-btn-text justify-center">Post Comments</span>
+                                </button>
+                            </div>
+                            <div class="flex mt-6"></div>
                         </div>
                     </div>
 
