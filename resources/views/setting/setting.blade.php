@@ -21,20 +21,20 @@
                                 <div>
                                     <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Agency Name</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                        <input name="agency_name" value="{{ old('agency_name') }}" type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="last-name" class="block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                        <input name="url_ending_legal" value="{{ old('url_ending_legal') }}" type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                             </div>
                             <div class="px-6 mt-4 ">
                                 <label class="overview-status-field text-[#222222] mb-2">Company Description</label>
                                 <div class="w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
-                                    <textarea id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder=""></textarea>
+                                    <textarea name="company_description" id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="">{{ old('company_description') }}</textarea>
                                     {{-- <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span> --}}
                                 </div>
                             </div>
@@ -53,11 +53,11 @@
                                 <div>
                                     <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Type</label>
                                     <div class="w-[316px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
-                                        <select id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option>Placement</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
+                                        <select name="service_type" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                            <option value="Placement">Placement</option>
+                                            <option value="Test 1">Test 1</option>
+                                            <option value="Test 2">Test 1</option>
+                                            <option value="Test 3">Test 1</option>
                                         </select>
                                         <div>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,25 +76,25 @@
                                             <tr class="border-b" valign="top" height="50px">
                                                 <td  width="175px">
                                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                        <input id="child-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="chile_care" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="child-care" class="overview-id-field text-colortext ">Child care</label>
                                                     </div>
                                                 </td>
                                                 <td  width="190px">
                                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                        <input id="senior-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="senior-care" class="overview-id-field text-colortext">Senior care</label>
                                                     </div>
                                                 </td>
                                                 <td  width="180px">
                                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                        <input id="home-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="home_care" id="home-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="home-care" class="overview-id-field text-colortext">Home care</label>
                                                     </div>  
                                                 </td>
                                                 <td >
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="other" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="other" id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="other" class="overview-id-field text-colortext">Other services</label>
                                                     </div>
                                                 </td>
@@ -102,43 +102,43 @@
                                             <tr>
                                                 <td  valign="top">
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
-                                                        <input id="nany-sister" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="nanny_sister" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="nany-sister" class="overview-id-field text-colortext">Nany/ Sister</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="au-pair" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="au_pair" id="au-pair" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="au-pair" class="overview-id-field text-colortext">Au Pair</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="maternity-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="maternity-care" class="overview-id-field text-colortext">Maternity Care</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="at-home-daycare" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="at_home_daycare" id="at-home-daycare" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="at-home-daycare" class="overview-id-field text-colortext">At Home Daycare</label>
                                                     </div>
                                                 </td>
                                                 <td  valign="top">
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="companion" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="companion" id="companion" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="companion" class="overview-id-field text-colortext">Companion</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="personal-full-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="personal_full_care" id="personal-full-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="personal-full-care" class="overview-id-field text-colortext">Personal Full Care</label>
                                                     </div>
                                                 </td>
                                                 <td  valign="top">
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="meal_prepation_coking" id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="meal-prepation-coking" class="overview-id-field text-colortext max-w-[140px]">Meal Prepation/ Coking</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="house-cleaning" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="house_cleaning" id="house-cleaning" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="house-cleaning" class="overview-id-field text-colortext">House Cleaning</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input id="private-home-kitchen" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input name="private_home_kitchen" id="private-home-kitchen" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="private-home-kitchen" class="overview-id-field text-colortext max-w-[130px]">Private Home Kitchen</label>
                                                     </div>
                                                 </td>
@@ -165,7 +165,7 @@
                                 <div>
                                     <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Location</label>
                                     <div class="w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
-                                        <select id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                        <select name="location" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                             <option>USA, CA, Senior care San Jose</option>
                                             <option>Test 1</option>
                                             <option>Test 1</option>
@@ -182,7 +182,7 @@
                                 <div>
                                     <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
-                                        <input id="send-notification" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input name="send_notifcation" id="send-notification" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
                                     </div>
                                 </div>
@@ -204,21 +204,21 @@
                                 </div>
                                 <div class="flex items-center space-x-[60px] mt-3">
                                     <div class="flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                        <input type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                        <input name="aplication_fee" value="{{ old('aplication_fee') }}" type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
                                        <div class="flex items-center justify-center space-x-2 pr-2">
                                             <span class="text-base text-colortext hover:cursor-pointer">+</span>
                                             <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
                                        </div>
                                     </div>
                                     <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                        <input type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                        <input name="placement_fee" value="{{ old('placement_fee') }}" type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
                                         <div class="flex items-center justify-center space-x-2 pr-2">
                                             <span class="text-base text-colortext hover:cursor-pointer">+</span>
                                             <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
                                        </div>
                                     </div>
                                     <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                        <input type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                        <input name="hourly_rate" value="{{ old('hourly_rate') }}" type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
                                         <div class="flex items-center justify-center space-x-2 pr-2">
                                             <span class="text-base text-colortext hover:cursor-pointer">+</span>
                                             <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
@@ -241,14 +241,14 @@
                                 <div>
                                     <label for="" class="overview-status-field text-colortext">Client</label>
                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input name="client" id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
                                     </div>
                                 </div>
                                 <div>
                                     <label for="" class="overview-status-field text-colortext">Caregives</label>
                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input name="caregives" id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@
                                 <div>
                                     <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
                                     <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input name="interested_public_pool" id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="" class="overview-id-field text-colortext">We want to share our work with other agencies and caregives</label>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                 <div class="flex items-center justify-between border-b py-[26.5px]">
                                     <span class=" overview-id-field text-colortext">Allow email notifications</span>
                                     <label for="toggle-email-notif" class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" value="" id="toggle-email-notif" class="sr-only peer">
+                                        <input name="notification_email" type="checkbox" value="" id="toggle-email-notif" class="sr-only peer">
                                         <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                     </label>
                                 </div>
@@ -288,13 +288,27 @@
                                 <div class="flex items-center border-b py-[28.5px] space-x-[108px]">
                                     <span class=" overview-id-field text-colortext">Choose a color theme</span>
                                     <div class="flex space-x-3">
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#EB5757]"></div>
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2994A]"></div>
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#27AE60]"></div>
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#6AEAE3]"></div>
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#56CCF2]"></div>
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#BB6BD9]"></div>
-                                        <div class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2C94C]"></div>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#EB5757]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#EB5757">
+                                        </label>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2994A]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#F2994A">
+                                        </label>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#27AE60]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#27AE60">
+                                        </label>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#6AEAE3]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#6AEAE3">
+                                        </label>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#56CCF2]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#56CCF2">
+                                        </label>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#BB6BD9]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#BB6BD9">
+                                        </label>
+                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2C94C]">
+                                            <input name="dashboard_color_theme" type="checkbox" value="#F2C94C">
+                                        </label>
                                     </div>
                                 </div>
                             </div>
