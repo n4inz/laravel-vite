@@ -2,7 +2,7 @@
 @section('container')
 <main class="flex">
     @include('layouts.sidebar')
-    <article id="article" class=" ml-56 space-x-2 mt-[85px] px-10 w-[80%]">
+    <article id="article" class=" ml-[310px] space-x-2 mt-[85px] px-5 w-[75%]">
         <div class="flex items-center justify-between mt-8 w-[1017px] xl:w-full">
             <span class="overview-modal-add-talent-title">Talents</span>
             <button class="w-[111px] h-10 bg-palet rounded-md">
@@ -36,7 +36,8 @@
         </div>
 
         <div class="grid gap-4 grid-cols-3 mt-10 mb-20 w-[1017px] xl:w-full">   
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+        {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
                 </div>
@@ -52,7 +53,7 @@
                     </div>
                 </div>
             </div>     
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
                 </div>
@@ -68,7 +69,7 @@
                     </div>
                 </div>
             </div>   
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
                 </div>
@@ -84,7 +85,7 @@
                     </div>
                 </div>
             </div>          
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
                 </div>
@@ -100,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="">
                 </div>
@@ -116,7 +117,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-4.jpg" alt="">
                 </div>
@@ -132,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
                 </div>
@@ -148,7 +149,7 @@
                     </div>
                 </div>
             </div>          
-            <div class="flex items-center w-[330px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+            <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                 <div>
                     <img class="w-20 h-20 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="">
                 </div>
@@ -164,7 +165,6 @@
                     </div>
                 </div>
             </div>
-    
         </div>
 
         {{-- Modal Create job --}}

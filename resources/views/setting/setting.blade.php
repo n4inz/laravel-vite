@@ -3,7 +3,7 @@
 
 <main class="flex">
     @include('layouts.sidebar')
-    <article id="article" class="ml-56 space-x-2 mt-[85px] px-10 xl:w-[80%]">
+    <article id="article" class="ml-[310px] space-x-2 mt-[85px] px-5 xl:w-[75%]">
         <div>            
             <div id="myTabContent" class="text-teal-500">
                 <div class=" flex space-x-2 mt-11">

@@ -1,8 +1,24 @@
 {{-- <nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded "> --}}
-<nav id="nav" class="fixed toggle-nav-show z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
+<nav id="nav" class="fixed w-[1400px] xl:w-full z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
 
-    <div class="container flex flex-nowrap xl:flex-wrap justify-between items-center mx-auto ">
-        <div class="flex items-center order-1  md:order-2 ">
+    <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
+        <div id="search" class="w-1/2 togle-search-desktop" >
+            <div class="relative ">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                    </svg>
+                        
+                </div>
+                <div class="w-[340px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
+
+                    <input type="text" id="simple-search" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" required>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end w-1/2">
             <div class="flex items-center justify-center space-x-11">
                 <div>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,21 +61,6 @@
                         <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                     </li>
                 </ul>
-            </div>
-        </div>
-        <div class=" items-center w-full flex md:w-auto md:order-1" >
-            <div id="search" class="relative w-80">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
-                    </svg>
-                        
-                </div>
-                <div class="w-[340px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
-
-                    <input type="text" id="simple-search" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" required>
-                </div>
-
             </div>
         </div>
     </div>

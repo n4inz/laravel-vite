@@ -3,7 +3,7 @@
 
 <main class="flex">
     @include('layouts.sidebar')
-    <article id="article" class="ml-56 space-x-2 mt-[85px] px-10 xl:w-[80%]">
+    <article id="article" class="ml-[310px] space-x-2 mt-[85px] px-5 xl:w-[75%]">
         <div>            
             <div id="myTabContent" class="text-teal-500">
                  {{-- Tabs Overview --}}
@@ -23,13 +23,13 @@
                                 <div>
                                     <label for="first-name" class="block overview-status-field text-[#222222] mb-2">First Name</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="First Name">
+                                        <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="last-name" class="block overview-status-field text-[#222222] mb-2">Last Name</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Lasr Name">
+                                        <input type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -37,13 +37,13 @@
                                 <div>
                                     <label for="email" class="block overview-status-field text-[#222222] mb-2">Email</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="First Name">
+                                        <input type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="phone" class="block overview-status-field text-[#222222] mb-2">Phone</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="phone" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Lasr Name">
+                                        <input type="text" id="phone" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -51,13 +51,13 @@
                                 <div>
                                     <label for="address" class="block overview-status-field text-[#222222] mb-2">Address</label>
                                     <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input type="text" id="address" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="First Name">
+                                        <input type="text" id="address" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="languages" class="block overview-status-field text-[#222222] mb-2">Languages</label>
                                     <div class="w-[316px] p-3 h-10 border border-[#ECECEC] flex items-center rounded">
-                                        <select id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                        <select id="category" class="text-sm overview-note-body bg-transparent border-none text-colortext appearance-none rounded-lg p-1 block w-full focus:ring-0 outline-none">
                                             <option>Languages</option>
                                             <option>Test 1</option>
                                             <option>Test 1</option>
@@ -72,9 +72,9 @@
                                 </div>
                             </div>
                             <div class="px-4 mt-4 ">
-                                <label class="overview-status-field text-[#222222] mb-2">Description</label>
+                                <label class="overview-status-field text-[#222222] mb-2">Note</label>
                                 <div class="w-[650px] h-[221px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
-                                    <textarea id="message" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="Enter your comment"></textarea>
+                                    <textarea id="message" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder=""></textarea>
                                     <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
+    line-height: 22px;
 }
 .btn-create-list{
     font-style: normal;
@@ -27,7 +28,15 @@
     padding-right: 6px;
 }
 
-.toggle-nav-show{
+.sidebar-text {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+
+/* .toggle-nav-show{
     width: 82%;
     margin-left: 18%;
 }
@@ -35,10 +44,23 @@
 .toggle-nav-hidden{
     width: 95%;
     margin-left: 5%;
+} */
+
+.togle-search-mobile{
+    /* justify-start pl-24 */
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 96px;
+    align-items: center;
+    /* margin-left: 40px; */
 }
 
-.togle-search{
-    margin-left: 40px;
+.togle-search-desktop{
+    /* justify-start pl-24 */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* margin-left: 40px; */
 }
 
 .overview-title {

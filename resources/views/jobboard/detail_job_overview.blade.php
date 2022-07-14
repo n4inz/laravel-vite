@@ -3,7 +3,7 @@
 
 <main class="flex">
     @include('layouts.sidebar')
-    <article id="article" class="ml-56 space-x-2 mt-[85px] px-10 xl:w-[80%]">
+    <article id="article" class="ml-[310px] space-x-2 mt-[85px] px-5 w-[75%]">
         <div>
             <div class="h-[228px] w-[1016px] xl:w-full bg-bgbody px-6 rounded">
                 <div class="flex items-center justify-between w-full mb-1">
@@ -42,7 +42,7 @@
                         </td>
                     </tr>
                 </table>
-                <ul class="mt-6 flex flex-wrap font-medium text-center" id="myTab" role="tablist">
+                <ul class="mt-5 flex flex-wrap font-medium text-center" id="myTab" role="tablist">
                     <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b  " id="overview-tab" data-tabs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
                     </li>
