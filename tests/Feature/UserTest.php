@@ -22,7 +22,7 @@ class UserTest extends TestCase
         $response->assertSeeText('First Name');
         $response->assertSeeText('Phone');
         $response->assertSeeText('Address');
-        $response->assertSeeText('Description');
+        $response->assertSeeText('Note');
 
         $response->assertStatus(200);
     }
