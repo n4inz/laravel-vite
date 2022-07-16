@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service_categories', function (Blueprint $table) {
+        Schema::create('setting_service_categories', function (Blueprint $table) {
             $table->id();
             $table->boolean('chile_care');
             $table->boolean('nanny_sister');
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_categories');
+        Schema::dropIfExists('setting_service_categories');
     }
 };

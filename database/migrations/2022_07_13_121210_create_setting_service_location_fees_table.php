@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service_location_fees', function (Blueprint $table) {
+        Schema::create('setting_service_location_fees', function (Blueprint $table) {
             $table->id();
             $table->string('location');
             $table->boolean('send_notifcation');
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_location_fees');
+        Schema::dropIfExists('setting_service_location_fees');
     }
 };

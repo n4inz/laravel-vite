@@ -12,12 +12,12 @@ class SettingDetail extends Model
 
     public function service_location_fee()
     {
-        return $this->hasOne(ServiceLocationFee::class, 'setting_details_id');
+        return $this->hasOne(SettingServiceLocationFee::class, 'setting_details_id');
     }
 
     public function service_category()
     {
-        return $this->hasOne(ServiceCategory::class, 'setting_details_id');
+        return $this->hasOne(SettingServiceCategory::class, 'setting_details_id');
     }
 
 }

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('defined_check_lists', function (Blueprint $table) {
+        Schema::create('jobs_languages', function (Blueprint $table) {
             $table->id();
-            $table->string('body');
-            $table->unsignedBigInteger('setting_additionals_id');
+            $table->string('language');
+            
+            $table->unsignedBigInteger('jobs_id');
             $table->timestamps();
-
-            $table->foreign('setting_additionals_id')
-            ->references('id')->on('setting_additionals')
+            $table->foreign('jobs_id')
+            ->references('id')->on('jobs')
             ->onDelete('cascade');
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('defined_check_lists');
+        Schema::dropIfExists('jobs_languages');
     }
 };
