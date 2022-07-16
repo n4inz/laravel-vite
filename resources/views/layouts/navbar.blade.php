@@ -58,7 +58,11 @@
                         <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                        <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                            @csrf
+                            <input  type="submit" class="hover:cursor-pointer" value="Sign out">
+                        </form>
+                        {{-- <a href="#" class=""></a> --}}
                     </li>
                 </ul>
             </div>

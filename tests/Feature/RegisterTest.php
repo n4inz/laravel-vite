@@ -29,6 +29,34 @@ class RegisterTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect('https://test.'.env('DOMAIN'));
+        $response->assertRedirect('https://test.'.env('DOMAIN').'/dashboard');
     }
+
+    // public function test_domain_exists()
+    // {
+    //     $this->withoutExceptionHandling();
+
+    //     // $this->post('/register-store',[
+    //     //     'sub_domain' => 'test',
+    //     //     'email' => 'test@mail.com',
+    //     //     'password' => 'test123',
+    //     //     'password_confirmation' => 'test123'
+    //     // ]);
+
+
+    //     $response = $this->post('/register-store',[
+    //         'sub_domain' => 'test',
+    //         'email' => '',
+    //         'password' => 'test123',
+    //         'password_confirmation' => 'test123'
+    //     ]);
+
+    //     $response->assertSessionHasErrors(['email']);
+        
+
+    //     // $response->assert(true);
+
+    //     // $this->assertAuthenticated();
+    //     // $response->assertRedirect('https://test.'.env('DOMAIN'));
+    // }
 }

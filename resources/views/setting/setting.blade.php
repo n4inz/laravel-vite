@@ -9,382 +9,386 @@
                 <div class=" flex space-x-2 mt-11">
                     {{-- right --}}
                     <div class="w-[704px] xl:w-[80%]">
-                        <div class="bg-bgbody rounded ">
-                            <div class="px-4 pt-[18.5px]">
-                                <div class="flex items-center space-x-2 ">
-                                    <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
-                                    <span class="text-[#222222] user-create-client-title">General</span>
-                                </div>
-                            </div>
-                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="px-6 mt-8 flex space-x-4">
-                                <div>
-                                    <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Agency Name</label>
-                                    <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input name="agency_name" value="{{ old('agency_name') }}" type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                        <form method="post" action="{{ route('setting.store') }}">
+                            @csrf
+                            <div class="bg-bgbody rounded ">
+                                <div class="px-4 pt-[18.5px]">
+                                    <div class="flex items-center space-x-2 ">
+                                        <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
+                                        <span class="text-[#222222] user-create-client-title">General</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <label for="last-name" class="block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
-                                    <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input name="url_ending_legal" value="{{ old('url_ending_legal') }}" type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-6 mt-8 flex space-x-4">
+                                    <div>
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Agency Name</label>
+                                        <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
+                                            <input name="agency_name" value="{{ old('agency_name') }}" type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="px-6 mt-4 ">
-                                <label class="overview-status-field text-[#222222] mb-2">Company Description</label>
-                                <div class="w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
-                                    <textarea name="company_description" id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="">{{ old('company_description') }}</textarea>
-                                    {{-- <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span> --}}
-                                </div>
-                            </div>
-                            <div class="flex mt-10"></div>
-                        </div>
-
-                        <div class="bg-bgbody rounded mt-3">
-                            <div class="px-4 pt-[18.5px]">
-                                <div class="flex items-center space-x-2 ">
-                                    <div class="w-2 h-6 bg-palet rounded-sm"></div>
-                                    <span class="text-[#222222] user-create-client-title">Details</span>
-                                </div>
-                            </div>
-                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="px-6 mt-8 flex space-x-4">
-                                <div>
-                                    <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Type</label>
-                                    <div class="w-[316px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
-                                        <select name="service_type" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option value="Placement">Placement</option>
-                                            <option value="Test 1">Test 1</option>
-                                            <option value="Test 2">Test 1</option>
-                                            <option value="Test 3">Test 1</option>
-                                        </select>
-                                        <div>
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
-                                                <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
-                                            </svg>   
+                                    <div>
+                                        <label for="last-name" class="block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
+                                        <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
+                                            <input name="url_ending_legal" value="{{ old('url_ending_legal') }}" type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="px-6 mt-6 flex space-x-4">
-                                <div class="w-full">
-                                    <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Category</label>
-                                    <div class="">
-                                        <table  width="100%">
-                                            <tr class="border-b" valign="top" height="50px">
-                                                <td  width="175px">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                        <input name="chile_care" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="child-care" class="overview-id-field text-colortext ">Child care</label>
-                                                    </div>
-                                                </td>
-                                                <td  width="190px">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                        <input name="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="senior-care" class="overview-id-field text-colortext">Senior care</label>
-                                                    </div>
-                                                </td>
-                                                <td  width="180px">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                        <input name="home_care" id="home-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="home-care" class="overview-id-field text-colortext">Home care</label>
-                                                    </div>  
-                                                </td>
-                                                <td >
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="other" id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="other" class="overview-id-field text-colortext">Other services</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td  valign="top">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
-                                                        <input name="nanny_sister" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="nany-sister" class="overview-id-field text-colortext">Nany/ Sister</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="au_pair" id="au-pair" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="au-pair" class="overview-id-field text-colortext">Au Pair</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="maternity-care" class="overview-id-field text-colortext">Maternity Care</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="at_home_daycare" id="at-home-daycare" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="at-home-daycare" class="overview-id-field text-colortext">At Home Daycare</label>
-                                                    </div>
-                                                </td>
-                                                <td  valign="top">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="companion" id="companion" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="companion" class="overview-id-field text-colortext">Companion</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="personal_full_care" id="personal-full-care" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="personal-full-care" class="overview-id-field text-colortext">Personal Full Care</label>
-                                                    </div>
-                                                </td>
-                                                <td  valign="top">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="meal_prepation_coking" id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="meal-prepation-coking" class="overview-id-field text-colortext max-w-[140px]">Meal Prepation/ Coking</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="house_cleaning" id="house-cleaning" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="house-cleaning" class="overview-id-field text-colortext">House Cleaning</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input name="private_home_kitchen" id="private-home-kitchen" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="private-home-kitchen" class="overview-id-field text-colortext max-w-[130px]">Private Home Kitchen</label>
-                                                    </div>
-                                                </td>
-                                                <td  valign="top">
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        {{-- <input id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
-                                                        <label for="meal-prepation-coking" class="overview-status text-[#AFABAB]">Tutor</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        {{-- <input id="house-cleaning" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
-                                                        <label for="house-cleaning" class="overview-status text-[#AFABAB]">Pick up/ Drop off</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        {{-- <input id="private-home-kitchen" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
-                                                        <label for="private-home-kitchen" class="overview-status text-[#AFABAB]">Other Professional Services</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                <div class="px-6 mt-4 ">
+                                    <label class="overview-status-field text-[#222222] mb-2">Company Description</label>
+                                    <div class="w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
+                                        <textarea name="company_description" id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="">{{ old('company_description') }}</textarea>
+                                        {{-- <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span> --}}
                                     </div>
                                 </div>
+                                <div class="flex mt-10"></div>
                             </div>
-                            <div class="px-6 mt-8 flex items-center space-x-[25px]">
-                                <div>
-                                    <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Location</label>
-                                    <div class="w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
-                                        <select name="location" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option>USA, CA, Senior care San Jose</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
-                                        </select>
-                                        <div>
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
-                                                <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
-                                            </svg>   
+    
+                            <div class="bg-bgbody rounded mt-3">
+                                <div class="px-4 pt-[18.5px]">
+                                    <div class="flex items-center space-x-2 ">
+                                        <div class="w-2 h-6 bg-palet rounded-sm"></div>
+                                        <span class="text-[#222222] user-create-client-title">Details</span>
+                                    </div>
+                                </div>
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-6 mt-8 flex space-x-4">
+                                    <div>
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Type</label>
+                                        <div class="w-[316px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
+                                            <select name="service_type" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                                <option value="Placement">Placement</option>
+                                                <option value="Test 1">Test 1</option>
+                                                <option value="Test 2">Test 1</option>
+                                                <option value="Test 3">Test 1</option>
+                                            </select>
+                                            <div>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
+                                                    <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
+                                                </svg>   
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
-                                        <input name="send_notifcation" id="send-notification" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
+                                <div class="px-6 mt-6 flex space-x-4">
+                                    <div class="w-full">
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Category</label>
+                                        <div class="">
+                                            <table  width="100%">
+                                                <tr class="border-b" valign="top" height="50px">
+                                                    <td  width="175px">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                                            <input name="chile_care" value="1" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="child-care" class="overview-id-field text-colortext ">Child care</label>
+                                                        </div>
+                                                    </td>
+                                                    <td  width="190px">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                                            <input name="senior_care" value="1" id="senior-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="senior-care" class="overview-id-field text-colortext">Senior care</label>
+                                                        </div>
+                                                    </td>
+                                                    <td  width="180px">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                                            <input name="home_care" value="1" id="home-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="home-care" class="overview-id-field text-colortext">Home care</label>
+                                                        </div>  
+                                                    </td>
+                                                    <td >
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="other" id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="other" class="overview-id-field text-colortext">Other services</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td  valign="top">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                            <input name="nanny_sister" value="1" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="nany-sister" class="overview-id-field text-colortext">Nany/ Sister</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="au_pair" value="1" id="au-pair" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="au-pair" class="overview-id-field text-colortext">Au Pair</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="maternity_care" value="1" id="maternity-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="maternity-care" class="overview-id-field text-colortext">Maternity Care</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="at_home_daycare" value="1" id="at-home-daycare" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="at-home-daycare" class="overview-id-field text-colortext">At Home Daycare</label>
+                                                        </div>
+                                                    </td>
+                                                    <td  valign="top">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="companion" value="1" id="companion" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="companion" class="overview-id-field text-colortext">Companion</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="personal_full_care" value="1" id="personal-full-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="personal-full-care" class="overview-id-field text-colortext">Personal Full Care</label>
+                                                        </div>
+                                                    </td>
+                                                    <td  valign="top">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="meal_prepation_coking" value="1" id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="meal-prepation-coking" class="overview-id-field text-colortext max-w-[140px]">Meal Prepation/ Coking</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="house_cleaning" value="1" id="house-cleaning" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="house-cleaning" class="overview-id-field text-colortext">House Cleaning</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            <input name="private_home_kitchen" value="1" id="private-home-kitchen" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <label for="private-home-kitchen" class="overview-id-field text-colortext max-w-[130px]">Private Home Kitchen</label>
+                                                        </div>
+                                                    </td>
+                                                    <td  valign="top">
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            {{-- <input id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
+                                                            <label for="meal-prepation-coking" class="overview-status text-[#AFABAB]">Tutor</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            {{-- <input id="house-cleaning" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
+                                                            <label for="house-cleaning" class="overview-status text-[#AFABAB]">Pick up/ Drop off</label>
+                                                        </div>
+                                                        <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                            {{-- <input id="private-home-kitchen" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
+                                                            <label for="private-home-kitchen" class="overview-status text-[#AFABAB]">Other Professional Services</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="px-6 mt-8 flex flex-col items-center space-x-[25px]">
-                                <div class="flex">
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input id="app-fee" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="app-fee" class="overview-status-field text-colortext ">Application Fee ($)</label>
-                                    </div>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input id="placement-fee" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="placement-fee" class="overview-status-field text-colortext ">Placement Fee ($)</label>
-                                    </div>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input id="hourly-rate" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="hourly-rate" class="overview-status-field text-colortext ">Hourly Rate ($)</label>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-[60px] mt-3">
-                                    <div class="flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                        <input name="aplication_fee" value="{{ old('aplication_fee') }}" type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                       <div class="flex items-center justify-center space-x-2 pr-2">
-                                            <span class="text-base text-colortext hover:cursor-pointer">+</span>
-                                            <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                       </div>
-                                    </div>
-                                    <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                        <input name="placement_fee" value="{{ old('placement_fee') }}" type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                        <div class="flex items-center justify-center space-x-2 pr-2">
-                                            <span class="text-base text-colortext hover:cursor-pointer">+</span>
-                                            <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                       </div>
-                                    </div>
-                                    <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                        <input name="hourly_rate" value="{{ old('hourly_rate') }}" type="text"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                        <div class="flex items-center justify-center space-x-2 pr-2">
-                                            <span class="text-base text-colortext hover:cursor-pointer">+</span>
-                                            <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                       </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-8 flex"></div>
-                        </div>
-
-                        <div class="bg-bgbody rounded mt-3">
-                            <div class="px-4 pt-[18.5px]">
-                                <div class="flex items-center space-x-2 ">
-                                    <div class="w-2 h-6 bg-[#FEC001] rounded-sm"></div>
-                                    <span class="text-[#222222] user-create-client-title">User</span>
-                                </div>
-                            </div>
-                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="px-6 mt-8 flex items-center space-x-4 ">
-                                <div>
-                                    <label for="" class="overview-status-field text-colortext">Client</label>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input name="client" id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="" class="overview-status-field text-colortext">Caregives</label>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input name="caregives" id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-6 mt-8 flex items-center space-x-4 ">
-                                <div>
-                                    <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
-                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                        <input name="interested_public_pool" id="" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="" class="overview-id-field text-colortext">We want to share our work with other agencies and caregives</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex mt-8"></div>
-                        </div>
-
-                        <div class="bg-bgbody rounded mt-3">
-                            <div class="px-4 pt-[18.5px]">
-                                <div class="flex items-center space-x-2 ">
-                                    <div class="w-2 h-6 bg-[#01A3FE] rounded-sm"></div>
-                                    <span class="text-[#222222] user-create-client-title">Additional settings</span>
-                                </div>
-                            </div>
-                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="px-8 mt-8 ">
-                                <label for="" class="overview-status-field text-colortext">Notification</label>
-                                <div class="flex items-center justify-between border-b py-[26.5px]">
-                                    <span class=" overview-id-field text-colortext">Allow email notifications</span>
-                                    <label for="toggle-email-notif" class="relative inline-flex items-center cursor-pointer">
-                                        <input name="notification_email" type="checkbox" value="" id="toggle-email-notif" class="sr-only peer">
-                                        <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="px-8 mt-4 ">
-                                <label for="" class="overview-status-field text-colortext">Dashboard</label>
-                                <div class="flex items-center border-b py-[28.5px] space-x-[108px]">
-                                    <span class=" overview-id-field text-colortext">Choose a color theme</span>
-                                    <div class="flex space-x-3">
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#EB5757]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#EB5757">
-                                        </label>
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2994A]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#F2994A">
-                                        </label>
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#27AE60]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#27AE60">
-                                        </label>
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#6AEAE3]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#6AEAE3">
-                                        </label>
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#56CCF2]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#56CCF2">
-                                        </label>
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#BB6BD9]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#BB6BD9">
-                                        </label>
-                                        <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2C94C]">
-                                            <input name="dashboard_color_theme" type="checkbox" value="#F2C94C">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-8 mt-4 ">
-                                <label for="" class="overview-status-field text-colortext mb-[26px]">Pre-defined check list</label>
-                                <div class="flex items-center space-x-[29.5px] mb-7">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                    </svg>
+                                <div class="px-6 mt-8 flex items-center space-x-[25px]">
                                     <div>
-                                        <span class="task-text-body text-colortext">Send Contact(WL)</span>
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Location</label>
+                                        <div class="w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
+                                            <select name="location" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                                <option>USA, CA, Senior care San Jose</option>
+                                                <option>Test 1</option>
+                                                <option>Test 1</option>
+                                                <option>Test 1</option>
+                                            </select>
+                                            <div>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
+                                                    <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
+                                                </svg>   
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex items-center space-x-[29.5px] mb-7">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                    </svg>
                                     <div>
-                                        <span class="task-text-body text-colortext">Sign Contract (Client)</span>
+                                        <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
+                                            <input name="send_notifcation" value="1" id="send-notification" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-[29.5px] mb-7">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                    </svg>
+                                <div class="px-6 mt-8 flex flex-col items-center space-x-[25px]">
+                                    <div class="flex">
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input id="app-fee" name="application_fee" value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="app-fee" class="overview-status-field text-colortext ">Application Fee ($)</label>
+                                        </div>
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input id="placement-fee" name="placement_fee" value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="placement-fee" class="overview-status-field text-colortext ">Placement Fee ($)</label>
+                                        </div>
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input id="hourly-rate" name="hourly_rate" value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="hourly-rate" class="overview-status-field text-colortext ">Hourly Rate ($)</label>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-[60px] mt-3">
+                                        <div class="flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
+                                            <input name="aplication_fee" value="{{ old('aplication_fee') }}" type="number"  class="overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                            <div class="flex items-center justify-center space-x-2 pr-2">
+                                                <span class="text-base text-colortext hover:cursor-pointer">+</span>
+                                                <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                            <input name="placement_fee" value="{{ old('placement_fee') }}" type="number"  class="overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                            <div class="flex items-center justify-center space-x-2 pr-2">
+                                                <span class="text-base text-colortext hover:cursor-pointer">+</span>
+                                                <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                            <input name="hourly_rate" value="{{ old('hourly_rate') }}" type="number"  class="overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                            <div class="flex items-center justify-center space-x-2 pr-2">
+                                                <span class="text-base text-colortext hover:cursor-pointer">+</span>
+                                                <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-8 flex"></div>
+                            </div>
+    
+                            <div class="bg-bgbody rounded mt-3">
+                                <div class="px-4 pt-[18.5px]">
+                                    <div class="flex items-center space-x-2 ">
+                                        <div class="w-2 h-6 bg-[#FEC001] rounded-sm"></div>
+                                        <span class="text-[#222222] user-create-client-title">User</span>
+                                    </div>
+                                </div>
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-6 mt-8 flex items-center space-x-4 ">
                                     <div>
-                                        <span class="task-text-body text-colortext">Make payment (Echo to send angent@gmail.com for quick payment)</span>
+                                        <label for="" class="overview-status-field text-colortext">Client</label>
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input name="client" value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex items-center space-x-[29.5px] mb-7">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                    </svg>
                                     <div>
-                                        <span class="task-text-body text-colortext">Update Job description</span>
+                                        <label for="" class="overview-status-field text-colortext">Caregives</label>
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input name="caregives" value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex items-center space-x-[29.5px] mb-7">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                    </svg>
+                                <div class="px-6 mt-8 flex items-center space-x-4 ">
                                     <div>
-                                        <span class="task-text-body text-colortext">Follow up with leads</span>
+                                        <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
+                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input name="interested_public_pool" value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="" class="overview-id-field text-colortext">We want to share our work with other agencies and caregives</label>
+                                        </div>
                                     </div>
                                 </div>
-                                {{-- Add more --}}
-                                <div class="flex items-center space-x-[29.5px] mb-7">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                    </svg>
-                                    <div>
-                                        <input type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                <div class="flex mt-8"></div>
+                            </div>
+    
+                            <div class="bg-bgbody rounded mt-3">
+                                <div class="px-4 pt-[18.5px]">
+                                    <div class="flex items-center space-x-2 ">
+                                        <div class="w-2 h-6 bg-[#01A3FE] rounded-sm"></div>
+                                        <span class="text-[#222222] user-create-client-title">Additional settings</span>
                                     </div>
                                 </div>
-                                {{-- Button --}}
-                                <button class="w-[133px] h-10 bg-palet rounded-md">
-                                    <span class="task-btn-text">+ Add More</span>
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-8 mt-8 ">
+                                    <label for="" class="overview-status-field text-colortext">Notification</label>
+                                    <div class="flex items-center justify-between border-b py-[26.5px]">
+                                        <span class=" overview-id-field text-colortext">Allow email notifications</span>
+                                        <label for="toggle-email-notif" class="relative inline-flex items-center cursor-pointer">
+                                            <input name="notification_email" value="1" type="checkbox" id="toggle-email-notif" class="sr-only peer">
+                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="px-8 mt-4 ">
+                                    <label for="" class="overview-status-field text-colortext">Dashboard</label>
+                                    <div class="flex items-center border-b py-[28.5px] space-x-[108px]">
+                                        <span class=" overview-id-field text-colortext">Choose a color theme</span>
+                                        <div class="flex space-x-3">
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#EB5757]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
+                                            </label>
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2994A]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2994A">
+                                            </label>
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#27AE60]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#27AE60">
+                                            </label>
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#6AEAE3]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#6AEAE3">
+                                            </label>
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#56CCF2]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#56CCF2">
+                                            </label>
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#BB6BD9]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#BB6BD9">
+                                            </label>
+                                            <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2C94C]">
+                                                <input  onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2C94C">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-8 mt-4 ">
+                                    <label for="" class="overview-status-field text-colortext mb-[26px]">Pre-defined check list</label>
+                                    <div class="flex items-center space-x-[29.5px] mb-7">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                        </svg>
+                                        <div>
+                                            <span class="task-text-body text-colortext">Send Contact(WL)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-[29.5px] mb-7">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                        </svg>
+                                        <div>
+                                            <span class="task-text-body text-colortext">Sign Contract (Client)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-[29.5px] mb-7">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                        </svg>
+                                        <div>
+                                            <span class="task-text-body text-colortext">Make payment (Echo to send angent@gmail.com for quick payment)</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-[29.5px] mb-7">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                        </svg>
+                                        <div>
+                                            <span class="task-text-body text-colortext">Update Job description</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-[29.5px] mb-7">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                        </svg>
+                                        <div>
+                                            <span class="task-text-body text-colortext">Follow up with leads</span>
+                                        </div>
+                                    </div>
+                                    {{-- Add more --}}
+                                    <div class="flex items-center space-x-[29.5px] mb-7">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                        </svg>
+                                        <div>
+                                            <input name="body" value="{{ old('body') }}" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                        </div>
+                                    </div>
+                                    {{-- Button --}}
+                                    <button class="w-[133px] h-10 bg-palet rounded-md">
+                                        <span class="task-btn-text">+ Add More</span>
+                                    </button>
+                                </div>
+                                <div class="flex mt-8"></div>
+                            </div>
+                            <div class="flex justify-end w-full mt-6 space-x-2 ">
+                                <button class="w-40 h-[42px] bg-colorStatusCard1 rounded-md ">
+                                    <span class="overview-attechment-btn-text justify-center">Cancel</span>
+                                </button>
+                                <button style="background: #3BD7CF" type="submit" class="w-40 h-[42px] rounded-md ">
+                                    <span class="overview-attechment-btn-text justify-center">Save</span>
                                 </button>
                             </div>
-                            <div class="flex mt-8"></div>
-                        </div>
-                        <div class="flex justify-end w-full mt-6 space-x-2 ">
-                            <button class="w-40 h-[42px] bg-colorStatusCard1 rounded-md ">
-                                <span class="overview-attechment-btn-text justify-center">Cancel</span>
-                            </button>
-                            <button class="w-40 h-[42px] bg-palet rounded-md ">
-                                <span class="overview-attechment-btn-text justify-center">Save</span>
-                            </button>
-                        </div>
+                        </form>
                     </div>
+          
 
                     {{-- left --}}
                     <div class="w-[300px] xl:w-[30%] ">
@@ -418,6 +422,7 @@
             </div>
         </div>
     </article>
+    <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
 </main>
 
 @endsection

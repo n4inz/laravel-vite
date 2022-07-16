@@ -11,14 +11,14 @@
         </div>
        <ul class="space-y-2 mt-8 ">
             <li>
-                <a href="{{ route('dashboard') }}" class="{{ request()->is('/') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 text-base font-normal text-gray-900 rounded-lg ">
+                <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 text-base font-normal text-gray-900 rounded-lg ">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 3C2.25 2.58579 2.58579 2.25 3 2.25H10C10.4142 2.25 10.75 2.58579 10.75 3V8.5C10.75 8.91421 10.4142 9.25 10 9.25H3C2.58579 9.25 2.25 8.91421 2.25 8.5V3ZM3.75 3.75V7.75H9.25V3.75H3.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }} "/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 15.5C13.25 15.0858 13.5858 14.75 14 14.75H21C21.4142 14.75 21.75 15.0858 21.75 15.5V21C21.75 21.4142 21.4142 21.75 21 21.75H14C13.5858 21.75 13.25 21.4142 13.25 21V15.5ZM14.75 16.25V20.25H20.25V16.25H14.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 3C13.25 2.58579 13.5858 2.25 14 2.25H21C21.4142 2.25 21.75 2.58579 21.75 3V11.5C21.75 11.9142 21.4142 12.25 21 12.25H14C13.5858 12.25 13.25 11.9142 13.25 11.5V3ZM14.75 3.75V10.75H20.25V3.75H14.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12.5C2.25 12.0858 2.58579 11.75 3 11.75H10C10.4142 11.75 10.75 12.0858 10.75 12.5V21C10.75 21.4142 10.4142 21.75 10 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21V12.5ZM3.75 13.25V20.25H9.25V13.25H3.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 3C2.25 2.58579 2.58579 2.25 3 2.25H10C10.4142 2.25 10.75 2.58579 10.75 3V8.5C10.75 8.91421 10.4142 9.25 10 9.25H3C2.58579 9.25 2.25 8.91421 2.25 8.5V3ZM3.75 3.75V7.75H9.25V3.75H3.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }} "/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 15.5C13.25 15.0858 13.5858 14.75 14 14.75H21C21.4142 14.75 21.75 15.0858 21.75 15.5V21C21.75 21.4142 21.4142 21.75 21 21.75H14C13.5858 21.75 13.25 21.4142 13.25 21V15.5ZM14.75 16.25V20.25H20.25V16.25H14.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 3C13.25 2.58579 13.5858 2.25 14 2.25H21C21.4142 2.25 21.75 2.58579 21.75 3V11.5C21.75 11.9142 21.4142 12.25 21 12.25H14C13.5858 12.25 13.25 11.9142 13.25 11.5V3ZM14.75 3.75V10.75H20.25V3.75H14.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12.5C2.25 12.0858 2.58579 11.75 3 11.75H10C10.4142 11.75 10.75 12.0858 10.75 12.5V21C10.75 21.4142 10.4142 21.75 10 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21V12.5ZM3.75 13.25V20.25H9.25V13.25H3.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
                     </svg>                                               
-                    <span class="{{ request()->is('/') ? 'text-palet': 'text-textcolor' }}  sidebar-text left-4 ml-3 sidebar-text">Dashboard</span>
+                    <span class="{{ request()->is('dashboard') ? 'text-palet': 'text-textcolor' }}  sidebar-text left-4 ml-3 sidebar-text">Dashboard</span>
                 </a>
             </li>
             <li>
@@ -116,12 +116,12 @@
         </div>
        <ul class="space-y-2 mt-8 ">
             <li>
-                <a href="{{ route('dashboard') }}" class="{{ request()->is('/') ? 'bg-hover': 'hover:bg-hover' }} flex group relative items-center p-2 text-base font-normal text-gray-900 rounded-lg">
+                <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'bg-hover': 'hover:bg-hover' }} flex group relative items-center p-2 text-base font-normal text-gray-900 rounded-lg">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 3C2.25 2.58579 2.58579 2.25 3 2.25H10C10.4142 2.25 10.75 2.58579 10.75 3V8.5C10.75 8.91421 10.4142 9.25 10 9.25H3C2.58579 9.25 2.25 8.91421 2.25 8.5V3ZM3.75 3.75V7.75H9.25V3.75H3.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 15.5C13.25 15.0858 13.5858 14.75 14 14.75H21C21.4142 14.75 21.75 15.0858 21.75 15.5V21C21.75 21.4142 21.4142 21.75 21 21.75H14C13.5858 21.75 13.25 21.4142 13.25 21V15.5ZM14.75 16.25V20.25H20.25V16.25H14.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 3C13.25 2.58579 13.5858 2.25 14 2.25H21C21.4142 2.25 21.75 2.58579 21.75 3V11.5C21.75 11.9142 21.4142 12.25 21 12.25H14C13.5858 12.25 13.25 11.9142 13.25 11.5V3ZM14.75 3.75V10.75H20.25V3.75H14.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12.5C2.25 12.0858 2.58579 11.75 3 11.75H10C10.4142 11.75 10.75 12.0858 10.75 12.5V21C10.75 21.4142 10.4142 21.75 10 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21V12.5ZM3.75 13.25V20.25H9.25V13.25H3.75Z" fill="{{ request()->is('/') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 3C2.25 2.58579 2.58579 2.25 3 2.25H10C10.4142 2.25 10.75 2.58579 10.75 3V8.5C10.75 8.91421 10.4142 9.25 10 9.25H3C2.58579 9.25 2.25 8.91421 2.25 8.5V3ZM3.75 3.75V7.75H9.25V3.75H3.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 15.5C13.25 15.0858 13.5858 14.75 14 14.75H21C21.4142 14.75 21.75 15.0858 21.75 15.5V21C21.75 21.4142 21.4142 21.75 21 21.75H14C13.5858 21.75 13.25 21.4142 13.25 21V15.5ZM14.75 16.25V20.25H20.25V16.25H14.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 3C13.25 2.58579 13.5858 2.25 14 2.25H21C21.4142 2.25 21.75 2.58579 21.75 3V11.5C21.75 11.9142 21.4142 12.25 21 12.25H14C13.5858 12.25 13.25 11.9142 13.25 11.5V3ZM14.75 3.75V10.75H20.25V3.75H14.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12.5C2.25 12.0858 2.58579 11.75 3 11.75H10C10.4142 11.75 10.75 12.0858 10.75 12.5V21C10.75 21.4142 10.4142 21.75 10 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21V12.5ZM3.75 13.25V20.25H9.25V13.25H3.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
                     </svg>
                         
                 </a>

@@ -22,6 +22,7 @@
                     <img src="{{ asset('images/bg-1.png') }}" alt="">
                 </div>
             </div>
+            <!--
             <div class="mt-[61px] pl-[58px] w-[680px]">
                 <span class="overview-send-title text-palet w-[650px] text-center">Register For Agency</span>
                     <form action="{{ route('register.store') }}" method="POST">
@@ -56,6 +57,39 @@
                             <span class="overview-talent-modal-title text-white">Register</span>
                         </button>
                     </form>
+            </div>
+        -->
+            <div class="mt-[61px] pl-[58px] w-[680px] flex flex-col items-center">
+                <span class="overview-send-title text-palet w-[650px] text-center">Register For Agency</span>
+                <form action="{{ route('register.store') }}" method="POST">
+                    @csrf
+                    <div class="mt-10 w-[27rem]">
+                        <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
+                            <input type="email" name="email" value="{{ old('email') }}" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="mt-4 w-[27rem]">
+                        <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
+                            <input type="text" name="sub_domain" value="{{ old('sub_domain') }}" id="sub_domain" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Subdomain">
+                        </div>
+                    </div>
+                    <div class="mt-4 w-[27rem]">
+                        <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                            <input type="password" name="password" id="password" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="mt-4 w-[27rem]">
+                        <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password confirmation">
+                        </div>
+                    </div>
+                    <div class="w-[27rem] mt-4">
+                        <a class="float-right text-palet opacity-70"  href="{{ route('login') }}">Login</a>
+                    </div>
+                    <button class="w-[27rem] h-10 bg-palet rounded-lg mt-6 mb-8">
+                        <span class="overview-talent-modal-title text-white">Register</span>
+                    </button>
+                </form>
             </div>
         </div>
     </main>

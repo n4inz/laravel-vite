@@ -15,6 +15,8 @@ class OverviewTest extends TestCase
      */
     public function test_overview_view()
     {
+        
+
         $response = $this->get('/overview');
 
         $response->assertSeeText('Job Detail');

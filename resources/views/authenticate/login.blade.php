@@ -1,3 +1,4 @@
+{{-- {{ dd(session()) }} --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,24 +25,27 @@
             </div>
             <div class="mt-[61px] pl-[58px] w-[680px] flex flex-col items-center">
                 <span class="overview-send-title text-palet w-[650px] text-center">Login For Agency</span>
-                    <div class="mt-10 w-[27rem]">
-                        <label for="first-name" class="block overview-modal-add-talent-text text-[#222222] mb-2">Email</label>
-                        <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                            <input type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
+                    <form action="{{ route('login.store') }}" method="POST">
+                        @csrf
+                        <div class="mt-10 w-[27rem]">
+                            <label for="first-name" class="block overview-modal-add-talent-text text-[#222222] mb-2">Email</label>
+                            <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
+                                <input type="text" name="email" value="{{ session()->get('email') }}" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-4 w-[27rem]">
-                        <label for="" class="block overview-modal-add-talent-text text-[#222222] mb-2">Password</label>
-                        <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
-                            <input type="password" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password">
+                        <div class="mt-4 w-[27rem]">
+                            <label for="" class="block overview-modal-add-talent-text text-[#222222] mb-2">Password</label>
+                            <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                                <input type="password" name="password" value="{{ old('password') }}" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="w-[27rem] mt-4">
-                        <a class="float-right text-palet opacity-70"  href="{{ route('register') }}">Register</a>
-                    </div>
-                    <button class="w-[27rem] h-10 bg-palet rounded-lg mt-6 mb-8">
-                        <span class="overview-talent-modal-title text-white">Login</span>
-                    </button>
+                        <div class="w-[27rem] mt-4">
+                            <a class="float-right text-palet opacity-70"  href="{{ route('register') }}">Register</a>
+                        </div>
+                        <button class="w-[27rem] h-10 bg-palet rounded-lg mt-6 mb-8">
+                            <span class="overview-talent-modal-title text-white">Login</span>
+                        </button>
+                    </form>
             </div>
         </div>
     </main>

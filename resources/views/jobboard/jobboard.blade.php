@@ -441,11 +441,11 @@
                     </div>
                     <div class="px-8 mt-[34px] flex items-center space-x-16">
                         <div class="flex items-center justify-center space-x-3">
-                            <input onclick="onlyOneStatus(this)" id="active" name="onlyOneStatus" checked style="color: #3BD7CF" type="checkbox" value="active" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                            <input onclick="onlyOneStatus(this, 'onlyOneStatus')" id="active" name="onlyOneStatus" checked style="color: #3BD7CF" type="checkbox" value="active" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                             <label for="active" class="overview-note-body text-colortext" >Active</label>
                         </div>
                         <div class="flex items-center justify-center space-x-3">
-                            <input onclick="onlyOneStatus(this)" id="archived" name="onlyOneStatus" style="color: #3BD7CF" type="checkbox" value="archived" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                            <input onclick="onlyOneStatus(this, 'onlyOneStatus')" id="archived" name="onlyOneStatus" style="color: #3BD7CF" type="checkbox" value="archived" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                             <label for="archived" class="overview-note-body text-colortext">Archived</label>
                         </div>
                     </div>

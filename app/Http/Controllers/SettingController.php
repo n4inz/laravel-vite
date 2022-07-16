@@ -19,12 +19,12 @@ class SettingController extends Controller
 
     public function setting_store(Request $request)
     {
-        // dd($request);
+        // return $request;
         $response = $request->validate([
             'agency_name' => 'required|min:6',
             'url_ending_legal' => 'required', 
             'company_description' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
             'service_type' => 'required',
 
@@ -35,13 +35,13 @@ class SettingController extends Controller
             'hourly_rate' => 'required'
         ]);
 
-       $avatar = $this->uploadImageStore($request->file('avatar'));
+    //    $avatar = $this->uploadImageStore($request->file('avatar'));
        
         SettingGeneral::create([
             'agency_name' => $request->agency_name,
             'url_ending_legal' => $request->url_ending_legal, 
             'company_description' => $request->company_description,
-            'avatar' => $avatar,
+            // 'avatar' => $avatar,
             'users_id' => auth()->user()->id
         ]);
 
