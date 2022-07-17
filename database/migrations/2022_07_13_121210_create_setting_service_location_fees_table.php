@@ -16,16 +16,21 @@ return new class extends Migration
         Schema::create('setting_service_location_fees', function (Blueprint $table) {
             $table->id();
             $table->string('location');
-            $table->boolean('send_notifcation');
-            $table->string('aplication_fee');
-            $table->string('placement_fee');
-            $table->string('hourly_rate');
+            $table->boolean('send_notifcation')->nullable()->default(false);
+            $table->string('aplication_fee')->nullable();
+            $table->string('placement_fee')->nullable();
+            $table->string('hourly_rate')->nullable();
             $table->unsignedBigInteger('setting_details_id');
+            $table->unsignedBigInteger('users_id');
+
             $table->timestamps();
 
             $table->foreign('setting_details_id')
             ->references('id')->on('setting_details')
-            ->onDelete('cascade');
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('users_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

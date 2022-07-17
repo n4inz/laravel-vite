@@ -46,6 +46,26 @@ class User extends Authenticatable
 
     public function tenants()
     {
-        return $this->belongsTo(Tenant::class, 'id');
+        return $this->belongsTo(Tenant::class, 'tenants_id');
+    }
+
+    public function SettingGeneral()
+    {
+        return $this->hasOne(SettingGeneral::class, 'users_id');
+    }
+
+    public function SettingDetail()
+    {
+        return $this->hasOne(SettingDetail::class, 'users_id');
+    }
+
+    public function SettingUsers()
+    {
+        return $this->hasOne(SettingUsers::class, 'users_id');
+    }
+
+    public function SettingAdditionals()
+    {
+        return $this->hasOne(SettingAdditionals::class, 'users_id');
     }
 }

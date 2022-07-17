@@ -3,70 +3,59 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TenancyRequest;
+use App\Http\Traits\Credentials;
+use App\Models\Credensial;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
 use Spatie\Multitenancy\Models\Tenant;
+
 
 class AuthenticateController extends Controller
 {
+    use Credentials;
     public function login()
     {
         return view('authenticate.login');
     }
 
+    public function tenancy(TenancyRequest $request)
+    {
+        $domain = User::with('tenants')->where('email' , request()->email)->first();
+        if(empty($domain)){
+            return redirect()->back()->with('messages', 'Credensial not found');
+        }
+        $this->create_credentials();
+        return redirect()->to('https://'.$domain->tenants->domain.'/tenancy');
+    }
+
     public function login_store(Request $request)
     {
+        $login = Credensial::first();
 
-    
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        $auth = [
+            'email' => $login->email,
+            'password' => $login->credensial
+        ];
 
-
-        // return redirect()->intended('https://'.auth()->user()->tenants->domain.'/dashboard');
-        $credentials = $request->only('email', 'password');
-
-
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($auth)) {
             $request->session()->regenerate();
-
-
-            return redirect()->intended('https://'.auth()->user()->tenants->domain.'/dashboard')->with('email', $request->email,
-            );
+            $login->truncate();
+            return response()->json([
+                'status' => 200,
+                'domain' => auth()->user()->tenants->domain
+            ]);
         }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-
-    }
-
-    public function login_tenancy(Request $request)
-    {
+        $login->truncate();
         return response()->json([
-            'test' => 'testing'
-        ]);
-        // $request->validate([
-        //     'email' => 'required',
-        //     'password' => 'required'
-        // ]);
+            'status' => 401,
+        ]);  
 
-        // $credentials = $request->only('email', 'password');
-
-        // if (Auth::attempt($credentials)) {
-        //     $request->session()->regenerate();
-
-        //     return redirect()->intended('http://'.auth()->user()->tenants->domain.'/login-tenancy');
-        // }
-
-        // return back()->withErrors([
-        //     'email' => 'The provided credentials do not match our records.',
-        // ])->onlyInput('email');
     }
+
 
     public function register()
     {
@@ -75,6 +64,7 @@ class AuthenticateController extends Controller
 
     public function register_store(Request $request)
     {
+       
         $request->validate([
             'sub_domain' => 'required|unique:tenants,domain',
             'email' => 'required|unique:users,email',
@@ -82,24 +72,24 @@ class AuthenticateController extends Controller
             'password_confirmation' => 'required_with:password|same:password|min:6'
         ]);
 
+        if(empty($this->cek_tenants())){
 
-        $tenant = Tenant::create([
-            'name' => $request->email,
-            'domain' => $request->sub_domain.'.'.env('DOMAIN'),
-            'database' => $request->sub_domain
-        ]);
+            $tenant = Tenant::create([
+                'name' => $request->email,
+                'domain' => $request->sub_domain.'.'.env('DOMAIN'),
+                'database' => $request->sub_domain
+            ]);
+    
+            $user = $tenant->user()->create([
+                'email' =>  $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+    
+            $this->create_credentials();
+            return redirect('https://'.$request->sub_domain.'.'.env('DOMAIN').'/tenancy');
+        }
 
-        $user = $tenant->user()->create([
-            'email' =>  $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        Auth::login($user);
-
-        // return auth()->user()->email;
-
-        // return redirect('https://'.$request->sub_domain.'.'.env('DOMAIN').'/dashboard');
-        return redirect('http://'.$request->sub_domain.'.'.env('DOMAIN').'/dashboard');
+        return redirect()->back()->withErrors('Error', 'Domain is exists');
        
     }
 

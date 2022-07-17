@@ -37,11 +37,18 @@ class SettingTest extends TestCase
         $this->withoutExceptionHandling();
 
 
+        // $this->post('/register-store',[
+        //     'sub_domain' => $faker->userName(),
+        //     'email' => $faker->email,
+        //     'password' => 'test123',
+        //     'password_confirmation' => 'test123'
+        // ]);
+
         $this->post('/register-store',[
-            'sub_domain' => $faker->userName(),
-            'email' => $faker->email,
-            'password' => 'test123',
-            'password_confirmation' => 'test123'
+            'sub_domain' => 'test',
+            'email' => 'test@mail.com',
+            'password' => '123456',
+            'password_confirmation' => '123456'
         ]);
 
         $response = $this->post('/setting-store',[

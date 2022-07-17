@@ -24,13 +24,13 @@
                 </div>
             </div>
             <div class="mt-[61px] pl-[58px] w-[680px] flex flex-col items-center">
-                <span class="overview-send-title text-palet w-[650px] text-center">Login For Agency</span>
-                    <form action="{{ route('login.store') }}" method="POST">
+                <span class="overview-send-title text-palet w-[650px] text-center">Login For Agency {{ session('status') }}</span>
+                    <form action="{{ route('login.tenancy') }}" method="POST">
                         @csrf
                         <div class="mt-10 w-[27rem]">
                             <label for="first-name" class="block overview-modal-add-talent-text text-[#222222] mb-2">Email</label>
                             <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                                <input type="text" name="email" value="{{ session()->get('email') }}" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
+                                <input type="text" name="email" value="{{ session('status')}}" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
                             </div>
                         </div>
                         <div class="mt-4 w-[27rem]">

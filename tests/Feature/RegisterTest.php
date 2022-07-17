@@ -28,8 +28,15 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'test123'
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect('https://test.'.env('DOMAIN').'/dashboard');
+        $this->assertDatabaseHas('credensials', [
+            'email' => 'test@mail.com',
+            'credensial' => 'test123'
+        ]);
+        $response->assertRedirect('https://test.'.env('DOMAIN').'/tenancy');
+
+
+        // $tenancy->assertRedirect('https://test.'.env('DOMAIN').'/tenancy');
+        // return redirect()->to('https://'.$domain->tenants->domain.'/tenancy');
     }
 
     // public function test_domain_exists()

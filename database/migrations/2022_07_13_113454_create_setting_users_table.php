@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('setting_users', function (Blueprint $table) {
             $table->id();
-            $table->boolean('client');
-            $table->boolean('caregives');
-            $table->boolean('interested_public_pool');
+            $table->boolean('client')->nullable()->default(false);
+            $table->boolean('caregives')->nullable()->default(false);
+            $table->boolean('interested_public_pool')->nullable()->default(false);
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
             $table->foreign('users_id')
