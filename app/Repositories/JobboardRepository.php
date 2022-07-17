@@ -42,8 +42,7 @@ class JobboardRepository
             'pay_with' => $request->pay_with,
             'rate_negotiable' => $request->rate_negotiable,
 
-            // 'status' => $request->status,
-            'status' => 'interviewing',
+            'status' => $request->status,
             // 'type' => $request->type,
             'type' => $request->onlyOneStatus,
 

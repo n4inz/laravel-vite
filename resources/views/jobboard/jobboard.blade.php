@@ -130,7 +130,7 @@
                         @endforeach
                         
                         {{-- Botton add fot potensial --}}
-                        <div data-modal-toggle="create-job" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="potensial_client()" data-modal-toggle="create-job" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -224,7 +224,7 @@
                             </a>
                         @endforeach
                         {{-- Botton add for Interviewing --}}
-                        <div data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="interviewing()" data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -319,7 +319,7 @@
                         @endforeach
 
                         {{-- Botton add fot Trialing --}}
-                        <div data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="trialing()" data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -412,7 +412,7 @@
                         </a>
                         @endforeach
                         {{-- Botton add fot Completed --}}
-                        <div data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="completed()" data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -431,6 +431,7 @@
         <div id="create-job" tabindex="-1" aria-hidden="true"  aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">
             <div class=" w-[766px] h-screen">
                 <form method="post" action="{{ route('jobboard.jobs_store') }}">
+                    <div class="status"></div>
                     @csrf
                     <div class="shadow bg-white rounded mt-6">
                         <div class="flex items-center justify-between px-8 h-14 rounded-t border-b dark:border-gray-600">
@@ -900,7 +901,7 @@
                                             <select id="pay-with" name="pay_with" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                                 <option value="any">Any</option>
                                                 <option value="check">Check</option>
-                                                <option value="">Cash</option>
+                                                <option value="cash">Cash</option>
                                                 <option value="online_payment">Online Payment</option>
                                             </select>
                                             <div>

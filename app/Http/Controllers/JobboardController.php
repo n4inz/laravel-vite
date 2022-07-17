@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobBoardRequest;
 use App\Models\Jobs;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
-// use App\Repositories\SettingRepository;
 
 class JobboardController extends Controller
 {
@@ -21,27 +21,15 @@ class JobboardController extends Controller
     {
         $jobs = Jobs::with(['sub_categorys', 'languages', 'availability'])->get();
         return view('jobboard.jobboard', [
-            "potential_clients" => $jobs->where('status', 'potential_clients'),
-            "interviewing" => $jobs->where('status', 'interviewing'),
-            "trialing" => $jobs->where('status', 'trialing'),
-            "completed" => $jobs->where('status', 'completed'),
+            "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id' , auth()->user()->id),
+            "interviewing" => $jobs->where('status', 'interviewing')->where('users_id' , auth()->user()->id),
+            "trialing" => $jobs->where('status', 'trialing')->where('users_id' , auth()->user()->id),
+            "completed" => $jobs->where('status', 'completed')->where('users_id' , auth()->user()->id),
         ]);
     }
 
-    public function jobs_store(Request $request)
-    {
-        // return $request;
-        // dd($request->days);
-        // $request->validate([
-        //     'family' => 'required',
-        //     'title' => 'required|min:3',
-        //     'description' => 'required|min:6',
-        //     'id_unique' => 'required|min:3|unique:jobs,id_unique',
-        //     'location' => 'required|min:3',
-        //     'status' => 'required',
-        //     'type' => 'required',
-        // ]);
-        
+    public function jobs_store(JobBoardRequest $request)
+    {       
         $this->jobboardRepository->created($request);
 
         return redirect()->back()->with('status', 'Create job succesfuly');

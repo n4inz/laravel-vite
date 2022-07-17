@@ -28,8 +28,22 @@ $( document ).ready(function() {
             $('#all-days').prop('checked', false)
         }
     })
-
-
 });
 
 
+function potensial_client(){
+    const input = `<input type="hidden" name="status" value="potential_clients">`;
+    $('.status').html(input);
+ }
+ function interviewing(){
+    const input = `<input type="hidden" name="status" value="interviewing">`;
+    $('.status').html(input);
+ }
+ function trialing(){
+    const input = `<input type="hidden" name="status" value="trialing">`;
+    $('.status').html(input);
+ }
+ function completed(){
+    const input = `<input type="hidden" name="status" value="completed">`;
+    $('.status').html(input);
+ }
