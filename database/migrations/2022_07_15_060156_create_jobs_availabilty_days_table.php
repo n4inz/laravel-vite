@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('jobs_availabilty_days', function (Blueprint $table) {
             $table->id();
-            $table->boolean('monday');
-            $table->boolean('tuesday');
-            $table->boolean('wednesday');
-            $table->boolean('thursday');
-            $table->boolean('friday');
-            $table->boolean('saturday');
-            $table->boolean('sunday');
+            $table->boolean('monday')->nullable()->default(false);
+            $table->boolean('tuesday')->nullable()->default(false);
+            $table->boolean('wednesday')->nullable()->default(false);
+            $table->boolean('thursday')->nullable()->default(false);
+            $table->boolean('friday')->nullable()->default(false);
+            $table->boolean('saturday')->nullable()->default(false);
+            $table->boolean('sunday')->nullable()->default(false);
             $table->unsignedBigInteger('jobs_id');
             $table->timestamps();
             $table->foreign('jobs_id')

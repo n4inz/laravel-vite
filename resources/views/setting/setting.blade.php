@@ -96,7 +96,7 @@
                                                     </td>
                                                     <td >
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="other" {{ $setting->SettingDetail->service_category->other != NULL ?? null ? 'checked' : '' }} id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="other" {{ $setting->SettingDetail->service_category->other ?? NULL ? 'checked' : '' }} id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="other" class="overview-id-field text-colortext">Other services</label>
                                                         </div>
                                                     </td>
@@ -192,15 +192,15 @@
                                 <div class="px-6 mt-8 flex flex-col items-center space-x-[25px]">
                                     <div class="flex">
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="app-fee" name="application_fee" {{ $setting->SettingDetail->service_location_fee->aplication_fee != NULL ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="app-fee" name="application_fee" {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="app-fee" class="overview-status-field text-colortext ">Application Fee ($)</label>
                                         </div>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="placement-fee" name="placement_fee" {{ $setting->SettingDetail->service_location_fee->placement_fee != NULL ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="placement-fee" name="placement_fee" {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="placement-fee" class="overview-status-field text-colortext ">Placement Fee ($)</label>
                                         </div>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="hourly-rate" name="hourly_rate" {{ $setting->SettingDetail->service_location_fee->hourly_rate != NULL ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="hourly-rate" name="hourly_rate" {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="hourly-rate" class="overview-status-field text-colortext ">Hourly Rate ($)</label>
                                         </div>
                                     </div>
@@ -291,25 +291,54 @@
                                         <span class=" overview-id-field text-colortext">Choose a color theme</span>
                                         <div class="flex space-x-3">
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#EB5757]">
-                                                <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#EB5757' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
+
+                                                @else
+                                                    <input {{  $setting->SettingAdditionals->dashboard_color_theme == '#EB5757' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
+                                                @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2994A]">
-                                                <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2994A' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2994A">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#F2994A">
+                                                @else
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2994A' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2994A">
+                                                @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#27AE60]">
-                                                <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#27AE60' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#27AE60">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#27AE60">
+                                                @else
+                                                    <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#27AE60' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#27AE60">
+                                                @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#6AEAE3]">
-                                                <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#6AEAE3' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#6AEAE3">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#6AEAE3">
+                                                @else
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#6AEAE3' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#6AEAE3">
+                                                @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#56CCF2]">
-                                                <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#56CCF2' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#56CCF2">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#56CCF2">
+                                                @else
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#56CCF2' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#56CCF2">
+                                                @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#BB6BD9]">
-                                                <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#BB6BD9' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#BB6BD9">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#BB6BD9">
+                                                @else
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#BB6BD9' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#BB6BD9">
+                                                @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2C94C]">
-                                                <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2C94C' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2C94C">
+                                                @if (empty($setting->SettingAdditionals->dashboard_color_theme))
+                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#F2C94C">
+                                                @else
+                                                    <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2C94C' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2C94C">
+                                                @endif
                                             </label>
                                         </div>
                                     </div>
@@ -325,25 +354,29 @@
                                         </svg>
                                         <div>
                                             <span class="task-text-body text-colortext">{{ $value->body }}</span>
+                                            <input type="hidden" name="body[]" value="{{ $value->body }}">
                                         </div>
                                     </div>
                                     @endforeach
                                     
                                    
                                     {{-- Add more --}}
-                                    <div class="flex items-center space-x-[29.5px] mb-7">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                        </svg>
-                                        <div>
-                                            <input name="body" value="{{ old('body') }}" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                    <div class="add">
+                                        <div class="flex items-center space-x-[29.5px] mb-7">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                            </svg>
+                                            <div>
+                                                <input name="body[]" value="{{ old('body') }}" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                     {{-- Button --}}
-                                    <button class="w-[133px] h-10 bg-palet rounded-md">
+                                    <div href="#" onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md flex items-center justify-center hover:cursor-pointer">
                                         <span class="task-btn-text">+ Add More</span>
-                                    </button>
+                                    </div>
                                 </div>
                                 <div class="flex mt-8"></div>
                             </div>
@@ -392,6 +425,21 @@
         </div>
     </article>
     <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
+    <script>
+        function add_more(){
+            const template = ` <div class="flex items-center space-x-[29.5px] mb-7">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                    </svg>
+                                    <div>
+                                        <input name="body[]" value="{{ old('body') }}" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                    </div>
+                                </div>`;
+
+            $(".add").append(template);
+        }
+    </script>
 </main>
 
 @endsection

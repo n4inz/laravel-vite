@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('jobs_languages', function (Blueprint $table) {
             $table->id();
-            $table->string('language');
+            $table->string('language')->nullable()->default(false);
             
             $table->unsignedBigInteger('jobs_id');
             $table->timestamps();

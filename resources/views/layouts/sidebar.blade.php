@@ -2,7 +2,9 @@
     {{-- Desktop --}}
     <div id="sidebar-desktop" class="fixed top-0 bottom-0 px-5 w-[300px] bg-bgbody rounded border">
         <div class="flex items-center justify-start mt-2 relative">
-            <span class=" text-palet title-logo leading-[22px] opacity-80 ">Your Agency</span>
+            <span class=" text-palet title-logo leading-[22px] opacity-80 ">
+                {{ App\Models\SettingGeneral::where('users_id',auth()->user()->id)->first()->agency_name ?? 'Your Agency' }}
+            </span>
             <div id="btn-sidebar-desktop" class="absolute hover:cursor-pointer z-50 -right-9 top-1 w-8 h-8 rounded-full shadow-md bg-white flex justify-center items-center">
                 <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.70679 11.707C6.51926 11.8944 6.26495 11.9998 5.99979 11.9998C5.73462 11.9998 5.48031 11.8944 5.29279 11.707L0.292787 6.70697C0.105316 6.51944 5.01337e-07 6.26513 5.24518e-07 5.99997C5.47699e-07 5.73481 0.105316 5.4805 0.292787 5.29297L5.29279 0.29297C5.48139 0.110812 5.73399 0.0100179 5.99619 0.0122962C6.25839 0.0145746 6.5092 0.119744 6.69461 0.305152C6.88001 0.490559 6.98518 0.741373 6.98746 1.00357C6.98974 1.26577 6.88895 1.51837 6.70679 1.70697L2.41379 5.99997L6.70679 10.293C6.89426 10.4805 6.99957 10.7348 6.99957 11C6.99957 11.2651 6.89426 11.5194 6.70679 11.707Z" fill="#2C2F32"/>

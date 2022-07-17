@@ -26,9 +26,9 @@ return new class extends Migration
             $table->string('desired_living');
             $table->string('english_level');
 
-            $table->boolean('comfortable_with_pets');
-            $table->boolean('has_transportation');
-            $table->boolean('has_driver_license');
+            $table->boolean('comfortable_with_pets')->nullable()->default(false);
+            $table->boolean('has_transportation')->nullable()->default(false);
+            $table->boolean('has_driver_license')->nullable()->default(false);
 
             $table->time('start_time');
             $table->time('end_time');
@@ -36,14 +36,14 @@ return new class extends Migration
 
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('asap');
-            $table->boolean('tbd');
+            $table->boolean('asap')->nullable()->default(false);
+            $table->boolean('tbd')->nullable()->default(false);
 
             $table->string('salary_type');
             $table->string('rate');
             $table->string('pay_frequency');
             $table->string('pay_with');
-            $table->boolean('rate_negotiable');
+            $table->boolean('rate_negotiable')->nullable()->default(false);
 
             $table->string('status');
             $table->enum('type', ['active', 'archived']);
