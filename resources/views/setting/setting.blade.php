@@ -354,7 +354,6 @@
                                         </svg>
                                         <div>
                                             <span class="task-text-body text-colortext">{{ $value->body }}</span>
-                                            <input type="hidden" name="body[]" value="{{ $value->body }}">
                                         </div>
                                     </div>
                                     @endforeach

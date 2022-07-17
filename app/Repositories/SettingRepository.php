@@ -121,14 +121,17 @@ class SettingRepository {
             'interested_public_pool' => $request->interested_public_pool,
         ]);
 
-        SettingAdditionals::where('users_id' , auth()->user()->id)->update([
+        $sett_id = SettingAdditionals::updateOrCreate(['users_id' => auth()->user()->id], [
             'notification_email' => $request->notification_email,
             'dashboard_color_theme' => $request->dashboard_color_theme,
         ]);
 
-        foreach($request->body as $key => $value){
-            SettingDefinedCheckList::where('users_id' , auth()->user()->id)->update([
-                'body' => $request->body[$key],
+
+        foreach($request->body as $keys => $value){
+            SettingDefinedCheckList::create([
+                'body' => $request->body[$keys],
+                'setting_additionals_id' => $sett_id->id,
+                'users_id' => auth()->user()->id
             ]);
         }
 

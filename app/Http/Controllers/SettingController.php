@@ -41,6 +41,8 @@ class SettingController extends Controller
     public function setting_store(SettingRequest $request)
     {
 
+
+
         $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();
 
         if(empty($cek_setting)){
