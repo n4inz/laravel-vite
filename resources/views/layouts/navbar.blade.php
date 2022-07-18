@@ -38,8 +38,10 @@
                     
                 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300 "  aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
+
+                    {{  $data = App\Models\SettingGeneral::where('users_id',auth()->user()->id)->first() }}
                     
-                    @if (empty( $data = App\Models\SettingGeneral::where('users_id',auth()->user()->id)->first()->avatar))
+                    @if (empty($data->avatar))
                         <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
                             <span class="text-xs text-gray-300 ">No Images</span>
                         </div>

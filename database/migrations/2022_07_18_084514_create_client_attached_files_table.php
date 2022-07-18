@@ -13,24 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('client_attached_files', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('address');
-            $table->string('languages');
-            $table->text('note');
+            $table->string('attached_file');
+            $table->unsignedBigInteger('clients_id');
 
             $table->unsignedBigInteger('users_id');
 
+            $table->foreign('clients_id')
+            ->references('id')->on('clients')
+            ->onDelete('cascade')->onUpdate('cascade');
 
             $table->foreign('users_id')
             ->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
-
-
             $table->timestamps();
         });
     }
@@ -42,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('client_attached_files');
     }
 };

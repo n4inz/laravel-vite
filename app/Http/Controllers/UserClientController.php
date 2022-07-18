@@ -2,31 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Http\Requests\ClientRequest;
+use App\Repositories\UserClientRepository;
+use App\Http\Traits\ImageUpload;
 use Illuminate\Http\Request;
 
 class UserClientController extends Controller
 {
+    use ImageUpload;
+    private $UserClientRepository;
+    public function __construct(UserClientRepository $UserClientRepository)
+    {
+        $this->UserClientRepository = $UserClientRepository;
+    }
     public function client()
     {
         return view('user.user_client');
     }
 
-    public function client_store(Request $request)
+    public function client_store(ClientRequest $request)
     {
-        Client::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'languages' => $request->languages,
-            'note' => $request->note,
-            'attached_file' => $request->attached_file,
-            'users_id' => $request->users_id,
-        ]);
-
+        
+        $this->UserClientRepository->created($request);
         return redirect()->back()->with('Success' , 'Created client successfuly');
+    }
+
+    public function attached_file(Request $request)
+    {
+        
+
+        
+
+        return redirect()->back()->with('Success', 'Attached file successfuly');
     }
 
     public function talent()

@@ -60,7 +60,7 @@ Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout'
 // Route::post('setting-store', [SettingController::class, 'setting_store'])->name('setting.store');
 // Route::get('/send', [JobboardController::class, 'send'])->name('jobboard.send');
 // Route::get('/apply', [JobboardController::class, 'apply'])->name('jobboard.apply');
-Route::post('/user-client-store', [UserClientController::class, 'client_store'])->name('user_client.store');
+
 Route::middleware(['tenant', 'auth'])->group(function(){
     // Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->name('login');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -70,7 +70,10 @@ Route::middleware(['tenant', 'auth'])->group(function(){
     
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_talent.talent');
+    Route::post('/user-client-store', [UserClientController::class, 'client_store'])->name('user_client.store');
+    Route::post('/user-client-attached-file', [UserClientController::class, 'attached_file'])->name('user_client. attached_file');
     
+   
     Route::get('/setting', [SettingController::class, 'setting'])->name('setting.setting');
     Route::post('setting-store', [SettingController::class, 'setting_store'])->name('setting.store');
     Route::post('upload-avatar', [SettingController::class, 'upload_avatar'])->name('setting.upload.avatar');

@@ -15,5 +15,10 @@ class Client extends Model
     {
         return $this->belongsTo(User::class,'users_id');
     }
+
+    public function attached_file()
+    {
+        return $this->hasOne(ClientAttachedFile::class, 'clients_id');
+    }
     
 }

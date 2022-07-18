@@ -454,7 +454,7 @@
           var output = document.getElementById('output');
           output.src = URL.createObjectURL(event.target.files[0]);
           output.onload = function() {
-            URL.revokeObjectURL(output.src) // free memory
+            URL.revokeObjectURL(output.src)
           }
 
           const btn = `<button class="bg-palet invisible group-hover:animate-pulse group-hover:visible h-6 absolute rounded-md p-4 top-1/2 bottom-1/2 flex items-center justify-center">

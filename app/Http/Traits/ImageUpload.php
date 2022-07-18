@@ -14,10 +14,10 @@ trait ImageUpload
         return $file_name;
     }
 
-    public function uploadImageStore($request)
+    public function uploadImageStore($request , $path)
     {
         $name = time().'_'.$request->getClientOriginalName();
-        $request->storePubliclyAs("avatar", $name, "public");
+        $request->storePubliclyAs($path, $name, "public");
 
         return $name;
     }
