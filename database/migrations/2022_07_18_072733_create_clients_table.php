@@ -13,18 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('setting_generals', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('agency_name');
-            $table->string('url_ending_legal');
-            $table->string('company_description');
-            $table->string('avatar')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('address');
+            $table->string('languages');
+            $table->text('note');
+            $table->string('attached_file');
             $table->unsignedBigInteger('users_id');
-            $table->timestamps();
 
             $table->foreign('users_id')
             ->references('id')->on('users')
-            ->onDelete('cascade');
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 
@@ -35,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting_generals');
+        Schema::dropIfExists('clients');
     }
 };

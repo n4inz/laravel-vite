@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(SettingAdditionals::class, 'users_id');
     }
+
+    public function client()
+    {
+        return $this->hasMany(Client::class, 'users_id');
+    }
 }

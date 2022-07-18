@@ -367,7 +367,7 @@
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
                                             </svg>
                                             <div>
-                                                <input name="body[]" value="{{ old('body') }}" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                                <input name="body[]" value="" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
                                             </div>
                                         </div>
                                     </div>
@@ -404,15 +404,39 @@
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div class="px-4 mt-6 flex items-center justify-center">
                                 {{-- Upload --}}
-                                <div class="relative w-[186px] flex justify-center h-[186px] bg-[#E8E8E8] rounded-full border-[2px] hover:cursor-pointer">
-                                    <div class="absolute -bottom-3 w-9 h-9 bg-palet rounded-full flex items-center justify-center">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.6875 3.375C1.6875 2.44302 2.44302 1.6875 3.375 1.6875H14.625C15.557 1.6875 16.3125 2.44303 16.3125 3.375V14.625C16.3125 15.557 15.557 16.3125 14.625 16.3125H3.375C2.44303 16.3125 1.6875 15.557 1.6875 14.625V3.375ZM3.375 2.8125C3.06434 2.8125 2.8125 3.06434 2.8125 3.375V14.625C2.8125 14.9357 3.06434 15.1875 3.375 15.1875H14.625C14.9357 15.1875 15.1875 14.9357 15.1875 14.625V3.375C15.1875 3.06434 14.9357 2.8125 14.625 2.8125H3.375Z" fill="white"/>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.3125 6.75C4.3125 5.40381 5.40381 4.3125 6.75 4.3125C8.09619 4.3125 9.1875 5.40381 9.1875 6.75C9.1875 8.09619 8.09619 9.1875 6.75 9.1875C5.40381 9.1875 4.3125 8.09619 4.3125 6.75ZM6.75 5.4375C6.02514 5.4375 5.4375 6.02514 5.4375 6.75C5.4375 7.47486 6.02514 8.0625 6.75 8.0625C7.47486 8.0625 8.0625 7.47486 8.0625 6.75C8.0625 6.02514 7.47486 5.4375 6.75 5.4375Z" fill="white"/>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2487 9.3319C11.4635 9.13865 11.7897 9.13946 12.0034 9.33378L16.1284 13.0838C16.3583 13.2928 16.3752 13.6485 16.1662 13.8784C15.9573 14.1082 15.6015 14.1252 15.3717 13.9162L11.6231 10.5085L8.25133 13.5431C8.04126 13.7322 7.72354 13.736 7.50896 13.5521L5.22656 11.5957L2.58753 13.575C2.339 13.7614 1.98643 13.711 1.80003 13.4625C1.61364 13.214 1.664 12.8614 1.91253 12.675L4.91253 10.425C5.12345 10.2668 5.41593 10.2763 5.6161 10.4479L7.86598 12.3764L11.2487 9.3319Z" fill="white"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                <form action="{{ route('setting.upload.avatar') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <label for="avatar" class="group">
+                                        <div id="bg-avatar" class="relative  w-[186px] flex justify-center h-[186px] bg-[#E8E8E8] rounded-full border-[2px] hover:cursor-pointer">
+                                            @if (empty($setting->SettingGeneral->avatar))
+                                                <img id="output" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                            @else
+                                                <img id="output" src="{{ asset('storage/avatar/'.$setting->SettingGeneral->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+
+                                            @endif
+
+                                            <div class="absolute -bottom-3 w-9 h-9 bg-palet rounded-full flex items-center justify-center">
+                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.6875 3.375C1.6875 2.44302 2.44302 1.6875 3.375 1.6875H14.625C15.557 1.6875 16.3125 2.44303 16.3125 3.375V14.625C16.3125 15.557 15.557 16.3125 14.625 16.3125H3.375C2.44303 16.3125 1.6875 15.557 1.6875 14.625V3.375ZM3.375 2.8125C3.06434 2.8125 2.8125 3.06434 2.8125 3.375V14.625C2.8125 14.9357 3.06434 15.1875 3.375 15.1875H14.625C14.9357 15.1875 15.1875 14.9357 15.1875 14.625V3.375C15.1875 3.06434 14.9357 2.8125 14.625 2.8125H3.375Z" fill="white"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.3125 6.75C4.3125 5.40381 5.40381 4.3125 6.75 4.3125C8.09619 4.3125 9.1875 5.40381 9.1875 6.75C9.1875 8.09619 8.09619 9.1875 6.75 9.1875C5.40381 9.1875 4.3125 8.09619 4.3125 6.75ZM6.75 5.4375C6.02514 5.4375 5.4375 6.02514 5.4375 6.75C5.4375 7.47486 6.02514 8.0625 6.75 8.0625C7.47486 8.0625 8.0625 7.47486 8.0625 6.75C8.0625 6.02514 7.47486 5.4375 6.75 5.4375Z" fill="white"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2487 9.3319C11.4635 9.13865 11.7897 9.13946 12.0034 9.33378L16.1284 13.0838C16.3583 13.2928 16.3752 13.6485 16.1662 13.8784C15.9573 14.1082 15.6015 14.1252 15.3717 13.9162L11.6231 10.5085L8.25133 13.5431C8.04126 13.7322 7.72354 13.736 7.50896 13.5521L5.22656 11.5957L2.58753 13.575C2.339 13.7614 1.98643 13.711 1.80003 13.4625C1.61364 13.214 1.664 12.8614 1.91253 12.675L4.91253 10.425C5.12345 10.2668 5.41593 10.2763 5.6161 10.4479L7.86598 12.3764L11.2487 9.3319Z" fill="white"/>
+                                                </svg>
+                                            </div>
+    
+                                            {{-- <button class="flex justify-center items-center px-5 w-[99px] h-6 bg-palet rounded space-x-1 hover:cursor-pointer absolute top-[45%]">
+                                                <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 4.625C10.2071 4.625 10.375 4.79289 10.375 5V9.5C10.375 9.70711 10.2071 9.875 10 9.875H1C0.792893 9.875 0.625 9.70711 0.625 9.5V5.00208C0.625 4.79497 0.792893 4.62708 1 4.62708C1.20711 4.62708 1.375 4.79497 1.375 5.00208V9.125H9.625V5C9.625 4.79289 9.79289 4.625 10 4.625Z" fill="#3BD7CF"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.23483 0.234835C5.38128 0.0883883 5.61872 0.0883883 5.76517 0.234835L8.01516 2.48483C8.16161 2.63128 8.16161 2.86872 8.01516 3.01517C7.86872 3.16161 7.63128 3.16161 7.48484 3.01517L5.5 1.03033L3.51517 3.01517C3.36872 3.16161 3.13128 3.16161 2.98483 3.01517C2.83839 2.86872 2.83839 2.63128 2.98483 2.48483L5.23483 0.234835Z" fill="#3BD7CF"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.49805 0.125C5.70515 0.125 5.87305 0.292893 5.87305 0.5V7C5.87305 7.20711 5.70515 7.375 5.49805 7.375C5.29094 7.375 5.12305 7.20711 5.12305 7V0.5C5.12305 0.292893 5.29094 0.125 5.49805 0.125Z" fill="#3BD7CF"/>
+                                                </svg> 
+                                                <span class="overview-send-job text-hover">Upload</span>
+                                            </button> --}}
+                            
+                                        </div>
+                                    </label>
+                                    <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
+
+                                </form>
                             </div>
                             <div class="flex mt-[51px]"></div>
                         </div>
@@ -425,6 +449,23 @@
     </article>
     <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
     <script src="{{ asset('js/jQuery/settingAgency.js') }}"></script>
+    <script>
+        var loadFile = function(event) {
+          var output = document.getElementById('output');
+          output.src = URL.createObjectURL(event.target.files[0]);
+          output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+          }
+
+          const btn = `<button class="bg-palet invisible group-hover:animate-pulse group-hover:visible h-6 absolute rounded-md p-4 top-1/2 bottom-1/2 flex items-center justify-center">
+                            <span class="text-sm text-gray-50">Upload</span>
+                        </button>`;
+    
+          $('#bg-avatar').append(btn);
+        };
+
+
+      </script>
 </main>
 
 @endsection

@@ -61,7 +61,7 @@
                             </svg> 
                         </div>
                         <div class="w-full">
-                            <a href="{{ route('user_client.talent') }}" class="{{ request()->is('user/talent') ? 'bg-hover': 'hover:bg-hover' }} flex items-center p-2 ml-11 text-base font-normal rounded-lg transition duration-75 group ">
+                            <a href="{{ route('user_talent.talent') }}" class="{{ request()->is('user/talent') ? 'bg-hover': 'hover:bg-hover' }} flex items-center p-2 ml-11 text-base font-normal rounded-lg transition duration-75 group ">
                                 <span class="{{ request()->is('user/talent') ? 'text-palet': 'text-textcolor' }} sidebar-text">Talent</span>
                             </a>
                         </div>

@@ -18,7 +18,7 @@ class SettingRepository {
             'agency_name' => $request->agency_name,
             'url_ending_legal' => $request->url_ending_legal, 
             'company_description' => $request->company_description,
-            'avatar' => '$avatar',
+            'avatar' => null,
             'users_id' => auth()->user()->id
         ]);
     
@@ -67,10 +67,12 @@ class SettingRepository {
         ]);
 
         foreach($request->body as $key => $value){
-            $setting_additionals->defined_check_list()->create([
-                'body' => $request->body[$key],
-                'users_id' => auth()->user()->id
-            ]);
+            if($request->body[$key] != null){
+                $setting_additionals->defined_check_list()->create([
+                    'body' => $request->body[$key],
+                    'users_id' => auth()->user()->id
+                ]);
+            }
         }
     
     }
@@ -81,7 +83,6 @@ class SettingRepository {
             'agency_name' => $request->agency_name,
             'url_ending_legal' => $request->url_ending_legal, 
             'company_description' => $request->company_description,
-            'avatar' => '$avatar',
             'users_id' => auth()->user()->id
         ]);
 
@@ -126,13 +127,14 @@ class SettingRepository {
             'dashboard_color_theme' => $request->dashboard_color_theme,
         ]);
 
-
         foreach($request->body as $keys => $value){
-            SettingDefinedCheckList::create([
-                'body' => $request->body[$keys],
-                'setting_additionals_id' => $sett_id->id,
-                'users_id' => auth()->user()->id
-            ]);
+            if($request->body[$keys] != null){
+                SettingDefinedCheckList::create([
+                    'body' => $request->body[$keys],
+                    'setting_additionals_id' => $sett_id->id,
+                    'users_id' => auth()->user()->id
+                ]);
+            }
         }
 
     }

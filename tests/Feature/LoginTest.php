@@ -8,30 +8,49 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_logic_login()
+    public function test_logic_login(): void
     {
         $this->withoutExceptionHandling();
-
-        $this->post('/register-store',[
+        $response = $this->post('/register-store',[
             'sub_domain' => 'test',
             'email' => 'test@mail.com',
             'password' => 'test123',
             'password_confirmation' => 'test123'
         ]);
 
+        // $this->assertDatabaseHas('credensials', [
+        //     'email' => 'test@mail.com',
+        //     'credensial' => 'test123'
+        // ]);
+
         $response = $this->post('/login-store',[
             'email' => 'test@mail.com',
             'password' => 'test123',
         ]);
 
+   
+
+        // $this->post('/register-store',[
+        //     'sub_domain' => 'test',
+        //     'email' => 'test@mail.com',
+        //     'password' => 'test123',
+        //     'password_confirmation' => 'test123'
+        // ]);
+
+        // $response = $this->post('/login-store',[
+        //     'email' => 'test@mail.com',
+        //     'password' => 'test123',
+        // ]);
+
         $this->assertAuthenticated();
 
-        $response->assertRedirect('https://nain.'.env('DOMAIN').'/dashboard');
+        // $response->assertRedirect('https://nain.'.env('DOMAIN').'/dashboard');
     }
 }
