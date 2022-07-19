@@ -72,7 +72,7 @@ class JobboardRepository
            'young_baby' => $request->young_baby,
            'toddler' => $request->toddler,
            'press_schooler' => $request->press_schooler,
-           'grade_Schooler' => $request->grade_Schooler,
+           'grade_schooler' => $request->grade_Schooler,
             'jobs_id' => $jobs->id,
         ]);
   

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JobBoardRequest;
 use App\Models\Jobs;
+use App\Models\JobsSubCategorys;
+use App\Models\Talents;
+use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
 
@@ -38,8 +41,12 @@ class JobboardController extends Controller
     public function overview($id_unique)
     {
 
+        return JobsSubCategorys::all();
+
+        $talent = TalentTypeHelper::with('talent')->where('code_helper', 'provide_transportation')->get();
+        return $talent;
         $result = Jobs::with(['sub_categorys', 'languages', 'availability'])->where('id_unique', $id_unique)->firstOrFail();
-        // return $result;
+        return $result;
         return view('jobboard.detail_job_overview', compact('result'));
     }
 

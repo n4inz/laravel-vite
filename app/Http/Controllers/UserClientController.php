@@ -35,7 +35,7 @@ class UserClientController extends Controller
     public function talent()
     {
 
-        $talent = Talents::query()->with('type_helper')->get();
+        $talent = Talents::where('users_id', auth()->user()->id)->with('type_helper')->get();
 
         return view('user.user_talent', compact('talent'));
     }

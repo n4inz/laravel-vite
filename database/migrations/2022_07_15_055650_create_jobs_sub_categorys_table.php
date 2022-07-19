@@ -36,7 +36,7 @@ return new class extends Migration
             $table->boolean('young_baby')->nullable()->default(false);
             $table->boolean('toddler')->nullable()->default(false);
             $table->boolean('press_schooler')->nullable()->default(false);
-            $table->boolean('grade_Schooler')->nullable()->default(false);
+            $table->boolean('grade_schooler')->nullable()->default(false);
             // $table->string('simple_housework');
             // $table->string('laundry');
             // $table->string('prep_meal');
