@@ -11,7 +11,7 @@ class UserClientRepository
     use ImageUpload;
     public function created($request)
     {
-        $name = $this->uploadImageStore($request->file('attached_file'), 'Attached File User');
+        $name = $this->uploadImageStore($request->file('attached_file'), 'Talent attached file');
        $client =  Client::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,

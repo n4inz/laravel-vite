@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
+use App\Http\Requests\TalentRequest;
+use App\Models\Talents;
 use App\Repositories\UserClientRepository;
-use App\Http\Traits\ImageUpload;
-use Illuminate\Http\Request;
+use App\Repositories\UserTalentRepository;
+
 
 class UserClientController extends Controller
 {
-    use ImageUpload;
+
     private $UserClientRepository;
-    public function __construct(UserClientRepository $UserClientRepository)
+    private $UserTalentRepository;
+    public function __construct(UserClientRepository $UserClientRepository, UserTalentRepository  $UserTalentRepository)
     {
         $this->UserClientRepository = $UserClientRepository;
+        $this->UserTalentRepository = $UserTalentRepository;
+
     }
     public function client()
     {
@@ -27,17 +32,18 @@ class UserClientController extends Controller
         return redirect()->back()->with('Success' , 'Created client successfuly');
     }
 
-    public function attached_file(Request $request)
-    {
-        
-
-        
-
-        return redirect()->back()->with('Success', 'Attached file successfuly');
-    }
-
     public function talent()
     {
-        return view('user.user_talent');
+
+        $talent = Talents::query()->with('type_helper')->get();
+
+        return view('user.user_talent', compact('talent'));
+    }
+
+    public function telent_store(TalentRequest $request)
+    {
+        
+        $this->UserTalentRepository->created($request);
+        return redirect()->back()->with('Success', 'Create Talent Successfuly');
     }
 }

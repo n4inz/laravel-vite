@@ -6,73 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+ 
     {{-- <link rel="stylesheet" href="{{ asset('css/chosen/style.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/chosen/prism.css') }}"> --}}
-    <style>
-        .search-choice{
-            position: relative;
-            background-color: #EEEEEE !important;
-            border: none !important;
-            width: auto !important;
-            height: 30px !important;
-            color: #222222 !important;
-            border-radius: 10px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important
-        }
-        .search-choice-close{
-            width: 24px !important;
-            height: 24px !important;
-            border-radius: 99999px !important;
-            background-color: #FFFFFF !important;
-            display: flex;
-            align-items: center !important;
-            justify-content: center !important
-        }
-        .search-choice span {
-
-            font-family: 'Roboto' !important;
-            font-style: normal !important;
-            font-weight: 400 !important;
-            font-size: 13px !important;
-            line-height: 18px !important;
-            letter-spacing: -0.08px !important;
-            color: #161616 !important;
-            padding-right: 15px !important;
-            padding-left: 7px !important;
-        }
-        .default{
-            background-color: #161616 !important;
-            border: 2px solid seagreen !important
-        }
-
-   
-        /* .chosen-container{
-            background-color: red !important;
-           
-
-        } */
-    </style>
-    <link rel="stylesheet" href="{{ asset('css/chosen/chosen.css') }}">
-
-
+    
+    {{-- <link rel="stylesheet" href="{{ asset('css/chosen/chosen.css') }}"> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/multiselect/multi-select.css') }}" />
+    <script src="{{ asset('js/multiselect/jquery.multi-select.js') }}"></script>
+    
 </head>
 <body>
-    <div>
-        <em>Into This</em>
-            @csrf
-            <select name="pilih[]"  class="chosen-select w-96 h-96 selected" multiple tabindex="10">
-              <option value=""></option>
-              <option value="nain">Nanny</option>
-              <option value="zul">Sister</option>
-              <option value="zul">MetarnityCare</option>
-            </select>
 
-    </div>
-    <script src="{{ asset('js/chosen/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/chosen/chosen.jquery.js') }}" type="text/javascript"></script>
-    {{-- <script src="{{ asset('js/chosen/prism.js') }}" type="text/javascript" charset="utf-8"></script> --}}
-    <script src="{{ asset('js/chosen/init.js') }}" type="text/javascript" charset="utf-8"></script>
+
+    <div class="example"></div>
+
+    <script>
+        	const myData = [
+                {text:'jquery', value: 1},
+                {text:'script', value: 4},
+                {text:'html', value: 3},
+                {text:'css', value: 2},
+                {text:'ruby', value: 6},
+                {text:'typeScript', value: 12},
+                {text:'react', value: 5},
+                {text:'vue', value: 8},
+                {text:'angular', value: 7},
+                {text:'golang', value: 10},
+                {text:'python', value: 16},
+            ],
+
+
+            $('.example').multiSelect({
+
+                data: myData
+
+            });
+
+
+    </script>
 </body>
 </html>
