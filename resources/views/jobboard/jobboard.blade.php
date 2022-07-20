@@ -499,10 +499,9 @@
                                 <label for="category" class="overview-note-body text-colortext mb-2 block">Category</label>
                                 <div class="w-[316px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                     <select name="category" id="category" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                        <option>Child Care</option>
-                                        <option>Test 1</option>
-                                        <option>Test 1</option>
-                                        <option>Test 1</option>
+                                        <option value="Child Care">Child Care</option>
+                                        <option value="Infant">Infant</option>
+                                        <option value="Family Assist">Family Assist</option>
                                     </select>
                                     <div>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -517,73 +516,73 @@
                                     <div>
                                         <label for="category" class="overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="nanny" name="nanny" value="1"  style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="nanny" name="subcategory[]" value="nanny"  style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="nanny" class="overview-note-body text-colortext">Nanny</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="sister" name="sister" value="1" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="sister" name="subcategory[]" value="sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="sister" class="overview-note-body text-colortext">Sister</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input name="maternity_care" value="1" id="maternity-care" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input name="subcategory[]" value="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="maternity-care" class="overview-note-body text-colortext">Maternity Care</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="daycare" name="at_home_daycare" value="1" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="daycare" name="subcategory[]" value="at_home_daycare" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="daycare" class="overview-note-body text-colortext">At Home Daycare</label>
                                         </div>
                                     </div>
                                     <div>
                                         <label for="category" class="overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="infant" name="infant" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="infant" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="infant" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="infant" class="overview-note-body text-colortext">Infant</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="young-baby" name="young_baby" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="young-baby" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="young_baby" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="young-baby" class="overview-note-body text-colortext">Young baby</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="toddler" name="toddler" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="toddler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="toddler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="toddler" class="overview-note-body text-colortext">Toddler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="press-schooler" name="press_schooler" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="press-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="press_schooler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="press-schooler" class="overview-note-body text-colortext">Press Schooler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="grade-schooler" name="grade_Schooler" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="grade-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="grade_schooler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="grade-schooler" class="overview-note-body text-colortext">Grade Schooler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="simple-housework " name="simple_housework" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="simple-housework " name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="simple_housework" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="simple-housework " class="overview-note-body text-colortext">Simple Housework </label>
                                         </div>
                                     </div>
                                     <div>
                                         <label for="category" class="invisible overview-note-body text-colortext mb-2 block">Subcategory</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="laundry" name="laundry" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="laundry" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="laundry" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="laundry" class="overview-note-body text-colortext">Laundry</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="prep-meal" name="prep_meal" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="prep-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="prep_meal" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="prep-meal" class="overview-note-body text-colortext">Prep Meal</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="cook-meal" name="cook_meal" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="cook-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="cook_meal" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="cook-meal" class="overview-note-body text-colortext">Cook Meal</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="run-errands" name="run_errands" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="run-errands" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="run_errands" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="run-errands" class="overview-note-body text-colortext">Run Errands</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="special-needs" name="special_needs" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="special-needs" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="special_needs" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="special-needs" class="overview-note-body text-colortext">Special Needs</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="provide-transportation" name="provide_transportation" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="provide-transportation" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="provide_transportation" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="provide-transportation" class="overview-note-body text-colortext">Provide Transportation</label>
                                         </div>
                                     </div>

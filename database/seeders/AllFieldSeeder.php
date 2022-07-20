@@ -7,6 +7,7 @@ use App\Models\ClientAttachedFile;
 use App\Models\Jobs;
 use App\Models\JobsAvailabiltyDays;
 use App\Models\JobsLanguages;
+use App\Models\JobsMatchTalent;
 use App\Models\JobsSubCategorys;
 use App\Models\TalentLanguage;
 use App\Models\Talents;
@@ -173,13 +174,13 @@ class AllFieldSeeder extends Seeder
             ]);
 
             JobsAvailabiltyDays::create([
-                'monday' => $faker->boolean(30), 
-                'tuesday' => $faker->boolean(30), 
-                'wednesday' => $faker->boolean(30), 
-                'thursday' => $faker->boolean(30), 
-                'friday' => $faker->boolean(30),   
-                'saturday' => $faker->boolean(30), 
-                'sunday' => $faker->boolean(30),
+                'monday' => (bool)rand(0,1), 
+                'tuesday' => (bool)rand(0,1), 
+                'wednesday' => (bool)rand(0,1), 
+                'thursday' => (bool)rand(0,1), 
+                'friday' => (bool)rand(0,1),   
+                'saturday' => (bool)rand(0,1), 
+                'sunday' => (bool)rand(0,1),
                 'jobs_id' => $jobs->id
             ]);
 
@@ -188,31 +189,15 @@ class AllFieldSeeder extends Seeder
                 'jobs_id' => $jobs->id,
             ]);
       
-            JobsSubCategorys::create([
-                'companion_elders' => $faker->boolean(30),
-                'hour_help' =>  $faker->boolean(30), 
-                'cook_meal' =>  $faker->boolean(30), 
-                'remind_medicine' =>  $faker->boolean(30), 
-                'run_errands' =>  $faker->boolean(30), 
-                'simple_housework' =>  $faker->boolean(30), 
-                'provide_transportation' =>  $faker->boolean(30), 
-                'assist_feeding' =>  $faker->boolean(30), 
-                'laundry' =>  $faker->boolean(30), 
-                'special_needs' =>  $faker->boolean(30), 
-                'prep_meal' =>  $faker->boolean(30), 
-                'assist_bathing' =>  $faker->boolean(30), 
-    
-                'nanny' =>  $faker->boolean(30), 
-                'sister' =>  $faker->boolean(30), 
-                'maternity_care' =>  $faker->boolean(30), 
-                'at_home_daycare' =>  $faker->boolean(30), 
-                'infant' =>  $faker->boolean(30), 
-                'young_baby' =>  $faker->boolean(30), 
-                'toddler' =>  $faker->boolean(30), 
-                'press_schooler' =>  $faker->boolean(30), 
-                'grade_Schooler' =>  $faker->boolean(30),
-                'jobs_id' => $jobs->id
-            ]);
+            for($th=1;$th<=7;$th++){
+                $typeCodeRand = $typeCode[Rand(0, count($typeCode) - 1)];
+                JobsMatchTalent::create([
+                    'jobs_sub_category' => $typeCodeRand,
+                    'jobs_id' => $jobs->id,
+                    'users_id' => $value->id,
+                ]);
+
+            }
         };
     }
 }

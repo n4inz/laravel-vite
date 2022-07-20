@@ -14,9 +14,9 @@ class Jobs extends Model
     {
         return 'id_unique';
     }
-    public function sub_categorys()
+    public function match_talent()
     {
-        return $this->hasMany(JobsSubCategorys::class, 'jobs_id');
+        return $this->hasMany(JobsMatchTalent::class, 'jobs_id');
     }
 
     public function languages()
