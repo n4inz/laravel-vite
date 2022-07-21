@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jobs extends Model
+class JobModels extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
@@ -16,16 +16,21 @@ class Jobs extends Model
     }
     public function match_talent()
     {
-        return $this->hasMany(JobsMatchTalent::class, 'jobs_id');
+        return $this->hasMany(JobModelsMatchTalent::class, 'job_models_id');
     }
 
     public function languages()
     {
-        return $this->hasMany(JobsLanguages::class, 'jobs_id');
+        return $this->hasMany(JobModelsLanguages::class, 'job_models_id');
     } 
     
     public function availability()
     {
-        return $this->hasMany(JobsAvailabiltyDays::class, 'jobs_id');
-    }   
+        return $this->hasMany(JobModelsAvailabiltyDays::class, 'job_models_id');
+    }
+    
+    public function task()
+    {
+        return $this->hasMany(JobModelsTask::class,'job_models_id');
+    }
 }

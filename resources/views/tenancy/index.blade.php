@@ -9,7 +9,6 @@
 </head>
 <body>
 <script>
-
     $(document).ready(function() {
         $.ajax({
                type:'POST',
@@ -17,11 +16,11 @@
                data:{_token: '{{ csrf_token() }}'},
                success:function(data){
                 if(data.status == 200){
-                    window.location.replace('https://'+data.domain+'{{ App\Providers\RouteServiceProvider::HOME }}');
+                    window.location.replace('{{ env("URI") }}'+data.domain+'{{ App\Providers\RouteServiceProvider::HOME }}');
 
                 }
                 if(data.status == 401){
-                    window.location.replace('https://{{ env("DOMAIN") }}')
+                    window.location.replace('{{ env("URI") }}{{ env("DOMAIN") }}')
                 }
                }
         });

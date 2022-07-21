@@ -145,4 +145,26 @@ class JobboardTest extends TestCase
         $response->assertSeeText('ok');
 
     }
+
+    public function test_ajax_task()
+    {
+        $this->withoutExceptionHandling();
+        $faker = Factory::create();
+        $response = $this->post('/add-task',[
+            'task' => $faker->sentence(mt_rand(1,10)),
+            'assignee' => $faker->name,
+            'status' => 'Inprogress',
+            'job_models_id' =>1,
+            'users_id' => 1
+        ]);
+
+        // $this->assertDatabaseHas('credensials', [
+        //     'task' => $faker->sentence(mt_rand(1,10)),
+        //     'assignee' => $faker->name,
+        //     'status' => 'Inprogress',
+        //     'job_models_id' =>1,
+        //     'users_id' => 1
+        // ]);
+
+    }
 }

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\JobBoardRequest;
-use App\Models\Jobs;
-use App\Models\JobsMatchTalent;
-use App\Models\JobsSubCategorys;
+use App\Jobs\SendMail;
+
+use App\Models\JobModels;
+use App\Models\JobModelsTask;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Break_;
 
 class JobboardController extends Controller
 {
@@ -25,7 +24,8 @@ class JobboardController extends Controller
 
     public function index()
     {
-        $jobs = Jobs::with(['match_talent', 'languages', 'availability'])->get();
+   
+        $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
         return view('jobboard.jobboard', [
             "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id' , auth()->user()->id),
             "interviewing" => $jobs->where('status', 'interviewing')->where('users_id' , auth()->user()->id),
@@ -46,7 +46,7 @@ class JobboardController extends Controller
         $dataTalent = [];
         $talentNeed = [];
 
-        $result = Jobs::with(['match_talent', 'languages', 'availability'])->where('id_unique', $id_unique)->firstOrFail();
+        $result = JobModels::with(['match_talent', 'languages', 'availability' ,'task'])->where('id_unique', $id_unique)->firstOrFail();
         foreach($result->match_talent as  $match){
             $talent = TalentTypeHelper::where('code_helper',$match->jobs_sub_category)->where('users_id', auth()->user()->id)->with('talent')->get();
             if($talent->count() > 0){
@@ -56,7 +56,60 @@ class JobboardController extends Controller
             }
             array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1 );
         }
+
+        // return$result;
         return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed'));
+    }
+
+    public function detail_match_talent($id)
+    {
+        $talent = Talents::where('id', $id)->first();
+        return view('modal.jobboard.detail_talent', compact('talent'));
+    }
+
+    public function add_task(Request $request)
+    {
+       switch ($request->sts){
+            case 'created';
+
+                $request->validate([
+                    'val' => 'required'
+                ]);
+                $data = JobModelsTask::create([
+                    'task' => $request->val,
+                    'assignee' => 'Dummy data',
+                    'status' => 'Inprogress',
+                    'job_models_id' => $request->id,
+                    'users_id' => 1
+                ]);
+                return response()->json([
+                    'status' => 200,
+                    'data' => $data
+                ],200);
+            break;
+
+            case 'updated';
+                $data = JobModelsTask::where('id',$request->id)->update([
+                    'status' => 'Done'
+                ]);
+
+                $load = JobModelsTask::where('id', $request->id)->first();
+                return response()->json([
+                    'status' => 200,
+                    'data' => $load
+                ],200);
+            break;
+       }
+
+    }
+
+    public function send_email(Request $request)
+    {   
+        $request->validate([
+            'talent_name' => 'required'
+        ]);
+        $this->jobboardRepository->email($request);
+        return redirect()->back()->with('success', 'Send email to talent Succesfuly');
     }
 
     public function send()

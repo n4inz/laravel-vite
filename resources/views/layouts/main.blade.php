@@ -22,9 +22,9 @@
             --tags-hover-border-color	:none;
         }
     </style> --}}
-    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    {{-- <script src="https://unpkg.com/@yaireo/tagify"></script>
     <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> --}}
     <script src="{{ asset('js/jQuery.js') }}"></script>
 </head>
 <body class="bg-backround font-roboto ">

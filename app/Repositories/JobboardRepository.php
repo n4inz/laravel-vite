@@ -2,17 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Jobs;
-use App\Models\JobsAvailabiltyDays;
-use App\Models\JobsLanguages;
-use App\Models\JobsMatchTalent;
-use App\Models\JobsSubCategorys;
+use App\Jobs\SendMail;
+use App\Models\JobModels;
+use App\Models\JobModelsAvailabiltyDays;
+use App\Models\JobModelsLanguages;
+use App\Models\JobModelsMatchTalent;
+use App\Models\JobModelsSubCategorys;
 
 class JobboardRepository 
 {
     public function created($request)
     {
-        $jobs = Jobs::create([
+        $jobs = JobModels::create([
             'family' => $request->family,
             'title' => $request->title,
             'description' => $request->description,
@@ -51,9 +52,9 @@ class JobboardRepository
         ]);
 
         foreach($request->subcategory as $keySub => $category){
-            JobsMatchTalent::create([
+            JobModelsMatchTalent::create([
                 'jobs_sub_category' => $request->subcategory[$keySub], 
-                'jobs_id' => $jobs->id, 
+                'job_models_id' => $jobs->id, 
                 'users_id' => auth()->user()->id
             ]);
 
@@ -62,13 +63,13 @@ class JobboardRepository
   
 
         foreach ($request->language as $keys => $lang) {
-            JobsLanguages::create([
+            JobModelsLanguages::create([
                 'language' => $request->language[$keys],
-                'jobs_id' => $jobs->id,
+                'job_models_id' => $jobs->id,
             ]);
         }
 
-        JobsAvailabiltyDays::create([
+        JobModelsAvailabiltyDays::create([
             'monday' => $request->monday,
             'tuesday' => $request->tuesday,
             'wednesday' => $request->wednesday,
@@ -76,7 +77,16 @@ class JobboardRepository
             'friday' => $request->friday,
             'saturday' => $request->saturday,
             'sunday' => $request->sunday,
-            'jobs_id' => $jobs->id,
+            'job_models_id' => $jobs->id,
         ]);
+    }
+
+    public function email($request)
+    {
+        foreach($request->talent_name as $key =>$val){
+            $details = ['email' => $request->talent_name[$key]];
+            SendMail::dispatch($details);
+        }
+
     }
 }

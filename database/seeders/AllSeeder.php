@@ -4,18 +4,18 @@ namespace Database\Seeders;
 
 use App\Models\Client;
 use App\Models\ClientAttachedFile;
-use App\Models\Jobs;
-use App\Models\JobsAvailabiltyDays;
-use App\Models\JobsLanguages;
-use App\Models\JobsMatchTalent;
-use App\Models\JobsSubCategorys;
+use App\Models\JobModels;
+use App\Models\JobModelsAvailabiltyDays;
+use App\Models\JobModelsLanguages;
+use App\Models\JobModelsMatchTalent;
+
 use App\Models\TalentLanguage;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Models\User;
-use Database\Factories\TalentTypeHelperFactory;
+
 use Faker\Factory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Multitenancy\Models\Tenant;
@@ -168,7 +168,7 @@ class AllSeeder extends Seeder
             $type = array("active", "archived");
             $type_rand = $type[rand(0, count($type) - 1)];
 
-            $jobs =  Jobs::create([
+            $jobs =  JobModels::create([
                 'family' => $faker->name,
                 'title' => $faker->userName(mt_rand(3,5)),
                 'description' => $faker->sentence(mt_rand(10,25)),
@@ -202,7 +202,7 @@ class AllSeeder extends Seeder
                 'users_id' => $value->id,
             ]);
 
-            JobsAvailabiltyDays::create([
+            JobModelsAvailabiltyDays::create([
                 'monday' => (bool)rand(0,1), 
                 'tuesday' => (bool)rand(0,1), 
                 'wednesday' => (bool)rand(0,1), 
@@ -210,20 +210,20 @@ class AllSeeder extends Seeder
                 'friday' => (bool)rand(0,1),   
                 'saturday' => (bool)rand(0,1), 
                 'sunday' => (bool)rand(0,1),
-                'jobs_id' => $jobs->id
+                'job_models_id' => $jobs->id
             ]);
 
-            JobsLanguages::create([
+            JobModelsLanguages::create([
                 'language' => $faker->country,       
-                'jobs_id' => $jobs->id,
+                'job_models_id' => $jobs->id,
             ]);
       
             for($th=1;$th<=7;$th++){
                 $typeCodeRand = $typeCode[Rand(0, count($typeCode) - 1)];
                 $typeNameRand = $typeName[Rand(0, count($typeName) - 1)];
-                JobsMatchTalent::create([
+                JobModelsMatchTalent::create([
                     'jobs_sub_category' => $typeCodeRand,
-                    'jobs_id' => $jobs->id,
+                    'job_models_id' => $jobs->id,
                     'users_id' => $user->id
                 ]);
 

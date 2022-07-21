@@ -29,7 +29,7 @@ class AuthenticateController extends Controller
             return redirect()->back()->with('messages', 'Credensial not found');
         }
         $this->create_credentials();
-        return redirect()->to('https://'.$domain->tenants->domain.'/tenancy');
+        return redirect()->to(env('URI').$domain->tenants->domain.'/tenancy');
     }
 
     public function login_store(Request $request)
@@ -89,7 +89,7 @@ class AuthenticateController extends Controller
             ]);
     
             $this->create_credentials();
-            return redirect('https://'.$request->sub_domain.'.'.env('DOMAIN').'/tenancy');
+            return redirect(env('URI').$request->sub_domain.'.'.env('DOMAIN').'/tenancy');
         }
 
         return redirect()->back()->withErrors('Error', 'Domain is exists');
@@ -104,6 +104,6 @@ class AuthenticateController extends Controller
      
         $request->session()->regenerateToken();
      
-        return redirect('https://'.env('DOMAIN'));
+        return redirect(env('URI').env('DOMAIN'));
     }
 }

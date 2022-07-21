@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs_availabilty_days', function (Blueprint $table) {
+        Schema::create('job_models_availabilty_days', function (Blueprint $table) {
             $table->id();
             $table->boolean('monday')->nullable()->default(false);
             $table->boolean('tuesday')->nullable()->default(false);
@@ -22,10 +22,10 @@ return new class extends Migration
             $table->boolean('friday')->nullable()->default(false);
             $table->boolean('saturday')->nullable()->default(false);
             $table->boolean('sunday')->nullable()->default(false);
-            $table->unsignedBigInteger('jobs_id');
+            $table->unsignedBigInteger('job_models_id');
             $table->timestamps();
-            $table->foreign('jobs_id')
-            ->references('id')->on('jobs')
+            $table->foreign('job_models_id')
+            ->references('id')->on('job_models')
             ->onDelete('cascade');
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs_availabilty_days');
+        Schema::dropIfExists('job_models_availabilty_days');
     }
 };

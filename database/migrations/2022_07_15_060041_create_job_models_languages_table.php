@@ -13,20 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs_match_talent', function (Blueprint $table) {
+        Schema::create('job_models_languages', function (Blueprint $table) {
             $table->id();
-            $table->string('jobs_sub_category');
-
-            $table->unsignedBigInteger('jobs_id');
-            $table->unsignedBigInteger('users_id');
-
+            $table->string('language')->nullable()->default(false);
+            
+            $table->unsignedBigInteger('job_models_id');
             $table->timestamps();
-
-            $table->foreign('jobs_id')
-            ->references('id')->on('jobs')
-            ->onDelete('cascade');
-            $table->foreign('users_id')
-            ->references('id')->on('users')
+            $table->foreign('job_models_id')
+            ->references('id')->on('job_models')
             ->onDelete('cascade');
         });
     }
@@ -38,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs_match_talent');
+        Schema::dropIfExists('job_models_languages');
     }
 };

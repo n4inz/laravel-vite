@@ -292,52 +292,52 @@
                                         <div class="flex space-x-3">
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#EB5757]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
+                                                    <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
 
                                                 @else
-                                                    <input {{  $setting->SettingAdditionals->dashboard_color_theme == '#EB5757' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
+                                                    <input {{  $setting->SettingAdditionals->dashboard_color_theme == '#EB5757' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#EB5757">
                                                 @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2994A]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#F2994A">
+                                                    <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#F2994A">
                                                 @else
-                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2994A' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2994A">
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2994A' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2994A">
                                                 @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#27AE60]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#27AE60">
+                                                    <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#27AE60">
                                                 @else
-                                                    <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#27AE60' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#27AE60">
+                                                    <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#27AE60' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#27AE60">
                                                 @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#6AEAE3]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#6AEAE3">
+                                                    <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#6AEAE3">
                                                 @else
-                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#6AEAE3' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#6AEAE3">
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#6AEAE3' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#6AEAE3">
                                                 @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#56CCF2]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#56CCF2">
+                                                    <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#56CCF2">
                                                 @else
-                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#56CCF2' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#56CCF2">
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#56CCF2' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#56CCF2">
                                                 @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#BB6BD9]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#BB6BD9">
+                                                <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#BB6BD9">
                                                 @else
-                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#BB6BD9' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#BB6BD9">
+                                                    <input {{ $setting->SettingAdditionals->dashboard_color_theme == '#BB6BD9' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#BB6BD9">
                                                 @endif
                                             </label>
                                             <label class="w-10 h-10 rounded-full hover:cursor-pointer bg-[#F2C94C]">
                                                 @if (empty($setting->SettingAdditionals->dashboard_color_theme))
-                                                    <input onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#F2C94C">
+                                                    <input onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"   type="checkbox" value="#F2C94C">
                                                 @else
-                                                    <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2C94C' ?? null ? 'checked' : '' }} onclick="onlyOneStatus(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2C94C">
+                                                    <input  {{ $setting->SettingAdditionals->dashboard_color_theme == '#F2C94C' ?? null ? 'checked' : '' }} onclick="onlyOneSetting(this, 'dashboard_color_theme')" name="dashboard_color_theme"  type="checkbox" value="#F2C94C">
                                                 @endif
                                             </label>
                                         </div>
@@ -373,7 +373,7 @@
                                     </div>
                                     
                                     {{-- Button --}}
-                                    <div href="#" onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md flex items-center justify-center hover:cursor-pointer">
+                                    <div onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md flex items-center justify-center hover:cursor-pointer">
                                         <span class="task-btn-text">+ Add More</span>
                                     </div>
                                 </div>

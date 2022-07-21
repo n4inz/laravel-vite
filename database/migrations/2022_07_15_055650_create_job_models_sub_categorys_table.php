@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs_sub_categorys', function (Blueprint $table) {
+        Schema::create('job_models_sub_categorys', function (Blueprint $table) {
             $table->id();
             $table->string('companion_elders')->nullable()->default(false);
             $table->string('hour_help')->nullable()->default(false);
@@ -45,10 +45,10 @@ return new class extends Migration
             // $table->string('special_needs');
             // $table->string('provide_transportation');
 
-            $table->unsignedBigInteger('jobs_id');
+            $table->unsignedBigInteger('job_models_id');
             $table->timestamps();
-            $table->foreign('jobs_id')
-            ->references('id')->on('jobs')
+            $table->foreign('job_models_id')
+            ->references('id')->on('job_models')
             ->onDelete('cascade');
         });
     }
@@ -60,6 +60,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs_sub_categorys');
+        Schema::dropIfExists('job_models_sub_categorys');
     }
 };

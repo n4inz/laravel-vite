@@ -40,33 +40,23 @@ Route::get('/tenancy', function(){
 
 Route::post('/login-tenancy', [AuthenticateController::class , 'tenancy'])->name('login.tenancy');
 
-
 Route::get('/register', [AuthenticateController::class , 'register'])->name('register');
 Route::post('/register-store', [AuthenticateController::class, 'register_store'])->name('register.store');
 Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->name('login');
 Route::post('/login-store', [AuthenticateController::class, 'login_store'])->name('login.store');
 Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
-
-// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-// Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
-// Route::get('/overview/{id_unique}', [JobboardController::class, 'overview'])->name('jobboard.overview');
-// Route::post('/job-store', [JobboardController::class,'jobs_store'])->name('jobboard.jobs_store');
-
-// Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
-// Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_client.talent');
-
-// Route::get('/setting', [SettingController::class, 'setting'])->name('setting.setting');
-// Route::post('setting-store', [SettingController::class, 'setting_store'])->name('setting.store');
-// Route::get('/send', [JobboardController::class, 'send'])->name('jobboard.send');
-// Route::get('/apply', [JobboardController::class, 'apply'])->name('jobboard.apply');
-
+Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
 Route::middleware(['tenant', 'auth'])->group(function(){
     // Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->name('login');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
+    Route::get('/detail-match-talent/{id}', [JobboardController::class, 'detail_match_talent'])->name('jobboard.detail_match_talent');
     Route::get('/overview/{id_unique}', [JobboardController::class, 'overview'])->name('jobboard.overview');
+    // Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
     Route::post('/job-store', [JobboardController::class,'jobs_store'])->name('jobboard.jobs_store');
+    Route::post('/send-email-talent', [JobboardController::class,'send_email'])->name('jobboard.send_email');
     
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_talent.talent');
