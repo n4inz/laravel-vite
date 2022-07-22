@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendMail;
-
+use App\Http\Requests\JobsStoreRequest;
+use App\Models\Client;
 use App\Models\JobModels;
-use App\Models\JobModelsTask;
+use App\Models\JobModelsFile;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Break_;
+use App\Http\Traits\ImageUpload;
+use Illuminate\Support\Facades\Storage;
 
 class JobboardController extends Controller
 {
+    use ImageUpload;
     private $jobboardRepository;
 
     public function __construct(JobboardRepository $jobboardRepository)
@@ -24,17 +26,27 @@ class JobboardController extends Controller
 
     public function index()
     {
-   
+        $client = Client::where('users_id', auth()->user()->id)->get();
+        $json = [];
+        foreach($client as $value){
+            array_push($json , [
+                'value' => $value->id,
+                'name' => $value->first_name,
+                'avatar' => 'dummy.png',
+                'email' => $value->email
+            ]);
+        }
         $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
         return view('jobboard.jobboard', [
             "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id' , auth()->user()->id),
             "interviewing" => $jobs->where('status', 'interviewing')->where('users_id' , auth()->user()->id),
             "trialing" => $jobs->where('status', 'trialing')->where('users_id' , auth()->user()->id),
             "completed" => $jobs->where('status', 'completed')->where('users_id' , auth()->user()->id),
+            "json" => $json
         ]);
     }
 
-    public function jobs_store(Request $request)
+    public function jobs_store(JobsStoreRequest $request)
     {  
         $this->jobboardRepository->created($request);
 
@@ -42,11 +54,14 @@ class JobboardController extends Controller
     }
 
     public function overview($id_unique)
-    {
+    {   
         $dataTalent = [];
         $talentNeed = [];
 
-        $result = JobModels::with(['match_talent', 'languages', 'availability' ,'task'])->where('id_unique', $id_unique)->firstOrFail();
+       $result = JobModels::with(['match_talent', 'languages', 'availability' ,'task','client', 'file' => function ($query){
+            $query->limit(5);
+       }])->where('id_unique', $id_unique)->firstOrFail();
+
         foreach($result->match_talent as  $match){
             $talent = TalentTypeHelper::where('code_helper',$match->jobs_sub_category)->where('users_id', auth()->user()->id)->with('talent')->get();
             if($talent->count() > 0){
@@ -56,8 +71,6 @@ class JobboardController extends Controller
             }
             array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1 );
         }
-
-        // return$result;
         return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed'));
     }
 
@@ -67,39 +80,36 @@ class JobboardController extends Controller
         return view('modal.jobboard.detail_talent', compact('talent'));
     }
 
+    public function upload_file(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:pdf,zip,rar,doc|max:2048',
+            'job_models_id' => 'required'
+        ]);
+
+        $name = $this->uploadImageStore($request->file('file'), 'Jobs attached file');       
+        JobModelsFile::create([
+            'file' => $name,
+            'job_models_id' => $request->job_models_id
+        ]);
+        return response()->json([
+            'status' => 'Success'
+        ],200);
+    }
+
+    public function download_file($file)
+    {
+        return response()
+            ->download(storage_path('app/public/Jobs attached file/'.$file));
+    }
+
     public function add_task(Request $request)
     {
-       switch ($request->sts){
-            case 'created';
-
-                $request->validate([
-                    'val' => 'required'
-                ]);
-                $data = JobModelsTask::create([
-                    'task' => $request->val,
-                    'assignee' => 'Dummy data',
-                    'status' => 'Inprogress',
-                    'job_models_id' => $request->id,
-                    'users_id' => 1
-                ]);
-                return response()->json([
-                    'status' => 200,
-                    'data' => $data
-                ],200);
-            break;
-
-            case 'updated';
-                $data = JobModelsTask::where('id',$request->id)->update([
-                    'status' => 'Done'
-                ]);
-
-                $load = JobModelsTask::where('id', $request->id)->first();
-                return response()->json([
-                    'status' => 200,
-                    'data' => $load
-                ],200);
-            break;
-       }
+       $data = $this->jobboardRepository->add_task($request);
+        return response()->json([
+            'status' => 200,
+            'data' => $data
+        ],200);
 
     }
 

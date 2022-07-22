@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('description');
             $table->string('id_unique');
 
-            $table->string('location');
-            $table->string('category');
-            $table->string('part_time');
-            $table->string('desired_living');
-            $table->string('english_level');
+            $table->string('location')->nullable();
+            $table->string('category')->nullable();
+            $table->string('part_time')->nullable();
+            $table->string('desired_living')->nullable();
+            $table->string('english_level')->nullable();
 
             $table->boolean('comfortable_with_pets')->nullable()->default(false);
             $table->boolean('has_transportation')->nullable()->default(false);
@@ -48,13 +48,14 @@ return new class extends Migration
             $table->string('status');
             $table->enum('type', ['active', 'archived']);
             $table->unsignedBigInteger('users_id');
+
             // $table->unsignedBigInteger('tenants_id');
             $table->timestamps();
-
 
             $table->foreign('users_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
+
 
             // $table->foreign('tenants_id')
             // ->references('id')->on('tenants')

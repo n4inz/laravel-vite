@@ -8,13 +8,15 @@ use App\Models\JobModelsAvailabiltyDays;
 use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
 use App\Models\JobModelsSubCategorys;
+use App\Models\JobModelsTask;
 
 class JobboardRepository 
 {
     public function created($request)
     {
-        $jobs = JobModels::create([
-            'family' => $request->family,
+        $value = json_decode($request->family);
+           $jobs = JobModels::create([
+            'family' => $value[0]->name,
             'title' => $request->title,
             'description' => $request->description,
             'id_unique' => $request->id_unique,
@@ -47,7 +49,7 @@ class JobboardRepository
             'status' => $request->status,
             // 'type' => $request->type,
             'type' => $request->onlyOneStatus,
-
+            'clients_id' => $value[0]->value,
             'users_id' => auth()->user()->id,
         ]);
 
@@ -88,5 +90,36 @@ class JobboardRepository
             SendMail::dispatch($details);
         }
 
+    }
+
+    public function add_task($request)
+    {
+        switch ($request->sts){
+            case 'created';
+
+                $request->validate([
+                    'val' => 'required'
+                ]);
+                $data = JobModelsTask::create([
+                    'task' => $request->val,
+                    'assignee' => 'Dummy data',
+                    'status' => 'Inprogress',
+                    'job_models_id' => $request->id,
+                    'users_id' => 1
+                ]);
+
+                return $data;
+            break;
+
+            case 'updated';
+                $data = JobModelsTask::where('id',$request->id)->update([
+                    'status' => 'Done'
+                ]);
+
+                $load = JobModelsTask::where('id', $request->id)->first();
+
+                return $load;
+            break;
+       }
     }
 }

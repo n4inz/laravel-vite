@@ -174,6 +174,7 @@ class AllFieldSeeder extends Seeder
                 'rate_negotiable' => (bool)rand(0,1),
                 'status' => $status_rand,
                 'type' => $type_rand,
+                'clients_id' => 1,
                 'users_id' => $value->id,
             ]);
 

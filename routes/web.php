@@ -46,7 +46,7 @@ Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->n
 Route::post('/login-store', [AuthenticateController::class, 'login_store'])->name('login.store');
 Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
-Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
+
 Route::middleware(['tenant', 'auth'])->group(function(){
     // Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->name('login');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -54,10 +54,12 @@ Route::middleware(['tenant', 'auth'])->group(function(){
     Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
     Route::get('/detail-match-talent/{id}', [JobboardController::class, 'detail_match_talent'])->name('jobboard.detail_match_talent');
     Route::get('/overview/{id_unique}', [JobboardController::class, 'overview'])->name('jobboard.overview');
-    // Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
+    Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
     Route::post('/job-store', [JobboardController::class,'jobs_store'])->name('jobboard.jobs_store');
     Route::post('/send-email-talent', [JobboardController::class,'send_email'])->name('jobboard.send_email');
-    
+    Route::post('upload-file', [JobboardController::class, 'upload_file'])->name('jobboard.upload_file');
+    Route::get('download-file/{file}', [JobboardController::class, 'download_file'])->name('jobboard.download_file');
+
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_talent.talent');
     Route::post('/user-client-store', [UserClientController::class, 'client_store'])->name('user_client.store');

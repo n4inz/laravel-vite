@@ -33,4 +33,13 @@ class JobModels extends Model
     {
         return $this->hasMany(JobModelsTask::class,'job_models_id');
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'clients_id');
+    }
+    public function file()
+    {
+        return $this->hasMany(JobModelsFile::class, 'job_models_id');
+    }
 }

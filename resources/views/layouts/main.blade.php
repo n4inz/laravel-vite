@@ -15,16 +15,85 @@
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> --}}
     
-    {{-- <style>
-        costum{
+    <script src="{{ asset('js/tagify/tagify.js') }}"></script>
+    <script src="{{ asset('js/tagify/tagify-min.js') }}"></script>
+    <link href="{{ asset('css/tagify/tagify.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+        /* User Talent */
+        .costum{
             --tags-focus-border-color: none;
             --tags-border-color : none;
             --tags-hover-border-color	:none;
         }
-    </style> --}}
-    {{-- <script src="https://unpkg.com/@yaireo/tagify"></script>
-    <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-    <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" /> --}}
+
+        /* Jobs */
+        .costums-family{
+            --tags-border-color	: none;
+            --tags-hover-border-color:none;
+            --tags-focus-border-color:none;
+            --tags-disabled-bg;
+            --tag-hover	: none;
+            height:  38px;
+            display: flex,
+            justify-content:center;
+            align-items:center;
+            padding-left:10px
+        }
+        .users-list{
+            border:red;
+        }
+        .tagify__dropdown.users-list .tagify__dropdown__item{
+            padding: .5em .7em;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0 1em;
+            grid-template-areas: "avatar name"
+                                "avatar email";
+        }
+
+        .tagify__dropdown.users-list .tagify__dropdown__item:hover .tagify__dropdown__item__avatar-wrap{
+            transform: scale(1.2);
+        }
+
+        .tagify__dropdown.users-list .tagify__dropdown__item__avatar-wrap{
+            grid-area: avatar;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #EEE;
+            transition: .1s ease-out;
+        }
+
+        .tagify__dropdown.users-list img{
+            width: 100%;
+            vertical-align: top;
+        }
+
+        .tagify__dropdown.users-list strong{
+            grid-area: name;
+            width: 100%;
+            align-self: center;
+        }
+
+        .tagify__dropdown.users-list span{
+            grid-area: email;
+            width: 100%;
+            font-size: .9em;
+            opacity: .6;
+        }
+
+        .tagify__dropdown.users-list .tagify__dropdown__item__addAll{
+            border-bottom: 1px solid #DDD;
+            gap: 0;
+        }
+
+        .tagify__tag__removeBtn{
+            color: rgb(148 163 184 / var(--tw-bg-opacity));;
+            background: white;
+        }
+      
+    </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
 </head>
 <body class="bg-backround font-roboto ">

@@ -33,11 +33,8 @@ class AuthenticateController extends Controller
     }
 
     public function login_store(Request $request)
-    {
-
-      
+    {     
         $login = Credensial::first();
-
 
         $auth = [
             'email' => $login->email,

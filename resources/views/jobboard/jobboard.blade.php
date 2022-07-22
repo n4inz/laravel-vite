@@ -84,8 +84,8 @@
                                                 {{Str::limit($value->title, 45, $end='...')}}
                                             </div> 
                                         </div>
-                                        <div class="pt-2">
-                                            <div class="text-xs text-[#827C7C]">
+                                        <div class="pt-2 ">
+                                            <div class="text-xs text-[#827C7C] ">
                                                 {{Str::limit($value->description, 110, $end='...')}}
                                             </div>
                                         </div>
@@ -449,31 +449,31 @@
                             </div>
                             <div class="flex items-center justify-center space-x-3">
                                 <input onclick="onlyOneJob(this, 'onlyOneStatus')" id="archived" name="onlyOneStatus" style="color: #3BD7CF" type="checkbox" value="archived" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                <label for="archived" class="overview-note-body text-colortext">Archived</label>
+                                <label  for="archived" class="overview-note-body text-colortext">Archived</label>
                             </div>
                         </div>
                         <div class="px-8 mt-4">
                             <label for="family" class="mb-2 overview-note-body block text-colortext">Family*</label>
-                            <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="family" type="text" id="family" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Find & select user">
+                            <div class="w-[670px] h-8 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                <input id="type_helper" name='family' value="{{ old('family') }}" type="text" id="family" class="costums-family overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
                             </div>
                         </div>
                         <div class="px-8 mt-4">
                             <label for="title" class="mb-2 block overview-note-body text-colortext">Title*</label>
                             <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="title" type="text" id="title" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
+                                <input name="title" value="{{ old('title') }}" type="text" id="title" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                             </div>
                         </div>
                         <div class="px-8 mt-4">
                             <label for="description" class="mb-2 block overview-note-body text-colortext">Description*</label>
                             <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="description" type="text" id="description" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
+                                <input name="description" value="{{ old('description') }}" type="text" id="description" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                             </div>
                         </div>
                         <div class="px-8 mt-4">
                             <label for="id" class="mb-2 block overview-note-body text-colortext">ID*</label>
                             <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="id_unique" type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
+                                <input name="id_unique" value="{{ old('id_unique') }}" type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                             </div>
                         </div>
                         <div class="px-8 mt-4">
@@ -487,7 +487,7 @@
                                     </svg> 
                                 </div>
                                 <div class="flex items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
-                                    <input name="location" type="text" id="id" class="overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
+                                    <input name="location" value="{{ old('') }}" type="text" id="id" class="overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
                                 </div>
                             </div>
                         </div>
@@ -792,13 +792,13 @@
                                     <div>
                                         <label for="start-date" class="overview-note-body text-colortext mb-2 block">Start time*</label>
                                         <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                            <input type="time" name="start_time" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                            <input type="time" name="start_time" value="{{ old('start_time') }}" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
                                     </div>
                                     <div>
                                         <label for="end-time*" class="overview-note-body text-colortext mb-2 block">End time*</label>
                                         <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                            <input type="time" name="end_time" id="end-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                            <input type="time" name="end_time" value="{{ old('end_time') }}" id="end-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
                                     </div>
                                     <div>
@@ -807,8 +807,8 @@
                                             <select id="duration" name="duration" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                                 <option>1 Month</option>
                                                 <option>3 Month</option>
-                                                <option>Test 1</option>
-                                                <option>Test 1</option>
+                                                <option>6 Month</option>
+                                                <option>1 Year</option>
                                             </select>
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -827,7 +827,7 @@
                                             <label for="asap" class="overview-note-body text-colortext">ASAP</label>
                                         </div>
                                         <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                            <input type="date" name="start_date" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                            <input type="date" name="start_date" value="{{ old('start_date') }}" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
                                     </div>
                                     <div>
@@ -837,7 +837,7 @@
                                             <label for="tbd" class="overview-note-body text-colortext">TBD</label>
                                         </div>
                                         <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                            <input type="date" name="end_date" id="end-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                            <input type="date" name="end_date" value="{{ old('end_date') }}" id="end-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
                                     </div>
             
@@ -874,7 +874,7 @@
                                     <div>
                                         <label for="rate" class="overview-note-body text-colortext mb-2 block">Rate*</label>
                                         <div class="w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                            <input type="text" name="rate" id="rate" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " placeholder="">
+                                            <input type="text" name="rate" value="{{ old('rate') }}" id="rate" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " placeholder="">
                                         </div>
                                     </div>
                                     <div>
@@ -928,5 +928,54 @@
     </article>
     <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
     <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
+    <script>
+        var input = document.querySelector('input[name=family]');
+
+        function tagTemplate(tagData){
+            return `
+            <div class="bg-palet h-5 flex items-center space-x-2 rounded-md pl-1">
+                <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
+
+                <img width="20" height="20" src="{{ asset('storage/Talent attached file/avatar/${tagData.avatar}') }}" class="rounded-full" alt="">
+                <span class="text-xs text-white pr-2">${tagData.name}</span>
+            </div>
+            `
+        }
+        function suggestionItemTemplate(tagData){
+            return `
+                <div ${this.getAttributes(tagData)}
+                    class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
+                    tabindex="0"
+                    role="option">
+                    ${ tagData.avatar ? `
+                    <div class='tagify__dropdown__item__avatar-wrap'>
+                        <img onerror="this.style.visibility='hidden'" src="{{ asset('storage/Talent attached file/avatar/${tagData.avatar}') }}">
+                    </div>` : ''
+                    }
+                    <strong>${tagData.name}</strong>
+                    <span>${tagData.email}</span>
+                </div>
+            `
+        }
+
+        new Tagify(input,{
+            whitelist : <?=  json_encode($json) ?>,
+            maxTags:1,
+            skipInvalid: true,
+            dropdown: {
+                closeOnSelect: true,
+                enabled: 0,
+                classname: 'users-list',
+                searchKeys: ['name', 'email']  // very important to set by which keys to search for suggesttions when typing
+            },
+
+            templates: {
+                tag: tagTemplate,
+                dropdownItem: suggestionItemTemplate,
+                // dropdownHeader: dropdownHeaderTemplate
+            },
+
+        })
+    </script>
 </main>
 @endsection
