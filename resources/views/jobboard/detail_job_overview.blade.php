@@ -752,7 +752,7 @@
                                             </div>
                                             <div>
                                                 <div class="overview-attechment-title text-colortext">{{ $val->file }}</div>
-                                                <div class="overview-attechment-size text-[#AFABAB]">{{ Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$val->file) / 1024 }} KB</div>
+                                                <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$val->file) / 1024 , 2) }} KB</div>
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-center space-x-3">
@@ -1060,78 +1060,32 @@
                                                 <span class="task-text ml-2">Upload Date</span>
                                             </td>
                                         </tr>
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class=" ml-2">App pages.zip</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">Zip File</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">2.2MB</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">22 Dec, 2022</span>
-                                            </td>
-                                            <td height="66px" class="border-t ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12.1018C1.5 11.8257 1.72386 11.6018 2 11.6018H14C14.2761 11.6018 14.5 11.8257 14.5 12.1018C14.5 12.3779 14.2761 12.6018 14 12.6018H2C1.72386 12.6018 1.5 12.3779 1.5 12.1018Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 14C1.5 13.7239 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.7239 14.5 14C14.5 14.2761 14.2761 14.5 14 14.5H2C1.72386 14.5 1.5 14.2761 1.5 14Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.64645 7.31307C5.84171 7.11781 6.15829 7.11781 6.35355 7.31307L8 8.95952L9.64645 7.31307C9.84171 7.11781 10.1583 7.11781 10.3536 7.31307C10.5488 7.50833 10.5488 7.82492 10.3536 8.02018L8.35355 10.0202C8.15829 10.2154 7.84171 10.2154 7.64645 10.0202L5.64645 8.02018C5.45118 7.82492 5.45118 7.50833 5.64645 7.31307Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1.5C8.27614 1.5 8.5 1.72386 8.5 2V9.66667C8.5 9.94281 8.27614 10.1667 8 10.1667C7.72386 10.1667 7.5 9.94281 7.5 9.66667V2C7.5 1.72386 7.72386 1.5 8 1.5Z" fill="#3BD7CF"/>
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class=" ml-2">App pages.zip</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">Zip File</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">2.2MB</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">22 Dec, 2022</span>
-                                            </td>
-                                            <td height="66px" class="border-t ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12.1018C1.5 11.8257 1.72386 11.6018 2 11.6018H14C14.2761 11.6018 14.5 11.8257 14.5 12.1018C14.5 12.3779 14.2761 12.6018 14 12.6018H2C1.72386 12.6018 1.5 12.3779 1.5 12.1018Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 14C1.5 13.7239 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.7239 14.5 14C14.5 14.2761 14.2761 14.5 14 14.5H2C1.72386 14.5 1.5 14.2761 1.5 14Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.64645 7.31307C5.84171 7.11781 6.15829 7.11781 6.35355 7.31307L8 8.95952L9.64645 7.31307C9.84171 7.11781 10.1583 7.11781 10.3536 7.31307C10.5488 7.50833 10.5488 7.82492 10.3536 8.02018L8.35355 10.0202C8.15829 10.2154 7.84171 10.2154 7.64645 10.0202L5.64645 8.02018C5.45118 7.82492 5.45118 7.50833 5.64645 7.31307Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1.5C8.27614 1.5 8.5 1.72386 8.5 2V9.66667C8.5 9.94281 8.27614 10.1667 8 10.1667C7.72386 10.1667 7.5 9.94281 7.5 9.66667V2C7.5 1.72386 7.72386 1.5 8 1.5Z" fill="#3BD7CF"/>
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class=" ml-2">App pages.zip</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">Zip File</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">2.2MB</span>
-                                            </td>
-                                            <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                <span class="ml-2">22 Dec, 2022</span>
-                                            </td>
-                                            <td height="66px" class="border-t ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12.1018C1.5 11.8257 1.72386 11.6018 2 11.6018H14C14.2761 11.6018 14.5 11.8257 14.5 12.1018C14.5 12.3779 14.2761 12.6018 14 12.6018H2C1.72386 12.6018 1.5 12.3779 1.5 12.1018Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 14C1.5 13.7239 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.7239 14.5 14C14.5 14.2761 14.2761 14.5 14 14.5H2C1.72386 14.5 1.5 14.2761 1.5 14Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.64645 7.31307C5.84171 7.11781 6.15829 7.11781 6.35355 7.31307L8 8.95952L9.64645 7.31307C9.84171 7.11781 10.1583 7.11781 10.3536 7.31307C10.5488 7.50833 10.5488 7.82492 10.3536 8.02018L8.35355 10.0202C8.15829 10.2154 7.84171 10.2154 7.64645 10.0202L5.64645 8.02018C5.45118 7.82492 5.45118 7.50833 5.64645 7.31307Z" fill="#3BD7CF"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1.5C8.27614 1.5 8.5 1.72386 8.5 2V9.66667C8.5 9.94281 8.27614 10.1667 8 10.1667C7.72386 10.1667 7.5 9.94281 7.5 9.66667V2C7.5 1.72386 7.72386 1.5 8 1.5Z" fill="#3BD7CF"/>
-                                                    </svg>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach ($result->file as $val )
+                                            <tr onclick="window.location.href = '{{ route('jobboard.download_file' , ['file' => $val->file]) }}'" class="hover:bg-gray-100 hover:cursor-pointer">
+                                                <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
+                                                    <span class=" ml-2">{{ $val->file }}</span>
+                                                </td>
+                                                <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
+                                                    <span class="ml-2">{{ pathinfo(storage_path().'public/Jobs attached file/'.$val->file)['extension'] }} File</span>
+                                                </td>
+                                                <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
+                                                    <span class="ml-2">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$val->file) / 1024 , 2) }} KB</span>
+                                                </td>
+                                                <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
+                                                    <span class="ml-2">{{ $val->created_at->isoFormat('D, MMMM Y') }}</span>
+                                                </td>
+                                                <td height="66px" class="border-t ">
+                                                    <div class="flex item-center justify-end">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12.1018C1.5 11.8257 1.72386 11.6018 2 11.6018H14C14.2761 11.6018 14.5 11.8257 14.5 12.1018C14.5 12.3779 14.2761 12.6018 14 12.6018H2C1.72386 12.6018 1.5 12.3779 1.5 12.1018Z" fill="#3BD7CF"/>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 14C1.5 13.7239 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.7239 14.5 14C14.5 14.2761 14.2761 14.5 14 14.5H2C1.72386 14.5 1.5 14.2761 1.5 14Z" fill="#3BD7CF"/>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.64645 7.31307C5.84171 7.11781 6.15829 7.11781 6.35355 7.31307L8 8.95952L9.64645 7.31307C9.84171 7.11781 10.1583 7.11781 10.3536 7.31307C10.5488 7.50833 10.5488 7.82492 10.3536 8.02018L8.35355 10.0202C8.15829 10.2154 7.84171 10.2154 7.64645 10.0202L5.64645 8.02018C5.45118 7.82492 5.45118 7.50833 5.64645 7.31307Z" fill="#3BD7CF"/>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1.5C8.27614 1.5 8.5 1.72386 8.5 2V9.66667C8.5 9.94281 8.27614 10.1667 8 10.1667C7.72386 10.1667 7.5 9.94281 7.5 9.66667V2C7.5 1.72386 7.72386 1.5 8 1.5Z" fill="#3BD7CF"/>
+                                                        </svg>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </table>
                                 </div>
                                 <div class="flex mt-8"></div>

@@ -11,7 +11,6 @@ use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageUpload;
-use Illuminate\Support\Facades\Storage;
 
 class JobboardController extends Controller
 {
