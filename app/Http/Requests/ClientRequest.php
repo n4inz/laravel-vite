@@ -27,7 +27,7 @@ class ClientRequest extends FormRequest
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
             'email' => 'required|unique:clients,email',
-            'phone' => 'required|min:3',
+            'phone' => 'required|min:3|numeric',
             'address' => 'required|min:3',
             'languages' => 'required',
             'note' => 'required',

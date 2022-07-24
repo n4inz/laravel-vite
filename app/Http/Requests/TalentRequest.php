@@ -30,7 +30,7 @@ class TalentRequest extends FormRequest
             'day_of_birthday' => 'required',
             'experience' => 'required',
             'email' => 'required',
-            'phone' => 'required|min:5',
+            'phone' => 'required|min:5|numeric',
             'address' => 'required|min:5',
             'about_talent' => 'required|min:6',
             'attached_file' => 'required|mimes:doc,rar,zip,pdf|max:2048',

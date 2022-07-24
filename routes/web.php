@@ -45,7 +45,7 @@ Route::post('/register-store', [AuthenticateController::class, 'register_store']
 Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->name('login');
 Route::post('/login-store', [AuthenticateController::class, 'login_store'])->name('login.store');
 Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
-
+Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 
 Route::middleware(['tenant', 'auth'])->group(function(){
     // Route::get('/',[AuthenticateController::class, 'login'])->middleware('guest')->name('login');

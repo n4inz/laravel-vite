@@ -24,28 +24,37 @@
                 </div>
             </div>
             <div class="mt-[61px] pl-[58px] w-[680px] flex flex-col items-center">
-                <span class="overview-send-title text-palet w-[650px] text-center">Login For Agency {{ session('status') }}</span>
-                    <form action="{{ route('login.tenancy') }}" method="POST">
-                        @csrf
-                        <div class="mt-10 w-[27rem]">
-                            <label for="first-name" class="block overview-modal-add-talent-text text-[#222222] mb-2">Email</label>
-                            <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                                <input type="text" name="email" value="{{ session('status')}}" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
-                            </div>
+                <span class="overview-send-title text-palet w-[650px] text-center">Login For Agency </span>
+                <form action="{{ route('login.tenancy') }}" method="POST">
+                    @csrf
+                    <div class="mt-10 w-[27rem]">
+                        <label for="first-name" class="{{ $errors->has('email') ? 'text-red-600' : '' }} block overview-modal-add-talent-text text-[#222222] mb-2">Email</label>
+                        <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
+                            <input type="text" name="email" value="{{ old('email')}}" id="first-name" class="{{ $errors->has('email') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} overview-modal-add-talent-text h-full  border-none focus:ring-0 w-full p-1 pl-3 rounded outline-none " placeholder="Email">
                         </div>
-                        <div class="mt-4 w-[27rem]">
-                            <label for="" class="block overview-modal-add-talent-text text-[#222222] mb-2">Password</label>
-                            <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
-                                <input type="password" name="password" value="{{ old('password') }}" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password">
-                            </div>
+                        @if($errors->has('email'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
+                        @endif
+                    </div>
+                    <div class="mt-4 w-[27rem]">
+                        <label for="" class="{{ $errors->has('password') ? 'text-red-600' : '' }} block overview-modal-add-talent-text text-[#222222] mb-2">Password</label>
+                        <div class="{{ $errors->has('password') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                            <input type="password" name="password" value="{{ old('password') }}" id="last-name" class="{{ $errors->has('password') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 pl-3 rounded outline-none " placeholder="Password">
                         </div>
-                        <div class="w-[27rem] mt-4">
-                            <a class="float-right text-palet opacity-70"  href="{{ route('register') }}">Register</a>
-                        </div>
-                        <button class="w-[27rem] h-10 bg-palet rounded-lg mt-6 mb-8">
-                            <span class="overview-talent-modal-title text-white">Login</span>
-                        </button>
-                    </form>
+                        @if($errors->has('password'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password') }}</p>
+                        @endif
+                        @if (session()->has('Failed'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ session()->get('Failed') }}</p>
+                        @endif
+                    </div>
+                    <div class="w-[27rem] mt-4">
+                        <a class="float-right text-palet opacity-70"  href="{{ route('register') }}">Register</a>
+                    </div>
+                    <button class="w-[27rem] h-10 bg-palet rounded-lg mt-6 mb-8">
+                        <span class="overview-talent-modal-title text-white">Login</span>
+                    </button>
+                </form>               
             </div>
         </div>
     </main>

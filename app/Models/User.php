@@ -73,4 +73,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Client::class, 'users_id');
     }
+    public function avatar()
+    {
+        return $this->hasOne(Avatar::class , 'users_id');
+    }
 }

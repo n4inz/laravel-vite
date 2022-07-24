@@ -26,7 +26,7 @@ class SettingRequest extends FormRequest
         return [
             'agency_name' => 'required|min:3',
             'url_ending_legal' => 'required', 
-            'company_description' => 'required',
+            'company_description' => 'required|min:10',
             // 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
             'service_type' => 'required',

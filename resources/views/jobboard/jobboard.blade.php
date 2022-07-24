@@ -130,7 +130,7 @@
                         @endforeach
                         
                         {{-- Botton add fot potensial --}}
-                        <div onclick="potensial_client()" data-modal-toggle="create-job" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="potensial_client()" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -224,7 +224,7 @@
                             </a>
                         @endforeach
                         {{-- Botton add for Interviewing --}}
-                        <div onclick="interviewing()" data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="interviewing()" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -319,7 +319,7 @@
                         @endforeach
 
                         {{-- Botton add fot Trialing --}}
-                        <div onclick="trialing()" data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="trialing()" class="flex items-center justify-center hover:cursor-pointer w-full h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -412,7 +412,7 @@
                         </a>
                         @endforeach
                         {{-- Botton add fot Completed --}}
-                        <div onclick="completed()" data-modal-toggle="create-job" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                        <div onclick="completed()" class="flex items-center justify-center hover:cursor-pointer w-full  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                             <div class="relative">
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -431,14 +431,18 @@
         <div id="create-job" tabindex="-1" aria-hidden="true"  aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">
             <div class=" w-[766px] h-screen">
                 <form method="post" action="{{ route('jobboard.jobs_store') }}">
-                    <div class="status"></div>
+                    <div class="status">
+                        @if($errors->any())
+                            <input type="hidden" name="status" value="{{ old('status') }}">
+                        @endif
+                    </div>
                     @csrf
                     <div class="shadow bg-white rounded mt-6">
                         <div class="flex items-center justify-between px-8 h-14 rounded-t border-b dark:border-gray-600">
                             <span class="overview-talent-modal-title text-colortext">
                                 Create Job
                             </span>
-                            <button data-modal-toggle="create-job" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"  data-modal-toggle="modal-detail-talen">
+                            <button onclick="close_modal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" >
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                             </button>
                         </div>
@@ -453,28 +457,40 @@
                             </div>
                         </div>
                         <div class="px-8 mt-4">
-                            <label for="family" class="mb-2 overview-note-body block text-colortext">Family*</label>
-                            <div class="w-[670px] h-8 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                <input id="type_helper" name='family' value="{{ old('family') }}" type="text" id="family" class="costums-family overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
+                            <label for="family" class="{{ $errors->has('family') ? 'text-red-600' : '' }} mb-2 overview-note-body block text-colortext">Family*</label>
+                            <div class="{{ $errors->has('family') ? 'border-red-500' : 'border-[#CCD3DC]' }} w-[670px] h-8 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                <input id="type_helper" name='family' value="{{ old('family') }}" type="text" id="family" class="costums-family overview-modal-add-talent-text  border-none rounded focus:ring-0 w-full p-1 outline-none" placeholder="">
                             </div>
+                            @if($errors->has('family'))
+                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('family') }}</p>
+                            @endif
                         </div>
                         <div class="px-8 mt-4">
-                            <label for="title" class="mb-2 block overview-note-body text-colortext">Title*</label>
-                            <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="title" value="{{ old('title') }}" type="text" id="title" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
+                            <label for="title" class="{{ $errors->has('title') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Title*</label>
+                            <div class="{{ $errors->has('title') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
+                                <input name="title" value="{{ old('title') }}" type="text" id="title" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="">
                             </div>
+                            @if($errors->has('title'))
+                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('title') }}</p>
+                            @endif
                         </div>
                         <div class="px-8 mt-4">
-                            <label for="description" class="mb-2 block overview-note-body text-colortext">Description*</label>
-                            <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="description" value="{{ old('description') }}" type="text" id="description" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
+                            <label for="description" class="{{ $errors->has('description') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Description*</label>
+                            <div class="{{ $errors->has('description') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
+                                <input name="description" value="{{ old('description') }}" type="text" id="description" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="">
                             </div>
+                            @if($errors->has('description'))
+                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('description') }}</p>
+                            @endif
                         </div>
                         <div class="px-8 mt-4">
-                            <label for="id" class="mb-2 block overview-note-body text-colortext">ID*</label>
-                            <div class="flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
+                            <label for="id" class="{{ $errors->has('id_unique') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">ID*</label>
+                            <div class="{{ $errors->has('id_unique') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
                                 <input name="id_unique" value="{{ old('id_unique') }}" type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
                             </div>
+                            @if($errors->has('id_unique'))
+                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('id_unique') }}</p>
+                            @endif
                         </div>
                         <div class="px-8 mt-4">
                             <label for="id" class="mb-2 block overview-note-body text-colortext">Address(city/state/country)</label>
@@ -514,79 +530,82 @@
                             <div class="p-2">
                                 <div class="flex space-x-[102px]">
                                     <div>
-                                        <label for="category" class="overview-note-body text-colortext mb-2 block">Subcategories*</label>
+                                        <label for="category" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="nanny" name="subcategory[]" value="nanny"  style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="nanny" class="overview-note-body text-colortext">Nanny</label>
+                                            <input id="nanny" name="subcategory[]" value="nanny"  style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="nanny" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Nanny</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="sister" name="subcategory[]" value="sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="sister" class="overview-note-body text-colortext">Sister</label>
+                                            <input id="sister" name="subcategory[]" value="sister" style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="sister" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Sister</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input name="subcategory[]" value="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="maternity-care" class="overview-note-body text-colortext">Maternity Care</label>
+                                            <input name="subcategory[]" value="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox"  class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="maternity-care" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Maternity Care</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="daycare" name="subcategory[]" value="at_home_daycare" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="daycare" class="overview-note-body text-colortext">At Home Daycare</label>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="category" class="overview-note-body text-colortext mb-2 block">Subcategories*</label>
-                                        <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="infant" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="infant" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="infant" class="overview-note-body text-colortext">Infant</label>
-                                        </div>
-                                        <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="young-baby" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="young_baby" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="young-baby" class="overview-note-body text-colortext">Young baby</label>
-                                        </div>
-                                        <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="toddler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="toddler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="toddler" class="overview-note-body text-colortext">Toddler</label>
-                                        </div>
-                                        <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="press-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="press_schooler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="press-schooler" class="overview-note-body text-colortext">Press Schooler</label>
-                                        </div>
-                                        <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="grade-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="grade_schooler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="grade-schooler" class="overview-note-body text-colortext">Grade Schooler</label>
-                                        </div>
-                                        <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="simple-housework " name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="simple_housework" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="simple-housework " class="overview-note-body text-colortext">Simple Housework </label>
+                                            <input id="daycare" name="subcategory[]" value="at_home_daycare" style="color: #3BD7CF" type="checkbox"  class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="daycare" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">At Home Daycare</label>
                                         </div>
                                     </div>
                                     <div>
-                                        <label for="category" class="invisible overview-note-body text-colortext mb-2 block">Subcategory</label>
+                                        <label for="category" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="laundry" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="laundry" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="laundry" class="overview-note-body text-colortext">Laundry</label>
+                                            <input id="infant" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="infant" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="infant" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Infant</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="prep-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="prep_meal" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="prep-meal" class="overview-note-body text-colortext">Prep Meal</label>
+                                            <input id="young-baby" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="young_baby" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="young-baby" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Young baby</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="cook-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="cook_meal" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="cook-meal" class="overview-note-body text-colortext">Cook Meal</label>
+                                            <input id="toddler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="toddler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="toddler" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Toddler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="run-errands" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="run_errands" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="run-errands" class="overview-note-body text-colortext">Run Errands</label>
+                                            <input id="press-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="press_schooler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="press-schooler" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Press Schooler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="special-needs" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="special_needs" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="special-needs" class="overview-note-body text-colortext">Special Needs</label>
+                                            <input id="grade-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="grade_schooler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="grade-schooler" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Grade Schooler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="provide-transportation" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="provide_transportation" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="provide-transportation" class="overview-note-body text-colortext">Provide Transportation</label>
+                                            <input id="simple-housework " name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="simple_housework" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="simple-housework " class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Simple Housework </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="category" class="invisible {{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategory</label>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="laundry" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="laundry" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="laundry" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Laundry</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="prep-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="prep_meal" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="prep-meal" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Prep Meal</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="cook-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="cook_meal" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="cook-meal" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Cook Meal</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="run-errands" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="run_errands" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="run-errands" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Run Errands</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="special-needs" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="special_needs" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="special-needs" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Special Needs</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="provide-transportation" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="provide_transportation" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="provide-transportation" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Provide Transportation</label>
                                         </div>
                                     </div>
                                 </div>
+                                @if($errors->has('subcategory'))
+                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('subcategory') }}</p>
+                                @endif
               
                             </div>
                         </div>
@@ -790,16 +809,22 @@
                                 </div>
                                 <div class="flex space-x-4 mt-8">
                                     <div>
-                                        <label for="start-date" class="overview-note-body text-colortext mb-2 block">Start time*</label>
-                                        <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
+                                        <label for="start-date" class="{{ $errors->has('start_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Start time*</label>
+                                        <div class="{{ $errors->has('start_time') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
                                             <input type="time" name="start_time" value="{{ old('start_time') }}" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('start_time'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_time') }}</p>
+                                        @endif
                                     </div>
                                     <div>
-                                        <label for="end-time*" class="overview-note-body text-colortext mb-2 block">End time*</label>
-                                        <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
+                                        <label for="end-time*" class="{{ $errors->has('end_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">End time*</label>
+                                        <div class="{{ $errors->has('end_time') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                             <input type="time" name="end_time" value="{{ old('end_time') }}" id="end-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('end_time'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_time') }}</p>
+                                        @endif
                                     </div>
                                     <div>
                                         <label for="duration" class="overview-note-body text-colortext mb-2 block">Duration</label>
@@ -821,24 +846,30 @@
                                 </div>
                                 <div class="flex space-x-4 mt-6">
                                     <div>
-                                        <label for="start-date" class="overview-note-body text-colortext block">Start date*</label>
+                                        <label for="start-date" class="{{ $errors->has('start_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">Start date*</label>
                                         <div class="flex items-center space-x-3 py-2 ">
                                             <input id="asap" name="asap" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="asap" class="overview-note-body text-colortext">ASAP</label>
                                         </div>
-                                        <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
+                                        <div class="{{ $errors->has('start_date') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
                                             <input type="date" name="start_date" value="{{ old('start_date') }}" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('start_date'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_date') }}</p>
+                                        @endif
                                     </div>
                                     <div>
-                                        <label for="end-date" class="overview-note-body text-colortext block">End date*</label>
+                                        <label for="end-date" class="{{ $errors->has('end_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">End date*</label>
                                         <div class="flex items-center space-x-3 py-2 ">
                                             <input id="tbd" name="tbd" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="tbd" class="overview-note-body text-colortext">TBD</label>
                                         </div>
-                                        <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
+                                        <div class="{{ $errors->has('start_date') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
                                             <input type="date" name="end_date" value="{{ old('end_date') }}" id="end-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('family'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_date') }}</p>
+                                        @endif
                                     </div>
             
                                 </div>
@@ -872,10 +903,13 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <label for="rate" class="overview-note-body text-colortext mb-2 block">Rate*</label>
-                                        <div class="w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
+                                        <label for="rate" class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Rate*</label>
+                                        <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                             <input type="text" name="rate" value="{{ old('rate') }}" id="rate" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('family'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('rate') }}</p>
+                                        @endif
                                     </div>
                                     <div>
                                         <label for="daily" class="overview-note-body text-colortext mb-2 block">Pay frequency</label>
@@ -977,5 +1011,12 @@
 
         })
     </script>
+    <script src="{{ asset('js/jQuery/jobBoardCreate.js') }}"></script>
+    @if ($errors->any())
+        <script>
+            modal.show()
+        </script>
+    @endif
+
 </main>
 @endsection

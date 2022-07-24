@@ -21,24 +21,32 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div>
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Agency Name</label>
-                                        <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                            <input name="agency_name" value="{{ old('agency_name' , $setting->SettingGeneral->agency_name ?? null) }}" type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                        <label for="first-name" class="{{ $errors->has('company_description') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">Agency Name</label>
+                                        <div class="{{ $errors->has('agency_name') ? 'border-red-500' : '' }} flex items-center justify-center w-[316px] h-10 border  rounded text-[#222222]">
+                                            <input name="agency_name" value="{{ old('agency_name' , $setting->SettingGeneral->agency_name ?? null) }}" type="text" id="first-name" class="{{ $errors->has('agency_name') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('agency_name'))
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('agency_name') }}</p>
+                                        @endif
                                     </div>
                                     <div>
-                                        <label for="last-name" class="block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
-                                        <div class="flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                            <input name="url_ending_legal" value="{{ old('url_ending_legal', $setting->SettingGeneral->url_ending_legal ?? null ) }}" type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                        <label for="last-name" class="{{ $errors->has('url_ending_legal') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
+                                        <div class="{{ $errors->has('url_ending_legal') ? 'border-red-500' : '' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
+                                            <input name="url_ending_legal" value="{{ old('url_ending_legal', $setting->SettingGeneral->url_ending_legal ?? null ) }}" type="text" id="last-name" class="{{ $errors->has('url_ending_legal') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
                                         </div>
+                                        @if($errors->has('url_ending_legal'))
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('url_ending_legal') }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="px-6 mt-4 ">
-                                    <label class="overview-status-field text-[#222222] mb-2">Company Description</label>
-                                    <div class="w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
-                                        <textarea name="company_description" id="message" rows="5" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="">{{ old('company_description' , $setting->SettingGeneral->company_description ?? null) }}</textarea>
-                                        {{-- <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span> --}}
+                                    <label class="{{ $errors->has('company_description') ? 'text-red-500' : '' }} overview-status-field text-[#222222] mb-2">Company Description</label>
+                                    <div class="{{ $errors->has('company_description') ? 'border-red-500' : '' }} w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
+                                        <textarea name="company_description" id="message" rows="5" class="{{ $errors->has('company_description') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="">{{ old('company_description' , $setting->SettingGeneral->company_description ?? null) }}</textarea>
                                     </div>
+                                    @if($errors->has('company_description'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('company_description') }}</p>
+                                    @endif
                                 </div>
                                 <div class="flex mt-10"></div>
                             </div>
@@ -165,8 +173,8 @@
                                 </div>
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
                                     <div>
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Location</label>
-                                        <div class="w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
+                                        <label for="first-name" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3">Services Location</label>
+                                        <div class="{{ $errors->has('location') ? 'border-red-500' : '' }} w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
                                             <select name="location" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                                 <option>USA, CA, Senior care San Jose</option>
                                                 <option>Test 1</option>
@@ -180,6 +188,9 @@
                                                 </svg>   
                                             </div>
                                         </div>
+                                        @if($errors->has('location'))
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('location') }}</p>
+                                        @endif
                                     </div>
                                     <div>
                                         <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
@@ -193,37 +204,37 @@
                                     <div class="flex">
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
                                             <input id="app-fee" name="application_fee" {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="app-fee" class="overview-status-field text-colortext ">Application Fee ($)</label>
+                                            <label for="app-fee" class="{{ $errors->has('aplication_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Application Fee ($)</label>
                                         </div>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
                                             <input id="placement-fee" name="placement_fee" {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="placement-fee" class="overview-status-field text-colortext ">Placement Fee ($)</label>
+                                            <label for="placement-fee" class="{{ $errors->has('placement_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Placement Fee ($)</label>
                                         </div>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
                                             <input id="hourly-rate" name="hourly_rate" {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="hourly-rate" class="overview-status-field text-colortext ">Hourly Rate ($)</label>
+                                            <label for="hourly-rate" class="{{ $errors->has('hourly_rate') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Hourly Rate ($)</label>
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-[60px] mt-3">
-                                        <div class="flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                            <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                        <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }} flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
+                                            <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
                                             <div class="flex items-center justify-center space-x-2 pr-2">
-                                                <span class="text-base text-colortext hover:cursor-pointer">+</span>
-                                                <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                                <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
+                                                <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
                                             </div>
                                         </div>
-                                        <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                            <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                        <div class="{{ $errors->has('placement_fee') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                            <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
                                             <div class="flex items-center justify-center space-x-2 pr-2">
-                                                <span class="text-base text-colortext hover:cursor-pointer">+</span>
-                                                <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                                <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
+                                                <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
                                             </div>
                                         </div>
-                                        <div class="flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                            <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                        <div class="{{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                            <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
                                             <div class="flex items-center justify-center space-x-2 pr-2">
-                                                <span class="text-base text-colortext hover:cursor-pointer">+</span>
-                                                <span class="text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                                <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
+                                                <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
                                             </div>
                                         </div>
                                     </div>
@@ -408,10 +419,10 @@
                                     @csrf
                                     <label for="avatar" class="group">
                                         <div id="bg-avatar" class="relative  w-[186px] flex justify-center h-[186px] bg-[#E8E8E8] rounded-full border-[2px] hover:cursor-pointer">
-                                            @if (empty($setting->SettingGeneral->avatar))
+                                            @if (empty($setting->avatar->avatar))
                                                 <img id="output" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
                                             @else
-                                                <img id="output" src="{{ asset('storage/Setting/avatar/'.$setting->SettingGeneral->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                                <img id="output" src="{{ asset('storage/Setting/avatar/'.$setting->avatar->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
 
                                             @endif
 
@@ -421,21 +432,10 @@
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4.3125 6.75C4.3125 5.40381 5.40381 4.3125 6.75 4.3125C8.09619 4.3125 9.1875 5.40381 9.1875 6.75C9.1875 8.09619 8.09619 9.1875 6.75 9.1875C5.40381 9.1875 4.3125 8.09619 4.3125 6.75ZM6.75 5.4375C6.02514 5.4375 5.4375 6.02514 5.4375 6.75C5.4375 7.47486 6.02514 8.0625 6.75 8.0625C7.47486 8.0625 8.0625 7.47486 8.0625 6.75C8.0625 6.02514 7.47486 5.4375 6.75 5.4375Z" fill="white"/>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2487 9.3319C11.4635 9.13865 11.7897 9.13946 12.0034 9.33378L16.1284 13.0838C16.3583 13.2928 16.3752 13.6485 16.1662 13.8784C15.9573 14.1082 15.6015 14.1252 15.3717 13.9162L11.6231 10.5085L8.25133 13.5431C8.04126 13.7322 7.72354 13.736 7.50896 13.5521L5.22656 11.5957L2.58753 13.575C2.339 13.7614 1.98643 13.711 1.80003 13.4625C1.61364 13.214 1.664 12.8614 1.91253 12.675L4.91253 10.425C5.12345 10.2668 5.41593 10.2763 5.6161 10.4479L7.86598 12.3764L11.2487 9.3319Z" fill="white"/>
                                                 </svg>
-                                            </div>
-    
-                                            {{-- <button class="flex justify-center items-center px-5 w-[99px] h-6 bg-palet rounded space-x-1 hover:cursor-pointer absolute top-[45%]">
-                                                <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 4.625C10.2071 4.625 10.375 4.79289 10.375 5V9.5C10.375 9.70711 10.2071 9.875 10 9.875H1C0.792893 9.875 0.625 9.70711 0.625 9.5V5.00208C0.625 4.79497 0.792893 4.62708 1 4.62708C1.20711 4.62708 1.375 4.79497 1.375 5.00208V9.125H9.625V5C9.625 4.79289 9.79289 4.625 10 4.625Z" fill="#3BD7CF"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.23483 0.234835C5.38128 0.0883883 5.61872 0.0883883 5.76517 0.234835L8.01516 2.48483C8.16161 2.63128 8.16161 2.86872 8.01516 3.01517C7.86872 3.16161 7.63128 3.16161 7.48484 3.01517L5.5 1.03033L3.51517 3.01517C3.36872 3.16161 3.13128 3.16161 2.98483 3.01517C2.83839 2.86872 2.83839 2.63128 2.98483 2.48483L5.23483 0.234835Z" fill="#3BD7CF"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.49805 0.125C5.70515 0.125 5.87305 0.292893 5.87305 0.5V7C5.87305 7.20711 5.70515 7.375 5.49805 7.375C5.29094 7.375 5.12305 7.20711 5.12305 7V0.5C5.12305 0.292893 5.29094 0.125 5.49805 0.125Z" fill="#3BD7CF"/>
-                                                </svg> 
-                                                <span class="overview-send-job text-hover">Upload</span>
-                                            </button> --}}
-                            
+                                            </div>                           
                                         </div>
                                     </label>
                                     <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
-
                                 </form>
                             </div>
                             <div class="flex mt-[51px]"></div>

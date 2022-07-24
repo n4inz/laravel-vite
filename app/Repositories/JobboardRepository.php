@@ -61,15 +61,16 @@ class JobboardRepository
             ]);
 
         }
-
-  
-
-        foreach ($request->language as $keys => $lang) {
-            JobModelsLanguages::create([
-                'language' => $request->language[$keys],
-                'job_models_id' => $jobs->id,
-            ]);
+ 
+        if(isset($request->language)){
+            foreach ($request->language as $keys => $lang) {
+                JobModelsLanguages::create([
+                    'language' => $request->language[$keys],
+                    'job_models_id' => $jobs->id,
+                ]);
+            }
         }
+
 
         JobModelsAvailabiltyDays::create([
             'monday' => $request->monday,

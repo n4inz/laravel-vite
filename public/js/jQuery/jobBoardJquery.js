@@ -31,25 +31,8 @@ $( document ).ready(function() {
 });
 
 
-function potensial_client(){
-    const input = `<input type="hidden" name="status" value="potential_clients">`;
-    $('.status').html(input);
- }
- function interviewing(){
-    const input = `<input type="hidden" name="status" value="interviewing">`;
-    $('.status').html(input);
- }
- function trialing(){
-    const input = `<input type="hidden" name="status" value="trialing">`;
-    $('.status').html(input);
- }
- function completed(){
-    const input = `<input type="hidden" name="status" value="completed">`;
-    $('.status').html(input);
- }
-
  function detail(id){
-    $.ajax({
+    $.ajax({ 
         type:'GET',
         // url: '{{ route("jobboard.detail_match_talent", ["id" => '+data+']) }}',
         url:'/detail-match-talent/'+id,

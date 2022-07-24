@@ -17,11 +17,10 @@
                success:function(data){
                 if(data.status == 200){
                     window.location.replace('{{ env("URI") }}'+data.domain+'{{ App\Providers\RouteServiceProvider::HOME }}');
-
                 }
-                if(data.status == 401){
-                    window.location.replace('{{ env("URI") }}{{ env("DOMAIN") }}')
-                }
+                    if(data.status == 401){
+                        window.location.href = "{{ route('fail') }}";
+                    }
                }
         });
     });

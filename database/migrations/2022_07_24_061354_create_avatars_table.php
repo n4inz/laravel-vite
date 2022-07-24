@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('setting_generals', function (Blueprint $table) {
+        Schema::create('avatars', function (Blueprint $table) {
             $table->id();
-            $table->string('agency_name');
-            $table->string('url_ending_legal');
-            $table->string('company_description');
+            $table->string('avatar')->nullable();
             $table->unsignedBigInteger('users_id');
-            $table->timestamps();
-
             $table->foreign('users_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting_generals');
+        Schema::dropIfExists('avatars');
     }
 };

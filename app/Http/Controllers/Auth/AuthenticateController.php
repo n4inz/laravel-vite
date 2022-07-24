@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Spatie\Multitenancy\Models\Tenant;
 
 
@@ -26,7 +27,7 @@ class AuthenticateController extends Controller
     {
         $domain = User::with('tenants')->where('email' , request()->email)->first();
         if(empty($domain)){
-            return redirect()->back()->with('messages', 'Credensial not found');
+            return redirect()->back()->with('Failed', 'Username Or Password Is Wrong');
         }
         $this->create_credentials();
         return redirect()->to(env('URI').$domain->tenants->domain.'/tenancy');
@@ -52,8 +53,7 @@ class AuthenticateController extends Controller
         $login->truncate();
         return response()->json([
             'status' => 401,
-        ]);  
-
+        ]); 
     }
 
 
@@ -66,7 +66,7 @@ class AuthenticateController extends Controller
     {
        
         $request->validate([
-            'sub_domain' => 'required|unique:tenants,domain',
+            'domain' => 'required|unique:tenants,domain',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:6',
             'password_confirmation' => 'required_with:password|same:password|min:6'
@@ -91,6 +91,11 @@ class AuthenticateController extends Controller
 
         return redirect()->back()->withErrors('Error', 'Domain is exists');
        
+    }
+
+    public function fail()
+    {
+        return redirect()->route('login')->with('Failed', 'Username Or Password Is Wrong');
     }
 
     public function logout(Request $request)

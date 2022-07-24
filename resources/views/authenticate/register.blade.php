@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    <script src="{{ asset('js/jQuery.js') }}"></script>
 </head>
 <body class="bg-bgbody font-roboto ">
     <main>
@@ -22,66 +23,46 @@
                     <img src="{{ asset('images/bg-1.png') }}" alt="">
                 </div>
             </div>
-            <!--
-            <div class="mt-[61px] pl-[58px] w-[680px]">
-                <span class="overview-send-title text-palet w-[650px] text-center">Register For Agency</span>
-                    <form action="{{ route('register.store') }}" method="POST">
-                        @csrf
-                        <div class="mt-10 flex space-x-4">
-                            <div>
-                                <label for="first-name" class="block overview-modal-add-talent-text text-[#222222] mb-2">Account</label>
-                                <div class="flex items-center justify-center w-[327px] h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                                    <input name="email" type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
-                                </div>
-                            </div>
-                            <div>
-                                <label for="last-name" class="invisible block overview-modal-add-talent-text text-[#222222] mb-2">Last Name</label>
-                                <div class="flex items-center justify-center w-[327px] h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                                    <input name="sub_domain" type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Subdomain">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-8 w-full">
-                            <label for="" class="block overview-modal-add-talent-text text-[#222222] mb-2">Password</label>
-                            <div class="flex items-center w-[670px] h-10 rounded border border-[#CCD3DC]">
-                                <input name="password" type="password" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password">
-                            </div>
-                            <div class="flex items-center w-[670px] h-10 rounded border border-[#CCD3DC] mt-[10px]">
-                                <input name="password_confirmation" type="password" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password Confirmation">
-                            </div>
-                        </div>
-                      
-                        {{-- <input type="submit" class="bg-palet" value="Register"> --}}
-        
-                        <button style="background-color: #3BD7CF;" type="submit" class="w-[670px] h-10 rounded-lg mt-20 mb-8">
-                            <span class="overview-talent-modal-title text-white">Register</span>
-                        </button>
-                    </form>
-            </div>
-        -->
             <div class="mt-[61px] pl-[58px] w-[680px] flex flex-col items-center">
                 <span class="overview-send-title text-palet w-[650px] text-center">Register For Agency</span>
                 <form action="{{ route('register.store') }}" method="POST">
                     @csrf
                     <div class="mt-10 w-[27rem]">
-                        <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                            <input type="email" name="email" value="{{ old('email') }}" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Email">
+                        <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-full h-10 border rounded text-[#222222]">
+                            <input type="email" name="email" value="{{ old('email') }}" id="first-name" class="{{ $errors->has('email') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder="Email">
                         </div>
+                        @if($errors->has('email'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
+                        @endif
                     </div>
                     <div class="mt-4 w-[27rem]">
-                        <div class="flex items-center justify-center w-full h-10 border border-[#CCD3DC] rounded text-[#222222]">
-                            <input type="text" name="sub_domain" value="{{ old('sub_domain') }}" id="sub_domain" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Subdomain">
+                        <div class="flex">
+                            <div class="{{ $errors->has('domain') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-full h-10 border rounded-l border-[#CCD3DC] text-[#222222]">
+                                <input type="text" name="sub_domain" value="{{ old('sub_domain') }}" class="{{ $errors->has('domain') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} sub_domain overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder="Subdomain">
+                            </div>
+                            <div class="{{ $errors->has('domain') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-full h-10 border-t border-b border-r rounded-r border-[#CCD3DC] bg-gray-100  text-gray-500">
+                                <input readonly type="text" name="domain" value="{{ old('domain') }}" class="{{ $errors->has('domain') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} domain bg-gray-100 overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder=".{{ env('DOMAIN') }}">
+                            </div>
                         </div>
+                        @if($errors->has('domain'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('domain') }}</p>
+                        @endif
                     </div>
                     <div class="mt-4 w-[27rem]">
-                        <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
-                            <input type="password" name="password" id="password" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password">
+                        <div class="{{ $errors->has('password') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                            <input type="password" name="password" id="password" class="{{ $errors->has('password') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder="Password">
                         </div>
+                        @if($errors->has('password'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password') }}</p>
+                        @endif
                     </div>
                     <div class="mt-4 w-[27rem]">
-                        <div class="flex items-center w-full h-10 rounded border border-[#CCD3DC]">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="Password confirmation">
+                        <div class="{{ $errors->has('password_confirmation') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center w-full h-10 rounded border border-[#CCD3DC]">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="{{ $errors->has('password_confirmation') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder="Password confirmation">
                         </div>
+                        @if($errors->has('password_confirmation'))
+                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password_confirmation') }}</p>
+                        @endif
                     </div>
                     <div class="w-[27rem] mt-4">
                         <a class="float-right text-palet opacity-70"  href="{{ route('login') }}">Login</a>
@@ -93,5 +74,13 @@
             </div>
         </div>
     </main>
+    <script>
+        $('.sub_domain').keyup(function(){
+           const sub_domain = $(this).val()+'.{{ env('DOMAIN') }}';
+
+           $('.domain').val(sub_domain)
+        })
+
+    </script>
 </body>
 </html>
