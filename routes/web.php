@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Comments;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobboardController;
@@ -29,6 +30,9 @@ Route::get('/test/replace', function(){
     return view('testing.replace');
 });
 
+Route::get('/pesan', function(){
+    Comments::dispatch('pesan');
+});
 
 Route::get('/test/login', function(){
     return auth()->user();
@@ -59,6 +63,7 @@ Route::middleware(['tenant', 'auth'])->group(function(){
     Route::post('/send-email-talent', [JobboardController::class,'send_email'])->name('jobboard.send_email');
     Route::post('upload-file', [JobboardController::class, 'upload_file'])->name('jobboard.upload_file');
     Route::get('download-file/{file}', [JobboardController::class, 'download_file'])->name('jobboard.download_file');
+    Route::post('comment', [JobboardController::class, 'comment'])->name('jobboard.comment');
 
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_talent.talent');

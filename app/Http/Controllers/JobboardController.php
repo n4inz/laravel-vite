@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Comments;
 use App\Http\Requests\JobsStoreRequest;
 use App\Http\Traits\ImageUpload;
 use App\Models\Client;
 use App\Models\JobModels;
+use App\Models\JobModelsComment;
 use App\Models\JobModelsFile;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JobboardController extends Controller
@@ -56,10 +59,11 @@ class JobboardController extends Controller
         $dataTalent = [];
         $talentNeed = [];
 
-        $result = JobModels::with(['match_talent', 'languages', 'availability', 'task', 'client', 'file' => function ($query) {
+        $result = JobModels::with(['comment','match_talent', 'languages', 'availability', 'task', 'client', 'file' => function ($query) {
             $query->limit(5);
         }])->where('id_unique', $id_unique)->firstOrFail();
 
+    
         foreach ($result->match_talent as $match) {
             $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->user()->id)->with('talent')->get();
             if ($talent->count() > 0) {
@@ -118,6 +122,38 @@ class JobboardController extends Controller
         ]);
         $this->jobboardRepository->email($request);
         return redirect()->back()->with('success', 'Send email to talent Succesfuly');
+    }
+
+    public function comment(Request $request)
+    {
+        $request->validate([
+            'comment' => 'required',
+            'job_models_id' => 'required|numeric'
+        ]);
+
+       $created =  JobModelsComment::create([
+            'comment' => $request->comment,
+            'job_models_id' => $request->job_models_id,
+            'users_id' => auth()->user()->id
+        ]);
+
+
+
+        $time = Carbon::parse($created->created_at)->format('g:i A');
+        $date = Carbon::parse($created->created_at)->format('d M Y');
+
+        $data = [
+            'comment' => $request->comment,
+            'avatar' => asset('storage/Setting/avatar/'.auth()->user()->avatar->avatar),
+            'time' =>  $date.' - '.$time,
+            'id' => $created->id,
+            'users_id' => auth()->user()->id,
+            'job_models_id' => $request->job_models_id,
+        ];
+
+        Comments::dispatch($data);
+
+        return 'berhsail';
     }
 
     public function send()

@@ -42,4 +42,9 @@ class JobModels extends Model
     {
         return $this->hasMany(JobModelsFile::class, 'job_models_id');
     }
+
+    public function comment()
+    {
+        return $this->hasMany(JobModelsComment::class, 'job_models_id');
+    }
 }
