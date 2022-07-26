@@ -156,7 +156,9 @@ class JobboardController extends Controller
 
         Comments::dispatch($data);
 
-        return response()->json($data);
+        return response()->json([
+            'status' => 'success'
+        ],200);
     }
 
     public function reply(Request $request)
@@ -190,7 +192,9 @@ class JobboardController extends Controller
 
         ReplyComment::dispatch($data);
 
-        return 'berhasil';
+        return response()->json([
+            'status' => 'success'
+        ],200);
     }
 
     public function send()
