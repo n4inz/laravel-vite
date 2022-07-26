@@ -15,4 +15,9 @@ class JobModelsComment extends Model
     {
         return $this->belongsTo(JobModels::class, 'job_models_id');
     }
+
+    public function job_models_comments_reply()
+    {   
+        return $this->hasMany(JobModelsCommentsReply::class, 'job_models_comments_id');
+    }
 }

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\Comments;
+use App\Events\ReplyComment;
 use App\Http\Requests\JobsStoreRequest;
 use App\Http\Traits\ImageUpload;
 use App\Models\Client;
 use App\Models\JobModels;
 use App\Models\JobModelsComment;
+use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
@@ -59,11 +61,13 @@ class JobboardController extends Controller
         $dataTalent = [];
         $talentNeed = [];
 
-        $result = JobModels::with(['comment','match_talent', 'languages', 'availability', 'task', 'client', 'file' => function ($query) {
+        $result = JobModels::with(['comment' => function ($query){
+            $query->with('job_models_comments_reply');
+        },'match_talent', 'languages', 'availability', 'task', 'client', 'file' => function ($query) {
             $query->limit(5);
         }])->where('id_unique', $id_unique)->firstOrFail();
 
-    
+        // return $result;
         foreach ($result->match_talent as $match) {
             $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->user()->id)->with('talent')->get();
             if ($talent->count() > 0) {
@@ -132,19 +136,18 @@ class JobboardController extends Controller
         ]);
 
        $created =  JobModelsComment::create([
+            'name' =>  auth()->user()->SettingGeneral->agency_name ?? 'Your agency',
             'comment' => $request->comment,
+            'avatar' => auth()->user()->avatar->avatar ?? 'dummy.png',
             'job_models_id' => $request->job_models_id,
             'users_id' => auth()->user()->id
         ]);
 
-
-
         $time = Carbon::parse($created->created_at)->format('g:i A');
         $date = Carbon::parse($created->created_at)->format('d M Y');
-
         $data = [
             'comment' => $request->comment,
-            'avatar' => asset('storage/Setting/avatar/'.auth()->user()->avatar->avatar),
+            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
             'time' =>  $date.' - '.$time,
             'id' => $created->id,
             'users_id' => auth()->user()->id,
@@ -153,7 +156,41 @@ class JobboardController extends Controller
 
         Comments::dispatch($data);
 
-        return 'berhsail';
+        return response()->json($data);
+    }
+
+    public function reply(Request $request)
+    {
+        $request->validate([
+            'reply_comment' => 'required'
+        ]);
+
+        $created = JobModelsCommentsReply::create([
+            'name' =>  auth()->user()->SettingGeneral->agency_name ?? 'Your agency',
+            'comment' => $request->reply_comment,
+            'avatar' => auth()->user()->avatar->avatar ?? 'dummy.png',
+            'job_models_comments_id' => $request->job_comments_id,
+            'job_models_id' => $request->job_models_id,
+            'users_id' => auth()->user()->id
+        ]);
+
+        $time = Carbon::parse($created->created_at)->format('g:i A');
+        $date = Carbon::parse($created->created_at)->format('d M Y');
+
+        $data = [
+            'name' => auth()->user()->SettingGeneral->agency_name ?? 'Your agency',
+            'reply' => $request->reply_comment,
+            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
+            'time' =>  $date.' - '.$time,
+            'id_comment' => $request->job_comments_id,
+            'users_id' => auth()->user()->id,
+            'job_models_id' => $request->job_models_id,
+        ];
+
+
+        ReplyComment::dispatch($data);
+
+        return 'berhasil';
     }
 
     public function send()

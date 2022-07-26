@@ -64,6 +64,7 @@ Route::middleware(['tenant', 'auth'])->group(function(){
     Route::post('upload-file', [JobboardController::class, 'upload_file'])->name('jobboard.upload_file');
     Route::get('download-file/{file}', [JobboardController::class, 'download_file'])->name('jobboard.download_file');
     Route::post('comment', [JobboardController::class, 'comment'])->name('jobboard.comment');
+    Route::post('reply', [JobboardController::class, 'reply'])->name('jobboard.reply');
 
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_talent.talent');

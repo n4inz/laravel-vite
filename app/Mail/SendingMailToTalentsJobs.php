@@ -28,6 +28,6 @@ class SendingMailToTalentsJobs extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from ItSolutionStuff.com')->view('email.jobboards.sendEmailToTalent');
+        return $this->subject('Mail from Ayiconnection.com')->view('email.jobboards.sendEmailToTalent');
     }
 }
