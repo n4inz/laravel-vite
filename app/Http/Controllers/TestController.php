@@ -38,4 +38,9 @@ class TestController extends Controller
     {
         return $request;
     }
+
+    public function drag()
+    {
+        return view('testing.drag');
+    }
 }

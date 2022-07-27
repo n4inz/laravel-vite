@@ -22,17 +22,10 @@ use Illuminate\Support\Facades\Route;
 // Testing
 Route::get('test', [TestController::class, 'welcome']);
 Route::get('test-multiselect', [TestController::class, 'test_multi_select'])->name('test.multi_select');
-Route::post('test-multiselect-store', [TestController::class, 'test_multi_select_store'])->name('test.multi_select_store');
-Route::get('test/multi-select', function(){
-    return view('testing.multi-select1');
-});
-Route::get('/test/replace', function(){
-    return view('testing.replace');
-});
+Route::get('drag', [TestController::class, 'drag'])->name('test.drag');
 
-Route::get('/pesan', function(){
-    Comments::dispatch('pesan');
-});
+Route::post('test-multiselect-store', [TestController::class, 'test_multi_select_store'])->name('test.multi_select_store');
+
 
 Route::get('/test/login', function(){
     return auth()->user();
@@ -58,6 +51,7 @@ Route::middleware(['tenant', 'auth'])->group(function(){
     Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
     Route::get('/detail-match-talent/{id}', [JobboardController::class, 'detail_match_talent'])->name('jobboard.detail_match_talent');
     Route::get('/overview/{id_unique}', [JobboardController::class, 'overview'])->name('jobboard.overview');
+    Route::post('/status',[JobboardController::class, 'status'])->name('jobboard.status');
     Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
     Route::post('/job-store', [JobboardController::class,'jobs_store'])->name('jobboard.jobs_store');
     Route::post('/send-email-talent', [JobboardController::class,'send_email'])->name('jobboard.send_email');

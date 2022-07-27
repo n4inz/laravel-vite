@@ -49,6 +49,29 @@ class JobboardController extends Controller
         ]);
     }
 
+    public function status(Request $request)
+    {
+       
+        $request->validate([
+            'id' => 'required',
+            'status' => 'required'
+        ]);
+
+        $data = JobModels::where('id' , $request->id)->update([
+            'status' => $request->status
+        ]);
+
+        return response()->json([
+            'id' => $request->id,
+            'status' => $request->status,
+            'count_potential_clients' => JobModels::where('status', 'potential_clients')->where('users_id', auth()->user()->id)->count(),
+            'count_interviewing' => JobModels::where('status', 'interviewing')->where('users_id', auth()->user()->id)->count(),
+            'count_trialing' => JobModels::where('status', 'trialing')->where('users_id', auth()->user()->id)->count(),
+            'count_completed' => JobModels::where('status', 'completed')->where('users_id', auth()->user()->id)->count(),
+        ]);
+
+    }
+
     public function jobs_store(JobsStoreRequest $request)
     {
         $this->jobboardRepository->created($request);

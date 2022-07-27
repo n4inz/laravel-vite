@@ -9,6 +9,7 @@
     <title>Dashboard</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link  href="{{ asset('css/flowbite.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('css/jQueryUi/jquery-ui.css') }}"> --}}
    
     {{-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" /> --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,6 +98,7 @@
       
     </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
+    <script src="{{ asset('js/jQuery/jQueryUi/jquery-ui.js') }}"></script>
 </head>
 <body class="bg-backround font-roboto ">
     @include('layouts.navbar')
