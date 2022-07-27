@@ -22,7 +22,7 @@
                         </div>
                         <div class="w-72 h-8 border rounded-md">
     
-                            <input type="text"  class="text-colortext text-xs border-none bg-transparent outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search for tasks, projects, ..." required>
+                            <input type="text"  class="search_task text-colortext text-xs border-none bg-transparent outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search for tasks, projects, ..." required>
                         </div>
                     </div>
                 </div>
@@ -1055,7 +1055,6 @@
     @endif
     <script>
         var status , id;
-
         $(function(){
             $("#potential_clients, #interviewing, #trialing, #completed")
             .sortable({
