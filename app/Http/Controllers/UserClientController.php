@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\TalentRequest;
+use App\Models\Client;
 use App\Models\Talents;
 use App\Repositories\UserClientRepository;
 use App\Repositories\UserTalentRepository;
@@ -22,7 +23,13 @@ class UserClientController extends Controller
     }
     public function client()
     {
-        return view('user.user_client');
+        $client = Client::where('users_id', auth()->user()->id)->get();
+        return view('user.client.user_client' , compact('client'));
+    }
+
+    public function client_created()
+    {
+        return view('user.client.user_client_created');
     }
 
     public function client_store(ClientRequest $request)

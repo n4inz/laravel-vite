@@ -114,7 +114,33 @@
                         </div>
 
                         {{-- left --}}
-                        <div class="w-[300px] xl:w-[30%] ">
+                        <div class="w-[300px] xl:w-[30%] space-y-2">
+                            <div class="bg-bgbody rounded ">
+                                <div class="flex justify-between px-4 pt-[18.5px]">
+                                    <div class="flex items-center space-x-2 ">
+                                        <div class="w-2 h-6 bg-palet rounded-sm"></div>
+                                        <span class="text-[#222222] user-create-client-title">Avatar</span>
+                                    </div>
+                                </div>
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-4 mt-6 flex items-center justify-center">
+                                    {{-- Upload --}}
+                                    <label for="avatar" class="group">
+                                        <div id="bg-avatar" class="relative  w-[186px] flex justify-center h-[186px] bg-[#E8E8E8] rounded-full border-[2px] hover:cursor-pointer">
+                                            <img id="output" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                            <div class="absolute -bottom-3 w-9 h-9 bg-palet rounded-full flex items-center justify-center">
+                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.6875 3.375C1.6875 2.44302 2.44302 1.6875 3.375 1.6875H14.625C15.557 1.6875 16.3125 2.44303 16.3125 3.375V14.625C16.3125 15.557 15.557 16.3125 14.625 16.3125H3.375C2.44303 16.3125 1.6875 15.557 1.6875 14.625V3.375ZM3.375 2.8125C3.06434 2.8125 2.8125 3.06434 2.8125 3.375V14.625C2.8125 14.9357 3.06434 15.1875 3.375 15.1875H14.625C14.9357 15.1875 15.1875 14.9357 15.1875 14.625V3.375C15.1875 3.06434 14.9357 2.8125 14.625 2.8125H3.375Z" fill="white"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.3125 6.75C4.3125 5.40381 5.40381 4.3125 6.75 4.3125C8.09619 4.3125 9.1875 5.40381 9.1875 6.75C9.1875 8.09619 8.09619 9.1875 6.75 9.1875C5.40381 9.1875 4.3125 8.09619 4.3125 6.75ZM6.75 5.4375C6.02514 5.4375 5.4375 6.02514 5.4375 6.75C5.4375 7.47486 6.02514 8.0625 6.75 8.0625C7.47486 8.0625 8.0625 7.47486 8.0625 6.75C8.0625 6.02514 7.47486 5.4375 6.75 5.4375Z" fill="white"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2487 9.3319C11.4635 9.13865 11.7897 9.13946 12.0034 9.33378L16.1284 13.0838C16.3583 13.2928 16.3752 13.6485 16.1662 13.8784C15.9573 14.1082 15.6015 14.1252 15.3717 13.9162L11.6231 10.5085L8.25133 13.5431C8.04126 13.7322 7.72354 13.736 7.50896 13.5521L5.22656 11.5957L2.58753 13.575C2.339 13.7614 1.98643 13.711 1.80003 13.4625C1.61364 13.214 1.664 12.8614 1.91253 12.675L4.91253 10.425C5.12345 10.2668 5.41593 10.2763 5.6161 10.4479L7.86598 12.3764L11.2487 9.3319Z" fill="white"/>
+                                                </svg>
+                                            </div>                           
+                                        </div>
+                                    </label>
+                                    <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
+                                </div>
+                                <div class="flex mt-[51px]"></div>
+                            </div>
                             {{-- Attached file --}}
                             <div class="bg-bgbody rounded h-[249px]">
                                 <div class="flex justify-between px-4 pt-[18.5px]">
@@ -149,79 +175,23 @@
             </div>
         </div>
     </article>
-    <!--
     <script>
-        $('#attached_file_user').change(function(){  
-          var formData = new FormData($("#uploadForm")[0]);
-          $.ajax({
-            url: $('#uploadForm').attr("action"),
-            type: 'POST',
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
+        var loadFile = function(event) {
+          var output = document.getElementById('output');
+          output.src = URL.createObjectURL(event.target.files[0]);
+          output.onload = function() {
+            URL.revokeObjectURL(output.src)
+          }
 
-            beforeSend : function(){
-                // const html = `<div class="mb-5">
-                //                 <svg role="status" class="w-20 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                //                   <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                //                   <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                //                 </svg>
-                //               </div>
-                //               <div class="w-2/4 bg-gray-200 rounded-full dark:bg-gray-700">
-                //                 <div id="progress-bar" class="bg-green-600 text-sm font-semibold text-blue-100 text-center p-0.5 leading-none rounded-full" > 85%</div>
-                //               </div>`;
-                // $('#template-img').html(html)
-            },
+        //   const btn = `<button class="bg-palet invisible group-hover:animate-pulse group-hover:visible h-6 absolute rounded-md p-4 top-1/2 bottom-1/2 flex items-center justify-center">
+        //                     <span class="text-sm text-gray-50">Upload</span>
+        //                 </button>`;
+    
+        //   $('#bg-avatar').append(btn);
+        };
 
-            xhr: function(){
-            //upload Progress
-              var xhr = $.ajaxSettings.xhr();
-              if (xhr.upload) {
-                xhr.upload.addEventListener('progress', function(event) {
-
-                var percent = 0;
-                var position = event.loaded || event.position;
-                var total = event.total;
-                if (event.lengthComputable)
-                {
-                percent = Math.ceil(position / total * 100);
-                }
-                
-                $("#progress-bar").css("width", + percent +"%");
-                $("#progress-bar").text(percent +"%");
-                }, true);
-              }
-              return xhr;
-            },
-            success: function (mdata) {
-              const html = `<div id="uplod_image" class="flex justify-center p-5 shadow rounded-lg overflow-x-auto max-h-[29rem] h-screen bg-white">
-                              <div class="w-1/2  text-center mx-auto m-10">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 mb-5 text-green-600 opacity-70 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="text-green-600 font-semibold uppercase">successfully</span>
-                                  <div class="flex mt-10">
-                                    <div class="relative w-full">
-                                        <input readonly type="search" id="pilih" class="block p-2.5 w-full z-20 text-sm text-gray-400 text-center bg-gray-50 rounded-lg  border-2 border-gray-100 outline-none " value="`+mdata.path+`" required>
-                                        <button title="Copy" onclick="copy_text()" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gray-100 rounded-r-lg  border-2 border-gray-100 hover:bg-gray-200 focus:outline-none ">
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                                          </svg>
-                                        </button>
-                                    </div>
-                                  </div>
-                              </div>
-                            </div>`;
-
-              $('#load').html(html)
-              
-            },
-          });
-        });
 
     </script>
--->
 </main>
 
 @endsection

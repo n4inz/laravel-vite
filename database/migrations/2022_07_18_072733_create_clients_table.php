@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('languages');
             $table->text('note');
-
+            $table->string('avatar')->nullable();
             $table->unsignedBigInteger('users_id');
 
 
