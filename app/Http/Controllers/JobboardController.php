@@ -11,6 +11,7 @@ use App\Models\JobModels;
 use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
+use App\Models\JobModelsTask;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
@@ -70,6 +71,13 @@ class JobboardController extends Controller
             'count_completed' => JobModels::where('status', 'completed')->where('users_id', auth()->user()->id)->count(),
         ]);
 
+    }
+
+    public function search_job(Request $request)
+    {
+        return response()->json([
+            'value' => $this->jobboardRepository->search_job($request),
+        ]);
     }
 
     public function jobs_store(JobsStoreRequest $request)
@@ -140,6 +148,11 @@ class JobboardController extends Controller
             'data' => $data,
         ], 200);
 
+    }
+
+    public function search_task(Request $request)
+    {                          
+        return $this->jobboardRepository->search_task($request);    
     }
 
     public function send_email(Request $request)

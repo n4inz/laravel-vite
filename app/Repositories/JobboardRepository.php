@@ -7,7 +7,7 @@ use App\Models\JobModels;
 use App\Models\JobModelsAvailabiltyDays;
 use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
-use App\Models\JobModelsSubCategorys;
+// use App\Models\JobModelsSubCategorys;
 use App\Models\JobModelsTask;
 
 class JobboardRepository 
@@ -70,8 +70,6 @@ class JobboardRepository
                 ]);
             }
         }
-
-
         JobModelsAvailabiltyDays::create([
             'monday' => $request->monday,
             'tuesday' => $request->tuesday,
@@ -122,5 +120,55 @@ class JobboardRepository
                 return $load;
             break;
        }
+    }
+
+    public function search_job($request)
+    {
+        return JobModels::orWhere('status', 'like', "%" . $request->search . "%")
+                        ->where('users_id', auth()->user()->id )
+                        ->orWhere('id_unique', 'like', "%" . $request->search . "%")
+                        ->where('users_id', auth()->user()->id )
+                        ->orWhere('description', 'like', "%" . $request->search . "%")
+                        ->where('users_id', auth()->user()->id )
+                        ->orWhere('title', 'like', "%" . $request->search . "%")
+                        ->where('users_id', auth()->user()->id )
+                        ->get();
+
+        // if(isset($request->search)){
+        //     $search = JobModels::orWhere('status', 'like', "%" . $request->search . "%")
+        //     ->where('users_id', auth()->user()->id )
+        //     ->orWhere('id_unique', 'like', "%" . $request->search . "%")
+        //     ->where('users_id', auth()->user()->id )
+        //     ->orWhere('description', 'like', "%" . $request->search . "%")
+        //     ->where('users_id', auth()->user()->id )
+        //     ->orWhere('title', 'like', "%" . $request->search . "%")
+        //     ->where('users_id', auth()->user()->id )
+        //     ->get();
+    
+        //     return $search;
+        // }else{
+        //     $search = JobModels::where('users_id', auth()->user()->id)->get();
+        //     return $search;
+        // }
+    }
+
+    public function search_task($request)
+    {
+        return JobModelsTask::orWhere('task' , 'like', "%" . $request->search_task . "%")
+        ->where([
+            ['users_id', auth()->user()->id], 
+            ['job_models_id' , $request->job_models_id],
+        ])
+        ->orWhere('status' , 'like', "%" . $request->search_task . "%")
+        ->where([
+            ['users_id', auth()->user()->id], 
+            ['job_models_id' , $request->job_models_id],
+        ])
+        ->orWhere('assignee' , 'like', "%" . $request->search_task . "%")
+        ->where([
+            ['users_id', auth()->user()->id], 
+            ['job_models_id' , $request->job_models_id],
+        ])
+        ->get();   
     }
 }

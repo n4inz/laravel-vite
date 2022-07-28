@@ -772,7 +772,7 @@
                                     </a>                                 
                                 @endforeach
                                 {{-- Button --}}
-                                <button class="flex items-center justify-center w-[268px] h-[42px] bg-palet rounded-md">
+                                <button class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md">
                                     <span class="overview-attechment-btn-text">View more</span> 
                                 </button>
                             </div>
@@ -865,11 +865,11 @@
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
                                         </svg>
                                     </div>
-                                    <input type="text" id="simple-search" class="bg-gray-200 border-none  text-colortext text-xs rounded-lg w-full pl-10 p-2 outline-none focus:ring-0" placeholder="Search name task" required>
+                                    <input type="text" class="search_task bg-gray-200 border-none  text-colortext text-xs rounded-lg w-full pl-10 p-2 outline-none focus:ring-0" placeholder="Search name task" required>
                                 </div>
                             </div>
                             <div class="mt-[30px] px-4">
-                                <table class="load-task" width="100%">
+                                <table width="100%">
                                     <tr>
                                         <td height="66px" width="12%">
 
@@ -884,34 +884,35 @@
                                             <span class="task-text">Assignee</span>
                                         </td>
                                     </tr>
-
-                                    @foreach ($result->task as $task)
-                                        <tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked{{ $task->id }}">
-                                            <td height="66px" width="12%">
-                                                <div class="flex items-center justify-center space-x-2">
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                    </svg>
-                                                    <input onclick="check({{ $task->id }})" {{ $task->status == 'Done' ? 'checked' : '' }} style="color: #3BD7CF" type="checkbox" value="{{ $task->id }}" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                </div>
-                                            </td>
-                                            <td height="66px" width="40%">
-                                                @if ($task->status == 'Done')
-                                                    <s class="task-text-body text-[#AFABAB]">{{ $task->task }}</s>                                                  
-                                                @endif
-                                                @if ($task->status == 'Inprogress')
-                                                    <span class="task-text-body text-[#222222]">{{ $task->task }}</span>
-                                                @endif
-                                            </td>
-                                            <td height="66px" width="25%">
-                                                <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $task->status }}</span>
-                                            </td>
-                                            <td height="66px">
-                                                <span class="task-text-body text-[#222222]">{{ $task->assignee }}</span>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    <tbody class="load-task">
+                                        @foreach ($result->task as $task)
+                                            <tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked{{ $task->id }}">
+                                                <td height="66px" width="12%">
+                                                    <div class="flex items-center justify-center space-x-2">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                        </svg>
+                                                        <input onclick="check({{ $task->id }})" {{ $task->status == 'Done' ? 'checked' : '' }} style="color: #3BD7CF" type="checkbox" value="{{ $task->id }}" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    </div>
+                                                </td>
+                                                <td height="66px" width="40%">
+                                                    @if ($task->status == 'Done')
+                                                        <s class="task-text-body text-[#AFABAB]">{{ $task->task }}</s>                                                  
+                                                    @endif
+                                                    @if ($task->status == 'Inprogress')
+                                                        <span class="task-text-body text-[#222222]">{{ $task->task }}</span>
+                                                    @endif
+                                                </td>
+                                                <td height="66px" width="25%">
+                                                    <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $task->status }}</span>
+                                                </td>
+                                                <td height="66px">
+                                                    <span class="task-text-body text-[#222222]">{{ $task->assignee }}</span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="px-4 mt-5">
@@ -1677,13 +1678,12 @@
             type: "POST",
             url: "{{ route('jobboard.upload_file') }}",
             enctype: 'multipart/form-data',
-            data: new FormData($('#upload-file')[0]), // The form with the file inputs.
+            data: new FormData($('#upload-file')[0]),
             processData: false,
             cache: false,
             contentType: false,   
             success: function (res) {
                 console.log(res)
-                // alert("Data Uploaded: ");
             }
         });
     })
@@ -1782,6 +1782,57 @@
             }
         });
     }
+
+    $('.search_task').keyup(function(){
+        const search_task = $(this).val();
+        const job_models_id = "{{ $result->id }}";
+        $.ajax({
+            type: "POST",
+            url: "{{ route('jobboard.search_task') }}",
+            data: {search_task, job_models_id,  _token: '{{ csrf_token() }}'},
+            success: function(res){
+                $('.load-task').html('');
+                res.map(function(val){
+                    let search_task, search_status ,search_asignee ;
+                    if(val.status == 'Done'){
+                        search_checked = `<input checked onclick="check(${val.id})" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >`;
+                        search_task = `<s class="task-text-body text-[#AFABAB]">${val.task}</a>`;
+                        search_status = `<span class="task-text-body text-palet">${val.status}</span>`;
+                        search_asignee = `<span class="task-text-body text-[#222222]">${val.assignee}</span>`;
+                    }else{
+                        search_checked = `<input onclick="check(${val.id})" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >`;
+                        search_task = `<span class="task-text-body text-[#222222]">${val.task}</span>`;
+                        search_status = `<span class="task-text-body text-colorStatusCard1">${val.status}</span>`;
+                        search_asignee = `<span class="task-text-body text-[#222222]">${val.assignee}</span>`;
+                    }
+                    const tmp_search = `<tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked${val.id}">
+                                                    <td height="66px" width="12%">
+                                                        <div class="flex items-center justify-center space-x-2">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                            </svg>
+                                                            ${search_checked}
+                                                        </div>
+                                                    </td>
+                                                    <td height="66px" width="40%">
+                                                        ${search_task}
+                                                    </td>
+                                                    <td height="66px" width="25%">
+                                                        ${search_status}
+                                                    </td>
+                                                    <td height="66px">
+                                                        ${search_asignee}
+                                                    </td>
+                                                </tr>`;
+    
+                    $('.load-task').append(tmp_search);
+                })
+
+                console.log(res)
+            }
+        })
+    })
 
 </script>
 

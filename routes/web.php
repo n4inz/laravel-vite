@@ -52,7 +52,12 @@ Route::middleware(['tenant', 'auth'])->group(function(){
     Route::get('/detail-match-talent/{id}', [JobboardController::class, 'detail_match_talent'])->name('jobboard.detail_match_talent');
     Route::get('/overview/{id_unique}', [JobboardController::class, 'overview'])->name('jobboard.overview');
     Route::post('/status',[JobboardController::class, 'status'])->name('jobboard.status');
+    Route::post('/search-job',[JobboardController::class, 'search_job'])->name('jobboard.search_job');
+
+
     Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');
+    Route::post('/search-task',[JobboardController::class, 'search_task'])->name('jobboard.search_task');
+
     Route::post('/job-store', [JobboardController::class,'jobs_store'])->name('jobboard.jobs_store');
     Route::post('/send-email-talent', [JobboardController::class,'send_email'])->name('jobboard.send_email');
     Route::post('upload-file', [JobboardController::class, 'upload_file'])->name('jobboard.upload_file');
