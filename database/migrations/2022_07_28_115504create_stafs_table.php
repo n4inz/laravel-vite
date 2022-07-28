@@ -13,19 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('stafs', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name')->nullable();
+            $table->string('full_name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->unsignedBigInteger('tenants_id');
+            $table->unsignedBigInteger('users_id');
             $table->timestamps();
-
-            // $table->foreign('tenants_id')
-            // ->references('id')->on('tenants')
-            // ->onDelete('cascade');
         });
     }
 
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('stafs');
     }
 };

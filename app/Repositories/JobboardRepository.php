@@ -9,6 +9,7 @@ use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
 // use App\Models\JobModelsSubCategorys;
 use App\Models\JobModelsTask;
+use App\Models\Talents;
 
 class JobboardRepository 
 {
@@ -84,11 +85,14 @@ class JobboardRepository
 
     public function email($request)
     {
+        $talent = [];
         foreach($request->talent_name as $key =>$val){
-            $details = ['email' => $request->talent_name[$key]];
-            SendMail::dispatch($details);
+            array_push($talent, $request->talent_name[$key]);
         }
 
+        // return $talent;
+        $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->id)->get();
+        SendMail::dispatch($request->email_client, $match_talent);
     }
 
     public function add_task($request)

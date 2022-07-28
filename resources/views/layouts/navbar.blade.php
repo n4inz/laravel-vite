@@ -55,12 +55,11 @@
             <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
                 <div class="py-3 px-4">
                     <span class="block text-sm text-gray-900 dark:text-white">
-                        @if (empty(auth()->user()->SettingGeneral->agency_name))
+                        @if (empty(auth()->user()->full_name))
                             Your Agency
                         @else
-                            {{ auth()->user()->SettingGeneral->agency_name }}
+                            {{ auth()->user()->full_name }}
                         @endif
-                        
                     </span>
                     <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->email }}</span>
                 </div>

@@ -8,7 +8,7 @@ use App\Models\Client;
 use App\Models\Talents;
 use App\Repositories\UserClientRepository;
 use App\Repositories\UserTalentRepository;
-
+use GuzzleHttp\Psr7\Request;
 
 class UserClientController extends Controller
 {
@@ -51,5 +51,15 @@ class UserClientController extends Controller
         
         $this->UserTalentRepository->created($request);
         return redirect()->back()->with('Success', 'Create Talent Successfuly');
+    }
+
+    public function staf()
+    {
+        return view('user.staf.staf');
+    }
+
+    public function staf_store(Request $request)
+    {
+
     }
 }

@@ -11,7 +11,6 @@ use App\Models\JobModels;
 use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
-use App\Models\JobModelsTask;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
@@ -157,8 +156,10 @@ class JobboardController extends Controller
 
     public function send_email(Request $request)
     {
+        // return $request->email_client;
         $request->validate([
             'talent_name' => 'required',
+            'email_client' => 'required'
         ]);
         $this->jobboardRepository->email($request);
         return redirect()->back()->with('success', 'Send email to talent Succesfuly');

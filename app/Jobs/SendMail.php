@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\SendingMailToTalentsJobs;
+use App\Mail\SendingMailToClientsJobs;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,16 +14,19 @@ use Illuminate\Support\Facades\Mail;
 class SendMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $details;
+    protected $email;
+    protected $match_talent;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($email, $match_talent)
     {
-        $this->details = $details;
+        $this->email = $email;
+        $this->match_talent = $match_talent;
+
     }
 
     /**
@@ -33,6 +36,8 @@ class SendMail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->details['email'])->send(new SendingMailToTalentsJobs);
+        // return $this->email;
+        
+        Mail::to($this->email)->send(new SendingMailToClientsJobs($this->match_talent));
     }
 }

@@ -99,6 +99,7 @@ class AllSeeder extends Seeder
             ]);
 
             $user = User::create([
+                'full_name' => $faker->name,
                 'email' => fake()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => Hash::make(123456),

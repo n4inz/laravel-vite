@@ -1391,7 +1391,7 @@
                                             <div class="flex items-center justify-between px-6 mb-4">
                                                 <div class="flex items-center space-x-2">
                                                     <div class="">
-                                                        <input id="send-email{{ $value->id }}" style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $value->email }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input id="send-email{{ $value->id }}" style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $value->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
                                                     <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->avatar) }}" alt="">
                                                     <div class="flex flex-col">
@@ -1412,6 +1412,7 @@
                                     <span class="overview-attechment-btn-text">Send</span>
                                 </button>                          
                             </div>
+                            <input type="hidden" name="email_client" value="{{ $result->client->email }}">
                         </form>
                     </div>
                 </div>
