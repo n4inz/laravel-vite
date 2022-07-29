@@ -44,6 +44,11 @@ Route::post('/login-store', [AuthenticateController::class, 'login_store'])->nam
 Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 
+// Login Staf
+Route::get('/login' , [AuthenticateController::class ,'staf'])->name('login.staf');
+
+Route::post('/login-staf' , [AuthenticateController::class ,'login_staf'])->name('login.staf_login');
+
 Route::middleware(['tenant', 'auth'])->group(function(){
     
     // Dashboard

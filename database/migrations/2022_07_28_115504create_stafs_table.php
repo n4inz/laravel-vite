@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('type');
+            $table->string('avatar');
             $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('tenants_id');
             $table->timestamps();
         });
     }

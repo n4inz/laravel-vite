@@ -11,7 +11,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Spatie\Multitenancy\Models\Tenant;
 
 
@@ -96,6 +95,34 @@ class AuthenticateController extends Controller
     public function fail()
     {
         return redirect()->route('login')->with('Failed', 'Username Or Password Is Wrong');
+    }
+
+    public function staf()
+    {
+        return view('authenticate.staf.login');
+    }
+
+    public function login_staf(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if(Auth::guard('staf')->attempt($credentials)) {
+            return 'is_logins';
+        }
+
+        return 'not_login';
+        // if(Auth::attempt($credentials)){
+        //     //Authentication passed...
+        //     // return redirect()
+        //     //     ->intended(route('admin.home'))
+        //     //     ->with('status','You are Logged in as Admin!');
+        // }
+   
+        // return 'gagal login';
+        return back()->withInput($request->only('email', 'remember'));
     }
 
     public function logout(Request $request)

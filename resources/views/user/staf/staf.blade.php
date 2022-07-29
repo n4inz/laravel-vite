@@ -35,6 +35,31 @@
                 </svg>   
             </div>
         </div>
+        <div class="grid gap-4 grid-cols-3 mt-10 mb-20 w-[1017px] xl:w-full">   
+            {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
+            @foreach ($staf as $values )
+                <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+                    <div>
+                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Staf/avatar/'.$values->avatar) }}" alt="">
+                    </div>
+                    <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
+                        <span class="user-talent-name text-[#222222]">{{ $values->full_name }}</span>
+                        {{-- <span class="user-talent-live">Age {{ Carbon\Carbon::parse($values->day_of_birthday)->age }}, in  {{ Str::limit($values->address, 20, $end='...') }}</span> --}}
+                        <span class="overview-note-body text-[#2CA6A0]">
+                           {{ $values->type }}
+                        </span>
+                        <div class="flex items-center space-x-[9.67px] ">
+                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.3337 4.1735V10.9585C17.3337 11.6503 17.069 12.3159 16.5939 12.8187C16.1188 13.3215 15.4693 13.6235 14.7787 13.6627L14.6253 13.6668H3.37533C2.68354 13.6669 2.01797 13.4022 1.51513 12.9271C1.0123 12.452 0.710324 11.8025 0.671159 11.1118L0.666992 10.9585V4.1735L8.71033 8.38683C8.79981 8.4337 8.89931 8.45818 9.00033 8.45818C9.10134 8.45818 9.20085 8.4337 9.29033 8.38683L17.3337 4.1735ZM3.37533 0.333496H14.6253C15.2966 0.333415 15.9441 0.582659 16.442 1.03289C16.94 1.48311 17.253 2.10223 17.3203 2.77016L9.00033 7.1285L0.680326 2.77016C0.744928 2.12876 1.0362 1.53143 1.50178 1.08555C1.96737 0.63967 2.57673 0.374485 3.22033 0.337663L3.37533 0.333496H14.6253H3.37533Z" fill="#3BD7CF"/>
+                            </svg>
+                            <span class="user-talent-live ">
+                                {{ Str::limit($values->email, 20, $end='...') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>         
+            @endforeach
+        </div>
 
         {{-- Modal add staf --}}
         <div id="modal-add-staf" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
@@ -46,7 +71,7 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
                     </div>
-                    <form action="{{ route('user_talent.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('user_staf.staf_store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="px-[91px] mt-10">
                             <div class="flex justify-center  items-center space-x-10">
@@ -91,6 +116,7 @@
                                         <label for="password" class="{{ $errors->has('password') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Password</label>
                                         <div class="{{ $errors->has('password') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
                                             <input name="password" value="{{ old('password') }}" type="password" id="password" class="{{ $errors->has('password') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" placeholder="Password">
+                                            <span toggle="#password" class="fa fa-eye-slash toggle-password mr-2"></span>
                                         </div>
                                         @if($errors->has('password'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password') }}</p>
@@ -99,7 +125,7 @@
                                     <div class="mb-6 w-full">
                                         <label for="type" class="{{ $errors->has('type') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Type</label>
                                         <div class="{{ $errors->has('type') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <select  class="bg-transparent border-none focus:ring-0 text-[#222222] block w-full p-2.5">
+                                            <select name="type"  class="bg-transparent border-none focus:ring-0 text-[#222222] block w-full p-2.5">
                                                 <option selected>Choose a type</option>
                                                 <option value="staf">Staf</option>
                                             </select>
@@ -138,7 +164,16 @@
             {
                 modal.show();
             }
+            $(".toggle-password").click(function() {
 
+                $(this).toggleClass("fa-eye-slash fa-eye");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                input.attr("type", "text");
+                } else {
+                input.attr("type", "password");
+                }
+            });
     </script>
     @if ($errors->any())
         <script>

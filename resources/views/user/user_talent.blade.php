@@ -42,7 +42,7 @@
         </div>
 
         <div class="grid gap-4 grid-cols-3 mt-10 mb-20 w-[1017px] xl:w-full">   
-        {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
+            {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
             @foreach ($talent as $values )
                 <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                     <div>
@@ -69,7 +69,6 @@
                     </div>
                 </div>         
             @endforeach
-
         </div>
 
         <!-- Main modal Add Talent -->

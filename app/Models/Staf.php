@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
-class Staf extends Model
+use Illuminate\Notifications\Notifiable;
+
+
+class Staf extends User
 {
-    use HasFactory;
-    protected $guarded = ['id'];
+    use Notifiable;
 
-    public function role()
-    {
-        return $this->hasOne(Role::class , 'stafs_id');
-    }
+    protected $guard = 'stafs';
+
+    protected $fillable = [
+        'full_name', 'email', 'password','avatar', 'type', 'tenants_id', 'users_id'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 }

@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     /**
      * A basic feature test example.
@@ -52,5 +52,23 @@ class LoginTest extends TestCase
         $this->assertAuthenticated();
 
         // $response->assertRedirect('https://nain.'.env('DOMAIN').'/dashboard');
+    }
+
+    public function test_staf_login()
+    {
+        
+        $this->withoutExceptionHandling();
+        $response = $this->post('/login-staf',[
+            'email' => 'nainzs@mail.com',
+            'password' => 'qwerty',
+        ]);
+
+        // $response = $this->post('/login-staf',[
+        //     'email' => 'swalker@example.org',
+        //     'password' => '123456',
+        // ]);
+
+
+        $this->assertAuthenticated();
     }
 }
