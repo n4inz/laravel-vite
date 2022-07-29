@@ -35,10 +35,12 @@ class JobboardController extends Controller
             array_push($json, [
                 'value' => $value->id,
                 'name' => $value->first_name,
-                'avatar' => 'dummy.png',
+                'avatar' => $value->avatar ?? 'dummy.png',
                 'email' => $value->email,
             ]);
         }
+
+        // return $client;
         $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
         return view('jobboard.jobboard', [
             "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id', auth()->user()->id),

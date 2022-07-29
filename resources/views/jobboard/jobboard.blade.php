@@ -279,7 +279,7 @@
                                             <div class="flex items-center justify-between pt-[11px]">
                                                 <div class="text-xs font-semibold text-[#2CA6A0] flex items-center space-x-2">
                                                     <span>#{{ $value->id_unique }}</span>
-                                                    @if (now()->diffInMinutes($value->created_at) < 1)
+                                                    @if (!empty(now()->diffInMinutes($value->created_at)) < 1)
                                                         <div class="w-[39px] h-[15px] bg-red-700 animate-pulse flex items-center justify-center rounded-sm"> <span class="overview-label-text">New</span></div>
                                                     @endif
                                                 </div>
@@ -1005,7 +1005,7 @@
             <div class="bg-palet h-5 flex items-center space-x-2 rounded-md pl-1">
                 <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
 
-                <img width="20" height="20" src="{{ asset('storage/Talent attached file/avatar/${tagData.avatar}') }}" class="rounded-full" alt="">
+                <img width="20" height="20" src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}" class="rounded-full" alt="">
                 <span class="text-xs text-white pr-2">${tagData.name}</span>
             </div>
             `
@@ -1018,7 +1018,7 @@
                     role="option">
                     ${ tagData.avatar ? `
                     <div class='tagify__dropdown__item__avatar-wrap'>
-                        <img onerror="this.style.visibility='hidden'" src="{{ asset('storage/Talent attached file/avatar/${tagData.avatar}') }}">
+                        <img onerror="this.style.visibility='hidden'" src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}">
                     </div>` : ''
                     }
                     <strong>${tagData.name}</strong>
@@ -1127,9 +1127,6 @@
                                             <div class="flex items-center justify-between pt-[11px]">
                                                 <div class="text-xs font-semibold text-[#2CA6A0] flex items-center space-x-2">
                                                     <span>#${res.id_unique} </span>
-                                                    @if (now()->diffInMinutes($value->created_at) < 1)
-                                                            <div class="w-[39px] h-[15px] bg-red-700 animate-pulse flex items-center justify-center rounded-sm"> <span class="overview-label-text">New</span></div>
-                                                    @endif
                                                 </div>
                                                 <div>
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
