@@ -51,7 +51,8 @@ class JobboardRepository
             // 'type' => $request->type,
             'type' => $request->onlyOneStatus,
             'clients_id' => $value[0]->value,
-            'users_id' => auth()->user()->id,
+            'users_id' => auth()->user()->id ?? auth()->guard('staf')->user()->users_id,
+            'stafs_id' => auth()->guard('staf')->user()->id ?? 0
         ]);
 
         foreach($request->subcategory as $keySub => $category){
@@ -91,7 +92,7 @@ class JobboardRepository
         }
 
         // return $talent;
-        $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->id)->get();
+        $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
         SendMail::dispatch($request->email_client, $match_talent);
     }
 
@@ -108,7 +109,8 @@ class JobboardRepository
                     'assignee' => 'Dummy data',
                     'status' => 'Inprogress',
                     'job_models_id' => $request->id,
-                    'users_id' => 1
+                    'users_id' => auth()->user()->id ?? auth()->guard('staf')->user()->users_id,
+                    'stafs_id' => auth()->guard('staf')->user()->id ?? 0
                 ]);
 
                 return $data;

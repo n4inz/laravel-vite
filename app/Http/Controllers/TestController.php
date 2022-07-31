@@ -9,8 +9,10 @@ class TestController extends Controller
 {
     public function welcome()
     {
+
         return view('welcome');
     }
+    
 
     public function test_multi_select()
     {

@@ -3,7 +3,12 @@
     <div id="sidebar-desktop" class="fixed top-0 bottom-0 px-5 w-[300px] bg-bgbody rounded border">
         <div class="flex items-center justify-start mt-2 relative">
             <span class=" text-palet title-logo leading-[22px] opacity-80 ">
-                {{ App\Models\SettingGeneral::where('users_id',auth()->user()->id)->first()->agency_name ?? 'Your Agency' }}
+                @auth('web')
+                    {{ App\Models\SettingGeneral::where('users_id',auth()->user()->id)->first()->agency_name ?? 'Your Agency' }}
+                @endauth
+                @auth('staf')
+                    <span>Staf Login</span>
+                @endauth
             </span>
             <div id="btn-sidebar-desktop" class="absolute hover:cursor-pointer z-50 -right-9 top-1 w-8 h-8 rounded-full shadow-md bg-white flex justify-center items-center">
                 <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,23 +18,23 @@
         </div>
        <ul class="space-y-2 mt-8 ">
             <li>
-                <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 text-base font-normal text-gray-900 rounded-lg ">
+                <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') || request()->is('staf/dashboard') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 text-base font-normal text-gray-900 rounded-lg ">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 3C2.25 2.58579 2.58579 2.25 3 2.25H10C10.4142 2.25 10.75 2.58579 10.75 3V8.5C10.75 8.91421 10.4142 9.25 10 9.25H3C2.58579 9.25 2.25 8.91421 2.25 8.5V3ZM3.75 3.75V7.75H9.25V3.75H3.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }} "/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 15.5C13.25 15.0858 13.5858 14.75 14 14.75H21C21.4142 14.75 21.75 15.0858 21.75 15.5V21C21.75 21.4142 21.4142 21.75 21 21.75H14C13.5858 21.75 13.25 21.4142 13.25 21V15.5ZM14.75 16.25V20.25H20.25V16.25H14.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 3C13.25 2.58579 13.5858 2.25 14 2.25H21C21.4142 2.25 21.75 2.58579 21.75 3V11.5C21.75 11.9142 21.4142 12.25 21 12.25H14C13.5858 12.25 13.25 11.9142 13.25 11.5V3ZM14.75 3.75V10.75H20.25V3.75H14.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12.5C2.25 12.0858 2.58579 11.75 3 11.75H10C10.4142 11.75 10.75 12.0858 10.75 12.5V21C10.75 21.4142 10.4142 21.75 10 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21V12.5ZM3.75 13.25V20.25H9.25V13.25H3.75Z" fill="{{ request()->is('dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 3C2.25 2.58579 2.58579 2.25 3 2.25H10C10.4142 2.25 10.75 2.58579 10.75 3V8.5C10.75 8.91421 10.4142 9.25 10 9.25H3C2.58579 9.25 2.25 8.91421 2.25 8.5V3ZM3.75 3.75V7.75H9.25V3.75H3.75Z" fill="{{ request()->is('dashboard') || request()->is('staf/dashboard') ? '#3BD7CF': '#868B90' }} "/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 15.5C13.25 15.0858 13.5858 14.75 14 14.75H21C21.4142 14.75 21.75 15.0858 21.75 15.5V21C21.75 21.4142 21.4142 21.75 21 21.75H14C13.5858 21.75 13.25 21.4142 13.25 21V15.5ZM14.75 16.25V20.25H20.25V16.25H14.75Z" fill="{{ request()->is('dashboard') || request()->is('staf/dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.25 3C13.25 2.58579 13.5858 2.25 14 2.25H21C21.4142 2.25 21.75 2.58579 21.75 3V11.5C21.75 11.9142 21.4142 12.25 21 12.25H14C13.5858 12.25 13.25 11.9142 13.25 11.5V3ZM14.75 3.75V10.75H20.25V3.75H14.75Z" fill="{{ request()->is('dashboard') || request()->is('staf/dashboard') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12.5C2.25 12.0858 2.58579 11.75 3 11.75H10C10.4142 11.75 10.75 12.0858 10.75 12.5V21C10.75 21.4142 10.4142 21.75 10 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21V12.5ZM3.75 13.25V20.25H9.25V13.25H3.75Z" fill="{{ request()->is('dashboard') || request()->is('staf/dashboard') ? '#3BD7CF': '#868B90' }}"/>
                     </svg>                                               
-                    <span class="{{ request()->is('dashboard') ? 'text-palet': 'text-textcolor' }}  sidebar-text left-4 ml-3 sidebar-text">Dashboard</span>
+                    <span class="{{ request()->is('dashboard') || request()->is('staf/dashboard') ? 'text-palet': 'text-textcolor' }}  sidebar-text left-4 ml-3 sidebar-text">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('jobboard') }}" class="{{ request()->is('jobboard') || request()->is('overview/*') ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg" >
+                <a href="{{ route('jobboard') }}" class="{{ request()->is('jobboard') || request()->is('overview/*') || request()->is('staf/jobboard') || request()->is('staf/overview/*')  ? 'bg-hover': 'hover:bg-hover' }} flex relative items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg" >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 12C1.75 6.33909 6.33909 1.75 12 1.75C17.6609 1.75 22.25 6.33909 22.25 12C22.25 12.4142 21.9142 12.75 21.5 12.75H13C12.8619 12.75 12.75 12.8619 12.75 13V21.5C12.75 21.9142 12.4142 22.25 12 22.25C6.33909 22.25 1.75 17.6609 1.75 12ZM12 3.25C7.16751 3.25 3.25 7.16751 3.25 12C3.25 16.5798 6.7686 20.3379 11.25 20.7183V13C11.25 12.0335 12.0335 11.25 13 11.25H20.7183C20.3379 6.7686 16.5798 3.25 12 3.25Z" fill="{{ request()->is('jobboard') || request()->is('overview/*') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.25 15C14.25 14.5858 14.5858 14.25 15 14.25H21C21.4142 14.25 21.75 14.5858 21.75 15V21C21.75 21.4142 21.4142 21.75 21 21.75H15C14.5858 21.75 14.25 21.4142 14.25 21V15ZM15.75 15.75V20.25H20.25V15.75H15.75Z" fill="{{ request()->is('jobboard') || request()->is('overview/*') ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 12C1.75 6.33909 6.33909 1.75 12 1.75C17.6609 1.75 22.25 6.33909 22.25 12C22.25 12.4142 21.9142 12.75 21.5 12.75H13C12.8619 12.75 12.75 12.8619 12.75 13V21.5C12.75 21.9142 12.4142 22.25 12 22.25C6.33909 22.25 1.75 17.6609 1.75 12ZM12 3.25C7.16751 3.25 3.25 7.16751 3.25 12C3.25 16.5798 6.7686 20.3379 11.25 20.7183V13C11.25 12.0335 12.0335 11.25 13 11.25H20.7183C20.3379 6.7686 16.5798 3.25 12 3.25Z" fill="{{ request()->is('jobboard') || request()->is('overview/*') || request()->is('staf/jobboard') || request()->is('staf/overview/*')  ? '#3BD7CF': '#868B90' }}"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.25 15C14.25 14.5858 14.5858 14.25 15 14.25H21C21.4142 14.25 21.75 14.5858 21.75 15V21C21.75 21.4142 21.4142 21.75 21 21.75H15C14.5858 21.75 14.25 21.4142 14.25 21V15ZM15.75 15.75V20.25H20.25V15.75H15.75Z" fill="{{ request()->is('jobboard') || request()->is('overview/*') || request()->is('staf/jobboard') || request()->is('staf/overview/*')  ? '#3BD7CF': '#868B90' }}"/>
                     </svg>
-                    <span class="{{ request()->is('jobboard') || request()->is('overview/*') ? 'text-palet': 'text-textcolor' }} sidebar-text left-4 ml-3 ">Job</span>
+                    <span class="{{ request()->is('jobboard') || request()->is('overview/*') || request()->is('staf/jobboard') || request()->is('staf/overview/*')  ? 'text-palet': 'text-textcolor' }} sidebar-text left-4 ml-3 ">Job</span>
                 </a>
             </li>
             <li>
@@ -54,41 +59,56 @@
                         </div>
                     </li>
                     <li class="relative flex items-center">
-                        <div class="absolute -top-50 left-2">
-                            <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 9C11 8.44771 11.4477 8 12 8C12.5523 8 13 8.44772 13 9V48H11V9Z" fill="#EFEFEF"/>
-                                <path d="M12 12V16C12 20.4183 15.5817 24 20 24H23" stroke="#EFEFEF" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
+                        @role('staf')
+                            <div class="absolute top-0 left-2">
+                                <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 0H13V17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17V0Z" fill="#EFEFEF"/>
+                                    <path d="M12 12V16C12 20.4183 15.5817 24 20 24H23" stroke="#EFEFEF" stroke-width="2" stroke-linecap="round"/>
+                                </svg> 
+                            </div>
+                        @endrole
+                        @role('agency')
+                            <div class="absolute -top-50 left-2">
+                                <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 9C11 8.44771 11.4477 8 12 8C12.5523 8 13 8.44772 13 9V48H11V9Z" fill="#EFEFEF"/>
+                                    <path d="M12 12V16C12 20.4183 15.5817 24 20 24H23" stroke="#EFEFEF" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                        @endrole
                         <div class="w-full">
                             <a href="{{ route('user_talent.talent') }}" class="{{ request()->is('user/talent') ? 'bg-hover': 'hover:bg-hover' }} flex items-center p-2 ml-11 text-base font-normal rounded-lg transition duration-75 group ">
                                 <span class="{{ request()->is('user/talent') ? 'text-palet': 'text-textcolor' }} sidebar-text">Talent</span>
                             </a>
                         </div>
                     </li>
-                    <li class="relative flex items-center">
-                        <div class="absolute top-0 left-2">
-                            <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 0H13V17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17V0Z" fill="#EFEFEF"/>
-                                <path d="M12 12V16C12 20.4183 15.5817 24 20 24H23" stroke="#EFEFEF" stroke-width="2" stroke-linecap="round"/>
-                            </svg> 
-                        </div>
-                        <div class="w-full">
-                            <a href="{{ route('user_staf.staf') }}" class="{{ request()->is('user/staf') ? 'bg-hover': 'hover:bg-hover' }} flex items-center p-2 ml-11 text-base font-normal rounded-lg transition duration-75 group ">
-                                <span class="{{ request()->is('user/staf') ? 'text-palet': 'text-textcolor' }} sidebar-text">Staf</span>
-                            </a>
-                        </div>
-                    </li>
+                    @role('agency')
+                        <li class="relative flex items-center">
+                            <div class="absolute top-0 left-2">
+                                <svg width="24" height="48" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 0H13V17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17V0Z" fill="#EFEFEF"/>
+                                    <path d="M12 12V16C12 20.4183 15.5817 24 20 24H23" stroke="#EFEFEF" stroke-width="2" stroke-linecap="round"/>
+                                </svg> 
+                            </div>
+                            <div class="w-full">
+                                <a href="{{ route('user_staf.staf') }}" class="{{ request()->is('user/staf') ? 'bg-hover': 'hover:bg-hover' }} flex items-center p-2 ml-11 text-base font-normal rounded-lg transition duration-75 group ">
+                                    <span class="{{ request()->is('user/staf') ? 'text-palet': 'text-textcolor' }} sidebar-text">Staf</span>
+                                </a>
+                            </div>
+                        </li>
+                    @endrole
                 </ul>
             </li>
             <li>
-                <a href="{{ route('setting.setting') }}" class="{{ request()->is('setting') ? 'bg-hover': 'hover:bg-hover' }}  flex relative items-center p-2 text-base font-normal text-gray-900 rounded-lg ">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="{{ request()->is('setting') ? '#3BD7CF': '#868B90' }}" fill-rule="evenodd" clip-rule="evenodd" d="M9.12596 1.6386C9.46935 1.54354 9.83221 1.7032 9.99413 2.02058C10.3672 2.75182 11.1261 3.24991 12 3.24991C12.8739 3.24991 13.6328 2.75182 14.0059 2.02058C14.1678 1.7032 14.5307 1.54354 14.874 1.6386C16.5585 2.10488 18.0759 2.97031 19.3184 4.12565C19.5611 4.35128 19.6269 4.70939 19.4804 5.00657C19.3331 5.30525 19.25 5.64181 19.25 5.99991C19.25 7.24254 20.2574 8.24991 21.5 8.24991L21.5314 8.24968C21.8629 8.24495 22.1583 8.4585 22.2576 8.77486C22.5777 9.79388 22.75 10.8775 22.75 11.9999C22.75 12.7407 22.6749 13.4648 22.5318 14.1647C22.4548 14.541 22.1059 14.7984 21.7237 14.7608C21.6504 14.7536 21.5758 14.7499 21.5 14.7499C20.2574 14.7499 19.25 15.7573 19.25 16.9999C19.25 17.553 19.4486 18.0578 19.7793 18.4497C20.027 18.7433 20.0128 19.1766 19.7465 19.4534C18.4777 20.7718 16.8745 21.7677 15.0721 22.3043C14.6807 22.4208 14.2681 22.2028 14.1437 21.8139C13.8535 20.9059 13.0024 20.2499 12 20.2499C10.9976 20.2499 10.1465 20.9059 9.85629 21.8139C9.73195 22.2028 9.31927 22.4208 8.92789 22.3043C7.12545 21.7677 5.52229 20.7718 4.25353 19.4534C3.98716 19.1766 3.97299 18.7433 4.22072 18.4497C4.55139 18.0578 4.75 17.553 4.75 16.9999C4.75 15.7573 3.74264 14.7499 2.5 14.7499C2.42423 14.7499 2.34963 14.7536 2.27634 14.7608C1.89406 14.7984 1.54519 14.541 1.46821 14.1647C1.32505 13.4648 1.25 12.7407 1.25 11.9999C1.25 10.8775 1.42227 9.79389 1.74236 8.77485C1.84173 8.4585 2.13705 8.24495 2.4686 8.24968L2.5 8.24991C3.74264 8.24991 4.75 7.24254 4.75 5.99991C4.75 5.64181 4.66689 5.30526 4.51962 5.00657C4.3731 4.70939 4.43894 4.35128 4.68159 4.12565C5.92411 2.97031 7.44153 2.10488 9.12596 1.6386ZM6.08277 4.88982C6.19152 5.24114 6.25 5.61415 6.25 5.99991C6.25 7.88936 4.85261 9.45244 3.03493 9.71204C2.84898 10.4431 2.75 11.2095 2.75 11.9999C2.75 12.4293 2.77921 12.8515 2.83567 13.2647C4.74948 13.4345 6.25 15.042 6.25 16.9999C6.25 17.6668 6.0754 18.294 5.76971 18.8371C6.62645 19.6183 7.63002 20.2403 8.73362 20.6569C9.37706 19.5189 10.598 18.7499 12 18.7499C13.402 18.7499 14.6229 19.5189 15.2664 20.6569C16.37 20.2403 17.3735 19.6183 18.2303 18.8371C17.9246 18.294 17.75 17.6668 17.75 16.9999C17.75 15.042 19.2505 13.4345 21.1643 13.2647C21.2208 12.8515 21.25 12.4293 21.25 11.9999C21.25 11.2095 21.151 10.4431 20.9651 9.71204C19.1474 9.45243 17.75 7.88935 17.75 5.99991C17.75 5.61415 17.8085 5.24114 17.9172 4.88982C17.0618 4.17701 16.0762 3.61605 15.0018 3.24766C14.3184 4.15887 13.2287 4.74991 12 4.74991C10.7713 4.74991 9.68158 4.15887 8.99819 3.24766C7.92382 3.61605 6.93823 4.17701 6.08277 4.88982Z" fill="{{ request()->is('setting') ? '#3BD7CF': '#868B90' }}"/>
-                        <path fill="{{ request()->is('setting') ? '#3BD7CF': '#868B90' }}" fill-rule="evenodd" clip-rule="evenodd" d="M7.75 12C7.75 9.65279 9.65279 7.75 12 7.75C14.3472 7.75 16.25 9.65279 16.25 12C16.25 14.3472 14.3472 16.25 12 16.25C9.65279 16.25 7.75 14.3472 7.75 12ZM12 9.25C10.4812 9.25 9.25 10.4812 9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25Z" />
-                    </svg>
-                    <span class="{{ request()->is('setting') ? 'text-palet': 'text-textcolor' }} left-4 ml-3 sidebar-text">Setting</span>
-                </a>
+                @role('agency')
+                    <a href="{{ route('setting.setting') }}" class="{{ request()->is('setting') ? 'bg-hover': 'hover:bg-hover' }}  flex relative items-center p-2 text-base font-normal text-gray-900 rounded-lg ">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="{{ request()->is('setting') ? '#3BD7CF': '#868B90' }}" fill-rule="evenodd" clip-rule="evenodd" d="M9.12596 1.6386C9.46935 1.54354 9.83221 1.7032 9.99413 2.02058C10.3672 2.75182 11.1261 3.24991 12 3.24991C12.8739 3.24991 13.6328 2.75182 14.0059 2.02058C14.1678 1.7032 14.5307 1.54354 14.874 1.6386C16.5585 2.10488 18.0759 2.97031 19.3184 4.12565C19.5611 4.35128 19.6269 4.70939 19.4804 5.00657C19.3331 5.30525 19.25 5.64181 19.25 5.99991C19.25 7.24254 20.2574 8.24991 21.5 8.24991L21.5314 8.24968C21.8629 8.24495 22.1583 8.4585 22.2576 8.77486C22.5777 9.79388 22.75 10.8775 22.75 11.9999C22.75 12.7407 22.6749 13.4648 22.5318 14.1647C22.4548 14.541 22.1059 14.7984 21.7237 14.7608C21.6504 14.7536 21.5758 14.7499 21.5 14.7499C20.2574 14.7499 19.25 15.7573 19.25 16.9999C19.25 17.553 19.4486 18.0578 19.7793 18.4497C20.027 18.7433 20.0128 19.1766 19.7465 19.4534C18.4777 20.7718 16.8745 21.7677 15.0721 22.3043C14.6807 22.4208 14.2681 22.2028 14.1437 21.8139C13.8535 20.9059 13.0024 20.2499 12 20.2499C10.9976 20.2499 10.1465 20.9059 9.85629 21.8139C9.73195 22.2028 9.31927 22.4208 8.92789 22.3043C7.12545 21.7677 5.52229 20.7718 4.25353 19.4534C3.98716 19.1766 3.97299 18.7433 4.22072 18.4497C4.55139 18.0578 4.75 17.553 4.75 16.9999C4.75 15.7573 3.74264 14.7499 2.5 14.7499C2.42423 14.7499 2.34963 14.7536 2.27634 14.7608C1.89406 14.7984 1.54519 14.541 1.46821 14.1647C1.32505 13.4648 1.25 12.7407 1.25 11.9999C1.25 10.8775 1.42227 9.79389 1.74236 8.77485C1.84173 8.4585 2.13705 8.24495 2.4686 8.24968L2.5 8.24991C3.74264 8.24991 4.75 7.24254 4.75 5.99991C4.75 5.64181 4.66689 5.30526 4.51962 5.00657C4.3731 4.70939 4.43894 4.35128 4.68159 4.12565C5.92411 2.97031 7.44153 2.10488 9.12596 1.6386ZM6.08277 4.88982C6.19152 5.24114 6.25 5.61415 6.25 5.99991C6.25 7.88936 4.85261 9.45244 3.03493 9.71204C2.84898 10.4431 2.75 11.2095 2.75 11.9999C2.75 12.4293 2.77921 12.8515 2.83567 13.2647C4.74948 13.4345 6.25 15.042 6.25 16.9999C6.25 17.6668 6.0754 18.294 5.76971 18.8371C6.62645 19.6183 7.63002 20.2403 8.73362 20.6569C9.37706 19.5189 10.598 18.7499 12 18.7499C13.402 18.7499 14.6229 19.5189 15.2664 20.6569C16.37 20.2403 17.3735 19.6183 18.2303 18.8371C17.9246 18.294 17.75 17.6668 17.75 16.9999C17.75 15.042 19.2505 13.4345 21.1643 13.2647C21.2208 12.8515 21.25 12.4293 21.25 11.9999C21.25 11.2095 21.151 10.4431 20.9651 9.71204C19.1474 9.45243 17.75 7.88935 17.75 5.99991C17.75 5.61415 17.8085 5.24114 17.9172 4.88982C17.0618 4.17701 16.0762 3.61605 15.0018 3.24766C14.3184 4.15887 13.2287 4.74991 12 4.74991C10.7713 4.74991 9.68158 4.15887 8.99819 3.24766C7.92382 3.61605 6.93823 4.17701 6.08277 4.88982Z" fill="{{ request()->is('setting') ? '#3BD7CF': '#868B90' }}"/>
+                            <path fill="{{ request()->is('setting') ? '#3BD7CF': '#868B90' }}" fill-rule="evenodd" clip-rule="evenodd" d="M7.75 12C7.75 9.65279 9.65279 7.75 12 7.75C14.3472 7.75 16.25 9.65279 16.25 12C16.25 14.3472 14.3472 16.25 12 16.25C9.65279 16.25 7.75 14.3472 7.75 12ZM12 9.25C10.4812 9.25 9.25 10.4812 9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25Z" />
+                        </svg>
+                        <span class="{{ request()->is('setting') ? 'text-palet': 'text-textcolor' }} left-4 ml-3 sidebar-text">Setting</span>
+                    </a>
+
+                @endrole
             </li>
        </ul>
     </div>

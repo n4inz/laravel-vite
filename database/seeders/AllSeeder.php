@@ -8,7 +8,7 @@ use App\Models\JobModels;
 use App\Models\JobModelsAvailabiltyDays;
 use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
-
+use App\Models\Staf;
 use App\Models\TalentLanguage;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
@@ -107,6 +107,8 @@ class AllSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
 
+            $user->assignRole('agency');
+
            $client = Client::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
@@ -117,6 +119,19 @@ class AllSeeder extends Seeder
                 'note' => $faker->sentence(mt_rand(15,30)),
                 'users_id' => $user->id
             ]);
+
+            $sraf = Staf::create([
+                'full_name' => $faker->firstName,
+                'email' => fake()->safeEmail(),
+                'password' => Hash::make(123456),
+                'avatar' => 'dummy.png',
+                'type' => 'staf',
+                'tenants_id' => $tenant->id,
+                'users_id' => $user->id
+            ]);
+
+            $sraf->assignRole('staf');
+
 
             ClientAttachedFile::create([
                 'attached_file' => 'dummy.zip',
@@ -160,7 +175,7 @@ class AllSeeder extends Seeder
         }
 
 
-        $idUsers = User::all();
+        $idUsers = User::with('staf')->get();
         foreach($idUsers as $value ){
             $payment = array('cash','check', 'online_payment' , 'any');
             $payment_rand = $payment[rand(0, count($payment) - 1)];
@@ -202,6 +217,7 @@ class AllSeeder extends Seeder
                 'type' => $type_rand,
                 'clients_id' => 1,
                 'users_id' => $value->id,
+                'stafs_id' => $value->staf[0]->id
             ]);
 
             JobModelsAvailabiltyDays::create([

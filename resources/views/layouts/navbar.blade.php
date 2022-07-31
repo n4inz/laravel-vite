@@ -39,8 +39,12 @@
                 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300 "  aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
 
-                    <?php  $data = App\Models\Avatar::where('users_id',auth()->user()->id)->first() ?>
-                    
+                    @auth('web')
+                        <?php  $data = App\Models\Avatar::where('users_id',auth()->user()->id)->first() ?>
+                    @endauth
+                    @auth('staf')
+                        <?php  $data = App\Models\Staf::where('id',auth()->guard('staf')->user()->id)->first() ?>
+                    @endauth
                     @if (empty($data->avatar))
                         <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
                             <span class="text-xs text-gray-300 ">No Images</span>
@@ -61,7 +65,7 @@
                             {{ auth()->user()->full_name }}
                         @endif
                     </span>
-                    <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->email }}</span>
+                    <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->email ?? auth()->guard('staf')->user()->email  }}</span>
                 </div>
                 <ul class="py-1" aria-labelledby="dropdown">
                     <li>

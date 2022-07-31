@@ -63,12 +63,9 @@ class LoginTest extends TestCase
             'password' => 'qwerty',
         ]);
 
-        // $response = $this->post('/login-staf',[
-        //     'email' => 'swalker@example.org',
-        //     'password' => '123456',
-        // ]);
+        $this->assertAuthenticated('staf');
+        $response->assertSeeText('is_logins');
+        $response->assertStatus(200);
 
-
-        $this->assertAuthenticated();
     }
 }

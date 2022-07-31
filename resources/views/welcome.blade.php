@@ -25,7 +25,7 @@
 </head>
 <body>
 
-    
+    {{ auth()->guard('staf')->user()->full_name }}
       
 {{-- 
     <select id="form-control" class="h-7 w-96">

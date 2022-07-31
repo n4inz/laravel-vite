@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'users',
         ],
 
-        'admin' => [
+        'staf' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'stafs',
         ],
     ],
 
@@ -70,7 +70,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'admins' => [
+        'stafs' => [
             'driver' => 'eloquent',
             'model' => App\Models\Staf::class,
         ],
@@ -99,8 +99,8 @@ return [
             'throttle' => 60,
         ],
 
-        'admins' => [
-            'provider' => 'admins',
+        'stafs' => [
+            'provider' => 'stafs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
@@ -121,3 +121,7 @@ return [
     'password_timeout' => 10800,
 
 ];
+
+
+
+

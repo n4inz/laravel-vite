@@ -87,7 +87,6 @@ class AuthenticateController extends Controller
             $this->create_credentials();
             return redirect(env('URI').$request->sub_domain.'.'.env('DOMAIN').'/tenancy');
         }
-
         return redirect()->back()->withErrors('Error', 'Domain is exists');
        
     }
@@ -109,26 +108,25 @@ class AuthenticateController extends Controller
             'password' => ['required'],
         ]);
 
-        if(Auth::guard('staf')->attempt($credentials)) {
-            return 'is_logins';
+        if(Auth::guard('staf')->attempt($credentials)){
+            if(auth()->guard('staf')->user()->tenants_id == app('currentTenant')->id){
+                return redirect()->intended('/dashboard');
+            }else{
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return 'logout';
+            }
         }
 
-        return 'not_login';
-        // if(Auth::attempt($credentials)){
-        //     //Authentication passed...
-        //     // return redirect()
-        //     //     ->intended(route('admin.home'))
-        //     //     ->with('status','You are Logged in as Admin!');
-        // }
-   
-        // return 'gagal login';
+
         return back()->withInput($request->only('email', 'remember'));
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
- 
+        
         $request->session()->invalidate();
      
         $request->session()->regenerateToken();

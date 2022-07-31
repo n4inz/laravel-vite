@@ -8,7 +8,7 @@ window.Echo.channel("messages").listen("Comments", (event) => {
                             <div class="w-full">
                                 <div class="flex space-x-4">
                                     <div class="flex space-x-1 justify-center items-center">
-                                        <div class="overview-comments-name text-colortext">Joseph Parker</div>
+                                        <div class="overview-comments-name text-colortext">${event.data.name}</div>
                                         <div class="overview-comments-name text-colorStatusCard1">${event.data.time}</div>
                                     </div>
                                 </div>
@@ -58,7 +58,5 @@ window.Echo.channel("reply-messages").listen("ReplyComment", (res) => {
 
     $('.reply_your_comment'+res.data.id_comment).append(template_reply);
     $('.add_reply'+res.data.id_comment).html('');
-
-    console.log(res);
 
 })

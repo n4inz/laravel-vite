@@ -13,6 +13,8 @@ use App\Repositories\UserTalentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class UserClientController extends Controller
 {
     use ImageUpload;
@@ -21,13 +23,14 @@ class UserClientController extends Controller
     private $UserTalentRepository;
     public function __construct(UserClientRepository $UserClientRepository, UserTalentRepository  $UserTalentRepository)
     {
+
         $this->UserClientRepository = $UserClientRepository;
         $this->UserTalentRepository = $UserTalentRepository;
 
     }
     public function client()
     {
-        $client = Client::where('users_id', auth()->user()->id)->get();
+        $client = Client::where('users_id', auth()->user()->id ?? auth()->guard('staf')->user()->id)->get();
         return view('user.client.user_client' , compact('client'));
     }
 
@@ -45,7 +48,7 @@ class UserClientController extends Controller
 
     public function talent()
     {
-        $talent = Talents::where('users_id', auth()->user()->id)->with('type_helper')->get();
+        $talent = Talents::where('users_id', auth()->user()->id ?? auth()->guard('staf')->user()->id)->with('type_helper')->get();
 
         return view('user.user_talent', compact('talent'));
     }
@@ -59,8 +62,12 @@ class UserClientController extends Controller
 
     public function staf()
     {
-        $staf = Staf::where('users_id' , auth()->user()->id)->get();
-        return view('user.staf.staf', compact('staf'));
+        if(auth()->user()->hasRole('agency')){
+            $staf = Staf::where('users_id' , auth()->user()->id ?? auth()->guard('staf')->user()->id)->get();
+            return view('user.staf.staf', compact('staf'));
+        }
+
+        return abort(403);
     }
 
     public function staf_store(Request $request)
@@ -73,9 +80,10 @@ class UserClientController extends Controller
             'password' => 'required',
         ]);
         if(isset($request->avatar)){
-            $avatar = $this->uploadImageStore($request->file('avatar') , 'Staf/avatar');
+            $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
         }
-        Staf::create([
+
+       $staf = Staf::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -84,6 +92,14 @@ class UserClientController extends Controller
             'tenants_id' => $request->user()->tenants_id,
             'users_id' => $request->user()->id
         ]);
+
+        // $role = Role::create(['name' => 'staf']);
+        // $permission = Permission::create(['name' => 'created']);
+        // $role->givePermissionTo($permission);
+   
+
+        $staf->assignRole('staf');
+
 
         return redirect()->back()->with('success', 'Create staff successfuly');
     }

@@ -46,7 +46,7 @@
                     </div>
                     <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
                         <span class="user-talent-name text-[#222222]">{{ $values->first_name }} {{ $values->last_name }}</span>
-                        <span class="user-talent-live">Age {{ Carbon\Carbon::parse($values->day_of_birthday)->age }}, in  {{ Str::limit($values->address, 20, $end='...') }}</span>
+                        <span class="user-talent-live">Live in  {{ Str::limit($values->address, 20, $end='...') }}</span>
                         <span class="overview-note-body text-[#2CA6A0]">
                             {{ $values->languages }}
                         </span>

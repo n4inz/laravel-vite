@@ -18,6 +18,7 @@ class SettingController extends Controller
 
     public function __construct(SettingRepository $settingRepository)
     {
+        $this->middleware(['role:agency']);
         $this->settingRepository = $settingRepository;
     }
 
