@@ -115,7 +115,7 @@
 
                         {{-- left --}}
                         <div class="w-[300px] xl:w-[30%] space-y-2">
-                            <div class="bg-bgbody rounded ">
+                            <div class="bg-bgbody rounded">
                                 <div class="flex justify-between px-4 pt-[18.5px]">
                                     <div class="flex items-center space-x-2 ">
                                         <div class="w-2 h-6 bg-palet rounded-sm"></div>
@@ -139,7 +139,9 @@
                                     </label>
                                     <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
                                 </div>
-                                <div class="flex mt-[51px]"></div>
+                                <span class="{{ $errors->has('attached_file') ? 'text-red-600' : '' }} text-center text-xs mt-4 mb-4 flex items-center justify-center text-gray-400">Max 126Kb</span>
+
+                                <div class="flex mt-4"></div>
                             </div>
                             {{-- Attached file --}}
                             <div class="bg-bgbody rounded h-[249px]">
@@ -152,7 +154,7 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="px-4 mt-4 space-y-3">
                                     {{-- Upload --}}
-                                    <label for="attached_file_user">
+                                    <label for="attached_file">
                                         <div class="{{ $errors->has('attached_file') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex flex-col justify-center items-center w-full h-40 rounded border-[2px] border-dotted space-y-[10.25px] hover:cursor-pointer">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.1528C2.25 17.7386 2.58579 17.4028 3 17.4028H21C21.4142 17.4028 21.75 17.7386 21.75 18.1528C21.75 18.567 21.4142 18.9028 21 18.9028H3C2.58579 18.9028 2.25 18.567 2.25 18.1528Z" fill="{{ $errors->has('attached_file') ? '#e80f00' : '#827C7C' }} "/>
@@ -162,8 +164,9 @@
                                             </svg>
                                             {{-- <span class="overview-modal-add-talent-upload-text text-[#827C7C]">Drop file here or click to upload.</span> --}}
                                             <span class="{{ $errors->has('attached_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
+                                            <span class="{{ $errors->has('attached_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 2MB</span>
                                         </div>
-                                        <input id="attached_file_user" name="attached_file" id="attached_file" type="file" class="hidden">
+                                        <input id="attached_file" name="attached_file" id="attached_file" type="file" class="hidden">
                                     </label>
                                 </div>
                             </div>
@@ -175,6 +178,7 @@
             </div>
         </div>
     </article>
+    <script src="{{ asset('js/fileNameLoad.js') }}"></script>
     <script>
         var loadFile = function(event) {
           var output = document.getElementById('output');
@@ -183,14 +187,7 @@
             URL.revokeObjectURL(output.src)
           }
 
-        //   const btn = `<button class="bg-palet invisible group-hover:animate-pulse group-hover:visible h-6 absolute rounded-md p-4 top-1/2 bottom-1/2 flex items-center justify-center">
-        //                     <span class="text-sm text-gray-50">Upload</span>
-        //                 </button>`;
-    
-        //   $('#bg-avatar').append(btn);
         };
-
-
     </script>
 </main>
 

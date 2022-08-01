@@ -31,7 +31,8 @@ class ClientRequest extends FormRequest
             'address' => 'required|min:3',
             'languages' => 'required',
             'note' => 'required',
-            'attached_file' => 'required'
+            'avatar' => 'mimes:png,jpg,jpeq,PNG,JPG,JPEG,webp|max:126',
+            'attached_file' => 'required|mimes:doc,rar,zip,pdf|max:2048',
         ];
     }
 }

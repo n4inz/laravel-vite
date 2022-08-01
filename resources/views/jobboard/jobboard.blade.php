@@ -538,7 +538,9 @@
                                     </svg> 
                                 </div>
                                 <div class="flex items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
-                                    <input name="location" value="{{ old('') }}" type="text" id="id" class="overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
+                                    <input name="address" value="{{ old('') }}" type="text" id="id" class="placepicker overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
+                                    <input type="hidden" name="latitude" value="-6.87421360">
+                                    <input type="hidden" name="longitude" value="107.60348900">
                                 </div>
                             </div>
                         </div>
@@ -550,9 +552,9 @@
                                 <label for="category" class="overview-note-body text-colortext mb-2 block">Category</label>
                                 <div class="w-[316px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                     <select name="category" id="category" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                        <option value="Child Care">Child Care</option>
-                                        <option value="Infant">Infant</option>
-                                        <option value="Family Assist">Family Assist</option>
+                                        <option @if(old('category') == 'Child Care') selected @endif value="Child Care">Child Care</option>
+                                        <option @if(old('category') == 'Infant') selected @endif value="Infant">Infant</option>
+                                        <option @if(old('category') == 'Family Assist') selected @endif value="Family Assist">Family Assist</option>
                                     </select>
                                     <div>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -567,73 +569,73 @@
                                     <div>
                                         <label for="category" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="nanny" name="subcategory[]" value="nanny"  style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="nanny" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('nanny', old('subcategory')) ) checked @endif value="nanny"  style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="nanny" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Nanny</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="sister" name="subcategory[]" value="sister" style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="sister" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('sister', old('subcategory')) ) checked @endif value="sister" style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="sister" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Sister</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input name="subcategory[]" value="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox"  class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input name="subcategory[]" @if(is_array(old('subcategory')) && in_array('maternity_care', old('subcategory')) ) checked @endif value="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox"  class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="maternity-care" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Maternity Care</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="daycare" name="subcategory[]" value="at_home_daycare" style="color: #3BD7CF" type="checkbox"  class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="daycare" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('at_home_daycare', old('subcategory')) ) checked @endif value="at_home_daycare" style="color: #3BD7CF" type="checkbox"  class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="daycare" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">At Home Daycare</label>
                                         </div>
                                     </div>
                                     <div>
                                         <label for="category" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="infant" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="infant" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="infant" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('infant', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="infant" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="infant" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Infant</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="young-baby" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="young_baby" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="young-baby" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('young_baby', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="young_baby" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="young-baby" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Young baby</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="toddler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="toddler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="toddler" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('toddler', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="toddler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="toddler" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Toddler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="press-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="press_schooler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="press-schooler" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('press_schooler', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="press_schooler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="press-schooler" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Press Schooler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="grade-schooler" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="grade_schooler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="grade-schooler" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('grade_schooler', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="grade_schooler" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="grade-schooler" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Grade Schooler</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="simple-housework " name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="simple_housework" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="simple-housework " name="subcategory[]" @if(is_array(old('subcategory')) && in_array('simple_housework', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="simple_housework" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="simple-housework " class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Simple Housework </label>
                                         </div>
                                     </div>
                                     <div>
                                         <label for="category" class="invisible {{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategory</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="laundry" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="laundry" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="laundry" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('laundry', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="laundry" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="laundry" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Laundry</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="prep-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="prep_meal" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="prep-meal" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('prep_meal', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="prep_meal" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="prep-meal" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Prep Meal</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="cook-meal" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="cook_meal" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="cook-meal" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('cook_meal', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="cook_meal" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="cook-meal" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Cook Meal</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="run-errands" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="run_errands" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="run-errands" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('run_errands', old('subcategory')) ) checked @endif  style="color: #3BD7CF" type="checkbox" value="run_errands" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="run-errands" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Run Errands</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="special-needs" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="special_needs" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="special-needs" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('special_needs', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="special_needs" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="special-needs" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Special Needs</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="provide-transportation" name="subcategory[]" style="color: #3BD7CF" type="checkbox" value="provide_transportation" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="provide-transportation" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('provide_transportation', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="provide_transportation" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="provide-transportation" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Provide Transportation</label>
                                         </div>
                                     </div>
@@ -653,10 +655,8 @@
                                     <label for="part-time" class="overview-note-body text-colortext mb-2 block">Part Time</label>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                         <select id="part-time" name="part_time" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option>Part Time</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
+                                            <option @if(old('part_time') == 'Part time') selected @endif value="Part time">Part Time</option>
+                                            <option @if(old('part_time') == 'Full time') selected @endif value="Full time">Full Time</option>
                                         </select>
                                         <div>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -666,7 +666,7 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[13px]">
-                                        <input id="comfortable-with-pets" name="comfortable_with_pets" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="comfortable-with-pets" @if(old('comfortable_with_pets')) checked @endif name="comfortable_with_pets" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="comfortable-with-pets" class="overview-note-body text-colortext">Comfortable with pets</label>
                                     </div>
                                 </div>
@@ -674,10 +674,9 @@
                                     <label for="desired-living" class="overview-note-body text-colortext mb-2 block">Desired Living</label>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                         <select id="desired-living" name="desired_living" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option>Desired Living</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
+                                            <option @if(old('desired_living') == 'any') selected @endif value="any" >Any</option>
+                                            <option @if(old('desired_living') == 'Live in') selected @endif value="Live in" >Live in</option>
+                                            <option @if(old('desired_living') == 'Live out') selected @endif value="Live out" >Live out</option>
                                         </select>
                                         <div>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -687,7 +686,7 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[13px]">
-                                        <input id="has-transportation" name="has_transportation" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="has-transportation" name="has_transportation" @if(old('has_transportation')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="has-transportation" class="overview-note-body text-colortext">Has transportation</label>
                                     </div>
                                 </div>
@@ -695,10 +694,9 @@
                                     <label for="english-level" class="overview-note-body text-colortext mb-2 block">English Level</label>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                         <select id="english-level" name="english_level" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option>Fluent</option>
-                                            <option>Basic</option>
-                                            <option>Test 1</option>
-                                            <option>Test 1</option>
+                                            <option @if(old('english_level') == 'Basic') selected @endif value="Basic">Basic</option>
+                                            <option  @if(old('english_level') == 'Conversational') selected @endif value="Conversational" >Conversational</option>
+                                            <option @if(old('english_level') == 'Fluent native') selected @endif value="Fluent native" >Fluent native</option>
                                         </select>
                                         <div>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -708,7 +706,7 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[13px]">
-                                        <input id="has-driver-license" name="has_driver_license" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="has-driver-license" name="has_driver_license" @if(old('has_driver_license')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="has-driver-license" class="overview-note-body text-colortext">Has driver license</label>
                                     </div>
                                 </div>
@@ -721,69 +719,65 @@
                             <div class="flex space-x-16 mt-4 px-2">
                                 <div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="english" name="language[]" style="color: #3BD7CF" type="checkbox" value="English" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="english" name="language[]" @if(is_array(old('language')) && in_array('English', old('language')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="English" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="english" class="overview-note-body text-colortext">English</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="french" name="language[]" style="color: #3BD7CF" type="checkbox" value="French" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="french" name="language[]" style="color: #3BD7CF" type="checkbox" value="French" @if(is_array(old('language')) && in_array('French', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="french" class="overview-note-body text-colortext">French</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="tagalog" name="language[]" style="color: #3BD7CF" type="checkbox" value="Tagalog" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="tagalog" name="language[]" style="color: #3BD7CF" type="checkbox" value="Tagalog" @if(is_array(old('language')) && in_array('Tagalog', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="tagalog" class="overview-note-body text-colortext">Tagalog</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="thai" name="language[]" style="color: #3BD7CF" type="checkbox" value="Thai" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="thai" name="language[]" style="color: #3BD7CF" type="checkbox" value="Thai" @if(is_array(old('language')) && in_array('Thai', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="thai" class="overview-note-body text-colortext">Thai</label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="chinese-mandarin" name="language[]" style="color: #3BD7CF" type="checkbox" value="Chinese Mandarin" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="chinese-mandarin" name="language[]" style="color: #3BD7CF" type="checkbox" value="Chinese Mandarin" @if(is_array(old('language')) && in_array('Chinese Mandarin', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="chinese-mandarin" class="overview-note-body text-colortext">Chinese Mandarin</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="hindi" name="language[]" style="color: #3BD7CF" type="checkbox" value="Hindi" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="hindi" name="language[]" style="color: #3BD7CF" type="checkbox" value="Hindi" @if(is_array(old('language')) && in_array('Hindi', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="hindi" class="overview-note-body text-colortext">Hindi</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="polish" name="language[]" style="color: #3BD7CF" type="checkbox" value="Polish" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="polish" name="language[]" style="color: #3BD7CF" type="checkbox" value="Polish" @if(is_array(old('language')) && in_array('Polish', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="polish" class="overview-note-body text-colortext">Polish</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="vietnamese" name="language[]" style="color: #3BD7CF" type="checkbox" value="Vietnamese" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="vietnamese" name="language[]" style="color: #3BD7CF" type="checkbox" value="Vietnamese" @if(is_array(old('language')) && in_array('Vietnamese', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="vietnamese" class="overview-note-body text-colortext">Vietnamese</label>
-                                    </div>
-                                    <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="grade-schooler" name="language[]" style="color: #3BD7CF" type="checkbox" value="Grade Schooler" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        <label for="grade-schooler" class="overview-note-body text-colortext">Grade Schooler</label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="chinese-cantonese" name="language[]" style="color: #3BD7CF" type="checkbox" value="Chinese Cantonese" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="chinese-cantonese" name="language[]" style="color: #3BD7CF" type="checkbox" value="Chinese Cantonese" @if(is_array(old('language')) && in_array('Chinese Cantonese', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="chinese-cantonese" class="overview-note-body text-colortext">Chinese Cantonese</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="japanese" name="language[]" style="color: #3BD7CF" type="checkbox" value="Japanese" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="japanese" name="language[]" style="color: #3BD7CF" type="checkbox" value="Japanese" @if(is_array(old('language')) && in_array('Japanese', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="japanese" class="overview-note-body text-colortext">Japanese</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="russian" name="language[]" style="color: #3BD7CF" type="checkbox" value="Russian" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="russian" name="language[]" style="color: #3BD7CF" type="checkbox" value="Russian" @if(is_array(old('language')) && in_array('Russian', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="russian" class="overview-note-body text-colortext">Russian</label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="ethiopian" name="language[]" style="color: #3BD7CF" type="checkbox" value="Ethiopian" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="ethiopian" name="language[]" style="color: #3BD7CF" type="checkbox" value="Ethiopian" @if(is_array(old('language')) && in_array('Ethiopian', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="ethiopian" class="overview-note-body text-colortext">Ethiopian</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="korean" name="language[]" style="color: #3BD7CF" type="checkbox" value="Korean" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="korean" name="language[]" style="color: #3BD7CF" type="checkbox" value="Korean" @if(is_array(old('language')) && in_array('Korean', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="korean" class="overview-note-body text-colortext">Korean</label>
                                     </div>
                                     <div class="flex items-center space-x-3 mt-[10px]">
-                                        <input id="spanish" name="language[]" style="color: #3BD7CF" type="checkbox" value="Spanish" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input id="spanish" name="language[]" style="color: #3BD7CF" type="checkbox" value="Spanish" @if(is_array(old('language')) && in_array('Spanish', old('language')) ) checked @endif class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                         <label for="spanish" class="overview-note-body text-colortext">Spanish</label>
                                     </div>
                                 </div>
@@ -807,37 +801,37 @@
                                 <div class="flex space-x-[110px]">
                                     <div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="all-days" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="all-days" name="all_days"  @if(old('all_days')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="all-days" class="overview-note-body text-colortext">All days</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="monday" name="monday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="monday" name="monday" @if(old('monday')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="monday" class="overview-note-body text-colortext">Monday</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="tuesday" name="tuesday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="tuesday" name="tuesday" @if(old('tuesday')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="tuesday" class="overview-note-body text-colortext">Tuesday</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="wednesday" name="wednesday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="wednesday" name="wednesday" @if(old('wednesday')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="wednesday" class="overview-note-body text-colortext">Wednesday</label>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="thursday" name="thursday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="thursday" name="thursday" @if(old('thursday')) checked @endif  style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="thursday" class="overview-note-body text-colortext">Thursday</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="friday" name="friday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="friday" name="friday" @if(old('friday')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="friday" class="overview-note-body text-colortext">Friday</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="saturday" name="saturday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="saturday" name="saturday" @if(old('saturday')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="saturday" class="overview-note-body text-colortext">Saturday</label>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
-                                            <input id="sunday" name="sunday" style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="sunday" name="sunday" @if(old('sunday')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="check w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="sunday" class="overview-note-body text-colortext">Sunday</label>
                                         </div>
                                     </div>
@@ -865,10 +859,10 @@
                                         <label for="duration" class="overview-note-body text-colortext mb-2 block">Duration</label>
                                         <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                             <select id="duration" name="duration" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                <option>1 Month</option>
-                                                <option>3 Month</option>
-                                                <option>6 Month</option>
-                                                <option>1 Year</option>
+                                                <option @if(old('duration') == '1 Month') selected @endif value="1 Month">1 Month</option>
+                                                <option @if(old('duration') == '3 Month') selected @endif value="3 Month">3 Month</option>
+                                                <option @if(old('duration') == '6 Month') selected @endif value="6 Month">6 Month</option>
+                                                <option @if(old('duration') == '1 Year') selected @endif value="1 Year">1 Year</option>
                                             </select>
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -883,7 +877,7 @@
                                     <div>
                                         <label for="start-date" class="{{ $errors->has('start_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">Start date*</label>
                                         <div class="flex items-center space-x-3 py-2 ">
-                                            <input id="asap" name="asap" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="asap" name="asap" @if(old('asap')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="asap" class="overview-note-body text-colortext">ASAP</label>
                                         </div>
                                         <div class="{{ $errors->has('start_date') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
@@ -896,7 +890,7 @@
                                     <div>
                                         <label for="end-date" class="{{ $errors->has('end_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">End date*</label>
                                         <div class="flex items-center space-x-3 py-2 ">
-                                            <input id="tbd" name="tbd" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="tbd" name="tbd" @if(old('tbd')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="tbd" class="overview-note-body text-colortext">TBD</label>
                                         </div>
                                         <div class="{{ $errors->has('start_date') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
@@ -920,10 +914,11 @@
                                         <label for="start-date" class="overview-note-body text-colortext mb-2 block">Type</label>
                                         <div class="w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
                                             <select id="duration" name="salary_type" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                <option>Hourly</option>
-                                                <option>Test 1</option>
-                                                <option>Test 1</option>
-                                                <option>Test 1</option>
+                                                <option @if(old('salary_type') == 'Hourly') selected @endif value="Hourly">Hourly</option>
+                                                <option @if(old('salary_type') == 'Daily') selected @endif value="Daily" >Daily</option>
+                                                <option @if(old('salary_type') == 'Weekly') selected @endif value="Weekly" >Weekly</option>
+                                                <option @if(old('salary_type') == 'Monthly') selected @endif value="Monthly" >Monthly</option>
+                                                <option @if(old('salary_type') == 'Year') selected @endif value="Year" >Year</option>
                                             </select>
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -933,7 +928,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center space-x-3 mt-[13px] ">
-                                            <input id="rate-negotible" name="rate_negotiable" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="rate-negotible" name="rate_negotiable" @if(old('rate_negotiable')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="rate-negotible" class="overview-note-body text-colortext">Rate negotiable</label>
                                         </div>
                                     </div>
@@ -950,10 +945,9 @@
                                         <label for="daily" class="overview-note-body text-colortext mb-2 block">Pay frequency</label>
                                         <div class="w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                             <select id="daily" name="pay_frequency" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                <option>Daily</option>
-                                                <option>Week</option>
-                                                <option>Test 1</option>
-                                                <option>Test 1</option>
+                                                <option @if(old('pay_frequency') == 'Daily') selected @endif value="Daily" >Daily</option>
+                                                <option @if(old('pay_frequency') == 'Weekly') selected @endif value="Weekly" >Weekly</option>
+                                                <option @if(old('pay_frequency') == 'Monthly') selected @endif value="Monthly" >Monthly</option>
                                             </select>
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -967,10 +961,10 @@
                                         <label for="pay-with" class="overview-note-body text-colortext mb-2 block">Pay with</label>
                                         <div class="w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                             <select id="pay-with" name="pay_with" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                <option value="any">Any</option>
-                                                <option value="check">Check</option>
-                                                <option value="cash">Cash</option>
-                                                <option value="online_payment">Online Payment</option>
+                                                <option @if(old('pay_with') == 'any') selected @endif value="any">Any</option>
+                                                <option @if(old('pay_with') == 'check') selected @endif value="check">Check</option>
+                                                <option @if(old('pay_with') == 'cash') selected @endif value="cash">Cash</option>
+                                                <option @if(old('pay_with') == 'online_payment') selected @endif value="online_payment">Online Payment</option>
                                             </select>
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1046,6 +1040,7 @@
 
         })
     </script>
+    <script src="{{ asset('js/placePicker.js') }}"></script>
     <script src="{{ asset('js/jQuery/jobBoardCreate.js') }}"></script>
     @if ($errors->any())
         <script>

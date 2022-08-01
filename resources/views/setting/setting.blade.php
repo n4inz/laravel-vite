@@ -86,25 +86,25 @@
                                                 <tr class="border-b" valign="top" height="50px">
                                                     <td  width="175px">
                                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                            <input name="chile_care" {{ $setting->SettingDetail->service_category->chile_care ?? null ? 'checked' : '' }} value="1" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="chile_care" {{ old('chile_care') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->chile_care ?? null ? 'checked' : '' }} value="1" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="child-care"  class="overview-id-field text-colortext ">Child care</label>
                                                         </div>
                                                     </td>
                                                     <td  width="190px">
                                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                            <input name="senior_care" {{ $setting->SettingDetail->service_category->senior_care ?? null ? 'checked' : '' }} value="1" id="senior-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="senior_care" {{ old('senior_care') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->senior_care ?? null ? 'checked' : '' }} value="1" id="senior-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="senior-care" class="overview-id-field text-colortext">Senior care</label>
                                                         </div>
                                                     </td>
                                                     <td  width="180px">
                                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                            <input name="home_care" {{ $setting->SettingDetail->service_category->home_care ?? null ? 'checked' : '' }} value="1" id="home-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="home_care" {{ old('home_care') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_category->home_care ?? null ? 'checked' : '' }} value="1" id="home-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="home-care" class="overview-id-field text-colortext">Home care</label>
                                                         </div>  
                                                     </td>
                                                     <td >
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="other" {{ $setting->SettingDetail->service_category->other ?? NULL ? 'checked' : '' }} id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="other" {{ old('other') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->other ?? NULL ? 'checked' : '' }} id="other" style="color: #3BD7CF" type="checkbox" value="other" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="other" class="overview-id-field text-colortext">Other services</label>
                                                         </div>
                                                     </td>
@@ -112,43 +112,43 @@
                                                 <tr>
                                                     <td  valign="top">
                                                         <div class="flex items-center space-x-[14px] mt-[10px] w-full">
-                                                            <input name="nanny_sister" {{ $setting->SettingDetail->service_category->nanny_sister ?? null ? 'checked' : '' }} value="1" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="nanny_sister" {{ old('nanny_sister') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->nanny_sister ?? null ? 'checked' : '' }} value="1" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="nany-sister" class="overview-id-field text-colortext">Nany/ Sister</label>
                                                         </div>
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="au_pair" {{ $setting->SettingDetail->service_category->au_pair ?? null ? 'checked' : '' }} value="1" id="au-pair" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="au_pair" {{ old('au_pair') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->au_pair ?? null ? 'checked' : '' }} value="1" id="au-pair" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="au-pair" class="overview-id-field text-colortext">Au Pair</label>
                                                         </div>
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="maternity_care" {{ $setting->SettingDetail->service_category->maternity_care ?? null ? 'checked' : '' }} value="1" id="maternity-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="maternity_care" {{ old('maternity_care') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->maternity_care ?? null ? 'checked' : '' }} value="1" id="maternity-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="maternity-care" class="overview-id-field text-colortext">Maternity Care</label>
                                                         </div>
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="at_home_daycare" {{ $setting->SettingDetail->service_category->at_home_daycare ?? null ? 'checked' : '' }}  value="1" id="at-home-daycare" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="at_home_daycare" {{ old('at_home_daycare') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->at_home_daycare ?? null ? 'checked' : '' }}  value="1" id="at-home-daycare" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="at-home-daycare" class="overview-id-field text-colortext">At Home Daycare</label>
                                                         </div>
                                                     </td>
                                                     <td  valign="top">
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="companion" {{ $setting->SettingDetail->service_category->companion ?? null ? 'checked' : '' }} value="1" id="companion" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="companion" {{ old('companion') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->companion ?? null ? 'checked' : '' }} value="1" id="companion" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="companion" class="overview-id-field text-colortext">Companion</label>
                                                         </div>
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="personal_full_care" {{ $setting->SettingDetail->service_category->personal_full_care ?? null ? 'checked' : '' }} value="1" id="personal-full-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="personal_full_care" {{ old('personal_full_care') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->personal_full_care ?? null ? 'checked' : '' }} value="1" id="personal-full-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="personal-full-care" class="overview-id-field text-colortext">Personal Full Care</label>
                                                         </div>
                                                     </td>
                                                     <td  valign="top">
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="meal_prepation_coking" {{ $setting->SettingDetail->service_category->meal_prepation_coking ?? null ? 'checked' : '' }} value="1" id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="meal_prepation_coking" {{ old('meal_prepation_coking') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->meal_prepation_coking ?? null ? 'checked' : '' }} value="1" id="meal-prepation-coking" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="meal-prepation-coking" class="overview-id-field text-colortext max-w-[140px]">Meal Prepation/ Coking</label>
                                                         </div>
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="house_cleaning" {{ $setting->SettingDetail->service_category->house_cleaning ?? null ? 'checked' : '' }} value="1" id="house-cleaning" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="house_cleaning" {{ old('house_cleaning') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->house_cleaning ?? null ? 'checked' : '' }} value="1" id="house-cleaning" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="house-cleaning" class="overview-id-field text-colortext">House Cleaning</label>
                                                         </div>
                                                         <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                            <input name="private_home_kitchen" {{ $setting->SettingDetail->service_category->private_home_kitchen ?? null ? 'checked' : '' }} value="1" id="private-home-kitchen" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input name="private_home_kitchen" {{ old('private_home_kitchen') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->private_home_kitchen ?? null ? 'checked' : '' }} value="1" id="private-home-kitchen" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="private-home-kitchen" class="overview-id-field text-colortext max-w-[130px]">Private Home Kitchen</label>
                                                         </div>
                                                     </td>
@@ -195,7 +195,7 @@
                                     <div>
                                         <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
-                                            <input name="send_notifcation" {{ $setting->SettingDetail->service_location_fee->send_notifcation ?? null ? 'checked' : '' }} value="1" id="send-notification" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input name="send_notifcation" {{ old('send_notifcation') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->send_notifcation ?? null ? 'checked' : '' }} value="1" id="send-notification" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
                                         </div>
                                     </div>
@@ -203,15 +203,15 @@
                                 <div class="px-6 mt-8 flex flex-col items-center space-x-[25px]">
                                     <div class="flex">
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="app-fee" name="application_fee" {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="app-fee" class="{{ $errors->has('aplication_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Application Fee ($)</label>
+                                            <input id="application_fee" name="application_fee" {{ old('application_fee') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="application_fee" class="{{ $errors->has('aplication_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Application Fee ($)</label>
                                         </div>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="placement-fee" name="placement_fee" {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="placement-fee" name="placement_fee" {{ old('placement_fee') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="placement-fee" class="{{ $errors->has('placement_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Placement Fee ($)</label>
                                         </div>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="hourly-rate" name="hourly_rate" {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="hourly-rate" name="hourly_rate" {{ old('hourly_rate') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="hourly-rate" class="{{ $errors->has('hourly_rate') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Hourly Rate ($)</label>
                                         </div>
                                     </div>
@@ -254,14 +254,14 @@
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Client</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input name="client" {{ $setting->SettingUsers->client ?? null ? 'checked' : '' }} value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input name="client" {{ old('client') ? 'checked' : ''  }} {{ $setting->SettingUsers->client ?? null ? 'checked' : '' }} value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
                                         </div>
                                     </div>
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Caregives</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input name="caregives" {{ $setting->SettingUsers->caregives ?? null ? 'checked' : '' }}  value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input name="caregives" {{ old('caregives') ? 'checked' : ''  }} {{ $setting->SettingUsers->caregives ?? null ? 'checked' : '' }}  value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
                                         </div>
                                     </div>
@@ -270,7 +270,7 @@
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input name="interested_public_pool" {{ $setting->SettingUsers->interested_public_pool ?? null ? 'checked' : '' }} value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input name="interested_public_pool" {{ old('interested_public_pool') ? 'checked' : ''  }} {{ $setting->SettingUsers->interested_public_pool ?? null ? 'checked' : '' }} value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="" class="overview-id-field text-colortext">We want to share our work with other agencies and caregives</label>
                                         </div>
                                     </div>

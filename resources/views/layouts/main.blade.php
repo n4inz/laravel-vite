@@ -97,6 +97,7 @@
       
     </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
+    
     <script src="{{ asset('js/jQuery/jQueryUi/jquery-ui.js') }}"></script>
 </head>
 <body class="bg-backround font-roboto ">

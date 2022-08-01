@@ -40,7 +40,7 @@
             @foreach ($staf as $values )
                 <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                     <div>
-                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Staf/avatar/'.$values->avatar) }}" alt="">
+                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Setting/avatar/'.$values->avatar) }}" alt="">
                     </div>
                     <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
                         <span class="user-talent-name text-[#222222]">{{ $values->full_name }}</span>

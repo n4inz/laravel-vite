@@ -51,7 +51,7 @@ class JobboardRepository
             // 'type' => $request->type,
             'type' => $request->onlyOneStatus,
             'clients_id' => $value[0]->value,
-            'users_id' => auth()->user()->id ?? auth()->guard('staf')->user()->users_id,
+            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
             'stafs_id' => auth()->guard('staf')->user()->id ?? 0
         ]);
 
@@ -59,7 +59,7 @@ class JobboardRepository
             JobModelsMatchTalent::create([
                 'jobs_sub_category' => $request->subcategory[$keySub], 
                 'job_models_id' => $jobs->id, 
-                'users_id' => auth()->user()->id
+                'users_id' => auth()->guard('web')->user()->id
             ]);
 
         }
@@ -92,7 +92,7 @@ class JobboardRepository
         }
 
         // return $talent;
-        $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
+        $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
         SendMail::dispatch($request->email_client, $match_talent);
     }
 
@@ -109,7 +109,7 @@ class JobboardRepository
                     'assignee' => 'Dummy data',
                     'status' => 'Inprogress',
                     'job_models_id' => $request->id,
-                    'users_id' => auth()->user()->id ?? auth()->guard('staf')->user()->users_id,
+                    'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
                     'stafs_id' => auth()->guard('staf')->user()->id ?? 0
                 ]);
 
@@ -131,18 +131,18 @@ class JobboardRepository
     public function search_job($request)
     {
         return JobModels::orWhere('status', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->id )
+                        ->where('users_id', auth()->guard('web')->user()->id ??  auth()->guard('staf')->user()->users_id )
                         ->orWhere('id_unique', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->id )
+                        ->where('users_id', auth()->guard('web')->user()->id ??  auth()->guard('staf')->user()->users_id )
                         ->orWhere('description', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->id )
+                        ->where('users_id', auth()->guard('web')->user()->id ??  auth()->guard('staf')->user()->users_id )
                         ->orWhere('title', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->id )
+                        ->where('users_id', auth()->guard('web')->user()->id ??  auth()->guard('staf')->user()->users_id )
                         ->get();
 
         // if(isset($request->search)){
         //     $search = JobModels::orWhere('status', 'like', "%" . $request->search . "%")
-        //     ->where('users_id', auth()->user()->id )
+        //     ->where('users_id', auth()->guard('web')->user()->id )
         //     ->orWhere('id_unique', 'like', "%" . $request->search . "%")
         //     ->where('users_id', auth()->user()->id )
         //     ->orWhere('description', 'like', "%" . $request->search . "%")
@@ -162,17 +162,17 @@ class JobboardRepository
     {
         return JobModelsTask::orWhere('task' , 'like', "%" . $request->search_task . "%")
         ->where([
-            ['users_id', auth()->user()->id], 
+            ['users_id', auth()->guard('web')->user()->id], 
             ['job_models_id' , $request->job_models_id],
         ])
         ->orWhere('status' , 'like', "%" . $request->search_task . "%")
         ->where([
-            ['users_id', auth()->user()->id], 
+            ['users_id', auth()->guard('web')->user()->id], 
             ['job_models_id' , $request->job_models_id],
         ])
         ->orWhere('assignee' , 'like', "%" . $request->search_task . "%")
         ->where([
-            ['users_id', auth()->user()->id], 
+            ['users_id', auth()->guard('web')->user()->id], 
             ['job_models_id' , $request->job_models_id],
         ])
         ->get();   

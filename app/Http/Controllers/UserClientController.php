@@ -30,7 +30,7 @@ class UserClientController extends Controller
     }
     public function client()
     {
-        $client = Client::where('users_id', auth()->user()->id ?? auth()->guard('staf')->user()->id)->get();
+        $client = Client::where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
         return view('user.client.user_client' , compact('client'));
     }
 
@@ -48,9 +48,9 @@ class UserClientController extends Controller
 
     public function talent()
     {
-        $talent = Talents::where('users_id', auth()->user()->id ?? auth()->guard('staf')->user()->id)->with('type_helper')->get();
+        $talent = Talents::where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->with('type_helper')->get();
 
-        return view('user.user_talent', compact('talent'));
+        return view('user.talent.user_talent', compact('talent'));
     }
 
     public function telent_store(TalentRequest $request)
@@ -63,7 +63,7 @@ class UserClientController extends Controller
     public function staf()
     {
         if(auth()->user()->hasRole('agency')){
-            $staf = Staf::where('users_id' , auth()->user()->id ?? auth()->guard('staf')->user()->id)->get();
+            $staf = Staf::where('users_id' , auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
             return view('user.staf.staf', compact('staf'));
         }
 
@@ -91,12 +91,7 @@ class UserClientController extends Controller
             'type' => $request->type,
             'tenants_id' => $request->user()->tenants_id,
             'users_id' => $request->user()->id
-        ]);
-
-        // $role = Role::create(['name' => 'staf']);
-        // $permission = Permission::create(['name' => 'created']);
-        // $role->givePermissionTo($permission);
-   
+        ]);  
 
         $staf->assignRole('staf');
 

@@ -25,14 +25,14 @@ class UserClientRepository
             'languages' => $request->languages,
             'note' => $request->note,
             'avatar' => $avatar ?? 'dummy.png',
-            'users_id' => auth()->user()->id ?? auth()->guard('staf')->user()->users_id,
-            'create_by' =>  auth()->user()->id ?? auth()->guard('staf')->user()->id,
+            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
+            'create_by' =>  auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->id,
         ]);
 
 
         $client->attached_file()->create([
             'attached_file' => $name,
-            'users_id' => auth()->user()->id ?? auth()->guard('staf')->user()->users_id
+            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id
         ]);
 
         // ClientAttachedFile::create([

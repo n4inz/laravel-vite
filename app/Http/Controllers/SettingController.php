@@ -24,18 +24,18 @@ class SettingController extends Controller
 
     public function setting()
     {
-        $setting = User::where('id',auth()->user()->id)->with(['avatar','SettingDetail' => function ($query){
+        $setting = User::where('id',auth()->guard('web')->user()->id)->with(['avatar','SettingDetail' => function ($query){
             $query->with(['service_location_fee', 'service_category'])->first();
         }, 'SettingAdditionals' => function($query){
             $query->with('defined_check_list')->first();
         },'SettingUsers', 'SettingGeneral'])->first();
-        $defined_list = SettingDefinedCheckList::where('users_id', auth()->user()->id)->get();
+        $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->get();
         return view('setting.setting', compact('setting', 'defined_list'));
     }
 
     public function setting_store(SettingRequest $request)
     {
-        $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();
+        $cek_setting = SettingGeneral::where('users_id' , auth()->guard('web')->user()->id)->first();
 
         if(empty($cek_setting)){
             $this->settingRepository->created($request);
@@ -49,15 +49,15 @@ class SettingController extends Controller
     public function upload_avatar(Request $request)
     {
         $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
-        $exit =  Avatar::where('users_id', auth()->user()->id)->first();
+        $exit =  Avatar::where('users_id', auth()->guard('web')->user()->id)->first();
 
         if(empty($exit)){
             Avatar::create([
                 'avatar' => $avatar,
-                'users_id' => auth()->user()->id
+                'users_id' => auth()->guard('web')->user()->id
             ]);
         }else{
-            Avatar::where('users_id' , auth()->user()->id)->update([
+            Avatar::where('users_id' , auth()->guard('web')->user()->id)->update([
                 'avatar' => $avatar,
             ]);
         }

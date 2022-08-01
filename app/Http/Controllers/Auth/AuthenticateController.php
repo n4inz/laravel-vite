@@ -83,6 +83,8 @@ class AuthenticateController extends Controller
                 'email' =>  $request->email,
                 'password' => Hash::make($request->password),
             ]);
+
+            $user->assignRole('agency');
     
             $this->create_credentials();
             return redirect(env('URI').$request->sub_domain.'.'.env('DOMAIN').'/tenancy');

@@ -173,9 +173,11 @@
                             </div>
                             <div class="mt-6">
                                 <span class="{{ $errors->has('type_helper') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Type of Help Needed</span>
-                                <div class="{{ $errors->has('type_helper') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
+                                <div class="{{ $errors->has('type_helper') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-28 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
                                 </div>
+                                {{-- <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder=""> --}}
+
                                 @if($errors->has('type_helper'))
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('type_helper') }}</p>
                                 @endif
@@ -201,7 +203,7 @@
                             <div class="mt-6">
                                 <span class="{{ $errors->has('about_talent') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">About talent</span>
                                 <div class="{{ $errors->has('about_talent') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-[148px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
-                                    <textarea name="about_talent" value="about_talent" rows="6" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Enter referral"></textarea>
+                                    <textarea name="about_talent" rows="6" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Enter referral">{{ old('about_talent') }}</textarea>
                                     <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
                                 </div>
                                 @if($errors->has('about_talent'))
@@ -219,7 +221,10 @@
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('attached_file') ? '#e80f00' : '#827C7C' }}"/>
                                         </svg>
                                         <span class="{{ $errors->has('attached_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
+                                        <span class="{{ $errors->has('attached_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 2MB</span>
+
                                     </div>
+                                    
                                     <input type="file" name="attached_file" id="attached_file" class="hidden">
                                 </label>
                                 @if($errors->has('attached_file'))
@@ -239,7 +244,7 @@
             </div>
         </div>
     </article>
-
+    <script src="{{ asset('js/fileNameLoad.js') }}"></script>
     <script>
         var type_helper = document.querySelector('#type_helper');
         var tagify = new Tagify(type_helper, {
