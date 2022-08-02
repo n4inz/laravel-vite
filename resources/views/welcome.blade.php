@@ -1,68 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    {{-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" /> --}}
-    {{-- <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script> --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
+<html>
+  <head>
+    <title>Add Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-    <link  href="{{ asset('css/testing-flowbite.css') }}" rel="stylesheet">
-    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
-    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
-    <link rel="stylesheet" href="{{ asset('css/test-select2.css') }}">
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-    <!-- CSS -->
-    {{-- <link rel="stylesheet" href="https://unpkg.com/multiple-select-js@1.0.2/dist/multiple-select.css">
-    <!-- JS -->
-    <script src="https://unpkg.com/multiple-select-js@1.0.2/dist/assets/js/multiple-select.js"></script> --}}
-    <link rel="stylesheet" href="{{ asset('css/multiselect/style.css') }}">
+    <style>
+        #map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+    </style>
+    <script type="module">
+        // Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  const uluru = { lat: -25.344, lng: 131.031 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+}
 
-</head>
-<body>
+window.initMap = initMap;
+    </script>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
 
-    {{ auth()->guard('staf')->user()->full_name }}
-      
-{{-- 
-    <select id="form-control" class="h-7 w-96">
-        <option selected="selected">orange</option>
-        <option >purple</option>
-        <option >green</option>
-        <option >yellow</option>
-        <option >purple</option>
-    </select> --}}
-    <div class="multiSelect">
-        <select multiple class="multiSelect_field" data-placeholder="Add ss Browsers">
-          <option value="chrome">Nanny</option>
-          <option selected="select" value="firefox">Firefox</option>
-          <option value="opera">Sister</option>
-          <option value="safari">Maternity Care</option>
-        </select>
-    </div>
-      
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconX">
-        <g stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-        </g>
-    </symbol>
-    </svg>
-
-    <script src="{{ asset('js/multiselect/multiselect.js') }}"></script>
-  
-{{-- <script>
-    $(document).ready(function() {
-    $('#form-control').select2({
-        multiple: true,
-
-    });
-});
-</script> --}}
-
-</body>
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFLOYUbtIHVDqMQ2lVhWcPa3234FlpzlI&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
 </html>

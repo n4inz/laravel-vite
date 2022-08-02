@@ -15,6 +15,9 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/font-awesome.css') }}"> --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFLOYUbtIHVDqMQ2lVhWcPa3234FlpzlI&libraries=places"></script>
+
+    <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script>
 
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <script src="{{ asset('js/tagify/tagify.js') }}"></script>
@@ -97,7 +100,7 @@
       
     </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
-    
+    <script src="{{ asset('js/placePicker.js') }}"></script>
     <script src="{{ asset('js/jQuery/jQueryUi/jquery-ui.js') }}"></script>
 </head>
 <body class="bg-backround font-roboto ">
@@ -109,9 +112,5 @@
         
     </div>
     <script src="{{ asset('js/sideNav.js') }}"></script>
-    {{-- <script src="{{ asset('js/multiselect/multiselect.js') }}"></script>
-    <script src="{{ asset('js/chosen/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/chosen/chosen.jquery.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/chosen/init.js') }}" type="text/javascript" charset="utf-8"></script> --}}
 </body>
 </html>

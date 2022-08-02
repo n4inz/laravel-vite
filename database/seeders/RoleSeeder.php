@@ -35,11 +35,11 @@ class RoleSeeder extends Seeder
         $permission_agency = Permission::create(['name' => 'all']);
         $role_agency->givePermissionTo($permission_agency);
 
-        $role_staf = Role::create(['guard_name' => 'staf', 'name' => 'staf']);
-        $permission_staf_create = Permission::create(['guard_name' => 'staf' ,'name' => 'create']);
-        $permission_staf_read = Permission::create(['guard_name' => 'staf' ,'name' => 'read']);
-        $permission_staf_update = Permission::create(['guard_name' => 'staf' ,'name' => 'update']);
-        $permission_staf_delete = Permission::create(['guard_name' => 'staf' ,'name' => 'delete']);
+        $role_staf = Role::create(['name' => 'staf']);
+        $permission_staf_create = Permission::create(['name' => 'create']);
+        $permission_staf_read = Permission::create(['name' => 'read']);
+        $permission_staf_update = Permission::create(['name' => 'update']);
+        $permission_staf_delete = Permission::create(['name' => 'delete']);
 
         $role_staf->givePermissionTo($permission_staf_create);
         $role_staf->givePermissionTo($permission_staf_read);

@@ -30,7 +30,7 @@ class JobboardController extends Controller
     public function index()
     {
 
-        $client = Client::where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
+        $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
             array_push($json, [
@@ -44,10 +44,10 @@ class JobboardController extends Controller
         // return $client;
         $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
         return view('jobboard.jobboard', [
-            "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id),
-            "interviewing" => $jobs->where('status', 'interviewing')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id),
-            "trialing" => $jobs->where('status', 'trialing')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id),
-            "completed" => $jobs->where('status', 'completed')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id),
+            "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
+            "interviewing" => $jobs->where('status', 'interviewing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
+            "trialing" => $jobs->where('status', 'trialing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
+            "completed" => $jobs->where('status', 'completed')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "json" => $json,
         ]);
     }
@@ -66,10 +66,10 @@ class JobboardController extends Controller
         return response()->json([
             'id' => $request->id,
             'status' => $request->status,
-            'count_potential_clients' => JobModels::where('status', 'potential_clients')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->count(),
-            'count_interviewing' => JobModels::where('status', 'interviewing')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->count(),
-            'count_trialing' => JobModels::where('status', 'trialing')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->count(),
-            'count_completed' => JobModels::where('status', 'completed')->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->count(),
+            'count_potential_clients' => JobModels::where('status', 'potential_clients')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
+            'count_interviewing' => JobModels::where('status', 'interviewing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
+            'count_trialing' => JobModels::where('status', 'trialing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
+            'count_completed' => JobModels::where('status', 'completed')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
         ]);
 
     }
@@ -101,7 +101,7 @@ class JobboardController extends Controller
 
         // return $result;
         foreach ($result->match_talent as $match) {
-            $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->with('talent')->get();
+            $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with('talent')->get();
             if ($talent->count() > 0) {
                 foreach ($talent as $val) {
                     array_push($dataTalent, $val->talent);
@@ -177,11 +177,11 @@ class JobboardController extends Controller
         ]);
 
        $created =  JobModelsComment::create([
-            'name' =>  auth()->guard('web')->user()->full_name ?? auth()->guard('staf')->user()->full_name ?? 'Your agency',
+            'name' =>  auth()->user()->full_name ?? 'Your agency',
             'comment' => $request->comment,
-            'avatar' => auth()->guard('web')->user()->avatar->avatar ?? auth()->guard('staf')->user()->avatar ?? 'dummy.png',
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
             'job_models_id' => $request->job_models_id,
-            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
         ]);
 
         $time = Carbon::parse($created->created_at)->format('g:i A');
@@ -192,7 +192,7 @@ class JobboardController extends Controller
             'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
             'time' =>  $date.' - '.$time,
             'id' => $created->id,
-            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             'job_models_id' => $request->job_models_id,
         ];
         Comments::dispatch($data);
@@ -211,12 +211,12 @@ class JobboardController extends Controller
         ]);
 
         $created = JobModelsCommentsReply::create([
-            'name' =>  auth()->guard('web')->user()->full_name ?? auth()->guard('staf')->user()->full_name ?? 'Your agency',
+            'name' =>  auth()->user()->full_name ?? 'Your agency',
             'comment' => $request->reply_comment,
-            'avatar' => auth()->guard('web')->user()->avatar->avatar ?? auth()->guard('staf')->user()->avatar ?? 'dummy.png',
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
             'job_models_comments_id' => $request->job_comments_id,
             'job_models_id' => $request->job_models_id,
-            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
         ]);
 
         $time = Carbon::parse($created->created_at)->format('g:i A');
@@ -228,7 +228,7 @@ class JobboardController extends Controller
             'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
             'time' =>  $date.' - '.$time,
             'id_comment' => $request->job_comments_id,
-            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             'job_models_id' => $request->job_models_id,
         ];
 

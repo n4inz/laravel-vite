@@ -43,7 +43,7 @@
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Setting/avatar/'.$values->avatar) }}" alt="">
                     </div>
                     <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
-                        <span class="user-talent-name text-[#222222]">{{ $values->full_name }}</span>
+                        <span class="user-talent-name text-[#222222]">{{ $values->user->full_name }}</span>
                         {{-- <span class="user-talent-live">Age {{ Carbon\Carbon::parse($values->day_of_birthday)->age }}, in  {{ Str::limit($values->address, 20, $end='...') }}</span> --}}
                         <span class="overview-note-body text-[#2CA6A0]">
                            {{ $values->type }}
@@ -53,7 +53,7 @@
                                 <path d="M17.3337 4.1735V10.9585C17.3337 11.6503 17.069 12.3159 16.5939 12.8187C16.1188 13.3215 15.4693 13.6235 14.7787 13.6627L14.6253 13.6668H3.37533C2.68354 13.6669 2.01797 13.4022 1.51513 12.9271C1.0123 12.452 0.710324 11.8025 0.671159 11.1118L0.666992 10.9585V4.1735L8.71033 8.38683C8.79981 8.4337 8.89931 8.45818 9.00033 8.45818C9.10134 8.45818 9.20085 8.4337 9.29033 8.38683L17.3337 4.1735ZM3.37533 0.333496H14.6253C15.2966 0.333415 15.9441 0.582659 16.442 1.03289C16.94 1.48311 17.253 2.10223 17.3203 2.77016L9.00033 7.1285L0.680326 2.77016C0.744928 2.12876 1.0362 1.53143 1.50178 1.08555C1.96737 0.63967 2.57673 0.374485 3.22033 0.337663L3.37533 0.333496H14.6253H3.37533Z" fill="#3BD7CF"/>
                             </svg>
                             <span class="user-talent-live ">
-                                {{ Str::limit($values->email, 20, $end='...') }}
+                                {{ Str::limit($values->user->email, 20, $end='...') }}
                             </span>
                         </div>
                     </div>

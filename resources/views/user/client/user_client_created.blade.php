@@ -74,10 +74,21 @@
                                             <label for="languages" class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
                                             <div class="{{ $errors->has('languages') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[316px] p-3 h-10 border border-[#ECECEC] flex items-center rounded">
                                                 <select name="languages" id="category" class="text-sm overview-note-body bg-transparent border-none text-colortext appearance-none rounded-lg p-1 block w-full focus:ring-0 outline-none">
-                                                    <option value="English">English</option>
-                                                    <option value="Rusia">Rusia</option>
-                                                    <option value="Indonesia">Indonesia</option>
-                                                    <option value="Hindi">Hindi</option>
+                                                    <option @if(old('languages') == 'Chinese Cantonese') selected @endif value="Chinese Cantonese">Chinese Cantonese</option>
+                                                    <option @if(old('languages') == 'Chinese Mandarin') selected @endif value="Chinese Mandarin">Chinese Mandarin</option>
+                                                    <option @if(old('languages') == 'English') selected @endif value="English">English</option>
+                                                    <option @if(old('languages') == 'Ethiopian') selected @endif value="Ethiopian">Ethiopian</option>
+                                                    
+                                                    <option @if(old('languages') == 'French') selected @endif value="French">French</option>
+                                                    <option @if(old('languages') == 'Hindi') selected @endif value="Hindi">Hindi</option>
+                                                    <option @if(old('languages') == 'Japanese') selected @endif value="Japanese">Japanese</option>
+                                                    <option @if(old('languages') == 'Korean') selected @endif value="Korean">Korean</option>
+                                                    <option @if(old('languages') == 'Tagalog') selected @endif value="Tagalog">Tagalog</option>
+                                                    <option @if(old('languages') == 'Polish') selected @endif value="Polish">Polish</option>
+                                                    <option @if(old('languages') == 'Russian') selected @endif value="Russian">Russian</option>
+                                                    <option @if(old('languages') == 'Spanish') selected @endif value="Spanish">Spanish</option>
+                                                    <option @if(old('languages') == 'Thai') selected @endif value="Thai">Thai</option>
+                                                    <option @if(old('languages') == 'Vietnamese') selected @endif value="Vietnamese">Vietnamese</option>
                                                 </select>
                                                 <div>
                                                     <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +166,7 @@
                                 <div class="px-4 mt-4 space-y-3">
                                     {{-- Upload --}}
                                     <label for="attached_file">
-                                        <div class="{{ $errors->has('attached_file') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex flex-col justify-center items-center w-full h-40 rounded border-[2px] border-dotted space-y-[10.25px] hover:cursor-pointer">
+                                        <div class="{{ $errors->has('attached_file') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex flex-col justify-center items-center w-full h-40 rounded border-[2px] border-dotted space-y-[10.25px] hover:cursor-pointer files-kept">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.1528C2.25 17.7386 2.58579 17.4028 3 17.4028H21C21.4142 17.4028 21.75 17.7386 21.75 18.1528C21.75 18.567 21.4142 18.9028 21 18.9028H3C2.58579 18.9028 2.25 18.567 2.25 18.1528Z" fill="{{ $errors->has('attached_file') ? '#e80f00' : '#827C7C' }} "/>
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21C2.25 20.5858 2.58579 20.25 3 20.25H21C21.4142 20.25 21.75 20.5858 21.75 21C21.75 21.4142 21.4142 21.75 21 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21Z" fill="{{ $errors->has('attached_file') ? '#e80f00' : '#827C7C' }}"/>
@@ -178,9 +189,10 @@
             </div>
         </div>
     </article>
-    <script src="{{ asset('js/fileNameLoad.js') }}"></script>
+   
     <script>
         var loadFile = function(event) {
+
           var output = document.getElementById('output');
           output.src = URL.createObjectURL(event.target.files[0]);
           output.onload = function() {
@@ -188,7 +200,30 @@
           }
 
         };
+
+        $('#attached_file').change(function(){
+           var val = $(this).val();
+
+            var extension = val.substring(val.lastIndexOf('.') + 1);
+            if(extension == 'pdf' || extension == 'PDF' || extension == 'Pdf'){
+                var pdf = `<i class="fa fa-5x fa-file-pdf-o text-red-600" aria-hidden="true"></i>
+                            <span class="name-file text-xs text-gray-400">Max 2MB</span>`;                 
+                $('.files-kept').html(pdf)
+            }else if(extension == 'zip' || extension == 'rar' || extension == 'Zip'){
+                var zip = `<i class="fa fa-5x text-yellow-400 fa-file-archive-o" aria-hidden="true"></i> 
+                            <span class="name-file text-xs text-gray-400">Max 2MB</span>`;                 
+                $('.files-kept').html(zip)
+            }else{
+                var other = `<i class="fa fa-5x fa-file-text-o" aria-hidden="true"></i> 
+                            <span class="name-file text-xs text-gray-400">Max 2MB</span>`;                 
+                $('.files-kept').html(other)
+            }
+
+
+           console.log(extension)
+        })
     </script>
+     <script src="{{ asset('js/fileNameLoad.js') }}"></script>
 </main>
 
 @endsection

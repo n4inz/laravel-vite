@@ -8,6 +8,7 @@ use App\Http\Traits\ImageUpload;
 use App\Models\Client;
 use App\Models\Staf;
 use App\Models\Talents;
+use App\Models\User;
 use App\Repositories\UserClientRepository;
 use App\Repositories\UserTalentRepository;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class UserClientController extends Controller
     }
     public function client()
     {
-        $client = Client::where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
+        $client = Client::get();
         return view('user.client.user_client' , compact('client'));
     }
 
@@ -43,12 +44,12 @@ class UserClientController extends Controller
     {
         
         $this->UserClientRepository->created($request);
-        return redirect()->back()->with('Success' , 'Created client successfuly');
+        return redirect()->route('user_client.client')->with('Success' , 'Created client successfuly');
     }
 
     public function talent()
     {
-        $talent = Talents::where('users_id', auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->with('type_helper')->get();
+        $talent = Talents::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with('type_helper')->get();
 
         return view('user.talent.user_talent', compact('talent'));
     }
@@ -63,7 +64,7 @@ class UserClientController extends Controller
     public function staf()
     {
         if(auth()->user()->hasRole('agency')){
-            $staf = Staf::where('users_id' , auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id)->get();
+            $staf = Staf::with('user')->where('users_agency_id' , auth()->user()->id)->get();
             return view('user.staf.staf', compact('staf'));
         }
 
@@ -75,7 +76,7 @@ class UserClientController extends Controller
 
         $request->validate([
             'full_name' => 'required|min:3',
-            'email' => 'required|unique:users,email|unique:stafs,email',
+            'email' => 'required|unique:users,email',
             'type' => 'required|min:3',
             'password' => 'required',
         ]);
@@ -83,18 +84,22 @@ class UserClientController extends Controller
             $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
         }
 
-       $staf = Staf::create([
+       $user = User::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'tenants_id' => $request->user()->tenants_id,
+
+        ]);
+
+        $user->staf()->create([
             'avatar' => $avatar ?? 'dummy.png',
             'type' => $request->type,
-            'tenants_id' => $request->user()->tenants_id,
-            'users_id' => $request->user()->id
-        ]);  
+            'users_agency_id' => $request->user()->id
+        ]);
+        
 
-        $staf->assignRole('staf');
-
+        $user->assignRole('staf');
 
         return redirect()->back()->with('success', 'Create staff successfuly');
     }

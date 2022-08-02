@@ -511,8 +511,9 @@
                         </div>
                         <div class="px-8 mt-4">
                             <label for="description" class="{{ $errors->has('description') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Description*</label>
-                            <div class="{{ $errors->has('description') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="description" value="{{ old('description') }}" type="text" id="description" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="">
+                            <div class="{{ $errors->has('description') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-20 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
+                                {{-- <input name="description" value="{{ old('description') }}" type="text" id="description" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder=""> --}}
+                                <textarea name="description" rows="3" class="{{ $errors->has('description') ? 'placeholder-red-600' : '' }}  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none">{{ old('description') }}</textarea>
                             </div>
                             @if($errors->has('description'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('description') }}</p>
@@ -537,7 +538,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99967 1.83325C4.59392 1.83325 1.83301 4.59416 1.83301 7.99992C1.83301 11.4057 4.59392 14.1666 7.99967 14.1666C11.4054 14.1666 14.1663 11.4057 14.1663 7.99992C14.1663 4.59416 11.4054 1.83325 7.99967 1.83325ZM0.833008 7.99992C0.833008 4.04188 4.04163 0.833252 7.99967 0.833252C11.9577 0.833252 15.1663 4.04188 15.1663 7.99992C15.1663 11.958 11.9577 15.1666 7.99967 15.1666C4.04163 15.1666 0.833008 11.958 0.833008 7.99992Z" fill="#222222"/>
                                     </svg> 
                                 </div>
-                                <div class="flex items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
+                                <div class="flex relative items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
                                     <input name="address" value="{{ old('') }}" type="text" id="id" class="placepicker overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
                                     <input type="hidden" name="latitude" value="-6.87421360">
                                     <input type="hidden" name="longitude" value="107.60348900">
@@ -873,7 +874,44 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex space-x-4 mt-6">
+
+                                <div class="flex space-x-[165px] mt-6">
+                                    <div>
+                                        <label for="start-date" class="{{ $errors->has('start_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">Start date*</label>
+                                        <div class="flex items-center space-x-3 py-2 ">
+                                            <input id="asap" name="asap" @if(old('asap')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="asap" class="overview-note-body text-colortext">ASAP</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="end-date" class="{{ $errors->has('end_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">End date*</label>
+                                        <div class="flex items-center space-x-3 py-2 ">
+                                            <input id="tbd" name="tbd" @if(old('tbd')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="tbd" class="overview-note-body text-colortext">TBD</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div date-rangepicker datepicker-format="yyyy/mm/dd" class="flex space-x-4 relative ">
+                                    <div>
+                                        <div class="relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
+                                            <input name="start_date" type="text" value="{{ old('start_date') }}" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="Select date start" autocomplete="off">
+                                        </div>
+                                        @if($errors->has('start_date'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_date') }}</p>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <div class="relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
+                                            <input name="end_date" type="text" value="{{ old('end_date') }}" id="end-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none" placeholder="Select date end" autocomplete="off">
+                                        </div>
+                                        @if($errors->has('end_date'))
+                                            <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_date') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            
+                             
+                                {{-- <div class="flex space-x-4 mt-6">
                                     <div>
                                         <label for="start-date" class="{{ $errors->has('start_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">Start date*</label>
                                         <div class="flex items-center space-x-3 py-2 ">
@@ -900,8 +938,7 @@
                                             <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_date') }}</p>
                                         @endif
                                     </div>
-            
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
             
@@ -1187,5 +1224,11 @@
             })
         })
     </script>
+
+<script>
+$(document).ready(function() {
+    $(".placepicker").placepicker();
+}); 
+</script>
 </main>
 @endsection

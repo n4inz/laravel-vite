@@ -608,7 +608,7 @@
                                         <div class="w-full">
                                             <div class="flex space-x-4">
                                                 <div class="flex space-x-1 justify-center items-center">
-                                                    <div class="overview-comments-name text-colortext">{{ auth()->user()->full_name ?? auth()->guard('staf')->user()->full_name ?? 'No Name' }}</div>
+                                                    <div class="overview-comments-name text-colortext">{{ $val->name }}</div>
                                                     <div class="overview-comments-name text-colorStatusCard1">{{ Carbon\Carbon::parse($val->created_at)->format('d M Y') }} - {{ Carbon\Carbon::parse($val->created_at)->format('g:i A') }}</div>
                                                 </div>
                                             </div>
@@ -690,7 +690,7 @@
                             <div class="px-4 mt-4 space-y-3">
                                 {{-- Download --}}
                                 @foreach ($result->file as $val )
-                                    <a href="{{ route('jobboard.download_file' , ['file' => $val->file]) }}" class="flex items-center justify-between w-[268px] h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
+                                    <a href="{{ route('jobboard.download_file' , ['file' => $val->file]) }}" class="flex items-center justify-between w-full  h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex items-center justify-center w-8 h-8 bg-[#F3F3F3] rounded-md">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -735,7 +735,7 @@
                         </div>
 
                         {{-- Task --}}
-                        <div class="bg-bgbody rounded mt-3 h-[357px]">
+                        <div class="bg-bgbody rounded mt-3 h-[430px]">
                             <div class="px-4 pt-[18.5px]">
                                 <div class="flex space-x-2 ">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
@@ -797,7 +797,7 @@
                                 </div>
         
                                 {{-- Button --}}
-                                <a href="#" class="flex items-center justify-center w-[268px] h-[42px] bg-palet rounded-md ">
+                                <a href="#" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md ">
                                     <span class="overview-attechment-btn-text">View more</span> 
                                 </a>
                             </div>
@@ -1640,7 +1640,7 @@
             cache: false,
             contentType: false,   
             success: function (res) {
-                console.log(res)
+               location.reload()
             }
         });
     })

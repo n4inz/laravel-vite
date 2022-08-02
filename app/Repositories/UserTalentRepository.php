@@ -25,15 +25,15 @@ class UserTalentRepository
             'address' => $request->address,
             'about_talent' => $request->about_talent,
             'file_documents' => $name,
-            'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
-            'create_by' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->id
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            'create_by' => auth()->user()->id,
         ]);
 
         foreach($languages as $key => $value){
 
             $talent->languages()->create([
                 'languages' => $languages[$key]->code,
-                'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             ]);
         }
 
@@ -41,7 +41,7 @@ class UserTalentRepository
             $talent->type_helper()->create([
                 'name_type_helper' => $type_helper[$key]->value,
                 'code_helper' => $type_helper[$key]->code,
-                'users_id' => auth()->guard('web')->user()->id ?? auth()->guard('staf')->user()->users_id,
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             ]);
          }
        

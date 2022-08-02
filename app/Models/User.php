@@ -85,7 +85,12 @@ class User extends Authenticatable
 
     public function staf()
     {
-        return $this->hasMany(Staf::class, 'users_id');
+        return $this->hasOne(Staf::class, 'users_id');
+    }
+
+    public function staf_agency()
+    {
+        return $this->hasMany(Staf::class, 'users_agency_id');
     }
 
     public function role()

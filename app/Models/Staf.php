@@ -1,23 +1,30 @@
 <?php
 
 namespace App\Models;
-
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Permission\Traits\HasRoles;
-class Staf extends User
+class Staf extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
     protected $guard = 'staf';
 
-    protected $fillable = [
-        'full_name', 'email', 'password','avatar', 'type', 'tenants_id', 'users_id'
+    protected $guarded = [
+        'id'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function staf_agency()
+    {
+        return $this->belongsTo(User::class, 'users_agency_id');
+    }
 }

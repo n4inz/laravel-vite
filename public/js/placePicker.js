@@ -42,6 +42,7 @@
       function template() {
           var templateString =`
               <div class="input-group mb-2">
+                  hello
                   <button class="btn input-group-prepend" style="padding: 0; border: none" type="button" data-toggle="collapse"  href="#` + options.mapContainerId + `">
                     <div class="input-group-text" style="height: 100%"><span class="` + options.mapIconClass + `"></span></div>
                   </button>
