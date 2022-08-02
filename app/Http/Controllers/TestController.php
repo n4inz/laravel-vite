@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Actifity;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,9 @@ class TestController extends Controller
 {
     public function welcome()
     {
-
-        return view('welcome');
+        // return 'ok';
+        // return view('welcome');
+        Actifity::dispatch('zulkarnain');
     }
     
 

@@ -727,6 +727,42 @@
                                         </div>
                                     </a>                                 
                                 @endforeach
+                                    <a href="{{ route('jobboard.download_file' , ['file' => $result->client->attached_file->attached_file]) }}" class="flex items-center justify-between w-full  h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="flex items-center justify-center w-8 h-8 bg-[#F3F3F3] rounded-md">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M3.33301 12.1666C3.60915 12.1666 3.83301 12.3905 3.83301 12.6666V14.1666H12.1663V12.6666C12.1663 12.3905 12.3902 12.1666 12.6663 12.1666C12.9425 12.1666 13.1663 12.3905 13.1663 12.6666V14.6666C13.1663 14.9428 12.9425 15.1666 12.6663 15.1666H3.33301C3.05687 15.1666 2.83301 14.9428 2.83301 14.6666V12.6666C2.83301 12.3905 3.05687 12.1666 3.33301 12.1666Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M2.83301 1.33337C2.83301 1.05723 3.05687 0.833374 3.33301 0.833374H9.99967C10.1516 0.833374 10.2952 0.902419 10.3901 1.02103L13.0568 4.35436C13.1277 4.44302 13.1663 4.55317 13.1663 4.66671V6.66671C13.1663 6.94285 12.9425 7.16671 12.6663 7.16671C12.3902 7.16671 12.1663 6.94285 12.1663 6.66671V4.8421L9.75936 1.83337H3.83301V6.66671C3.83301 6.94285 3.60915 7.16671 3.33301 7.16671C3.05687 7.16671 2.83301 6.94285 2.83301 6.66671V1.33337Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M9.33301 0.833374C9.60915 0.833374 9.83301 1.05723 9.83301 1.33337V4.16671H12.6663C12.9425 4.16671 13.1663 4.39056 13.1663 4.66671C13.1663 4.94285 12.9425 5.16671 12.6663 5.16671H9.33301C9.05687 5.16671 8.83301 4.94285 8.83301 4.66671V1.33337C8.83301 1.05723 9.05687 0.833374 9.33301 0.833374Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M1.99967 7.16663C1.90763 7.16663 1.83301 7.24125 1.83301 7.33329V12C1.83301 12.092 1.90763 12.1666 1.99967 12.1666H13.9997C14.0917 12.1666 14.1663 12.092 14.1663 12V7.33329C14.1663 7.24125 14.0917 7.16663 13.9997 7.16663H1.99967ZM0.833008 7.33329C0.833008 6.68896 1.35534 6.16663 1.99967 6.16663H13.9997C14.644 6.16663 15.1663 6.68896 15.1663 7.33329V12C15.1663 12.6443 14.644 13.1666 13.9997 13.1666H1.99967C1.35534 13.1666 0.833008 12.6443 0.833008 12V7.33329Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M7 7.83337C7.27614 7.83337 7.5 8.05723 7.5 8.33337V11C7.5 11.2762 7.27614 11.5 7 11.5C6.72386 11.5 6.5 11.2762 6.5 11V8.33337C6.5 8.05723 6.72386 7.83337 7 7.83337Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M3.33301 7.83337C3.60915 7.83337 3.83301 8.05723 3.83301 8.33337V11C3.83301 11.2762 3.60915 11.5 3.33301 11.5C3.05687 11.5 2.83301 11.2762 2.83301 11V8.33337C2.83301 8.05723 3.05687 7.83337 3.33301 7.83337Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M10.167 8.33337C10.167 8.05723 10.3908 7.83337 10.667 7.83337H12.3337C12.6098 7.83337 12.8337 8.05723 12.8337 8.33337C12.8337 8.60952 12.6098 8.83337 12.3337 8.83337H11.167V11C11.167 11.2762 10.9431 11.5 10.667 11.5C10.3908 11.5 10.167 11.2762 10.167 11V8.33337Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M10.167 10C10.167 9.72386 10.3908 9.5 10.667 9.5H12.3337C12.6098 9.5 12.8337 9.72386 12.8337 10C12.8337 10.2761 12.6098 10.5 12.3337 10.5H10.667C10.3908 10.5 10.167 10.2761 10.167 10Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M2.83301 8.33337C2.83301 8.05723 3.05687 7.83337 3.33301 7.83337H4.49967C5.23605 7.83337 5.83301 8.43033 5.83301 9.16671C5.83301 9.90308 5.23605 10.5 4.49967 10.5H3.33301C3.05687 10.5 2.83301 10.2762 2.83301 10C2.83301 9.7239 3.05687 9.50004 3.33301 9.50004H4.49967C4.68377 9.50004 4.83301 9.3508 4.83301 9.16671C4.83301 8.98262 4.68377 8.83337 4.49967 8.83337H3.33301C3.05687 8.83337 2.83301 8.60952 2.83301 8.33337Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M6.5 8.33337C6.5 8.05723 6.72386 7.83337 7 7.83337H7.66667C8.67918 7.83337 9.5 8.6542 9.5 9.66671C9.5 10.6792 8.67918 11.5 7.66667 11.5H7C6.72386 11.5 6.5 11.2762 6.5 11C6.5 10.7239 6.72386 10.5 7 10.5H7.66667C8.12689 10.5 8.5 10.1269 8.5 9.66671C8.5 9.20648 8.12689 8.83337 7.66667 8.83337H7C6.72386 8.83337 6.5 8.60952 6.5 8.33337Z" />
+                                                    <path fill="#FA9D6B" fill-rule="evenodd" clip-rule="evenodd" d="M4.83301 4C4.83301 3.72386 5.05687 3.5 5.33301 3.5H6.66634C6.94248 3.5 7.16634 3.72386 7.16634 4C7.16634 4.27614 6.94248 4.5 6.66634 4.5H5.33301C5.05687 4.5 4.83301 4.27614 4.83301 4Z" />
+                                                </svg> 
+                                            </div>
+                                            <div>
+                                                <div class="overview-attechment-title text-colortext">{{ $result->client->attached_file->attached_file }}</div>
+                                                <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Client file/'.$result->client->attached_file->attached_file) / 1024 , 2) }} KB</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-center space-x-3">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path  fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12.1018C1.5 11.8257 1.72386 11.6018 2 11.6018H14C14.2761 11.6018 14.5 11.8257 14.5 12.1018C14.5 12.3779 14.2761 12.6018 14 12.6018H2C1.72386 12.6018 1.5 12.3779 1.5 12.1018Z" fill="#222222"/>
+                                                <path  fill-rule="evenodd" clip-rule="evenodd" d="M1.5 14C1.5 13.7239 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.7239 14.5 14C14.5 14.2761 14.2761 14.5 14 14.5H2C1.72386 14.5 1.5 14.2761 1.5 14Z" fill="#222222"/>
+                                                <path  fill-rule="evenodd" clip-rule="evenodd" d="M5.64645 7.31307C5.84171 7.11781 6.15829 7.11781 6.35355 7.31307L8 8.95952L9.64645 7.31307C9.84171 7.11781 10.1583 7.11781 10.3536 7.31307C10.5488 7.50833 10.5488 7.82492 10.3536 8.02018L8.35355 10.0202C8.15829 10.2154 7.84171 10.2154 7.64645 10.0202L5.64645 8.02018C5.45118 7.82492 5.45118 7.50833 5.64645 7.31307Z" fill="#222222"/>
+                                                <path  fill-rule="evenodd" clip-rule="evenodd" d="M8 1.5C8.27614 1.5 8.5 1.72386 8.5 2V9.66667C8.5 9.94281 8.27614 10.1667 8 10.1667C7.72386 10.1667 7.5 9.94281 7.5 9.66667V2C7.5 1.72386 7.72386 1.5 8 1.5Z" fill="#222222"/>
+                                            </svg>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4 9C4.55228 9 5 8.55228 5 8C5 7.44772 4.55228 7 4 7C3.44772 7 3 7.44772 3 8C3 8.55228 3.44772 9 4 9Z" fill="#827C7C"/>
+                                                <path d="M8 9C8.55228 9 9 8.55228 9 8C9 7.44772 8.55228 7 8 7C7.44772 7 7 7.44772 7 8C7 8.55228 7.44772 9 8 9Z" fill="#827C7C"/>
+                                                <path d="M12 9C12.5523 9 13 8.55228 13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8C11 8.55228 11.4477 9 12 9Z" fill="#827C7C"/>
+                                            </svg>
+                                        </div>
+                                    </a>    
                                 {{-- Button --}}
                                 <button class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md">
                                     <span class="overview-attechment-btn-text">View more</span> 
@@ -745,57 +781,29 @@
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div class="px-4 mt-4 space-y-8 ">
                                 {{-- Task body --}}
-                                <div class="flex items-center space-x-3">
-                                    <div>
-                                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <div class="text-sm  text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                                        <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                                    </div>
-                                </div>
 
-                                <div class="flex items-center space-x-3">
-                                    <div>
-                                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <div class="text-sm  text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                                        <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                                    </div>
-                                </div>
+                                @foreach ($result->actifities as $val)
+                                    @if ($val->type == 'TASK')
+                                        <div class="flex items-center space-x-3">
+                                            <div>
+                                                <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-1">
 
-                                <div class="flex items-center space-x-3">
-                                    <div>
-                                        <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                                            </svg>
+                                                <div class="text-sm  text-[#222222] font-semibold">Quote accept by {{ $val->name }}</div>
+                                                <div class="text-sm"><span class="text-[#FA9D6B] ">{{ Carbon\Carbon::parse($val->created_at)->diffForHumans() }}</span> / {{ $val->name }}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="space-y-1">
-                                        <div class="text-sm  text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                                        <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                                    </div>
-                                </div>
-        
+                                    @endif  
+                                @endforeach
+       
                                 {{-- Button --}}
                                 <a href="#" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md ">
                                     <span class="overview-attechment-btn-text">View more</span> 
@@ -934,7 +942,8 @@
                                             <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
                                             <span class="text-[#222222] font-semibold">Talents outside of Ayi</span>
                                         </div>
-                                        <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                        <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                        {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
                                             <span class="overview-send-job text-palet">+ Add Talent</span>
                                         </div>
                                     </div>
@@ -1066,70 +1075,26 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="space-y-8 mt-[22px] mb-8 px-8">
                                     <table width="100%">
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
-                                               <div class="flex items-center justify-start space-x-3">
-                                                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                                    <span class="overview-comments-name text-[#222222]">Joseph Parker</span>
-                                                    <span class="overview-comments-name text-[#827C7C]">last Thursday at 09:28 (fixed task "Send Contact(WL)" )</span>
-                                                </div>
-                                            </td>
-                                            <td height="66px" class="border-b ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.10531 0.870209C9.29375 0.793594 9.50982 0.83878 9.65177 0.98449L15.0245 6.49959C15.21 6.69003 15.2141 6.99237 15.0337 7.1877L9.66096 13.0059C9.5213 13.1572 9.30323 13.2074 9.11151 13.1324C8.91979 13.0574 8.79362 12.8726 8.79362 12.6667V9.53699C7.84091 9.43128 6.83795 9.48785 5.782 9.7119C4.69402 9.94275 3.33901 10.9524 1.71981 12.9289C1.58002 13.0996 1.34493 13.1585 1.14122 13.0738C0.937512 12.9892 0.813322 12.7811 0.835574 12.5617C1.07334 10.2167 1.97303 8.23742 3.54063 6.64886L3.89652 7.00006L3.54063 6.64886C4.99873 5.17124 6.75718 4.36531 8.79362 4.23954V1.33339C8.79362 1.12997 8.91686 0.946825 9.10531 0.870209ZM9.79362 2.56318V4.72239C9.79362 4.99699 9.57217 5.2202 9.29758 5.22237C7.31334 5.23806 5.64101 5.94408 4.25242 7.35125L3.92787 7.03099L4.25242 7.35125C3.25151 8.36554 2.55223 9.55822 2.15675 10.9385C3.35212 9.72503 4.49096 8.96357 5.57445 8.73368C6.89394 8.45371 8.16197 8.4091 9.37442 8.60763C9.61616 8.64721 9.79362 8.8561 9.79362 9.10106V11.3883L13.9773 6.85769L9.79362 2.56318Z" fill="#3BD7CF"/>
-                                                    </svg>    
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
-                                               <div class="flex items-center justify-start space-x-3">
-                                                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                                    <span class="overview-comments-name text-[#222222]">Joseph Parker</span>
-                                                    <span class="overview-comments-name text-[#827C7C]">last Thursday at 09:28 (fixed task "Send Contact(WL)" )</span>
-                                                </div>
-                                            </td>
-                                            <td height="66px" class="border-b ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.10531 0.870209C9.29375 0.793594 9.50982 0.83878 9.65177 0.98449L15.0245 6.49959C15.21 6.69003 15.2141 6.99237 15.0337 7.1877L9.66096 13.0059C9.5213 13.1572 9.30323 13.2074 9.11151 13.1324C8.91979 13.0574 8.79362 12.8726 8.79362 12.6667V9.53699C7.84091 9.43128 6.83795 9.48785 5.782 9.7119C4.69402 9.94275 3.33901 10.9524 1.71981 12.9289C1.58002 13.0996 1.34493 13.1585 1.14122 13.0738C0.937512 12.9892 0.813322 12.7811 0.835574 12.5617C1.07334 10.2167 1.97303 8.23742 3.54063 6.64886L3.89652 7.00006L3.54063 6.64886C4.99873 5.17124 6.75718 4.36531 8.79362 4.23954V1.33339C8.79362 1.12997 8.91686 0.946825 9.10531 0.870209ZM9.79362 2.56318V4.72239C9.79362 4.99699 9.57217 5.2202 9.29758 5.22237C7.31334 5.23806 5.64101 5.94408 4.25242 7.35125L3.92787 7.03099L4.25242 7.35125C3.25151 8.36554 2.55223 9.55822 2.15675 10.9385C3.35212 9.72503 4.49096 8.96357 5.57445 8.73368C6.89394 8.45371 8.16197 8.4091 9.37442 8.60763C9.61616 8.64721 9.79362 8.8561 9.79362 9.10106V11.3883L13.9773 6.85769L9.79362 2.56318Z" fill="#3BD7CF"/>
-                                                    </svg>    
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
-                                               <div class="flex items-center justify-start space-x-3">
-                                                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                                    <span class="overview-comments-name text-[#222222]">Joseph Parker</span>
-                                                    <span class="overview-comments-name text-[#827C7C]">last Thursday at 09:28 (fixed task "Send Contact(WL)" )</span>
-                                                </div>
-                                            </td>
-                                            <td height="66px" class="border-b ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.10531 0.870209C9.29375 0.793594 9.50982 0.83878 9.65177 0.98449L15.0245 6.49959C15.21 6.69003 15.2141 6.99237 15.0337 7.1877L9.66096 13.0059C9.5213 13.1572 9.30323 13.2074 9.11151 13.1324C8.91979 13.0574 8.79362 12.8726 8.79362 12.6667V9.53699C7.84091 9.43128 6.83795 9.48785 5.782 9.7119C4.69402 9.94275 3.33901 10.9524 1.71981 12.9289C1.58002 13.0996 1.34493 13.1585 1.14122 13.0738C0.937512 12.9892 0.813322 12.7811 0.835574 12.5617C1.07334 10.2167 1.97303 8.23742 3.54063 6.64886L3.89652 7.00006L3.54063 6.64886C4.99873 5.17124 6.75718 4.36531 8.79362 4.23954V1.33339C8.79362 1.12997 8.91686 0.946825 9.10531 0.870209ZM9.79362 2.56318V4.72239C9.79362 4.99699 9.57217 5.2202 9.29758 5.22237C7.31334 5.23806 5.64101 5.94408 4.25242 7.35125L3.92787 7.03099L4.25242 7.35125C3.25151 8.36554 2.55223 9.55822 2.15675 10.9385C3.35212 9.72503 4.49096 8.96357 5.57445 8.73368C6.89394 8.45371 8.16197 8.4091 9.37442 8.60763C9.61616 8.64721 9.79362 8.8561 9.79362 9.10106V11.3883L13.9773 6.85769L9.79362 2.56318Z" fill="#3BD7CF"/>
-                                                    </svg>    
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100 hover:cursor-pointer">
-                                            <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
-                                               <div class="flex items-center justify-start space-x-3">
-                                                    <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                                    <span class="overview-comments-name text-[#222222]">Joseph Parker</span>
-                                                    <span class="overview-comments-name text-[#827C7C]">added talent to job</span>
-                                                </div>
-                                            </td>
-                                            <td height="66px" class="border-b ">
-                                                <div class="flex item-center justify-end">
-                                                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.10531 0.870209C9.29375 0.793594 9.50982 0.83878 9.65177 0.98449L15.0245 6.49959C15.21 6.69003 15.2141 6.99237 15.0337 7.1877L9.66096 13.0059C9.5213 13.1572 9.30323 13.2074 9.11151 13.1324C8.91979 13.0574 8.79362 12.8726 8.79362 12.6667V9.53699C7.84091 9.43128 6.83795 9.48785 5.782 9.7119C4.69402 9.94275 3.33901 10.9524 1.71981 12.9289C1.58002 13.0996 1.34493 13.1585 1.14122 13.0738C0.937512 12.9892 0.813322 12.7811 0.835574 12.5617C1.07334 10.2167 1.97303 8.23742 3.54063 6.64886L3.89652 7.00006L3.54063 6.64886C4.99873 5.17124 6.75718 4.36531 8.79362 4.23954V1.33339C8.79362 1.12997 8.91686 0.946825 9.10531 0.870209ZM9.79362 2.56318V4.72239C9.79362 4.99699 9.57217 5.2202 9.29758 5.22237C7.31334 5.23806 5.64101 5.94408 4.25242 7.35125L3.92787 7.03099L4.25242 7.35125C3.25151 8.36554 2.55223 9.55822 2.15675 10.9385C3.35212 9.72503 4.49096 8.96357 5.57445 8.73368C6.89394 8.45371 8.16197 8.4091 9.37442 8.60763C9.61616 8.64721 9.79362 8.8561 9.79362 9.10106V11.3883L13.9773 6.85769L9.79362 2.56318Z" fill="#3BD7CF"/>
-                                                    </svg>    
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach ($result->actifities as $val )
+                                            @if ($val->type == 'ACTIVITIES')
+                                                <tr class="hover:bg-gray-100 hover:cursor-pointer">
+                                                    <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
+                                                    <div class="flex items-center justify-start space-x-3">
+                                                            <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Setting/avatar/'.$val->avatar) }}" alt="">
+                                                            <span class="overview-comments-name text-[#222222]">{{ $val->name }}</span>
+                                                            <span class="overview-comments-name text-[#827C7C]">{{ Carbon\Carbon::parse($val->created_at)->diffForHumans() }} at {{ $val->created_at->format('H:i'); }} ({{ $val->body }})</span>
+                                                        </div>
+                                                    </td>
+                                                    <td height="66px" class="border-b ">
+                                                        <div class="flex item-center justify-end">
+                                                            <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.10531 0.870209C9.29375 0.793594 9.50982 0.83878 9.65177 0.98449L15.0245 6.49959C15.21 6.69003 15.2141 6.99237 15.0337 7.1877L9.66096 13.0059C9.5213 13.1572 9.30323 13.2074 9.11151 13.1324C8.91979 13.0574 8.79362 12.8726 8.79362 12.6667V9.53699C7.84091 9.43128 6.83795 9.48785 5.782 9.7119C4.69402 9.94275 3.33901 10.9524 1.71981 12.9289C1.58002 13.0996 1.34493 13.1585 1.14122 13.0738C0.937512 12.9892 0.813322 12.7811 0.835574 12.5617C1.07334 10.2167 1.97303 8.23742 3.54063 6.64886L3.89652 7.00006L3.54063 6.64886C4.99873 5.17124 6.75718 4.36531 8.79362 4.23954V1.33339C8.79362 1.12997 8.91686 0.946825 9.10531 0.870209ZM9.79362 2.56318V4.72239C9.79362 4.99699 9.57217 5.2202 9.29758 5.22237C7.31334 5.23806 5.64101 5.94408 4.25242 7.35125L3.92787 7.03099L4.25242 7.35125C3.25151 8.36554 2.55223 9.55822 2.15675 10.9385C3.35212 9.72503 4.49096 8.96357 5.57445 8.73368C6.89394 8.45371 8.16197 8.4091 9.37442 8.60763C9.61616 8.64721 9.79362 8.8561 9.79362 9.10106V11.3883L13.9773 6.85769L9.79362 2.56318Z" fill="#3BD7CF"/>
+                                                            </svg>    
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     </table>
                                 </div>
                                 <div class="flex mt-8"></div>
@@ -1369,6 +1334,7 @@
                                 </button>                          
                             </div>
                             <input type="hidden" name="email_client" value="{{ $result->client->email }}">
+                            <input type="hidden" name="job_models_id" value="{{ $result->id }}">
                         </form>
                     </div>
                 </div>
@@ -1559,8 +1525,9 @@
         $(".load-task").append(template);
         $('#input'+no).keypress(function(e) {
             const val = $(this).val();
-            const id = $('.job_models_id').val()
+            const id = '{{ $result->id }}'
             if(e.which == 13) {
+      
                 $.ajax({
                     type:'POST',
                     url:'{{ route("jobboard.add_task") }}',
@@ -1587,7 +1554,6 @@
                                         </td>
                                     </tr>`;
                     $(".load-task").append(loader);
-                    console.log(data)
                     }
                 });
                 $(this).parent().parent().remove();                    
@@ -1599,10 +1565,11 @@
     }
 
     function check(id){
+        const job_models_id = '{{ $result->id }}';
         $.ajax({
                 type:'POST',
                 url:'{{ route("jobboard.add_task") }}',
-                data:{_token: '{{ csrf_token() }}', id , sts:'updated'},
+                data:{_token: '{{ csrf_token() }}', id ,job_models_id,  sts:'updated'},
                 success:function(data){
                     var loader_done = ` <td height="66px" width="12%">
                                             <div class="flex items-center justify-center space-x-2">

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Actifity;
 use App\Events\Comments;
 use App\Events\ReplyComment;
 use App\Http\Requests\JobsStoreRequest;
+use App\Http\Traits\Actifity as TraitsActifity;
 use App\Http\Traits\ImageUpload;
+use App\Models\Actifity as ModelsActifity;
 use App\Models\Client;
 use App\Models\JobModels;
 use App\Models\JobModelsComment;
@@ -19,7 +22,7 @@ use Illuminate\Http\Request;
 
 class JobboardController extends Controller
 {
-    use ImageUpload;
+    use ImageUpload , TraitsActifity;
     private $jobboardRepository;
 
     public function __construct(JobboardRepository $jobboardRepository)
@@ -95,8 +98,12 @@ class JobboardController extends Controller
 
         $result = JobModels::with(['comment' => function ($query){
             $query->with('job_models_comments_reply');
-        },'match_talent', 'languages', 'availability', 'task', 'client', 'file' => function ($query) {
+        },'match_talent', 'languages', 'availability', 'task', 'client' => function($query){
+            $query->with('attached_file');
+        }, 'file' => function ($query) {
             $query->limit(5);
+        },'actifities' => function ($query) {
+            $query->limit(6)->orderBy('id', 'desc');
         }])->where('id_unique', $id_unique)->firstOrFail();
 
         // return $result;
@@ -109,7 +116,9 @@ class JobboardController extends Controller
             }
             array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
         }
-        return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed'));
+
+        $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed', 'actifity'));
     }
 
     public function detail_match_talent($id)
@@ -137,12 +146,14 @@ class JobboardController extends Controller
 
     public function download_file($file)
     {
+        
         return response()
             ->download(storage_path('app/public/Jobs attached file/' . $file));
     }
 
     public function add_task(Request $request)
     {
+       
         $data = $this->jobboardRepository->add_task($request);
         return response()->json([
             'status' => 200,
@@ -158,13 +169,14 @@ class JobboardController extends Controller
 
     public function send_email(Request $request)
     {
-       
-        // return $request->email_client;
         $request->validate([
             'talent_name' => 'required',
-            'email_client' => 'required'
+            'email_client' => 'required',
+            'job_models_id' => 'required'
         ]);
         $this->jobboardRepository->email($request);
+        $actifity = $this->actifity('Matched Email has sent to Client' , 'ACTIVITIES');
+        Actifity::dispatch($actifity);
         return redirect()->back()->with('success', 'Send email to talent Succesfuly');
     }
 

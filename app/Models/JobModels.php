@@ -47,4 +47,9 @@ class JobModels extends Model
     {
         return $this->hasMany(JobModelsComment::class, 'job_models_id');
     }
+
+    public function actifities()
+    {
+        return $this->hasMany(Actifity::class , 'job_models_id');
+    }
 }

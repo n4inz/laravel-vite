@@ -32,7 +32,7 @@ class ClientRequest extends FormRequest
             'languages' => 'required',
             'note' => 'required',
             'avatar' => 'mimes:png,jpg,jpeq,PNG,JPG,JPEG,webp|max:126',
-            'attached_file' => 'required|mimes:doc,rar,zip,pdf,txt|max:2048',
+            'attached_file' => 'mimes:doc,rar,zip,pdf,txt|max:2048',
         ];
     }
 }

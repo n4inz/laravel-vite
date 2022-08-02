@@ -150,12 +150,12 @@
                                     </label>
                                     <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
                                 </div>
-                                <span class="{{ $errors->has('attached_file') ? 'text-red-600' : '' }} text-center text-xs mt-4 mb-4 flex items-center justify-center text-gray-400">Max 126Kb</span>
+                                <span class="{{ $errors->has('avatar') ? 'text-red-600' : '' }} text-center text-xs mt-4 mb-4 flex items-center justify-center text-gray-400">Max 126Kb</span>
 
                                 <div class="flex mt-4"></div>
                             </div>
                             {{-- Attached file --}}
-                            <div class="bg-bgbody rounded h-[249px]">
+                            <div class="bg-bgbody rounded {{ $errors->has('attached_file') ? 'h-[290px]' : 'h-[259px]' }} ">
                                 <div class="flex justify-between px-4 pt-[18.5px]">
                                     <div class="flex items-center space-x-2 ">
                                         <div class="w-2 h-6 bg-palet rounded-sm"></div>
@@ -179,6 +179,13 @@
                                         </div>
                                         <input id="attached_file" name="attached_file" id="attached_file" type="file" class="hidden">
                                     </label>
+                                    
+                                </div>
+                                
+                                <div class="flex items-center justify-center px-4">
+                                    @if($errors->has('attached_file'))
+                                        <p class="mt-2 text-center text-sm text-red-600 dark:text-red-500">{{ $errors->first('attached_file') }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

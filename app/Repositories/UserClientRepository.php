@@ -11,9 +11,9 @@ class UserClientRepository
     use ImageUpload;
     public function created($request)
     {
-        $name = $this->uploadImageStore($request->file('attached_file'), 'Client file');
+        $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
         if(isset($request->avatar)){
-            $avatar = $this->uploadImageStore($request->file('avatar'), 'Client file/avatar');
+            $avatar = $this->uploadImageStore($request->file('avatar'), 'Setting/avatar');
         }
 
        $client =  Client::create([

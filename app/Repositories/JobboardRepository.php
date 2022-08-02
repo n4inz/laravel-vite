@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Events\Actifity as EventsActifity;
+use App\Http\Traits\Actifity;
 use App\Jobs\SendMail;
 use App\Models\JobModels;
 use App\Models\JobModelsAvailabiltyDays;
@@ -13,6 +15,7 @@ use App\Models\Talents;
 
 class JobboardRepository 
 {
+    use Actifity;
     public function created($request)
     {
         $value = json_decode($request->family);
@@ -94,10 +97,13 @@ class JobboardRepository
         // return $talent;
         $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         SendMail::dispatch($request->email_client, $match_talent);
+
+        
     }
 
     public function add_task($request)
     {
+
         switch ($request->sts){
             case 'created';
 
@@ -120,9 +126,10 @@ class JobboardRepository
                 $data = JobModelsTask::where('id',$request->id)->update([
                     'status' => 'Done'
                 ]);
-
                 $load = JobModelsTask::where('id', $request->id)->first();
 
+                $actifity = $this->actifity('Quote accept', 'TASK');
+                EventsActifity::dispatch($actifity);
                 return $load;
             break;
        }
