@@ -86,7 +86,7 @@
                                                 <tr class="border-b" valign="top" height="50px">
                                                     <td  width="175px">
                                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                                            <input name="chile_care" {{ old('chile_care') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->chile_care ?? null ? 'checked' : '' }} value="1" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                            <input disabled name="chile_care" {{ old('chile_care') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_category->chile_care ?? null ? 'checked' : '' }} value="1" id="child-care" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                             <label for="child-care"  class="overview-id-field text-colortext ">Child care</label>
                                                         </div>
                                                     </td>
