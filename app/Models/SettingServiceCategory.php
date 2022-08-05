@@ -9,4 +9,9 @@ class SettingServiceCategory extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function service_subcategorys()
+    {
+        return $this->hasMany(SettingServiceSubcategory::class, 'service_categories_id');
+    }
 }

@@ -3,12 +3,7 @@
     <div id="sidebar-desktop" class="fixed top-0 bottom-0 px-5 w-[300px] bg-bgbody rounded border">
         <div class="flex items-center justify-start mt-2 relative">
             <span class=" text-palet title-logo leading-[22px] opacity-80 ">
-                @auth('web')
-                    {{ App\Models\SettingGeneral::where('users_id',auth()->user()->id)->first()->agency_name ?? 'Your Agency' }}
-                @endauth
-                @auth('staf')
-                    <span>Staf Login</span>
-                @endauth
+                {{ App\Models\SettingGeneral::where('users_id',auth()->user()->staf->users_agency_id ?? auth()->user()->id )->first()->agency_name ?? 'Your Agency' }}
             </span>
             <div id="btn-sidebar-desktop" class="absolute hover:cursor-pointer z-50 -right-9 top-1 w-8 h-8 rounded-full shadow-md bg-white flex justify-center items-center">
                 <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">

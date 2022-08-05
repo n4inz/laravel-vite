@@ -522,7 +522,8 @@
                         <div class="px-8 mt-4">
                             <label for="id" class="{{ $errors->has('id_unique') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">ID*</label>
                             <div class="{{ $errors->has('id_unique') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="id_unique" value="{{ old('id_unique') }}" type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="">
+                                <input disabled name="id_uniques" value="{{ old('id_unique') }}" type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="ID will be shown after submit">
+                                {{-- <input disabled value="{{  }}" type="hidden" name="id_unique"> --}}
                             </div>
                             @if($errors->has('id_unique'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('id_unique') }}</p>
@@ -553,9 +554,14 @@
                                 <label for="category" class="overview-note-body text-colortext mb-2 block">Category</label>
                                 <div class="w-[316px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                     <select name="category" id="category" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                        <option @if(old('category') == 'Child Care') selected @endif value="Child Care">Child Care</option>
-                                        <option @if(old('category') == 'Infant') selected @endif value="Infant">Infant</option>
-                                        <option @if(old('category') == 'Family Assist') selected @endif value="Family Assist">Family Assist</option>
+                                        
+                                        @if($category->count() == 0)
+                                            <option value="">Category is empty</option>
+                                        @endif
+                                        @foreach ($category as $val )
+                                            <option @if(old('category') == $val->id) selected @endif value="{{ $val->id }}">{{ $val->category_name }}</option>
+                                        @endforeach
+                                       
                                     </select>
                                     <div>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -566,8 +572,21 @@
                                 </div>
                             </div>
                             <div class="p-2">
-                                <div class="flex space-x-[102px]">
-                                    <div>
+                                {{-- <input class="subCategoryError" disabled type="text" value="{{ json_encode(old('subcategory')) }}"> --}}
+                                <div class="sub_categorys grid grid-cols-3">
+{{--                                
+                                    @foreach ($category as $vals )
+                                        @foreach ($vals->service_subcategorys as $val)
+                                        <div id="nain{{ $val->service_categories_id }}" class="nain{{ $val->service_categories_id }} items-center space-x-3 mt-[10px]">
+                                            <input id="{{ $val->sub_category_key }}" name="subcategory[]" {{ is_array(old('subcategory')) && in_array($val->sub_category_key, old('subcategory')) ? 'checked' : ''}} style="color: #3BD7CF" type="checkbox" value="{{ $val->sub_category_key }}" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="{{ $val->sub_category_key }}" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">{{ $val->service_categories_id }}</label>
+                                        </div>
+                                        @endforeach
+                                    @endforeach --}}
+                          
+               
+                             
+                                    {{-- <div>
                                         <label for="category" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Subcategories*</label>
                                         <div class="flex items-center space-x-3 mt-[10px]">
                                             <input id="nanny" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('nanny', old('subcategory')) ) checked @endif value="nanny"  style="color: #3BD7CF" type="checkbox" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
@@ -639,7 +658,23 @@
                                             <input id="provide-transportation" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('provide_transportation', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="provide_transportation" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="provide-transportation" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Provide Transportation</label>
                                         </div>
-                                    </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="companion-elders" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('companion_elders', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="companion_elders" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="companion-elders" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Companion Elders</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="assist-feeding" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('assist_feeding', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="assist_feeding" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="assist-feeding" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Assist Feeding</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="hour-help" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('hour_help', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="hour_help" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="hour-help" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Hour Help</label>
+                                        </div>
+                                        <div class="flex items-center space-x-3 mt-[10px]">
+                                            <input id="remind-medicine" name="subcategory[]" @if(is_array(old('subcategory')) && in_array('remind_medicine', old('subcategory')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="remind_medicine" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="remind-medicine" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">Remind Medicine</label>
+                                        </div>
+                                    </div> --}}
                                 </div>
                                 @if($errors->has('subcategory'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('subcategory') }}</p>
@@ -1223,6 +1258,39 @@
                 }
             })
         })
+
+        function subCategorys(id){
+            $.ajax({
+                type:'POST',
+                url:'{{ route("jobboard.get_subcategory_ajax") }}',
+                data:{id , _token: '{{ csrf_token() }}'},
+                success:function(res){
+                      $('.sub_categorys').html('')
+                   
+                    res.sub_categorys.map(function(e){
+                        var tmp = `<div  class=" items-center space-x-3 mt-[10px]">
+                                        <input id="${e.sub_category_key}" name="subcategory[]" {{ is_array(old('subcategory')) && in_array($val->sub_category_key, old('subcategory')) ? 'checked' : ''}} style="color: #3BD7CF" type="checkbox" value="${e.sub_category_key}" class="{{ $errors->has('subcategory') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <label for="${e.sub_category_key}" class="{{ $errors->has('subcategory') ? 'text-red-600' : '' }} overview-note-body text-colortext">${e.sub_category_name}</label>
+                                    </div>`;
+                                    $('.sub_categorys').append(tmp)
+
+                       
+
+                    })
+                    // console.log(res.sub_categorys)
+                }
+            });
+        }
+    
+
+        $('#category').change(function(){
+            const id = $(this).val()
+            // $('#nain'+id).toggleClass('hidden')
+            // alert(id)
+            subCategorys(id)
+        })
+
+        subCategorys($('#category').val())
     </script>
 
 <script>

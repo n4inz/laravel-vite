@@ -24,25 +24,39 @@ class SettingController extends Controller
 
     public function setting()
     {
-        $setting = User::where('id',auth()->guard('web')->user()->id)->with(['avatar','SettingDetail' => function ($query){
-            $query->with(['service_location_fee', 'service_category'])->first();
+        $setting = User::where('id',auth()->user()->id)->with(['avatar','SettingDetail' => function ($query){
+            $query->with(['service_location_fee'])->first();
         }, 'SettingAdditionals' => function($query){
             $query->with('defined_check_list')->first();
-        },'SettingUsers', 'SettingGeneral'])->first();
+        },'SettingUsers', 'SettingGeneral' , 'SettingCategory'])->first();
+
+        // return $setting;
+        $category = [];
+        $subCategory = [];
+        if(!empty($setting->SettingCategory)){
+            foreach($setting->SettingCategory as $val ){
+                array_push($category, $val->category_key);
+    
+                foreach($val->service_subcategorys as $valSubs ){
+                    array_push($subCategory, $valSubs->sub_category_key);
+                }
+            }
+        }
         $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->get();
-        return view('setting.setting', compact('setting', 'defined_list'));
+        return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory'));
     }
 
     public function setting_store(SettingRequest $request)
     {
-        $cek_setting = SettingGeneral::where('users_id' , auth()->guard('web')->user()->id)->first();
+        $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();
 
         if(empty($cek_setting)){
-            $this->settingRepository->created($request);
+        
+           $this->settingRepository->created($request);
         }else{
-            $this->settingRepository->updated($request);
-        }
+           $a = $this->settingRepository->updated($request);
 
+        }
         return redirect()->back()->with('success', 'Setting was success update');
     }
 

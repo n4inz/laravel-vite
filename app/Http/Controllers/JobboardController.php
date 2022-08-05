@@ -14,11 +14,15 @@ use App\Models\JobModels;
 use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
+use App\Models\SettingServiceCategory;
+use App\Models\SettingServiceSubcategory;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+
+
 
 class JobboardController extends Controller
 {
@@ -32,7 +36,7 @@ class JobboardController extends Controller
 
     public function index()
     {
-
+    
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
@@ -45,14 +49,31 @@ class JobboardController extends Controller
         }
 
         // return $client;
+        $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        // return $category[0];
         $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
         return view('jobboard.jobboard', [
             "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "interviewing" => $jobs->where('status', 'interviewing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "trialing" => $jobs->where('status', 'trialing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "completed" => $jobs->where('status', 'completed')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
+            "category" => $category,
             "json" => $json,
         ]);
+    }
+
+    public function get_subcategory_ajax(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+       $subCategory = SettingServiceSubcategory::where('service_categories_id', $request->id)->where('users_id', auth()->user()->id)->get();
+        
+
+       return response()->json([
+            'sub_categorys' => $subCategory
+       ]);
     }
 
     public function status(Request $request)

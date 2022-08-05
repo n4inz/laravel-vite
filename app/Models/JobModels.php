@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use Ramsey\Uuid\Uuid as Generator;
 class JobModels extends Model
 {
     use HasFactory;
@@ -51,5 +52,20 @@ class JobModels extends Model
     public function actifities()
     {
         return $this->hasMany(Actifity::class , 'job_models_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            try {
+                $model->uid = Generator::uuid4()->getHex()->toString();
+                // $model->id_unique = Generator::uuid4()->getHex()->toString();
+
+            } catch (\Exception $e) {
+                abort(500, $e->getMessage());
+            }
+        });
     }
 }

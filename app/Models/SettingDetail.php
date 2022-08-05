@@ -17,7 +17,7 @@ class SettingDetail extends Model
 
     public function service_category()
     {
-        return $this->hasOne(SettingServiceCategory::class, 'setting_details_id');
+        return $this->hasMany(SettingServiceCategory::class, 'setting_details_id');
     }
 
 }

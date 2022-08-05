@@ -112,6 +112,7 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         // Jobboard
         Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
+        Route::post('/get-subcategory', [JobboardController::class, 'get_subcategory_ajax'])->name('jobboard.get_subcategory_ajax');
         Route::get('/detail-match-talent/{id}', [JobboardController::class, 'detail_match_talent'])->name('jobboard.detail_match_talent');
         Route::get('/overview/{id_unique}', [JobboardController::class, 'overview'])->name('jobboard.overview');
         Route::post('/status',[JobboardController::class, 'status'])->name('jobboard.status');

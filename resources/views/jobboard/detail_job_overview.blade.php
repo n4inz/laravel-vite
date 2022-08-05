@@ -746,7 +746,7 @@
                                             </div>
                                             <div>
                                                 <div class="overview-attechment-title text-colortext">{{ $result->client->attached_file->attached_file }}</div>
-                                                <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Client file/'.$result->client->attached_file->attached_file) / 1024 , 2) }} KB</div>
+                                                <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$result->client->attached_file->attached_file) / 1024 , 2) }} KB</div>
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-center space-x-3">
@@ -808,6 +808,7 @@
                                 <a href="#" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md mb-5">
                                     <span class="overview-attechment-btn-text">View more</span> 
                                 </a>
+                                <div class="flex mt-4"></div>
                             </div>
                         </div>
                         

@@ -73,6 +73,11 @@ class User extends Authenticatable
         return $this->hasOne(SettingAdditionals::class, 'users_id');
     }
 
+    public function SettingCategory()
+    {
+        return $this->hasMany(SettingServiceCategory::class ,'users_id');
+    }
+
     public function client()
     {
         return $this->hasMany(Client::class, 'users_id');
@@ -87,6 +92,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Staf::class, 'users_id');
     }
+
+    // public function staf_agency_name()
+    // {
+    //     return $this->hasOne(SettingGeneral::class, 'users_id','users_agency_id');
+    // }
 
     public function staf_agency()
     {
