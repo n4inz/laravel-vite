@@ -28,12 +28,12 @@ class JobsStoreRequest extends FormRequest
             'family' => 'required|min:3',
             'title' => 'required|min:3',
             'description' => 'required|min:10',
-            'id_unique' =>'required|unique:job_models,id_unique',
+            // 'id_unique' =>'required|unique:job_models,id_unique',
             'subcategory' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            // 'start_date' => 'required',
+            // 'end_date' => 'required',
             'rate' => 'required'
         ];
     }

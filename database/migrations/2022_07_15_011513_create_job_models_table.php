@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('family');
             $table->string('title');
             $table->string('description');
-            $table->string('id_unique');
+            $table->unsignedInteger('id_unique');
+
+            // $table->string('id_unique');
 
             $table->string('location')->nullable();
             $table->string('category')->nullable();
@@ -35,8 +37,8 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('duration');
 
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->boolean('asap')->nullable()->default(false);
             $table->boolean('tbd')->nullable()->default(false);
 

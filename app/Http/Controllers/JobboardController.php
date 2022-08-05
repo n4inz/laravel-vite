@@ -15,6 +15,7 @@ use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
 use App\Models\SettingServiceCategory;
+use App\Models\SettingServiceLocationFee;
 use App\Models\SettingServiceSubcategory;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
@@ -36,7 +37,6 @@ class JobboardController extends Controller
 
     public function index()
     {
-    
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
@@ -47,11 +47,9 @@ class JobboardController extends Controller
                 'email' => $value->email,
             ]);
         }
-
-        // return $client;
         $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        // return $category[0];
         $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
+        $user_location = SettingServiceLocationFee::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first('location');
         return view('jobboard.jobboard', [
             "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "interviewing" => $jobs->where('status', 'interviewing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
@@ -59,6 +57,7 @@ class JobboardController extends Controller
             "completed" => $jobs->where('status', 'completed')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "category" => $category,
             "json" => $json,
+            'user_location' => $user_location,
         ]);
     }
 
@@ -112,7 +111,7 @@ class JobboardController extends Controller
         return redirect()->back()->with('status', 'Create job succesfuly');
     }
 
-    public function overview($id_unique)
+    public function overview($uid)
     {
         $dataTalent = [];
         $talentNeed = [];
@@ -125,7 +124,7 @@ class JobboardController extends Controller
             $query->limit(5);
         },'actifities' => function ($query) {
             $query->limit(6)->orderBy('id', 'desc');
-        }])->where('id_unique', $id_unique)->firstOrFail();
+        }])->where('uid', $uid)->firstOrFail();
 
         // return $result;
         foreach ($result->match_talent as $match) {

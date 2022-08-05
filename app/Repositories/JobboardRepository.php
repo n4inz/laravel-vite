@@ -18,12 +18,14 @@ class JobboardRepository
     use Actifity;
     public function created($request)
     {
+        $jobs = JobModels::get();
+
         $value = json_decode($request->family);
            $jobs = JobModels::create([
             'family' => $value[0]->name,
             'title' => $request->title,
             'description' => $request->description,
-            'id_unique' => $request->id_unique,
+            'id_unique' => $jobs->count()+1,
 
             'location' => $request->address,
             'category' => $request->category,

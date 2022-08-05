@@ -11,7 +11,7 @@ class UserClientRepository
     use ImageUpload;
     public function created($request)
     {
-        $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
+
         if(isset($request->avatar)){
             $avatar = $this->uploadImageStore($request->file('avatar'), 'Setting/avatar');
         }
@@ -29,11 +29,13 @@ class UserClientRepository
             'create_by' =>  auth()->user()->id,
         ]);
 
-
-        $client->attached_file()->create([
-            'attached_file' => $name,
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        ]);
+        if($request->attached_file){
+            $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
+            $client->attached_file()->create([
+                'attached_file' => $name,
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            ]);
+        }
 
         // ClientAttachedFile::create([
 
