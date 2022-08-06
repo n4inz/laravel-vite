@@ -7,11 +7,13 @@ use App\Http\Traits\Actifity;
 use App\Jobs\SendMail;
 use App\Models\JobModels;
 use App\Models\JobModelsAvailabiltyDays;
+use App\Models\JobModelsChile;
 use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
 // use App\Models\JobModelsSubCategorys;
 use App\Models\JobModelsTask;
 use App\Models\Talents;
+use Illuminate\Support\Facades\DB;
 
 class JobboardRepository 
 {
@@ -20,73 +22,93 @@ class JobboardRepository
     {
         $jobs = JobModels::get();
 
-        $value = json_decode($request->family);
-           $jobs = JobModels::create([
-            'family' => $value[0]->name,
-            'title' => $request->title,
-            'description' => $request->description,
-            'id_unique' => $jobs->count()+1,
-
-            'location' => $request->address,
-            'category' => $request->category,
-            'part_time' => $request->part_time,
-            'desired_living' => $request->desired_living,
-            'english_level' => $request->english_level,
-
-            'comfortable_with_pets' => $request->comfortable_with_pets,
-            'has_transportation' => $request->has_transportation,
-            'has_driver_license' => $request->has_driver_license,
-
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'duration' => $request->duration,
-
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'asap' => $request->asap,
-            'tbd' => $request->tbd,
-
-            'salary_type' => $request->salary_type,
-            'rate' => $request->rate,
-            'pay_frequency' => $request->pay_frequency,
-            'pay_with' => $request->pay_with,
-            'rate_negotiable' => $request->rate_negotiable,
-
-            'status' => $request->status,
-            // 'type' => $request->type,
-            'type' => $request->onlyOneStatus,
-            'clients_id' => $value[0]->value,
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-            'stafs_id' => auth()->user()->staf->users_id ?? 0
-        ]);
-
-        foreach($request->subcategory as $keySub => $category){
-            JobModelsMatchTalent::create([
-                'jobs_sub_category' => $request->subcategory[$keySub], 
-                'job_models_id' => $jobs->id, 
-                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+        DB::beginTransaction();
+        try{
+            $value = json_decode($request->family);
+            $jobs = JobModels::create([
+             'family' => $value[0]->name,
+             'title' => $request->title,
+             'description' => $request->description,
+             'id_unique' => $jobs->count()+1,
+ 
+             'location' => $request->address,
+             'category' => $request->category,
+             'part_time' => $request->part_time,
+             'desired_living' => $request->desired_living,
+             'english_level' => $request->english_level,
+ 
+             'comfortable_with_pets' => $request->comfortable_with_pets,
+             'has_transportation' => $request->has_transportation,
+             'has_driver_license' => $request->has_driver_license,
+ 
+             'start_time' => $request->start_time,
+             'end_time' => $request->end_time,
+             'duration' => $request->duration,
+ 
+             'start_date' => $request->start_date,
+             'end_date' => $request->end_date,
+             'asap' => $request->asap,
+             'tbd' => $request->tbd,
+ 
+             'salary_type' => $request->salary_type,
+             'rate' => $request->rate,
+             'pay_frequency' => $request->pay_frequency,
+             'pay_with' => $request->pay_with,
+             'rate_negotiable' => $request->rate_negotiable,
+ 
+             'status' => $request->status,
+             // 'type' => $request->type,
+             'type' => $request->onlyOneStatus,
+             'clients_id' => $value[0]->value,
+             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+             'stafs_id' => auth()->user()->staf->users_id ?? 0
+         ]);
+ 
+            foreach($request->subcategory as $keySub => $category){
+                JobModelsMatchTalent::create([
+                    'jobs_sub_category' => $request->subcategory[$keySub], 
+                    'job_models_id' => $jobs->id, 
+                    'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                ]);
+    
+            }
+    
+            if(isset($request->language)){
+                foreach ($request->language as $keys => $lang) {
+                    JobModelsLanguages::create([
+                        'language' => $request->language[$keys],
+                        'job_models_id' => $jobs->id,
+                    ]);
+                }
+            }
+            JobModelsAvailabiltyDays::create([
+                'monday' => $request->monday,
+                'tuesday' => $request->tuesday,
+                'wednesday' => $request->wednesday,
+                'thursday' => $request->thursday,
+                'friday' => $request->friday,
+                'saturday' => $request->saturday,
+                'sunday' => $request->sunday,
+                'job_models_id' => $jobs->id,
             ]);
 
-        }
- 
-        if(isset($request->language)){
-            foreach ($request->language as $keys => $lang) {
-                JobModelsLanguages::create([
-                    'language' => $request->language[$keys],
-                    'job_models_id' => $jobs->id,
-                ]);
+            if(isset($request->name_chile)){
+                foreach ($request->name_chile as $keys => $lang) {
+                    JobModelsChile::create([
+                        'name' => $request->name_chile[$keys],
+                        'gender' =>$request->chile_gender[$keys],
+                        'age_type' =>$request->age_type[$keys],
+                        'age' =>$request->age[$keys],
+                        'job_models_id' => $jobs->id,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                    ]);
+                }
             }
+            DB::commit();
+        }catch(\Exception $e ){
+            DB::rollback();
         }
-        JobModelsAvailabiltyDays::create([
-            'monday' => $request->monday,
-            'tuesday' => $request->tuesday,
-            'wednesday' => $request->wednesday,
-            'thursday' => $request->thursday,
-            'friday' => $request->friday,
-            'saturday' => $request->saturday,
-            'sunday' => $request->sunday,
-            'job_models_id' => $jobs->id,
-        ]);
+       
     }
 
     public function email($request)

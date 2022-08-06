@@ -506,3 +506,27 @@
     line-height: 18px;
     letter-spacing: -0.361765px;
 }
+/* #family-error , #title-error , #description-error , #id-error{
+    color: red;
+    font-size: 12px;
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+} */
+
+label[for="subcategory[]"], 
+label[for=family] ,
+label[for=title] ,
+label[for=description] , 
+label[for=address],
+label[for=start_time],
+label[for=end_time],
+label[for=start_date],
+label[for=end_date],
+label[for=rate],
+label[for="name_chile[]"],
+label[for="age[]"]  
+{
+    color: red;
+    font-size: 12px;
+}

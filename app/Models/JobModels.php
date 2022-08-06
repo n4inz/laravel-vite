@@ -54,6 +54,11 @@ class JobModels extends Model
         return $this->hasMany(Actifity::class , 'job_models_id');
     }
 
+    public function chile()
+    {
+        return $this->hasMany(JobModelsChile::class, 'job_models_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -5,6 +5,21 @@ function onlyOneStatus(checkbox, name) {
     })
 }
 
+function chileAge(checkbox, name) {
+    var checkboxes = document.getElementsByName(name)
+    checkboxes.forEach((item) => {
+        if (item !== checkbox) item.checked = false
+    })
+}
+
+function chileGender(checkbox, name) {
+    var checkboxes = document.getElementsByName(name)
+    checkboxes.forEach((item) => {
+        console.log(item.id)
+        if (item !== checkbox) item.checked = false
+    })
+}
+
 function onlyOneSetting(checkbox, name){
 
     var tmp = ` <div id="checklist-EB5757" class="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-palet flex items-center justify-center">

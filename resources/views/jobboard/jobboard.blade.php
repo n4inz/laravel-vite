@@ -22,7 +22,7 @@
                         </div>
                         <div class="w-72 h-8 border rounded-md">
     
-                            <input type="text"  class="search_task text-colortext text-xs border-none bg-transparent outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search for tasks, projects, ..." required>
+                            <input type="text"  class="search_task text-colortext text-xs border-none bg-transparent outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search for tasks, projects, ..." required autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -465,7 +465,7 @@
         {{-- Modal Create job --}}
         <div id="create-job" tabindex="-1" aria-hidden="true"  aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">
             <div class=" w-[766px] h-screen">
-                <form method="post" action="{{ route('jobboard.jobs_store') }}">
+                <form class="validations" method="post" action="{{ route('jobboard.jobs_store') }}">
                     <div class="status">
                         @if($errors->any())
                             <input type="hidden" name="status" value="{{ old('status') }}">
@@ -491,26 +491,26 @@
                                 <label  for="archived" class="overview-note-body text-colortext">Archived</label>
                             </div>
                         </div>
-                        <div class="px-8 mt-4">
-                            <label for="family" class="{{ $errors->has('family') ? 'text-red-600' : '' }} mb-2 overview-note-body block text-colortext">Family*</label>
+                        <div class="px-8 mt-4 family-errors">
+                            <label class="{{ $errors->has('family') ? 'text-red-600' : '' }} mb-2 overview-note-body block text-colortext">Family*</label>
                             <div class="{{ $errors->has('family') ? 'border-red-500' : 'border-[#CCD3DC]' }} w-[670px] h-8 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                <input id="type_helper" name='family' value="{{ old('family') }}" type="text" id="family" class="costums-family overview-modal-add-talent-text  border-none rounded focus:ring-0 w-full p-1 outline-none" placeholder="">
+                                <input  name='family' value="{{ old('family') }}" type="text" class="costums-family overview-modal-add-talent-text  border-none rounded focus:ring-0 w-full p-1 outline-none" autocomplete="off">
                             </div>
                             @if($errors->has('family'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('family') }}</p>
                             @endif
                         </div>
-                        <div class="px-8 mt-4">
-                            <label for="title" class="{{ $errors->has('title') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Title*</label>
-                            <div class="{{ $errors->has('title') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input name="title" value="{{ old('title') }}" type="text" id="title" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="">
+                        <div class="px-8 mt-4 title-errors">
+                            <label class="{{ $errors->has('title') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Title*</label>
+                            <div class="{{ $errors->has('title') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} relative flex flex-col items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
+                                <input name="title" value="{{ old('title') }}" type="text" class="h-8  block border-none bg-transparent focus:ring-0 w-full outline-none rounded" autocomplete="off">
                             </div>
                             @if($errors->has('title'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('title') }}</p>
                             @endif
                         </div>
-                        <div class="px-8 mt-4">
-                            <label for="description" class="{{ $errors->has('description') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Description*</label>
+                        <div class="px-8 mt-4 description-errors">
+                            <label for="description-label" class="{{ $errors->has('description') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Description*</label>
                             <div class="{{ $errors->has('description') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-20 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
                                 {{-- <input name="description" value="{{ old('description') }}" type="text" id="description" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder=""> --}}
                                 <textarea name="description" rows="3" class="{{ $errors->has('description') ? 'placeholder-red-600' : '' }}  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none">{{ old('description') }}</textarea>
@@ -522,14 +522,14 @@
                         <div class="px-8 mt-4">
                             <label for="id" class="{{ $errors->has('id_unique') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">ID*</label>
                             <div class="{{ $errors->has('id_unique') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex bg-gray-200 items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input disabled  value="{{ old('id_unique') }}" type="text" id="id" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="ID will be shown after submit">
+                                <input disabled  value="{{ old('id_unique') }}" type="text" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="ID will be shown after submit">
                             </div>
                             @if($errors->has('id_unique'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('id_unique') }}</p>
                             @endif
                         </div>
-                        <div class="px-8 mt-4">
-                            <label for="id" class="mb-2 block overview-note-body text-colortext">Address(city/state/country)</label>
+                        <div class="px-8 mt-4 address-errors">
+                            <label class="mb-2 block overview-note-body text-colortext">Address(city/state/country)</label>
                             <div class="flex items-center">
                                 <div class="w-8 h-[34px] flex items-center justify-center rounded-l bg-[#CCD3DC]">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -539,10 +539,11 @@
                                     </svg> 
                                 </div>
                                 <div class="flex relative items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
-                                    <input name="address" value="{{ old('address' , $user_location->location) }}" type="text" id="id" class="placepicker overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location">
-                                    <input type="hidden" name="latitude" value="-6.87421360">
-                                    <input type="hidden" name="longitude" value="107.60348900">
+                                    <input name="address" value="{{ old('address' ) }}" type="text" class="placepicker overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location" autocomplete="off">
                                 </div>
+                                @if($errors->has('address'))
+                                    <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
+                                @endif
                             </div>
                         </div>
             
@@ -573,10 +574,11 @@
                             <div class="p-2">
                                 <div class="sub_categorys grid grid-cols-3">
                                 </div>
-                                @if($errors->has('subcategory'))
-                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('subcategory') }}</p>
-                                @endif
-              
+                                <div class="sub_categorys_error">
+                                    @if($errors->has('subcategory'))
+                                    <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('subcategory') }}</p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
             
@@ -721,10 +723,14 @@
                         <div class="px-8 mt-8 ">
                             <span class="overview-comments-name text-colortext">Childrens/ Seniors</span>
                             <div class="flex mt-4 px-2">
-                                <button class="w-[71px] h-8 rounded-lg bg-palet flex items-center justify-center">
+                                <div onclick="addChile()" class="hover:cursor-pointer w-[71px] h-8 rounded-lg bg-palet flex items-center justify-center">
                                     <span class="overview-attechment-btn-text text-center">Add</span>
-                                </button>
+                                </div>
                             </div>
+
+                            <div class="append_chile px-2 mt-8 flex flex-wrap justify-around">
+                            </div>
+
                         </div>
             
                         {{-- availability --}}
@@ -770,19 +776,19 @@
                                     </div>
                                 </div>
                                 <div class="flex space-x-4 mt-8">
-                                    <div>
-                                        <label for="start-date" class="{{ $errors->has('start_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Start time*</label>
+                                    <div class="start-time-errors">
+                                        <label class="{{ $errors->has('start_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Start time*</label>
                                         <div class="{{ $errors->has('start_time') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                            <input type="time" name="start_time" value="{{ old('start_time') }}" id="start-date" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                            <input type="time" name="start_time" value="{{ old('start_time') }}" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="" autocomplete="off">
                                         </div>
                                         @if($errors->has('start_time'))
                                             <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_time') }}</p>
                                         @endif
                                     </div>
-                                    <div>
-                                        <label for="end-time*" class="{{ $errors->has('end_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">End time*</label>
+                                    <div class="end-time-errors">
+                                        <label  class="{{ $errors->has('end_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">End time*</label>
                                         <div class="{{ $errors->has('end_time') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                            <input type="time" name="end_time" value="{{ old('end_time') }}" id="end-time" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="">
+                                            <input type="time" name="end_time" value="{{ old('end_time') }}" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="" autocomplete="off">
                                         </div>
                                         @if($errors->has('end_time'))
                                             <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_time') }}</p>
@@ -824,7 +830,7 @@
                                     </div>
                                 </div>
                                 <div date-rangepicker datepicker-format="yyyy/mm/dd" class="flex space-x-4 relative ">
-                                    <div>
+                                    <div class="start-date-errors">
                                         <div class="input_asap relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
                                             <input name="start_date" type="text" value="{{ old('start_date') }}" class="start_date overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " autocomplete="off">
                                         </div>
@@ -832,7 +838,7 @@
                                             <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_date') }}</p>
                                         @endif
                                     </div>
-                                    <div>
+                                    <div class="end-date-errors">
                                         <div class="input_tbd relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
                                             <input name="end_date" type="text" value="{{ old('end_date') }}" class="end_date overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none" autocomplete="off">
                                         </div>
@@ -872,10 +878,10 @@
                                             <label for="rate-negotible" class="overview-note-body text-colortext">Rate negotiable</label>
                                         </div>
                                     </div>
-                                    <div>
-                                        <label for="rate" class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Rate*</label>
+                                    <div class="rate-errors">
+                                        <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Rate*</label>
                                         <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                            <input type="text" name="rate" value="{{ old('rate') }}" id="rate" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " placeholder="">
+                                            <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " autocomplete="off">
                                         </div>
                                         @if($errors->has('family'))
                                             <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('rate') }}</p>
@@ -933,6 +939,89 @@
     <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
     
     <script>
+        // Validate
+        $(function(){
+        var validate = $('.validations');
+        
+            if(validate.length){
+                validate.validate({
+                    rules: {
+                        family:{
+                            required:true
+                        },
+                        title:{
+                            required:true
+                        },
+                        description: {
+                            required:true,
+                            minlength: 10
+                        },
+                        address:{
+                            required:true,
+                        },
+                        'subcategory[]':{
+                            required:true,
+                        },
+                        start_time:{
+                            required:true,
+                        },
+                        end_time:{
+                            required:true,
+                        },
+                        start_date:{
+                            required:true,
+                        },
+                        end_date:{
+                            required:true,
+                        },
+                        rate:{
+                            required:true,
+                            number:true
+                        },
+                        'name_chile[]':{
+                            required:true,
+                        },
+                        'age[]':{
+                            required:true,
+                        },
+                    },
+                    errorPlacement: function(error, element){
+                        if (element.is(":checkbox"))
+                        {
+                           
+                            error.appendTo($('.sub_categorys_error'));
+                        }else{ 
+                            error.insertAfter( element );
+                            error.appendTo(element.parents('.family-errors'));
+                            error.appendTo(element.parents('.title-errors'));
+                            error.appendTo(element.parents('.description-errors'));
+                            error.appendTo(element.parents('.address-errors'));
+                            error.appendTo(element.parents('.start-time-errors'));
+                            error.appendTo(element.parents('.end-time-errors'));
+                            error.appendTo(element.parents('.start-date-errors'));
+                            error.appendTo(element.parents('.end-date-errors'));
+                            error.appendTo(element.parents('.rate-errors'));
+                            error.appendTo(element.parents('.name-chile-errors'));
+                            error.appendTo(element.parents('.age-errors'));
+                        }
+                    },
+                    checkForm: function() {
+                        this.prepareForm();
+                        for (var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++) {
+                            if (this.findByName(elements[i].name).length != undefined && this.findByName(elements[i].name).length > 1) {
+                                for (var cnt = 0; cnt < this.findByName(elements[i].name).length; cnt++) {
+                                    this.check(this.findByName(elements[i].name)[cnt]);
+                                }
+                            } else {
+                                this.check(elements[i]);
+                            }
+                        }
+                        return this.valid();
+                    }
+                })
+            }
+        })
+
         var input = document.querySelector('input[name=family]');
 
         function tagTemplate(tagData){
@@ -989,6 +1078,8 @@
         </script>
     @endif
     <script>
+
+        // Drag and drop
         var status , id;
         $(function(){
             $("#potential_clients, #interviewing, #trialing, #completed")
@@ -1027,6 +1118,7 @@
             })
         })
 
+        // Search
         $('.search_task').keyup(function(){
             const search = $(this).val();
 
@@ -1128,6 +1220,7 @@
             })
         })
 
+        // SubCategorys
         function subCategorys(id){
             $.ajax({
                 type:'POST',
@@ -1152,16 +1245,18 @@
         })
         subCategorys($('#category').val())
 
+
+        // ASAP & TBD
         $('#asap').click(function(){
             $('.input_asap').toggleClass('bg-gray-200');
             if (this.checked) {
                 $('.start_date').prop('disabled', true);
                 $('.start_date').attr("type", "date")
-                // $('.start_date').addClass("text-gray-200");
+                $('.start_date').addClass("text-gray-200");
             } else {
                 $('.start_date').prop('disabled', false);
                 $('.start_date').attr("type", "text")
-                // $('.start_date').removeClass("text-gray-200");          
+                $('.start_date').removeClass("text-gray-200");          
             }
         })
 
@@ -1171,19 +1266,117 @@
             if (this.checked) {
                 $('.end_date').prop('disabled', true);
                 $('.end_date').attr("type", "date")
-                // $('.end_date').addClass("text-gray-200");
+                $('.end_date').addClass("text-gray-200");
             } else {
                 $('.end_date').prop('disabled', false);
                 $('.end_date').attr("type", "text")
-                // $('.end_date').removeClass("text-gray-200");      
+                $('.end_date').removeClass("text-gray-200");      
             }
         })
+
+
+        // Add chile
+        var no = 0; 
+        function addChile()
+        {
+            const tmp = ` <div id="${no}" class="border group w-52 rounded-lg shadow mb-3">
+                            <div class="relative px-4 mt-2 text-center py-3 bg-hover">
+                                <span class="text-colorStatusCard1 font-semibold">Child / Senior</span>
+                                <button onclick="$(this).parent().parent().remove()" type="button" class="absolute right-0 top-0 text-gray-400 hover:text-red-400 group-hover:inline-flex hidden rounded-full text-sm p-1.5 ml-auto items-center" >
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                                </button>
+                            </div>
+                            <div class="px-4 mt-4 flex items-center justify-center space-x-10">
+                                <div class="flex items-center justify-center space-x-3">
+                                    <label for="male${no}" class="overview-note-body text-colortext" >
+                                        <input data-type="${no}"  id="male${no}" name="gender${no}" checked  type="radio" value="male" class="gender${no} hidden" autocomplete="off">
+                                        <i class="fa fa-2x fa-male male${no} text-palet hover:cursor-pointer" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-center space-x-3">
+                                    <label for="female${no}" class="overview-note-body text-colortext">
+                                        <input data-type="${no}" id="female${no}" name="gender${no}"  type="radio" value="female" class="gender${no} hidden" autocomplete="off">
+                                        <i class="fa fa-2x fa-female female${no} text-gray-400 hover:cursor-pointer" aria-hidden="true"></i>
+                                    </label>
+                                </div>
+                                <input class="a${no} hidden" name="chile_gender[]" type="text" value="male" />
+                            </div>
+                            <div class="px-4 mt-4 name-chile-errors">
+                                <div class="{{ $errors->has('name_chile') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 h-8 border border-[#CCD3DC] rounded py-4">
+                                    <input name="name_chile[]" value="{{ old('name_chile') }}" type="text"  class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="Name" autocomplete="off" required>
+                                </div>
+                                @if($errors->has('name_chile'))
+                                    <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('name_chile') }}</p>
+                                @endif
+                            </div>
+                            <div class="px-4 mt-8 flex items-center space-x-4">
+                                <label for="month_type${no}" class="bg-colorStatusCard2 month${no} text-white flex items-center p-2 w-full justify-center hover:cursor-pointer space-x-1 rounded border">
+                                    <input data-type="${no}" id="month_type${no}" type="radio" value="month" name="type${no}" class="age_type${no} hidden">
+                                    <span  class="text-[11px]" >Month</span>
+                                </label>
+                                <label for="year_type${no}" class="bg-colorStatusCard1 year${no} text-white flex items-center p-2 w-full justify-center hover:cursor-pointer space-x-1 rounded border">
+                                    <input data-type="${no}" checked id="year_type${no}" type="radio" value="year" name="type${no}" class="age_type${no} hidden">
+                                    <span class="text-[11px]">Year</span>
+                                </label>
+                                <input class="b${no} hidden" name="age_type[]" type="text" value="year" />
+                            </div>
+                            <div class="px-4 mt-2 age-errors">
+                                <div class="{{ $errors->has('age') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 h-8 border border-[#CCD3DC] rounded py-4">
+                                    <input name="age[]" value="{{ old('age') }}" type="text" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="Age" autocomplete="off">
+                                </div>
+                                @if($errors->has('age'))
+                                    <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('age') }}</p>
+                                @endif
+                            </div>
+                            <div class="flex mt-2"></div>
+                        </div>`;
+           $('.append_chile').append(tmp);
+           
+           $('.gender'+no).change(function(){
+            
+            var gender = $(this).val();
+            var data = $(this).data('type')
+            $('.a'+data).val(gender)
+
+            if($('#male'+data).is(":checked")){
+                $('.male'+data).toggleClass('text-palet text-gray-400')
+                $('.female'+data).toggleClass('text-gray-400 text-palet')
+            }
+
+            if($('#female'+data).is(":checked")){
+                $('.female'+data).toggleClass('text-gray-400 text-palet')
+                $('.male'+data).toggleClass('text-palet text-gray-400')
+
+                // alert('female')
+            }
+           })
+
+           $('.age_type'+no).change(function(){
+            var age_type = $(this).val();
+            var data = $(this).data('type')
+            $('.b'+data).val(age_type)
+
+            if($('#month_type'+data).is(":checked")){
+                $('.month'+data).toggleClass('bg-colorStatusCard2 bg-colorStatusCard1')
+                $('.year'+data).toggleClass('bg-colorStatusCard1 bg-colorStatusCard2')
+            }
+
+            if($('#year_type'+data).is(":checked")){
+                $('.month'+data).toggleClass('bg-colorStatusCard1 bg-colorStatusCard2')
+                $('.year'+data).toggleClass('bg-colorStatusCard2 bg-colorStatusCard1')
+            }
+
+           })
+
+           ++no;
+        }
+
 </script>
 
 <script>
-$(document).ready(function() {
-    $(".placepicker").placepicker();
-}); 
+    $(document).ready(function() {
+        $(".placepicker").placepicker();
+    }); 
 </script>
 </main>
 @endsection

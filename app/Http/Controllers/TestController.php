@@ -11,8 +11,8 @@ class TestController extends Controller
     public function welcome()
     {
         // return 'ok';
-        // return view('welcome');
-        Actifity::dispatch('zulkarnain');
+        return view('welcome');
+        // Actifity::dispatch('zulkarnain');
     }
     
 
