@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('talents', function (Blueprint $table) {
             $table->id();
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('day_of_birthday');
@@ -25,7 +25,7 @@ return new class extends Migration
 
             $table->string('address');
             $table->string('about_talent');
-            $table->string('file_documents');
+            $table->string('file_documents')->nullable();
             $table->unsignedBigInteger('users_id');
 
             $table->foreign('users_id')

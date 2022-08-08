@@ -18,7 +18,6 @@ trait ImageUpload
     {
         $name = time().'_'.$request->getClientOriginalName();
         $request->storePubliclyAs($path, $name, "public");
-
         return $name;
     }
 

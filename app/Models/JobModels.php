@@ -59,6 +59,11 @@ class JobModels extends Model
         return $this->hasMany(JobModelsChile::class, 'job_models_id');
     }
 
+    public function setting_status()
+    {
+        return $this->belongsTo(SettingJobModelsStatus::class, 'status', 'status_key');
+    }
+
     protected static function boot()
     {
         parent::boot();

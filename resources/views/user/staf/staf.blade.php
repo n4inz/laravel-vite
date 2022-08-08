@@ -71,7 +71,7 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
                     </div>
-                    <form action="{{ route('user_staf.staf_store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('user_staf.staf_store') }}" class="validate_staff" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="px-[91px] mt-10">
                             <div class="flex justify-center  items-center space-x-10">
@@ -91,19 +91,19 @@
                             </div>
                             <div class="w-full flex flex-col mt-6">
                                 <div class="flex items-center space-x-2">
-                                    <div class="mb-6 w-full ">
+                                    <div class="mb-6 w-full errors_full_name">
                                         <label for="full-name" class="{{ $errors->has('full_name') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Full Name</label>
                                         <div class="{{ $errors->has('full_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="full_name" value="{{ old('full_name') }}" type="text" id="full-name" class="{{ $errors->has('full_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
+                                            <input name="full_name" value="{{ old('full_name') }}" type="text" class="{{ $errors->has('full_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
                                         </div>
                                         @if($errors->has('full_name'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('full_name') }}</p>
                                         @endif
                                     </div>
-                                    <div class="mb-6 w-full">
-                                        <label for="email" class="{{ $errors->has('email') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Email</label>
+                                    <div class="mb-6 w-full errors_last_name">
+                                        <label class="{{ $errors->has('email') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Email</label>
                                         <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="email" value="{{ old('email') }}" type="email" id="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Email">
+                                            <input name="email" value="{{ old('email') }}" type="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Email">
                                         </div>
                                         @if($errors->has('email'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
@@ -112,8 +112,8 @@
                                 </div>
        
                                 <div class="flex items-center space-x-2">
-                                    <div class="mb-6 w-full">
-                                        <label for="password" class="{{ $errors->has('password') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Password</label>
+                                    <div class="mb-6 w-full errors_password">
+                                        <label class="{{ $errors->has('password') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Password</label>
                                         <div class="{{ $errors->has('password') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
                                             <input name="password" value="{{ old('password') }}" type="password" id="password" class="{{ $errors->has('password') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" placeholder="Password">
                                             <span toggle="#password" class="fa fa-eye-slash toggle-password mr-2"></span>
@@ -122,7 +122,7 @@
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password') }}</p>
                                         @endif
                                     </div>
-                                    <div class="mb-6 w-full">
+                                    {{-- <div class="mb-6 w-full">
                                         <label for="type" class="{{ $errors->has('type') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Type</label>
                                         <div class="{{ $errors->has('type') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
                                             <select name="type"  class="bg-transparent border-none focus:ring-0 text-[#222222] block w-full p-2.5">
@@ -133,7 +133,7 @@
                                         @if($errors->has('type'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('type') }}</p>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="py-12">
@@ -149,6 +149,39 @@
         </div>
     </article>
     <script>
+        // Validate
+        $(function(){
+        var validate = $('.validate_staff');
+        
+            if(validate.length){
+                validate.validate({
+                    rules: {
+                        full_name:{
+                            required:true
+                        },
+                        last_name:{
+                            required:true
+                        },
+                        email:{
+                            required:true,
+                            email: true,
+                        },
+                        password:{
+                            required:true,
+                        },
+                    },
+                    errorPlacement: function(error, element){
+                        error.insertAfter( element );
+                        error.appendTo(element.parents('.errors_full_name'));
+                        error.appendTo(element.parents('.errors_last_name'));
+                        error.appendTo(element.parents('.errors_last_name'));
+                        error.appendTo(element.parents('.errors_email'));
+                        error.appendTo(element.parents('.errors_password'));
+                    },
+
+                })
+            }
+        })
         const options = {
             };
             const targetEl = document.getElementById('modal-add-staf');

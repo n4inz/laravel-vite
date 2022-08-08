@@ -18,7 +18,8 @@
                 <table width="500px">
                     <tr>
                         <td height="30px" width="65px"><span class="text-[#827C7C] overview-status">Status</span></td>
-                        @if($result->status === 'potential_clients')
+                        <td ><span class="text-colorStatusCard1 overview-status-field">{{ str_replace('_',' ',ucfirst($result->status)) }}</span></td>
+                        {{-- @if($result->status === 'potential_clients')
                             <td ><span class="text-colorStatusCard1 overview-status-field">Potential Clients</span></td>
                         @endif
                         @if($result->status === 'interviewing')
@@ -29,7 +30,7 @@
                         @endif
                         @if($result->status === 'completed')
                         <td ><span class="text-palet overview-status-field">completed</span></td>
-                        @endif
+                        @endif --}}
                     </tr>
                     <tr>
                         <td width="65px" height="30px"><span class="text-[#827C7C] overview-status">ID</span></td>

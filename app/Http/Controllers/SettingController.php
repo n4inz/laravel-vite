@@ -28,9 +28,10 @@ class SettingController extends Controller
             $query->with(['service_location_fee'])->first();
         }, 'SettingAdditionals' => function($query){
             $query->with('defined_check_list')->first();
-        },'SettingUsers', 'SettingGeneral' , 'SettingCategory'])->first();
+        },'SettingUsers', 'SettingGeneral' , 'SettingCategory' , 'SettingJobStatus'])->first();
 
         // return $setting;
+        // In array catagory and subcategory
         $category = [];
         $subCategory = [];
         if(!empty($setting->SettingCategory)){
@@ -42,8 +43,16 @@ class SettingController extends Controller
                 }
             }
         }
+
+        // In array job status
+        $jobStatus = [];
+        if(!empty($setting->SettingJobStatus)){
+            foreach($setting->SettingJobStatus as $val ){
+                array_push($jobStatus, $val->status_key);
+            }
+        }
         $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->get();
-        return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory'));
+        return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory' , 'jobStatus'));
     }
 
     public function setting_store(SettingRequest $request)

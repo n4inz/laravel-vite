@@ -6,7 +6,7 @@
     <article id="article" class="ml-[310px] space-x-2 mt-[85px] px-5 xl:w-[75%]">
         <div>            
             <div id="myTabContent" class="text-teal-500">
-                 <form action="{{ route('user_client.store') }}" method="POST" enctype="multipart/form-data">
+                 <form action="{{ route('user_client.store') }}" class="validate_client" method="POST" enctype="multipart/form-data">
                     <div class=" flex space-x-2 mt-11">
                         {{-- right --}}
                         <div class="w-[704px] xl:w-[80%] ">
@@ -21,19 +21,19 @@
                                     </div>
                                     <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                     <div class="px-4 mt-8 flex space-x-4">
-                                        <div>
-                                            <label for="first-name" class="{{ $errors->has('first_name') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">First Name</label>
+                                        <div class="errors_first_name">
+                                            <label class="{{ $errors->has('first_name') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">First Name</label>
                                             <div class="{{ $errors->has('first_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                <input name="first_name" value="{{ old('first_name') }}" type="text" id="first-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                                <input name="first_name" value="{{ old('first_name') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
                                             </div>
                                             @if($errors->has('first_name'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('first_name') }}</p>
                                             @endif
                                         </div>
-                                        <div>
-                                            <label for="last-name" class="{{ $errors->has('last_name') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Last Name</label>
+                                        <div class="errors_last_name">
+                                            <label class="{{ $errors->has('last_name') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Last Name</label>
                                             <div class="{{ $errors->has('last_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                <input name="last_name" value="{{ old('last_name') }}" type="text" id="last-name" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                                <input name="last_name" value="{{ old('last_name') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
                                             </div>
                                             @if($errors->has('last_name'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
@@ -41,8 +41,8 @@
                                         </div>
                                     </div>
                                     <div class="px-4 mt-4 flex space-x-4">
-                                        <div>
-                                            <label for="email" class="{{ $errors->has('email') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Email</label>
+                                        <div class="errors_email">
+                                            <label class="{{ $errors->has('email') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Email</label>
                                             <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
                                                 <input name="email" value="{{ old('email') }}" type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
                                             </div>
@@ -50,10 +50,10 @@
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
                                             @endif
                                         </div>
-                                        <div>
-                                            <label for="phone" class="{{ $errors->has('phone') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Phone</label>
+                                        <div class="errors_phone">
+                                            <label class="{{ $errors->has('phone') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Phone</label>
                                             <div class="{{ $errors->has('phone') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                <input name="phone" value="{{ old('phone') }}" type="text" id="phone" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="">
+                                                <input name="phone" value="{{ old('phone') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="">
                                             </div>
                                             @if($errors->has('phone'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
@@ -61,8 +61,8 @@
                                         </div>
                                     </div>
                                     <div class="px-4 mt-4 flex space-x-4">
-                                        <div>
-                                            <label for="address" class="{{ $errors->has('address') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Address</label>
+                                        <div class="errors_address">
+                                            <label class="{{ $errors->has('address') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Address</label>
                                             <div class="{{ $errors->has('address') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
                                                 <input name="address" value="{{ old('address') }}" type="text" id="address" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="">
                                             </div>
@@ -71,7 +71,7 @@
                                             @endif
                                         </div>
                                         <div>
-                                            <label for="languages" class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
+                                            <label  class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
                                             <div class="{{ $errors->has('languages') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[316px] p-3 h-10 border border-[#ECECEC] flex items-center rounded">
                                                 <select name="languages" id="category" class="text-sm overview-note-body bg-transparent border-none text-colortext appearance-none rounded-lg p-1 block w-full focus:ring-0 outline-none">
                                                     <option @if(old('languages') == 'Chinese Cantonese') selected @endif value="Chinese Cantonese">Chinese Cantonese</option>
@@ -101,10 +101,10 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="px-4 mt-4 ">
+                                    <div class="px-4 mt-4 errors_note">
                                         <label class="{{ $errors->has('note') ? 'text-red-600' : '' }} overview-status-field text-[#222222] mb-2">Note</label>
                                         <div class="{{ $errors->has('note') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[650px] h-[221px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
-                                            <textarea id="message" name="note" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none text-[#222222]" placeholder="">{{ old('note') }}</textarea>
+                                            <textarea name="note" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none text-[#222222]" placeholder="">{{ old('note') }}</textarea>
                                             <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
                                         </div>
                                         @if($errors->has('note'))
@@ -198,6 +198,56 @@
     </article>
    
     <script>
+        // Validate
+        $(function(){
+        var validate = $('.validate_client');
+        
+            if(validate.length){
+                validate.validate({
+                    rules: {
+                        first_name:{
+                            required:true
+                        },
+                        last_name:{
+                            required:true
+                        },
+                        email:{
+                            required:true,
+                            email: true,
+                        },
+                        phone:{
+                            required:true,
+                            number:true,
+                         
+                            minlength:5,
+                            maxlength:13
+                        },
+                        address:{
+                            required:true
+                        },
+                        note:{
+                            required:true
+                        },
+                    },
+                    errorPlacement: function(error, element){
+                        if (element.is(":checkbox"))
+                        {
+                            error.appendTo(element.parents('.errors_status'));
+                            error.appendTo(element.parents('.errors_subcategory'));
+                        }else{ 
+                            error.insertAfter( element );
+                            error.appendTo(element.parents('.errors_first_name'));
+                            error.appendTo(element.parents('.errors_last_name'));
+                            error.appendTo(element.parents('.errors_email'));
+                            error.appendTo(element.parents('.errors_phone'));
+                            error.appendTo(element.parents('.errors_address'));
+                            error.appendTo(element.parents('.errors_note'));
+                        }
+                    },
+
+                })
+            }
+        })
         var loadFile = function(event) {
 
           var output = document.getElementById('output');
@@ -225,9 +275,6 @@
                             <span class="name-file text-xs text-gray-400">Max 2MB</span>`;                 
                 $('.files-kept').html(other)
             }
-
-
-           console.log(extension)
         })
     </script>
      <script src="{{ asset('js/fileNameLoad.js') }}"></script>

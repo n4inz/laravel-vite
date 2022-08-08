@@ -76,8 +76,8 @@ class UserClientController extends Controller
 
         $request->validate([
             'full_name' => 'required|min:3',
-            'email' => 'required|unique:users,email',
-            'type' => 'required|min:3',
+            'email' => 'required|unique:users,email|unique:clients,email|unique:talents,email',
+            // 'type' => 'required|min:3',
             'password' => 'required',
         ]);
         if(isset($request->avatar)){
@@ -94,7 +94,7 @@ class UserClientController extends Controller
 
         $user->staf()->create([
             'avatar' => $avatar ?? 'dummy.png',
-            'type' => $request->type,
+            'type' => $request->type ?? 'staf',
             'users_agency_id' => $request->user()->id
         ]);
         

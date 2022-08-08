@@ -12,6 +12,7 @@ use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
 // use App\Models\JobModelsSubCategorys;
 use App\Models\JobModelsTask;
+use App\Models\SettingJobModelsStatus;
 use App\Models\Talents;
 use Illuminate\Support\Facades\DB;
 
@@ -94,14 +95,16 @@ class JobboardRepository
 
             if(isset($request->name_chile)){
                 foreach ($request->name_chile as $keys => $lang) {
-                    JobModelsChile::create([
-                        'name' => $request->name_chile[$keys],
-                        'gender' =>$request->chile_gender[$keys],
-                        'age_type' =>$request->age_type[$keys],
-                        'age' =>$request->age[$keys],
-                        'job_models_id' => $jobs->id,
-                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                    ]);
+                    if($request->name_chile[$keys] != null AND $request->chile_gender[$keys] != null AND $request->age_type[$keys] != null AND $request->age[$keys] != null ){
+                        JobModelsChile::create([
+                            'name' => $request->name_chile[$keys],
+                            'gender' =>$request->chile_gender[$keys],
+                            'age_type' =>$request->age_type[$keys],
+                            'age' =>$request->age[$keys],
+                            'job_models_id' => $jobs->id,
+                            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        ]);
+                    }
                 }
             }
             DB::commit();
@@ -161,7 +164,21 @@ class JobboardRepository
 
     public function search_job($request)
     {
-        return JobModels::orWhere('status', 'like', "%" . $request->search . "%")
+        // return SettingJobModelsStatus::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+        //                             ->with(['job_models' => function ($query) use ($request) {
+        //                                 $query->orWhere('status', 'like', "%" . $request->search . "%")
+        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+        //                                 ->orWhere('id_unique', 'like', "%" . $request->search . "%")
+        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+        //                                 ->orWhere('description', 'like', "%" . $request->search . "%")
+        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+        //                                 ->orWhere('title', 'like', "%" . $request->search . "%")
+        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+        //                                 ->get();
+        //                             }])->get();
+        return JobModels::with(['setting_status' => function($query){
+                            $query->get('status_name');
+                        }])->orWhere('status', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
                         ->orWhere('id_unique', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)

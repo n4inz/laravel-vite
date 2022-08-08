@@ -14,6 +14,7 @@ use App\Models\JobModels;
 use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
+use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
 use App\Models\SettingServiceSubcategory;
@@ -22,8 +23,6 @@ use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-
 
 class JobboardController extends Controller
 {
@@ -37,6 +36,8 @@ class JobboardController extends Controller
 
     public function index()
     {
+        // return JobModels::with('setting_status')->get();
+        $status = SettingJobModelsStatus::with('job_models')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
@@ -47,17 +48,20 @@ class JobboardController extends Controller
                 'email' => $value->email,
             ]);
         }
+
+        $status_key = '';
+        foreach($status as $key => $sts_key){
+            $status_key .= '#'.$sts_key->status_key.',';
+        }
+
         $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        $jobs = JobModels::with(['match_talent', 'languages', 'availability'])->get();
         $user_location = SettingServiceLocationFee::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first('location');
         return view('jobboard.jobboard', [
-            "potential_clients" => $jobs->where('status', 'potential_clients')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
-            "interviewing" => $jobs->where('status', 'interviewing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
-            "trialing" => $jobs->where('status', 'trialing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
-            "completed" => $jobs->where('status', 'completed')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id),
             "category" => $category,
             "json" => $json,
             'user_location' => $user_location,
+            'status' => $status,
+            'status_key' => rtrim($status_key, ',')
         ]);
     }
 
@@ -86,13 +90,12 @@ class JobboardController extends Controller
             'status' => $request->status
         ]);
 
+        $status_count = SettingJobModelsStatus::with('job_models')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+
         return response()->json([
             'id' => $request->id,
             'status' => $request->status,
-            'count_potential_clients' => JobModels::where('status', 'potential_clients')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
-            'count_interviewing' => JobModels::where('status', 'interviewing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
-            'count_trialing' => JobModels::where('status', 'trialing')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
-            'count_completed' => JobModels::where('status', 'completed')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->count(),
+            'status_count' =>  $status_count
         ]);
 
     }
@@ -100,12 +103,13 @@ class JobboardController extends Controller
     public function search_job(Request $request)
     {
         return response()->json([
+            'status' => SettingJobModelsStatus::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('status_key'),
             'value' => $this->jobboardRepository->search_job($request),
         ]);
     }
 
     public function jobs_store(JobsStoreRequest $request)
-    {
+    {  
         $this->jobboardRepository->created($request);
 
         return redirect()->back()->with('status', 'Create job succesfuly');

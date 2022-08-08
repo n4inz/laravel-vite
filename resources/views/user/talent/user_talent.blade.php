@@ -81,11 +81,11 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
                     </div>
-                    <form action="{{ route('user_talent.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('user_talent.store') }}" method="post" class="validate_talent" enctype="multipart/form-data">
                         @csrf
                         <div class="px-[91px] mt-10">
                             <div class="flex justify-center  items-center space-x-10">
-                                <div>
+                                <div class="errors_avatar">
                                     <label for="avatar">
                                         <div class="{{ $errors->has('avatar') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex relative justify-center  items-center w-28 h-28 bg-hover rounded-full hover:cursor-pointer">
                                             <img id="output" class="absolute rounded-full w-28 h-28"/>
@@ -100,10 +100,10 @@
                                 </div>
                                 <div class="w-full flex flex-col ">
                                     <div class="flex items-center space-x-2">
-                                        <div class="mb-6 w-[249px] ">
+                                        <div class="mb-6 w-[249px] errors_first_name">
                                             <label for="first-name" class="{{ $errors->has('first_name') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Full Name</label>
                                             <div class="{{ $errors->has('first_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="first_name" value="{{ old('first_name') }}" type="text" id="first-name" class="{{ $errors->has('first_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
+                                                <input name="first_name" value="{{ old('first_name') }}" type="text" class="{{ $errors->has('first_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
                                             </div>
                                             @if($errors->has('first_name'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('first_name') }}</p>
@@ -112,10 +112,10 @@
                                                 <p class="{{ $errors->has('last_name') ? 'invisible' : 'hidden' }} mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
                                             @endif
                                         </div>
-                                        <div class="mb-6 w-[249px]">
+                                        <div class="mb-6 w-[249px] errors_last_name">
                                             <label for="last-name" class="{{ $errors->has('last_name') ? 'text-red-600' : '' }} invisible block mb-2 overview-modal-add-talent-text text-[#222222]">Last Name</label>
                                             <div class="{{ $errors->has('last_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="last_name" value="{{ old('last_name') }}" type="text" id="last-name" class="{{ $errors->has('last_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Last Name">
+                                                <input name="last_name" value="{{ old('last_name') }}" type="text" class="{{ $errors->has('last_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Last Name">
                                             </div>
                                             @if($errors->has('last_name'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
@@ -127,10 +127,10 @@
                                     </div>
            
                                     <div class="flex items-center space-x-2">
-                                        <div class="mb-6 w-[249px]">
-                                            <label for="dob" class="{{ $errors->has('day_of_birthday') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">DoB</label>
+                                        <div class="mb-6 w-[249px] errors_day_of_birthday">
+                                            <label  class="{{ $errors->has('day_of_birthday') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">DoB</label>
                                             <div class="{{ $errors->has('day_of_birthday') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="day_of_birthday" value="{{ old('day_of_birthday') }}" type="date" id="dob" class="{{ $errors->has('day_of_birthday') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50">
+                                                <input name="day_of_birthday" value="{{ old('day_of_birthday') }}" type="date" class="{{ $errors->has('day_of_birthday') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50">
                                             </div>
                                             @if($errors->has('day_of_birthday'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('day_of_birthday') }}</p>
@@ -139,10 +139,10 @@
                                                 <p class="{{ $errors->has('experience') ? 'invisible' : 'hidden' }} mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('experience') }}</p>
                                             @endif
                                         </div>
-                                        <div class="mb-6 w-[249px]">
-                                            <label for="experience" class="{{ $errors->has('experience') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Experience</label>
+                                        <div class="mb-6 w-[249px] errors_experience">
+                                            <label  class="{{ $errors->has('experience') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Experience</label>
                                             <div class="{{ $errors->has('experience') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="experience" value="{{ old('experience') }}" type="text" id="experience" class="{{ $errors->has('experience') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="10">
+                                                <input name="experience" value="{{ old('experience') }}" type="text" class="{{ $errors->has('experience') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="10">
                                             </div>
                                             @if($errors->has('experience'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('experience') }}</p>
@@ -157,24 +157,28 @@
                                 </div>
                             </div>
                             <div class="mt-6">
-                                <span class="{{ $errors->has('email') ||  $errors->has('phone') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Your contact information</span>
-                                <div class="{{ $errors->has('email') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input name="email" value="{{ old('email') }}" type="text" id="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Email">
+                                <div class="errors_email">
+                                    <span class="{{ $errors->has('email') ||  $errors->has('phone') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Your contact information</span>
+                                    <div class="{{ $errors->has('email') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                        <input name="email" value="{{ old('email') }}" type="text" id="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Email">
+                                    </div>
+                                    @if($errors->has('email'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
+                                    @endif
                                 </div>
-                                @if($errors->has('email'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
-                                @endif
-                                <div class="{{ $errors->has('phone') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input name="phone" value="{{ old('phone') }}" type="text" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Phone">
+                                <div class="errors_phone">
+                                    <div class="{{ $errors->has('phone') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                        <input name="phone" value="{{ old('phone') }}" type="text" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Phone">
+                                    </div>
+                                    @if($errors->has('phone'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
+                                    @endif
                                 </div>
-                                @if($errors->has('phone'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
-                                @endif
                             </div>
-                            <div class="mt-6">
+                            <div class="mt-6 errors_type_helper">
                                 <span class="{{ $errors->has('type_helper') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Type of Help Needed</span>
                                 <div class="{{ $errors->has('type_helper') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-28 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
+                                    <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
                                 </div>
                                 {{-- <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder=""> --}}
 
@@ -182,16 +186,16 @@
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('type_helper') }}</p>
                                 @endif
                             </div>
-                            <div class="mt-6">
+                            <div class="mt-6 errors_languages">
                                 <span class="{{ $errors->has('languages') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Languages</span>
                                 <div class="{{ $errors->has('languages') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input id="languages" name='languages' value="{{ old('languages') }}" type="text" id="email" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
+                                    <input name='languages' value="{{ old('languages') }}" type="text" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
                                 </div>
                                 @if($errors->has('languages'))
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>
                                 @endif
                             </div>
-                            <div class="mt-6">
+                            <div class="mt-6 errors_address">
                                 <span class="{{ $errors->has('address') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Address</span>
                                 <div class="{{ $errors->has('address') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
                                     <input name="address" value="{{ old('address') }}" type="text" id="address" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="">
@@ -200,7 +204,7 @@
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
                                 @endif
                             </div>
-                            <div class="mt-6">
+                            <div class="mt-6 errors_about_talent">
                                 <span class="{{ $errors->has('about_talent') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">About talent</span>
                                 <div class="{{ $errors->has('about_talent') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-[148px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
                                     <textarea name="about_talent" rows="6" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Enter referral">{{ old('about_talent') }}</textarea>
@@ -246,6 +250,79 @@
     </article>
     <script src="{{ asset('js/fileNameLoad.js') }}"></script>
     <script>
+        // Validate
+        $(function(){
+        var validate = $('.validate_talent');
+        
+            if(validate.length){
+                validate.validate({
+                    rules: {
+                        avatar:{
+                            required:true
+                        },
+                        first_name:{
+                            required:true
+                        },
+                        last_name:{
+                            required:true
+                        },
+                        email:{
+                            required:true,
+                            email: true,
+                        },
+                        phone:{
+                            required:true,
+                            number:true,
+                         
+                            minlength:5,
+                            maxlength:13
+                        },
+                        day_of_birthday:{
+                            required:true
+                        },
+                        experience:{
+                            required:true
+                        },
+                        experience:{
+                            required:true
+                        },
+                        type_helper:{
+                            required:true
+                        },
+                        languages:{
+                            required:true
+                        },
+                        address:{
+                            required:true
+                        },
+                        about_talent:{
+                            required:true
+                        }
+                    },
+                    errorPlacement: function(error, element){
+                        if (element.is(":checkbox"))
+                        {
+                            error.appendTo(element.parents('.errors_status'));
+                            error.appendTo(element.parents('.errors_subcategory'));
+                        }else{ 
+                            error.insertAfter( element );
+                            error.appendTo(element.parents('.errors_avatar'));
+                            error.appendTo(element.parents('.errors_first_name'));
+                            error.appendTo(element.parents('.errors_last_name'));
+                            error.appendTo(element.parents('.errors_email'));
+                            error.appendTo(element.parents('.errors_phone'));
+                            error.appendTo(element.parents('.errors_day_of_birthday'));
+                            error.appendTo(element.parents('.errors_experience'));
+                            error.appendTo(element.parents('.errors_type_helper'));
+                            error.appendTo(element.parents('.errors_languages'));
+                            error.appendTo(element.parents('.errors_address'));
+                            error.appendTo(element.parents('.errors_about_talent'));
+                        }
+                    },
+
+                })
+            }
+        })
         var type_helper = document.querySelector('#type_helper');
         var tagify = new Tagify(type_helper, {
         whitelist  : [

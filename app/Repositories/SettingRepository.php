@@ -6,6 +6,7 @@ use App\Models\SettingAdditionals;
 use App\Models\SettingDefinedCheckList;
 use App\Models\SettingDetail;
 use App\Models\SettingGeneral;
+use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
 use App\Models\SettingUsers;
@@ -160,6 +161,16 @@ class SettingRepository {
                 }
             }
 
+            foreach($request->status as $key => $status){
+                SettingJobModelsStatus::create([
+                    'status_name' => $request->status[$key],
+                    'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
+                    // 'text_color' => $request->text_color[$key],
+                    // 'bg_color' => $request->bg_color[$key],
+                    'users_id' => auth()->user()->id
+                ]);
+            }
+
             DB::commit(); 
  
         }catch(\Exception $e){
@@ -190,6 +201,7 @@ class SettingRepository {
 
             
             SettingServiceCategory::where('users_id', auth()->user()->id)->delete();
+
 
              //Chile care
              if(isset($request->chile_care_category)){
@@ -309,6 +321,18 @@ class SettingRepository {
                         'users_id' => auth()->user()->id
                     ]);
                 }
+            }
+
+            SettingJobModelsStatus::where('users_id', auth()->user()->id)->delete();
+
+            foreach($request->status as $key => $status){
+                SettingJobModelsStatus::create([
+                    'status_name' => $request->status[$key],
+                    'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
+                    // 'text_color' => $request->text_color[$key],
+                    // 'bg_color' => $request->bg_color[$key],
+                    'users_id' => auth()->user()->id
+                ]);
             }
 
             

@@ -24,7 +24,7 @@ class TalentRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => 'required',
+            // 'avatar' => 'required',
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
             'day_of_birthday' => 'required',
@@ -33,9 +33,11 @@ class TalentRequest extends FormRequest
             'phone' => 'required|min:5|numeric',
             'address' => 'required|min:5',
             'about_talent' => 'required|min:6',
-            'attached_file' => 'required|mimes:doc,rar,zip,pdf|max:2048',
+            // 'attached_file' => 'required|mimes:doc,rar,zip,pdf|max:2048',
             'languages' => 'required',
-            'type_helper' => 'required'
+            'type_helper' => 'required',
+            'avatar' => 'mimes:png,jpg,jpeq,PNG,JPG,JPEG,webp|max:126',
+            'attached_file' => 'mimes:doc,rar,zip,pdf,txt|max:2048',
         ];
     }
 }

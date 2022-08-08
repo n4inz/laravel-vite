@@ -63,6 +63,11 @@ class User extends Authenticatable
         return $this->hasOne(SettingDetail::class, 'users_id');
     }
 
+    public function SettingJobStatus()
+    {
+        return $this->hasMany(SettingJobModelsStatus::class , 'users_id');
+    }
+
     public function SettingUsers()
     {
         return $this->hasOne(SettingUsers::class, 'users_id');

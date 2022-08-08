@@ -11,11 +11,16 @@ class UserTalentRepository
     {
         $languages = json_decode($request->languages);
         $type_helper = json_decode($request->type_helper);
-        $name = $this->uploadImageStore($request->file('attached_file'), 'Talent attached file');
-        $avatar = $this->uploadImageStore($request->file('avatar'), 'Talent attached file/avatar');
-
+        
+        
+        if(isset($request->avatar)){
+            $avatar = $this->uploadImageStore($request->file('avatar'), 'Talent attached file/avatar');
+        }
+        if(isset($request->attached_file)){
+            $name = $this->uploadImageStore($request->file('attached_file'), 'Talent attached file');
+        }
        $talent =  Talents::create([
-            'avatar' => $avatar,
+            'avatar' => $avatar ?? 'dummy.png',
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'day_of_birthday' => $request->day_of_birthday,

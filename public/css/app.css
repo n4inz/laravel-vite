@@ -1111,11 +1111,11 @@ video {
 .w-1\/2 {
   width: 50%;
 }
-.w-\[450px\] {
-  width: 450px;
-}
 .w-\[51px\] {
   width: 51px;
+}
+.w-\[450px\] {
+  width: 450px;
 }
 .w-\[186px\] {
   width: 186px;
@@ -1668,21 +1668,13 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
-.bg-colorStatusCard2 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 226 210 / var(--tw-bg-opacity));
-}
 .bg-\[\#DAF2F1\] {
   --tw-bg-opacity: 1;
   background-color: rgb(218 242 241 / var(--tw-bg-opacity));
 }
-.bg-\[\#923BD7\] {
+.bg-colorStatusCard2 {
   --tw-bg-opacity: 1;
-  background-color: rgb(146 59 215 / var(--tw-bg-opacity));
-}
-.bg-\[\#3B79D7\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 121 215 / var(--tw-bg-opacity));
+  background-color: rgb(255 226 210 / var(--tw-bg-opacity));
 }
 .bg-backround {
   --tw-bg-opacity: 1;
@@ -2626,7 +2618,25 @@ label[for=start_date],
 label[for=end_date],
 label[for=rate],
 label[for="name_chile[]"],
-label[for="age[]"]  
+label[for="age[]"],
+label[for=agency_name],
+label[for=url_ending_legal],
+label[for=company_description],
+label[for="status[]"],
+label[for="chile_care[]"],
+label[for="senior_care[]"],
+label[for="home_care[]"],
+label[for=first_name],
+label[for=last_name],
+label[for=email],
+label[for=phone],
+label[for=address],
+label[for=day_of_birthday],
+label[for=type_helper],
+label[for=experience],
+label[for=languages],
+label[for=full_name],
+label[for=password]
 {
     color: red;
     font-size: 12px;

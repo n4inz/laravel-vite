@@ -28,9 +28,14 @@ class SettingRequest extends FormRequest
             'url_ending_legal' => 'required', 
             'company_description' => 'required|min:10',
             // 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'chile_care_category' OR 'senior_care_category.*' OR 'home_care_category.*' OR 'other_category.*' =>  'required',
+            'chile_care_category.*' =>  'required_with:senior_care_category.*,home_care_category.*,other_category.*',
+            'senior_care_category.*' =>  'required_with:chile_care_category.*,home_care_category.*,other_category.*',
+            'home_care_category.*' =>  'required_with:chile_care_category.*,senior_care_category.*,other_category.*',
+            'other_category.*' =>  'required_with:chile_care_category.*,senior_care_category.*,home_care_category.*',
 
             'service_type' => 'required',
-
+            'status' => 'required',
             'location' => 'required',
             'aplication_fee' => 'required',
             'placement_fee' => 'required',

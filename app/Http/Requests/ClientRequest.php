@@ -26,11 +26,11 @@ class ClientRequest extends FormRequest
         return [
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
-            'email' => 'required|unique:clients,email',
+            'email' => 'required|unique:clients,email|unique:users,email',
             'phone' => 'required|min:3|numeric',
             'address' => 'required|min:3',
             'languages' => 'required',
-            'note' => 'required',
+            'note' => 'required|min:255',
             'avatar' => 'mimes:png,jpg,jpeq,PNG,JPG,JPEG,webp|max:126',
             'attached_file' => 'mimes:doc,rar,zip,pdf,txt|max:2048',
         ];

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\JobsSubCategorys;
+use App\Models\SettingJobModelsStatus;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Models\User;
@@ -32,21 +33,46 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make(123456),
         // ]);
 
-        $this->call([
-            RoleSeeder::class,
-            // AllSeeder::class,
-            // TenantsSeeder::class,
-            // UserSeeder::class,
+        $status = array(
+            [
+                'status_name' => 'Outside Application',
+                'status_key' => 'outside_application',
+                'users_id' => 1
+            ],
+            [
+                'status_name' => 'Agency Interview',
+                'status_key' => 'agency_interview',
+                'users_id' => 1
+            ],
+            [
+                'status_name' => 'Present to Family',
+                'status_key' => 'present_to_family',
+                'users_id' => 1
+            ],
+            [
+                'status_name' => 'Family Interview',
+                'status_key' => 'family_interview',
+                'users_id' => 1
+            ],
+        );
 
-            // ClientSeeder::class,
-            // TalentsSeeder::class,
-            // TalentLanguageSeeder::class,
-            // TalentTypeHelperSeeder::class,
-            // JobsSeeder::class,
-            // JobsAvailabiltyDaysSeeder::class,
-            // JobsLanguagesSeeder::class,
-            // JobsSubCategorysSeeder::class,
-        ]);
+        SettingJobModelsStatus::insert($status);
+
+        // $this->call([
+        //     RoleSeeder::class,
+        //     // AllSeeder::class,
+        //     // TenantsSeeder::class,
+        //     // UserSeeder::class,
+
+        //     // ClientSeeder::class,
+        //     // TalentsSeeder::class,
+        //     // TalentLanguageSeeder::class,
+        //     // TalentTypeHelperSeeder::class,
+        //     // JobsSeeder::class,
+        //     // JobsAvailabiltyDaysSeeder::class,
+        //     // JobsLanguagesSeeder::class,
+        //     // JobsSubCategorysSeeder::class,
+        // ]);
         
 
     }
