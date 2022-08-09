@@ -14,6 +14,6 @@ class WhereUsersIdScope implements Scope
 
         // $builder->orderBy('id','desc');
 
-        $builder->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id);
+        // $builder->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id);
     }
 }

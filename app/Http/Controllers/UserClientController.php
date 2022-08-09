@@ -32,6 +32,8 @@ class UserClientController extends Controller
     public function client()
     {
         $client = Client::get();
+
+        // return $client->count();
         return view('user.client.user_client' , compact('client'));
     }
 
@@ -74,33 +76,36 @@ class UserClientController extends Controller
     public function staf_store(Request $request)
     {
 
-        $request->validate([
-            'full_name' => 'required|min:3',
-            'email' => 'required|unique:users,email|unique:clients,email|unique:talents,email',
-            // 'type' => 'required|min:3',
-            'password' => 'required',
-        ]);
-        if(isset($request->avatar)){
-            $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
+        if(auth()->user()->hasRole('agency')){
+            $request->validate([
+                'full_name' => 'required|min:3',
+                'email' => 'required|unique:users,email|unique:clients,email|unique:talents,email',
+                // 'type' => 'required|min:3',
+                'password' => 'required',
+            ]);
+            if(isset($request->avatar)){
+                $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
+            }
+    
+           $user = User::create([
+                'full_name' => $request->full_name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'tenants_id' => $request->user()->tenants_id,
+    
+            ]);
+    
+            $user->staf()->create([
+                'avatar' => $avatar ?? 'dummy.png',
+                'type' => $request->type ?? 'staf',
+                'users_agency_id' => $request->user()->id
+            ]);
+            
+    
+            $user->assignRole('staf');
+    
+            return redirect()->back()->with('success', 'Create staff successfuly');
         }
-
-       $user = User::create([
-            'full_name' => $request->full_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'tenants_id' => $request->user()->tenants_id,
-
-        ]);
-
-        $user->staf()->create([
-            'avatar' => $avatar ?? 'dummy.png',
-            'type' => $request->type ?? 'staf',
-            'users_agency_id' => $request->user()->id
-        ]);
-        
-
-        $user->assignRole('staf');
-
-        return redirect()->back()->with('success', 'Create staff successfuly');
+      
     }
 }

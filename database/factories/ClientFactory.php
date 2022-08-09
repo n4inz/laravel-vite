@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,15 +17,18 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
+        $users_id = User::inRandomOrder()->first()->id;
         return [
            'first_name' => $this->faker->firstName,
            'last_name' => $this->faker->lastName,
-           'email'  =>  fake()->safeEmail(),
+           'email'  =>  $this->faker->unique()->email,
            'phone' => $this->faker->phoneNumber,
            'address' => $this->faker->address,
            'languages' => $this->faker->country,
            'note' => $this->faker->sentence(mt_rand(15,30)),
-           'users_id' => mt_rand(1,10)
+           'avatar' => 'dummy.png',
+        //    'users_id' => $users_id,
+        //    'create_by' => $users_id
         ];
     }
 }

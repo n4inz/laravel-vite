@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,6 +17,7 @@ class TalentsFactory extends Factory
      */
     public function definition()
     {
+        $users_id = User::inRandomOrder()->first()->id;
         return [
             'avatar' => 'dummy.png',
             'first_name' => $this->faker->firstName,
@@ -27,8 +29,9 @@ class TalentsFactory extends Factory
 
             'address' => $this->faker->address,
             'about_talent' => $this->faker->sentence,
-            'file_documents' => 'dummy',
-            'users_id' => mt_rand(1,10),
+            'file_documents' => 'dummy.pdf',
+            // 'users_id' => $users_id,
+            // 'create_by' => $users_id,
         ];
     }
 }

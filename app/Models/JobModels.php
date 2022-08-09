@@ -20,6 +20,11 @@ class JobModels extends Model
         return $this->hasMany(JobModelsMatchTalent::class, 'job_models_id');
     }
 
+    public function talent_status()
+    {
+        return $this->hasMany(JobModelsTalentStatus::class,'job_models_id');
+    }
+
     public function languages()
     {
         return $this->hasMany(JobModelsLanguages::class, 'job_models_id');

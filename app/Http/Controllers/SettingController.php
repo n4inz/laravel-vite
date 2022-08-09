@@ -7,6 +7,7 @@ use App\Models\SettingGeneral;
 use App\Http\Traits\ImageUpload;
 use App\Models\Avatar;
 use App\Models\SettingDefinedCheckList;
+use App\Models\SettingStatusTalent;
 use App\Models\User;
 use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class SettingController extends Controller
             $query->with(['service_location_fee'])->first();
         }, 'SettingAdditionals' => function($query){
             $query->with('defined_check_list')->first();
-        },'SettingUsers', 'SettingGeneral' , 'SettingCategory' , 'SettingJobStatus'])->first();
+        },'SettingUsers', 'SettingGeneral' , 'SettingCategory' , 'SettingJobStatus' , 'SettingTalentStatus'])->first();
 
         // return $setting;
         // In array catagory and subcategory
@@ -51,8 +52,17 @@ class SettingController extends Controller
                 array_push($jobStatus, $val->status_key);
             }
         }
+
+        // in array talent status
+        $talentStatus = [];
+        if(!empty($setting->SettingTalentStatus)){
+            foreach($setting->SettingTalentStatus as $val ){
+                array_push($talentStatus, $val->status_key);
+            }
+        }
+
         $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->get();
-        return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory' , 'jobStatus'));
+        return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory' , 'jobStatus', 'talentStatus'));
     }
 
     public function setting_store(SettingRequest $request)

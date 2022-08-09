@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Talents;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -31,12 +32,12 @@ class TalentLanguageFactory extends Factory
         ];
 
         $LangRand = $lang[Rand(0, count($lang) - 1)];
+
+        // $talents = Talents::inRandomOrder()->first();
         return [
             'languages' => $LangRand,
-            'talents_id' => mt_rand(1,10),
-            'users_id' => mt_rand(1,10)
-            
-            // 'users_id' => mt_rand(1,10)
+            // 'talents_id' => $talents->id,
+            // 'users_id' => $talents->users_id
         ];
     }
 }

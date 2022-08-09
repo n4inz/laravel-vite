@@ -19,6 +19,10 @@ class Talents extends Model
     public function languages()
     {
         return $this->hasMany(TalentLanguage::class, 'talents_id');
+    }
 
+    public function job_model_talent_status()
+    {
+        return $this->hasOne(JobModelsTalentStatus::class, 'talents_id');
     }
 }

@@ -189,7 +189,7 @@
                             <div class="mt-6 errors_languages">
                                 <span class="{{ $errors->has('languages') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Languages</span>
                                 <div class="{{ $errors->has('languages') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input name='languages' value="{{ old('languages') }}" type="text" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
+                                    <input name='languages' value="{{ old('languages') }}" id="languages" type="text" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
                                 </div>
                                 @if($errors->has('languages'))
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>

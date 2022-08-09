@@ -225,6 +225,29 @@
                                                         </label>
                                                     </td>
                                                 </tr>
+                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
+                                                    <td height="66px" width="12%">
+                                                        <div class="flex items-center justify-center space-x-2">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                            </svg>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td height="66px" width="40%">
+                                                        <span class="task-text-body text-[#222222]">Family Offer</span>
+                                                    </td>
+                                                    <td height="66px" width="25%">
+                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
+                                                    </td>
+                                                    <td height="66px" align="center">
+                                                        <label for="family_offer" class="relative inline-flex items-center cursor-pointer">
+                                                            <input name="status[]"  @if(is_array(old('status')) && in_array('Family Offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="Family Offer" type="checkbox" id="family_offer" class="sr-only peer">
+                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
+                                                        </label>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                         @if($errors->has('status'))
@@ -232,9 +255,64 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="px-6 mt-6 flex space-x-4">
+                                    <div class="w-full">
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Status Talents</label>
+                                        <div class="errors_status_talent">
+                                            {{-- Chile Care --}}
+                                            <div class="flex space-x-7 p-4 rounded-lg dark:bg-gray-800" id="chile_care" role="tabpanel" aria-labelledby="chile-care">
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('internal_matched', old('status_talent')) ) checked @endif @if(in_array('internal_matched', $talentStatus)) checked @endif value="internal_matched" id="internal_matched_talent" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
+                                                        <label for="internal_matched_talent" class="overview-id-field text-colortext hover:cursor-pointer">Internal Matched</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('agency_interview', old('status_talent')) ) checked @endif  @if(in_array('agency_interview', $talentStatus)) checked @endif  value="agency_interview" id="agency_interview_talent" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="agency_interview_talent" class="overview-id-field text-colortext hover:cursor-pointer">Agency Interview</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('present_to_family', old('status_talent')) ) checked @endif @if(in_array('present_to_family', $talentStatus)) checked @endif value="present_to_family" id="present_to_family_talent" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="present_to_family_talent" class="overview-id-field text-colortext hover:cursor-pointer">Present to Family</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('family_interview', old('status_talent')) ) checked @endif @if(in_array('family_interview', $talentStatus)) checked @endif value="family_interview" id="family_interview_talent" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="family_interview_talent" class="overview-id-field text-colortext hover:cursor-pointer">Family Interview</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('family_trialing', old('status_talent')) ) checked @endif @if(in_array('family_trialing', $talentStatus)) checked @endif value="family_trialing" id="family_trialing_talent" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="family_trialing_talent" class="overview-id-field text-colortext hover:cursor-pointer">Family Trialing</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('rejected', old('status_talent')) ) checked @endif @if(in_array('rejected', $talentStatus)) checked @endif value="rejected" id="rejected_talent" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="rejected_talent" class="overview-id-field text-colortext hover:cursor-pointer">Rejected</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('withdrawn', old('status_talent')) ) checked @endif @if(in_array('withdrawn', $talentStatus)) checked @endif value="withdrawn" id="withdrawn_talent" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="withdrawn_talent" class="overview-id-field text-colortext hover:cursor-pointer">Withdrawn</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input name="status_talent[]" @if(is_array(old('status_talent')) && in_array('family_offer', old('status_talent')) ) checked @endif @if(in_array('family_offer', $talentStatus)) checked @endif value="family_offer" id="family_offer_talent" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="family_offer_talent" class="overview-id-field text-colortext hover:cursor-pointer">Family Offer</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- End chile care --}}
+                                            @if($errors->has('status_talent'))
+                                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('status_talent') }}</p>
+                                            @endif
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div>
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Services Type</label>
+                                        <label class="block overview-status-field text-[#222222] mb-3">Services Type</label>
                                         <div class="w-[316px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
                                             <select name="service_type" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                                 <option value="Placement">Placement</option>
@@ -827,6 +905,9 @@
                         'other[]': {
                             require_from_group: [1, ".subcategory"]
                         },
+                        'status_talent[]':{
+                            required:true,
+                        }
                    
                     },
                     errorPlacement: function(error, element){
@@ -834,6 +915,8 @@
                         {
                             error.appendTo(element.parents('.errors_status'));
                             error.appendTo(element.parents('.errors_subcategory'));
+                            error.appendTo(element.parents('.errors_status_talent'));
+
                         }else{ 
                             error.insertAfter( element );
                             error.appendTo(element.parents('.errors_agency_name'));

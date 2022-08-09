@@ -36,6 +36,7 @@ class SettingRequest extends FormRequest
 
             'service_type' => 'required',
             'status' => 'required',
+            'status_talent' => 'required',
             'location' => 'required',
             'aplication_fee' => 'required',
             'placement_fee' => 'required',

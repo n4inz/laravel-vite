@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\JobModels;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobsAvailabiltyDays>
  */
-class JobsAvailabiltyDaysFactory extends Factory
+class JobModelsAvailabiltyDaysFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,7 +25,7 @@ class JobsAvailabiltyDaysFactory extends Factory
             'friday' => (bool)rand(0,1),   
             'saturday' => (bool)rand(0,1), 
             'sunday' => (bool)rand(0,1),
-            'jobs_id' => mt_rand(1,10)
+            // 'job_models_id' => JobModels::inRandomOrder()->first()->id
         ];
     }
 }

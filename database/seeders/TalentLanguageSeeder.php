@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\TalentLanguage;
+use App\Models\Talents;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,8 +16,15 @@ class TalentLanguageSeeder extends Seeder
      */
     public function run()
     {
-        for($x=1;$x<=10;$x++){
-            TalentLanguage::factory(1)->create();
-        }   
+   
+        $talents = Talents::all();
+
+        foreach($talents as $talent){
+            TalentLanguage::factory(4)->create([
+                'talents_id' => $talent->id,
+                'users_id' => $talent->users_id
+            ]);
+        }
+     
     }
 }

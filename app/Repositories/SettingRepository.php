@@ -9,6 +9,7 @@ use App\Models\SettingGeneral;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
+use App\Models\SettingStatusTalent;
 use App\Models\SettingUsers;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -169,6 +170,15 @@ class SettingRepository {
                     // 'bg_color' => $request->bg_color[$key],
                     'users_id' => auth()->user()->id
                 ]);
+            }
+
+            foreach($request->status_talent as $key => $value){
+                SettingStatusTalent::create([
+                    'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
+                    'status_key' =>  $request->status_talent[$key],
+                    'users_id' => auth()->user()->id
+                ]);
+    
             }
 
             DB::commit(); 
@@ -335,6 +345,16 @@ class SettingRepository {
                 ]);
             }
 
+            SettingStatusTalent::where('users_id', auth()->user()->id)->delete();
+
+            foreach($request->status_talent as $key => $value){
+                SettingStatusTalent::create([
+                    'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
+                    'status_key' =>  $request->status_talent[$key],
+                    'users_id' => auth()->user()->id
+                ]);
+    
+            }
             
             DB::commit(); 
            

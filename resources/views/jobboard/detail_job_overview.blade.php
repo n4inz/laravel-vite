@@ -484,8 +484,9 @@
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div class="space-y-6 mt-6">
                                 @foreach (array_unique($dataTalent) as $talent )
-                                    <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->id }})" class="flex justify-between px-4 hover:cursor-pointer">
-                                        <div class="flex space-x-2 ">
+                                {{-- $talent->job_model_talent_status->status --}}
+                                    <div  class="flex justify-between px-4 hover:cursor-pointer">
+                                        <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->id }})" class="flex space-x-2 ">
                                             <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->avatar) }}" alt="">
                                             <div class="flex flex-col">
                                                 <span class="overview-name-talent text-colortext">{{ $talent->first_name }}</span>
@@ -494,8 +495,18 @@
                                             </div>
                                         </div>
                                         <div class="h-4">
-                                            <select  class="p-2 text-xs text-[#5FCFFF] bg-gray-50 rounded border border-[#5FCFFF] outline-none ">
-                                                <option selected>Interviewing</option>
+                                            
+                                            <select data-talent="{{ $talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                    <option>-- Select status --</option>
+                                                    @if (!empty($talent->job_model_talent_status->status))
+                                                        @foreach ($status_talent as $value )
+                                                            <option @if($value->status_name === $talent->job_model_talent_status->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($status_talent as $value )
+                                                            <option class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                        @endforeach
+                                                    @endif
                                             </select>
                                         </div>
                                     </div>
@@ -957,7 +968,7 @@
                                     <div class="flex justify-between space-x-2 ">
                                         <div class="flex space-x-2 ">
                                             <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
-                                            <span class="text-[#222222] font-semibold">Talents outside of Ayi</span>
+                                            <span class="text-[#222222] font-semibold">New applicants</span>
                                         </div>
                                         <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                         {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
@@ -1522,6 +1533,7 @@
 <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
+
     var no = 0 ;
     function add_more(){
         const template =    '<tr id="" class="load'+no+' check hover:bg-[#F7F7F7] cursor-pointer">'+
@@ -1770,6 +1782,20 @@
                     $('.load-task').append(tmp_search);
                 })
 
+                console.log(res)
+            }
+        })
+    })
+
+    $('.status_talents').change(function(){
+        const status = $(this).val();
+        const talent_id = $(this).attr("data-talent")
+        const job_models_id  = $(this).attr("data-job-id")
+        $.ajax({
+            type: "POST",
+            url: "{{ route('jobboard.talent_status') }}",
+            data: {status, talent_id,job_models_id,  _token: '{{ csrf_token() }}'},
+            success: function(res){
                 console.log(res)
             }
         })

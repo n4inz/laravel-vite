@@ -13,20 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('client_attached_files', function (Blueprint $table) {
+        Schema::create('job_models_talent_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('attached_file')->nullable();
-            $table->unsignedBigInteger('clients_id');
-
+            $table->string('status');
+            $table->unsignedBigInteger('job_models_id');
+            $table->unsignedBigInteger('talents_id');
             $table->unsignedBigInteger('users_id');
 
-            $table->foreign('clients_id')
-            ->references('id')->on('clients')
-            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('talents_id')
+            ->references('id')->on('talents');
 
             $table->foreign('users_id')
             ->references('id')->on('users')
-            ->onDelete('cascade')->onUpdate('cascade');
+            ->onDelete('cascade');
+
+            $table->foreign('job_models_id')
+            ->references('id')->on('job_models')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -38,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_attached_files');
+        Schema::dropIfExists('job_models_talent_statuses');
     }
 };

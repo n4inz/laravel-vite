@@ -543,7 +543,8 @@ label[for=type_helper],
 label[for=experience],
 label[for=languages],
 label[for=full_name],
-label[for=password]
+label[for=password],
+label[for="status_talent[]"]
 {
     color: red;
     font-size: 12px;

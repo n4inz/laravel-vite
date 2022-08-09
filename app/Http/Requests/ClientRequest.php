@@ -30,7 +30,7 @@ class ClientRequest extends FormRequest
             'phone' => 'required|min:3|numeric',
             'address' => 'required|min:3',
             'languages' => 'required',
-            'note' => 'required|min:255',
+            'note' => 'required|max:255',
             'avatar' => 'mimes:png,jpg,jpeq,PNG,JPG,JPEG,webp|max:126',
             'attached_file' => 'mimes:doc,rar,zip,pdf,txt|max:2048',
         ];

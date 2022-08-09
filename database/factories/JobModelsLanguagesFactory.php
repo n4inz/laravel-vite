@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\JobModels;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobsLanguages>
  */
-class JobsLanguagesFactory extends Factory
+class JobModelsLanguagesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +19,7 @@ class JobsLanguagesFactory extends Factory
     {
         return [
            'language' => $this->faker->country,       
-            'jobs_id' => mt_rand(1,10),
+            // 'job_models_id' => JobModels::inRandomOrder()->first()->id,
 
         ];
     }

@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Jobs;
+use App\Models\JobModels;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class JobsSeeder extends Seeder
+class JobSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +16,20 @@ class JobsSeeder extends Seeder
      */
     public function run()
     {
-        Jobs::factory()->create();
+        $users = User::with('client')->get();
+
+        
+        foreach($users as $user){
+            foreach($user->client as $client){
+                JobModels::factory(1)->create([
+                'users_id' =>  $user->id,
+                'clients_id' => $client->id,
+                'stafs_id' => $user->id,
+                ]);
+            }
+            
+
+        }
 
         // for($x=1;$x<=10;$x++){
         //     Jobs::factory()->create();

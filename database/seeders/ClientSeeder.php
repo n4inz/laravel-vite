@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,8 +16,13 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        for($x=1;$x<=10;$x++){
-            Client::factory(1)->create();
-        }  
+        $users = User::all();
+        foreach($users as $user){
+            Client::factory(100)->create([
+                'users_id' => $user->id,
+                'create_by' => $user->id
+            ]);
+        }
+   
     }
 }

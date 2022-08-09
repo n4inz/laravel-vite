@@ -86,7 +86,7 @@
                             </div>
                             <div class="w-full">
                                 <a href="{{ route('user_staf.staf') }}" class="{{ request()->is('user/staf') ? 'bg-hover': 'hover:bg-hover' }} flex items-center p-2 ml-11 text-base font-normal rounded-lg transition duration-75 group ">
-                                    <span class="{{ request()->is('user/staf') ? 'text-palet': 'text-textcolor' }} sidebar-text">Staf</span>
+                                    <span class="{{ request()->is('user/staf') ? 'text-palet': 'text-textcolor' }} sidebar-text">Staff</span>
                                 </a>
                             </div>
                         </li>

@@ -14,10 +14,13 @@ use App\Models\JobModels;
 use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
+use App\Models\JobModelsTalent;
+use App\Models\JobModelsTalentStatus;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
 use App\Models\SettingServiceSubcategory;
+use App\Models\SettingStatusTalent;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
@@ -36,8 +39,12 @@ class JobboardController extends Controller
 
     public function index()
     {
-        // return JobModels::with('setting_status')->get();
-        $status = SettingJobModelsStatus::with('job_models')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+
+        $status = SettingJobModelsStatus::with(['job_models' => function($query){
+            $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
+        }])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        
+
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
@@ -90,7 +97,9 @@ class JobboardController extends Controller
             'status' => $request->status
         ]);
 
-        $status_count = SettingJobModelsStatus::with('job_models')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        $status_count = SettingJobModelsStatus::with(['job_models' => function ($query){
+            $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
+        }])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
 
         return response()->json([
             'id' => $request->id,
@@ -128,21 +137,40 @@ class JobboardController extends Controller
             $query->limit(5);
         },'actifities' => function ($query) {
             $query->limit(6)->orderBy('id', 'desc');
-        }])->where('uid', $uid)->firstOrFail();
+        }, 'talent_status'])->where('uid', $uid)->firstOrFail();
 
         // return $result;
         foreach ($result->match_talent as $match) {
-            $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with('talent')->get();
+            $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with(['talent' => function($query){
+                $query->with('job_model_talent_status');
+            }])->get();
             if ($talent->count() > 0) {
                 foreach ($talent as $val) {
+
                     array_push($dataTalent, $val->talent);
                 }
             }
             array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
         }
+        // return $dataTalent;
 
+        // Setting status talent
+        $status_talent = SettingStatusTalent::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get(['id', 'status_name', 'status_key']);
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed', 'actifity'));
+        return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed', 'actifity' ,'status_talent'));
+    }
+
+    public function talent_status(Request $request)
+    {
+      
+        JobModelsTalentStatus::updateOrCreate(['talents_id' => $request->talent_id],[
+            'status' => $request->status,
+            'talents_id' => $request->talent_id,
+            'job_models_id' => $request->job_models_id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+        ]);
+
+        return response(200);
     }
 
     public function detail_match_talent($id)

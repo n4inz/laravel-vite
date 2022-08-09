@@ -115,6 +115,7 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
         Route::post('/get-subcategory', [JobboardController::class, 'get_subcategory_ajax'])->name('jobboard.get_subcategory_ajax');
         Route::get('/detail-match-talent/{id}', [JobboardController::class, 'detail_match_talent'])->name('jobboard.detail_match_talent');
         Route::get('/overview/{uid}', [JobboardController::class, 'overview'])->name('jobboard.overview');
+        Route::post('/talent-status', [JobboardController::class , 'talent_status'])->name('jobboard.talent_status');
         Route::post('/status',[JobboardController::class, 'status'])->name('jobboard.status');
         Route::post('/search-job',[JobboardController::class, 'search_job'])->name('jobboard.search_job');
         Route::post('/add-task',[JobboardController::class, 'add_task'])->name('jobboard.add_task');

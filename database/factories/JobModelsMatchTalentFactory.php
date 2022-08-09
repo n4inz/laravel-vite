@@ -2,18 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Talents;
-use App\Models\TalentTypeHelper;
+use App\Models\JobModels;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobsSubCategorys>
  */
-class TalentTypeHelperFactory extends Factory
+class JobModelsMatchTalentFactory extends Factory
 {
-    // protected $model = TalentTypeHelper::class;
- 
     /**
      * Define the model's default state.
      *
@@ -21,7 +17,7 @@ class TalentTypeHelperFactory extends Factory
      */
     public function definition()
     {
-       $subcategory =  ['nanny',
+        $subcategory =  ['nanny',
         'sister',
         'au_pair',
         'maternity_care',
@@ -59,19 +55,11 @@ class TalentTypeHelperFactory extends Factory
         'tutor',
         'pick_up_frop_off',
         'other_professional_services'];
-
-        
-       
-
         $typeNameRand = $subcategory[Rand(0, count($subcategory) - 1)];
-        // $talents = Talents::inRandomOrder()->first();
         return [
-            'name_type_helper' => str_replace('_', ' ', ucfirst($typeNameRand)),
-            'code_helper' => $typeNameRand,
-            // 'talents_id' => $talents->id,
-            // 'users_id' => $talents->users_id
+            'jobs_sub_category' => $typeNameRand,
+            // 'job_models_id' => JobModels::inRandomOrder()->first()->id,
+            // 'users_id' => JobModels::inRandomOrder()->first()->users_id,
         ];
     }
-
-
 }
