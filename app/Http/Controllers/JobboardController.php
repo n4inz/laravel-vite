@@ -234,13 +234,12 @@ class JobboardController extends Controller
 
     public function comment(Request $request)
     {
-     
         $request->validate([
             'comment' => 'required',
             'job_models_id' => 'required|numeric'
         ]);
 
-       $created =  JobModelsComment::create([
+        $created =  JobModelsComment::create([
             'name' =>  auth()->user()->full_name ?? 'Your agency',
             'comment' => $request->comment,
             'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
@@ -261,6 +260,7 @@ class JobboardController extends Controller
         ];
         Comments::dispatch($data);
 
+        
         return response()->json([
             'status' => 'success'
         ],200);
