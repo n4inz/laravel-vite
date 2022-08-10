@@ -544,7 +544,11 @@ label[for=experience],
 label[for=languages],
 label[for=full_name],
 label[for=password],
-label[for="status_talent[]"]
+label[for="status_talent[]"],
+label[for=hourly_rate],
+label[for=placement_fee],
+label[for=aplication_fee],
+label[for=location]
 {
     color: red;
     font-size: 12px;

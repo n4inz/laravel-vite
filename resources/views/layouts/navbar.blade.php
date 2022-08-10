@@ -1,5 +1,5 @@
 {{-- <nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded "> --}}
-<nav id="nav" class="fixed w-[1400px] xl:w-full z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
+    <nav id="nav" class="fixed w-[1400px] xl:w-full z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
 
     <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
         <div id="search" class="w-1/2 togle-search-desktop" >
@@ -20,22 +20,25 @@
 
         <div class="flex items-center justify-end w-1/2">
             <div class="flex items-center justify-center space-x-11">
-                <div class="relative hover:cursor-pointer" data-dropdown-toggle="dropdown-comment">
-                    <div class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></div>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.25 11C17.25 10.5858 17.5858 10.25 18 10.25H22C22.4142 10.25 22.75 10.5858 22.75 11V19C22.75 19.4142 22.4142 19.75 22 19.75H19.8107L18.5303 21.0303C18.2374 21.3232 17.7626 21.3232 17.4697 21.0303L16.1893 19.75H11C10.5858 19.75 10.25 19.4142 10.25 19V15C10.25 14.5858 10.5858 14.25 11 14.25H17.25V11ZM18.75 11.75V15C18.75 15.4142 18.4142 15.75 18 15.75H11.75V18.25H16.5C16.6989 18.25 16.8897 18.329 17.0303 18.4697L18 19.4393L18.9697 18.4697C19.1103 18.329 19.3011 18.25 19.5 18.25H21.25V11.75H18.75Z" fill="#868B90"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25 3C1.25 2.58579 1.58579 2.25 2 2.25H18C18.4142 2.25 18.75 2.58579 18.75 3V15C18.75 15.4142 18.4142 15.75 18 15.75H8.81066L7.03033 17.5303C6.73744 17.8232 6.26256 17.8232 5.96967 17.5303L4.18934 15.75H2C1.58579 15.75 1.25 15.4142 1.25 15V3ZM2.75 3.75V14.25H4.5C4.69891 14.25 4.88968 14.329 5.03033 14.4697L6.5 15.9393L7.96967 14.4697C8.11032 14.329 8.30109 14.25 8.5 14.25H17.25V3.75H2.75Z" fill="#868B90"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.25 11C5.25 10.5858 5.58579 10.25 6 10.25H9C9.41421 10.25 9.75 10.5858 9.75 11C9.75 11.4142 9.41421 11.75 9 11.75H6C5.58579 11.75 5.25 11.4142 5.25 11Z" fill="#868B90"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.25 7C5.25 6.58579 5.58579 6.25 6 6.25H12C12.4142 6.25 12.75 6.58579 12.75 7C12.75 7.41421 12.4142 7.75 12 7.75H6C5.58579 7.75 5.25 7.41421 5.25 7Z" fill="#868B90"/>
-                    </svg>
+                <div class="dropdown_comment relative hover:cursor-pointer" data-dropdown-toggle="dropdown-comment">
+                        @if (App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id])->count() > 0)
+                        <div class="count absolute w-[65%] h-[65%] top-0 right-0 flex items-center justify-center bg-red-500 rounded-full text-[8px] text-white">
+                            {{ App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id])->count() }}
+                        </div>
+                        @endif
+             
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.75C15.4518 2.75 18.25 5.54821 18.25 9V18.25H5.75V9C5.75 5.54821 8.54821 2.75 12 2.75ZM19.75 18.25V9C19.75 4.71979 16.2802 1.25 12 1.25C7.71979 1.25 4.25 4.71979 4.25 9V18.25H2C1.58579 18.25 1.25 18.5858 1.25 19C1.25 19.4142 1.58579 19.75 2 19.75H22C22.4142 19.75 22.75 19.4142 22.75 19C22.75 18.5858 22.4142 18.25 22 18.25H19.75Z" fill="#1C1B1E"/>
+                            <path d="M8.75 19C8.75 18.5858 9.08579 18.25 9.5 18.25H14.5C14.9142 18.25 15.25 18.5858 15.25 19V19.5C15.25 21.2949 13.7949 22.75 12 22.75C10.2051 22.75 8.75 21.2949 8.75 19.5V19ZM10.2677 19.75C10.389 20.5981 11.1184 21.25 12 21.25C12.8816 21.25 13.611 20.5981 13.7323 19.75H10.2677Z" fill="#1C1B1E"/>
+                        </svg>
                 </div>
-                <div id="bell" class="relative hover:cursor-pointer" >
+                {{-- <div id="bell" class="relative hover:cursor-pointer" >
                     <div class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></div>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2.75C15.4518 2.75 18.25 5.54821 18.25 9V18.25H5.75V9C5.75 5.54821 8.54821 2.75 12 2.75ZM19.75 18.25V9C19.75 4.71979 16.2802 1.25 12 1.25C7.71979 1.25 4.25 4.71979 4.25 9V18.25H2C1.58579 18.25 1.25 18.5858 1.25 19C1.25 19.4142 1.58579 19.75 2 19.75H22C22.4142 19.75 22.75 19.4142 22.75 19C22.75 18.5858 22.4142 18.25 22 18.25H19.75Z" fill="#1C1B1E"/>
                         <path d="M8.75 19C8.75 18.5858 9.08579 18.25 9.5 18.25H14.5C14.9142 18.25 15.25 18.5858 15.25 19V19.5C15.25 21.2949 13.7949 22.75 12 22.75C10.2051 22.75 8.75 21.2949 8.75 19.5V19ZM10.2677 19.75C10.389 20.5981 11.1184 21.25 12 21.25C12.8816 21.25 13.611 20.5981 13.7323 19.75H10.2677Z" fill="#1C1B1E"/>
                     </svg>
-                </div>
+                </div> --}}
                     
                 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300 "  aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
@@ -53,27 +56,27 @@
                 </button>
             </div>
             <!-- Dropdown menu -->
-            <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
-                <div class="py-3 px-4">
-                    <span class="block text-sm text-gray-900 dark:text-white">
+            <div class="hidden z-50 my-4 text-sm list-none bg-white text-colorStatusCard1 rounded divide-y  shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
+                <div class="py-3 px-4 text-palet font-semibold">
+                    <span class="block text-sm  dark:text-white">
 
                             {{ auth()->user()->full_name }}
 
                     </span>
-                    <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ auth()->user()->email ?? auth()->guard('staf')->user()->email  }}</span>
+                    <span class="block text-sm font-medium  truncate dark:text-gray-400">{{ auth()->user()->email ?? auth()->guard('staf')->user()->email  }}</span>
                 </div>
                 <ul class="py-1" aria-labelledby="dropdown">
                     <li>
-                        <a href="{{ route('dashboard') }}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="block py-2 px-4 text-sm  hover:bg-hover dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('user_client.client') }}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">User</a>
+                        <a href="{{ route('user_client.client') }}" class="block py-2 px-4 text-sm  hover:bg-hover dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">User</a>
                     </li>
                     <li>
-                        <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+                        <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
                     </li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                        <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm  hover:bg-hover dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                             @csrf
                             <input  type="submit" class="hover:cursor-pointer" value="Sign out">
                         </form>
@@ -83,57 +86,68 @@
             </div>
 
             {{-- Dropdown comment --}}
-            <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-comment">
-                <ul class="py-1 w-48" aria-labelledby="dropdown">
-                    <li>
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
-                          <div class="inline-flex items-center">
-                            <div>
-                                <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-de" viewBox="0 0 512 512"><path fill="#ffce00" d="M0 341.3h512V512H0z"/><path d="M0 0h512v170.7H0z"/><path fill="#d00" d="M0 170.7h512v170.6H0z"/></svg>
-                            </div>
-                            <div>
-                                <span>fadil has commented on job id #2</span>
-                            </div>
-                          </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
-                          <div class="inline-flex items-center">
-                            <div>
-                                <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-de" viewBox="0 0 512 512"><path fill="#ffce00" d="M0 341.3h512V512H0z"/><path d="M0 0h512v170.7H0z"/><path fill="#d00" d="M0 170.7h512v170.6H0z"/></svg>
-                            </div>
-                            <div>
-                                <span>fadil has commented on job id #2</span>
-                            </div>
-                          </div>
-                        </a>
-                    </li>                    <li>
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
-                          <div class="inline-flex items-center">
-                            <div>
-                                <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-de" viewBox="0 0 512 512"><path fill="#ffce00" d="M0 341.3h512V512H0z"/><path d="M0 0h512v170.7H0z"/><path fill="#d00" d="M0 170.7h512v170.6H0z"/></svg>
-                            </div>
-                            <div>
-                                <span>fadil has commented on job id #2</span>
-                            </div>
-                          </div>
-                        </a>
-                    </li>                    <li>
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
-                          <div class="inline-flex items-center">
-                            <div>
-                                <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-de" viewBox="0 0 512 512"><path fill="#ffce00" d="M0 341.3h512V512H0z"/><path d="M0 0h512v170.7H0z"/><path fill="#d00" d="M0 170.7h512v170.6H0z"/></svg>
-                            </div>
-                            <div>
-                                <span>fadil has commented on job id #2</span>
-                            </div>
-                          </div>
-                        </a>
-                    </li>
+            <div class="hidden z-50 my-4 text-xs list-none  bg-white rounded divide-y  shadow" id="dropdown-comment">
+                <ul class="tmp_notify_comment py-1 w-48 h-48 " aria-labelledby="dropdown">
+
                 </ul>
             </div>
         </div>
     </div>
 </nav>
+
+<script>
+    $('.dropdown_comment').click(function(){
+
+        $.ajax({
+            method: 'post',
+            url: "{{ route('navbar.comment_notify') }}",
+            data : {  _token : '{{ csrf_token() }}' },
+            beforeSend: function() {
+                const tmp = `<li class="flex items-center justify-center h-40">
+                                <div role="status">
+                                    <svg class="inline mr-2 w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                </div>
+                            </li>`;
+            $('.tmp_notify_comment').html(tmp)
+            },
+            success: function(res){
+                $('.tmp_notify_comment').html('')
+                if(res.length == 0){
+                    const tmp = ` <li class="flex items-center justify-center h-40">
+                                    <div role="status">
+                                        <i class="text-gray-300">Not Notify</i>
+                                    </div>
+                                </li>`;
+                    $('.tmp_notify_comment').html(tmp);
+
+                    return false;
+                }
+                
+                res.map(function(e){
+                    
+                    console.log(res.length)
+
+                        const tmp = `<li>
+                                         <a href="#" class="block  py-2 px-4 text-xs text-orange-300 hover:bg-hover dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                                         <div class="inline-flex items-center space-x-1">
+                                             <div class="w-6">
+                                                 <img class="w-5 h-5 rounded-full" src="${e.avatar}" alt="">
+                                             </div>
+                                             <div class="w-full">
+                                                 <span>${e.body}</span><span class="text-palet"> ID#${e.job_models_id}</span><i class="text-xs text-gray-400"> ${e.created_at}</i>
+                                             </div>
+                                         </div>
+                                         </a>
+                                     </li>`;
+                    
+                    $('.tmp_notify_comment').append(tmp)
+                })
+
+            }
+        })
+    })
+</script>
 

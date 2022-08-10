@@ -60,3 +60,11 @@ window.Echo.channel("reply-messages").listen("ReplyComment", (res) => {
     $('.add_reply'+res.data.id_comment).html('');
 
 })
+
+// Notif comment
+window.Echo.channel("channel-comment").listen("Nofication", (res) => {
+
+    console.log(res);
+    // $('.count').html('<span>'+res.data.count+'</span>');
+
+})

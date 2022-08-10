@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\Actifity;
+use App\Events\Nofication;
 use App\Listeners\ActifityListener;
+use App\Listeners\NotificationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -33,6 +35,15 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(
             Actifity::class,
             [ActifityListener::class, 'handle']
+        );
+
+        // Event::listen(function (Nofication $event) {
+        //     [NotificationListener::class, 'create'];
+        // });
+
+        Event::listen(
+            Nofication::class,
+            [NotificationListener::class, 'create']
         );
 
     }

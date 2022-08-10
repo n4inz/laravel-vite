@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\Actifity;
 use App\Events\Comments;
+use App\Events\Nofication;
 use App\Events\ReplyComment;
 use App\Http\Requests\JobsStoreRequest;
 use App\Http\Traits\Actifity as TraitsActifity;
@@ -14,8 +15,8 @@ use App\Models\JobModels;
 use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
-use App\Models\JobModelsTalent;
 use App\Models\JobModelsTalentStatus;
+
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
@@ -257,10 +258,19 @@ class JobboardController extends Controller
             'id' => $created->id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             'job_models_id' => $request->job_models_id,
+            
         ];
         Comments::dispatch($data);
 
-        
+        $notification_comment = [
+            'name' => $created->name,
+            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
+            'body' => auth()->user()->full_name.' has commented on job' ?? 'Your agency' . ' has commented on job',
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            'job_models_id' => $request->job_models_id,
+        ];
+        Nofication::dispatch($notification_comment);
+       
         return response()->json([
             'status' => 'success'
         ],200);

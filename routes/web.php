@@ -4,6 +4,7 @@ use App\Events\Comments;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobboardController;
+use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserClientController;
@@ -108,6 +109,9 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 
 
     Route::group(['middleware' => 'auth:staf,web'],function(){
+        // Navbar
+        Route::post('/comment-notify' ,[NavbarController::class, 'comment_notify'])->name('navbar.comment_notify');
+
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         // Jobboard

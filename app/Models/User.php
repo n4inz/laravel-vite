@@ -103,6 +103,10 @@ class User extends Authenticatable
         return $this->hasOne(Staf::class, 'users_id');
     }
 
+    public function notification()
+    {
+        return $this->hasMany(Notification::class, 'users_id');
+    }
     // public function staf_agency_name()
     // {
     //     return $this->hasOne(SettingGeneral::class, 'users_id','users_agency_id');

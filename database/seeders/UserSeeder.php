@@ -20,7 +20,24 @@ class UserSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $faker = Factory::create();
-        for($x=1;$x<=10;$x++){
+        $tenant =  Tenant::create([
+            'name' => 'test',
+            'domain' => 'test.agency.test',
+            'database' => $faker->userName(4)
+        ]);
+
+        $user_test = User::create([
+            'full_name' => $faker->name,
+            'email' => 'test@mail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make(123456),
+            'tenants_id' =>  $tenant->id,
+            'remember_token' => Str::random(10),
+        ]);
+
+        $user_test->assignRole('agency');
+
+        for($x=1;$x<=9;$x++){
             $tenant =  Tenant::create([
                 'name' => $faker->name,
                 'domain' => $faker->lastName.'.agency.test',

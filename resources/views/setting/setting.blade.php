@@ -518,16 +518,10 @@
                                     </div>
                                 </div>
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
-                                    <div>
+                                    <div class="errors_location">
                                         <label for="first-name" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3">Services Location</label>
                                         <div class="{{ $errors->has('location') ? 'border-red-500' : '' }} w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
                                             <input type="text"value="{{ old('location' , $setting->SettingDetail->service_location_fee->location ?? null) }}"  name="location" class="placepicker-setting text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            {{-- <select name="location" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                <option>USA, CA, Senior care San Jose</option>
-                                                <option>Test 1</option>
-                                                <option>Test 1</option>
-                                                <option>Test 1</option>
-                                            </select> --}}
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
@@ -549,41 +543,49 @@
                                 </div>
                                 <div class="px-6 mt-8 flex flex-col items-center space-x-[25px]">
                                     <div class="flex">
-                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="application_fee" name="application_fee" {{ old('application_fee') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="application_fee" class="{{ $errors->has('aplication_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Application Fee ($)</label>
+                                        <div class=" flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input id="aplication_fee_checkbox" name="aplication_fee_checkbox" {{ old('aplication_fee_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="aplication_fee_checkbox" class="{{ $errors->has('aplication_fee_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Application Fee ($)</label>
                                         </div>
-                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="placement-fee" name="placement_fee" {{ old('placement_fee') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="placement-fee" class="{{ $errors->has('placement_fee') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Placement Fee ($)</label>
+                                        <div class=" flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input id="placement_fee_checkbox" name="placement_fee_checkbox" {{ old('placement_fee_checkbox') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="placement_fee_checkbox" class="{{ $errors->has('placement_fee_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Placement Fee ($)</label>
                                         </div>
-                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="hourly-rate" name="hourly_rate" {{ old('hourly_rate') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="hourly-rate" class="{{ $errors->has('hourly_rate') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Hourly Rate ($)</label>
+                                        <div class=" flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                            <input id="hourly_rate_checkbox" name="hourly_rate_checkbox" {{ old('hourly_rate_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="hourly_rate_checkbox" class="{{ $errors->has('hourly_rate_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Hourly Rate ($)</label>
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-[60px] mt-3">
-                                        <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }} flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                            <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                            <div class="flex items-center justify-center space-x-2 pr-2">
-                                                <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
-                                                <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                        <div class="errors_aplication_fee">
+                                            <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }} flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                <div class="flex items-center justify-center space-x-2 pr-2">
+                                                    <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
+                                                    <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                                </div>
+                                               
                                             </div>
                                         </div>
-                                        <div class="{{ $errors->has('placement_fee') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                            <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                            <div class="flex items-center justify-center space-x-2 pr-2">
-                                                <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
-                                                <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                        <div class="errors_placement_fee">
+                                            <div class="{{ $errors->has('placement_fee') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                <div class="flex items-center justify-center space-x-2 pr-2">
+                                                    <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
+                                                    <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="{{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                            <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                            <div class="flex items-center justify-center space-x-2 pr-2">
-                                                <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
-                                                <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                        <div class="errors_hourly_rate">
+                                            <div class="{{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                <div class="flex items-center justify-center space-x-2 pr-2">
+                                                    <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
+                                                    <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
+                                                </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="mt-8 flex"></div>
@@ -890,6 +892,18 @@
                         company_description:{
                             required:true,
                         },
+                        location:{
+                            required:true,
+                        },
+                        aplication_fee:{
+                            required:true,
+                        },
+                        placement_fee:{
+                            required:true,
+                        },
+                        hourly_rate:{
+                            required:true,
+                        },
                         'status[]':{
                             required:true,
                         },
@@ -922,7 +936,10 @@
                             error.appendTo(element.parents('.errors_agency_name'));
                             error.appendTo(element.parents('.errors_url_ending_legal'));
                             error.appendTo(element.parents('.errors_company_description'));
-             
+                            error.appendTo(element.parents('.errors_location'));
+                            error.appendTo(element.parents('.errors_hourly_rate'));
+                            error.appendTo(element.parents('.errors_placement_fee'));
+                            error.appendTo(element.parents('.errors_aplication_fee'));
                         }
                     },
 

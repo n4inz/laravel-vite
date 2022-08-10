@@ -2177,6 +2177,10 @@ window.Echo.channel("reply-messages").listen("ReplyComment", function (res) {
   var template_reply = "<div class=\"flex space-x-2\">\n                                <img class=\"w-10 h-10 border-2 border-white rounded-full dark:border-gray-800\" src=\"".concat(res.data.avatar, "\" alt=\"\">\n                                <div class=\"max-w-xl\">\n                                    <div class=\"flex space-x-4\">\n                                        <div class=\"flex space-x-1 justify-center items-center\">\n                                            <div class=\"overview-comments-name text-colortext\">").concat(res.data.name, "</div>\n                                            <div class=\"overview-comments-name text-colorStatusCard1\">").concat(res.data.time, "</div>\n                                        </div>\n                                    </div>\n                                    <span class=\"overview-comments-body\">").concat(res.data.reply, "</span>   \n                                </div>\n                            </div>");
   $('.reply_your_comment' + res.data.id_comment).append(template_reply);
   $('.add_reply' + res.data.id_comment).html('');
+}); // Notif comment
+
+window.Echo.channel("channel-comment").listen("Nofication", function (res) {
+  $('.count').html('<span>' + res.data.count + '</span>');
 });
 
 /***/ }),
