@@ -21,25 +21,18 @@
         <div class="flex items-center justify-end w-1/2">
             <div class="flex items-center justify-center space-x-11">
                 <div class="dropdown_comment relative hover:cursor-pointer" data-dropdown-toggle="dropdown-comment">
-                        @if (App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id])->count() > 0)
-                        <div class="count absolute w-[65%] h-[65%] top-0 right-0 flex items-center justify-center bg-red-500 rounded-full text-[8px] text-white">
-                            {{ App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id])->count() }}
-                        </div>
+                    <div id="counters" class="counter counters{{ auth()->user()->id }}">
+                        @if (App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id , 'status' => 'UNREAD'])->count() > 0)
+                            <div class="count absolute w-[65%] h-[65%] top-0 right-0 flex items-center justify-center bg-red-500 rounded-full text-[8px] text-white">
+                                {{ App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id , 'status' => 'UNREAD'])->count() }}
+                            </div>
                         @endif
-             
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.75C15.4518 2.75 18.25 5.54821 18.25 9V18.25H5.75V9C5.75 5.54821 8.54821 2.75 12 2.75ZM19.75 18.25V9C19.75 4.71979 16.2802 1.25 12 1.25C7.71979 1.25 4.25 4.71979 4.25 9V18.25H2C1.58579 18.25 1.25 18.5858 1.25 19C1.25 19.4142 1.58579 19.75 2 19.75H22C22.4142 19.75 22.75 19.4142 22.75 19C22.75 18.5858 22.4142 18.25 22 18.25H19.75Z" fill="#1C1B1E"/>
-                            <path d="M8.75 19C8.75 18.5858 9.08579 18.25 9.5 18.25H14.5C14.9142 18.25 15.25 18.5858 15.25 19V19.5C15.25 21.2949 13.7949 22.75 12 22.75C10.2051 22.75 8.75 21.2949 8.75 19.5V19ZM10.2677 19.75C10.389 20.5981 11.1184 21.25 12 21.25C12.8816 21.25 13.611 20.5981 13.7323 19.75H10.2677Z" fill="#1C1B1E"/>
-                        </svg>
-                </div>
-                {{-- <div id="bell" class="relative hover:cursor-pointer" >
-                    <div class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></div>
+                    </div>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2.75C15.4518 2.75 18.25 5.54821 18.25 9V18.25H5.75V9C5.75 5.54821 8.54821 2.75 12 2.75ZM19.75 18.25V9C19.75 4.71979 16.2802 1.25 12 1.25C7.71979 1.25 4.25 4.71979 4.25 9V18.25H2C1.58579 18.25 1.25 18.5858 1.25 19C1.25 19.4142 1.58579 19.75 2 19.75H22C22.4142 19.75 22.75 19.4142 22.75 19C22.75 18.5858 22.4142 18.25 22 18.25H19.75Z" fill="#1C1B1E"/>
                         <path d="M8.75 19C8.75 18.5858 9.08579 18.25 9.5 18.25H14.5C14.9142 18.25 15.25 18.5858 15.25 19V19.5C15.25 21.2949 13.7949 22.75 12 22.75C10.2051 22.75 8.75 21.2949 8.75 19.5V19ZM10.2677 19.75C10.389 20.5981 11.1184 21.25 12 21.25C12.8816 21.25 13.611 20.5981 13.7323 19.75H10.2677Z" fill="#1C1B1E"/>
                     </svg>
-                </div> --}}
-                    
+                </div>                   
                 <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300 "  aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
 
@@ -94,7 +87,6 @@
         </div>
     </div>
 </nav>
-
 <script>
     $('.dropdown_comment').click(function(){
 
@@ -125,11 +117,11 @@
 
                     return false;
                 }
+
+                $('.counter').html('');
                 
                 res.map(function(e){
-                    
                     console.log(res.length)
-
                         const tmp = `<li>
                                          <a href="#" class="block  py-2 px-4 text-xs text-orange-300 hover:bg-hover dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
                                          <div class="inline-flex items-center space-x-1">

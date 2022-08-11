@@ -7,6 +7,7 @@ use App\Models\SettingGeneral;
 use App\Http\Traits\ImageUpload;
 use App\Models\Avatar;
 use App\Models\SettingDefinedCheckList;
+use App\Models\SettingJobModelsStatus;
 use App\Models\SettingStatusTalent;
 use App\Models\User;
 use App\Repositories\SettingRepository;
@@ -67,6 +68,7 @@ class SettingController extends Controller
 
     public function setting_store(SettingRequest $request)
     {
+
         $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();
 
         if(empty($cek_setting)){

@@ -1531,7 +1531,7 @@
 </main>
 <script src="{{ asset('js/jQuery/jobBoardTab.js') }}"></script>
 <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+
 <script>
 
     var no = 0 ;

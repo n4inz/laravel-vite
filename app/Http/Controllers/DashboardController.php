@@ -14,9 +14,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        
-        // $s=  Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id])->get();
-        // return $s; 
         return view('dashboard.dashboard');
     }
 }

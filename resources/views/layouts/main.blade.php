@@ -22,6 +22,7 @@
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <script src="{{ asset('js/tagify/tagify.js') }}"></script>
     <script src="{{ asset('js/tagify/tagify-min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <link href="{{ asset('css/tagify/tagify.css') }}" rel="stylesheet" type="text/css" />
     <style>
         /* User Talent */

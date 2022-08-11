@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Events\Actifity;
 use App\Events\Comments;
-use App\Events\Nofication;
 use App\Events\ReplyComment;
 use App\Http\Requests\JobsStoreRequest;
 use App\Http\Traits\Actifity as TraitsActifity;
+use App\Http\Traits\Event;
 use App\Http\Traits\ImageUpload;
 use App\Models\Actifity as ModelsActifity;
 use App\Models\Client;
@@ -16,7 +16,7 @@ use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
 use App\Models\JobModelsTalentStatus;
-
+use App\Models\Notification;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
@@ -25,12 +25,11 @@ use App\Models\SettingStatusTalent;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JobboardController extends Controller
 {
-    use ImageUpload , TraitsActifity;
+    use ImageUpload , TraitsActifity , Event;
     private $jobboardRepository;
 
     public function __construct(JobboardRepository $jobboardRepository)
@@ -239,38 +238,9 @@ class JobboardController extends Controller
             'comment' => 'required',
             'job_models_id' => 'required|numeric'
         ]);
+        $this->comment_event($request, $this->jobboardRepository->comment_created($request));
+        $this->notify($request,auth()->user()->full_name.' has commented on job' ?? 'Your agency' . ' has commented on job');
 
-        $created =  JobModelsComment::create([
-            'name' =>  auth()->user()->full_name ?? 'Your agency',
-            'comment' => $request->comment,
-            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
-            'job_models_id' => $request->job_models_id,
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
-        ]);
-
-        $time = Carbon::parse($created->created_at)->format('g:i A');
-        $date = Carbon::parse($created->created_at)->format('d M Y');
-        $data = [
-            'name' => $created->name,
-            'comment' => $request->comment,
-            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
-            'time' =>  $date.' - '.$time,
-            'id' => $created->id,
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-            'job_models_id' => $request->job_models_id,
-            
-        ];
-        Comments::dispatch($data);
-
-        $notification_comment = [
-            'name' => $created->name,
-            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
-            'body' => auth()->user()->full_name.' has commented on job' ?? 'Your agency' . ' has commented on job',
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-            'job_models_id' => $request->job_models_id,
-        ];
-        Nofication::dispatch($notification_comment);
-       
         return response()->json([
             'status' => 'success'
         ],200);
@@ -281,33 +251,12 @@ class JobboardController extends Controller
         $request->validate([
             'reply_comment' => 'required',
             'job_comments_id' => 'required',
-            'job_models_id' => 'required'
+            'job_models_id' => 'required|numeric'
         ]);
 
-        $created = JobModelsCommentsReply::create([
-            'name' =>  auth()->user()->full_name ?? 'Your agency',
-            'comment' => $request->reply_comment,
-            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
-            'job_models_comments_id' => $request->job_comments_id,
-            'job_models_id' => $request->job_models_id,
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
-        ]);
-
-        $time = Carbon::parse($created->created_at)->format('g:i A');
-        $date = Carbon::parse($created->created_at)->format('d M Y');
-
-        $data = [
-            'name' => $created->name ?? 'Not Name',
-            'reply' => $request->reply_comment,
-            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
-            'time' =>  $date.' - '.$time,
-            'id_comment' => $request->job_comments_id,
-            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-            'job_models_id' => $request->job_models_id,
-        ];
-
-
-        ReplyComment::dispatch($data);
+        $this->reply_comment_event($request, $this->jobboardRepository->comment_reaply_created($request));
+        $this->notify($request, auth()->user()->full_name.' has reply your comment on job' ?? 'Your agency' . ' has reply your comment on job');
+ 
 
         return response()->json([
             'status' => 'success'

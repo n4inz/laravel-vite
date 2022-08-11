@@ -23,7 +23,7 @@
                                     <div class="errors_agency_name">
                                         <label class="{{ $errors->has('company_description') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">Agency Name</label>
                                         <div class="{{ $errors->has('agency_name') ? 'border-red-500' : '' }} flex items-center justify-center w-[316px] h-10 border  rounded text-[#222222]">
-                                            <input name="agency_name" value="{{ old('agency_name' , $setting->SettingGeneral->agency_name ?? null) }}" type="text" class="{{ $errors->has('agency_name') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                            <input name="agency_name" value="{{ old('agency_name' , $setting->SettingGeneral->agency_name ?? null) }}" type="text" class="{{ $errors->has('agency_name') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " autocomplete="off">
                                         </div>
                                         @if($errors->has('agency_name'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('agency_name') }}</p>
@@ -32,7 +32,7 @@
                                     <div class="errors_url_ending_legal">
                                         <label  class="{{ $errors->has('url_ending_legal') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
                                         <div class="{{ $errors->has('url_ending_legal') ? 'border-red-500' : '' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                            <input name="url_ending_legal" value="{{ old('url_ending_legal', $setting->SettingGeneral->url_ending_legal ?? null ) }}" type="text" class="{{ $errors->has('url_ending_legal') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="">
+                                            <input name="url_ending_legal" value="{{ old('url_ending_legal', $setting->SettingGeneral->url_ending_legal ?? null ) }}" type="text" class="{{ $errors->has('url_ending_legal') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " autocomplete="off">
                                         </div>
                                         @if($errors->has('url_ending_legal'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('url_ending_legal') }}</p>
@@ -42,7 +42,7 @@
                                 <div class="px-6 mt-4 errors_company_description">
                                     <label class="{{ $errors->has('company_description') ? 'text-red-500' : '' }} overview-status-field text-[#222222] mb-2">Company Description</label>
                                     <div class="{{ $errors->has('company_description') ? 'border-red-500' : '' }} w-[650px] h-36 flex items-center justify-center border border-[#ECECEC] mt-2 rounded relative">
-                                        <textarea name="company_description"  rows="5" class="{{ $errors->has('company_description') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" placeholder="">{{ old('company_description' , $setting->SettingGeneral->company_description ?? null) }}</textarea>
+                                        <textarea name="company_description"  rows="5" class="{{ $errors->has('company_description') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none text-[#222222]" autocomplete="off">{{ old('company_description' , $setting->SettingGeneral->company_description ?? null) }}</textarea>
                                     </div>
                                     @if($errors->has('company_description'))
                                         <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('company_description') }}</p>
@@ -64,6 +64,7 @@
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Service Job Status</label>
                                         <table width="100%">
                                             <tbody class="load-task">
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -74,19 +75,22 @@
                                                             
                                                         </div>
                                                     </td>
-                                                    <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Internal Matched</span>
+                                                    <td height="66px" width="50%">
+                                                        <input name="name_status_job[]" type="text" value="Internal Matched" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                        
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="internal_matched" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]" @if(is_array(old('status')) && in_array('Internal Matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="Internal Matched" type="checkbox" id="internal_matched" class="sr-only peer">
+                                                            <input type="hidden" name="0" value="0">
+                                                            <input name="0" @if(is_array(old('status')) && in_array('internal_matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="1" type="checkbox" id="internal_matched" class="sts group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -98,18 +102,20 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Agency Interview</span>
+                                                        <input name="name_status_job[]" type="text" value="Agency Interview" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="agency_interview" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]" @if(is_array(old('status')) && in_array('Agency Interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="Agency Interview" type="checkbox" id="agency_interview" class="sr-only peer">
+                                                            <input type="hidden" name="1" value="0">
+                                                            <input name="1" @if(is_array(old('status')) && in_array('agency_interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="agency_interview" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -121,18 +127,20 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Present to Family</span>
+                                                        <input name="name_status_job[]" type="text" value="Present to Family" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="present_to_family" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]" @if(is_array(old('status')) && in_array('Present to Family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="Present to Family" type="checkbox" id="present_to_family" class="sr-only peer">
+                                                            <input type="hidden" name="2" value="0">
+                                                            <input name="2" @if(is_array(old('status')) && in_array('present_to_family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="1" type="checkbox" id="present_to_family" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -144,18 +152,20 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Family Interview</span>
+                                                        <input name="name_status_job[]" type="text" value="Family Interview" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_interview" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]" @if(is_array(old('status')) && in_array('Family Interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="Family Interview" type="checkbox" id="family_interview" class="sr-only peer">
+                                                            <input type="hidden" name="3" value="0">
+                                                            <input name="3" @if(is_array(old('status')) && in_array('family_interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="family_interview" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -167,18 +177,20 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Family Trialing</span>
+                                                        <input name="name_status_job[]" type="text" value="Family Trialing" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_trialing" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]" @if(is_array(old('status')) && in_array('Family Trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="Family Trialing" type="checkbox" id="family_trialing" class="sr-only peer">
+                                                            <input type="hidden" name="5" value="0">
+                                                            <input name="5" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -190,18 +202,20 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Rejected</span>
+                                                        <input name="name_status_job[]" type="text" value="Rejected" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="rejected" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]" @if(is_array(old('status')) && in_array('Rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="Rejected" type="checkbox" id="rejected" class="sr-only peer">
+                                                            <input type="hidden" name="5" value="0">
+                                                            <input name="5" @if(is_array(old('status')) && in_array('rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="1" type="checkbox" id="rejected" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -213,18 +227,20 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Withdrawn</span>
+                                                        <input name="name_status_job[]" type="text" value="Withdrawn" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="withdrawn" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]"  @if(is_array(old('status')) && in_array('Withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="Withdrawn" type="checkbox" id="withdrawn" class="sr-only peer">
+                                                            <input type="hidden" name="6" value="0">
+                                                            <input name="6"  @if(is_array(old('status')) && in_array('withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="1" type="checkbox" id="withdrawn" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
                                                         <div class="flex items-center justify-center space-x-2">
@@ -236,14 +252,15 @@
                                                         </div>
                                                     </td>
                                                     <td height="66px" width="40%">
-                                                        <span class="task-text-body text-[#222222]">Family Offer</span>
+                                                        <input name="name_status_job[]" type="text" value="Family Offer" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                     </td>
                                                     <td height="66px" width="25%">
                                                         {{-- <span class="task-text-body ">CEKK</span> --}}
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_offer" class="relative inline-flex items-center cursor-pointer">
-                                                            <input name="status[]"  @if(is_array(old('status')) && in_array('Family Offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="Family Offer" type="checkbox" id="family_offer" class="sr-only peer">
+                                                            <input type="hidden" name="7" value="0">
+                                                            <input name="7"  @if(is_array(old('status')) && in_array('family_offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="1" type="checkbox" id="family_offer" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -332,6 +349,7 @@
                                 <div class="px-6 mt-6 flex space-x-4">
                                     <div class="w-full">
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Category</label>
+                                        <!--
                                         <div class="flex mb-2 border-b border-gray-200 dark:border-gray-700" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                                             {{-- <button >Profile</button> --}}
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2" id="chile-care" data-tabs-target="#chile_care" role="tab" aria-controls="Chile Care" aria-selected="false">
@@ -354,7 +372,9 @@
                                             <input  name="senior_care_category" {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory senior-care " >
                                             <input name="home_care_category" {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory home-care" >
                                             <input name="other_category" {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other hidden subcategory " >
-                                            </div>
+                                        </div>
+                                        -->
+                                        <!--
                                         <div id="myTabContent" class="errors_subcategory">
                                             {{-- Chile Care --}}
                                             <div class="flex space-x-10 p-4 rounded-lg dark:bg-gray-800" id="chile_care" role="tabpanel" aria-labelledby="chile-care">
@@ -514,7 +534,38 @@
                                             </div>
                                             {{-- End other --}}
                                         </div>
+                                        -->
                                         
+                                        
+                                            <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                                <div class="mr-2" role="presentation">
+                                                    <button class="inline-block p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                                                </div>
+                                                <div class="mr-2" role="presentation">
+                                                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Dashboard</button>
+                                                </div>
+                                                <div class="mr-2" role="presentation">
+                                                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+                                                </div>
+                                                <div role="presentation">
+                                                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contacts</button>
+                                                </div>
+                                            </div>
+
+                                        <div id="myTabContent">
+                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            </div>
+                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            </div>
+                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            </div>
+                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
@@ -904,9 +955,7 @@
                         hourly_rate:{
                             required:true,
                         },
-                        'status[]':{
-                            required:true,
-                        },
+
                         'chile_care[]': {   
                             require_from_group: [1, ".subcategory"]
                         },
@@ -921,7 +970,7 @@
                         },
                         'status_talent[]':{
                             required:true,
-                        }
+                        },
                    
                     },
                     errorPlacement: function(error, element){
@@ -944,6 +993,12 @@
                     },
 
                 })
+                $(".sts").rules("add", {
+                            require_from_group: [1, '.group_sts'],
+                            // messages: {
+                            //         required: "This field is required."
+                            // }
+                });
             }
         })
 

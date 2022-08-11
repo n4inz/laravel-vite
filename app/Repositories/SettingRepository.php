@@ -162,15 +162,27 @@ class SettingRepository {
                 }
             }
 
-            foreach($request->status as $key => $status){
+            foreach($request->name_status_job as $key => $status){
+            
                 SettingJobModelsStatus::create([
-                    'status_name' => $request->status[$key],
-                    'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
+                    'status_name' => $request->name_status_job[$key],
+                    'status_key' => str_replace(' ', '_', strtolower($request->name_status_job[$key])),
+                    'status' => request()->post($key),
                     // 'text_color' => $request->text_color[$key],
                     // 'bg_color' => $request->bg_color[$key],
                     'users_id' => auth()->user()->id
                 ]);
             }
+
+            // foreach($request->status as $key => $status){
+            //     SettingJobModelsStatus::create([
+            //         'status_name' => $request->status[$key],
+            //         'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
+            //         // 'text_color' => $request->text_color[$key],
+            //         // 'bg_color' => $request->bg_color[$key],
+            //         'users_id' => auth()->user()->id
+            //     ]);
+            // }
 
             foreach($request->status_talent as $key => $value){
                 SettingStatusTalent::create([
@@ -335,15 +347,27 @@ class SettingRepository {
 
             SettingJobModelsStatus::where('users_id', auth()->user()->id)->delete();
 
-            foreach($request->status as $key => $status){
+            foreach($request->name_status_job as $key => $status){
+            
                 SettingJobModelsStatus::create([
-                    'status_name' => $request->status[$key],
-                    'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
+                    'status_name' => $request->name_status_job[$key],
+                    'status_key' => str_replace(' ', '_', strtolower($request->name_status_job[$key])),
+                    'status' => request()->post($key),
                     // 'text_color' => $request->text_color[$key],
                     // 'bg_color' => $request->bg_color[$key],
                     'users_id' => auth()->user()->id
                 ]);
             }
+            
+            // foreach($request->status as $key => $status){
+            //     SettingJobModelsStatus::create([
+            //         'status_name' => $request->status[$key],
+            //         'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
+            //         // 'text_color' => $request->text_color[$key],
+            //         // 'bg_color' => $request->bg_color[$key],
+            //         'users_id' => auth()->user()->id
+            //     ]);
+            // }
 
             SettingStatusTalent::where('users_id', auth()->user()->id)->delete();
 
@@ -366,5 +390,7 @@ class SettingRepository {
      
 
     }
+
+
 
 }

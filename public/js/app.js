@@ -2180,7 +2180,10 @@ window.Echo.channel("reply-messages").listen("ReplyComment", function (res) {
 }); // Notif comment
 
 window.Echo.channel("channel-comment").listen("Nofication", function (res) {
-  $('.count').html('<span>' + res.data.count + '</span>');
+  res.count.map(function (e) {
+    var tmp = "<div class=\"count absolute w-[65%] h-[65%] top-0 right-0 flex items-center justify-center bg-red-500 rounded-full text-[8px] text-white\">\n                        ".concat(e.count, "\n                    </div>");
+    $('.counters' + e.notify_to).html(tmp);
+  });
 });
 
 /***/ }),

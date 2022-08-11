@@ -29,9 +29,7 @@ class NotificationListener
     {
         $data = Staf::where('users_agency_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with('user')->get();
         
-        $id = [
-         
-        ];
+        $id = [ ];
         foreach($data as $val){
             if(auth()->user()->id != $val->users_id){
                 array_push($id, $val->users_id);

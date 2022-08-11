@@ -8,6 +8,8 @@ use App\Jobs\SendMail;
 use App\Models\JobModels;
 use App\Models\JobModelsAvailabiltyDays;
 use App\Models\JobModelsChile;
+use App\Models\JobModelsComment;
+use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
 // use App\Models\JobModelsSubCategorys;
@@ -224,5 +226,29 @@ class JobboardRepository
             ['job_models_id' , $request->job_models_id],
         ])
         ->get();   
+    }
+
+    public function comment_created($request)
+    {
+        return JobModelsComment::create([
+            'name' =>  auth()->user()->full_name ?? 'Your agency',
+            'comment' => $request->comment,
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
+            'job_models_id' => $request->job_models_id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+        ]);
+    }
+
+    public function comment_reaply_created($request)
+    {   
+        return JobModelsCommentsReply::create([
+            'name' =>  auth()->user()->full_name ?? 'Your agency',
+            'comment' => $request->reply_comment,
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
+            'job_models_comments_id' => $request->job_comments_id,
+            'job_models_id' => $request->job_models_id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+        ]);
+
     }
 }

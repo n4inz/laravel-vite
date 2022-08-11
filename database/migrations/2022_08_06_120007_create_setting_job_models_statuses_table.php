@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('status_name');
             $table->string('status_key');
+            $table->boolean('status');
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
 
