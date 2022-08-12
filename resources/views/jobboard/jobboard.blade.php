@@ -187,6 +187,11 @@
                             <label class="{{ $errors->has('family') ? 'text-red-600' : '' }} mb-2 overview-note-body block text-colortext">Family*</label>
                             <div class="{{ $errors->has('family') ? 'border-red-500' : 'border-[#CCD3DC]' }} w-[670px] h-8 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
                                 <input  name='family' value="{{ old('family') }}" type="text" class="costums-family overview-modal-add-talent-text  border-none rounded focus:ring-0 w-full p-1 outline-none" autocomplete="off">
+                                <a href="{{ route('user_client.client_created') }}" class="flex px-2">
+                                    <div class="hover:cursor-pointer w-10 h-5 rounded-lg bg-palet flex items-center justify-center">
+                                        <span class="text-xs font-semibold text-white text-center">+</span>
+                                    </div>
+                                </a>
                             </div>
                             @if($errors->has('family'))
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('family') }}</p>

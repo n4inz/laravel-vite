@@ -792,31 +792,31 @@
                                     </div>
                                     <div class="flex items-center space-x-[60px] mt-3">
                                         <div class="errors_aplication_fee">
-                                            <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }} flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                                <div class="flex items-center justify-center space-x-2 pr-2">
+                                            <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }} aplication_fee flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                {{-- <div class="flex items-center justify-center space-x-2 pr-2">
                                                     <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
                                                     <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                                </div>
+                                                </div> --}}
                                                
                                             </div>
                                         </div>
                                         <div class="errors_placement_fee">
-                                            <div class="{{ $errors->has('placement_fee') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                                <div class="flex items-center justify-center space-x-2 pr-2">
+                                            <div class="placement_fee {{ $errors->has('placement_fee') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                {{-- <div class="flex items-center justify-center space-x-2 pr-2">
                                                     <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
                                                     <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="errors_hourly_rate">
-                                            <div class="{{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
-                                                <div class="flex items-center justify-center space-x-2 pr-2">
+                                            <div class="hourly_rate {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                {{-- <div class="flex items-center justify-center space-x-2 pr-2">
                                                     <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
                                                     <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         
@@ -1177,10 +1177,8 @@
 
                 })
                 $(".sts").rules("add", {
-                            require_from_group: [1, '.group_sts'],
-                            // messages: {
-                            //         required: "This field is required."
-                            // }
+                    require_from_group: [1, '.group_sts'],
+
                 });
             }
         })
@@ -1204,6 +1202,7 @@
 
     
 
+    // SUbcategory
     function chileCare(){       
         var a =  document.querySelectorAll('[data-type="chile_care"]');
         var allChecked = false;
@@ -1265,6 +1264,46 @@
             $('.other').prop('checked', false)
         }
     }
+
+    // FEE
+    $('#aplication_fee_checkbox').click(function(){
+        $('.aplication_fee').toggleClass('bg-gray-200');
+        
+        $('.aplication_fee_input').toggleClass('bg-gray-200');
+        if (this.checked) {
+            $('.aplication_fee_input').prop('disabled', true);
+         
+        } else {
+            $('.aplication_fee_input').prop('disabled', false);
+        }
+    })
+
+    $('#placement_fee_checkbox').click(function(){
+        $('.placement_fee').toggleClass('bg-gray-200');
+        
+        $('.placement_fee_input').toggleClass('bg-gray-200');
+        if (this.checked) {
+            $('.placement_fee_input').prop('disabled', true);
+         
+        } else {
+            $('.placement_fee_input').prop('disabled', false);
+        }
+    })
+
+    $('#hourly_rate_checkbox').click(function(){
+        $('.hourly_rate').toggleClass('bg-gray-200');
+        
+        $('.hourly_rate_input').toggleClass('bg-gray-200');
+        if (this.checked) {
+            $('.hourly_rate_input').prop('disabled', true);
+         
+        } else {
+            $('.hourly_rate_input').prop('disabled', false);
+        }
+    })
+    
+
+
     </script>
 </main>
 
