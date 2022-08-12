@@ -111,14 +111,16 @@ class JobboardRepository
                 }
             }
 
-            foreach($task_setting as $tasks){
-                JobModelsTask::create([
-                    'task' => $tasks->body,
-                    'assignee' => auth()->user()->full_name ?? 'Your Agency',
-                    'job_models_id' => $jobs->id,
-                    'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                    'stafs_id' => 0
-                ]);
+            if(isset($task_setting)){
+                foreach($task_setting as $tasks){
+                    JobModelsTask::create([
+                        'task' => $tasks->body,
+                        'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                        'job_models_id' => $jobs->id,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'stafs_id' => 0
+                    ]);
+                }
             }
             DB::commit();
         }catch(\Exception $e ){

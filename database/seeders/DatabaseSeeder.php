@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             // ClientSeeder::class,
-            // TalentsSeeder::class,
-            // TalentLanguageSeeder::class,
-            // TalentTypeHelperSeeder::class,
+            TalentsSeeder::class,
+            TalentLanguageSeeder::class,
+            TalentTypeHelperSeeder::class,
             // JobSeeder::class,
 
             // SeedersJobModelsAvailabiltyDaysSeeder::class,

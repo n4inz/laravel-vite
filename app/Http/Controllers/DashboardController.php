@@ -29,13 +29,13 @@ class DashboardController extends Controller
         // request()->session()->forget(auth()->user()->staf->users_agency_id ?? auth()->user()->id);
         // return request()->session()->get(auth()->user()->staf->users_agency_id ?? auth()->user()->id);
         
-        $session = 'talent_file_'.auth()->user()->id;
-        if(request()->session()->get($session)){
-            return request()->session()->get($session);
+        // $session = 'talent_file_'.auth()->user()->id;
+        // if(request()->session()->get($session)){
+        //     return request()->session()->get($session);
 
-        }else{
-            return 'not';
-        }
+        // }else{
+        //     return 'not';
+        // }
         
         return view('dashboard.dashboard');
     }
