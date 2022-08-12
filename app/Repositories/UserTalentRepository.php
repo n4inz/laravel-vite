@@ -16,9 +16,9 @@ class UserTalentRepository
         if(isset($request->avatar)){
             $avatar = $this->uploadImageStore($request->file('avatar'), 'Talent attached file/avatar');
         }
-        if(isset($request->attached_file)){
-            $name = $this->uploadImageStore($request->file('attached_file'), 'Talent attached file');
-        }
+        // if(isset($request->attached_file)){
+        //     $name = $this->uploadImageStore($request->file('attached_file'), 'Talent attached file');
+        // }
        $talent =  Talents::create([
             'avatar' => $avatar ?? 'dummy.png',
             'first_name' => $request->first_name,
@@ -29,7 +29,7 @@ class UserTalentRepository
             'phone' => $request->phone,
             'address' => $request->address,
             'about_talent' => $request->about_talent,
-            'file_documents' => $name,
+            'file_documents' => $name ?? null,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             'create_by' => auth()->user()->id,
         ]);
@@ -49,6 +49,19 @@ class UserTalentRepository
                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             ]);
          }
+
+         $session = 'talent_file_'.auth()->user()->id;
+         if(request()->session()->get($session)){
+             $file = request()->session()->get($session);
+             // $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
+             $this->move_file('public/Files before submit/'.$file, 'public/Talent attached file/'.$file);
+             $talent->attached_file()->create([
+                 'files' => $file ,
+                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+             ]);
+ 
+             request()->session()->forget($session);
+         }  
        
     }
 }

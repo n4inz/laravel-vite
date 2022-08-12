@@ -35,7 +35,7 @@ class SettingRequest extends FormRequest
             'other_category.*' =>  'required_with:chile_care_category.*,senior_care_category.*,home_care_category.*',
 
             'service_type' => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
             'status_talent' => 'required',
             'location' => 'required',
             'aplication_fee' => 'required',

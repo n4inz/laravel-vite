@@ -62,6 +62,7 @@
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div class="w-full errors_status">
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Service Job Status</label>
+                                        @if ($setting->SettingJobStatus->count() == 0)
                                         <table width="100%">
                                             <tbody class="load-task">
 
@@ -184,8 +185,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_trialing" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="5" value="0">
-                                                            <input name="5" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="4" value="0">
+                                                            <input name="4" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -267,6 +268,42 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        @else
+                                            @foreach ($setting->SettingJobStatus as $val )
+                                                <table width="100%">
+                                                    <tbody class="load-task">
+                                                        <tr class="hover:bg-[#F7F7F7] cursor-pointer">
+                                                            <td height="66px" width="12%">
+                                                                <div class="flex items-center justify-center space-x-2">
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                                    </svg>
+                                                                    
+                                                                </div>
+                                                            </td>
+                                                            <td height="66px" width="50%">
+                                                                <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                                
+                                                            </td>
+                                                            <td height="66px" width="25%">
+                                                               
+                                                                {{-- <span class="task-text-body ">CEKK</span> --}}
+                                                            </td>
+                                                            <td height="66px" align="center">
+                                                                <label for="{{ $val->id }}" class="relative inline-flex items-center cursor-pointer">
+                                                                    <input type="hidden" name="{{ $loop->iteration -1 }}" value="0">
+                                                                    <input name="{{ $loop->iteration -1 }}" @if($val->status) checked @endif value="1" type="checkbox" id="{{ $val->id }}" class="sts group_sts sr-only peer">
+                                                                    <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            @endforeach
+                                        @endif
                                         @if($errors->has('status'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('status') }}</p>
                                         @endif
@@ -537,33 +574,179 @@
                                         -->
                                         
                                         
-                                            <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-                                                <div class="mr-2" role="presentation">
-                                                    <button class="inline-block p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                                        <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                            <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile"  role="tab" aria-controls="profile" aria-selected="false">
+                                                <input disabled {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <label class="overview-id-field text-colortext ">Child care</label>
+                                            </div>
+                                            
+                                            <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard"  role="tab" aria-controls="dashboard" aria-selected="false">
+                                                <input disabled {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="senior-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <label  class="overview-id-field text-colortext">Senior care</label>
+                                            </div>
+                                            
+                                            <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings"  role="tab" aria-controls="settings" aria-selected="false">
+                                                <input disabled {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="home-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <label  class="overview-id-field text-colortext">Home care</label>
+                                            </div>
+                                            
+                                            <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts"  role="tab" aria-controls="contacts" aria-selected="false">
+                                                <input disabled {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <label  class="overview-id-field text-colortext">Other services</label>
+                                            </div>
+                                            <input name="chile_care_category" {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care hidden subcategory">
+                                            <input  name="senior_care_category" {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory senior-care " >
+                                            <input name="home_care_category" {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory home-care" >
+                                            <input name="other_category" {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other hidden subcategory " >
+                                        </div>
+
+                                        <div id="myTabContent">
+                                            <div class="flex space-x-10 p-4 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('nanny/_sister', old('chile_care')) ) checked @endif @if(in_array('nanny/_sister', $subCategory)) checked @endif value="nanny/_sister" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
+                                                        <label for="nany-sister" class="overview-id-field text-colortext hover:cursor-pointer">Nany/ Sister</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('au_pair', old('chile_care')) ) checked @endif  @if(in_array('au_pair', $subCategory)) checked @endif  value="au_pair" id="au-pair" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="au-pair" class="overview-id-field text-colortext hover:cursor-pointer">Au Pair</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('maternity_care', old('chile_care')) ) checked @endif @if(in_array('maternity_care', $subCategory)) checked @endif value="maternity_care" id="maternity-care" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="maternity-care" class="overview-id-field text-colortext hover:cursor-pointer">Maternity Care</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('at_home_daycare', old('chile_care')) ) checked @endif @if(in_array('at_home_daycare', $subCategory)) checked @endif value="at_home_daycare" id="at-home-daycare" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="at-home-daycare" class="overview-id-field text-colortext hover:cursor-pointer">At Home Daycare</label>
+                                                    </div>
                                                 </div>
-                                                <div class="mr-2" role="presentation">
-                                                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Dashboard</button>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('at_home_daycare', old('chile_care')) ) checked @endif @if(in_array('infant', $subCategory)) checked @endif value="infant" id="infant" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="infant" class="overview-id-field text-colortext hover:cursor-pointer">Infant</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('young_baby', old('chile_care')) ) checked @endif @if(in_array('young_baby', $subCategory)) checked @endif value="young_baby" id="young_baby" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="young_baby" class="overview-id-field text-colortext hover:cursor-pointer">Young Baby</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('toddler', old('chile_care')) ) checked @endif @if(in_array('toddler', $subCategory)) checked @endif value="toddler" id="toddler" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="toddler" class="overview-id-field text-colortext hover:cursor-pointer">Toddler</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('press_schooler', old('chile_care')) ) checked @endif @if(in_array('press_schooler', $subCategory)) checked @endif value="press_schooler" id="press_schooler" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="press_schooler" class="overview-id-field text-colortext hover:cursor-pointer">Press Schooler</label>
+                                                    </div>
                                                 </div>
-                                                <div class="mr-2" role="presentation">
-                                                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-tab" data-tabs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
-                                                </div>
-                                                <div role="presentation">
-                                                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contacts</button>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('grade_schooler', old('chile_care')) ) checked @endif @if(in_array('grade_schooler', $subCategory)) checked @endif value="grade_schooler" id="grade_schooler" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="grade_schooler" class="overview-id-field text-colortext hover:cursor-pointer">Grade Schooler</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('assist_bathing', old('chile_care')) ) checked @endif @if(in_array('assist_bathing', $subCategory)) checked @endif value="assist_bathing" id="assist_bathing" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="assist_bathing" class="overview-id-field text-colortext hover:cursor-pointer">Assist Bathing</label>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                        <div id="myTabContent">
-                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Profile tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            <div class="flex space-x-10  p-4  rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('companion', old('senior_care')) ) checked @endif @if(in_array('companion', $subCategory)) checked @endif value="companion" id="companion" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="companion" class="overview-id-field text-colortext hover:cursor-pointer">Companion</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('personal_full_care', old('senior_care')) ) checked @endif @if(in_array('personal_full_care', $subCategory)) checked @endif value="personal_full_care" id="personal_full_care" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="personal_full_care" class="overview-id-field text-colortext hover:cursor-pointer">Personal Full Care</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('laundry', old('senior_care')) ) checked @endif @if(in_array('laundry', $subCategory)) checked @endif value="laundry" id="laundry" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="laundry" class="overview-id-field text-colortext hover:cursor-pointer">Laundry</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('prep_meal', old('senior_care')) ) checked @endif @if(in_array('prep_meal', $subCategory)) checked @endif  value="prep_meal" id="prep_meal" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="prep_meal" class="overview-id-field text-colortext hover:cursor-pointer">Prep Meal</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('cook_meal', old('senior_care')) ) checked @endif @if(in_array('cook_meal', $subCategory)) checked @endif value="cook_meal" id="cook_meal" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="cook_meal" class="overview-id-field text-colortext hover:cursor-pointer">Cook Meal</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('run_errands', old('senior_care')) ) checked @endif @if(in_array('run_errands', $subCategory)) checked @endif value="run_errands" id="run_errands" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="run_errands" class="overview-id-field text-colortext hover:cursor-pointer">Run Errands</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('special_needs', old('senior_care')) ) checked @endif @if(in_array('special_needs', $subCategory)) checked @endif value="special_needs" id="special_needs" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="special_needs" class="overview-id-field text-colortext hover:cursor-pointer">Special Needs</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('simple_housework', old('senior_care')) ) checked @endif @if(in_array('simple_housework', $subCategory)) checked @endif value="simple_housework" id="simple_housework" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="simple_housework" class="overview-id-field text-colortext hover:cursor-pointer">Simple Housework</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('assist_feeding', old('senior_care')) ) checked @endif @if(in_array('assist_feeding', $subCategory)) checked @endif value="assist_feeding" id="assist_feeding" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="assist_feeding" class="overview-id-field text-colortext hover:cursor-pointer">Assist Feeding</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('hour_help', old('senior_care')) ) checked @endif @if(in_array('hour_help', $subCategory)) checked @endif value="hour_help" id="hour_help" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="hour_help" class="overview-id-field text-colortext hover:cursor-pointer">Hour Help</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="seniorCare()" data-type="senior_care" name="senior_care[]" @if(is_array(old('senior_care')) && in_array('remind_medicine', old('senior_care')) ) checked @endif @if(in_array('remind_medicine', $subCategory)) checked @endif value="remind_medicine" id="remind_medicine" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="remind_medicine" class="overview-id-field text-colortext hover:cursor-pointer">Remind Medicine</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            <div class="flex space-x-10 p-4  rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="homeCare()" data-type="home_care" name="home_care[]"  @if(is_array(old('home_care')) && in_array('companion_elders', old('home_care')) ) checked @endif @if(in_array('companion_elders', $subCategory)) checked @endif value="companion_elders" id="companion_elders" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="companion_elders" class="overview-id-field text-colortext hover:cursor-pointer">Companion Elders</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="homeCare()" data-type="home_care" name="home_care[]" @if(is_array(old('home_care')) && in_array('private_home_kitchen', old('home_care')) ) checked @endif @if(in_array('private_home_kitchen', $subCategory)) checked @endif value="private_home_kitchen" id="private_home_kitchen" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="private_home_kitchen" class="overview-id-field text-colortext hover:cursor-pointer">Private Home Kitchen</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="homeCare()" data-type="home_care" name="home_care[]" @if(is_array(old('home_care')) && in_array('meal_prepation_coking', old('home_care')) ) checked @endif @if(in_array('meal_prepation_coking', $subCategory)) checked @endif value="meal_prepation_coking" id="meal_prepation_coking" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="meal_prepation_coking" class="overview-id-field text-colortext hover:cursor-pointer">Meal Prepation Coking</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="homeCare()" data-type="home_care" name="home_care[]" @if(is_array(old('home_care')) && in_array('house_cleaning', old('home_care')) ) checked @endif @if(in_array('house_cleaning', $subCategory)) checked @endif value="house_cleaning" id="house_cleaning" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="house_cleaning" class="overview-id-field text-colortext hover:cursor-pointer">House Cleaning</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="homeCare()" data-type="home_care" name="home_care[]" @if(is_array(old('home_care')) && in_array('provide_transportation', old('home_care')) ) checked @endif @if(in_array('provide_transportation', $subCategory)) checked @endif value="provide_transportation" id="provide_transportation" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="provide_transportation" class="overview-id-field text-colortext hover:cursor-pointer">Provide Transportation</label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
-                                            </div>
-                                            <div class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-                                                <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                                            <div class="flex space-x-16 p-4 rounded-lg dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
+                                                        <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('tutor', old('other')) ) checked @endif @if(in_array('tutor', $subCategory)) checked @endif value="tutor" id="tutor" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="tutor" class="overview-id-field text-colortext hover:cursor-pointer">Tutor</label>
+                                                    </div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('pick_up_frop_off', old('other')) ) checked @endif @if(in_array('pick_up_frop_off', $subCategory)) checked @endif value="pick_up_frop_off" id="pick_up_frop_off" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="pick_up_frop_off" class="overview-id-field text-colortext hover:cursor-pointer">Pick Up Drop Off</label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
+                                                        <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('other_professional_services', old('other')) ) checked @endif @if(in_array('other_professional_services', $subCategory)) checked @endif value="other_professional_services" id="other_professional_services" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="other_professional_services" class="overview-id-field text-colortext hover:cursor-pointer">Other Professional Services</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

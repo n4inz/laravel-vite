@@ -14,6 +14,7 @@ use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
 // use App\Models\JobModelsSubCategorys;
 use App\Models\JobModelsTask;
+use App\Models\SettingDefinedCheckList;
 use App\Models\SettingJobModelsStatus;
 use App\Models\Talents;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class JobboardRepository
     public function created($request)
     {
         $jobs = JobModels::get();
-
+        $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('body');
         DB::beginTransaction();
         try{
             $value = json_decode($request->family);
@@ -109,6 +110,16 @@ class JobboardRepository
                     }
                 }
             }
+
+            foreach($task_setting as $tasks){
+                JobModelsTask::create([
+                    'task' => $tasks->body,
+                    'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                    'job_models_id' => $jobs->id,
+                    'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                    'stafs_id' => 0
+                ]);
+            }
             DB::commit();
         }catch(\Exception $e ){
             DB::rollback();
@@ -178,9 +189,7 @@ class JobboardRepository
         //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
         //                                 ->get();
         //                             }])->get();
-        return JobModels::with(['setting_status' => function($query){
-                            $query->get('status_name');
-                        }])->orWhere('status', 'like', "%" . $request->search . "%")
+        return JobModels::with(['setting_status'])->orWhere('status', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
                         ->orWhere('id_unique', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)

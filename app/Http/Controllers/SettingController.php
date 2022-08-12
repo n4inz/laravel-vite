@@ -32,7 +32,7 @@ class SettingController extends Controller
             $query->with('defined_check_list')->first();
         },'SettingUsers', 'SettingGeneral' , 'SettingCategory' , 'SettingJobStatus' , 'SettingTalentStatus'])->first();
 
-        // return $setting;
+        // return $setting->SettingJobStatus;
         // In array catagory and subcategory
         $category = [];
         $subCategory = [];
@@ -45,7 +45,6 @@ class SettingController extends Controller
                 }
             }
         }
-
         // In array job status
         $jobStatus = [];
         if(!empty($setting->SettingJobStatus)){
@@ -66,9 +65,8 @@ class SettingController extends Controller
         return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory' , 'jobStatus', 'talentStatus'));
     }
 
-    public function setting_store(SettingRequest $request)
+    public function setting_store(Request $request)
     {
-
         $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();
 
         if(empty($cek_setting)){

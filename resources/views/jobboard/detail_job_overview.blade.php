@@ -164,8 +164,9 @@
                             </div>
 
                             {{-- Show more & less --}}
+                           
                             <div data-accordion="collapse">
-                                <div id="job-detail" class="hidden" aria-labelledby="accordion-collapse-body-3">
+                                <div id="job-detail" class="hidden" >
                                     <div class="px-4 mt-6">
                                         <span class="overview-note">Talent in the Ayi</span>
                                         <div class="flex w-full p-4 space-x-12">
@@ -462,12 +463,13 @@
                                 </div>
         
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[60px]">
-                                <div class="flex justify-center items-center -space-x-1 p-2  hover:cursor-pointer" data-accordion-target="#job-detail" aria-expanded="false" aria-controls="job-detail">
-                                    <span class="overview-show-more">Show more</span>
+                                <div id="show_detail_jobs" class="flex justify-center items-center -space-x-1 p-2  hover:cursor-pointer" data-accordion-target="#job-detail" aria-expanded="false" aria-controls="job-detail">
+                                    <span  class="overview-show-more">Show more</span>
                                     <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
                                 </div>
 
                             </div>
+                           
                         </div>
 
                         {{-- Matched Talent --}}
@@ -482,9 +484,10 @@
                                 </div>
                             </div>
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="space-y-6 mt-6">
-                                @foreach (array_unique($dataTalent) as $talent )
-                                {{-- $talent->job_model_talent_status->status --}}
+                            <div class="space-y-6 mt-6 match_talent_hide">
+                                @foreach (array_unique($dataTalent) as $key => $talent )
+                                    {{-- $talent->job_model_talent_status->status --}}
+                                    @if($loop->iteration > 10) @break @endif
                                     <div  class="flex justify-between px-4 hover:cursor-pointer">
                                         <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->id }})" class="flex space-x-2 ">
                                             <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->avatar) }}" alt="">
@@ -510,14 +513,44 @@
                                             </select>
                                         </div>
                                     </div>
-                                @endforeach
+                                 @endforeach
                             </div>
-                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[73px]">
-                            <div class="flex justify-center items-center p-2 space-x-1 hover:cursor-pointer">
-                                <span class="overview-show-more">Show more</span>
-                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979454 0.646447C1.17472 0.451184 1.4913 0.451184 1.68656 0.646447L5.33301 4.29289L8.97945 0.646447C9.17472 0.451184 9.4913 0.451184 9.68656 0.646447C9.88182 0.841709 9.88182 1.15829 9.68656 1.35355L5.68656 5.35355C5.4913 5.54882 5.17472 5.54882 4.97945 5.35355L0.979454 1.35355C0.784192 1.15829 0.784192 0.841709 0.979454 0.646447Z" />
-                                </svg>
+                            {{-- Show more and show less match talent --}}
+                            <div  data-accordion="collapse">
+                                <div id="acording_match_talent" class="hidden space-y-6 mt-6" aria-labelledby="accordion-collapse-heading-2">
+                                    @foreach (array_unique($dataTalent) as $key => $talent )
+                                        <div  class="flex justify-between px-4 hover:cursor-pointer">
+                                            <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->id }})" class="flex space-x-2 ">
+                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->avatar) }}" alt="">
+                                                <div class="flex flex-col">
+                                                    <span class="overview-name-talent text-colortext">{{ $talent->first_name }}</span>
+                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->day_of_birthday)->age }}, in {{ $talent->address }}</span>
+                                                    <span class="overview-experiance-talent">{{ $talent->experience }} Year Experience, {{ Str::limit($talent->about_talent , 25, $end='...') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="h-4">
+                                                
+                                                <select data-talent="{{ $talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                        <option>-- Select status --</option>
+                                                        @if (!empty($talent->job_model_talent_status->status))
+                                                            @foreach ($status_talent as $value )
+                                                                <option @if($value->status_name === $talent->job_model_talent_status->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                            @endforeach
+                                                        @else
+                                                            @foreach ($status_talent as $value )
+                                                                <option class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[73px]">
+                                <div id="show_match_talent" class="flex justify-center items-center -space-x-1 p-2  hover:cursor-pointer" data-accordion-target="#acording_match_talent" aria-expanded="false" aria-controls="acording_match_talent">
+                                    <span  class="overview-show-more">Show more</span>
+                                    <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
+                                </div>
                             </div>
                         </div>
 
@@ -689,7 +722,7 @@
                     {{-- left --}}
                     <div class="w-[300px] xl:w-[30%] ">
                         {{-- Attechment --}}
-                        <div class="bg-bgbody rounded h-[501px]">
+                        <div class="bg-bgbody rounded">
                             <div class="flex justify-between px-4 pt-[18.5px]">
                                 <div class="flex space-x-2 ">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
@@ -791,9 +824,10 @@
                                         </a>  
                                     @endif
                                 {{-- Button --}}
-                                <button class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md">
+                                <button data-modal-toggle="upload_progress" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md">
                                     <span class="overview-attechment-btn-text">View more</span> 
                                 </button>
+                                <div class="flex mt-2"></div>
                             </div>
                         </div>
 
@@ -892,12 +926,17 @@
                                                     @if ($task->status == 'Done')
                                                         <s class="task-text-body text-[#AFABAB]">{{ $task->task }}</s>                                                  
                                                     @endif
-                                                    @if ($task->status == 'Inprogress')
+                                                    @if ($task->status == 'Inprogress' OR $task->status == Null)
                                                         <span class="task-text-body text-[#222222]">{{ $task->task }}</span>
                                                     @endif
                                                 </td>
                                                 <td height="66px" width="25%">
-                                                    <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $task->status }}</span>
+                                                    @if ($task->status == null)
+                                                        <span class="task-text-body text-colorStatusCard1 ">Inprogress</span>
+                                                    @else
+                                                        <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $task->status }}</span>    
+                                                    @endif
+
                                                 </td>
                                                 <td height="66px">
                                                     <span class="task-text-body text-[#222222]">{{ $task->assignee }}</span>
@@ -1526,6 +1565,27 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Modal upload --}}
+            <div id="upload_progress" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                    <div class="relative upload_kept h-80 bg-white rounded-lg shadow flex flex-col items-center justify-center">
+                        <div role="status">
+                            <svg class="inline mr-2 w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                            </svg>
+                        </div>
+                        <div class="flex flex-col text-center w-2/4 mt-5">
+                            {{-- <span class="text-2xl text-[#222222]">50%</span> --}}
+                            <span class="text-[#222222] text-sm animate-pulse">Upload progress</span>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-1">
+                                <div id="progress-bar" class="bg-palet h-2.5 rounded-full" style="width: 1%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </article>
 </main>
@@ -1534,6 +1594,7 @@
 
 <script>
 
+    // Add Task
     var no = 0 ;
     function add_more(){
         const template =    '<tr id="" class="load'+no+' check hover:bg-[#F7F7F7] cursor-pointer">'+
@@ -1623,6 +1684,10 @@
         });
     }
 
+    // Modal 
+    const upload_modal = document.getElementById('upload_progress');
+    const modal = new Modal(upload_modal, { });
+    // Upload file
     $('#file').change(function(){
         const file = $(this).val();
         const job_models_id = $('.job_models_id').val();
@@ -1634,14 +1699,52 @@
             data: new FormData($('#upload-file')[0]),
             processData: false,
             cache: false,
-            contentType: false,   
+            contentType: false,
+            beforeSend : function(xhr ,a){
+                modal.show();
+                const tmp = `<div role="status">
+                                <svg class="inline mr-2 w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                </svg>
+                            </div>
+                            <div class="flex flex-col text-center w-2/4 mt-5">
+                                {{-- <span class="text-2xl text-[#222222]">50%</span> --}}
+                                <span class="text-[#222222] text-sm animate-pulse">Upload progress</span>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-1">
+                                    <div id="progress-bar" class="bg-palet h-2.5 rounded-full" style="width: 1%"></div>
+                                </div>
+                            </div>`;
+                $('.upload_kept').html(tmp)
+            },
+            xhr: function(){
+            //upload Progress
+              var xhr = $.ajaxSettings.xhr();
+              if (xhr.upload) {
+                xhr.upload.addEventListener('progress', function(event) {
+                    var percent = 0;
+                    var position = event.loaded || event.position;
+                    var total = event.total;
+                    if (event.lengthComputable){
+                        percent = Math.ceil(position / total * 100);
+                    }
+
+                    
+                    $("#progress-bar").css("width", + percent +"%");
+                }, true);
+              }
+              return xhr;
+            },
+            error: function(e){
+                modal.hide();
+            },   
             success: function (res) {
                location.reload()
             }
         });
     })
 
-    // Comments
+    // Comments And Reply
 
     function post_comment(){
        const comment = $('#message').val()
@@ -1736,6 +1839,7 @@
         });
     }
 
+    // Search Task
     $('.search_task').keyup(function(){
         const search_task = $(this).val();
         const job_models_id = "{{ $result->id }}";
@@ -1800,6 +1904,67 @@
             }
         })
     })
+
+    // Show more and show less detail job
+    const accordionItems = [
+        {
+            id: 'show_detail_jobs',
+            triggerEl: document.querySelector('#show_detail_jobs'),
+            targetEl: document.querySelector('#job-detail'),
+            active: false
+        },
+
+    ];
+
+    const options_show_detail_job = {
+        onOpen: (item) => {
+
+            const tmp = `<span  class="overview-show-more">Show less</span>
+            <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+            $('#show_detail_jobs').html(tmp)
+            
+        },
+        onClose: (item) => {
+            const tmp = `<span  class="overview-show-more">Show more</span>
+                        <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+            $('#show_detail_jobs').html(tmp)
+          
+        },
+
+    };
+    new Accordion(accordionItems, options_show_detail_job);
+
+
+    // Acording Match talent
+    const accordionItemsMatchTalent = [
+        {
+            id: 'show_match_talent',
+            triggerEl: document.querySelector('#show_match_talent'),
+            targetEl: document.querySelector('#acording_match_talent'),
+            active: false
+        },
+
+    ];
+
+    const options_show_match_talent = {
+        onOpen: (item) => {
+            const tmp = `<span  class="overview-show-more">Show less</span>
+            <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+            
+            $('#show_match_talent').html(tmp);
+        },
+        onClose: (item) => {
+            const tmp = `<span  class="overview-show-more">Show more</span>
+                        <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+            
+            $('#show_match_talent').html(tmp)
+        },
+        onToggle: (item) => {
+            $('.match_talent_hide').toggleClass('hidden')
+        },
+
+    };
+    const accordion = new Accordion(accordionItemsMatchTalent, options_show_match_talent);
 
 </script>
 

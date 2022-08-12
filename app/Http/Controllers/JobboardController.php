@@ -16,7 +16,9 @@ use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsFile;
 use App\Models\JobModelsTalentStatus;
+use App\Models\JobModelsTask;
 use App\Models\Notification;
+use App\Models\SettingDefinedCheckList;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
@@ -42,7 +44,7 @@ class JobboardController extends Controller
 
         $status = SettingJobModelsStatus::with(['job_models' => function($query){
             $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
-        }])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        }])->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get();
         
 
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
@@ -99,7 +101,7 @@ class JobboardController extends Controller
 
         $status_count = SettingJobModelsStatus::with(['job_models' => function ($query){
             $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
-        }])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        }])->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->get();
 
         return response()->json([
             'id' => $request->id,
@@ -112,7 +114,7 @@ class JobboardController extends Controller
     public function search_job(Request $request)
     {
         return response()->json([
-            'status' => SettingJobModelsStatus::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('status_key'),
+            'status' => SettingJobModelsStatus::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get(['status_key', 'status_name']),
             'value' => $this->jobboardRepository->search_job($request),
         ]);
     }
@@ -120,6 +122,8 @@ class JobboardController extends Controller
     public function jobs_store(JobsStoreRequest $request)
     {  
         $this->jobboardRepository->created($request);
+
+                // Add Task form settiing
 
         return redirect()->back()->with('status', 'Create job succesfuly');
     }
@@ -139,9 +143,10 @@ class JobboardController extends Controller
             $query->limit(6)->orderBy('id', 'desc');
         }, 'talent_status'])->where('uid', $uid)->firstOrFail();
 
+
         // return $result;
         foreach ($result->match_talent as $match) {
-            $talent = TalentTypeHelper::where('code_helper', $match->jobs_sub_category)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with(['talent' => function($query){
+            $talent = TalentTypeHelper::orderBy('id', 'desc')->where(['code_helper' => $match->jobs_sub_category , 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id])->with(['talent' => function($query){
                 $query->with('job_model_talent_status');
             }])->get();
             if ($talent->count() > 0) {
@@ -152,9 +157,8 @@ class JobboardController extends Controller
             }
             array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
         }
-        // return $dataTalent;
 
-        // Setting status talent
+        
         $status_talent = SettingStatusTalent::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get(['id', 'status_name', 'status_key']);
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         return view('jobboard.detail_job_overview', compact('result', 'dataTalent', 'talentNeed', 'actifity' ,'status_talent'));
@@ -182,7 +186,7 @@ class JobboardController extends Controller
     public function upload_file(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:pdf,zip,rar,doc|max:2048',
+            'file' => 'required|file|mimes:pdf,zip,rar,doc|max:10000',
             'job_models_id' => 'required',
         ]);
 

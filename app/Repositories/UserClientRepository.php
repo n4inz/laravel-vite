@@ -13,7 +13,7 @@ class UserClientRepository
     {
 
         if(isset($request->avatar)){
-            $avatar = $this->uploadImageStore($request->file('avatar'), 'Setting/avatar');
+            $avatar = $this->uploadImageStore($request->file('avatar'), 'Client file/avatar');
         }
 
        $client =  Client::create([
@@ -29,16 +29,18 @@ class UserClientRepository
             'create_by' =>  auth()->user()->id,
         ]);
 
-        if($request->attached_file){
-            $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
+
+        $session = 'client_file_'.auth()->user()->id;
+        if(request()->session()->get($session)){
+            $file = request()->session()->get($session);
+            // $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
+            $this->move_file('public/Files before submit/'.$file, 'public/Jobs attached file/'.$file);
             $client->attached_file()->create([
-                'attached_file' => $name ,
+                'attached_file' => $file ,
                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             ]);
+
+            request()->session()->forget($session);
         }
-
-        // ClientAttachedFile::create([
-
-        // ]);
     }
 }

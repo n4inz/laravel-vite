@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Support\Facades\Storage;
 
 trait ImageUpload
 {
@@ -19,6 +20,11 @@ trait ImageUpload
         $name = time().'_'.$request->getClientOriginalName();
         $request->storePubliclyAs($path, $name, "public");
         return $name;
+    }
+
+    public function move_file($old , $new)
+    {
+        Storage::move($old, $new);
     }
 
 }

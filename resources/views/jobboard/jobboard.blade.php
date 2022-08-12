@@ -211,15 +211,6 @@
                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('description') }}</p>
                             @endif
                         </div>
-                        <div class="px-8 mt-4">
-                            <label for="id" class="{{ $errors->has('id_unique') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">ID*</label>
-                            <div class="{{ $errors->has('id_unique') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex bg-gray-200 items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                <input disabled  value="{{ old('id_unique') }}" type="text" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="ID will be shown after submit">
-                            </div>
-                            @if($errors->has('id_unique'))
-                                <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('id_unique') }}</p>
-                            @endif
-                        </div>
                         <div class="px-8 mt-4 address-errors">
                             <label class="mb-2 block overview-note-body text-colortext">Address(city/state/country)</label>
                             <div class="flex items-center">
@@ -642,11 +633,13 @@
                             required:true
                         },
                         title:{
-                            required:true
+                            required:true,
+                            maxlength:255
                         },
                         description: {
                             required:true,
-                            minlength: 10
+                            minlength: 10,
+                            maxlength:255
                         },
                         address:{
                             required:true,
@@ -715,10 +708,10 @@
 
         function tagTemplate(tagData){
             return `
-            <div class="bg-palet h-5 flex items-center space-x-2 rounded-md pl-1">
+            <div class="bg-palet h-6 flex items-center space-x-2 rounded-md pl-1">
                 <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
 
-                <img width="20" height="20" src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}" class="rounded-full" alt="">
+                <img  src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}" class="rounded-full h-5 w-5" alt="">
                 <span class="text-xs text-white pr-2">${tagData.name}</span>
             </div>
             `
@@ -730,8 +723,8 @@
                     tabindex="0"
                     role="option">
                     ${ tagData.avatar ? `
-                    <div class='tagify__dropdown__item__avatar-wrap'>
-                        <img onerror="this.style.visibility='hidden'" src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}">
+                    <div class='tagify__dropdown__item__avatar-wrap w-full'>
+                        <img class="w-full mt-1" src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}">
                     </div>` : ''
                     }
                     <strong>${tagData.name}</strong>
@@ -741,6 +734,7 @@
         }
 
         new Tagify(input,{
+            enforceWhitelist : true,
             whitelist : <?=  json_encode($json) ?>,
             maxTags:1,
             skipInvalid: true,
@@ -820,12 +814,13 @@
                 url:'{{ route("jobboard.search_job") }}',
                 data:{search , _token: '{{ csrf_token() }}'},
                 success:function(val){
-                        console.log(val)
+
                         val.status.map(function(sts){
                             $('#'+sts.status_key).html('');
                         })
 
                         val.value.map(function(res){
+
                             // if(res.status == 'potential_clients'){
                             //   var sts =   '<div class="text-colorStatusCard1 status-card-job bg-colorStatusCard2 rounded-sm">Potencial Client</div>';
                             // }
@@ -841,6 +836,8 @@
                             // if(res.status == 'completed'){
                             //     var sts =  '<div class="text-white status-card-job bg-palet rounded-sm">Accepted</div>';
                             // }
+
+
                             const card = `<a id="${res.id}" href="/overview/${res.uid}">
                                             <div class="relative w-full h-[211px] bg-bgbody mt-3 rounded">
                                                 <div class="h-40 px-4">

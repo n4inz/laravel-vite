@@ -25,4 +25,9 @@ class Talents extends Model
     {
         return $this->hasOne(JobModelsTalentStatus::class, 'talents_id');
     }
+
+    public function attached_file()
+    {
+        return $this->hasOne(TalentsFiles::class, 'talents_id');
+    }
 }

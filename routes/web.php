@@ -7,6 +7,7 @@ use App\Http\Controllers\JobboardController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserClientController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -114,6 +115,7 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        
         // Jobboard
         Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
         Route::post('/get-subcategory', [JobboardController::class, 'get_subcategory_ajax'])->name('jobboard.get_subcategory_ajax');
@@ -149,6 +151,10 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
         Route::post('upload-avatar', [SettingController::class, 'upload_avatar'])->name('setting.upload.avatar');
         Route::get('/send', [JobboardController::class, 'send'])->name('jobboard.send');
         Route::get('/apply', [JobboardController::class, 'apply'])->name('jobboard.apply');
+
+
+        // Upload FIle
+        Route::post('/upload',[UploadController::class , 'upload'])->name('upload');
     });
 
 

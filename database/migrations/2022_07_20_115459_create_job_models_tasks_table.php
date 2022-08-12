@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('task');
             $table->string('assignee');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->unsignedBigInteger('job_models_id');
             $table->unsignedBigInteger('users_id');
 

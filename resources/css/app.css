@@ -549,7 +549,9 @@ label[for=hourly_rate],
 label[for=placement_fee],
 label[for=aplication_fee],
 label[for=location],
-label[id="0-error"]
+label[id="0-error"],
+label[for=note],
+label[id="about_talent-error"]
 {
     color: red;
     font-size: 12px;
