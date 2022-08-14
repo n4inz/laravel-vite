@@ -27,6 +27,7 @@
                             <div>
                                 <span class="text-5xl font-bold">10</span>
                             </div>
+                            
                         </div>
     
                         <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">

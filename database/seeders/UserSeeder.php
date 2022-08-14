@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         $faker = Factory::create();
         $tenant =  Tenant::create([
             'name' => 'test',
-            'domain' => 'test.agency.test',
+            'domain' => 'test.'.env('DOMAIN'),
             'database' => $faker->userName(4)
         ]);
 
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         for($x=1;$x<=9;$x++){
             $tenant =  Tenant::create([
                 'name' => $faker->name,
-                'domain' => $faker->lastName.'.agency.test',
+                'domain' => $faker->lastName.'.'.env('DOMAIN'),
                 'database' => $faker->userName(4)
             ]);
 

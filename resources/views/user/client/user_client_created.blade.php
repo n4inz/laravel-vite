@@ -187,7 +187,7 @@
                                         
                                         <div class="errors_client_file bg-bgbody flex items-center justify-center px-4">
                                             @if($errors->has('client_file'))
-                                                <p class="mt-2 text-center text-sm text-red-600 dark:text-red-500">{{ $errors->first('client_file') }}</p>
+                                                <p class="mt-2 text-center text-sm text-red-600 dark:bg-gray-500">{{ $errors->first('client_file') }}</p>
                                             @endif
                                         </div>
                                     </div>
