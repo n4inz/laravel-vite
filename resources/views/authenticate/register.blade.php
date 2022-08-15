@@ -41,7 +41,7 @@
                                 <input type="text" name="sub_domain" value="{{ old('sub_domain') }}" class="{{ $errors->has('domain') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} sub_domain overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder="Subdomain">
                             </div>
                             <div class="{{ $errors->has('domain') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-full h-10 border-t border-b border-r rounded-r border-[#CCD3DC] bg-gray-100  text-gray-500">
-                                <input readonly type="text" name="domain" value="{{ old('domain') }}" class="{{ $errors->has('domain') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} domain bg-gray-100 overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder=".{{ env('DOMAIN') }}">
+                                <input readonly type="text" name="domain" value="{{ old('domain') }}" class="{{ $errors->has('domain') ? 'placeholder-red-700 text-red-900 bg-red-100' : '' }} domain bg-gray-100 overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full p-1 pl-3 rounded outline-none " placeholder=".{{ config('app.domain') }}">
                             </div>
                         </div>
                         @if($errors->has('domain'))
@@ -76,7 +76,7 @@
     </main>
     <script>
         $('.sub_domain').keyup(function(){
-           const sub_domain = $(this).val()+'.{{ env('DOMAIN') }}';
+           const sub_domain = $(this).val()+'.{{ config('app.domain') }}';
 
            $('.domain').val(sub_domain)
         })
