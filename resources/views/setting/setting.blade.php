@@ -384,9 +384,9 @@
                                     </div>
                                 </div>
                                 <div class="px-6 mt-6 flex space-x-4">
-                                    <div class="w-full">
+                                    <div class="w-full errors_subcategory">
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Category</label>
-                                        <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                         <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile"  role="tab" aria-controls="profile" aria-selected="false">
                                                 <input disabled {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                 <label class="overview-id-field text-colortext ">Child care</label>
@@ -410,9 +410,12 @@
                                             <input  name="senior_care_category" {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory senior-care " >
                                             <input name="home_care_category" {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory home-care" >
                                             <input name="other_category" {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other hidden subcategory " >
-                                        </div>
+                                            </div>
+                                         
 
+                                        
                                         <div id="myTabContent">
+                                 
                                             <div class="flex space-x-10 p-4 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
@@ -461,7 +464,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                     
+                                           
                                             <div class="flex space-x-10  p-4  rounded-lg" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
@@ -514,6 +518,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                           
                                             <div class="flex space-x-10 p-4  rounded-lg" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
@@ -542,6 +548,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="flex space-x-16 p-4 rounded-lg" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
@@ -561,6 +568,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        
                                     </div>
                                 </div>
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
@@ -590,22 +599,22 @@
                                 <div class="px-6 mt-8 flex flex-col items-center space-x-[25px]">
                                     <div class="flex">
                                         <div class=" flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="aplication_fee_checkbox" name="aplication_fee_checkbox" {{ old('aplication_fee_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="aplication_fee_checkbox" name="aplication_fee_checkbox" {{ old('aplication_fee_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="aplication_fee_checkbox" class="{{ $errors->has('aplication_fee_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Application Fee ($)</label>
                                         </div>
                                         <div class=" flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="placement_fee_checkbox" name="placement_fee_checkbox" {{ old('placement_fee_checkbox') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->placement_fee  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="placement_fee_checkbox" name="placement_fee_checkbox" {{ old('placement_fee_checkbox') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->placement_fee_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="placement_fee w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="placement_fee_checkbox" class="{{ $errors->has('placement_fee_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Placement Fee ($)</label>
                                         </div>
                                         <div class=" flex items-center space-x-[14px] mt-[10px] mr-[76px]">
-                                            <input id="hourly_rate_checkbox" name="hourly_rate_checkbox" {{ old('hourly_rate_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->hourly_rate  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <input id="hourly_rate_checkbox" name="hourly_rate_checkbox" {{ old('hourly_rate_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->hourly_rate_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="hourly_rate w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             <label for="hourly_rate_checkbox" class="{{ $errors->has('hourly_rate_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext ">Hourly Rate ($)</label>
                                         </div>
                                     </div>
                                     <div class="flex items-center space-x-[60px] mt-3">
                                         <div class="errors_aplication_fee">
                                             <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }} aplication_fee flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                <input name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                                 {{-- <div class="flex items-center justify-center space-x-2 pr-2">
                                                     <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
                                                     <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
@@ -615,7 +624,7 @@
                                         </div>
                                         <div class="errors_placement_fee">
                                             <div class="placement_fee {{ $errors->has('placement_fee') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                                 {{-- <div class="flex items-center justify-center space-x-2 pr-2">
                                                     <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
                                                     <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
@@ -624,7 +633,7 @@
                                         </div>
                                         <div class="errors_hourly_rate">
                                             <div class="hourly_rate {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0">
+                                                <input name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                                 {{-- <div class="flex items-center justify-center space-x-2 pr-2">
                                                     <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
                                                     <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
@@ -685,7 +694,7 @@
                                     <label for="" class="overview-status-field text-colortext">Calendly API</label>
                                     <div class=" w-full errors_calendly">
                                         <div class="{{ $errors->has('calendly') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} mt-2 w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="calendly" value="{{ old('calendly' , $setting->SettingCalendly->token) }}" type="password" id="calendly" class="{{ $errors->has('calendly') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" >
+                                            <input name="calendly" value="{{ old('calendly' , $setting->SettingCalendly->token ?? '') }}" type="password" id="calendly" class="{{ $errors->has('calendly') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" >
                                             <span toggle="#calendly" class="fa fa-eye-slash toggle-calendly mr-2"></span>
                                         </div>
                                         @if($errors->has('calendly'))
@@ -938,7 +947,7 @@
     <script>
     // Validate
     $(function(){
-        var validate = $('.validate_settings');
+        var validate = $('.validate_setting');
         
             if(validate.length){
                 validate.validate({
@@ -955,16 +964,16 @@
                         location:{
                             required:true,
                         },
-                        aplication_fee:{
-                            required:true,
+                        aplication_fee_checkbox:{
+                            require_from_group: [1, ".aplication_fee_input"]
+                           
                         },
-                        placement_fee:{
-                            required:true,
-                        },
-                        hourly_rate:{
-                            required:true,
-                        },
-
+                        // placement_fee:{
+                        //     require_from_group: [1, ".placement_fee"]
+                        // },
+                        // hourly_rate:{
+                        //     require_from_group: [1, ".hourly_rate"]
+                        // },
                         'chile_care[]': {   
                             require_from_group: [1, ".subcategory"]
                         },
@@ -975,7 +984,7 @@
                             require_from_group: [1, ".subcategory"]
                         },
                         'other[]': {
-                            require_from_group: [1, ".subcategory"]
+                            required:true,
                         },
                         'status_talent[]':{
                             required:true,
@@ -983,11 +992,15 @@
                    
                     },
                     errorPlacement: function(error, element){
+                        error.appendTo($('.errors_aplication_fee'));
                         if (element.is(":checkbox"))
                         {
+                            console.log(error)
                             error.appendTo(element.parents('.errors_status'));
                             error.appendTo(element.parents('.errors_subcategory'));
                             error.appendTo(element.parents('.errors_status_talent'));
+                           
+
 
                         }else{ 
                             error.insertAfter( element );
@@ -997,8 +1010,9 @@
                             error.appendTo(element.parents('.errors_location'));
                             error.appendTo(element.parents('.errors_hourly_rate'));
                             error.appendTo(element.parents('.errors_placement_fee'));
-                            error.appendTo(element.parents('.errors_aplication_fee'));
+                           
                         }
+                       
                     },
 
                 })
@@ -1022,7 +1036,7 @@
           const btn = `<button class="bg-palet invisible group-hover:animate-pulse group-hover:visible h-6 absolute rounded-md p-4 top-1/2 bottom-1/2 flex items-center justify-center">
                             <span class="text-sm text-gray-50">Upload</span>
                         </button>`;
-    
+                        
           $('#bg-avatar').append(btn);
         };
 

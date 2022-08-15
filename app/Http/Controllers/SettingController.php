@@ -67,7 +67,7 @@ class SettingController extends Controller
         return view('setting.setting', compact('setting', 'defined_list' , 'category' , 'subCategory' , 'jobStatus', 'talentStatus'));
     }
 
-    public function setting_store(Request $request)
+    public function setting_store(SettingRequest $request)
     {
 
         $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();

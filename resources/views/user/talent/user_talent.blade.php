@@ -233,9 +233,11 @@
                                         </div>
                                         <input type="file" name="file" id="talent_file" class="hidden">
                                     </label>
-                                    @if($errors->has('talent_file'))
-                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('talent_file') }}</p>
-                                    @endif
+                                    <div class="errors_uploaded">
+                                        @if($errors->has('talent_file'))
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('talent_file') }}</p>
+                                        @endif
+                                    </div>
                                 </div>
                             </form>
     
@@ -422,6 +424,7 @@
                 contentType: false,
                 processData: false,
                 beforeSend : function(xhr ,a){
+                    $('.errors_uploaded').html('')
                 const tmp = `<div class="w-full h-full bg-gray-200">
                                 <div id="progress-bar" class="bg-hover h-full flex items-center justify-center text-5xl  font-medium text-white text-center p-0.5 leading-none " style="width: 1%"> </div>
                             </div>`;
@@ -429,7 +432,6 @@
                 },
 
                 xhr: function(){
-                   
                 //upload Progress
                 var xhr = $.ajaxSettings.xhr();
                 if (xhr.upload) {
@@ -447,42 +449,21 @@
                 return xhr;
                 },
                 error: function(e){
-
                     console.log(e)
-                    // const tmp = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    //                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.1528C2.25 17.7386 2.58579 17.4028 3 17.4028H21C21.4142 17.4028 21.75 17.7386 21.75 18.1528C21.75 18.567 21.4142 18.9028 21 18.9028H3C2.58579 18.9028 2.25 18.567 2.25 18.1528Z" fill="{{ $errors->has('client_file') ? '#e80f00' : '#827C7C' }} "/>
-                    //                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21C2.25 20.5858 2.58579 20.25 3 20.25H21C21.4142 20.25 21.75 20.5858 21.75 21C21.75 21.4142 21.4142 21.75 21 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21Z" fill="{{ $errors->has('client_file') ? '#e80f00' : '#827C7C' }}"/>
-                    //                 <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 10.9697C8.76256 10.6768 9.23744 10.6768 9.53033 10.9697L12 13.4393L14.4697 10.9697C14.7626 10.6768 15.2374 10.6768 15.5303 10.9697C15.8232 11.2626 15.8232 11.7374 15.5303 12.0303L12.5303 15.0303C12.2374 15.3232 11.7626 15.3232 11.4697 15.0303L8.46967 12.0303C8.17678 11.7374 8.17678 11.2626 8.46967 10.9697Z" fill="{{ $errors->has('client_file') ? '#e80f00' : '#827C7C' }}"/>
-                    //                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.25C12.4142 2.25 12.75 2.58579 12.75 3V14.5C12.75 14.9142 12.4142 15.25 12 15.25C11.5858 15.25 11.25 14.9142 11.25 14.5V3C11.25 2.58579 11.5858 2.25 12 2.25Z" fill="{{ $errors->has('client_file') ? '#e80f00' : '#827C7C' }}"/>
-                    //             </svg>
-                                
-                    //             <span class="{{ $errors->has('client_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
-                    //             <span class="{{ $errors->has('client_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>`;
-                    // $('.files-kept').html(tmp)
-
-                    // const errors = `<p class="mt-2 text-center text-sm text-red-600 dark:text-red-500 py-2">${e.responseJSON.message}</p>
-                    //                 <div class="flex mb-5"></div>`;
-                    // if(e.status != 500){
-                    //     $('.errors_client_file').html(errors)                  
-                    // }
+                    const tmp = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                </svg>
+                                <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
+                                <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>`;
+                                $('.files-kept').html(tmp)
+                    const errors = `<p class="mt-2 text-sm text-red-600 dark:text-red-500">${e.responseJSON.message}</p>`;
+                    $('.errors_uploaded').html(errors)
                 },
                 success: function (mdata) {
                     console.log(mdata)
-                    // var extension = val.substring(val.lastIndexOf('.') + 1);
-                    // if(extension == 'pdf' || extension == 'PDF' || extension == 'Pdf'){
-                    //     var pdf = `<i class="fa fa-5x fa-file-pdf-o text-red-600" aria-hidden="true"></i>
-                    //                 <span class="name-file text-xs text-gray-400">Uploaded</span>`;                 
-                    //     $('.files-kept').html(pdf)
-                    // }else if(extension == 'zip' || extension == 'rar' || extension == 'Zip'){
-                    //     var zip = `<i class="fa fa-5x text-yellow-400 fa-file-archive-o" aria-hidden="true"></i> 
-                    //                 <span class="name-file text-xs text-gray-400">Uploaded</span>`;                 
-                    //     $('.files-kept').html(zip)
-                    // }else{
-                    //     var other = `<i class="fa fa-5x fa-file-text-o" aria-hidden="true"></i> 
-                    //                 <span class="name-file text-xs text-gray-400">Uploaded</span>`;                 
-                    //     $('.files-kept').html(other)
-                    // }
-                                
                 },
             });
         });

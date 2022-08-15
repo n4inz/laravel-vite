@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('location');
             $table->boolean('send_notifcation')->nullable()->default(false);
             $table->string('aplication_fee')->nullable();
+            $table->boolean('aplication_fee_check')->nullable();
             $table->string('placement_fee')->nullable();
+            $table->boolean('placement_fee_check')->nullable();
             $table->string('hourly_rate')->nullable();
+            $table->boolean('hourly_rate_check')->nullable();
             $table->unsignedBigInteger('setting_details_id');
             $table->unsignedBigInteger('users_id');
 

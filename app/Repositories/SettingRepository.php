@@ -48,8 +48,11 @@ class SettingRepository {
                 'location' => $request->location,
                 'send_notifcation' => $request->send_notifcation,
                 'aplication_fee' => $request->aplication_fee,
+                'aplication_fee_check' => $request->aplication_fee_checkbox,
                 'placement_fee' => $request->placement_fee,
+                'placement_fee_check' => $request->placement_fee_checkbox,
                 'hourly_rate' => $request->hourly_rate,
+                'hourly_rate_check' => $request->hourly_rate_checkbox,
                 'users_id' => auth()->user()->id
             ]);
            
@@ -327,8 +330,11 @@ class SettingRepository {
                 'location' => $request->location,
                 'send_notifcation' => $request->send_notifcation,
                 'aplication_fee' => $request->aplication_fee,
+                'aplication_fee_check' => $request->aplication_fee_checkbox,
                 'placement_fee' => $request->placement_fee,
-                'hourly_rate' => $request->hourly_rate
+                'placement_fee_check' => $request->placement_fee_checkbox,
+                'hourly_rate' => $request->hourly_rate,
+                'hourly_rate_check' => $request->hourly_rate_checkbox,
             ]);
 
             SettingUsers::where('users_id' , auth()->user()->id)->update([
