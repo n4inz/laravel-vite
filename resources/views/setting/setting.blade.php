@@ -685,7 +685,7 @@
                                     <label for="" class="overview-status-field text-colortext">Calendly API</label>
                                     <div class=" w-full errors_calendly">
                                         <div class="{{ $errors->has('calendly') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} mt-2 w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="calendly" value="{{ old('calendly') }}" type="text" id="calendly" class="{{ $errors->has('calendly') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" >
+                                            <input name="calendly" value="{{ old('calendly' , $setting->SettingCalendly->token) }}" type="password" id="calendly" class="{{ $errors->has('calendly') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" >
                                             <span toggle="#calendly" class="fa fa-eye-slash toggle-calendly mr-2"></span>
                                         </div>
                                         @if($errors->has('calendly'))
@@ -938,7 +938,7 @@
     <script>
     // Validate
     $(function(){
-        var validate = $('.validate_setting');
+        var validate = $('.validate_settings');
         
             if(validate.length){
                 validate.validate({
@@ -1129,6 +1129,16 @@
     })
     
 
+    // Calenly show and hide
+    $(".toggle-calendly").click(function() {
+    $(this).toggleClass("fa-eye-slash fa-eye");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+    input.attr("type", "text");
+    } else {
+    input.attr("type", "password");
+    }
+    });
 
     </script>
 </main>

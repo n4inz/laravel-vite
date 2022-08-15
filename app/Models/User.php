@@ -88,6 +88,11 @@ class User extends Authenticatable
         return $this->hasMany(SettingServiceCategory::class ,'users_id');
     }
 
+    public function SettingCalendly()
+    {
+        return $this->hasOne(SettingCalendlyApi::class,'users_id');
+    }
+
     public function client()
     {
         return $this->hasMany(Client::class, 'users_id');

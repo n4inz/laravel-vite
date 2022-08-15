@@ -38,11 +38,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
-            UserSeeder::class,
+            // UserSeeder::class,
             // ClientSeeder::class,
-            TalentsSeeder::class,
-            TalentLanguageSeeder::class,
-            TalentTypeHelperSeeder::class,
+            // TalentsSeeder::class,
+            // TalentLanguageSeeder::class,
+            // TalentTypeHelperSeeder::class,
             // JobSeeder::class,
 
             // SeedersJobModelsAvailabiltyDaysSeeder::class,

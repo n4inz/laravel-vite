@@ -29,7 +29,7 @@ class AuthenticateController extends Controller
             return redirect()->back()->with('Failed', 'Username Or Password Is Wrong');
         }
         $this->create_credentials();
-        return redirect()->to(env('URI').$domain->tenants->domain.'/tenancy');
+        return redirect()->to(config('app.uri').$domain->tenants->domain.'/tenancy');
     }
 
     public function login_store(Request $request)
@@ -75,7 +75,7 @@ class AuthenticateController extends Controller
 
             $tenant = Tenant::create([
                 'name' => $request->email,
-                'domain' => $request->sub_domain.'.'.env('DOMAIN'),
+                'domain' => $request->sub_domain.'.'.config('app.domain'),
                 'database' => $request->sub_domain
             ]);
     
@@ -87,7 +87,7 @@ class AuthenticateController extends Controller
             $user->assignRole('agency');
     
             $this->create_credentials();
-            return redirect(env('URI').$request->sub_domain.'.'.env('DOMAIN').'/tenancy');
+            return redirect(config('app.uri').$request->sub_domain.'.'.config('app.domain').'/tenancy');
         }
         return redirect()->back()->withErrors('Error', 'Domain is exists');
        
@@ -133,6 +133,6 @@ class AuthenticateController extends Controller
      
         $request->session()->regenerateToken();
      
-        return redirect(env('URI').env('DOMAIN'));
+        return redirect(config('app.uri').config('app.domain'));
     }
 }

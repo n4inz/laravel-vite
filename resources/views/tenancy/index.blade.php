@@ -16,7 +16,7 @@
                data:{_token: '{{ csrf_token() }}'},
                success:function(data){
                 if(data.status == 200){
-                    window.location.replace('{{ env("URI") }}'+data.domain+'{{ App\Providers\RouteServiceProvider::HOME }}');
+                    window.location.replace('{{ config("app.uri") }}'+data.domain+'{{ App\Providers\RouteServiceProvider::HOME }}');
                 }
                     if(data.status == 401){
                         window.location.href = "{{ route('fail') }}";

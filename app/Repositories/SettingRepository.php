@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Http\Traits\HttpGuzzle;
 use App\Models\SettingAdditionals;
+use App\Models\SettingCalendlyApi;
 use App\Models\SettingDefinedCheckList;
 use App\Models\SettingDetail;
 use App\Models\SettingGeneral;
@@ -15,6 +17,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class SettingRepository {
+
+    use HttpGuzzle;
 
     public function created($request)
     {
@@ -174,16 +178,6 @@ class SettingRepository {
                 ]);
             }
 
-            // foreach($request->status as $key => $status){
-            //     SettingJobModelsStatus::create([
-            //         'status_name' => $request->status[$key],
-            //         'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
-            //         // 'text_color' => $request->text_color[$key],
-            //         // 'bg_color' => $request->bg_color[$key],
-            //         'users_id' => auth()->user()->id
-            //     ]);
-            // }
-
             foreach($request->status_talent as $key => $value){
                 SettingStatusTalent::create([
                     'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
@@ -192,6 +186,19 @@ class SettingRepository {
                 ]);
     
             }
+
+            if(isset($request->calendly)){
+                $res = json_decode($this->get('https://api.calendly.com', 'users/me' , $request)->getBody());
+    
+                SettingCalendlyApi::create([
+                    'token' => $request->calendly,
+                    'current_organization' => $res->resource->current_organization,
+                    'scheduling_url' => $res->resource->scheduling_url,
+                    'uri' => $res->resource->uri,
+                    'users_id' => auth()->user()->id
+                ]);
+            }
+
 
             DB::commit(); 
  
@@ -359,16 +366,6 @@ class SettingRepository {
                 ]);
             }
             
-            // foreach($request->status as $key => $status){
-            //     SettingJobModelsStatus::create([
-            //         'status_name' => $request->status[$key],
-            //         'status_key' => str_replace(' ', '_', strtolower($request->status[$key])),
-            //         // 'text_color' => $request->text_color[$key],
-            //         // 'bg_color' => $request->bg_color[$key],
-            //         'users_id' => auth()->user()->id
-            //     ]);
-            // }
-
             SettingStatusTalent::where('users_id', auth()->user()->id)->delete();
 
             foreach($request->status_talent as $key => $value){
@@ -379,7 +376,19 @@ class SettingRepository {
                 ]);
     
             }
-            
+
+            if(isset($request->calendly)){
+                $res = json_decode($this->get('https://api.calendly.com', 'users/me' , $request)->getBody());
+    
+                SettingCalendlyApi::updateOrCreate(['users_id' => auth()->user()->id],[
+                    'token' => $request->calendly,
+                    'current_organization' => $res->resource->current_organization,
+                    'scheduling_url' => $res->resource->scheduling_url,
+                    'uri' => $res->resource->uri,
+                    'users_id' => auth()->user()->id
+                ]);    
+            }
+
             DB::commit(); 
            
         }catch(\Exception $e){

@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SettingRequest;
+use App\Http\Traits\HttpGuzzle;
 use App\Models\SettingGeneral;
 use App\Http\Traits\ImageUpload;
 use App\Models\Avatar;
+use App\Models\SettingCalendlyApi;
 use App\Models\SettingDefinedCheckList;
-use App\Models\SettingJobModelsStatus;
-use App\Models\SettingStatusTalent;
+
 use App\Models\User;
 use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
 
+
 class SettingController extends Controller
 {
-    use ImageUpload;
+    use ImageUpload, HttpGuzzle;
     private $settingRepository;
 
     public function __construct(SettingRepository $settingRepository)
@@ -30,7 +32,7 @@ class SettingController extends Controller
             $query->with(['service_location_fee'])->first();
         }, 'SettingAdditionals' => function($query){
             $query->with('defined_check_list')->first();
-        },'SettingUsers', 'SettingGeneral' , 'SettingCategory' , 'SettingJobStatus' , 'SettingTalentStatus'])->first();
+        },'SettingUsers', 'SettingGeneral' , 'SettingCategory' , 'SettingJobStatus' , 'SettingTalentStatus','SettingCalendly'])->first();
 
         // return $setting->SettingJobStatus;
         // In array catagory and subcategory
@@ -67,7 +69,7 @@ class SettingController extends Controller
 
     public function setting_store(Request $request)
     {
-        return $request;
+
         $cek_setting = SettingGeneral::where('users_id' , auth()->user()->id)->first();
 
         if(empty($cek_setting)){

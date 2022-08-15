@@ -37,65 +37,6 @@ Route::get('/test/login', function(){
 });
 
 
-// Route::prefix('admin')->group(function () {
-//     Route::get('/home', function () {
-//         return auth()->guard('admin')->user();
-//     })->middleware('auth:admin');
-// });
-
-// Route::get('/home', function () {
-//     return auth()->user();
-// })->middleware('auth');
-
-
-// Case 1
-// Route::get('/test/login', function(){
-//     return auth()->guard('admin')->user();
-// })->middleware('auth:admin');
-
-// Route::get('/test/login', function(){
-//     return auth()->user();
-// })->middleware('auth');
-
-// Case 2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Login Agnecy
 Route::get('/tenancy', function(){
     return view('tenancy.index');
@@ -115,6 +56,7 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/calendly' , [DashboardController::class,'calendlyApi'])->name('dashboard.calendly');
         
         // Jobboard
         Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
