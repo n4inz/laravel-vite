@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('address');
             $table->text('description');
+            $table->string('status');
             $table->unsignedBigInteger('job_models_id');
             $table->unsignedBigInteger('users_id');
 

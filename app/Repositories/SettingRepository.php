@@ -358,17 +358,15 @@ class SettingRepository {
                 }
             }
 
-            SettingJobModelsStatus::where('users_id', auth()->user()->id)->delete();
-
             foreach($request->name_status_job as $key => $status){
             
-                SettingJobModelsStatus::create([
+                SettingJobModelsStatus::updateOrCreate(['id' => $request->id[$key] ],[
                     'status_name' => $request->name_status_job[$key],
                     'status_key' => str_replace(' ', '_', strtolower($request->name_status_job[$key])),
                     'status' => request()->post($key),
                     // 'text_color' => $request->text_color[$key],
                     // 'bg_color' => $request->bg_color[$key],
-                    'users_id' => auth()->user()->id
+                    // 'users_id' => auth()->user()->id
                 ]);
             }
             

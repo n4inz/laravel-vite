@@ -301,7 +301,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('jobboard.apply') }}" class="flex justify-center items-center w-full h-10 bg-palet rounded-md mt-8">
+                    <a href="{{ route('jobboard.apply' , ['uid' => $job->uid]) }}" class="flex justify-center items-center w-full h-10 bg-palet rounded-md mt-8">
                         <span class="overview-talent-modal-title text-[#FFFFFF]">Apply</span>
                     </a>
                     <div class="mt-8"></div>

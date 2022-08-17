@@ -18,7 +18,7 @@
                 <table width="500px">
                     <tr>
                         <td height="30px" width="65px"><span class="text-[#827C7C] overview-status">Status</span></td>
-                        <td ><span class="text-colorStatusCard1 overview-status-field">{{ str_replace('_',' ',ucfirst($result->status)) }}</span></td>
+                        <td ><span class="text-colorStatusCard1 overview-status-field">{{ str_replace('_',' ',ucfirst($result->setting_status->status_name)) }}</span></td>
                         {{-- @if($result->status === 'potential_clients')
                             <td ><span class="text-colorStatusCard1 overview-status-field">Potential Clients</span></td>
                         @endif
@@ -97,10 +97,30 @@
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div class="px-4 mt-8">
                                 <span class="overview-note">DESCRIPTION</span>
-                                <div class="w-full bg-[#F5F5F5] rounded-md p-4 text-xs">
-                                    <span class="overview-note-body text-[#827C7C]">
-                                        {{ $result->description }}
+                                
+                                <div class="desc_view w-full bg-[#F5F5F5] rounded-md p-4 text-xs">
+                                    <span onclick="edit_desc()" class="overview-note-body text-[#827C7C]">
+                                        {!! $result->description !!}
                                     </span> 
+                                </div>
+                              
+                                <div class="editor relative w-full p-4 hidden">
+                                    @if($errors->has('edit_description'))
+                                    <p class="mb-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('edit_description') }}</p>
+                                     @endif
+                                    <form action="{{ route('jobboard.edit_description') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="uid" value="{{ $result->uid }}" >
+                                        <textarea id="editor1" class="w-full h-full" name="edit_description" id="">{{ old('edit_description',$result->description) }}</textarea>
+                                        <div class="flex space-x-3 float-right">
+                                            <div  onclick="edit_desc()" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
+                                                <span class="text-sm text-white">Cancel</span> 
+                                            </div>
+                                            <button class="flex items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
+                                                <span class="text-sm text-white">Save</span> 
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="flex space-x-4 items-center px-4 mt-[30px]">
@@ -479,62 +499,45 @@
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
                                     <span class="text-[#222222] font-semibold">Matched Talent</span>
                                 </div>
-                                <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                     <span class="overview-send-job text-palet">+ Add Talent</span>
                                 </div>
                             </div>
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="space-y-6 mt-6 match_talent_hide">
-                                @foreach (array_unique($dataTalent) as $key => $talent )
-                                    {{-- $talent->job_model_talent_status->status --}}
-                                    @if($loop->iteration > 10) @break @endif
-                                    <div  class="flex justify-between px-4 hover:cursor-pointer">
-                                        <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->id }})" class="flex space-x-2 ">
-                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->avatar) }}" alt="">
-                                            <div class="flex flex-col">
-                                                <span class="overview-name-talent text-colortext">{{ $talent->first_name }}</span>
-                                                <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->day_of_birthday)->age }}, in {{ $talent->address }}</span>
-                                                <span class="overview-experiance-talent">{{ $talent->experience }} Year Experience, {{ Str::limit($talent->about_talent , 25, $end='...') }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="h-4">
-                                            
-                                            <select data-talent="{{ $talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                    <option>-- Select status --</option>
-                                                    @if (!empty($talent->job_model_talent_status->status))
-                                                        @foreach ($status_talent as $value )
-                                                            <option @if($value->status_name === $talent->job_model_talent_status->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach ($status_talent as $value )
-                                                            <option class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                        @endforeach
-                                                    @endif
-                                            </select>
-                                        </div>
-                                    </div>
-                                 @endforeach
-                            </div>
-                            {{-- Show more and show less match talent --}}
-                            <div  data-accordion="collapse">
-                                <div id="acording_match_talent" class="hidden space-y-6 mt-6" aria-labelledby="accordion-collapse-heading-2">
-                                    @foreach (array_unique($dataTalent) as $key => $talent )
-                                        <div  class="flex justify-between px-4 hover:cursor-pointer">
-                                            <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->id }})" class="flex space-x-2 ">
-                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->avatar) }}" alt="">
-                                                <div class="flex flex-col">
-                                                    <span class="overview-name-talent text-colortext">{{ $talent->first_name }}</span>
-                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->day_of_birthday)->age }}, in {{ $talent->address }}</span>
-                                                    <span class="overview-experiance-talent">{{ $talent->experience }} Year Experience, {{ Str::limit($talent->about_talent , 25, $end='...') }}</span>
+                            <form id="form_match_talent" action="{{ route('jobboard.send_email')}}" method="POST">@csrf
+                                <input type="hidden" name="email_client" value="{{ $result->client->email }}">
+                                <input type="hidden" name="job_models_id" value="{{ $result->id }}">
+                                <div class="status_all_select"></div>
+                                <!--
+                                <div class="space-y-6 mt-6">
+                                    @foreach ($result->match_talents_add as $key => $talent )
+                                        {{-- $talent->job_model_talent_status->status --}}
+                                        <div  class="flex justify-between px-4">
+                                            <div  class="flex space-x-2 items-center justify-center">
+                                                <div class="">
+                                                    <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                </div>
+                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})" class="flex flex-col hover:cursor-pointer">
+                                                    <div class="flex space-x-3 ">
+                                                        <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
+                                                        <div class="text-white rounded-md bg-colorStatusCard1 flex items-center justify-center w-[85px] h-4 space-x-1">
+                                                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M5.75 7C6.02614 7 6.25 6.77614 6.25 6.5C6.25 6.22386 6.02614 6 5.75 6V7ZM1.59203 6.71798L1.36504 6.27247L1.36503 6.27247L1.59203 6.71798ZM0.717988 7.59202L1.16349 7.81902L1.16349 7.81902L0.717988 7.59202ZM0.5 10H0C0 10.2761 0.223858 10.5 0.5 10.5L0.5 10ZM5.75 10.5C6.02614 10.5 6.25 10.2761 6.25 10C6.25 9.72386 6.02614 9.5 5.75 9.5V10.5ZM3.75 5C4.99264 5 6 3.99264 6 2.75H5C5 3.44036 4.44036 4 3.75 4V5ZM6 2.75C6 1.50736 4.99264 0.5 3.75 0.5V1.5C4.44036 1.5 5 2.05964 5 2.75H6ZM3.75 0.5C2.50736 0.5 1.5 1.50736 1.5 2.75H2.5C2.5 2.05964 3.05964 1.5 3.75 1.5V0.5ZM1.5 2.75C1.5 3.99264 2.50736 5 3.75 5V4C3.05964 4 2.5 3.44036 2.5 2.75H1.5ZM7.5 6.75V9.75H8.5V6.75H7.5ZM6.5 8.75H9.5V7.75H6.5V8.75ZM5.75 6H3.7V7H5.75V6ZM3.7 6C3.1482 6 2.70428 5.99961 2.3457 6.02891C1.98127 6.05868 1.66118 6.12158 1.36504 6.27247L1.81901 7.16348C1.95069 7.09639 2.12454 7.05031 2.42712 7.02559C2.73554 7.00039 3.1317 7 3.7 7V6ZM1.36503 6.27247C0.894613 6.51216 0.512162 6.89463 0.272483 7.36503L1.16349 7.81902C1.3073 7.53677 1.53678 7.30729 1.81902 7.16348L1.36503 6.27247ZM0.272484 7.36503C0.12159 7.66118 0.0586838 7.98127 0.028909 8.34569C-0.000388861 8.70428 0 9.1482 0 9.7H1C1 9.1317 1.00039 8.73554 1.02559 8.42713C1.05031 8.12454 1.0964 7.9507 1.16349 7.81902L0.272484 7.36503ZM0 9.7V10H1V9.7H0ZM0.5 10.5H5.75V9.5H0.5V10.5Z" fill="white"/>
+                                                            </svg>
+                                                            <span class="overview-add-talent">Talent Add</span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                    <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
                                                 </div>
                                             </div>
                                             <div class="h-4">
-                                                
-                                                <select data-talent="{{ $talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
                                                         <option>-- Select status --</option>
-                                                        @if (!empty($talent->job_model_talent_status->status))
+                                                        @if (!empty($talent->talent->job_model_talent_status->status))
                                                             @foreach ($status_talent as $value )
-                                                                <option @if($value->status_name === $talent->job_model_talent_status->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                                <option @if($value->status_name === $talent->talent->job_model_talent_status->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
                                                             @endforeach
                                                         @else
                                                             @foreach ($status_talent as $value )
@@ -546,12 +549,107 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[73px]">
-                                <div id="show_match_talent" class="flex justify-center items-center -space-x-1 p-2  hover:cursor-pointer" data-accordion-target="#acording_match_talent" aria-expanded="false" aria-controls="acording_match_talent">
-                                    <span  class="overview-show-more">Show more</span>
-                                    <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
+                                -->
+                                <div class="space-y-6 mt-6 match_talent_hide">
+                                    @foreach ($matchTalents as $key => $talent )
+                                        {{-- $talent->job_model_talent_status->status --}}
+                                        @if($loop->iteration > 10) @break @endif
+                                        <div  class="flex justify-between px-4 hover:cursor-pointer">
+                                            <div class="flex space-x-2 items-center justify-center">
+                                                <div class="">
+                                                    <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                </div>
+                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
+                                                    <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
+                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                    <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="h-4">
+                                                <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                    <option>-- Select status --</option>
+                                                    @foreach ($status_talent as $value )
+                                                        <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                     @endforeach
+                                    <div class="flex items-center justify-end px-6 space-x-2 rounded-b w-full ">
+                                        <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center w-40 h-[42px] bg-colorStatusCard1 rounded-md hover:cursor-pointer">
+                                            <span class="overview-attechment-btn-text">Select</span>
+                                        </div>
+                                        <div id="dropdown_select" class="hidden z-10 w-40 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                            <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
+                                                @foreach ($status_talent as $value )
+                                                <li>
+                                                    <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
+                                                        <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
+                                                    </label>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <button class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                            <span class="overview-attechment-btn-text">Send</span>
+                                        </button>                          
+                                    </div>
                                 </div>
-                            </div>
+                                {{-- Show more and show less match talent --}}
+                                <div  data-accordion="collapse">
+                                    <div id="acording_match_talent" class="hidden space-y-6 mt-6" aria-labelledby="accordion-collapse-heading-2">
+                                        
+                                        @foreach ($matchTalents as $key => $talent )
+                                            <div  class="flex justify-between px-4 hover:cursor-pointer">
+                                                <div class="flex space-x-2 items-center justify-center">
+                                                    <div class="">
+                                                        <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    </div>
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                    <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})" class="flex flex-col">
+                                                        <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
+                                                        <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                        <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="h-4">
+                                                    <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                        <option>-- Select status --</option>
+                                                        @foreach ($status_talent as $value )
+                                                            <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <div class="flex items-center justify-end px-6 space-x-2 rounded-b w-full ">
+                                            <div id="dropdownDefault" data-dropdown-toggle="dropdown_select2" class="flex justify-center items-center w-40 h-[42px] bg-colorStatusCard1 rounded-md hover:cursor-pointer">
+                                                <span class="overview-attechment-btn-text">Select</span>
+                                            </div>
+                                            <div id="dropdown_select2" class="hidden z-10 w-40 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                                <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
+                                                    @foreach ($status_talent as $value )
+                                                    <li>
+                                                        <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
+                                                            <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
+                                                        </label>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <button class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                                <span class="overview-attechment-btn-text">Send</span>
+                                            </button>                          
+                                        </div>
+                                    </div>
+                                    <hr class="bg-[#ECECEC] h-[1px] w-full mt-[73px]">
+                                    <div id="show_match_talent" class="flex justify-center items-center -space-x-1 p-2  hover:cursor-pointer" data-accordion-target="#acording_match_talent" aria-expanded="false" aria-controls="acording_match_talent">
+                                        <span  class="overview-show-more">Show more</span>
+                                        <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
                         <div class="bg-bgbody rounded mt-3">
@@ -970,14 +1068,14 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="space-y-8 mt-8 mb-8 px-8">
 
-                                    @foreach (array_unique($dataTalent) as $value )
+                                    @foreach ($matchTalents as $value )
                                         <div class="flex justify-between px-4">
                                             <div class="flex space-x-2">
-                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->avatar) }}" alt="">
+                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->talent->avatar) }}" alt="">
                                                 <div class="flex flex-col">
-                                                    <span class="overview-name-talent text-colortext">{{ $value->first_name }}</span>
-                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($value->day_of_birthday)->age }}, in {{ $value->address }}</span>
-                                                    <span class="overview-experiance-talent">{{ $value->experience }} Year Experience, {{ Str::limit($value->about_talent , 25, $end='...') }}</span>
+                                                    <span class="overview-name-talent text-colortext">{{ $value->talent->first_name }}</span>
+                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($value->talent->day_of_birthday)->age }}, in {{ $value->talent->address }}</span>
+                                                    <span class="overview-experiance-talent">{{ $value->talent->experience }} Year Experience, {{ Str::limit($value->talent->about_talent , 25, $end='...') }}</span>
                                                 </div>
                                             </div>
                                             <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#22CCE3]">
@@ -991,7 +1089,7 @@
                                         </div>                                  
                                     @endforeach
                                     <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="modal-detail-choice">
-                                    {{-- <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="modal-detail-talen"> --}}
+                                    {{-- <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="modal-detail-add-match"> --}}
                                         <span class="overview-attechment-btn-text">View more</span>
                                     </button>
                                 </div>
@@ -1053,7 +1151,7 @@
                                 <div class="flex items-center justify-center mx-auto mt-10 mb-6">
                                     <span class="overview-talent-otside-text text-[#222222]">Invite more talents outside the Ayiconnection system list</span>
                                 </div>
-                                <a href="{{ route('jobboard.send') }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
+                                <a href="{{ route('jobboard.send', ['uid' => $result->uid]) }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
@@ -1173,179 +1271,66 @@
                 <div class="flex mt-8"></div>
             </div>
             
-            <!-- Main modal detail Talent -->
-            <div id="modal-detail-talen" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
-                <div class="relative p-4 w-full max-w-2xl">
-                    <!-- Modal content -->
-                    <div class="relative bg-white rounded-lg shadow">
-                        <!-- Modal header -->
-                        <div class="flex items-center justify-between  px-8 h-14 rounded-t border-b dark:border-gray-600">
-                            <span class="overview-talent-modal-title text-[#222222]">
-                                Send Talent to Client
-                            </span>
-                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"  data-modal-toggle="modal-detail-talen">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                            </button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="">
-                            <div class="relative flex items-center justify-center w-full py-[18px] px-6 border-b">
-                                <div class="flex absolute inset-y-0 left-8 items-center  pointer-events-none">
-                                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
-                                    </svg> 
-                                </div>
-                                <input type="text" class="pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search" required>
-                            </div>
-                            <div class="space-y-8 mt-8 h-80 overflow-y-scroll ">
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input checked style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="">
-                                            <input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                        </div>
-                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                        <div class="flex flex-col">
-                                            <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                            <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                            <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                        <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                        </svg>
-                                    </div>
+            <!-- Main modal Add match talent -->
+            <div id="modal-detail-add-match" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
+                <form action="{{ route('jobboard.modal_add_match_talent') }}" method="post">@csrf
+                    <input type="hidden" name="job_models_id" value="{{ $result->id }}">
+                    <div class="relative p-4 w-[672px]">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow w-[672px]">
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between  px-8 h-14 rounded-t border-b dark:border-gray-600">
+                                <span class="overview-talent-modal-title text-[#222222]">
+                                    Add Talent
+                                </span>
+                                <div type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:cursor-pointer"  data-modal-toggle="modal-detail-add-match">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                                 </div>
                             </div>
-                        </div>
-                        <!-- Modal footer -->
-                        <div class="flex items-center justify-end px-12 space-x-2 rounded-b  w-full h-[97px]">
-                            <button data-modal-toggle="modal-detail-talen" class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md">
-                                <span class="overview-attechment-btn-text">Cancel</span>
-                            </button>
-                            <div data-modal-toggle="modal-detail-talen" class="w-40 h-[42px]">
-                                <button  data-modal-toggle="modal-detail-choice"  data-modal-toggle="modal-detail-talen" class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
-                                    <span  class="overview-attechment-btn-text">Next</span>
-                                </button>                          
+                            <!-- Modal body -->
+                            <div class="w-[672px]">
+                                <div class="relative flex items-center justify-center w-[672px] py-[18px] px-6 border-b">
+                                    <div class="flex absolute inset-y-0 left-8 items-center  pointer-events-none">
+                                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                                        </svg> 
+                                    </div>
+                                    <input id="search_talents_match" type="text" class=" pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search">
+                                </div>
+                                <div class="space-y-8 mt-8 h-80 overflow-y-scroll w-[672px]">
+                                    @foreach ($talents as $talent_value ) 
+                                        <div id="data_di_cari" class="flex items-center justify-between px-6">
+                                            <label for="{{ $talent_value->id }}">
+                                                <div class="flex items-center space-x-2 hover:cursor-pointer">
+                                                    <div class="">
+                                                        <input name="id_talent_match[]" id="{{ $talent_value->id }}" style="color: #3BD7CF" type="checkbox" value="{{ $talent_value->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    </div>
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                                    <div class="flex flex-col">
+                                                        <span class="overview-name-talent text-colortext">{{ $talent_value->first_name.' '.$talent_value->last_name }}</span>
+                                                        <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent_value->day_of_birthday)->age }}, in {{ $talent_value->address }}</span>
+                                                        <span class="overview-experiance-talent">{{ $talent_value->experience }} Year Experience</span>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-center justify-end px-12 space-x-2 rounded-b  w-full h-[97px]">
+                                <div data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md hover:cursor-pointer">
+                                    <span class="overview-attechment-btn-text">Cancel</span>
+                                </div>
+                                <div  class="w-40 h-[42px]">
+                                    <button  class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                        <span  class="overview-attechment-btn-text">Add</span>
+                                    </button>                          
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- Main modal detail choice -->
@@ -1374,16 +1359,16 @@
                                     <input type="text" class="pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search">
                                 </div>
                                 <div class="mt-8 h-80 overflow-y-auto ">
-                                    @foreach (array_unique($dataTalent) as $value )
-                                        <label for="send-email{{ $value->id }}" class="hover:cursor-pointer">
+                                    @foreach ($matchTalents as $value )
+                                        <label for="send-email{{ $value->talent->id }}" class="hover:cursor-pointer">
                                             <div class="flex items-center justify-between px-6 mb-4">
                                                 <div class="flex items-center space-x-2">
                                                     <div class="">
-                                                        <input id="send-email{{ $value->id }}" style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $value->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <input id="send-email{{ $value->talent->id }}" style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $value->talent->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->avatar) }}" alt="">
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->talent->avatar) }}" alt="">
                                                     <div class="flex flex-col">
-                                                        <span class="overview-name-talent text-colortext">{{ $value->first_name }} {{ $value->last_name }}</span>
+                                                        <span class="overview-name-talent text-colortext">{{ $value->talent->first_name }} {{ $value->talent->last_name }}</span>
                                                     </div>
                                                 </div>
                                             </div>  
@@ -1886,7 +1871,7 @@
                     $('.load-task').append(tmp_search);
                 })
 
-                console.log(res)
+                
             }
         })
     })
@@ -1900,7 +1885,7 @@
             url: "{{ route('jobboard.talent_status') }}",
             data: {status, talent_id,job_models_id,  _token: '{{ csrf_token() }}'},
             success: function(res){
-                console.log(res)
+                
             }
         })
     })
@@ -1966,6 +1951,61 @@
     };
     const accordion = new Accordion(accordionItemsMatchTalent, options_show_match_talent);
 
-</script>
 
+    // add match talent
+    function load_talent(){
+        // $('.desc_view').toggleClass('hidden');
+        // $('.editor').toggleClass('hidden');
+        // $.ajax({
+        //     type:'POST',
+        //     url:'{{ route("jobboard.modal_add_match_talent") }}',
+        //     data:{_token: '{{ csrf_token() }}'},
+        //     success:function(data){
+        //         console.log(data)
+        //     }
+        // });
+    }
+
+
+    // Select all status match Talent
+    function status_talents(val){
+        const tmp = `<input class="" id="{{ $value->id }}" type="hidden" name="status_name_match" value="${val}">`;
+        $('.status_all_select').html(tmp)
+        // var data = $('#form_match_talent').serialize();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("jobboard.change_status_all_match_talent") }}',
+            data:$('#form_match_talent').serialize(),
+            success:function(data){
+                location.reload()
+            }
+        });
+
+    }
+
+    // Show hide description
+    function edit_desc(){
+        $('.desc_view').toggleClass('hidden');
+        $('.editor').toggleClass('hidden');
+    }
+
+   
+
+</script>
+<script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
+<script type="text/javascript">
+	$('input#search_talents_match').quicksearch('div#data_di_cari');
+</script>
+<script>
+    CKEDITOR.replace('editor1', {
+      width: '100%',
+      height: 350,
+      removeButtons: 'PasteFromWord'
+    });
+  </script>
 @endsection

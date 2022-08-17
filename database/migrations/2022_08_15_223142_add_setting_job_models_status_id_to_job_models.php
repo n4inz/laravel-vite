@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('job_models_tasks', function (Blueprint $table) {
-            $table->string('name');
+        Schema::table('job_models', function (Blueprint $table) {
+            $table->unsignedBigInteger('set_job_status_id');
+            $table->foreign('set_job_status_id')
+            ->references('id')->on('setting_job_models_statuses')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -25,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('job_models_tasks', function (Blueprint $table) {
+        Schema::table('job_models', function (Blueprint $table) {
             //
         });
     }

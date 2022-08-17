@@ -66,7 +66,12 @@ class JobModels extends Model
 
     public function setting_status()
     {
-        return $this->belongsTo(SettingJobModelsStatus::class, 'status', 'status_key');
+        return $this->belongsTo(SettingJobModelsStatus::class, 'set_job_status_id');
+    }
+
+    public function match_talents_add()
+    {
+        return $this->hasMany(JobModelsMatchTalentAdd::class, 'job_models_id');
     }
 
     protected static function boot()

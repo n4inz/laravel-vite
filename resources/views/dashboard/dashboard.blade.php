@@ -4,15 +4,16 @@
     @include('layouts.sidebar')
     <article id="article" class="ml-[310px] mt-20 px-6 w-[75%]">
         <div class=" flex w-full space-x-2">
-
-            <div class=" w-[669px] space-y-2 ">
-                <div class="space-y-5 bg-bgbody p-8 rounded">
+            <div class=" space-y-2 ">
+                <div class="space-y-5 bg-bgbody p-8 rounded w-[669px]">
                     <div class=" flex space-x-2">
                         <div class="w-2 h-6 bg-palet rounded-sm"></div>
                         <span class="text-[#222222] font-semibold">Job Status</span>
                     </div>
-                    <div class="flex space-x-4">
-                        <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
+                    
+                    <div class="flex flex-wrap items-center w-full ">
+                            
+                        <div class="w-[135px] mb-2 mr-4 h-[126px] border border-palet rounded-md p-4">
                             <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11.4997 2.83325C10.5792 2.83325 9.83301 3.57944 9.83301 4.49992C9.83301 5.42039 10.5792 6.16658 11.4997 6.16658C12.4201 6.16658 13.1663 5.42039 13.1663 4.49992C13.1663 3.57944 12.4201 2.83325 11.4997 2.83325ZM8.83301 4.49992C8.83301 3.02716 10.0269 1.83325 11.4997 1.83325C12.9724 1.83325 14.1663 3.02716 14.1663 4.49992C14.1663 5.97268 12.9724 7.16658 11.4997 7.16658C10.0269 7.16658 8.83301 5.97268 8.83301 4.49992Z" fill="white"/>
@@ -22,15 +23,34 @@
                                 </svg>
                             </div>
                             <div>
-                                <span class="text-[#4F4F4F] text-xs font-semibold">Total</span>
+                                <span class="text-[#4F4F4F] text-sm font-semibold">Total</span>
                             </div>
                             <div>
-                                <span class="text-5xl font-bold">10</span>
+                                <span class="text-5xl font-bold">{{ $TotalJob->count() }}</span>
                             </div>
-                            
                         </div>
-    
-                        <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
+
+                        @foreach ($statusJob as $valueStatusJob )
+                            <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
+                                <div class="flex justify-between ">
+                                    <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
+                                        </svg>
+                                    </div>
+                                    <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
+                                </div>
+                                <div>
+                                    <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
+                                </div>
+                                <div>
+                                    <span class="text-3xl font-bold">{{ round(($valueStatusJob->job_models->count()/$TotalJob->count()) * 100,1)  }} %</span>
+                                </div>
+                            </div>
+                        @endforeach
+                        <!--
+                        <div class="w-[114px]  border border-palet rounded-md p-4">
                             <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C2.72386 2.5 2.5 2.72386 2.5 3V13C2.5 13.2761 2.72386 13.5 3 13.5H13C13.2761 13.5 13.5 13.2761 13.5 13V3C13.5 2.72386 13.2761 2.5 13 2.5H3ZM1.5 3C1.5 2.17157 2.17157 1.5 3 1.5H13C13.8284 1.5 14.5 2.17157 14.5 3V13C14.5 13.8284 13.8284 14.5 13 14.5H3C2.17157 14.5 1.5 13.8284 1.5 13V3Z" fill="white"/>
@@ -42,7 +62,7 @@
                                 </svg> 
                             </div>
                             <div>
-                                <span class="text-[#4F4F4F] text-xs font-semibold">New</span>
+                                <span class="text-[#4F4F4F] text-xs font-semibold">New New New</span>
                             </div>
                             <div>
                                 <span class="text-5xl font-bold">2</span>
@@ -92,9 +112,14 @@
                                 <span class="text-5xl font-bold">3</span>
                             </div>
                         </div>
+                        -->
+                        
                     </div>
+
+
+
                 </div>
-                <div class="bg-bgbody  p-8 rounded">
+                <div class="bg-bgbody  p-8 rounded w-[669px]">
                     <div class="flex justify-between">
                         <div class="flex space-x-2 ">
                             <div class="w-2 h-6 bg-[#3B83D7] rounded-sm"></div>
@@ -111,7 +136,7 @@
                     </div>
                 </div>
     
-                <div class="bg-bgbody p-8 rounded space-y-10">
+                <div class="bg-bgbody p-8 rounded space-y-10 w-[669px]">
                     <div class="flex space-x-2 ">
                         <div class="w-2 h-6 bg-[#FEC001] rounded-sm"></div>
                         <span class="text-[#222222] font-semibold">Favorite Links</span>
@@ -156,6 +181,26 @@
                         <span class="text-[#222222] font-semibold">Task</span>
                     </div>
                     <div class="text-[#827C7C] text-sm font-semibold py-5 border-b ">Past Due</div>
+                    @foreach ($array as $arrayValue )
+                        <div class="flex items-center space-x-3 mt-7">
+                            <div>
+                                <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm  text-[#222222] font-semibold">{{ $arrayValue['title'] }}</div>
+                                <div class="text-sm"><span class="text-[#FA9D6B] ">{{ $arrayValue['body'] }}</span> / {{ $arrayValue['name'] }}</div>
+                            </div>
+                        </div>
+                        
+                    @endforeach
+                    <!--
                     <div class="flex items-center space-x-3 mt-7">
                         <div>
                             <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
@@ -168,7 +213,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="text-sm  text-[#222222] font-semibold">Quote accept by Jonathan</div>
+                            <div class="text-sm text-[#222222] font-semibold">Quote accept by Jonathan</div>
                             <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
                         </div>
                     </div>
@@ -189,40 +234,26 @@
                             <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
                         </div>
                     </div>
-    
-                    <div class="flex items-center space-x-3 mt-7">
-                        <div>
-                            <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                                </svg>
+                    -->
+                    <div class="text-[#827C7C] text-sm font-semibold py-5 border-b ">{{ date('l', strtotime(now())) }}</div>
+                    @foreach ($taskFolowUp as $value )
+                        <div class="flex items-center space-x-3 mt-7">
+                            <div>
+                                <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm text-[#222222] font-semibold">Follow up {{ now()->format('Y') }}</div>
+                                <div class="text-sm"><span class="text-[#FA9D6B] "> {{ $value->created_at->format('d/m/Y') }}</span> / {{ $value->name }}</div>
                             </div>
                         </div>
-                        <div>
-                            <div class="text-sm text-[#222222] font-semibold">Quote accept by Jonathan</div>
-                            <div class="text-sm"><span class="text-[#FA9D6B] ">Due 1 day ago</span> / Jonathan Morrow</div>
-                        </div>
-                    </div>
-                    <div class="text-[#827C7C] text-sm font-semibold py-5 border-b ">Friday</div>
-                    <div class="flex items-center space-x-3 mt-7">
-                        <div>
-                            <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-sm text-[#222222] font-semibold">Follow up 2019</div>
-                            <div class="text-sm"><span class="text-[#FA9D6B] ">01/04/2022</span> / Jonathan Morrow</div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
     
                 <div class="bg-bgbody p-8 rounded ">
@@ -230,55 +261,12 @@
                         <div class="w-2 h-6 bg-colorelips rounded-sm"></div>
                         <span class="text-[#222222] font-semibold">Appointments</span>
                     </div>
-{{--                     
-                    @foreach ($array as $val )
-                        <div class="flex items-center space-x-3 mt-7">
-                            <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16113 1.79653C9.74277 1.70983 10.3383 1.73824 10.9111 1.88187L10.9111 1.88187C11.6683 2.07176 12.3855 2.46301 12.9769 3.05431L12.6505 3.38067L12.9769 3.05431C13.5682 3.64562 13.9594 4.36283 14.1493 5.12015C14.293 5.69296 14.3214 6.28841 14.2347 6.87005C14.1971 7.12216 13.9622 7.29607 13.7101 7.25849C13.458 7.2209 13.2841 6.98606 13.3217 6.73394C13.3905 6.27201 13.3679 5.79911 13.254 5.34466L13.254 5.34464C13.1036 4.74491 12.7941 4.17695 12.3241 3.70703C11.8542 3.23711 11.2863 2.92761 10.6866 2.77723C10.2321 2.66327 9.75916 2.64066 9.29723 2.70952C9.04511 2.7471 8.81027 2.57319 8.77268 2.32107C8.7351 2.06896 8.90902 1.83411 9.16113 1.79653Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.27539 3.99892C9.9728 3.89496 10.7108 4.11146 11.2489 4.64951L11.2489 4.64952C11.7869 5.1876 12.0034 5.92562 11.8994 6.62301C11.8619 6.87512 11.627 7.04903 11.3749 7.01145C11.1228 6.97387 10.9489 6.73902 10.9865 6.48691C11.0491 6.06638 10.9186 5.62472 10.5962 5.30225C10.5962 5.30224 10.5962 5.30224 10.5962 5.30224M10.5962 5.30224C10.2736 4.97974 9.83198 4.84923 9.41149 4.91191C9.15937 4.94949 8.92453 4.77558 8.88694 4.52347C8.84936 4.27135 9.02327 4.03651 9.27539 3.99892" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.78537 3.62889C3.27893 3.62889 2.96302 4.0827 3.1077 4.51147C3.62644 6.04887 4.59312 8.36164 6.03477 9.80326L6.03477 9.80326C7.47639 11.2449 9.78916 12.2116 11.3266 12.7303L11.3266 12.7303C11.7553 12.875 12.2092 12.5591 12.2092 12.0527V10.4916C12.2092 10.4357 12.1789 10.3843 12.1301 10.3571L12.1301 10.3571L10.7703 9.60113C10.7259 9.57644 10.6721 9.57527 10.6267 9.59798L10.6267 9.598L9.17657 10.323C9.08589 10.3684 8.9828 10.3826 8.88323 10.3635L8.97017 9.91023C8.88323 10.3635 8.88309 10.3635 8.88294 10.3635L8.88262 10.3634L8.8819 10.3633L8.88018 10.3629L8.87554 10.362L8.86162 10.3591C8.85032 10.3567 8.83501 10.3533 8.81602 10.3488C8.77806 10.3398 8.72526 10.3264 8.66019 10.3077C8.53023 10.2701 8.35016 10.2108 8.14089 10.1216C7.72415 9.94403 7.18016 9.64322 6.68748 9.15056L6.68747 9.15056C6.19487 8.65795 5.89322 8.11317 5.7148 7.69583C5.62519 7.48623 5.56541 7.30582 5.52756 7.17564C5.50861 7.11046 5.49507 7.05757 5.486 7.01956C5.48146 7.00055 5.47803 6.98523 5.47559 6.97393L5.47266 6.96002L5.47172 6.95539L5.47138 6.95367L5.47124 6.95296L5.47118 6.95264C5.47115 6.9525 5.47112 6.95235 5.92417 6.86423L5.47112 6.95235C5.45168 6.85243 5.46583 6.74888 5.51136 6.65783L6.23653 5.20749L6.23654 5.20746C6.25923 5.16208 6.25809 5.1084 6.23343 5.06399L5.48072 3.7081C5.45356 3.65919 5.40204 3.62889 5.3462 3.62889H3.78537ZM6.41371 6.91718C6.41379 6.91743 6.41386 6.91769 6.41394 6.91795C6.44298 7.01784 6.4907 7.16252 6.56357 7.33297C6.7101 7.67574 6.95328 8.11094 7.34018 8.49784C7.34018 8.49784 7.34018 8.49784 7.34019 8.49784M7.34019 8.49784C7.72705 8.88469 8.16122 9.12689 8.50276 9.27244C8.67264 9.34483 8.81674 9.39208 8.91616 9.42078C8.91635 9.42084 8.91653 9.42089 8.91672 9.42094L10.2139 8.77239C10.2139 8.77238 10.2139 8.77238 10.2139 8.77237C10.532 8.61332 10.908 8.62157 11.2188 8.79435L11.0102 9.1696L11.2188 8.79435L12.5786 9.55033C12.9203 9.74032 13.1322 10.1006 13.1322 10.4916V12.0527C13.1322 13.1362 12.1092 13.9686 11.0314 13.605C9.47474 13.0797 6.98462 12.0586 5.38205 10.456C3.77946 8.85341 2.75832 6.36329 2.23307 4.80659L2.6405 4.66911L2.23306 4.80659C1.86942 3.72884 2.70187 2.70581 3.78537 2.70581H5.3462C5.73744 2.70581 6.09785 2.91802 6.28774 3.26L6.28776 3.26003L7.0405 4.61597L7.0405 4.61598C7.21295 4.92664 7.2211 5.30242 7.06215 5.6203C7.06215 5.62031 7.06214 5.62032 7.06214 5.62033L6.41371 6.91718" fill="white"/>
-                                </svg>   
-                            </div>
-                            <div>
-                                <div class="text-sm text-[#222222] font-semibold">{{ $val['full_name'] ?? $val['name'] }}</div>
-                                <div class="text-sm"> {{ Carbon\Carbon::parse($val['start_time'])->format('d/m/Y') }} {{ Carbon\Carbon::parse($val['start_time'])->format('g:i A') }}</div>
-                            </div>
-                        </div> 
-                    @endforeach --}}
+
                     <div class="calendly_load">
 
                     </div>
-    
-                    <!--
-                        <div class="flex items-center space-x-3 mt-7">
-                            <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.8078 8.04062C12.8719 7.68906 12.9063 7.32969 12.9063 6.97031C12.9063 6.17344 12.75 5.4 12.4422 4.67344C12.1453 3.97031 11.7188 3.33906 11.1766 2.79688C10.6389 2.25785 10.0016 1.82852 9.30002 1.53281C8.5719 1.225 7.80002 1.06875 7.00314 1.06875C6.62814 1.06875 6.25158 1.10469 5.88595 1.175C5.38004 0.906911 4.81632 0.766385 4.24376 0.765625C3.31095 0.765625 2.43282 1.12969 1.77345 1.78906C1.44808 2.11276 1.1901 2.49775 1.01443 2.92177C0.838765 3.34578 0.748892 3.80041 0.75001 4.25938C0.75001 4.85313 0.903136 5.4375 1.18907 5.95312C1.13126 6.2875 1.10001 6.62969 1.10001 6.97031C1.10001 7.76719 1.25626 8.54062 1.56407 9.26719C1.86095 9.97031 2.28595 10.6016 2.82814 11.1438C3.37033 11.6859 4.00158 12.1109 4.7047 12.4078C5.43283 12.7156 6.2047 12.8719 7.00158 12.8719C7.34846 12.8719 7.69533 12.8406 8.03596 12.7797C8.55939 13.075 9.15002 13.2328 9.75471 13.2328C10.6875 13.2328 11.5656 12.8703 12.225 12.2094C12.886 11.55 13.2485 10.6719 13.2485 9.73906C13.25 9.14531 13.0969 8.55937 12.8078 8.04062ZM7.02658 10.5859C4.9297 10.5859 3.9922 9.55469 3.9922 8.78281C3.9922 8.38594 4.28439 8.10938 4.68752 8.10938C5.58439 8.10938 5.35314 9.39844 7.02658 9.39844C7.88439 9.39844 8.35783 8.93281 8.35783 8.45625C8.35783 8.17031 8.21721 7.85156 7.65158 7.7125L5.78595 7.24687C4.28439 6.87031 4.01095 6.05781 4.01095 5.29531C4.01095 3.71094 5.50314 3.11562 6.90471 3.11562C8.19533 3.11562 9.71721 3.82969 9.71721 4.77969C9.71721 5.1875 9.36408 5.42344 8.96096 5.42344C8.19533 5.42344 8.33596 4.36406 6.79377 4.36406C6.02814 4.36406 5.6047 4.71094 5.6047 5.20625C5.6047 5.70156 6.20939 5.85938 6.73439 5.97969L8.11564 6.28594C9.62815 6.62344 10.011 7.50625 10.011 8.3375C10.011 9.62344 9.0219 10.5859 7.02658 10.5859Z" fill="white"/>
-                                </svg>
-                            </div>
-        
-                            <div>
-                                <div class="text-sm text-[#222222] font-semibold">Jonathan Morrow</div>
-                                <div class="text-sm">01/04/2022 - 2:35PM</div>
-                            </div>
-                        </div>
-        
-                        <div class="flex items-center space-x-3 mt-7">
-                            <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.8064 0.436249C12.8064 0.436249 14.1015 -0.0687513 13.9936 1.15768C13.9576 1.66269 13.6339 3.43019 13.382 5.34199L12.5186 11.0052C12.5186 11.0052 12.4467 11.8349 11.7991 11.9792C11.1516 12.1234 10.1803 11.4742 10.0004 11.3299C9.85647 11.2217 7.30227 9.59842 6.40287 8.80485C6.15103 8.58842 5.86323 8.15555 6.43883 7.65055L10.2162 4.04342C10.6479 3.61055 11.0796 2.60055 9.28087 3.82699L4.24437 7.25379C4.24437 7.25379 3.66877 7.61449 2.58953 7.28985L0.25114 6.56842C0.25114 6.56842 -0.612263 6.02735 0.862717 5.48625C4.46023 3.79089 8.88517 2.05945 12.8064 0.436249Z" fill="white"/>
-                                </svg>    
-                            </div>
-        
-                            <div>
-                                <div class="text-sm text-[#222222] font-semibold">Jonathan Morrow</div>
-                                <div class="text-sm">01/04/2022 - 2:35PM</div>
-                            </div>
-                        </div>
-                    -->
                 </div>
-            </div>
+            </div> 
         </div>
     </article>
 </main>

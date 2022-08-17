@@ -14,7 +14,7 @@ trait Actifity
             'create_by' => auth()->user()->id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             'type' => $type,
-            'job_models_id' => request()->job_models_id
+            'job_models_id' => request()->job_models_id ?? request()->id
         ];           
     }
 }

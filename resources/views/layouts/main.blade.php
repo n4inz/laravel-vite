@@ -18,7 +18,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFLOYUbtIHVDqMQ2lVhWcPa3234FlpzlI&libraries=places"></script>
 
     <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script>
-
+    <script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <script src="{{ asset('js/tagify/tagify.js') }}"></script>
     <script src="{{ asset('js/tagify/tagify-min.js') }}"></script>

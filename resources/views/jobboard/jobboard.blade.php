@@ -52,7 +52,7 @@
                             <div class="w-[265px] flex justify-between">
                                 <div class="flex items-center space-x-1">
                                     <span class="text-base">{{ $sts_val->status_name }}</span>
-                                    <div class="{{ $sts_val->status_key }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">{{ $sts_val->job_models->count() }}</div>
+                                    <div class="{{ $sts_val->id }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">{{ $sts_val->job_models->count() }}</div>
                                 </div>
                                 <div>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +64,7 @@
                             </div>
                             <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
                             {{-- Card --}}
-                            <div id="{{ $sts_val->status_key }}" class="connectedSortable min-h-[170px] w-[265px]">
+                            <div id="{{ $sts_val->id }}" class="connectedSortable min-h-[170px] w-[265px]">
                                 @foreach ($sts_val->job_models as $value )
                                     <a id="{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
                                         <div class="relative w-full h-[211px] bg-bgbody mt-3 rounded">
@@ -138,7 +138,7 @@
                             </div>
                             
                             {{-- Botton add fot potensial --}}
-                            <div onclick="create_jobs('{{ $sts_val->status_key }}')" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
+                            <div onclick="create_jobs('{{ $sts_val->id }}')" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
                                 <div class="relative">
                                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
@@ -778,21 +778,21 @@
                 receive: function (event , ui,){
                     status = event.target.id;
                     id = ui.item.attr('id');
+                    console.log(status)
                     $.ajax({
                         type:'POST',
                         url:'{{ route("jobboard.status") }}',
                         data:{status ,id , _token: '{{ csrf_token() }}'},
                         success:function(res){
-                            res.status_count.map(function(e){
-                                // console.log(e.job_models.length)
-                                // console.log(e)
-                                $('.'+e.status_key).html(`<span>${e.job_models.length}</span>`)
+                                res.status_count.map(function(e){
+                                  console.log(e.job_models.id)
+                                $('.'+e.id).html(`<span>${e.job_models.length}</span>`)
  
                                 // if(status == e.status_key){
                                 //      $('#sts'+id).html('<div class="text-colorStatusCard1 status-card-job bg-colorStatusCard2 rounded-sm">'+e.status_name+'</div>')
                                 // }
     
-                                if(status == e.status_key){
+                                if(status == e.id){
                                     $('#sts'+id).html('<div class="text-white status-card-job bg-colorStatusCard1 rounded-sm">'+e.status_name+'</div>')
                                 }   
     
@@ -819,13 +819,13 @@
                 url:'{{ route("jobboard.search_job") }}',
                 data:{search , _token: '{{ csrf_token() }}'},
                 success:function(val){
-
+    
                         val.status.map(function(sts){
-                            $('#'+sts.status_key).html('');
+                            $('#'+sts.id).html('');
                         })
 
                         val.value.map(function(res){
-
+                            
                             // if(res.status == 'potential_clients'){
                             //   var sts =   '<div class="text-colorStatusCard1 status-card-job bg-colorStatusCard2 rounded-sm">Potencial Client</div>';
                             // }

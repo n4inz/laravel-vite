@@ -15,4 +15,9 @@ class JobModelsNewApplicant extends Model
     {
         return $this->hasOne(JobModelsNewAplicantsFile::class ,'new_applicants_id');
     }
+
+    public function job_models()
+    {
+        return $this->belongsTo(JobModels::class , 'job_models_id');
+    }
 }

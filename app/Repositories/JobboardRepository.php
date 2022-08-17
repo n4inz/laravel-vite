@@ -65,8 +65,9 @@ class JobboardRepository
              'type' => $request->onlyOneStatus,
              'clients_id' => $value[0]->value,
              'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-             'stafs_id' => auth()->user()->staf->users_id ?? 0
-         ]);
+             'stafs_id' => auth()->user()->staf->users_id ?? 0,
+             'set_job_status_id' => $request->status,
+             ]);
  
             foreach($request->subcategory as $keySub => $category){
                 JobModelsMatchTalent::create([
@@ -132,6 +133,7 @@ class JobboardRepository
     public function email($request)
     {
         $talent = [];
+        $filter = array_unique($request->talent_name);
         foreach($request->talent_name as $key =>$val){
             array_push($talent, $request->talent_name[$key]);
         }
@@ -158,9 +160,11 @@ class JobboardRepository
                     'status' => 'Inprogress',
                     'job_models_id' => $request->id,
                     'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                    'stafs_id' => auth()->user()->staf->users_id ?? 0
+                    'name' => auth()->user()->full_name
                 ]);
 
+                $actifity = $this->actifity('Create Task', 'TASK CREATED');
+                EventsActifity::dispatch($actifity);
                 return $data;
             break;
 
@@ -191,7 +195,10 @@ class JobboardRepository
         //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
         //                                 ->get();
         //                             }])->get();
-        return JobModels::with(['setting_status'])->orWhere('status', 'like', "%" . $request->search . "%")
+
+        return JobModels::whereHas('setting_status', function($query) use($request){
+                            $query->where('status_name','like', "%" . $request->search . "%");
+                        })->orWhere('status', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
                         ->orWhere('id_unique', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
@@ -199,7 +206,7 @@ class JobboardRepository
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
                         ->orWhere('title', 'like', "%" . $request->search . "%")
                         ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-                        ->get();
+                        ->with('setting_status')->get();
 
         // if(isset($request->search)){
         //     $search = JobModels::orWhere('status', 'like', "%" . $request->search . "%")
@@ -217,6 +224,8 @@ class JobboardRepository
         //     $search = JobModels::where('users_id', auth()->user()->id)->get();
         //     return $search;
         // }
+
+
     }
 
     public function search_task($request)

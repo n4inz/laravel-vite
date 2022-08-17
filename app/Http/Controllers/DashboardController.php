@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Events\Nofication;
 use App\Http\Traits\HttpGuzzle;
+use App\Models\Actifity;
 use App\Models\JobModels;
+use App\Models\JobModelsTask;
 use App\Models\Notification;
 use App\Models\NotificationStatus;
 use App\Models\SettingCalendlyApi;
+use App\Models\SettingJobModelsStatus;
 use App\Models\Staf;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
@@ -18,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request as RequestGuzzle;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
@@ -26,19 +30,39 @@ class DashboardController extends Controller
 
     public function index()
     {
-    
-      
-    
-        return view('dashboard.dashboard');
+
+        // Past due
+       $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();
+        $array = [];
+        foreach($getTask as $val){
+            $pastDue =  now()->diffInDays($val->updated_at);
+            if($pastDue >= 1){
+  
+
+               array_push($array , [
+                    'title' => 'Quote accept by'.' '.$val->name,
+                    'body' => 'Due '.$pastDue.' day ago ',
+                    'name' => $val->name
+               ]);
+            }
+        }
+
+       $TotalJob = JobModels::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('id');
+        
+       $statusJob = SettingJobModelsStatus::with('job_models')->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get();
+        
+       $taskFolowUp  = Actifity::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'type' => 'TASK CREATED'])->whereDay('created_at', date('d'))->get();
+       return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array'));
     }
 
     public function calendlyApi()
     {
         $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
-    
         $response = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
             'organization' => $load->current_organization,
-            'status' => 'active'
+            'status' => 'active',
+            'count' => 3,
+            'min_start_time' => now()->toDateTimeString()
         ]);
 
         $res = json_decode($response);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('uid');
             $table->string('family');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->unsignedInteger('id_unique');
 
             // $table->string('id_unique');

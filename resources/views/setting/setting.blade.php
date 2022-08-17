@@ -284,7 +284,7 @@
                                                             </td>
                                                             <td height="66px" width="50%">
                                                                 <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                                
+                                                                <input type="hidden" name="id[]" value="{{ $val->id }}">
                                                             </td>
                                                             <td height="66px" width="25%">
                                                                

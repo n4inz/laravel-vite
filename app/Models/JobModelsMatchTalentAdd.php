@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SettingJobModelsStatus extends Model
+class JobModelsMatchTalentAdd extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function job_models()
+    public function talent()
     {
-        return $this->hasMany(JobModels::class,'set_job_status_id');
+        return $this->belongsTo(Talents::class,'talents_id');
     }
 }
