@@ -2,52 +2,55 @@
   <head>
     <title>Add Map</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="{{ asset('js/jQuery.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+   
 
+
+    
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
 
-    <form id="commentForm" method="post" action="{{ route('jobboard.apply') }}">
-    
-          <div class="flex flex-col">
-            <input  name="name" type="text" >
+    <input type="file" 
+    class="filepond"
+    name="filepond" 
+    multiple 
+    data-allow-reorder="true"
+    data-max-file-size="3MB"
+    data-max-files="3">
 
-          </div>
+    <!-- include jQuery library -->
+    <script src="{{ asset('js/jQuery.js') }}"></script>
 
-          <button>submit</button>
+<!-- include FilePond library -->
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+<!-- include FilePond plugins -->
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+
+<!-- include FilePond jQuery adapter -->
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+<script>
+  $(function(){
   
-    </form>
-    <script>
-    // $("#commentForm").validate({
+    // First register any plugins
+    $.fn.filepond.registerPlugin(FilePondPluginImagePreview);
 
-    // });
-    
-    $(function(){
-     var test = $('#commentForm');
-    
-      if(test.length){
-        test.validate({
-          rules: {
-            name:{
-              required:true
-            }
-          }
-        })
-      }
-    })
-    </script>
-    <!-- 
-     The `defer` attribute causes the callback to execute after the full HTML
-     document has been parsed. For non-blocking uses, avoiding race conditions,
-     and consistent behavior across browsers, consider loading using Promises
-     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
-    -->
+    // Turn input element into a pond
+    $('.my-pond').filepond();
 
+    // Set allowMultiple property to true
+    $('.my-pond').filepond('allowMultiple', true);
+  
+    // Listen for addfile event
+    $('.my-pond').on('FilePond:addfile', function(e) {
+        console.log('file added event', e);
+    });
+
+    // Manually add a file using the addfile method
+    $('.my-pond').first().filepond('addFile', 'index.html').then(function(file){
+      console.log('file added', file);
+    });
+  
+  });
+</script>
   </body>
 </html>
