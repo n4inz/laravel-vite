@@ -27,10 +27,10 @@ class JobBoardRequest extends FormRequest
             'family' => 'required',
             'title' => 'required|min:3',
             'description' => 'required|min:6',
-            'id_unique' => 'required|min:3|unique:jobs,id_unique',
-            'location' => 'required|min:3',
-            // 'status' => 'required',
-            'type' => 'required',
+            'subcategory' => 'required',
+            'rate' => 'required',
+            'address' => 'required|min:3',
+            'status' => 'required',
         ];
     }
 }

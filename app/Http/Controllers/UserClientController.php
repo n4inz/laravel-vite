@@ -6,6 +6,7 @@ use App\Http\Requests\ClientRequest;
 use App\Http\Requests\TalentRequest;
 use App\Http\Traits\ImageUpload;
 use App\Models\Client;
+use App\Models\File;
 use App\Models\Staf;
 use App\Models\Talents;
 use App\Models\User;
@@ -22,11 +23,15 @@ class UserClientController extends Controller
 
     private $UserClientRepository;
     private $UserTalentRepository;
+
+
     public function __construct(UserClientRepository $UserClientRepository, UserTalentRepository  $UserTalentRepository)
     {
 
         $this->UserClientRepository = $UserClientRepository;
         $this->UserTalentRepository = $UserTalentRepository;
+
+        // File::where(['type' => 'TALENT'])->delete();
 
     }
     public function client()

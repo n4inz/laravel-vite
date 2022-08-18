@@ -26,6 +26,7 @@ class JobboardRepository
     {
         $jobs = JobModels::get();
         $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('body');
+       
         DB::beginTransaction();
         try{
             $value = json_decode($request->family);
@@ -119,12 +120,13 @@ class JobboardRepository
                         'assignee' => auth()->user()->full_name ?? 'Your Agency',
                         'job_models_id' => $jobs->id,
                         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                        'stafs_id' => 0
+                        'name' => auth()->user()->full_name
                     ]);
                 }
             }
             DB::commit();
         }catch(\Exception $e ){
+          
             DB::rollback();
         }
        

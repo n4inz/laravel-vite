@@ -45,7 +45,7 @@
                                     <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
                                 </div>
                                 <div>
-                                    <span class="text-3xl font-bold">{{ round(($valueStatusJob->job_models->count()/$TotalJob->count()) * 100,1)  }} %</span>
+                                    <span class="text-3xl font-bold">{{ round(($valueStatusJob->job_models->count() ?? 0/ $TotalJob->count() ?? 0) * 100,1) }} %</span>
                                 </div>
                             </div>
                         @endforeach

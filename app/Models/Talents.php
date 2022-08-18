@@ -28,6 +28,6 @@ class Talents extends Model
 
     public function attached_file()
     {
-        return $this->hasOne(TalentsFiles::class, 'talents_id');
+        return $this->hasMany(TalentsFiles::class, 'talents_id');
     }
 }

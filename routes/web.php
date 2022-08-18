@@ -99,6 +99,9 @@ Route::group(['middleware' => 'auth:staf,web'],function(){
     
     // Upload FIle
     Route::post('/upload',[UploadController::class , 'upload'])->name('upload');
+    Route::post('/upload-with-db',[UploadController::class , 'uploadWithDb'])->name('uploadWithDb');
+
+    
 });
 
 Route::get('/send/{uid}', [JobboardController::class, 'send'])->name('jobboard.send');

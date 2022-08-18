@@ -215,31 +215,24 @@
                                 @endif
                             </div>
                     </form>
-                            <form action="{{ route('upload') }}" class="talent_submit_file"  method="POST" enctype="multipart/form-data">
-                                <input type="hidden" name="type" value="talent_file">
-                                @csrf
-                                <div class="mt-6">
-                                    <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Upload documents</span>
-                                    <label for="talent_file">
-                                        <div class="{{ $errors->has('talent_file') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} files-kept w-[670px] h-[109px] flex flex-col items-center justify-center  space-x-[10.25px] border border-dotted border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer">
-                                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                            </svg>
-                                            <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
-                                            <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>
-                                        </div>
-                                        <input type="file" name="file" id="talent_file" class="hidden">
-                                    </label>
-                                    <div class="errors_uploaded">
-                                        @if($errors->has('talent_file'))
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('talent_file') }}</p>
-                                        @endif
+                           
+                            <div class="mt-6">
+                                <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Upload documents</span>
+                                <form style="border-style: dotted" action="{{ route('uploadWithDb') }}"  class="dropzone w-[670px]  border border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer" id="dropzone"  method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="type" value="TALENT">
+                                    <div class="dz-default dz-message flex flex-col items-center justify-center  space-x-[10.25px]">
+                                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                        </svg>
+                                        <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
+                                        <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
     
                             <div class="py-12">
                                 <button class="w-[670px] h-[40px] bg-palet rounded">
@@ -410,7 +403,7 @@
         };
 
         // Upload FIle
-        $('#talent_file').change(function(e){
+        $('#talent_filea').change(function(e){
             var val = $(this).val();
             e.preventDefault();
            
@@ -467,6 +460,44 @@
                 },
             });
         });
+
+        // Dropzone config
+        Dropzone.options.dropzone =
+        {
+            maxFilesize: 12,
+            resizeQuality: 1.0,
+            acceptedFiles: ".pdf,.jpg,.png,.gif",
+            // addRemoveLinks: true,
+            timeout: 60000,
+
+            // uploadMultiple:true
+            removedfile: function(file) 
+            {
+                var name = file.upload.filename;
+                $.ajax({
+                    headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            },
+                    type: 'POST',
+                    url: '{{ url("files/destroy") }}',
+                    data: {file: name},
+                    success: function (data){
+                        console.log("File has been successfully removed!!");
+                    },
+                    error: function(e) {
+                        console.log(e);
+                }});
+                    var fileRef;
+                    return (fileRef = file.previewElement) != null ? 
+                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            success: function (file, response) {
+            },
+            error: function (file, response) {
+                return false;
+            }
+  };
+
     </script>
 
     <script>

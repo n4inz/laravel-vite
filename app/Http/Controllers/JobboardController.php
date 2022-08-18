@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\Actifity;
-use App\Events\Comments;
-use App\Events\ReplyComment;
+use App\Http\Requests\JobBoardRequest;
 use App\Http\Requests\JobsStoreRequest;
 use App\Http\Requests\NewAplicantsRequest;
 use App\Http\Traits\Actifity as TraitsActifity;
@@ -13,16 +12,12 @@ use App\Http\Traits\ImageUpload;
 use App\Models\Actifity as ModelsActifity;
 use App\Models\Client;
 use App\Models\JobModels;
-use App\Models\JobModelsComment;
-use App\Models\JobModelsCommentsReply;
+
 use App\Models\JobModelsFile;
-use App\Models\JobModelsMatchTalent;
+
 use App\Models\JobModelsMatchTalentAdd;
 use App\Models\JobModelsNewApplicant;
-use App\Models\JobModelsTalentStatus;
-use App\Models\JobModelsTask;
-use App\Models\Notification;
-use App\Models\SettingDefinedCheckList;
+
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
@@ -32,7 +27,7 @@ use App\Models\Talents;
 use App\Models\TalentTypeHelper;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+
 
 class JobboardController extends Controller
 {
@@ -68,8 +63,6 @@ class JobboardController extends Controller
         foreach($status as $key => $sts_key){
             $status_key .= '#'.$sts_key->id.',';
         }
-
-
 
         $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $user_location = SettingServiceLocationFee::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first('location');
@@ -128,9 +121,9 @@ class JobboardController extends Controller
         ]);
     }
 
-    public function jobs_store(JobsStoreRequest $request)
+    public function jobs_store(JobBoardRequest $request)
     {  
-        // return $request;
+
         $this->jobboardRepository->created($request);
         return redirect()->back()->with('status', 'Create job succesfuly');
     }
@@ -204,7 +197,7 @@ class JobboardController extends Controller
 
     public function detail_match_talent($id)
     {
-        $talent = Talents::where('id', $id)->first();
+        $talent = Talents::with(['type_helper' , 'languages' , 'attached_file'])->where('id', $id)->first();
         return view('modal.jobboard.detail_talent', compact('talent'));
     }
 
@@ -227,7 +220,6 @@ class JobboardController extends Controller
 
     public function download_file($file)
     {
-        
         return response()
             ->download(storage_path('app/public/Jobs attached file/' . $file));
     }

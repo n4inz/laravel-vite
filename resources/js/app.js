@@ -69,6 +69,6 @@ window.Echo.channel("channel-comment").listen("Nofication", (res) => {
                     </div>`;
         $('.counters'+e.notify_to).html(tmp);
     })
-
-
 })
+
+

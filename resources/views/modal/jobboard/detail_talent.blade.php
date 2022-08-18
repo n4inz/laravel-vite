@@ -91,15 +91,21 @@
 </div>
 
 <div class="mt-8">
-    <span class="overview-talent-modal-title">Uploaded documents</span>
-    <div class="flex mt-4">
-        <div class="flex items-center space-x-[16.33px] ">
+    <span class="overview-talent-modal-title">Feedback</span>
+    <div class="flex flex-wrap mt-4">
+        @foreach ($talent->attached_file as $talentFile )
+            <div class="flex mr-4 items-center justify-center space-x-[16.33px] w-[121px] h-32">
+                <img src="{{ asset('storage/Talent attached file/'.$talentFile->files) }}" alt="">
+            </div>
+        @endforeach
+
+        {{-- <div class="flex items-center space-x-[16.33px] ">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.33301 4.00002C4.33301 2.71136 5.37768 1.66669 6.66634 1.66669H20.6663C20.9498 1.66669 21.22 1.78701 21.4096 1.99772L27.4096 8.66439C27.5749 8.84801 27.6663 9.08631 27.6663 9.33335V28C27.6663 29.2887 26.6217 30.3334 25.333 30.3334H6.66634C5.37769 30.3334 4.33301 29.2887 4.33301 28V4.00002ZM6.66634 3.66669C6.48225 3.66669 6.33301 3.81593 6.33301 4.00002V28C6.33301 28.1841 6.48224 28.3334 6.66634 28.3334H25.333C25.5171 28.3334 25.6663 28.1841 25.6663 28V9.71709L20.221 3.66669H6.66634Z" fill="#8A8888"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M20 1.66669C20.5523 1.66669 21 2.1144 21 2.66669V8.33335H26.6667C27.219 8.33335 27.6667 8.78107 27.6667 9.33335C27.6667 9.88564 27.219 10.3334 26.6667 10.3334H20C19.4477 10.3334 19 9.88564 19 9.33335V2.66669C19 2.1144 19.4477 1.66669 20 1.66669Z" fill="#8A8888"/>
             </svg>
-            <span class="overview-comments-name text-[#222222]">{{ $talent->file_documents }}</span>
-        </div>
+            <span class="overview-comments-name text-[#222222]">aa</span>
+        </div> --}}
         {{-- <div class="flex items-center space-x-[16.33px] ml-[64.33px]">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.33301 4.00002C4.33301 2.71136 5.37768 1.66669 6.66634 1.66669H20.6663C20.9498 1.66669 21.22 1.78701 21.4096 1.99772L27.4096 8.66439C27.5749 8.84801 27.6663 9.08631 27.6663 9.33335V28C27.6663 29.2887 26.6217 30.3334 25.333 30.3334H6.66634C5.37769 30.3334 4.33301 29.2887 4.33301 28V4.00002ZM6.66634 3.66669C6.48225 3.66669 6.33301 3.81593 6.33301 4.00002V28C6.33301 28.1841 6.48224 28.3334 6.66634 28.3334H25.333C25.5171 28.3334 25.6663 28.1841 25.6663 28V9.71709L20.221 3.66669H6.66634Z" fill="#8A8888"/>

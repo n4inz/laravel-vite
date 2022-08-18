@@ -420,6 +420,11 @@
                             </div>
 
                         </div>
+                   
+    @foreach ($errors->all() as $error)
+        <div>{{ $error }}</div>
+    @endforeach
+
             
                         {{-- availability --}}
                         <div class="px-8 mt-8 ">

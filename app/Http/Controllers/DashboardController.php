@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Events\Nofication;
 use App\Http\Traits\HttpGuzzle;
 use App\Models\Actifity;
+use App\Models\File;
 use App\Models\JobModels;
 use App\Models\JobModelsTask;
 use App\Models\Notification;
@@ -28,8 +29,10 @@ class DashboardController extends Controller
 {
     use HttpGuzzle;
 
-    public function index()
+    public function index(Request $request)
     {
+        $talent = Talents::with(['type_helper' , 'languages' , 'attached_file'])->where('id', 8)->first();
+        return $talent;
 
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();

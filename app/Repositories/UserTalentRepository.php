@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Talents;
 use App\Http\Traits\ImageUpload;
+use App\Models\File;
+
 class UserTalentRepository 
 {
     use ImageUpload;
@@ -50,18 +52,16 @@ class UserTalentRepository
             ]);
          }
 
-         $session = 'talent_file_'.auth()->user()->id;
-         if(request()->session()->get($session)){
-             $file = request()->session()->get($session);
-             // $name = $this->uploadImageStore($request->file('attached_file'), 'Jobs attached file');
-             $this->move_file('public/Files before submit/'.$file, 'public/Talent attached file/'.$file);
-             $talent->attached_file()->create([
-                 'files' => $file ,
-                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-             ]);
- 
-             request()->session()->forget($session);
-         }  
+         File::where(['users_id' => auth()->user()->id , 'type' => 'TALENT'])->get()->map(function($res , $key) use($talent){
+            $talent->attached_file()->create([
+                'files' => $res->file ,
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            ]);
+            $this->move_file('public/Files before submit/'.$res->file, 'public/Talent attached file/'.$res->file);
+
+            File::where('id' , $res->id)->delete();
+         });
+
        
     }
 }
