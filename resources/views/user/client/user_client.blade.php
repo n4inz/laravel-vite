@@ -24,7 +24,7 @@
                         </svg>
                     </div>
                     <div class="w-[340px] h-10 border-2 border-[#EFEFEF] rounded-md bg-[#EFEFEF] flex items-center">
-                        <input type="text"  class="border border-[#EFEFEF] text-colortext text-sm bg-transparent border-none outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search client" required>
+                        <input id="search_clients" type="text"  class="border border-[#EFEFEF] text-colortext text-sm bg-transparent border-none outline-none  block w-full pl-10 p-2 focus:ring-0" placeholder="Search client" required>
                     </div>
                 </div>
             </div>
@@ -39,9 +39,8 @@
         <div class="grid gap-4 grid-cols-3 mt-10 mb-20 w-[1017px] xl:w-full">   
         {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
             @foreach ($client as $values )
-                <div class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+                <div id="search_client" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                     <div>
-                        
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Client file/avatar/'.$values->avatar) }}" alt="">
                     </div>
                     <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
@@ -64,5 +63,10 @@
         </div>
     </article>
 </main>
+    {{-- Quick search --}}
+    <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
+    <script type="text/javascript">
+        $('input#search_clients').quicksearch('div#search_client');
+    </script>
 
 @endsection

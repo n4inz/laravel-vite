@@ -113,4 +113,10 @@ class UserClientController extends Controller
         }
       
     }
+
+
+    public function __destruct()
+    {
+        File::where(['type' => 'TALENT'])->delete();
+    }
 }

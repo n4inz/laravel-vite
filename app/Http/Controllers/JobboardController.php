@@ -9,6 +9,7 @@ use App\Http\Requests\NewAplicantsRequest;
 use App\Http\Traits\Actifity as TraitsActifity;
 use App\Http\Traits\Event;
 use App\Http\Traits\ImageUpload;
+use App\Jobs\SendEmailToTalent;
 use App\Models\Actifity as ModelsActifity;
 use App\Models\Client;
 use App\Models\JobModels;
@@ -25,6 +26,7 @@ use App\Models\SettingServiceSubcategory;
 use App\Models\SettingStatusTalent;
 use App\Models\Talents;
 use App\Models\TalentTypeHelper;
+use App\Models\TemplateEmail;
 use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
 
@@ -164,9 +166,12 @@ class JobboardController extends Controller
 
         $matchTalents = JobModelsMatchTalentAdd::with('talent')->where(['job_models_id' => $result->id])->orderBy('id' , 'desc')->get();
 
+        $tmp_email1 = TemplateEmail::where(['type' => 2 , 'status' => 'INTERVIEW'])->first('body');
+        $tmp_email2 = TemplateEmail::where(['type' => 1 , 'status' => 'REJECTED'])->first('body');
+        // $tmp_email3 = TemplateEmail::where(['type' => 3 , 'status' => 'REJECTED'])->first('body');
 
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents' , 'matchTalents'));
+        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents' , 'matchTalents' , 'tmp_email1' ,'tmp_email2'));
     }
 
     public function edit_description(Request $request)
@@ -342,5 +347,22 @@ class JobboardController extends Controller
             ]);
         }
       return response(200);
+    }
+
+    // public function load_template_email_talent(Request $request)
+    // {
+    //     return response()->json([
+    //         'tmp' => TemplateEmail::where(['type' => $request->type , 'status' => $request->status])->first('body')
+    //     ], 200);
+    // }
+
+    public function edit_template_email(Request $request)
+    {
+        $temp =  $request->template;
+        // return request()->post($temp);
+
+        $talentEmail =  Talents::where(['id' => $request->talent_id , 'users_id' =>auth()->user()->staf->users_agency_id ?? auth()->user()->id])->first();
+        SendEmailToTalent::dispatch($talentEmail->email, request()->post($temp));
+        return redirect()->back();
     }
 }

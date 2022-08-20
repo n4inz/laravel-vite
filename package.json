@@ -20,6 +20,8 @@
         "tailwindcss": "^3.1.4"
     },
     "dependencies": {
-        "fine-uploader": "^5.16.2"
+        "fine-uploader": "^5.16.2",
+        "imageviewer": "^1.1.0",
+        "jquery": "^3.6.0"
     }
 }

@@ -56,6 +56,7 @@ class UserTalentRepository
             $talent->attached_file()->create([
                 'files' => $res->file ,
                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                'extension' => strtolower($res->extension)
             ]);
             $this->move_file('public/Files before submit/'.$res->file, 'public/Talent attached file/'.$res->file);
 

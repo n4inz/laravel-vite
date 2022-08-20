@@ -47,4 +47,9 @@ class TestController extends Controller
     {
         return view('testing.drag');
     }
+
+    public function image_viewer()
+    {
+        return view('testing.image-viewer');
+    }
 }

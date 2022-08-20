@@ -25,6 +25,8 @@ use Spatie\Multitenancy\Models\Tenant;
 */
 // Testing
 Route::get('test', [TestController::class, 'welcome']);
+Route::get('test/image-viewer', [TestController::class, 'image_viewer']);
+
 Route::get('test-multiselect', [TestController::class, 'test_multi_select'])->name('test.multi_select');
 Route::get('drag', [TestController::class, 'drag'])->name('test.drag');
 Route::post('test-multiselect-store', [TestController::class, 'test_multi_select_store'])->name('test.multi_select_store');
@@ -57,6 +59,7 @@ Route::group(['middleware' => 'auth:staf,web'],function(){
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/calendly' , [DashboardController::class,'calendlyApi'])->name('dashboard.calendly');
+    Route::post('/detail-calendly' , [DashboardController::class,'detailCalendlyApi'])->name('dashboard.detailCalendlyApi');
     
     // Jobboard
     Route::get('/jobboard', [JobboardController::class, 'index'])->name('jobboard');
@@ -75,6 +78,8 @@ Route::group(['middleware' => 'auth:staf,web'],function(){
     Route::post('comment', [JobboardController::class, 'comment'])->name('jobboard.comment');
     Route::post('reply', [JobboardController::class, 'reply'])->name('jobboard.reply');
     Route::post('edit-description', [JobboardController::class, 'edit_description'])->name('jobboard.edit_description');
+    Route::post('load-template-email-talent' , [JobboardController::class, 'load_template_email_talent'])->name('jobboard.load_template_email_talent');
+    Route::post('edit-template-email' , [JobboardController::class , 'edit_template_email'])->name('jobboard.edit_template_email');
 
     Route::post('modal-add-match-talent', [JobboardController::class, 'modal_add_match_talent'])->name('jobboard.modal_add_match_talent');
     Route::post('change-status-all-match-talent', [JobboardController::class, 'change_status_all_match_talent'])->name('jobboard.change_status_all_match_talent');

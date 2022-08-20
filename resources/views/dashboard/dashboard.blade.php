@@ -10,7 +10,6 @@
                         <div class="w-2 h-6 bg-palet rounded-sm"></div>
                         <span class="text-[#222222] font-semibold">Job Status</span>
                     </div>
-                    
                     <div class="flex flex-wrap items-center w-full ">
                             
                         <div class="w-[135px] mb-2 mr-4 h-[126px] border border-palet rounded-md p-4">
@@ -29,25 +28,26 @@
                                 <span class="text-5xl font-bold">{{ $TotalJob->count() }}</span>
                             </div>
                         </div>
-
                         @foreach ($statusJob as $valueStatusJob )
-                            <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
-                                <div class="flex justify-between ">
-                                    <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                                        </svg>
+                            @if($valueStatusJob->job_models->count() > 0)
+                                <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
+                                    <div class="flex justify-between ">
+                                        <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
+                                            </svg>
+                                        </div>
+                                        <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
                                     </div>
-                                    <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
+                                    <div>
+                                        <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
+                                    </div>
+                                    <div>
+                                    <span class="text-3xl font-bold">{{ round(($valueStatusJob->job_models->count() / $TotalJob->count() ) * 100,1) }} %</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
-                                </div>
-                                <div>
-                                    <span class="text-3xl font-bold">{{ round(($valueStatusJob->job_models->count() ?? 0/ $TotalJob->count() ?? 0) * 100,1) }} %</span>
-                                </div>
-                            </div>
+                            @endif
                         @endforeach
                         <!--
                         <div class="w-[114px]  border border-palet rounded-md p-4">
@@ -115,9 +115,6 @@
                         -->
                         
                     </div>
-
-
-
                 </div>
                 <div class="bg-bgbody  p-8 rounded w-[669px]">
                     <div class="flex justify-between">
@@ -174,7 +171,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-[341px] space-y-2">
+            <div class="w-[341px] space-y-2" >
                 <div class="bg-bgbody p-8 rounded ">
                     <div class=" flex space-x-2">
                         <div class="w-2 h-6 bg-[#FA9D6B] rounded-sm"></div>
@@ -262,8 +259,22 @@
                         <span class="text-[#222222] font-semibold">Appointments</span>
                     </div>
 
-                    <div class="calendly_load">
+                    <div data-modal-toggle="detail_schedule_calendly" class="calendly_load">
+                        
+                    </div>
+                </div>
+                <!-- Detail Schedule Calendly -->
+                <div id="detail_schedule_calendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative flex bg-white rounded-lg shadow pb-10 ">
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center absolute top-2 right-2" data-modal-toggle="detail_schedule_calendly">
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                            <div class="load_detail_calendly w-full flex justify-center "></div>
 
+                        </div>
                     </div>
                 </div>
             </div> 
@@ -329,28 +340,33 @@
             success: function (data) {
                 console.log(data)
                 $('.calendly_load').html('');
-                data.res.map(function(e){
-                    const tmp = `<div class="flex items-center space-x-3 mt-7">
-                                    <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.8078 8.04062C12.8719 7.68906 12.9063 7.32969 12.9063 6.97031C12.9063 6.17344 12.75 5.4 12.4422 4.67344C12.1453 3.97031 11.7188 3.33906 11.1766 2.79688C10.6389 2.25785 10.0016 1.82852 9.30002 1.53281C8.5719 1.225 7.80002 1.06875 7.00314 1.06875C6.62814 1.06875 6.25158 1.10469 5.88595 1.175C5.38004 0.906911 4.81632 0.766385 4.24376 0.765625C3.31095 0.765625 2.43282 1.12969 1.77345 1.78906C1.44808 2.11276 1.1901 2.49775 1.01443 2.92177C0.838765 3.34578 0.748892 3.80041 0.75001 4.25938C0.75001 4.85313 0.903136 5.4375 1.18907 5.95312C1.13126 6.2875 1.10001 6.62969 1.10001 6.97031C1.10001 7.76719 1.25626 8.54062 1.56407 9.26719C1.86095 9.97031 2.28595 10.6016 2.82814 11.1438C3.37033 11.6859 4.00158 12.1109 4.7047 12.4078C5.43283 12.7156 6.2047 12.8719 7.00158 12.8719C7.34846 12.8719 7.69533 12.8406 8.03596 12.7797C8.55939 13.075 9.15002 13.2328 9.75471 13.2328C10.6875 13.2328 11.5656 12.8703 12.225 12.2094C12.886 11.55 13.2485 10.6719 13.2485 9.73906C13.25 9.14531 13.0969 8.55937 12.8078 8.04062ZM7.02658 10.5859C4.9297 10.5859 3.9922 9.55469 3.9922 8.78281C3.9922 8.38594 4.28439 8.10938 4.68752 8.10938C5.58439 8.10938 5.35314 9.39844 7.02658 9.39844C7.88439 9.39844 8.35783 8.93281 8.35783 8.45625C8.35783 8.17031 8.21721 7.85156 7.65158 7.7125L5.78595 7.24687C4.28439 6.87031 4.01095 6.05781 4.01095 5.29531C4.01095 3.71094 5.50314 3.11562 6.90471 3.11562C8.19533 3.11562 9.71721 3.82969 9.71721 4.77969C9.71721 5.1875 9.36408 5.42344 8.96096 5.42344C8.19533 5.42344 8.33596 4.36406 6.79377 4.36406C6.02814 4.36406 5.6047 4.71094 5.6047 5.20625C5.6047 5.70156 6.20939 5.85938 6.73439 5.97969L8.11564 6.28594C9.62815 6.62344 10.011 7.50625 10.011 8.3375C10.011 9.62344 9.0219 10.5859 7.02658 10.5859Z" fill="white"/>
-                                        </svg>
-                                    </div>
-                
-                                    <div>
-                                        <div class="text-sm text-[#222222] font-semibold">${e.full_name ?? e.name}</div>
-                                        <div class="text-sm">${e.start_time}</div>
-                                    </div>
-                                </div>`;
-                    
-                    $('.calendly_load').append(tmp);
+                $('.calendly_load').append(data);
 
-                })
             }
         });
     }
 
     apoitment();
+
+    function detail_calendly(id){
+        $.ajax({
+            type: "POST",
+            url: '{{ route("dashboard.detailCalendlyApi") }}',
+            data:{ _token: '{{ csrf_token() }}', id},
+            beforeSend:function(){
+                const tmp = `<div class="h-56 w-full flex text-center justify-center pt-5">
+                                <svg aria-hidden="true" class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                </svg>
+                            </div>`;
+                            $('.load_detail_calendly').html(tmp);
+            },
+            success: function (data) {
+               $('.load_detail_calendly').html(data);
+            }
+        });
+    }
     </script>
  
 @endsection

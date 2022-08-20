@@ -1,28 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use App\Events\Nofication;
 use App\Http\Traits\HttpGuzzle;
 use App\Models\Actifity;
-use App\Models\File;
 use App\Models\JobModels;
 use App\Models\JobModelsTask;
-use App\Models\Notification;
-use App\Models\NotificationStatus;
 use App\Models\SettingCalendlyApi;
 use App\Models\SettingJobModelsStatus;
-use App\Models\Staf;
-use App\Models\Talents;
-use App\Models\TalentTypeHelper;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request as RequestGuzzle;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
@@ -31,9 +18,6 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        $talent = Talents::with(['type_helper' , 'languages' , 'attached_file'])->where('id', 8)->first();
-        return $talent;
-
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();
         $array = [];
@@ -58,19 +42,21 @@ class DashboardController extends Controller
        return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array'));
     }
 
-    public function calendlyApi()
+    public function calendlyApi(Request $request)
     {
         $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
         $response = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
             'organization' => $load->current_organization,
             'status' => 'active',
-            'count' => 3,
+            // 'count' => 3,
             'min_start_time' => now()->toDateTimeString()
         ]);
 
         $res = json_decode($response);
 
-        $array = [];
+        $array = [
+            
+        ];
         foreach($res->collection as $val){
             // $invites = Http::withToken($load->token)->get($val->uri.'/invitees');
             $invites = $this->getWithParams($load->token, $val->uri.'/invitees');
@@ -78,18 +64,40 @@ class DashboardController extends Controller
             $invite = json_decode($invites);
             array_push($array, [
                 'start_time' => Carbon::parse($val->start_time)->format('d/m/Y').' '.Carbon::parse($val->start_time)->format('g:i A'),
+                // 'start_time' => $val->start_time,
                 'end_time' => $val->end_time,
                 'location_meet' => $val->location,
                 'type' => $val->location->type,
+                'event' => $val->name,
                 'first_name' => $invite->collection[0]->first_name,
                 'last_name' => $invite->collection[0]->last_name,
-                'name' => $invite->collection[0]->name
+                'name' => $invite->collection[0]->name,
+                'email_talent' => $invite->collection[0]->email,
+                'created_at' => Carbon::parse($invite->collection[0]->created_at)->format('d F Y'),
+                'time_zone' => $invite->collection[0]->timezone,
+                'cancel_url' =>  $invite->collection[0]->cancel_url,
+                'reschedule_url' =>  $invite->collection[0]->reschedule_url,
+                'questions_and_answers' => $invite->collection[0]->questions_and_answers,
             ]);
 
         }
 
+        $session = 'calendly'.auth()->user()->id;
+        $request->session()->put($session , $array);
+        return view('modal.dashboard.calendly', compact('array'));
+
         return response()->json([
             'res' => $array
+        ]);
+    }
+
+    public function detailCalendlyApi(Request $request)
+    {
+        $session = 'calendly'.auth()->user()->id;
+        $calendly = $request->session()->get($session);
+
+        return view('modal.dashboard.detailCalendly', [
+            'val' => $calendly[$request->id]
         ]);
     }
 }

@@ -1,14 +1,14 @@
-
 @extends('layouts.main')
 @section('container')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/imageviewer/1.1.0/viewer.js" integrity="sha512-B/Fq6n5Mr2myLD1ls1c0W4EBEGqEjI7GIhoE8irtb/X6W2J/f1vrZhkc5E1m6rXxxHeD3T+9kROYxtMv45s40A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/imageviewer/1.1.0/viewer.css" integrity="sha512-zjtv6O/V90xbtThlL9qyg8//kV/EyXJ47nrXR524Ip/qcrth9sJfVfFqTdQWGGqQ59i1kiVy1HiW9kgNj+QKCw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <main class="flex">
     @include('layouts.sidebar')
     <article id="article" class="ml-[310px] space-x-2 mt-[85px] px-5 w-[75%]">
         <div>
             <div class="h-[228px] w-[1016px] xl:w-full bg-bgbody px-6 rounded">
                 <div class="flex items-center justify-between w-full mb-1">
-                    <span class="overview-title text-colortext mt-6">Live-in nanny</span>
+                    <span class="overview-title text-colortext mt-6">{{ $result->title }}</span>
                     <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 18.5C9.10457 18.5 10 17.6046 10 16.5C10 15.3954 9.10457 14.5 8 14.5C6.89543 14.5 6 15.3954 6 16.5C6 17.6046 6.89543 18.5 8 18.5Z" fill="#827C7C"/>
                         <path d="M16 18.5C17.1046 18.5 18 17.6046 18 16.5C18 15.3954 17.1046 14.5 16 14.5C14.8954 14.5 14 15.3954 14 16.5C14 17.6046 14.8954 18.5 16 18.5Z" fill="#827C7C"/>
@@ -554,7 +554,7 @@
                                     @foreach ($matchTalents as $key => $talent )
                                         {{-- $talent->job_model_talent_status->status --}}
                                         @if($loop->iteration > 10) @break @endif
-                                        <div  class="flex justify-between px-4 hover:cursor-pointer">
+                                        <div class="flex justify-between px-4 hover:cursor-pointer">
                                             <div class="flex space-x-2 items-center justify-center">
                                                 <div class="">
                                                     <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
@@ -1305,7 +1305,7 @@
                                                     <div class="">
                                                         <input name="id_talent_match[]" id="{{ $talent_value->id }}" style="color: #3BD7CF" type="checkbox" value="{{ $talent_value->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent_value->avatar) }}" alt="">
                                                     <div class="flex flex-col">
                                                         <span class="overview-name-talent text-colortext">{{ $talent_value->first_name.' '.$talent_value->last_name }}</span>
                                                         <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent_value->day_of_birthday)->age }}, in {{ $talent_value->address }}</span>
@@ -1571,6 +1571,59 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Main Send email talent -->
+            <div id="send_mail_talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4  max-w-2xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white w-[600px] rounded-lg shadow ">
+                        <!-- Modal header -->
+                        <form action="{{ route('jobboard.edit_template_email') }}" method="POST">@csrf
+                            <div class="talentId"></div>
+                            <div class="flex justify-center items-start p-4 rounded-t relative">
+                                <div class=" border-b border-gray-200">
+                                    <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                        <label for="one"  for="type"  class="mr-2" role="presentation">
+                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">Interviewing</div>
+                                            <input checked type="radio" class="hidden" name="template" id="one" value="editor_tmp_email_1">
+                                        </label>
+                                        <label for="two" class="mr-2" role="presentation">
+                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">Rejected</div>
+                                            <input type="radio" class="hidden" name="template" id="two" value="editor_tmp_email_2">
+                                        </label>
+                                        {{-- <label for="three" class="mr-2" role="presentation">
+                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="settings-tab" data-tabs-target="#settings" role="tab" aria-controls="settings" aria-selected="false">Template 3</div>
+                                            <input type="radio" class="hidden" name="template" id="three" value="editor_tmp_email_3">
+                                        </label> --}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6 space-y-6">
+                                <div id="myTabContent">
+                                    <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <textarea id="editor_tmp_email_1" class="w-full h-full" name="editor_tmp_email_1" >{{ $tmp_email1->body }}</textarea>
+                                    </div>
+                                    <div class="hidden w-full" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                        <textarea id="editor_tmp_email_2" class="w-full h-full okee" name="editor_tmp_email_2">{{ $tmp_email2->body }}</textarea>
+                                    </div>
+                                    {{-- <div class="hidden" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                        <textarea id="editor_tmp_email_3" class="w-full h-full" name="editor_tmp_email_3">{{ $tmp_email3->body }}</textarea>
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-end justify-center  p-6 space-x-2 rounded-b border-t border-gray-200 ">
+                                <div onclick="ClosemodalSendEmailTalent()" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
+                                    <span class="text-sm text-white">Don't Send</span> 
+                                </div>
+                                <button class="flex items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
+                                    <span class="text-sm text-white">Send</span> 
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </article>
 </main>
@@ -1787,7 +1840,6 @@
     }
 
     function submit(id){
-
         const job_comments_id = $('.comment_id'+id).val();
         const job_models_id = "{{ $result->id }}";
         const reply_comment = $('#reply_comment'+id).val();
@@ -1876,9 +1928,17 @@
         })
     })
 
+
+    // Modal modalSendEmailTalent
+    const IdSendEmailTalent = document.getElementById('send_mail_talent');
+    const modalSendEmailTalent = new Modal(IdSendEmailTalent, { });
     $('.status_talents').change(function(){
         const status = $(this).val();
         const talent_id = $(this).attr("data-talent")
+        modalSendEmailTalent.show();
+        const tmp = `<input type="hidden" value="${talent_id}" name="talent_id">`;
+        $('.talentId').html(tmp);
+
         const job_models_id  = $(this).attr("data-job-id")
         $.ajax({
             type: "POST",
@@ -1889,6 +1949,10 @@
             }
         })
     })
+
+    function ClosemodalSendEmailTalent(){
+        modalSendEmailTalent.hide();
+    }
 
     // Show more and show less detail job
     const accordionItems = [
@@ -1952,21 +2016,6 @@
     const accordion = new Accordion(accordionItemsMatchTalent, options_show_match_talent);
 
 
-    // add match talent
-    function load_talent(){
-        // $('.desc_view').toggleClass('hidden');
-        // $('.editor').toggleClass('hidden');
-        // $.ajax({
-        //     type:'POST',
-        //     url:'{{ route("jobboard.modal_add_match_talent") }}',
-        //     data:{_token: '{{ csrf_token() }}'},
-        //     success:function(data){
-        //         console.log(data)
-        //     }
-        // });
-    }
-
-
     // Select all status match Talent
     function status_talents(val){
         const tmp = `<input class="" id="{{ $value->id }}" type="hidden" name="status_name_match" value="${val}">`;
@@ -1994,6 +2043,39 @@
         $('.editor').toggleClass('hidden');
     }
 
+    // Send mail talent status
+    // function template(type,status){
+    //     $.ajaxSetup({
+    //         headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         }
+    //     });
+    //     $.ajax({
+    //         type:'POST',
+    //         url:'{{ route("jobboard.load_template_email_talent") }}',
+    //         data: {type , status},
+    //         success:function(data){
+    //             $('#editor_tmp_email_'+type).val('apaaa')
+        
+    //         }
+    //     });
+
+    // }
+
+
+
+    // template(1,'REJECTED');
+
+    function edit_email(type){
+        $('.view_email_'+type).toggleClass('hidden');
+        $('.editor_email_'+type).toggleClass('hidden');
+    }
+
+    function priview_tmp_email(){
+        const val =  $('#editor_tmp_email_1').val();
+        console.log(val)
+    }
+
    
 
 </script>
@@ -2007,5 +2089,20 @@
       height: 350,
       removeButtons: 'PasteFromWord'
     });
+    CKEDITOR.replace('editor_tmp_email_1', {
+      width: '100%',
+      height: 250,
+      removeButtons: 'PasteFromWord'
+    });
+    CKEDITOR.replace('editor_tmp_email_2', {
+      width: '100%',
+      height: 250,
+      removeButtons: 'PasteFromWord'
+    });
+    // CKEDITOR.replace('editor_tmp_email_3', {
+    //   width: '100%',
+    //   height: 250,
+    //   removeButtons: 'PasteFromWord'
+    // });
   </script>
 @endsection

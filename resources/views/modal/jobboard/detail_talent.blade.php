@@ -92,13 +92,14 @@
 
 <div class="mt-8">
     <span class="overview-talent-modal-title">Feedback</span>
-    <div class="flex flex-wrap mt-4">
+    <div id="images" class="flex flex-wrap mt-4">
         @foreach ($talent->attached_file as $talentFile )
-            <div class="flex mr-4 items-center justify-center space-x-[16.33px] w-[121px] h-32">
-                <img src="{{ asset('storage/Talent attached file/'.$talentFile->files) }}" alt="">
-            </div>
+            @if ($talentFile->extension == 'png' or $talentFile->extension == 'jpg' or $talentFile->extension == 'jpeg')
+                <div class="flex mr-4 items-center justify-center space-x-[16.33px] w-[121px] h-32 hover:cursor-pointer">
+                    <img src="{{ asset('storage/Talent attached file/'.$talentFile->files) }}" alt="">
+                </div>
+            @endif
         @endforeach
-
         {{-- <div class="flex items-center space-x-[16.33px] ">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.33301 4.00002C4.33301 2.71136 5.37768 1.66669 6.66634 1.66669H20.6663C20.9498 1.66669 21.22 1.78701 21.4096 1.99772L27.4096 8.66439C27.5749 8.84801 27.6663 9.08631 27.6663 9.33335V28C27.6663 29.2887 26.6217 30.3334 25.333 30.3334H6.66634C5.37769 30.3334 4.33301 29.2887 4.33301 28V4.00002ZM6.66634 3.66669C6.48225 3.66669 6.33301 3.81593 6.33301 4.00002V28C6.33301 28.1841 6.48224 28.3334 6.66634 28.3334H25.333C25.5171 28.3334 25.6663 28.1841 25.6663 28V9.71709L20.221 3.66669H6.66634Z" fill="#8A8888"/>
@@ -121,6 +122,31 @@
             <span class="overview-comments-name text-[#222222]">CV.pdf</span>
         </div> --}}
     </div>
-
+</div>
+<div class="mt-8">
+    <span class="overview-talent-modal-title">Document</span>
+    <div class="flex flex-wrap mt-4">
+        @foreach ($talent->attached_file as $talentFile )
+            @if ($talentFile->extension == 'pdf')
+                <div class="mr-4 mb-4 flex flex-col items-center justify-center hover:cursor-pointer">
+                    <i class="fa fa-2x fa-file-pdf-o text-red-600" aria-hidden="true"></i>
+                    <span class="text-xs text-gray-400 mt-1">{{ $talentFile->files }}</span>
+                </div>
+            @endif
+        @endforeach
+    </div>
 </div>
 <div class="mt-8 flex"></div>
+
+<script>
+    var $image = $('#image');
+
+    $image.viewer({
+    inline: true,
+    viewed: function() {
+        $image.viewer('zoomTo', 1);
+    }
+    });
+    var viewer = $image.data('viewer');
+    $('#images').viewer();
+</script>
