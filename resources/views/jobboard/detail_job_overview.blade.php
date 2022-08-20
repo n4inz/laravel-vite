@@ -846,7 +846,7 @@
                             <div class="px-4 mt-4 space-y-3">
                                 {{-- Download --}}
                                 @foreach ($result->file as $val )
-                                    <a href="{{ route('jobboard.download_file' , ['file' => $val->file]) }}" class="flex items-center justify-between w-full  h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
+                                    <a href="{{ route('jobboard.download_file' , ['file' => $val->file , 'path' => 'Jobs attached file']) }}" class="flex items-center justify-between w-full  h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex items-center justify-center w-8 h-8 bg-[#F3F3F3] rounded-md">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

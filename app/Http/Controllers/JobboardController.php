@@ -226,7 +226,7 @@ class JobboardController extends Controller
     public function download_file($file)
     {
         return response()
-            ->download(storage_path('app/public/Jobs attached file/' . $file));
+        ->download(storage_path('app/public/'.request()->get('path').'/' . $file));
     }
 
     public function add_task(Request $request)
@@ -365,4 +365,6 @@ class JobboardController extends Controller
         SendEmailToTalent::dispatch($talentEmail->email, request()->post($temp));
         return redirect()->back();
     }
+
+
 }

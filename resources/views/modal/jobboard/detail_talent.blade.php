@@ -128,10 +128,12 @@
     <div class="flex flex-wrap mt-4">
         @foreach ($talent->attached_file as $talentFile )
             @if ($talentFile->extension == 'pdf')
+            <a href="{{ route('jobboard.download_file' , ['file' => $talentFile->files , 'path' => 'Talent attached file']) }}">
                 <div class="mr-4 mb-4 flex flex-col items-center justify-center hover:cursor-pointer">
                     <i class="fa fa-2x fa-file-pdf-o text-red-600" aria-hidden="true"></i>
                     <span class="text-xs text-gray-400 mt-1">{{ $talentFile->files }}</span>
                 </div>
+            </a>
             @endif
         @endforeach
     </div>
