@@ -35,6 +35,6 @@ class SendEmailToTalent implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new SendingEmailToTalent($this->template));
+        Mail::to('nainmo@ymail.com')->send(new SendingEmailToTalent($this->template));
     }
 }
