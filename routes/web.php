@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobboardController;
 use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UploadController;
@@ -106,7 +107,8 @@ Route::group(['middleware' => 'auth:staf,web'],function(){
     Route::post('/upload',[UploadController::class , 'upload'])->name('upload');
     Route::post('/upload-with-db',[UploadController::class , 'uploadWithDb'])->name('uploadWithDb');
 
-    
+    //Search
+    Route::post('/search', SearchController::class)->name('search');
 });
 
 Route::get('/send/{uid}', [JobboardController::class, 'send'])->name('jobboard.send');

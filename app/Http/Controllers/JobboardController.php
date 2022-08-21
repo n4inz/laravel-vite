@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\Actifity;
 use App\Http\Requests\JobBoardRequest;
-use App\Http\Requests\JobsStoreRequest;
+
 use App\Http\Requests\NewAplicantsRequest;
 use App\Http\Traits\Actifity as TraitsActifity;
 use App\Http\Traits\Event;
@@ -12,6 +12,7 @@ use App\Http\Traits\ImageUpload;
 use App\Jobs\SendEmailToTalent;
 use App\Models\Actifity as ModelsActifity;
 use App\Models\Client;
+use App\Models\File;
 use App\Models\JobModels;
 
 use App\Models\JobModelsFile;
@@ -93,6 +94,7 @@ class JobboardController extends Controller
 
     public function status(Request $request)
     {
+        // return $request;
         $request->validate([
             'id' => 'required',
             'status' => 'required'
@@ -307,7 +309,7 @@ class JobboardController extends Controller
         // return $request->uid;
         $idModels = JobModels::where('uid' , $request->uid)->firstOrFail('id');
         
-        JobModelsNewApplicant::create([
+       $newAplicants =  JobModelsNewApplicant::create([
            'first_name' => $request->first_name,
            'last_name' => $request->last_name,
            'email' => $request->email,
@@ -318,6 +320,21 @@ class JobboardController extends Controller
            'job_models_id' =>  $idModels->id,
            'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id
         ]);
+
+        if(isset($request->id_file)){
+            foreach($request->id_file as $key => $idFile){
+                File::where(['id' => $request->id_file[$key], 'type' => 'NEW_APLICANTS'])->get()->map(function($res , $key) use($newAplicants){
+                    $newAplicants->file()->create([
+                        'file' => $res->file ,
+                        // 'extension' => strtolower($res->extension)
+                    ]);
+                    $this->move_file('public/Files before submit/'.$res->file, 'public/File/'.$res->file);
+        
+                    File::where('id' , $res->id)->delete();
+                 });
+            }
+        }
+
 
         return redirect()->back()->with('success' , 'success apply');
     }

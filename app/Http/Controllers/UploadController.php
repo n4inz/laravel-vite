@@ -38,13 +38,15 @@ class UploadController extends Controller
         ]);
         $name = $this->uploadImageStore($request->file('file'), 'Files before submit');
 
-        File::create([
+       $res =  File::create([
             'file' => $name,
             'extension' => $request->file('file')->extension(),
             'type' => $request->type,
-            'users_id' => auth()->user()->id
+            'users_id' => auth()->user()->id ?? 0
         ]);
 
-        return response(200);
+        return response()->json([
+            'id' => $res->id
+        ]);
     }
 }

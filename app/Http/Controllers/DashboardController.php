@@ -36,8 +36,8 @@ class DashboardController extends Controller
 
        $TotalJob = JobModels::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('id');
         
-       $statusJob = SettingJobModelsStatus::with('job_models')->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get();
-        
+       $statusJob = SettingJobModelsStatus::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->with('job_models')->get();
+    // return $statusJob;
        $taskFolowUp  = Actifity::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'type' => 'TASK CREATED'])->whereDay('created_at', date('d'))->get();
        return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array'));
     }

@@ -25,7 +25,7 @@ class JobBoardRequest extends FormRequest
     {
         return [
             'family' => 'required',
-            'title' => 'required|min:3',
+            'title' => 'required|min:3|max:25',
             'description' => 'required|min:6',
             'subcategory' => 'required',
             'rate' => 'required',

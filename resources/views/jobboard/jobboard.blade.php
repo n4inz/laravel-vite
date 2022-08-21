@@ -47,6 +47,7 @@
                
                 <div class="flex xl:w-full space-x-4 overflow-auto overflow-y-hidden">
                     @foreach ($status as $sts_val )
+                        
                         <div class="w-[265px]">
                             {{-- Tittle Card --}}
                             <div class="w-[265px] flex justify-between">
@@ -66,7 +67,7 @@
                             {{-- Card --}}
                             <div id="{{ $sts_val->id }}" class="connectedSortable min-h-[170px] w-[265px]">
                                 @foreach ($sts_val->job_models as $value )
-                                    <a id="{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
+                                    <a id="data_{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
                                         <div class="relative w-full h-[211px] bg-bgbody mt-3 rounded">
                                             <div class="h-40 px-4">
                                                 <div class="flex items-center justify-between pt-[11px]">
@@ -421,9 +422,7 @@
 
                         </div>
                    
-    @foreach ($errors->all() as $error)
-        <div>{{ $error }}</div>
-    @endforeach
+
 
             
                         {{-- availability --}}
@@ -644,7 +643,7 @@
                         },
                         title:{
                             required:true,
-                            maxlength:255
+                            maxlength:25
                         },
                         description: {
                             required:true,
@@ -773,7 +772,7 @@
     <script>
 
         // Drag and drop
-        var status , id;
+        var status , data;
         $(function(){
             $("{{ $status_key }}")
 
@@ -782,15 +781,21 @@
                 connectWith: ".connectedSortable",
                 receive: function (event , ui,){
                     status = event.target.id;
-                    id = ui.item.attr('id');
-                    console.log(status)
+                    data = ui.item.attr('id');
+                    
+                    var explode = data.split("_");
+                    var id = explode[1];
+       
+                    // console.log('ui',ui)
+
                     $.ajax({
                         type:'POST',
                         url:'{{ route("jobboard.status") }}',
                         data:{status ,id , _token: '{{ csrf_token() }}'},
                         success:function(res){
+                       
                                 res.status_count.map(function(e){
-                                  console.log(e.job_models.id)
+                                
                                 $('.'+e.id).html(`<span>${e.job_models.length}</span>`)
  
                                 // if(status == e.status_key){
