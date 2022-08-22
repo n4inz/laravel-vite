@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('job_models_new_applicants', function (Blueprint $table) {
             $table->id();
+            $table->string('avatar')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address');
             $table->text('description');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->unsignedBigInteger('job_models_id');
             $table->unsignedBigInteger('users_id');
 

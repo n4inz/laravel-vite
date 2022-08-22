@@ -3,6 +3,7 @@
 use App\Events\Comments;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobboardController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\SearchController;
@@ -53,7 +54,7 @@ Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout'
 Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 
 
-Route::group(['middleware' => 'auth:staf,web'],function(){
+Route::group(['middleware' => 'auth'],function(){
     // Navbar
     Route::post('/comment-notify' ,[NavbarController::class, 'comment_notify'])->name('navbar.comment_notify');
 
@@ -85,7 +86,8 @@ Route::group(['middleware' => 'auth:staf,web'],function(){
     Route::post('modal-add-match-talent', [JobboardController::class, 'modal_add_match_talent'])->name('jobboard.modal_add_match_talent');
     Route::post('change-status-all-match-talent', [JobboardController::class, 'change_status_all_match_talent'])->name('jobboard.change_status_all_match_talent');
 
-    Route::post('new-aplicants', [JobboardController::class , 'new_aplicant_store'])->name('jobboard.new_aplicants');
+    Route::post('add-new-aplicants', [JobboardController::class , 'new_aplicant_store'])->name('jobboard.new_aplicants');
+
     // User
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/client/created', [UserClientController::class, 'client_created'])->name('user_client.client_created');
@@ -111,8 +113,12 @@ Route::group(['middleware' => 'auth:staf,web'],function(){
     Route::post('/search', SearchController::class)->name('search');
 });
 
-Route::get('/send/{uid}', [JobboardController::class, 'send'])->name('jobboard.send');
-Route::get('/apply/{uid}', [JobboardController::class, 'apply'])->name('jobboard.apply');
+// Home
+Route::get('/send/{uid}', [HomeController::class, 'send'])->name('home.send');
+Route::get('/apply/{uid}', [HomeController::class, 'apply'])->name('home.apply');
+Route::post('/home-new-aplicants', [HomeController::class , 'new_aplicant_store'])->name('home.new_aplicants');
+Route::post('/home-upload', [HomeController::class , 'upload'])->name('home.upload');
+
 // -- STAF --
 
 // Login Staf

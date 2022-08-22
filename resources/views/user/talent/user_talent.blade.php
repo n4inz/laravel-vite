@@ -410,63 +410,63 @@
         };
 
         // Upload FIle
-        $('#talent_filea').change(function(e){
-            var val = $(this).val();
-            e.preventDefault();
+        // $('#talent_filea').change(function(e){
+        //     var val = $(this).val();
+        //     e.preventDefault();
            
-            var formData = new FormData($(".talent_submit_file")[0]);
+        //     var formData = new FormData($(".talent_submit_file")[0]);
                     
-           $.ajax({
-                url: $('.talent_submit_file').attr("action"),
-                type: 'POST',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                beforeSend : function(xhr ,a){
-                    $('.errors_uploaded').html('')
-                const tmp = `<div class="w-full h-full bg-gray-200">
-                                <div id="progress-bar" class="bg-hover h-full flex items-center justify-center text-5xl  font-medium text-white text-center p-0.5 leading-none " style="width: 1%"> </div>
-                            </div>`;
-                    $('.files-kept').html(tmp)
-                },
+        //    $.ajax({
+        //         url: $('.talent_submit_file').attr("action"),
+        //         type: 'POST',
+        //         data: formData,
+        //         cache: false,
+        //         contentType: false,
+        //         processData: false,
+        //         beforeSend : function(xhr ,a){
+        //             $('.errors_uploaded').html('')
+        //         const tmp = `<div class="w-full h-full bg-gray-200">
+        //                         <div id="progress-bar" class="bg-hover h-full flex items-center justify-center text-5xl  font-medium text-white text-center p-0.5 leading-none " style="width: 1%"> </div>
+        //                     </div>`;
+        //             $('.files-kept').html(tmp)
+        //         },
 
-                xhr: function(){
-                //upload Progress
-                var xhr = $.ajaxSettings.xhr();
-                if (xhr.upload) {
-                    xhr.upload.addEventListener('progress', function(event) {
-                    var percent = 0;
-                    var position = event.loaded || event.position;
-                    var total = event.total;
-                    if (event.lengthComputable){
-                    percent = Math.ceil(position / total * 100);
-                    }                   
-                    $("#progress-bar").css("width", + percent +"%");
-                    $("#progress-bar").text(percent +"%");
-                    }, true);
-                }
-                return xhr;
-                },
-                error: function(e){
-                    console.log(e)
-                    const tmp = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-                                </svg>
-                                <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
-                                <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>`;
-                                $('.files-kept').html(tmp)
-                    const errors = `<p class="mt-2 text-sm text-red-600 dark:text-red-500">${e.responseJSON.message}</p>`;
-                    $('.errors_uploaded').html(errors)
-                },
-                success: function (mdata) {
-                    console.log(mdata)
-                },
-            });
-        });
+        //         xhr: function(){
+        //         //upload Progress
+        //         var xhr = $.ajaxSettings.xhr();
+        //         if (xhr.upload) {
+        //             xhr.upload.addEventListener('progress', function(event) {
+        //             var percent = 0;
+        //             var position = event.loaded || event.position;
+        //             var total = event.total;
+        //             if (event.lengthComputable){
+        //             percent = Math.ceil(position / total * 100);
+        //             }                   
+        //             $("#progress-bar").css("width", + percent +"%");
+        //             $("#progress-bar").text(percent +"%");
+        //             }, true);
+        //         }
+        //         return xhr;
+        //         },
+        //         error: function(e){
+        //             console.log(e)
+        //             const tmp = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+        //                         </svg>
+        //                         <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
+        //                         <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>`;
+        //                         $('.files-kept').html(tmp)
+        //             const errors = `<p class="mt-2 text-sm text-red-600 dark:text-red-500">${e.responseJSON.message}</p>`;
+        //             $('.errors_uploaded').html(errors)
+        //         },
+        //         success: function (mdata) {
+        //             console.log(mdata)
+        //         },
+        //     });
+        // });
 
         // Dropzone config
         Dropzone.options.dropzone =

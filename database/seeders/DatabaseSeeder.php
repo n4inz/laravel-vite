@@ -39,17 +39,18 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            SettingSeeder::class,
             ClientSeeder::class,
             TalentsSeeder::class,
             TalentLanguageSeeder::class,
             TalentTypeHelperSeeder::class,
-            // JobSeeder::class,
+            JobSeeder::class,
 
-            // SeedersJobModelsAvailabiltyDaysSeeder::class,
-            // JobModelsLanguagesSeeder::class,
-            // JobModelsMatchTalentSeeder::class,
+            SeedersJobModelsAvailabiltyDaysSeeder::class,
+            JobModelsLanguagesSeeder::class,
+            JobModelsMatchTalentSeeder::class,
 
-            StafSeeder::class,
+            // StafSeeder::class,
             TemplateEmailSeeder::class
 
             

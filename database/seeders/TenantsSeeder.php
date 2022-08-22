@@ -19,7 +19,7 @@ class TenantsSeeder extends Seeder
         $faker = Factory::create();
  
 
-        for($x=1;$x<=10;$x++){
+        for($x=1;$x<=2;$x++){
             $user =  Tenant::create([
                 'name' => $faker->name,
                 'domain' => $faker->userName.'.agency.test',

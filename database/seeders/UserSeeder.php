@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
 
         $user_test->assignRole('agency');
 
-        for($x=1;$x<=9;$x++){
+        for($x=1;$x<=2;$x++){
             $tenant =  Tenant::create([
                 'name' => $faker->name,
                 'domain' => $faker->lastName.'.'.env('DOMAIN'),

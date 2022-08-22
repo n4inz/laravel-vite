@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('job_models_new_aplicants_files', function (Blueprint $table) {
             $table->id();
             $table->string('file');
+            $table->string('extension');
             $table->unsignedBigInteger('new_applicants_id');
             $table->foreign('new_applicants_id')
             ->references('id')->on('job_models_new_applicants')

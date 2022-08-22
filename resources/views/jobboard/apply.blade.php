@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="mt-[61px] pl-[58px] w-[680px]">
-                <form class="submit" action="{{ route('jobboard.new_aplicants') }}" method="post" enctype="multipart/form-data">
+                <form class="submit" action="{{ route('home.new_aplicants') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="id"></div>
                     <input type="hidden" name="uid" value="{{ $uid }}">
@@ -69,9 +69,10 @@
                 </form>
                     <div class="mt-8">
                         <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Upload documents</span>
-                        <form style="border-style: dotted" action="{{ route('uploadWithDb') }}"  class="dropzone w-[670px]  border border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer" id="dropzone"  method="POST" enctype="multipart/form-data">
+                        <form style="border-style: dotted" action="{{ route('home.upload') }}"  class="dropzone w-[670px]  border border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer" id="dropzone"  method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="type" value="NEW_APLICANTS">
+                            <input type="hidden" name="uid" value="{{ $uid }}">
                             <div class="dz-default dz-message flex flex-col items-center justify-center  space-x-[10.25px]">
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
@@ -98,6 +99,7 @@
             url: $('.submit').attr('action'),
             data:$('.submit').serialize(),
             success:function(data){
+                // console.log(data)
                location.reload()
             }
         });

@@ -43,11 +43,12 @@ class JobModelsFactory extends Factory
         $category = $categorys[Rand(0, count($categorys) - 1)];
 
         $users_id = User::inRandomOrder()->first()->id;
+        // $client_id = Client::inRandomOrder()->first()->id;
         return [
             'family' => $this->faker->name,
             'title' => $this->faker->sentence(mt_rand(3,5)),
             'description' => $this->faker->sentence(mt_rand(1,15)),
-            'id_unique' =>  mt_rand(1000,9999),
+            'id_unique' =>  mt_rand(1,9999),
             'location' => $this->faker->address,
             'category' => $category,
             'part_time' => $this->faker->word(mt_rand(3,7)),
@@ -64,8 +65,8 @@ class JobModelsFactory extends Factory
 
             'start_date' => $this->faker->date,
             'end_date' => $this->faker->date,
-            // 'asap' => (bool)rand(0,1),
-            // 'tbd' => (bool)rand(0,1),
+            'asap' => (bool)rand(0,1),
+            'tbd' => (bool)rand(0,1),
 
 
             'salary_type' => $this->faker->sentence(mt_rand(3,5)),
@@ -76,7 +77,7 @@ class JobModelsFactory extends Factory
             'status' => str_replace(' ', '_', strtolower($status_rand)),
             'type' => $type_rand,
             // 'users_id' =>  $users_id,
-            // 'clients_id' => Client::inRandomOrder()->first()->id,
+            // 'clients_id' => (bool)rand(1,1000),
             // 'stafs_id' => $users_id,
         ];
     }

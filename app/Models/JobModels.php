@@ -74,6 +74,11 @@ class JobModels extends Model
         return $this->hasMany(JobModelsMatchTalentAdd::class, 'job_models_id');
     }
 
+    public function talent_new_aplicants()
+    {
+        return $this->hasMany(JobModelsNewApplicant::class, 'job_models_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

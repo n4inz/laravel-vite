@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Traits\HttpGuzzle;
 use App\Models\Actifity;
+use App\Models\Client;
 use App\Models\JobModels;
 use App\Models\JobModelsTask;
 use App\Models\SettingCalendlyApi;
 use App\Models\SettingJobModelsStatus;
+use App\Models\User;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Http;
@@ -18,14 +20,16 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+
+        Search::addMany[
+
+        ];
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();
         $array = [];
         foreach($getTask as $val){
             $pastDue =  now()->diffInDays($val->updated_at);
             if($pastDue >= 1){
-  
-
                array_push($array , [
                     'title' => 'Quote accept by'.' '.$val->name,
                     'body' => 'Due '.$pastDue.' day ago ',
@@ -36,8 +40,11 @@ class DashboardController extends Controller
 
        $TotalJob = JobModels::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('id');
         
-       $statusJob = SettingJobModelsStatus::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->with('job_models')->get();
-    // return $statusJob;
+       
+       $statusJob = SettingJobModelsStatus::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->with('job_models' , function($query){
+        $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
+       })->get();
+    // return $statusJob->job_models[0];
        $taskFolowUp  = Actifity::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'type' => 'TASK CREATED'])->whereDay('created_at', date('d'))->get();
        return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array'));
     }

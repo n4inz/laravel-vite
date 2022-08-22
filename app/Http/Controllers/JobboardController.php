@@ -6,6 +6,7 @@ use App\Events\Actifity;
 use App\Http\Requests\JobBoardRequest;
 
 use App\Http\Requests\NewAplicantsRequest;
+use App\Http\Requests\UserAplicantsRequest;
 use App\Http\Traits\Actifity as TraitsActifity;
 use App\Http\Traits\Event;
 use App\Http\Traits\ImageUpload;
@@ -146,8 +147,9 @@ class JobboardController extends Controller
             $query->limit(6)->orderBy('id', 'desc');
         }, 'talent_status' , 'setting_status' , 'match_talents_add' => function($query){
             $query->with('talent');
-        }])->where('uid', $uid)->firstOrFail();
+        }, 'talent_new_aplicants'])->where('uid', $uid)->firstOrFail();
 
+        // return $result;
         // Match Talent
         foreach ($result->match_talent as $match) {
             $talent = TalentTypeHelper::orderBy('id', 'desc')->where(['code_helper' => $match->jobs_sub_category , 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id])->with(['talent'])->get();
@@ -291,49 +293,48 @@ class JobboardController extends Controller
         ],200);
     }
 
-    public function send($uid)
+    public function new_aplicant_store(UserAplicantsRequest $request)
     {
-        $job = JobModels::where('uid' , $uid)->firstOrFail();
-
-        return view('jobboard.send' , compact('job'));
-    }
-
-    public function apply($uid)
-    {
-        
-        return view('jobboard.apply' , compact('uid'));
-    }
-
-    public function new_aplicant_store(NewAplicantsRequest $request)
-    {
-        // return $request->uid;
-        $idModels = JobModels::where('uid' , $request->uid)->firstOrFail('id');
-        
+        // return $request;
+        // $idModels = JobModels::where('uid' , $request->uid)->firstOrFail('id');
+        if(isset($request->avatar)){
+            $avatar = $this->uploadImageStore($request->file('avatar'), 'avatar');
+        }
        $newAplicants =  JobModelsNewApplicant::create([
+            'avatar' => $avatar ?? null,
            'first_name' => $request->first_name,
            'last_name' => $request->last_name,
            'email' => $request->email,
            'phone' => $request->phone,
            'address' => $request->address,
            'description' => $request->description,
-           'status' => 'new',
-           'job_models_id' =>  $idModels->id,
+           'job_models_id' =>  $request->job_models_id,
            'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id
         ]);
 
-        if(isset($request->id_file)){
-            foreach($request->id_file as $key => $idFile){
-                File::where(['id' => $request->id_file[$key], 'type' => 'NEW_APLICANTS'])->get()->map(function($res , $key) use($newAplicants){
-                    $newAplicants->file()->create([
-                        'file' => $res->file ,
-                        // 'extension' => strtolower($res->extension)
-                    ]);
-                    $this->move_file('public/Files before submit/'.$res->file, 'public/File/'.$res->file);
+        File::where(['users_id' => auth()->user()->id , 'type' => 'NEW_APLICANTS'])->get()->map(function($res , $key) use($newAplicants){
+            $newAplicants->file()->create([
+                'file' => $res->file ,
+                'extension' => strtolower($res->extension)
+            ]);
+            $this->move_file('public/Files before submit/'.$res->file, 'public/File/'.$res->file);
+
+            File::where('id' , $res->id)->delete();
+        });
+
+        // if(isset($request->id_file)){
+        //     foreach($request->id_file as $key => $idFile){
+        //         File::where(['id' => $request->id_file[$key], 'type' => 'NEW_APLICANTS'])->get()->map(function($res , $key) use($newAplicants){
+        //             $newAplicants->file()->create([
+        //                 'file' => $res->file ,
+        //                 // 'extension' => strtolower($res->extension)
+        //             ]);
+        //             $this->move_file('public/Files before submit/'.$res->file, 'public/File/'.$res->file);
         
-                    File::where('id' , $res->id)->delete();
-                 });
-            }
-        }
+        //             File::where('id' , $res->id)->delete();
+        //          });
+        //     }
+        // }
 
 
         return redirect()->back()->with('success' , 'success apply');
@@ -366,13 +367,6 @@ class JobboardController extends Controller
       return response(200);
     }
 
-    // public function load_template_email_talent(Request $request)
-    // {
-    //     return response()->json([
-    //         'tmp' => TemplateEmail::where(['type' => $request->type , 'status' => $request->status])->first('body')
-    //     ], 200);
-    // }
-
     public function edit_template_email(Request $request)
     {
         $temp =  $request->template;
@@ -383,5 +377,9 @@ class JobboardController extends Controller
         return redirect()->back();
     }
 
+    public function __destruct()
+    {
+        File::where(['type' => 'NEW_APLICANTS' , 'users_id' => auth()->user()->id])->delete();
+    }
 
 }

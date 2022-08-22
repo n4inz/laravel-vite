@@ -1109,13 +1109,41 @@
                                         </div>
                                         <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                         {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
-                                            <span class="overview-send-job text-palet">+ Add Talent</span>
+                                            <span data-modal-toggle="add-new-aplicants" class="overview-send-job text-palet">+ Add Talent</span>
                                         </div>
                                     </div>
                                 </div>
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="space-y-8 mt-8 px-8">
-                                    <div class="flex justify-between px-4">
+                                    @foreach ($result->talent_new_aplicants as $val_talent_new_aplicants)
+                                        <div class="flex justify-between px-4">
+                                            <div class="flex space-x-2">
+                                                @if ($val_talent_new_aplicants->avatar)
+                                                    
+                                                        <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt="">
+                                                    
+                                                @else
+                                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-400 rounded-full">
+                                                        <span class="text-white">{{ strtoupper(substr($val_talent_new_aplicants->first_name, 0, 1)) }}{{ strtoupper(substr($val_talent_new_aplicants->last_name, 0, 1)) }}</span>
+                                                    </div>
+                                                @endif
+                                                <div class="flex flex-col">
+                                                    <span class="overview-name-talent text-colortext">{{ $val_talent_new_aplicants->first_name }} {{ $val_talent_new_aplicants->last_name }}</span>
+                                                    <span class="overview-live-talent">{{ $val_talent_new_aplicants->phone }}, {{ $val_talent_new_aplicants->email }}</span>
+                                                    <span class="overview-experiance-talent">{{ $val_talent_new_aplicants->address }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#22CCE3]">
+                                                <span class="overview-talent-status text-[#22CCE3]">Applying</span>
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 1.33337C7.5 1.05723 7.72386 0.833374 8 0.833374C11.958 0.833374 15.1667 4.042 15.1667 8.00004C15.1667 11.9581 11.958 15.1667 8 15.1667C7.72386 15.1667 7.5 14.9429 7.5 14.6667C7.5 14.3906 7.72386 14.1667 8 14.1667C11.4058 14.1667 14.1667 11.4058 14.1667 8.00004C14.1667 4.59428 11.4058 1.83337 8 1.83337C7.72386 1.83337 7.5 1.60952 7.5 1.33337Z" fill="#22CCE3"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64852 0.841849C7.76499 0.836219 7.88214 0.833374 7.99992 0.833374C8.27606 0.833374 8.49992 1.05723 8.49992 1.33337C8.49992 1.60952 8.27606 1.83337 7.99992 1.83337C7.89825 1.83337 7.79719 1.83583 7.6968 1.84068C7.42098 1.85402 7.18658 1.64123 7.17325 1.36541C7.15991 1.08959 7.3727 0.855181 7.64852 0.841849ZM6.22405 1.55293C6.31709 1.81293 6.18175 2.09912 5.92176 2.19216C5.731 2.26043 5.54457 2.33784 5.36299 2.42387C5.11344 2.5421 4.81529 2.43565 4.69705 2.1861C4.57882 1.93656 4.68527 1.63841 4.93482 1.52017C5.146 1.42012 5.36287 1.33006 5.58482 1.25064C5.84482 1.15759 6.13101 1.29294 6.22405 1.55293ZM3.89323 2.72441C4.07874 2.92897 4.0633 3.24517 3.85874 3.43068C3.70914 3.56635 3.56623 3.70926 3.43056 3.85887C3.24505 4.06342 2.92884 4.07886 2.72429 3.89335C2.51974 3.70785 2.5043 3.39164 2.6898 3.18709C2.84733 3.01339 3.01326 2.84745 3.18697 2.68993C3.39152 2.50442 3.70773 2.51986 3.89323 2.72441ZM2.18598 4.69718C2.43553 4.81541 2.54198 5.11356 2.42375 5.36311C2.33772 5.54469 2.26031 5.73112 2.19204 5.92188C2.099 6.18187 1.81281 6.31722 1.55281 6.22417C1.29282 6.13113 1.15747 5.84494 1.25051 5.58494C1.32994 5.36299 1.41999 5.14612 1.52005 4.93494C1.63828 4.68539 1.93643 4.57894 2.18598 4.69718ZM1.36528 7.17337C1.6411 7.1867 1.85389 7.42111 1.84056 7.69693C1.83571 7.79732 1.83325 7.89837 1.83325 8.00004C1.83325 8.10171 1.83571 8.20277 1.84056 8.30315C1.85389 8.57897 1.6411 8.81338 1.36528 8.82671C1.08946 8.84004 0.855059 8.62726 0.841727 8.35144C0.836097 8.23497 0.833252 8.11782 0.833252 8.00004C0.833252 7.88226 0.836097 7.76511 0.841727 7.64865C0.855059 7.37283 1.08946 7.16004 1.36528 7.17337ZM1.55281 9.77591C1.81281 9.68287 2.099 9.81821 2.19204 10.0782C2.26031 10.269 2.33772 10.4554 2.42375 10.637C2.54198 10.8865 2.43553 11.1847 2.18598 11.3029C1.93643 11.4211 1.63828 11.3147 1.52005 11.0651C1.41999 10.854 1.32994 10.6371 1.25051 10.4151C1.15747 10.1551 1.29282 9.86895 1.55281 9.77591ZM2.72429 12.1067C2.92884 11.9212 3.24505 11.9367 3.43056 12.1412C3.56623 12.2908 3.70914 12.4337 3.85874 12.5694C4.0633 12.7549 4.07874 13.0711 3.89323 13.2757C3.70773 13.4802 3.39152 13.4957 3.18697 13.3102C3.01326 13.1526 2.84733 12.9867 2.6898 12.813C2.5043 12.6084 2.51974 12.2922 2.72429 12.1067ZM4.69705 13.814C4.81529 13.5644 5.11344 13.458 5.36299 13.5762C5.54457 13.6622 5.731 13.7397 5.92176 13.8079C6.18175 13.901 6.31709 14.1872 6.22405 14.4471C6.13101 14.7071 5.84482 14.8425 5.58482 14.7494C5.36287 14.67 5.146 14.58 4.93482 14.4799C4.68527 14.3617 4.57882 14.0635 4.69705 13.814ZM7.17325 14.6347C7.18658 14.3589 7.42098 14.1461 7.6968 14.1594C7.79719 14.1643 7.89825 14.1667 7.99992 14.1667C8.27606 14.1667 8.49992 14.3906 8.49992 14.6667C8.49992 14.9429 8.27606 15.1667 7.99992 15.1667C7.88214 15.1667 7.76499 15.1639 7.64852 15.1582C7.3727 15.1449 7.15991 14.9105 7.17325 14.6347Z" fill="#22CCE3"/>
+                                                </svg>
+                                                    
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    {{-- <div class="flex justify-between px-4">
                                         <div class="flex space-x-2">
                                             <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
                                             <div class="flex flex-col">
@@ -1130,28 +1158,12 @@
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
                                             </svg>
                                         </div>
-                                    </div>
-                                    <div class="flex justify-between px-4">
-                                        <div class="flex space-x-2">
-                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                            <div class="flex flex-col">
-                                                <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                                <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                                <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                            <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                            </svg>
-                                        </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="flex items-center justify-center mx-auto mt-10 mb-6">
                                     <span class="overview-talent-otside-text text-[#222222]">Invite more talents outside the Ayiconnection system list</span>
                                 </div>
-                                <a href="{{ route('jobboard.send', ['uid' => $result->uid]) }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
+                                <a href="{{ route('home.send', ['uid' => $result->uid]) }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
@@ -1624,6 +1636,133 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Modal New Aplicants --}}
+            <div id="add-new-aplicants" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
+                <div class="p-4 w-[852px] h-screen">
+                    <div class="bg-white rounded-lg shadow ">
+                        <div class="relative text-center pt-10">
+                            <span class="overview-modal-add-talent-title mt-10 ml-10 text-[#222222]">New Talent Aplicants</span>
+                            <button data-modal-toggle="add-new-aplicants" type="button" class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" >
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                            </button>
+                        </div>
+                        <form action="{{ route('jobboard.new_aplicants') }}" method="post" class="validate_new_aplicants" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="job_models_id" id="" value="{{ $result->id }}">
+                            <div class="px-[91px] mt-10">
+                                <div class="flex justify-center  items-center space-x-10">
+                                    <div class="errors_avatar">
+                                        <label for="avatar">
+                                            <div class="{{ $errors->has('avatar') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex relative justify-center  items-center w-28 h-28 bg-hover rounded-full hover:cursor-pointer">
+                                                <img id="output" class="absolute rounded-full w-28 h-28"/>
+                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 6C3 4.34315 4.34315 3 6 3H26C27.6569 3 29 4.34316 29 6V26C29 27.6569 27.6569 29 26 29H6C4.34316 29 3 27.6569 3 26V6ZM6 5C5.44772 5 5 5.44772 5 6V26C5 26.5523 5.44771 27 6 27H26C26.5523 27 27 26.5523 27 26V6C27 5.44771 26.5523 5 26 5H6Z" fill="{{ $errors->has('avatar') ? '#e80f00' : '#3BD7CF' }}"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.66675 12C7.66675 9.60674 9.60686 7.66663 12.0001 7.66663C14.3933 7.66663 16.3334 9.60674 16.3334 12C16.3334 14.3932 14.3933 16.3333 12.0001 16.3333C9.60686 16.3333 7.66675 14.3932 7.66675 12ZM12.0001 9.66663C10.7114 9.66663 9.66675 10.7113 9.66675 12C9.66675 13.2886 10.7114 14.3333 12.0001 14.3333C13.2887 14.3333 14.3334 13.2886 14.3334 12C14.3334 10.7113 13.2887 9.66663 12.0001 9.66663Z" fill="{{ $errors->has('avatar') ? '#e80f00' : '#3BD7CF' }}"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9978 16.5901C20.3795 16.2465 20.9594 16.248 21.3394 16.5934L28.6727 23.2601C29.0814 23.6316 29.1115 24.2641 28.74 24.6727C28.3685 25.0814 27.736 25.1115 27.3274 24.74L20.6634 18.6818L14.669 24.0767C14.2956 24.4128 13.7307 24.4196 13.3493 24.0926L9.29165 20.6147L4.60006 24.1334C4.15823 24.4647 3.53143 24.3752 3.20006 23.9334C2.86869 23.4915 2.95823 22.8647 3.40006 22.5334L8.73339 18.5334C9.10835 18.2522 9.62832 18.2691 9.98418 18.5741L13.984 22.0025L19.9978 16.5901Z" fill="{{ $errors->has('avatar') ? '#c7270e' : '#3BD7CF' }}"/>
+                                                </svg>
+                                            </div>
+                                            <input onchange="loadFile(event)" type="file" id="avatar" name="avatar" class="hidden">
+                                        </label>
+                                    </div>
+                                    <div class="w-full flex flex-col ">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="mb-6 w-[249px] errors_first_name">
+                                                <label for="first-name" class="{{ $errors->has('first_name') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Full Name</label>
+                                                <div class="{{ $errors->has('first_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                                    <input name="first_name" value="{{ old('first_name') }}" type="text" class="{{ $errors->has('first_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
+                                                </div>
+                                                @if($errors->has('first_name'))
+                                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('first_name') }}</p>
+                                                @endif
+                                                @if($errors->has('last_name'))
+                                                    <p class="{{ $errors->has('last_name') ? 'invisible' : 'hidden' }} mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="mb-6 w-[249px] errors_last_name">
+                                                <label for="last-name" class="{{ $errors->has('last_name') ? 'text-red-600' : '' }} invisible block mb-2 overview-modal-add-talent-text text-[#222222]">Last Name</label>
+                                                <div class="{{ $errors->has('last_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                                    <input name="last_name" value="{{ old('last_name') }}" type="text" class="{{ $errors->has('last_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Last Name">
+                                                </div>
+                                                @if($errors->has('last_name'))
+                                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
+                                                @endif
+                                                @if($errors->has('first_name'))
+                                                    <p class="{{ $errors->has('first_name') ? 'invisible' : 'hidden' }} mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('first_name') }}</p>
+                                                @endif
+                                            </div>                        
+                                        </div>
+        
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="errors_email">
+                                        <span class="{{ $errors->has('email') ||  $errors->has('phone') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Your contact information</span>
+                                        <div class="{{ $errors->has('email') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                            <input name="email" value="{{ old('email') }}" type="text" id="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Email">
+                                        </div>
+                                        @if($errors->has('email'))
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
+                                        @endif
+                                    </div>
+                                    <div class="errors_phone">
+                                        <div class="{{ $errors->has('phone') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                            <input name="phone" value="{{ old('phone') }}" type="text" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Phone">
+                                        </div>
+                                        @if($errors->has('phone'))
+                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="mt-6 errors_address">
+                                    <span class="{{ $errors->has('address') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Address</span>
+                                    <div class="{{ $errors->has('address') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                        <input name="address" value="{{ old('address') }}" type="text" id="address" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="">
+                                    </div>
+                                    @if($errors->has('address'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
+                                    @endif
+                                </div>
+                                <div class="mt-6 errors_description">
+                                    <span class="{{ $errors->has('description') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Description</span>
+                                    <div class="{{ $errors->has('description') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-[148px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
+                                        <textarea name="description" rows="6" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none">{{ old('description') }}</textarea>
+                                        <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
+                                    </div>
+                                    @if($errors->has('description'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('description') }}</p>
+                                    @endif
+                                </div>
+                        </form>
+                               
+                                <div class="mt-6">
+                                    <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Upload documents</span>
+                                    <form style="border-style: dotted" action="{{ route('uploadWithDb') }}"  class="dropzone w-[670px]  border border-[#CCD3DC] mt-2 rounded relative hover:cursor-pointer" id="dropzone"  method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="type" value="NEW_APLICANTS">
+                                        <div class="dz-default dz-message flex flex-col items-center justify-center  space-x-[10.25px]">
+                                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
+                                            </svg>
+                                            <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
+                                            <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>
+                                        </div>
+                                    </form>
+                                </div>
+        
+                                <div class="py-12">
+                                    <button class="w-[670px] h-[40px] bg-palet rounded">
+                                        <span class="overview-talent-modal-title text-white">Add Talent</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
         </div>
     </article>
 </main>
@@ -2043,29 +2182,6 @@
         $('.editor').toggleClass('hidden');
     }
 
-    // Send mail talent status
-    // function template(type,status){
-    //     $.ajaxSetup({
-    //         headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $.ajax({
-    //         type:'POST',
-    //         url:'{{ route("jobboard.load_template_email_talent") }}',
-    //         data: {type , status},
-    //         success:function(data){
-    //             $('#editor_tmp_email_'+type).val('apaaa')
-        
-    //         }
-    //     });
-
-    // }
-
-
-
-    // template(1,'REJECTED');
-
     function edit_email(type){
         $('.view_email_'+type).toggleClass('hidden');
         $('.editor_email_'+type).toggleClass('hidden');
@@ -2076,6 +2192,14 @@
         console.log(val)
     }
 
+    // Priview images
+        var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+        URL.revokeObjectURL(output.src)
+        }
+    };
    
 
 </script>
