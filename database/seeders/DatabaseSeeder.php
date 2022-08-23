@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             JobModelsLanguagesSeeder::class,
             JobModelsMatchTalentSeeder::class,
 
-            // StafSeeder::class,
+            StafSeeder::class,
             TemplateEmailSeeder::class
 
             

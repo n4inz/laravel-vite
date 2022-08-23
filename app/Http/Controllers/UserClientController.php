@@ -37,7 +37,7 @@ class UserClientController extends Controller
     public function client()
     {
         $client = Client::get();
-
+        // return request()->query('search');
         // return $client->count();
         return view('user.client.user_client' , compact('client'));
     }

@@ -5,7 +5,7 @@
     @include('layouts.sidebar')
     <article id="article" class=" ml-[310px] space-x-2 mt-[85px] px-5 w-[75%]">
         <div class="flex items-center justify-between mt-8 w-[1017px] xl:w-full">
-            <span class="overview-modal-add-talent-title">Staf</span>
+            <span class="overview-modal-add-talent-title">Staff</span>
             <button onclick="modal_show()" class="w-[111px] h-10 bg-palet rounded-md">
                 <span class="task-btn-text">+ Create</span>
             </button>
@@ -14,7 +14,7 @@
             <div class="flex items-center space-x-8 w-[1017px]">
                 <div class="flex items-center space-x-2 ">
                     <div class="w-2 h-6 bg-palet rounded-sm"></div>
-                    <span class="text-[#222222] user-talent-title">Staf</span>
+                    <span class="text-[#222222] user-talent-title">Staff</span>
                 </div>
     
                 <div class="relative w-80 left-1">
@@ -39,6 +39,7 @@
             {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
             @foreach ($staf as $values )
                 <div id="search_staf" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+                    <div class="hidden">{{ $values->user->email }} {{ $values->user->full_name }}</div>
                     <div>
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Setting/avatar/'.$values->avatar) }}" alt="">
                     </div>
@@ -66,7 +67,7 @@
             <div class="p-4 w-[852px] h-screen">
                 <div class="bg-white rounded-lg shadow ">
                     <div class="relative text-center pt-10">
-                        <span class="overview-modal-add-talent-title mt-10 ml-10 text-[#222222]">Add New Staf</span>
+                        <span class="overview-modal-add-talent-title mt-10 ml-10 text-[#222222]">Add New Staff</span>
                         <button onclick="close_modal()" type="button" class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" >
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
@@ -138,7 +139,7 @@
                             </div>
                             <div class="py-12">
                                 <button class="w-[670px] h-[40px] bg-palet rounded">
-                                    <span class="overview-talent-modal-title text-white">Add Your Staf</span>
+                                    <span class="overview-talent-modal-title text-white">Add Your Staff</span>
                                 </button>
                             </div>
                         </div>
@@ -151,6 +152,7 @@
     <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
     <script type="text/javascript">
         $('input#search_stafs').quicksearch('div#search_staf');
+        $('input#simple-search').quicksearch('div#search_staf');
     </script>
     <script>
         // Validate

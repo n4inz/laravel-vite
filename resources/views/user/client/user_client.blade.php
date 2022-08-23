@@ -40,6 +40,8 @@
         {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
             @foreach ($client as $values )
                 <div id="search_client" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+                    <div class="hidden">{{ $values->phone}} {{ $values->email }} {{ $values->address }} {{ $values->languages }} {{ $values->note }}</div>
+                    {{-- <div class="hidden"></div> --}}
                     <div>
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Client file/avatar/'.$values->avatar) }}" alt="">
                     </div>
@@ -67,6 +69,8 @@
     <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
     <script type="text/javascript">
         $('input#search_clients').quicksearch('div#search_client');
+        $('input#simple-search').quicksearch('div#search_client');
+        
     </script>
 
 @endsection

@@ -14,6 +14,8 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Http;
 
+use function PHPUnit\Framework\classHasAttribute;
+
 class DashboardController extends Controller
 {
     use HttpGuzzle;
@@ -21,9 +23,6 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-        Search::addMany[
-
-        ];
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();
         $array = [];
@@ -43,7 +42,9 @@ class DashboardController extends Controller
        
        $statusJob = SettingJobModelsStatus::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->with('job_models' , function($query){
         $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
-       })->get();
+       })->withCount('job_models')->get();
+
+    //    return $statusJob;
     // return $statusJob->job_models[0];
        $taskFolowUp  = Actifity::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'type' => 'TASK CREATED'])->whereDay('created_at', date('d'))->get();
        return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array'));

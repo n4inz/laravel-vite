@@ -69,6 +69,7 @@
                                 @foreach ($sts_val->job_models as $value )
                                     <a id="data_{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
                                         <div id="search_list" class="relative w-full h-[211px] bg-bgbody mt-3 rounded">
+                                            <div class="hidden">{{ $sts_val->status_name }} {{ $value->family }} {{ $value->title }} {{ $value->description }} {{ $value->location }}</div>
                                             <div class="h-40 px-4">
                                                 <div class="flex items-center justify-between pt-[11px]">
                                                     <div class="text-xs font-semibold text-[#2CA6A0] flex items-center space-x-2">
@@ -632,6 +633,7 @@
     <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
     <script type="text/javascript">
         $('input#search_task').quicksearch('div#search_list');
+        $('input#simple-search').quicksearch('div#search_list');
     </script>
     <script>
         // Validate
