@@ -65,6 +65,31 @@
                                         @if ($setting->SettingJobStatus->count() == 0)
                                         <table width="100%">
                                             <tbody class="load-task">
+                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer hidden">
+                                                    <td height="66px" width="12%">
+                                                        <div class="flex items-center justify-center space-x-2">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                            </svg>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                    <td height="66px" width="50%">
+                                                        <input name="name_status_job[]" type="text" value="Potential Client" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                        
+                                                    </td>
+                                                    <td height="66px" width="25%">
+                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
+                                                    </td>
+                                                    <td height="66px" align="center">
+                                                        <label for="potential_client" class="relative inline-flex items-center cursor-pointer">
+                                                           
+                                                            <input name="0" checked value="1" type="checkbox" id="potential_client" class="sts group_sts sr-only peer">
+                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
+                                                        </label>
+                                                    </td>
+                                                </tr>
 
                                                 <tr class="hover:bg-[#F7F7F7] cursor-pointer">
                                                     <td height="66px" width="12%">
@@ -85,8 +110,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="internal_matched" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="0" value="0">
-                                                            <input name="0" @if(is_array(old('status')) && in_array('internal_matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="1" type="checkbox" id="internal_matched" class="sts group_sts sr-only peer">
+                                                            <input type="hidden" name="1" value="0">
+                                                            <input name="1" @if(is_array(old('status')) && in_array('internal_matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="1" type="checkbox" id="internal_matched" class="sts group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -110,8 +135,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="agency_interview" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="1" value="0">
-                                                            <input name="1" @if(is_array(old('status')) && in_array('agency_interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="agency_interview" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="2" value="0">
+                                                            <input name="2" @if(is_array(old('status')) && in_array('agency_interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="agency_interview" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -135,8 +160,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="present_to_family" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="2" value="0">
-                                                            <input name="2" @if(is_array(old('status')) && in_array('present_to_family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="1" type="checkbox" id="present_to_family" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="3" value="0">
+                                                            <input name="3" @if(is_array(old('status')) && in_array('present_to_family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="1" type="checkbox" id="present_to_family" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -160,8 +185,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_interview" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="3" value="0">
-                                                            <input name="3" @if(is_array(old('status')) && in_array('family_interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="family_interview" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="4" value="0">
+                                                            <input name="4" @if(is_array(old('status')) && in_array('family_interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="family_interview" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -185,8 +210,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_trialing" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="4" value="0">
-                                                            <input name="4" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="5" value="0">
+                                                            <input name="5" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -210,8 +235,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="rejected" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="5" value="0">
-                                                            <input name="5" @if(is_array(old('status')) && in_array('rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="1" type="checkbox" id="rejected" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="6" value="0">
+                                                            <input name="6" @if(is_array(old('status')) && in_array('rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="1" type="checkbox" id="rejected" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -235,8 +260,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="withdrawn" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="6" value="0">
-                                                            <input name="6"  @if(is_array(old('status')) && in_array('withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="1" type="checkbox" id="withdrawn" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="7" value="0">
+                                                            <input name="7"  @if(is_array(old('status')) && in_array('withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="1" type="checkbox" id="withdrawn" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -260,8 +285,8 @@
                                                     </td>
                                                     <td height="66px" align="center">
                                                         <label for="family_offer" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="7" value="0">
-                                                            <input name="7"  @if(is_array(old('status')) && in_array('family_offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="1" type="checkbox" id="family_offer" class="group_sts sr-only peer">
+                                                            <input type="hidden" name="8" value="0">
+                                                            <input name="8"  @if(is_array(old('status')) && in_array('family_offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="1" type="checkbox" id="family_offer" class="group_sts sr-only peer">
                                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                                         </label>
                                                     </td>
@@ -272,34 +297,35 @@
                                             @foreach ($setting->SettingJobStatus as $val )
                                                 <table width="100%">
                                                     <tbody class="load-task">
-                                                        <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                            <td height="66px" width="12%">
-                                                                <div class="flex items-center justify-center space-x-2">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                                    </svg>
-                                                                    
-                                                                </div>
-                                                            </td>
-                                                            <td height="66px" width="50%">
-                                                                <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                                <input type="hidden" name="id[]" value="{{ $val->id }}">
-                                                            </td>
-                                                            <td height="66px" width="25%">
-                                                               
-                                                                {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                            </td>
-                                                            <td height="66px" align="center">
-                                                                <label for="{{ $val->id }}" class="relative inline-flex items-center cursor-pointer">
-                                                                    <input type="hidden" name="{{ $loop->iteration -1 }}" value="0">
-                                                                    <input name="{{ $loop->iteration -1 }}" @if($val->status) checked @endif value="1" type="checkbox" id="{{ $val->id }}" class="sts group_sts sr-only peer">
-                                                                    <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                                </label>
-                                                            </td>
-                                                        </tr>
-
-
+                                                        @if ($val->status_key != 'potential_client')
+                                                        
+                                                            <tr class="hover:bg-[#F7F7F7] cursor-pointer">
+                                                                <td height="66px" width="12%">
+                                                                    <div class="flex items-center justify-center space-x-2">
+                                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                                        </svg>
+                                                                        
+                                                                    </div>
+                                                                </td>
+                                                                <td height="66px" width="50%">
+                                                                    <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                                    <input type="hidden" name="id[]" value="{{ $val->id }}">
+                                                                </td>
+                                                                <td height="66px" width="25%">
+                                                                
+                                                                    {{-- <span class="task-text-body ">CEKK</span> --}}
+                                                                </td>
+                                                                <td height="66px" align="center">
+                                                                    <label for="{{ $val->id }}" class="relative inline-flex items-center cursor-pointer">
+                                                                        <input type="hidden" name="{{ $loop->iteration -2 }}" value="0">
+                                                                        <input name="{{ $loop->iteration -2 }}" @if($val->status) checked @endif value="1" type="checkbox" id="{{ $val->id }}" class="sts group_sts sr-only peer">
+                                                                        <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             @endforeach
@@ -419,8 +445,8 @@
                                             <div class="flex space-x-10 p-4 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
-                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('nanny/_sister', old('chile_care')) ) checked @endif @if(in_array('nanny/_sister', $subCategory)) checked @endif value="nanny/_sister" id="nany-sister" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
-                                                        <label for="nany-sister" class="overview-id-field text-colortext hover:cursor-pointer">Nany/ Sister</label>
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('nanny/_sitter', old('chile_care')) ) checked @endif @if(in_array('nanny/_sitter', $subCategory)) checked @endif value="nanny/_sitter" id="nany-sitter" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
+                                                        <label for="nany-sitter" class="overview-id-field text-colortext hover:cursor-pointer">Nany/ Sitter</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
                                                         <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('au_pair', old('chile_care')) ) checked @endif  @if(in_array('au_pair', $subCategory)) checked @endif  value="au_pair" id="au-pair" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >

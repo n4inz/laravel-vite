@@ -99,6 +99,9 @@
             color: rgb(148 163 184 / var(--tw-bg-opacity));;
             background: white;
         }
+        .tagify__input{
+            font-size: 11px
+        }
       
     </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
@@ -109,7 +112,9 @@
 
 </head>
 <body class="bg-backround font-roboto ">
+   
     @include('layouts.navbar')
+    <div class="inset-0 bg-gray-800 opacity-30 fixed z-20 hide_body hidden"></div>
 
     <div>
        

@@ -4,7 +4,7 @@ import './bootstrap';
 window.Echo.channel("messages").listen("Comments", (event) => {
 
     const template = `<div class="flex space-x-2 mt-6">
-                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${event.data.avatar}" alt="">
+                        <img class="w-10 h-10 border-2 border-white rounded-full " src="${event.data.avatar}" alt="">
                             <div class="w-full">
                                 <div class="flex space-x-4">
                                     <div class="flex space-x-1 justify-center items-center">
@@ -44,7 +44,7 @@ window.Echo.channel("messages").listen("Comments", (event) => {
 window.Echo.channel("reply-messages").listen("ReplyComment", (res) => {
 
     const template_reply = `<div class="flex space-x-2">
-                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="${res.data.avatar}" alt="">
+                                <img class="w-10 h-10 border-2 border-white rounded-full" src="${res.data.avatar}" alt="">
                                 <div class="max-w-xl">
                                     <div class="flex space-x-4">
                                         <div class="flex space-x-1 justify-center items-center">

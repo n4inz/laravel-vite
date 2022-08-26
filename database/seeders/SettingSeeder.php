@@ -36,6 +36,7 @@ class SettingSeeder extends Seeder
             ]);
 
             $status = [
+                'Potential Client',
                 'Internal Matched',
                 'Agency Interview',
                 'Present to Family',

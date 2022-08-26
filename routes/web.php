@@ -82,6 +82,13 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('edit-description', [JobboardController::class, 'edit_description'])->name('jobboard.edit_description');
     Route::post('load-template-email-talent' , [JobboardController::class, 'load_template_email_talent'])->name('jobboard.load_template_email_talent');
     Route::post('edit-template-email' , [JobboardController::class , 'edit_template_email'])->name('jobboard.edit_template_email');
+    Route::post('edit-pay-info' , [JobboardController::class , 'edit_pay_info'])->name('jobboard.edit_pay_info');
+
+    // AJAX JOBBOARD
+    Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');
+    Route::post('edit-client-detail',[JobboardController::class, 'edit_client_detail'])->name('jobboard.edit_client_detail');
+    Route::post('edit-subcategory',[JobboardController::class, 'edit_subcategorys'])->name('jobboard.edit_subcategory');
+    Route::post('edit-talents-ayi',[JobboardController::class, 'edit_talents_ayi'])->name('jobboard.edit_talents_ayi');
 
     Route::post('modal-add-match-talent', [JobboardController::class, 'modal_add_match_talent'])->name('jobboard.modal_add_match_talent');
     Route::post('change-status-all-match-talent', [JobboardController::class, 'change_status_all_match_talent'])->name('jobboard.change_status_all_match_talent');

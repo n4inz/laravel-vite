@@ -6,8 +6,8 @@ const modal = new Modal(targetEl, options);
 
 function create_jobs(sts){
    modal.show();
-   const input = `<input type="hidden" name="status" value="${sts}">`;
-   $('.status').html(input);
+   // const input = `<input type="hidden" name="status" value="${sts}">`;
+   // $('.status').html(input);
 }
 
 // function potensial_client(){

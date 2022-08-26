@@ -110,7 +110,7 @@
 
     {{-- Mobile --}}
 
-    <div id="sidebar-mobile" class="hidden fixed top-0 bottom-0 px-5 w-20 bg-bgbody rounded dark:bg-gray-800 border">
+    <div id="sidebar-mobile" class="hidden fixed top-0 bottom-0 px-5 w-20 bg-bgbody rounded border">
         <div class="flex items-center justify-center xl:justify-start mt-2 relative">
             <div class="">
                 <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

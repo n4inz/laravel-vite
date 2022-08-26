@@ -79,6 +79,11 @@ class JobModels extends Model
         return $this->hasMany(JobModelsNewApplicant::class, 'job_models_id');
     }
 
+    public function setting_category()
+    {
+        return $this->belongsTo(SettingServiceCategory::class , 'category' , 'id');
+    }
+
     protected static function boot()
     {
         parent::boot();

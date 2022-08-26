@@ -13,24 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('job_models_ranges', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name')->nullable();
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('address');
-            $table->string('languages');
-            $table->text('note')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('status_from');
+            $table->string('status_to');
+            $table->string('date_first');
+            $table->string('date_second');
+            $table->string('day');
+            $table->unsignedBigInteger('job_models_id');
             $table->unsignedBigInteger('users_id');
 
-
+            $table->foreign('job_models_id')
+            ->references('id')->on('job_models')
+            ->onDelete('cascade');
             $table->foreign('users_id')
             ->references('id')->on('users')
-            ->onDelete('cascade')->onUpdate('cascade');
-
-
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -42,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('job_models_ranges');
     }
 };

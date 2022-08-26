@@ -15,12 +15,13 @@ use App\Models\Actifity as ModelsActifity;
 use App\Models\Client;
 use App\Models\File;
 use App\Models\JobModels;
-
+use App\Models\JobModelsAvailabiltyDays;
 use App\Models\JobModelsFile;
-
+use App\Models\JobModelsLanguages;
+use App\Models\JobModelsMatchTalent;
 use App\Models\JobModelsMatchTalentAdd;
 use App\Models\JobModelsNewApplicant;
-
+use App\Models\JobModelsRange;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
@@ -101,9 +102,26 @@ class JobboardController extends Controller
             'status' => 'required'
         ]);
 
-        $data = JobModels::where('id' , $request->id)->update([
+
+        $loadJob = JobModels::where('id' , $request->id)->first(['set_job_status_id', 'updated_at']);
+        
+        
+        $data = JobModels::updateOrCreate(['id' => $request->id],[
             'status' => $request->status,
             'set_job_status_id' => $request->status
+        ]);
+        
+        $from = now()->parse($loadJob->updated_at);
+        $to = now()->parse($data->updated_at);
+
+        JobModelsRange::create([
+            'status_from' => $loadJob->set_job_status_id,
+            'status_to' => $request->status,
+            'date_first' => $loadJob->updated_at,
+            'date_second' => $data->updated_at,
+            'day' => $from->diff($to)->format('%d'),
+            'job_models_id' => $request->id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
         ]);
 
         $status_count = SettingJobModelsStatus::with(['job_models' => function ($query) use($request){
@@ -147,7 +165,7 @@ class JobboardController extends Controller
             $query->limit(6)->orderBy('id', 'desc');
         }, 'talent_status' , 'setting_status' , 'match_talents_add' => function($query){
             $query->with('talent');
-        }, 'talent_new_aplicants'])->where('uid', $uid)->firstOrFail();
+        }, 'talent_new_aplicants' , 'setting_category'])->where('uid', $uid)->firstOrFail();
 
         // return $result;
         // Match Talent
@@ -169,13 +187,28 @@ class JobboardController extends Controller
         $status_talent = SettingStatusTalent::where(['users_id'  => auth()->user()->staf->users_agency_id ?? auth()->user()->id ])->get(['id', 'status_name', 'status_key']);
 
         $matchTalents = JobModelsMatchTalentAdd::with('talent')->where(['job_models_id' => $result->id])->orderBy('id' , 'desc')->get();
-
+        $category = SettingServiceCategory::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $tmp_email1 = TemplateEmail::where(['type' => 2 , 'status' => 'INTERVIEW'])->first('body');
         $tmp_email2 = TemplateEmail::where(['type' => 1 , 'status' => 'REJECTED'])->first('body');
         // $tmp_email3 = TemplateEmail::where(['type' => 3 , 'status' => 'REJECTED'])->first('body');
+        // Tagify
+
+        $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        $json = [];
+        foreach ($client as $value) {
+            array_push($json, [
+                'value' => $value->id,
+                'name' => $value->first_name,
+                'avatar' => $value->avatar ?? 'dummy.png',
+                'email' => $value->email,
+                'phone' => $value->phone,
+                'address' => $value->address,
+                'languages' => $value->languages,
+            ]);
+        }
 
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents' , 'matchTalents' , 'tmp_email1' ,'tmp_email2'));
+        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents' , 'matchTalents' , 'tmp_email1' ,'tmp_email2' ,'json' , 'category'));
     }
 
     public function edit_description(Request $request)
@@ -372,8 +405,119 @@ class JobboardController extends Controller
         $temp =  $request->template;
         // return request()->post($temp);
 
-        $talentEmail =  Talents::where(['id' => $request->talent_id , 'users_id' =>auth()->user()->staf->users_agency_id ?? auth()->user()->id])->first();
+        $talentEmail =  Talents::where(['id' => $request->talent_id , 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id])->first();
         SendEmailToTalent::dispatch($talentEmail->email, request()->post($temp));
+        return redirect()->back();
+    }
+
+    // AJAX
+    public function edit_responsibility(Request $request)
+    {
+        JobModelsAvailabiltyDays::updateOrCreate(['job_models_id' => $request->job_models_id],[
+            'monday' => $request->monday,
+            'tuesday' => $request->tuesday,
+            'wednesday' => $request->wednesday,
+            'thursday' => $request->thursday,
+            'friday' => $request->friday,
+            'saturday' => $request->saturday,
+            'sunday' => $request->sunday,
+            'job_models_id' => $request->job_models_id
+        ]);
+
+        JobModels::where('id',$request->job_models_id)->update([
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'asap' => $request->asap,
+            'tbd' => $request->tbd
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function edit_client_detail(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required|unique:talents,phone',
+            'email' => 'required|unique:users,email|unique:talents,email',
+            'address' => 'required',
+            'languages' => 'required',
+            'job_models_id' => 'required'
+        ]);
+        $client = Client::updateOrCreate(['id' => $request->client_id],[
+            'first_name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'languages' => $request->languages,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            'create_by' => auth()->user()->id,
+        ]);
+        
+        JobModels::where('id', $request->job_models_id)->update([
+            'clients_id' => $client->id
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function edit_subcategorys(Request $request)
+    {
+        // return $request;
+        $request->validate([
+            'job_models_id' => 'required',
+            'subcategory' => 'required'
+        ]);
+        JobModelsMatchTalent::where('job_models_id', $request->job_models_id)->delete();
+        foreach($request->subcategory as $keys => $val_sub_cat){
+            JobModelsMatchTalent::create([
+                'jobs_sub_category' => $request->subcategory[$keys],
+                'job_models_id' => $request->job_models_id,
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function edit_talents_ayi(Request $request)
+    {
+       
+        $request->validate([
+            'category' => 'required',
+            'location' => 'required',
+            'desired_living' => 'required',
+            'english_level' => 'required',
+            'rate_negotiable' => 'required',
+            'part_time' => 'required',
+            'job_models_id' => 'required'
+        ]);
+        JobModels::where('id', $request->job_models_id)->update([
+            'category' => $request->category,
+            'location' => $request->location,
+            'desired_living' => $request->desired_living,
+            'english_level' => $request->english_level ,
+            'rate_negotiable' => $request->rate_negotiable,
+            'part_time' => $request->part_time
+        ]);
+
+        JobModelsLanguages::updateOrCreate(['job_models_id' => $request->job_models_id],[
+            'language' => $request->languages,
+            'job_models_id' => $request->job_models_id,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function edit_pay_info(Request $request)
+    {
+        JobModels::where('id' , $request->job_models_id)->update([
+            'pay_with' => $request->pay_info
+        ]);
+
         return redirect()->back();
     }
 

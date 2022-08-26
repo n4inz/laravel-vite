@@ -3,7 +3,7 @@
 
     <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
         <div id="search" class="w-1/2 togle-search-desktop" >
-            <div class="relative ">
+            {{-- <div class="relative ">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
@@ -14,7 +14,7 @@
                     <input readonly data-modal-toggle="global-search" type="text" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" autocomplete="off" required>
                 </div>
 
-            </div>
+            </div> --}}
         </div>
 
         <div class="flex items-center justify-end w-1/2">

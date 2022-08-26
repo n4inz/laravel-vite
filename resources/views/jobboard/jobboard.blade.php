@@ -6,12 +6,12 @@
         <div>
             <div class="h-20 xl:w-full bg-bgbody px-6 flex items-center justify-between rounded">
                 <div class="flex items-center">
-                    <div class="h-8 w-[119px] bg-palet rounded-lg flex items-center justify-center space-x-2 hover:cursor-pointer">
+                    <div onclick="create_jobs()" class="h-8 w-[119px] bg-palet rounded-lg flex items-center justify-center space-x-2 hover:cursor-pointer">
                         <div class="relative">
                             <div class="w-[10.33px] h-[1px] bg-white"></div>
                             <div class="absolute w-[10.33px] h-[1px] bg-white rotate-90"></div>
                         </div>
-                        <div class="btn-create-list text-white ">Create a List</div>
+                        <div class="btn-create-list text-white ">Create a Job</div>
                     </div>
         
                     <div class="relative w-80 left-1">
@@ -65,7 +65,8 @@
                             </div>
                             <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
                             {{-- Card --}}
-                            <div id="{{ $sts_val->id }}" class="connectedSortable min-h-[170px] w-[265px]">
+                            <div id="{{ $sts_val->id }}" class="connectedSortable min-h-full w-[265px] pb-2">
+
                                 @foreach ($sts_val->job_models as $value )
                                     <a id="data_{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
                                         <div id="search_list" class="relative w-full h-[211px] bg-bgbody mt-3 rounded">
@@ -93,7 +94,7 @@
                                                 </div>
                                                 <div class="pt-2 ">
                                                     <div class="text-xs text-[#827C7C] ">
-                                                        {{Str::limit($value->description, 110, $end='...')}}
+                                                        {!! Str::limit($value->description, 110, $end='...') !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,17 +140,6 @@
                                 @endforeach
                             </div>
                             
-                            {{-- Botton add fot potensial --}}
-                            <div onclick="create_jobs('{{ $sts_val->id }}')" class="w-full flex items-center justify-center hover:cursor-pointer  h-[42px] bg-[#DAF2F1] mt-3 rounded mb-5">
-                                <div class="relative">
-                                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.5 8H12.5" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M8.5 12V4" stroke="#3BD7CF" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                        
-                                </div>
-                                <div class="text-palet text-sm">Create a job</div>
-                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -299,7 +289,7 @@
                                     <label for="desired-living" class="overview-note-body text-colortext mb-2 block">Desired Living</label>
                                     <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                         <select id="desired-living" name="desired_living" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <option @if(old('desired_living') == 'any') selected @endif value="any" >Any</option>
+                                            <option @if(old('desired_living') == 'any') selected @endif value="Any" >Any</option>
                                             <option @if(old('desired_living') == 'Live in') selected @endif value="Live in" >Live in</option>
                                             <option @if(old('desired_living') == 'Live out') selected @endif value="Live out" >Live out</option>
                                         </select>
@@ -791,7 +781,7 @@
                     var explode = data.split("_");
                     var id = explode[1];
        
-                    // console.log('ui',ui)
+                    // console.log(status)
 
                     $.ajax({
                         type:'POST',

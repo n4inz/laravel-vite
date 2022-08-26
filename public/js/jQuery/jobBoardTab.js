@@ -1,4 +1,7 @@
-const tabElements = [
+
+
+
+  const tabElements = [
     {
         id: 'overview',
         triggerEl: document.querySelector('#overview-tab'),
@@ -30,7 +33,7 @@ const tabElements = [
   const options = {
       defaultTabId: 'profile-tab',
       activeClasses: 'text-palet border-palet dark:border-blue-500',
-      inactiveClasses: 'text-gray-500 hover:text-palet dark:text-gray-400 border-gray-100 hover:border-palet dark:border-gray-700 dark:hover:text-gray-300',
+      inactiveClasses: 'text-gray-500 hover:text-palet border-gray-100 hover:border-palet dark:hover:text-gray-300',
       onShow: (e) => {
           const tab = document.querySelector('#'+e._activeTab.id);
   

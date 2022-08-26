@@ -24,9 +24,9 @@ class JobboardRepository
     use Actifity;
     public function created($request)
     {
-        $jobs = JobModels::get();
+        $jobsIdUnique = JobModels::get();
         $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('body');
-       
+        $status_job = SettingJobModelsStatus::where(['users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->get('id' , 'status_name');
         DB::beginTransaction();
         try{
             $value = json_decode($request->family);
@@ -34,7 +34,7 @@ class JobboardRepository
              'family' => $value[0]->name,
              'title' => $request->title,
              'description' => $request->description,
-             'id_unique' => $jobs->count()+1,
+             'id_unique' => $jobsIdUnique->count()+1,
  
              'location' => $request->address,
              'category' => $request->category,
@@ -61,13 +61,13 @@ class JobboardRepository
              'pay_with' => $request->pay_with,
              'rate_negotiable' => $request->rate_negotiable,
  
-             'status' => $request->status,
+             'status' => $status_job[1]->status_name,
              // 'type' => $request->type,
              'type' => $request->onlyOneStatus,
              'clients_id' => $value[0]->value,
              'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
              'stafs_id' => auth()->user()->staf->users_id ?? 0,
-             'set_job_status_id' => $request->status,
+             'set_job_status_id' => $status_job[1]->id
              ]);
  
             foreach($request->subcategory as $keySub => $category){

@@ -30,6 +30,7 @@
                         </div>
                         @foreach ($statusJob as $valueStatusJob )
                             @if($valueStatusJob->job_models->count() > 0)
+                                
                                 <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
                                     <div class="flex justify-between ">
                                         <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
@@ -44,7 +45,13 @@
                                         <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
                                     </div>
                                     <div>
-                                    <span class="text-3xl font-bold">{{ round(($valueStatusJob->job_models->count() / $TotalJob->count() ) * 100,1) }} %</span>
+                                    <span class="text-sm font-bold">
+                                        @if ( App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') == 0)
+                                            <span class="text-xs">Lest then 1 day</span>
+                                        @else
+                                            {{ App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') / App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->count() }} Day
+                                        @endif
+                                    </span>
                                     </div>
                                 </div>
                             @else
@@ -63,78 +70,19 @@
                                     <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
                                 </div>
                                 <div>
-                                <span class="text-3xl font-bold"> 0 %</span>
+                                <span class="text-sm font-bold">
+                                    @if ( App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day')  == 0)
+                                        <span class="text-xs">Lest then 1 day</span>
+                                    @else
+                                        {{ App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') / App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->count() }} Day
+                                    @endif
+                                </span>
                                 </div>
                             </div>
                         
                             @endif
                             
                         @endforeach
-                        <!--
-                        <div class="w-[114px]  border border-palet rounded-md p-4">
-                            <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.5C2.72386 2.5 2.5 2.72386 2.5 3V13C2.5 13.2761 2.72386 13.5 3 13.5H13C13.2761 13.5 13.5 13.2761 13.5 13V3C13.5 2.72386 13.2761 2.5 13 2.5H3ZM1.5 3C1.5 2.17157 2.17157 1.5 3 1.5H13C13.8284 1.5 14.5 2.17157 14.5 3V13C14.5 13.8284 13.8284 14.5 13 14.5H3C2.17157 14.5 1.5 13.8284 1.5 13V3Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 4.33325C3.83301 4.05711 4.05687 3.83325 4.33301 3.83325H6.99967C7.27582 3.83325 7.49967 4.05711 7.49967 4.33325V6.99992C7.49967 7.27606 7.27582 7.49992 6.99967 7.49992H4.33301C4.05687 7.49992 3.83301 7.27606 3.83301 6.99992V4.33325ZM4.83301 4.83325V6.49992H6.49967V4.83325H4.83301Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 4.33325C8.5 4.05711 8.72386 3.83325 9 3.83325H11.6667C11.9428 3.83325 12.1667 4.05711 12.1667 4.33325C12.1667 4.60939 11.9428 4.83325 11.6667 4.83325H9C8.72386 4.83325 8.5 4.60939 8.5 4.33325Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 6.66675C8.5 6.39061 8.72386 6.16675 9 6.16675H11.6667C11.9428 6.16675 12.1667 6.39061 12.1667 6.66675C12.1667 6.94289 11.9428 7.16675 11.6667 7.16675H9C8.72386 7.16675 8.5 6.94289 8.5 6.66675Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H11.6663C11.9425 8.83325 12.1663 9.05711 12.1663 9.33325C12.1663 9.60939 11.9425 9.83325 11.6663 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 11.6667C3.83301 11.3906 4.05687 11.1667 4.33301 11.1667H11.6663C11.9425 11.1667 12.1663 11.3906 12.1663 11.6667C12.1663 11.9429 11.9425 12.1667 11.6663 12.1667H4.33301C4.05687 12.1667 3.83301 11.9429 3.83301 11.6667Z" fill="white"/>
-                                </svg> 
-                            </div>
-                            <div>
-                                <span class="text-[#4F4F4F] text-xs font-semibold">New New New</span>
-                            </div>
-                            <div>
-                                <span class="text-5xl font-bold">2</span>
-                            </div>
-                        </div>
-    
-                        <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                            <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.8628 0.520022C7.95432 0.493314 8.05157 0.493326 8.14308 0.520059L14.1402 2.27194C14.3534 2.33423 14.5 2.52974 14.5 2.75188V6.34456C14.5 10.336 11.9457 13.8795 8.15893 15.1412C8.05635 15.1754 7.94545 15.1754 7.84286 15.1412C4.05512 13.8795 1.5 10.3352 1.5 6.3429V2.75188C1.5 2.52969 1.64663 2.33415 1.85992 2.2719L7.8628 0.520022ZM2.5 3.12682V6.3429C2.5 9.84893 4.70872 12.9676 8.00085 14.1381C11.292 12.9676 13.5 9.84968 13.5 6.34456V3.12672L8.00281 1.52088L2.5 3.12682Z" fill="white"/>
-                                </svg>    
-                            </div>
-                            <div>
-                                <span class="text-[#4F4F4F] text-xs font-semibold">Action</span>
-                            </div>
-                            <div>
-                                <span class="text-5xl font-bold">5</span>
-                            </div>
-                        </div>
-    
-                        <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                            <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                                </svg> 
-                            </div>
-                            <div>
-                                <span class="text-[#4F4F4F] text-xs font-semibold">Over 1 week</span>
-                            </div>
-                            <div>
-                                <span class="text-5xl font-bold">2</span>
-                            </div>
-                        </div>
-    
-                        <div class="w-[114px] h-[126px] border border-palet rounded-md p-4">
-                            <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <span class="text-[#4F4F4F] text-xs font-semibold">Over 2 week</span>
-                            </div>
-                            <div>
-                                <span class="text-5xl font-bold">3</span>
-                            </div>
-                        </div>
-                        -->
-                        
                     </div>
                 </div>
                 <div class="bg-bgbody  p-8 rounded w-[669px]">
@@ -353,7 +301,7 @@
                 console.log(error)
                 $('.calendly_load').html('');
                 const tmp = `<div class="py-10 flex flex-col items-center justify-center">
-                                <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 <div onclick="apoitment()" class="text-center bg-colorStatusCard1 rounded-md text-white w-28 text-xs p-1 hover:cursor-pointer">Try Again</div>
                             </div>`;
                 $('.calendly_load').append(tmp);
@@ -376,7 +324,7 @@
             data:{ _token: '{{ csrf_token() }}', id},
             beforeSend:function(){
                 const tmp = `<div class="h-56 w-full flex text-center justify-center pt-5">
-                                <svg aria-hidden="true" class="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg aria-hidden="true" class="mr-2 w-8 h-8 text-gray-200 animate-spin  fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                 </svg>
