@@ -55,13 +55,33 @@
                                     <span class="text-base">{{ $sts_val->status_name }}</span>
                                     <div class="{{ $sts_val->id }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">{{ $sts_val->job_models->count() }}</div>
                                 </div>
-                                <div>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
-                                        <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
-                                        <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
-                                    </svg>
-                                </div>                   
+                                @if($sts_val->status_key == 'potential_client')
+                                    <div data-dropdown-toggle="dropdownBottom"  data-dropdown-placement="left-start" class="hover:cursor-pointer">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                            <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                            <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                        </svg>
+                                    </div>
+                                    <div id="dropdownBottom" class="hidden z-10  bg-white rounded divide-y divide-gray-100 shadow">
+                                        <div class=" px-2 space-x-1 text-xs text-gray-700 flex items-center justify-center hover:bg-gray-100 ">
+                                          
+                                            <form class="sync-calendly" action="{{ route('jobboard.sync_calendly') }}" method="POST">@csrf
+                                                <button class="block py-2 justify-">Sync To Calendly</button>
+                                            </form>
+                                            <i class="fa fa-refresh text-palet" aria-hidden="true"></i>
+
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="hover:cursor-pointer">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                            <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                            <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                        </svg>
+                                    </div>              
+                                @endif
                             </div>
                             <div class="w-[265px] h-[1px] bg-palet mt-3.5"></div>
                             {{-- Card --}}
@@ -94,7 +114,7 @@
                                                 </div>
                                                 <div class="pt-2 ">
                                                     <div class="text-xs text-[#827C7C] ">
-                                                        {!! Str::limit($value->description, 110, $end='...') !!}
+                                                        {{ Str::limit($value->description, 110, $end='...') }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -165,6 +185,11 @@
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                             </button>
                         </div>
+                        @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div>{{$error}}</div>
+                        @endforeach
+                    @endif
                         <div class="px-8 mt-[34px] flex items-center space-x-16">
                             <div class="flex items-center justify-center space-x-3">
                                 <input onclick="onlyOneJob(this, 'onlyOneStatus')" id="active" name="onlyOneStatus" checked style="color: #3BD7CF" type="checkbox" value="active" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
@@ -617,6 +642,27 @@
                 </form>
             </div>
         </div>
+
+        {{-- Modal Calendly --}}
+        <div id="modalCalendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="h-80 flex items-center justify-center space-x-24 display_calendly">
+                        <div class='container-loading'>
+                            <div class="loader">
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                                <div class='loader--dot'></div>
+                            </div>                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </article>
     <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
     <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
@@ -711,28 +757,43 @@
         var input = document.querySelector('input[name=family]');
 
         function tagTemplate(tagData){
+            var avatar
+            if(tagData.avatar != null){
+                avatar = `<img  src="{{ asset('storage/avatar/${tagData.avatar}') }}" class="rounded-full h-5 w-5" alt="">`;
+            }else{
+                avatar = tagData.tagTemplate
+            }
             return `
             <div class="bg-palet h-6 flex items-center space-x-2 rounded-md pl-1">
                 <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
-
-                <img  src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}" class="rounded-full h-5 w-5" alt="">
-                <span class="text-xs text-white pr-2">${tagData.name}</span>
+                ${avatar}
+                
+                <span class="text-xs text-white pr-2">${tagData.first_name}</span>
             </div>
             `
         }
         function suggestionItemTemplate(tagData){
+            
+            var avatar
+            if(tagData.avatar != null){
+                avatar = `<div class="w-10">
+                            <img class="w-10 h-10 rounded-full mt-1" src="{{ asset('storage/avatar/${tagData.avatar}') }}">
+                        </div>`;
+            }else{
+                avatar = tagData.avatar1
+            }
             return `
                 <div ${this.getAttributes(tagData)}
-                    class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
+                    class='tagify__dropdown__item flex items-center space-x-1 ${tagData.class ? tagData.class : ""}'
                     tabindex="0"
                     role="option">
-                    ${ tagData.avatar ? `
-                    <div class='tagify__dropdown__item__avatar-wrap w-full'>
-                        <img class="w-full mt-1" src="{{ asset('storage/Client file/avatar/${tagData.avatar}') }}">
-                    </div>` : ''
-                    }
-                    <strong>${tagData.name}</strong>
-                    <span>${tagData.email}</span>
+                   
+                    ${avatar}
+                   
+                    <div class="flex flex-col">
+                        <strong>${tagData.first_name}</strong>
+                        <span>${tagData.email}</span>
+                    </div>
                 </div>
             `
         }
@@ -746,7 +807,7 @@
                 closeOnSelect: true,
                 enabled: 0,
                 classname: 'users-list',
-                searchKeys: ['name', 'email']  // very important to set by which keys to search for suggesttions when typing
+                searchKeys: ['first_name', 'email']  // very important to set by which keys to search for suggesttions when typing
             },
 
             templates: {
@@ -1070,6 +1131,36 @@
 
            ++no;
         }
+
+        // Sync Calendly
+        const targetElCalendly = document.getElementById('modalCalendly');
+        const modalCalendly = new Modal(targetElCalendly, {});
+        $('.sync-calendly').submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            
+            $.ajax({
+                type: "POST",
+                url: actionUrl,
+                data: form.serialize(),
+                beforeSend: function(){
+                    modalCalendly.show()
+                },
+                error : function(e){
+                    const tmp = `<div class="flex flex-col items-center justify-center">
+                                    <i class="fa fa-5x text-red-600 fa-exclamation-triangle" aria-hidden="true"></i>
+                                    <span class="text-red-500 mt-2 font-semibold">Failed to sync to calendly </span>
+                                    <span class="text-red-500 font-semibold">Check your api key</span>
+                                </div>`;
+                   $('.display_calendly').html(tmp)
+                },
+                success: function(data){
+                    location.reload()
+                }
+
+            });
+        })
 
 </script>
 

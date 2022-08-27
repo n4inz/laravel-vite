@@ -13,21 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('job_models_comments', function (Blueprint $table) {
+        Schema::create('job_models_match_talent_filters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('comment');
-            $table->string('avatar')->nullable();
+            $table->unsignedBigInteger('talents_id');
+            $table->string('status')->nullable();
             $table->unsignedBigInteger('job_models_id');
-            $table->unsignedBigInteger('users_id');
 
             $table->foreign('job_models_id')
             ->references('id')->on('job_models')
-            ->onDelete('cascade');
-            
-            $table->foreign('users_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
+            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('talents_id')
+            ->references('id')->on('talents');
             $table->timestamps();
         });
     }
@@ -39,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_models_comments');
+        Schema::dropIfExists('job_models_match_talent_filters');
     }
 };

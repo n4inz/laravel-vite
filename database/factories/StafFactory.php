@@ -20,7 +20,7 @@ class StafFactory extends Factory
         $users_id = User::inRandomOrder()->first()->id;
         return [
             'type' => 'staf',
-            'avatar' => 'dummy.png',
+            // 'avatar' => 'dummy.png',
             'users_id' => $users_id,
             'users_agency_id' => $users_id
         ];

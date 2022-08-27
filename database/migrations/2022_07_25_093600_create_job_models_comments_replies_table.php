@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('comment');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
 
 
             $table->unsignedBigInteger('job_models_comments_id');

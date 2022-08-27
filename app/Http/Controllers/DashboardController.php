@@ -25,60 +25,18 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        // // Get Description
-        // $responseSchedulings = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
-        //     'organization' => $load->current_organization,
-        //     'status' => 'active',
-
-        // ]);
-
+        // Get Description
         
-        // $arrayAnswerDetail = [];
-        // $responseScheduling = json_decode($responseSchedulings);
-        // foreach($responseScheduling->collection as $value_scheduling){
-        //     if($value_scheduling->event_type == 'https://api.calendly.com/event_types/0dfdb4dd-f4d4-4bbd-8c08-6af927282a0a'){
-        //         // array_push($arrayScheduling,$value_scheduling->uri);
-                
-        //         $getQuestionPerEvents = $this->getWithParams($load->token, $value_scheduling->uri.'/invitees');
-        //         $getQuestionPerEvent = json_decode($getQuestionPerEvents);
-        //         array_push($arrayAnswerDetail, $getQuestionPerEvent->collection);
-        //     }
-        // }
-
-        // $description = [];
-        // $descriptionString = '';
-        // foreach($arrayAnswerDetail as $valAnswerDetail){
-        //     $question = '';
-        //     foreach ($valAnswerDetail[0]->questions_and_answers as $val_question) {
-        //         $question .= ''.$val_question->question.' : '.$val_question->answer.'<br />';
-        //     }
-        //     $descriptionString .= '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam facilis ab quia voluptas quidem esse<br /><br />​​​​​​​<br /></p><p><strong>Name :</strong>&nbsp; '.$valAnswerDetail[0]->name.' '.$valAnswerDetail[0]->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail[0]->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail[0]->payment->external_id).';<br />provider : '.isset($valAnswerDetail[0]->payment->provider).'<br />amount : '.isset($valAnswerDetail[0]->payment->amount).'<br />currency : '.isset($valAnswerDetail[0]->payment->currency).'<br />terms: '.isset($valAnswerDetail[0]->payment->terms).'<br /><br />--------------------------------------------------------------------------------------------------------------------------------------<br /><br />&nbsp;</p>';
-
-        //     // $descriptionString .= $valAnswerDetail[0]->name.' '.$valAnswerDetail[0]->first_name.$valAnswerDetail[0]->email.' '.$question.' '.isset($valAnswerDetail[0]->payment->external_id).' '.isset($valAnswerDetail[0]->payment->provider).' '.isset($valAnswerDetail[0]->payment->amount).' '.isset($valAnswerDetail[0]->payment->currency).' '.isset($valAnswerDetail[0]->payment->terms);
-           
-        //     // array_push($description,[
-        //     //     'desc' => '<p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam facilis ab quia voluptas quidem esse<br /><br />​​​​​​​<br /></strong><p><strong>Name :&nbsp; '.$valAnswerDetail[0]->name.' '.$valAnswerDetail[0]->first_name.'<br />email :&nbsp;'.$valAnswerDetail[0]->email.'</strong><br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail[0]->payment->external_id).';<br />provider : '.isset($valAnswerDetail[0]->payment->provider).'<br />amount : '.isset($valAnswerDetail[0]->payment->amount).'<br />currency : '.isset($valAnswerDetail[0]->payment->currency).'<br />terms: '.isset($valAnswerDetail[0]->payment->terms).'<br /><br />--------------------------------------------------------------------------------------------------------------------------------------<br /><br />&nbsp;</p>',
-
-        //     // ]);
-        // }
-        // array_push($description,[
-        //     'desc' => $descriptionString
-        // ]);
-        
-
-        // return $description;
-
-        // return $arrayAnswerDetail;
-        // return $responseScheduling->collection;
-
         // $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
-        // $responses = $this->getWithParams($load->token, 'https://api.calendly.com/event_types',[
+        // $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
         //     'organization' => $load->current_organization,
         //     'status' => 'active',
 
         // ]);
 
         // $response = json_decode($responses);
+
+        // // return $response->collection;
   
         // foreach($response->collection as $valCalendly){
         //     $idJobStatus = SettingJobModelsStatus::where([
@@ -86,85 +44,44 @@ class DashboardController extends Controller
         //         'status_key' => 'potential_client',
         //         ])->first('id');
         //     $exits = JobModels::where('uri_api', $valCalendly->uri)->first('id');
-        //     $jobsIdUnique = JobModels::get('id');
+           
+            
         //      // Get Description
-        //      $responseSchedulings = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
-        //         'organization' => $load->current_organization,
-        //         'status' => 'active',
-
-        //     ]);
-
-        //     $arrayAnswerDetail = [];
-        //     $responseScheduling = json_decode($responseSchedulings);
-        //     foreach($responseScheduling->collection as $value_scheduling){
-        //         if($value_scheduling->event_type == $valCalendly->uri){
-        //             $getQuestionPerEvents = $this->getWithParams($load->token, $value_scheduling->uri.'/invitees');
-        //             $getQuestionPerEvent = json_decode($getQuestionPerEvents);
-        //             array_push($arrayAnswerDetail, $getQuestionPerEvent->collection);
-        //         }
-        //     }
-
-        //     $description = [];
+        //     $getQuestionPerEvents = $this->getWithParams($load->token, $valCalendly->uri.'/invitees');
+        //     $questionDetail = json_decode($getQuestionPerEvents);
         //     $descriptionString = '';
-        //     foreach($arrayAnswerDetail as $valAnswerDetail){
+        //      foreach($questionDetail->collection as $valAnswerDetail) {
         //         $question = '';
-        //         foreach ($valAnswerDetail[0]->questions_and_answers as $val_question) {
+        //         foreach ($valAnswerDetail->questions_and_answers as $val_question) {
         //             $question .= ''.$val_question->question.' : '.$val_question->answer.'<br />';
         //         }
-        //         $descriptionString .= '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam facilis ab quia voluptas quidem esse<br /><br />​​​​​​​<br /></p><p><strong>Name :</strong>&nbsp; '.$valAnswerDetail[0]->name.' '.$valAnswerDetail[0]->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail[0]->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail[0]->payment->external_id).';<br />provider : '.isset($valAnswerDetail[0]->payment->provider).'<br />amount : '.isset($valAnswerDetail[0]->payment->amount).'<br />currency : '.isset($valAnswerDetail[0]->payment->currency).'<br />terms: '.isset($valAnswerDetail[0]->payment->terms).'<br /><br />--------------------------------------------------------------------------------------------------------------------------------------<br /><br />&nbsp;</p>';
-        //     }
+        //         // $descriptionString .= '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, asperiores? <br /><br />​​​​​​​<br /></p><p><strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail->payment->external_id).';<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: '.isset($valAnswerDetail->payment->terms).'&nbsp;</p>';
+        //         $descriptionString .= '<p>​​​​​​<strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<strong>Payment&nbsp;:</strong><br />external_id :&nbsp;'.isset($valAnswerDetail->payment->external_id).'<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: &nbsp; '.isset($valAnswerDetail->payment->terms).'</p>';
+        //      }
+        //      //  Get URL calendly
+        //      $eventCalendlys = $this->getWithParams($load->token, $valCalendly->event_type);
+        //      $eventCalendly = json_decode($eventCalendlys);
+        //      $jobsIdUnique = JobModels::get('id');
+        //      if(!$exits){
+        //          $jobs = JobModels::create([
+        //              'title' => $valCalendly->name,
+        //              'id_unique' => $jobsIdUnique->count()+1,
+        //              'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+        //              'url_calendly' => $eventCalendly->resource->scheduling_url,
+        //              'uri_api' => $valCalendly->uri,
+        //              'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+        //              'set_job_status_id' => $idJobStatus->id
+        //          ]);
 
-        //     if(!$exits){
-                
-        //         $jobs = JobModels::create([
+        //      }else{
+        //         $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([
         //             'title' => $valCalendly->name,
-        //             'id_unique' => $jobsIdUnique->count()+1,
-        //             'description' => $descriptionString,
-        //             'url_calendly' => $valCalendly->scheduling_url,
-        //             'uri_api' => $valCalendly->uri,
-        //             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        //             'set_job_status_id' => $idJobStatus->id
+        //             'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+
         //         ]);
-        //     }
+        //      }
 
-        //     // Filter subcategory form multi_select type
-        //     foreach($valCalendly->custom_questions as $subcategory){
-        //         if($subcategory->type == 'multi_select'){
 
-        //             // Update Subcategory 
-        //             if(count($subcategory->answer_choices) > 0){
-        //                 $jobsUpdate = JobModels::updateOrCreate(['uri_api' => $valCalendly->uri],[
-        //                     'title' => $valCalendly->name,
-        //                     'description' => $descriptionString,
-        //                     'url_calendly' => $valCalendly->scheduling_url,
-        //                     'uri_api' => $valCalendly->uri,
-        //                     'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        //                     // 'set_job_status_id' => $idJobStatus->id
-        //                 ]);
-
-        //                 JobModelsMatchTalent::where(['job_models_id' => $jobsUpdate->id])->delete();
-        //                 foreach($subcategory->answer_choices as $keySub => $category){
-        //                     JobModelsMatchTalent::create([
-        //                         'jobs_sub_category' => str_replace(' ', '_', strtolower($subcategory->answer_choices[$keySub])), 
-        //                         'job_models_id' => $jobsUpdate->id, 
-        //                         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        //                     ]);
-        //                 }
-        //             }
-                   
-        //             // Create subcategory if subcategory exist
-        //             if(!$exits){
-        //                 foreach($subcategory->answer_choices as $keySub => $category){
-        //                     JobModelsMatchTalent::updateOrCreate([
-        //                         'jobs_sub_category' => str_replace(' ', '_', strtolower($subcategory->answer_choices[$keySub])), 
-        //                         'job_models_id' => $jobs->id, 
-        //                         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        //                     ]);
-        //                 }
-        //             }
-        //         }
-
-        //     }
         // }
 
         // return 'ok';

@@ -1049,7 +1049,7 @@
                         </div>
 
                         {{-- Matched Talent --}}
-                        <div class="bg-bgbody rounded mt-3">
+                        <div class="bg-bgbody rounded mt-3 w-[1016px] xl:w-full">
                             <div class="flex justify-between px-4 pt-[18.5px]">
                                 <div class="flex space-x-2 ">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
@@ -1066,7 +1066,38 @@
                                 <div class="status_all_select"></div>
                                
                                 <div class="space-y-6 mt-6 match_talent_hide">
-                                    @foreach ($matchTalents as $key => $talent )
+                                    @foreach ($result->match_talents_filters as $values_filter )
+                                        @if($loop->iteration > 10) @break @endif
+                                        <div class="flex justify-between px-4 hover:cursor-pointer">
+                                            <div class="flex space-x-2 items-center justify-center">
+                                                <div class="">
+                                                    <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $values_filter->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                </div>
+                                                @if ($values_filter->talent->avatar)
+                                                    {{-- <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt=""> --}}
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$values_filter->talent->avatar) }}" alt="">
+                                                @else
+                                                    <div class="w-12 h-12 flex items-center justify-center bg-[{{ $values_filter->talent->color }}] rounded-full">
+                                                        <span class="text-white">{{ strtoupper(substr($values_filter->talent->first_name, 0, 1)) }}{{ strtoupper(substr($values_filter->talent->last_name, 0, 1)) }}</span>
+                                                    </div>
+                                                @endif
+                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values_filter->talent->id }})"  class="flex flex-col">
+                                                    <span class="overview-name-talent text-colortext">{{ $values_filter->talent->first_name }}</span>
+                                                    <span class="overview-live-talent">Age @if($values_filter->talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($values_filter->talent->day_of_birthday)->age }} @endif, in {{ $values_filter->talent->address }}</span>
+                                                    <span class="overview-experiance-talent">{{ $values_filter->talent->experience }} Year Experience, {{ Str::limit($values_filter->talent->about_talent , 25, $end='...') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="h-4">
+                                                <select data-talent="{{ $values_filter->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                    <option>-- Select status --</option>
+                                                    @foreach ($status_talent as $value )
+                                                        <option @if($value->status_name === $values_filter->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($result->match_talents_add as $key => $talent )
                                         {{-- $talent->job_model_talent_status->status --}}
                                         @if($loop->iteration > 10) @break @endif
                                         <div class="flex justify-between px-4 hover:cursor-pointer">
@@ -1074,7 +1105,13 @@
                                                 <div class="">
                                                     <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                 </div>
-                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                @if ($talent->talent->avatar)
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                @else
+                                                    <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
+                                                        <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
+                                                    </div>
+                                                @endif
                                                 <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
                                                     <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
                                                     <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
@@ -1091,7 +1128,7 @@
                                             </div>
                                         </div>
                                      @endforeach
-                                    <div class="flex items-center justify-end px-6 space-x-2 rounded-b w-full ">
+                                    <div class="flex items-center justify-center px-6 space-x-2 rounded-b w-full ">
                                         <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center w-40 h-[42px] bg-colorStatusCard1 rounded-md hover:cursor-pointer">
                                             <span class="overview-attechment-btn-text">Select</span>
                                         </div>
@@ -1114,17 +1151,53 @@
                                 {{-- Show more and show less match talent --}}
                                 <div  data-accordion="collapse">
                                     <div id="acording_match_talent" class="hidden space-y-6 mt-6" aria-labelledby="accordion-collapse-heading-2">
-                                        
-                                        @foreach ($matchTalents as $key => $talent )
+                                        @foreach ($result->match_talents_filters as $values_filter )
+                                        @if($loop->iteration > 10) @break @endif
+                                            <div class="flex justify-between px-4 hover:cursor-pointer">
+                                                <div class="flex space-x-2 items-center justify-center">
+                                                    <div class="">
+                                                        <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $values_filter->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    </div>
+                                                    @if ($values_filter->talent->avatar)
+                                                        {{-- <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt=""> --}}
+                                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$values_filter->talent->avatar) }}" alt="">
+                                                    @else
+                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $values_filter->talent->color }}] rounded-full">
+                                                            <span class="text-white">{{ strtoupper(substr($values_filter->talent->first_name, 0, 1)) }}{{ strtoupper(substr($values_filter->talent->last_name, 0, 1)) }}</span>
+                                                        </div>
+                                                    @endif
+                                                    <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values_filter->talent->id }})"  class="flex flex-col">
+                                                        <span class="overview-name-talent text-colortext">{{ $values_filter->talent->first_name }}</span>
+                                                        <span class="overview-live-talent">Age @if($values_filter->talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($values_filter->talent->day_of_birthday)->age }} @endif, in {{ $values_filter->talent->address }}</span>
+                                                        <span class="overview-experiance-talent">{{ $values_filter->talent->experience }} Year Experience, {{ Str::limit($values_filter->talent->about_talent , 25, $end='...') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="h-4">
+                                                    <select data-talent="{{ $values_filter->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                        <option>-- Select status --</option>
+                                                        @foreach ($status_talent as $value )
+                                                            <option @if($value->status_name === $values_filter->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @foreach ($result->match_talents_add as $key => $talent )
                                             <div  class="flex justify-between px-4 hover:cursor-pointer">
                                                 <div class="flex space-x-2 items-center justify-center">
                                                     <div class="">
                                                         <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->talent->avatar) }}" alt="">
-                                                    <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})" class="flex flex-col">
+                                                    @if ($talent->talent->avatar)
+                                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                    @else
+                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
+                                                            <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
+                                                        </div>
+                                                    @endif
+                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})" class="flex flex-col">
                                                         <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
-                                                        <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                        <span class="overview-live-talent">Age @if($talent->talent->day_of_birthday != 'null'){{ Carbon\Carbon::parse($talent->talent->day_of_birthday )->age }} @endif, in {{ $talent->talent->address }}</span>
                                                         <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
                                                     </div>
                                                 </div>
@@ -1138,7 +1211,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <div class="flex items-center justify-end px-6 space-x-2 rounded-b w-full ">
+                                        <div class="flex items-center justify-center px-6 space-x-2 rounded-b w-full ">
                                             <div id="dropdownDefault" data-dropdown-toggle="dropdown_select2" class="flex justify-center items-center w-40 h-[42px] bg-colorStatusCard1 rounded-md hover:cursor-pointer">
                                                 <span class="overview-attechment-btn-text">Select</span>
                                             </div>
@@ -1496,7 +1569,15 @@
                                 {{-- Messages --}}
                                 @foreach ($result->comment as $val )
                                     <div class="flex space-x-2 mt-6">
-                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Setting/avatar/'.$val->avatar) }}" alt="">
+                                        <div>
+                                            @if ($val->avatar)
+                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt="">
+                                            @else
+                                                <div class="w-10 h-10 flex items-center justify-center bg-[{{ $val->users->color }}] rounded-full">
+                                                    <span class="text-white text-lg">{{ strtoupper(substr($val->name, 0, 1)) }}{{ strtoupper(substr($val->last_name, 0, 1)) }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
                                         <div class="w-full">
                                             <div class="flex space-x-4">
                                                 <div class="flex space-x-1 justify-center items-center">
@@ -1517,7 +1598,16 @@
                                             <div class="reply_your_comment{{ $val->id }} w-full space-y-4">
                                                 @foreach ($val->job_models_comments_reply as $reply )
                                                     <div class="flex space-x-2">
-                                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Setting/avatar/'.$reply->avatar) }}" alt="">
+                                                        <div>
+                                                            @if ($val->avatar)
+                                                                {{-- <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt=""> --}}
+                                                                <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$reply->avatar) }}" alt="">
+                                                            @else
+                                                                <div class="w-10 h-10 flex items-center justify-center bg-[{{ $val->users->color }}] rounded-full">
+                                                                    <span class="text-white text-lg">{{ strtoupper(substr($reply->name, 0, 1)) }}{{ strtoupper(substr($reply->last_name, 0, 1)) }}</span>
+                                                                </div>
+                                                            @endif
+                                                        </div>
                                                         <div class="max-w-xl">
                                                             <div class="flex space-x-4">
                                                                 <div class="flex space-x-1 justify-center items-center">
@@ -1582,7 +1672,7 @@
                             <div class="px-4 mt-4 space-y-3">
                                 {{-- Download --}}
                                 @foreach ($result->file as $val )
-                                    <a href="{{ route('jobboard.download_file' , ['file' => $val->file , 'path' => 'Jobs attached file']) }}" class="flex items-center justify-between w-full  h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
+                                    <a href="{{ route('jobboard.download_file' , ['file' => $val->file , 'path' => 'file']) }}" class="flex items-center justify-between w-full  h-[60px] border-[2px] border-dotted border-gray-300 px-3 hover:cursor-pointer">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex items-center justify-center w-8 h-8 bg-[#F3F3F3] rounded-md">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1601,7 +1691,7 @@
                                             </div>
                                             <div>
                                                 <div class="overview-attechment-title text-colortext">{{ $val->file }}</div>
-                                                <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$val->file) / 1024 , 2) }} KB</div>
+                                                <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/file/'.$val->file) / 1024 , 2) }} KB</div>
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-center space-x-3">
@@ -1640,7 +1730,7 @@
                                                     </div>
                                                     <div>
                                                         <div class="overview-attechment-title text-colortext">{{ $result->client->attached_file->attached_file }}</div>
-                                                        <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$result->client->attached_file->attached_file) / 1024 , 2) }} KB</div>
+                                                        <div class="overview-attechment-size text-[#AFABAB]">{{ number_format(Illuminate\Support\Facades\Storage::size('public/file/'.$result->client->attached_file->attached_file) / 1024 , 2) }} KB</div>
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center justify-center space-x-3">
@@ -1669,16 +1759,19 @@
 
                         {{-- Task --}}
                         <div class="bg-bgbody rounded mt-3 ">
-                            <div class="px-4 pt-[18.5px]">
+                            <div class="px-4 pt-[18.5px] flex justify-between">
                                 <div class="flex space-x-2 ">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
                                     <span class="text-[#222222] font-semibold">Task</span>
                                 </div>
+                                <div onclick="add_more()" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                    <span class="overview-send-job text-palet">Add Task +</span>
+                                </div>
                             </div>
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <div class="px-4 mt-4 space-y-8 ">
+                            <div class="px-2 mt-4 space-y-8 ">
                                 {{-- Task body --}}
-
+                                <!--
                                 @foreach ($result->actifities as $val)
                                     @if ($val->type == 'TASK')
                                         <div class="flex items-center space-x-3">
@@ -1700,11 +1793,73 @@
                                         </div>
                                     @endif  
                                 @endforeach
+                                -->
        
                                 {{-- Button --}}
+                                <!--
                                 <a href="#" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md mb-5">
                                     <span class="overview-attechment-btn-text">View more</span> 
                                 </a>
+                                -->
+                                <!--
+                                <table width="100%">
+                                    <tbody class="load-task">
+                                        @foreach ($result->task as $task)
+                                            
+                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked{{ $task->id }}">
+                                                    <td height="66px" width="12%">
+                                                        <div class="flex items-center justify-center space-x-2">
+                                                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                            </svg>
+                                                            <input id="{{ $task->id }}" onclick="check({{ $task->id }})"  style="color: #3BD7CF" type="checkbox" value="{{ $task->id }}" class="check  w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        </div>
+                                                    </td>
+                                                    <label for="{{ $task->id }}">
+                                                    <td height="66px" width="40%">
+                                                        @if ($task->status == 'Done')
+                                                            <s class="task-text-body text-xs text-[#AFABAB]">{{ $task->task }}  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, aspernatur.</s>                                                  
+                                                        @endif
+                                                        @if ($task->status == 'Inprogress' OR $task->status == Null)
+                                                            <span class="task-text-body text-xs text-[#222222]">{{ $task->task }}</span>
+                                                        @endif
+                                                    </td>
+                                                </label>
+    
+                                                </tr>
+
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            -->
+                                <div class="load-task">
+                                    @foreach ($result->task as $task)
+                                    <label for="{{ $task->id }}">
+                                        
+                                            <div class="flex space-x-2 space-y-2 hover:bg-[#F7F7F7] cursor-pointer loader-checked{{ $task->id }}">
+                                                <div class="flex items-center py-2 justify-center space-x-2">
+                                                    <div>
+                                                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                        </svg>
+                                                    </div>
+                                                    <input id="{{ $task->id }}" onclick="check({{ $task->id }})" {{ $task->status == 'Done' ? 'checked disabled' : '' }}  style="color: #3BD7CF" type="checkbox" value="{{ $task->id }}" class="check hidden  w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <div class="">
+                                                        @if ($task->status == 'Done')
+                                                            <s class="task-text-body  text-[#AFABAB]">{{ $task->task }} </s>                                                  
+                                                        @endif
+                                                        @if ($task->status == 'Inprogress' OR $task->status == Null)
+                                                            <span class="task-text-body  text-[#222222]">{{ $task->task }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                    </label>
+                                    @endforeach
+                                </div>
                                 <div class="flex mt-4"></div>
                             </div>
                         </div>
@@ -1794,47 +1949,9 @@
                 
                 {{-- Tabs Talent --}}
                 <div class="hidden" id="talent" role="tabpanel" aria-labelledby="talent-tab">
-                    <div class="flex space-x-2 mt-6">
-                        <div class="w-[1016px] xl:w-full ">
-                            <div class="bg-bgbody rounded ">
-                                <div class="px-8 pt-[18.5px]">
-                                    <div class="flex space-x-2 ">
-                                        <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
-                                        <span class="text-[#222222] font-semibold">Matched Talent</span>
-                                    </div>
-                                </div>
-                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                                <div class="space-y-8 mt-8 mb-8 px-8">
-
-                                    @foreach ($matchTalents as $value )
-                                        <div class="flex justify-between px-4">
-                                            <div class="flex space-x-2">
-                                                <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->talent->avatar) }}" alt="">
-                                                <div class="flex flex-col">
-                                                    <span class="overview-name-talent text-colortext">{{ $value->talent->first_name }}</span>
-                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($value->talent->day_of_birthday)->age }}, in {{ $value->talent->address }}</span>
-                                                    <span class="overview-experiance-talent">{{ $value->talent->experience }} Year Experience, {{ Str::limit($value->talent->about_talent , 25, $end='...') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#22CCE3]">
-                                                <span class="overview-talent-status text-[#22CCE3]">Applying</span>
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 1.33337C7.5 1.05723 7.72386 0.833374 8 0.833374C11.958 0.833374 15.1667 4.042 15.1667 8.00004C15.1667 11.9581 11.958 15.1667 8 15.1667C7.72386 15.1667 7.5 14.9429 7.5 14.6667C7.5 14.3906 7.72386 14.1667 8 14.1667C11.4058 14.1667 14.1667 11.4058 14.1667 8.00004C14.1667 4.59428 11.4058 1.83337 8 1.83337C7.72386 1.83337 7.5 1.60952 7.5 1.33337Z" fill="#22CCE3"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64852 0.841849C7.76499 0.836219 7.88214 0.833374 7.99992 0.833374C8.27606 0.833374 8.49992 1.05723 8.49992 1.33337C8.49992 1.60952 8.27606 1.83337 7.99992 1.83337C7.89825 1.83337 7.79719 1.83583 7.6968 1.84068C7.42098 1.85402 7.18658 1.64123 7.17325 1.36541C7.15991 1.08959 7.3727 0.855181 7.64852 0.841849ZM6.22405 1.55293C6.31709 1.81293 6.18175 2.09912 5.92176 2.19216C5.731 2.26043 5.54457 2.33784 5.36299 2.42387C5.11344 2.5421 4.81529 2.43565 4.69705 2.1861C4.57882 1.93656 4.68527 1.63841 4.93482 1.52017C5.146 1.42012 5.36287 1.33006 5.58482 1.25064C5.84482 1.15759 6.13101 1.29294 6.22405 1.55293ZM3.89323 2.72441C4.07874 2.92897 4.0633 3.24517 3.85874 3.43068C3.70914 3.56635 3.56623 3.70926 3.43056 3.85887C3.24505 4.06342 2.92884 4.07886 2.72429 3.89335C2.51974 3.70785 2.5043 3.39164 2.6898 3.18709C2.84733 3.01339 3.01326 2.84745 3.18697 2.68993C3.39152 2.50442 3.70773 2.51986 3.89323 2.72441ZM2.18598 4.69718C2.43553 4.81541 2.54198 5.11356 2.42375 5.36311C2.33772 5.54469 2.26031 5.73112 2.19204 5.92188C2.099 6.18187 1.81281 6.31722 1.55281 6.22417C1.29282 6.13113 1.15747 5.84494 1.25051 5.58494C1.32994 5.36299 1.41999 5.14612 1.52005 4.93494C1.63828 4.68539 1.93643 4.57894 2.18598 4.69718ZM1.36528 7.17337C1.6411 7.1867 1.85389 7.42111 1.84056 7.69693C1.83571 7.79732 1.83325 7.89837 1.83325 8.00004C1.83325 8.10171 1.83571 8.20277 1.84056 8.30315C1.85389 8.57897 1.6411 8.81338 1.36528 8.82671C1.08946 8.84004 0.855059 8.62726 0.841727 8.35144C0.836097 8.23497 0.833252 8.11782 0.833252 8.00004C0.833252 7.88226 0.836097 7.76511 0.841727 7.64865C0.855059 7.37283 1.08946 7.16004 1.36528 7.17337ZM1.55281 9.77591C1.81281 9.68287 2.099 9.81821 2.19204 10.0782C2.26031 10.269 2.33772 10.4554 2.42375 10.637C2.54198 10.8865 2.43553 11.1847 2.18598 11.3029C1.93643 11.4211 1.63828 11.3147 1.52005 11.0651C1.41999 10.854 1.32994 10.6371 1.25051 10.4151C1.15747 10.1551 1.29282 9.86895 1.55281 9.77591ZM2.72429 12.1067C2.92884 11.9212 3.24505 11.9367 3.43056 12.1412C3.56623 12.2908 3.70914 12.4337 3.85874 12.5694C4.0633 12.7549 4.07874 13.0711 3.89323 13.2757C3.70773 13.4802 3.39152 13.4957 3.18697 13.3102C3.01326 13.1526 2.84733 12.9867 2.6898 12.813C2.5043 12.6084 2.51974 12.2922 2.72429 12.1067ZM4.69705 13.814C4.81529 13.5644 5.11344 13.458 5.36299 13.5762C5.54457 13.6622 5.731 13.7397 5.92176 13.8079C6.18175 13.901 6.31709 14.1872 6.22405 14.4471C6.13101 14.7071 5.84482 14.8425 5.58482 14.7494C5.36287 14.67 5.146 14.58 4.93482 14.4799C4.68527 14.3617 4.57882 14.0635 4.69705 13.814ZM7.17325 14.6347C7.18658 14.3589 7.42098 14.1461 7.6968 14.1594C7.79719 14.1643 7.89825 14.1667 7.99992 14.1667C8.27606 14.1667 8.49992 14.3906 8.49992 14.6667C8.49992 14.9429 8.27606 15.1667 7.99992 15.1667C7.88214 15.1667 7.76499 15.1639 7.64852 15.1582C7.3727 15.1449 7.15991 14.9105 7.17325 14.6347Z" fill="#22CCE3"/>
-                                                </svg>
-                                                    
-                                            </div>
-                                        </div>                                  
-                                    @endforeach
-                                    <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="modal-detail-choice">
-                                    {{-- <button class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md mt-8" data-modal-toggle="modal-detail-add-match"> --}}
-                                        <span class="overview-attechment-btn-text">View more</span>
-                                    </button>
-                                </div>
-                                <div class="flex mt-8"></div>
-                            </div>
-                        </div>
-                    </div>
+               
+                    
+                    
         
                     <div class="flex space-x-2 mt-6">
                         <div class="w-[1016px] xl:w-full ">
@@ -1857,11 +1974,9 @@
                                         <div class="flex justify-between px-4">
                                             <div class="flex space-x-2">
                                                 @if ($val_talent_new_aplicants->avatar)
-                                                    
-                                                        <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt="">
-                                                    
+                                                    <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt="">
                                                 @else
-                                                    <div class="w-12 h-12 flex items-center justify-center bg-gray-400 rounded-full">
+                                                    <div class="w-12 h-12 flex items-center justify-center bg-[{{ $val_talent_new_aplicants->color }}] rounded-full">
                                                         <span class="text-white">{{ strtoupper(substr($val_talent_new_aplicants->first_name, 0, 1)) }}{{ strtoupper(substr($val_talent_new_aplicants->last_name, 0, 1)) }}</span>
                                                     </div>
                                                 @endif
@@ -1871,13 +1986,23 @@
                                                     <span class="overview-experiance-talent">{{ $val_talent_new_aplicants->address }}</span>
                                                 </div>
                                             </div>
-                                            <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#22CCE3]">
+                                            <div data-dropdown-toggle="dropdown_aplying" class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#22CCE3] hover:cursor-pointer">
                                                 <span class="overview-talent-status text-[#22CCE3]">Applying</span>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 1.33337C7.5 1.05723 7.72386 0.833374 8 0.833374C11.958 0.833374 15.1667 4.042 15.1667 8.00004C15.1667 11.9581 11.958 15.1667 8 15.1667C7.72386 15.1667 7.5 14.9429 7.5 14.6667C7.5 14.3906 7.72386 14.1667 8 14.1667C11.4058 14.1667 14.1667 11.4058 14.1667 8.00004C14.1667 4.59428 11.4058 1.83337 8 1.83337C7.72386 1.83337 7.5 1.60952 7.5 1.33337Z" fill="#22CCE3"/>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64852 0.841849C7.76499 0.836219 7.88214 0.833374 7.99992 0.833374C8.27606 0.833374 8.49992 1.05723 8.49992 1.33337C8.49992 1.60952 8.27606 1.83337 7.99992 1.83337C7.89825 1.83337 7.79719 1.83583 7.6968 1.84068C7.42098 1.85402 7.18658 1.64123 7.17325 1.36541C7.15991 1.08959 7.3727 0.855181 7.64852 0.841849ZM6.22405 1.55293C6.31709 1.81293 6.18175 2.09912 5.92176 2.19216C5.731 2.26043 5.54457 2.33784 5.36299 2.42387C5.11344 2.5421 4.81529 2.43565 4.69705 2.1861C4.57882 1.93656 4.68527 1.63841 4.93482 1.52017C5.146 1.42012 5.36287 1.33006 5.58482 1.25064C5.84482 1.15759 6.13101 1.29294 6.22405 1.55293ZM3.89323 2.72441C4.07874 2.92897 4.0633 3.24517 3.85874 3.43068C3.70914 3.56635 3.56623 3.70926 3.43056 3.85887C3.24505 4.06342 2.92884 4.07886 2.72429 3.89335C2.51974 3.70785 2.5043 3.39164 2.6898 3.18709C2.84733 3.01339 3.01326 2.84745 3.18697 2.68993C3.39152 2.50442 3.70773 2.51986 3.89323 2.72441ZM2.18598 4.69718C2.43553 4.81541 2.54198 5.11356 2.42375 5.36311C2.33772 5.54469 2.26031 5.73112 2.19204 5.92188C2.099 6.18187 1.81281 6.31722 1.55281 6.22417C1.29282 6.13113 1.15747 5.84494 1.25051 5.58494C1.32994 5.36299 1.41999 5.14612 1.52005 4.93494C1.63828 4.68539 1.93643 4.57894 2.18598 4.69718ZM1.36528 7.17337C1.6411 7.1867 1.85389 7.42111 1.84056 7.69693C1.83571 7.79732 1.83325 7.89837 1.83325 8.00004C1.83325 8.10171 1.83571 8.20277 1.84056 8.30315C1.85389 8.57897 1.6411 8.81338 1.36528 8.82671C1.08946 8.84004 0.855059 8.62726 0.841727 8.35144C0.836097 8.23497 0.833252 8.11782 0.833252 8.00004C0.833252 7.88226 0.836097 7.76511 0.841727 7.64865C0.855059 7.37283 1.08946 7.16004 1.36528 7.17337ZM1.55281 9.77591C1.81281 9.68287 2.099 9.81821 2.19204 10.0782C2.26031 10.269 2.33772 10.4554 2.42375 10.637C2.54198 10.8865 2.43553 11.1847 2.18598 11.3029C1.93643 11.4211 1.63828 11.3147 1.52005 11.0651C1.41999 10.854 1.32994 10.6371 1.25051 10.4151C1.15747 10.1551 1.29282 9.86895 1.55281 9.77591ZM2.72429 12.1067C2.92884 11.9212 3.24505 11.9367 3.43056 12.1412C3.56623 12.2908 3.70914 12.4337 3.85874 12.5694C4.0633 12.7549 4.07874 13.0711 3.89323 13.2757C3.70773 13.4802 3.39152 13.4957 3.18697 13.3102C3.01326 13.1526 2.84733 12.9867 2.6898 12.813C2.5043 12.6084 2.51974 12.2922 2.72429 12.1067ZM4.69705 13.814C4.81529 13.5644 5.11344 13.458 5.36299 13.5762C5.54457 13.6622 5.731 13.7397 5.92176 13.8079C6.18175 13.901 6.31709 14.1872 6.22405 14.4471C6.13101 14.7071 5.84482 14.8425 5.58482 14.7494C5.36287 14.67 5.146 14.58 4.93482 14.4799C4.68527 14.3617 4.57882 14.0635 4.69705 13.814ZM7.17325 14.6347C7.18658 14.3589 7.42098 14.1461 7.6968 14.1594C7.79719 14.1643 7.89825 14.1667 7.99992 14.1667C8.27606 14.1667 8.49992 14.3906 8.49992 14.6667C8.49992 14.9429 8.27606 15.1667 7.99992 15.1667C7.88214 15.1667 7.76499 15.1639 7.64852 15.1582C7.3727 15.1449 7.15991 14.9105 7.17325 14.6347Z" fill="#22CCE3"/>
                                                 </svg>
-                                                    
+                                            </div>
+                                            <div id="dropdown_aplying" class="hidden z-10 w-40 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                                <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
+                                                    @foreach ($status_talent as $value )
+                                                    <li  onclick="status_new_aplicants('{{ $value->status_name }}' , '{{ $val_talent_new_aplicants->id }}' , '{{ $result->id }}')" >
+                                                        <label class="hover:cursor-pointer">
+                                                            <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
+                                                        </label>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
                                             </div>
                                         </div>
                                     @endforeach
@@ -1948,10 +2073,10 @@
                                                     <span class=" ml-2">{{ $val->file }}</span>
                                                 </td>
                                                 <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                    <span class="ml-2">{{ pathinfo(storage_path().'public/Jobs attached file/'.$val->file)['extension'] }} File</span>
+                                                    <span class="ml-2">{{ pathinfo(storage_path().'public/file/'.$val->file)['extension'] }} File</span>
                                                 </td>
                                                 <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
-                                                    <span class="ml-2">{{ number_format(Illuminate\Support\Facades\Storage::size('public/Jobs attached file/'.$val->file) / 1024 , 2) }} KB</span>
+                                                    <span class="ml-2">{{ number_format(Illuminate\Support\Facades\Storage::size('public/file/'.$val->file) / 1024 , 2) }} KB</span>
                                                 </td>
                                                 <td height="66px" class="border-t overview-talent-otside-text text-[#222222]">
                                                     <span class="ml-2">{{ $val->created_at->isoFormat('D, MMMM Y') }}</span>
@@ -1995,7 +2120,7 @@
                                                 <tr class="hover:bg-gray-100 hover:cursor-pointer">
                                                     <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
                                                     <div class="flex items-center justify-start space-x-3">
-                                                            <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Setting/avatar/'.$val->avatar) }}" alt="">
+                                                            <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt="">
                                                             <span class="overview-comments-name text-[#222222]">{{ $val->name }}</span>
                                                             <span class="overview-comments-name text-[#827C7C]">{{ Carbon\Carbon::parse($val->created_at)->diffForHumans() }} at {{ $val->created_at->format('H:i'); }} ({{ $val->body }})</span>
                                                         </div>
@@ -2055,10 +2180,16 @@
                                                     <div class="">
                                                         <input name="id_talent_match[]" id="{{ $talent_value->id }}" style="color: #3BD7CF" type="checkbox" value="{{ $talent_value->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent_value->avatar) }}" alt="">
+                                                    @if ($talent_value->avatar)
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent_value->avatar) }}" alt="">
+                                                    @else
+                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent_value->color }}] rounded-full">
+                                                            <span class="text-white">{{ strtoupper(substr($talent_value->first_name, 0, 1)) }}{{ strtoupper(substr($talent_value->last_name, 0, 1)) }}</span>
+                                                        </div>
+                                                    @endif
                                                     <div class="flex flex-col">
                                                         <span class="overview-name-talent text-colortext">{{ $talent_value->first_name.' '.$talent_value->last_name }}</span>
-                                                        <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent_value->day_of_birthday)->age }}, in {{ $talent_value->address }}</span>
+                                                        <span class="overview-live-talent">Age @if($talent_value->day_of_birthday != 'null') {{ Carbon\Carbon::parse($talent_value->day_of_birthday)->age }} @endif , in {{ $talent_value->address }}</span>
                                                         <span class="overview-experiance-talent">{{ $talent_value->experience }} Year Experience</span>
                                                     </div>
                                                 </div>
@@ -2084,6 +2215,7 @@
             </div>
 
             <!-- Main modal detail choice -->
+            {{-- Target Detelet --}}
             <div id="modal-detail-choice" tabindex="-1" aria-hidden="true" class="hidden fixed top-5 right-0 left-0 z-50 w-[452px] mx-auto h-modal ">
                 <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                     <!-- Modal content -->
@@ -2109,14 +2241,14 @@
                                     <input type="text" class="pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search">
                                 </div>
                                 <div class="mt-8 h-80 overflow-y-auto ">
-                                    @foreach ($matchTalents as $value )
+                                    @foreach ($result->match_talents_add as $value )
                                         <label for="send-email{{ $value->talent->id }}" class="hover:cursor-pointer">
                                             <div class="flex items-center justify-between px-6 mb-4">
                                                 <div class="flex items-center space-x-2">
                                                     <div class="">
                                                         <input id="send-email{{ $value->talent->id }}" style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $value->talent->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$value->talent->avatar) }}" alt="">
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$value->talent->avatar) }}" alt="">
                                                     <div class="flex flex-col">
                                                         <span class="overview-name-talent text-colortext">{{ $value->talent->first_name }} {{ $value->talent->last_name }}</span>
                                                     </div>
@@ -2511,23 +2643,84 @@
 <script>
 
     // Add Task
+
+    // Target delete
+    // var no = 0 ;
+    // function add_more(){
+    //     const template =    '<tr id="" class="load'+no+' check hover:bg-[#F7F7F7] cursor-pointer">'+
+    //                             '<td height="66px" width="12%">'+
+    //                                 '<div class="flex items-center justify-center space-x-2">'+
+    //                                     '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'+
+    //                                         '<path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>'+
+    //                                         '<path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>'+
+    //                                     '</svg>'+
+    //                                     '<input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >'+
+    //                                 '</div>'+
+    //                             '</td>'+
+    //                             '<td colspan="3" height="66px" width="40%">'+
+    //                                 '<input id="input'+no+'"  name="task" type="text" class="enter'+no+' -ml-3 border bg-transparent border-none  text-[#222222] task-text-body w-full  outline-none focus:ring-0" placeholder="Enter a title for this task" required>'+
+    //                                 '<input type="hidden" class="job_models_id" name="job_models_id" value="{{ $result->id }}">'+
+    //                             '</td>'+
+    //                         '</tr>';
+    //     $(".load-task").append(template);
+    //     $('#input'+no).keypress(function(e) {
+    //         const val = $(this).val();
+    //         const id = '{{ $result->id }}'
+    //         if(e.which == 13) {
+      
+    //             $.ajax({
+    //                 type:'POST',
+    //                 url:'{{ route("jobboard.add_task") }}',
+    //                 data:{_token: '{{ csrf_token() }}', val, id , sts:'created'},
+    //                 success:function(data){
+    //                     var loader = `<tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked${data.data.id}">
+    //                                     <td height="66px" width="12%">
+    //                                         <div class="flex items-center justify-center space-x-2">
+    //                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+    //                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+    //                                             </svg>
+    //                                             <input onclick="check(${data.data.id})" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+    //                                         </div>
+    //                                     </td>
+    //                                     <td height="66px" width="40%">
+    //                                         <span class="task-text-body text-[#222222]">${data.data.task}</span>
+    //                                     </td>
+    //                                     <td height="66px" width="25%">
+    //                                         <span class="task-text-body text-colorStatusCard1">${data.data.status}</span>
+    //                                     </td>
+    //                                     <td height="66px">
+    //                                         <span class="task-text-body text-[#222222]">${data.data.assignee}</span>
+    //                                     </td>
+    //                                 </tr>`;
+    //                 $(".load-task").append(loader);
+    //                 }
+    //             });
+    //             $(this).parent().parent().remove();                    
+    //         }
+    //     });
+
+    
+    //     ++no;
+    // }
+
     var no = 0 ;
     function add_more(){
-        const template =    '<tr id="" class="load'+no+' check hover:bg-[#F7F7F7] cursor-pointer">'+
-                                '<td height="66px" width="12%">'+
-                                    '<div class="flex items-center justify-center space-x-2">'+
-                                        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'+
-                                            '<path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>'+
-                                            '<path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>'+
-                                        '</svg>'+
-                                        '<input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >'+
-                                    '</div>'+
-                                '</td>'+
-                                '<td colspan="3" height="66px" width="40%">'+
-                                    '<input id="input'+no+'"  name="task" type="text" class="enter'+no+' -ml-3 border bg-transparent border-none  text-[#222222] task-text-body w-full  outline-none focus:ring-0" placeholder="Enter a title for this task" required>'+
-                                    '<input type="hidden" class="job_models_id" name="job_models_id" value="{{ $result->id }}">'+
-                                '</td>'+
-                            '</tr>';
+    const template =  '<div class="flex space-x-2 space-y-2">'+
+                        '<div class="flex items-center justify-center space-x-2">'+
+                            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">'+
+                                '<path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>'+
+                                '<path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>'+
+                            '</svg>'+
+                            '<input style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 hidden border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >'+
+                        '</div>'+
+                        
+                        '<div>'+
+                            '<input id="input'+no+'"  name="task" type="text" class="enter'+no+' -ml-3 border bg-transparent border-none  text-[#222222] task-text-body w-full  outline-none focus:ring-0" placeholder="Enter a title for this task" required>'+
+                            '<input type="hidden" class="job_models_id" name="job_models_id" value="{{ $result->id }}">'+
+                        '</div>'+
+                        '</div>';
+                           
         $(".load-task").append(template);
         $('#input'+no).keypress(function(e) {
             const val = $(this).val();
@@ -2539,26 +2732,24 @@
                     url:'{{ route("jobboard.add_task") }}',
                     data:{_token: '{{ csrf_token() }}', val, id , sts:'created'},
                     success:function(data){
-                        var loader = `<tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked${data.data.id}">
-                                        <td height="66px" width="12%">
-                                            <div class="flex items-center justify-center space-x-2">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                </svg>
-                                                <input onclick="check(${data.data.id})" style="color: #3BD7CF" type="checkbox" value="" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+
+                        
+                        var loader = `<label for="${data.data.id}">
+                                        <div class="flex space-x-2 space-y-2 hover:bg-[#F7F7F7] cursor-pointer loader-checked${data.data.id}">
+                                            <div class="flex items-center  py-2 justify-center space-x-2">
+                                                <div>
+                                                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                    </svg>
+                                                </div>
+                                                <input id="${data.data.id}" onclick="check(${data.data.id})" style="color: #3BD7CF" type="checkbox" value="" class="hidden check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <div>
+                                                    <span class="task-text-body text-[#222222]">${data.data.task}</span>
+                                                </div>
                                             </div>
-                                        </td>
-                                        <td height="66px" width="40%">
-                                            <span class="task-text-body text-[#222222]">${data.data.task}</span>
-                                        </td>
-                                        <td height="66px" width="25%">
-                                            <span class="task-text-body text-colorStatusCard1">${data.data.status}</span>
-                                        </td>
-                                        <td height="66px">
-                                            <span class="task-text-body text-[#222222]">${data.data.assignee}</span>
-                                        </td>
-                                    </tr>`;
+                                        </div>
+                                        </label>`;
                     $(".load-task").append(loader);
                     }
                 });
@@ -2577,24 +2768,21 @@
                 url:'{{ route("jobboard.add_task") }}',
                 data:{_token: '{{ csrf_token() }}', id ,job_models_id,  sts:'updated'},
                 success:function(data){
-                    var loader_done = ` <td height="66px" width="12%">
-                                            <div class="flex items-center justify-center space-x-2">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                    var loader_done = ` <label>
+                                        <div class="flex items-center py-2 justify-center space-x-2">
+                                            <div>
+                                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
                                                 </svg>
-                                                <input checked disabled style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                             </div>
-                                        </td>
-                                        <td height="66px" width="40%">
-                                            <s class="task-text-body text-[#AFABAB]">${data.data.task}</a>
-                                        </td>
-                                        <td height="66px" width="25%">        
-                                            <span class="task-text-body text-palet">${data.data.status}</span>
-                                        </td>
-                                        <td height="66px">
-                                            <span class="task-text-body text-[#222222]">${data.data.assignee}</span>
-                                        </td>`;
+                                            <input checked disabled style="color: #3BD7CF" type="checkbox" value="" class="w-5 h-5 hidden rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <div height="66px" width="40%">
+                                                <s class="task-text-body text-[#AFABAB]">${data.data.task}</a>
+                                            </div>
+                                        </div>
+                                        </label>`;
                     $('.loader-checked'+id).html(loader_done);
                 }
         });
@@ -2986,7 +3174,7 @@
 
     function toggle_availability_day(){
        $('.toggle_availability_day').toggleClass('hidden')
-       $('.toggle_availability_day_edit').toggleClass('relative z-30 bg-white')
+       $('.toggle_availability_day_edit').toggleClass('relative z-30 pt-2 bg-white')
        $('.hide_body').toggleClass('hidden');
     }
 
@@ -3097,7 +3285,44 @@
         $('.toggle_client_detail').toggleClass('relative z-50 bg-white')
         $('.hide_body').toggleClass('hidden');
 
-    
+    }
+
+    function status_talents(val){
+        const tmp = `<input class="" id="{{ $value->id }}" type="hidden" name="status_name_match" value="${val}">`;
+        $('.status_all_select').html(tmp)
+        // var data = $('#form_match_talent').serialize();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("jobboard.change_status_all_match_talent") }}',
+            data:$('#form_match_talent').serialize(),
+            success:function(data){
+                location.reload()
+            }
+        });
+
+    }
+
+    // New Aplicants Status
+    function status_new_aplicants(status, id , job_models_id){
+        // alert(status, id , job_models_id)
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("jobboard.add_new_aplicants_to_match_talent") }}',
+            data: {id , status , job_models_id},
+            success:function(data){
+                location.reload()
+            }
+        });
     }
 </script>
 <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('languages');
+            $table->string('color')->nullable();
             $table->text('note')->nullable();
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('users_id');

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 
 class JobboardRepository 
 {
+    
     use Actifity;
     public function created($request)
     {
@@ -31,7 +32,7 @@ class JobboardRepository
         try{
             $value = json_decode($request->family);
             $jobs = JobModels::create([
-             'family' => $value[0]->name,
+             'family' => $value[0]->first_name,
              'title' => $request->title,
              'description' => $request->description,
              'id_unique' => $jobsIdUnique->count()+1,
@@ -255,7 +256,7 @@ class JobboardRepository
         return JobModelsComment::create([
             'name' =>  auth()->user()->full_name ?? 'Your agency',
             'comment' => $request->comment,
-            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? null,
             'job_models_id' => $request->job_models_id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
         ]);
@@ -266,7 +267,7 @@ class JobboardRepository
         return JobModelsCommentsReply::create([
             'name' =>  auth()->user()->full_name ?? 'Your agency',
             'comment' => $request->reply_comment,
-            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? null,
             'job_models_comments_id' => $request->job_comments_id,
             'job_models_id' => $request->job_models_id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id

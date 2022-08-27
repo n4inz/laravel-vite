@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->string('day_of_birthday')->nullable();
             $table->string('address');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('color')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('job_models_id');
             $table->unsignedBigInteger('users_id');

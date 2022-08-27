@@ -26,6 +26,9 @@ class NavbarController extends Controller
             array_push($response, [
                 'name' => $val->name,
                 'avatar' => $val->avatar,
+                'avatar1' => '<div class="w-5 h-5 flex items-center justify-center rounded-full">
+                                    <span class="text-white text-lg">'.$val->name.'</span>
+                                </div>',
                 'body' => $val->body,
                 'job_models_id' => $val->job_models_id,
                 'notify_status' => $val->notify_status,

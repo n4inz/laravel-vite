@@ -1444,6 +1444,11 @@ video {
   margin-right: calc(165px * var(--tw-space-x-reverse));
   margin-left: calc(165px * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-x-24 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(6rem * var(--tw-space-x-reverse));
+  margin-left: calc(6rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .space-x-11 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(2.75rem * var(--tw-space-x-reverse));
@@ -1750,6 +1755,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(155 155 155 / var(--tw-bg-opacity));
 }
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
+}
 .bg-\[\#F7F7F7\] {
   --tw-bg-opacity: 1;
   background-color: rgb(247 247 247 / var(--tw-bg-opacity));
@@ -1761,10 +1770,6 @@ video {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-.bg-gray-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity));
 }
 .bg-\[\#DCDCDC\] {
   --tw-bg-opacity: 1;
@@ -1985,6 +1990,9 @@ video {
 .pl-10 {
   padding-left: 2.5rem;
 }
+.pt-2 {
+  padding-top: 0.5rem;
+}
 .pl-1 {
   padding-left: 0.25rem;
 }
@@ -1999,9 +2007,6 @@ video {
 }
 .pt-\[7px\] {
   padding-top: 7px;
-}
-.pt-2 {
-  padding-top: 0.5rem;
 }
 .pl-5 {
   padding-left: 1.25rem;
@@ -2046,6 +2051,10 @@ video {
 .text-\[13px\] {
   font-size: 13px;
 }
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -2053,8 +2062,8 @@ video {
 .text-\[11px\] {
   font-size: 11px;
 }
-.text-lg {
-  font-size: 1.125rem;
+.text-xl {
+  font-size: 1.25rem;
   line-height: 1.75rem;
 }
 .font-semibold {
@@ -2170,6 +2179,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(44 166 160 / var(--tw-text-opacity));
 }
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
 .text-\[\#FFFFFF\] {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2189,10 +2202,6 @@ video {
 .text-teal-500 {
   --tw-text-opacity: 1;
   color: rgb(20 184 166 / var(--tw-text-opacity));
-}
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .text-red-700 {
   --tw-text-opacity: 1;
@@ -2279,13 +2288,13 @@ video {
 }
 
 .title-logo {
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
     line-height: 22px;
 }
-.btn-create-list{
+.btn-create-list {
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
@@ -2293,9 +2302,8 @@ video {
     letter-spacing: -0.04em;
 }
 
-.status-card-job{
-
-    font-family: 'Roboto';
+.status-card-job {
+    font-family: "Roboto";
     font-style: normal;
     font-weight: 500;
     font-size: 11px;
@@ -2311,7 +2319,6 @@ video {
     line-height: 24px;
 }
 
-
 /* .toggle-nav-show{
     width: 82%;
     margin-left: 18%;
@@ -2322,7 +2329,7 @@ video {
     margin-left: 5%;
 } */
 
-.togle-search-mobile{
+.togle-search-mobile {
     /* justify-start pl-24 */
     display: flex;
     justify-content: flex-start;
@@ -2331,7 +2338,7 @@ video {
     /* margin-left: 40px; */
 }
 
-.togle-search-desktop{
+.togle-search-desktop {
     /* justify-start pl-24 */
     display: flex;
     justify-content: flex-end;
@@ -2359,7 +2366,7 @@ video {
     letter-spacing: 0.337647px;
 }
 
-.overview-status-field{
+.overview-status-field {
     font-weight: 600;
     font-size: 13px;
     line-height: 15px;
@@ -2368,7 +2375,7 @@ video {
     letter-spacing: 0.337647px;
 }
 
-.overview-id-field{
+.overview-id-field {
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
@@ -2382,7 +2389,7 @@ video {
     margin-left: calc(58px * calc(1 - var(--tw-space-x-reverse)));
 } */
 
-.overview-assigned-field{
+.overview-assigned-field {
     font-weight: 500;
     font-size: 13px;
     line-height: 15px;
@@ -2391,8 +2398,8 @@ video {
     letter-spacing: 0.337647px;
 }
 
-.overview-label-text{
-    font-family: 'Roboto';
+.overview-label-text {
+    font-family: "Roboto";
     font-style: normal;
     font-weight: 500;
     font-size: 11px;
@@ -2400,10 +2407,10 @@ video {
     display: flex;
     align-items: center;
     letter-spacing: 0.07px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
-.overview-tab{
+.overview-tab {
     font-weight: 600;
     font-size: 13px;
     display: flex;
@@ -2411,7 +2418,7 @@ video {
     letter-spacing: 0.337647px;
 }
 
-.overview-send-job{
+.overview-send-job {
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
@@ -2421,7 +2428,7 @@ video {
     letter-spacing: -0.24px;
 }
 
-.overview-note{
+.overview-note {
     font-weight: 700;
     font-size: 13px;
     line-height: 34px;
@@ -2431,14 +2438,14 @@ video {
     color: #222222;
 }
 
-.overview-note-body{
+.overview-note-body {
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
     letter-spacing: -0.08px;
 }
 
-.overview-modal-detail-talent{
+.overview-modal-detail-talent {
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
@@ -2446,64 +2453,64 @@ video {
     letter-spacing: -0.08px;
 }
 
-.overview-when{
+.overview-when {
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 22px;
     letter-spacing: -0.505882px;
-    color: #9B9B9B;
+    color: #9b9b9b;
 }
 
-.overview-ring-day{
-    border: 2px solid #FA9D6B;
+.overview-ring-day {
+    border: 2px solid #fa9d6b;
     border-radius: 7px;
 }
 
-.overview-text-day{
+.overview-text-day {
     font-weight: 400;
     font-size: 13px;
     line-height: 22px;
     text-align: center;
     letter-spacing: -0.505882px;
-    color: #FA9D6B;
+    color: #fa9d6b;
 }
 
-.overview-text-muted{
+.overview-text-muted {
     font-weight: 400;
     font-size: 13px;
     line-height: 22px;
     text-align: center;
     letter-spacing: -0.505882px;
-    color: #DDDDDD;
+    color: #dddddd;
 }
 
-.overview-table-header-day{
+.overview-table-header-day {
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
     letter-spacing: -0.505882px;
-    color: #9B9B9B;
+    color: #9b9b9b;
 }
 
-.overview-tabel-body-day{
+.overview-tabel-body-day {
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
     letter-spacing: -0.43px;
-    color: #4A4A4A;
+    color: #4a4a4a;
 }
-.overview-show-more{
+.overview-show-more {
     font-weight: 500;
     font-size: 11px;
     line-height: 13px;
     letter-spacing: 0.07px;
-    color: #FA9D6B;
+    color: #fa9d6b;
 }
 
-.overview-name-talent{
+.overview-name-talent {
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
@@ -2512,27 +2519,27 @@ video {
     letter-spacing: 0.337647px;
 }
 
-.overview-live-talent{
+.overview-live-talent {
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
     display: flex;
     align-items: center;
     letter-spacing: 0.337647px;
-    color: #3BD7CF;
+    color: #3bd7cf;
 }
 
-.overview-experiance-talent{
+.overview-experiance-talent {
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
     display: flex;
     align-items: center;
     letter-spacing: 0.337647px;
-    color: #827C7C;
+    color: #827c7c;
 }
 
-.overview-add-talent{
+.overview-add-talent {
     font-style: normal;
     font-weight: 400;
     font-size: 11px;
@@ -2541,9 +2548,9 @@ video {
     align-items: flex-end;
     text-align: right;
     letter-spacing: 0.07px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
-.overview-client-detail{
+.overview-client-detail {
     font-style: normal;
     font-weight: 700;
     font-size: 13px;
@@ -2553,7 +2560,7 @@ video {
     letter-spacing: 0.337647px;
     color: #222222;
 }
-.overview-client-detail-table{
+.overview-client-detail-table {
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -2561,7 +2568,7 @@ video {
     letter-spacing: -0.08px;
     color: #222222;
 }
-.overview-comments-name{
+.overview-comments-name {
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -2572,24 +2579,24 @@ video {
     -moz-appearance: none;
 }
 
-.overview-comments-body{
+.overview-comments-body {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
     letter-spacing: -0.24px;
-    color: #827C7C;
+    color: #827c7c;
 }
-.overview-comments-reply{
+.overview-comments-reply {
     font-weight: 400;
     font-size: 12px;
     line-height: 20px;
     display: flex;
     align-items: center;
     letter-spacing: -0.24px;
-    color: #AFABAB;
+    color: #afabab;
 }
-.overview-comments-leave{
+.overview-comments-leave {
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -2598,7 +2605,7 @@ video {
     align-items: center;
     letter-spacing: -0.24px;
 }
-.overview-attechment-title{
+.overview-attechment-title {
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
@@ -2607,7 +2614,7 @@ video {
     align-items: center;
     letter-spacing: -0.24px;
 }
-.overview-attechment-size{
+.overview-attechment-size {
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -2617,7 +2624,7 @@ video {
     letter-spacing: -0.24px;
 }
 
-.overview-attechment-btn-text{
+.overview-attechment-btn-text {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -2625,26 +2632,26 @@ video {
     display: flex;
     align-items: center;
     letter-spacing: -0.24px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
-.overview-responsibilities-title{
+.overview-responsibilities-title {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
     text-align: center;
     letter-spacing: -0.411029px;
-    color: #4A4A4A;
+    color: #4a4a4a;
 }
-.overview-responsibilities-title-muted{
+.overview-responsibilities-title-muted {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
     text-align: center;
     letter-spacing: -0.411029px;
-    color: #DDDDDD;
+    color: #dddddd;
 }
 
 .task-text {
@@ -2653,10 +2660,10 @@ video {
     font-size: 13px;
     line-height: 18px;
     letter-spacing: -0.08px;
-    color: #827C7C;
+    color: #827c7c;
 }
 
-.task-text-body{
+.task-text-body {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -2664,16 +2671,16 @@ video {
     letter-spacing: -0.24px;
 }
 
-.task-btn-text{
+.task-btn-text {
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     letter-spacing: -0.24px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
-.overview-talent-status{
+.overview-talent-status {
     font-style: normal;
     font-weight: 500;
     font-size: 11px;
@@ -2682,7 +2689,7 @@ video {
     align-items: center;
     letter-spacing: 0.07px;
 }
-.overview-talent-otside-text{
+.overview-talent-otside-text {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -2691,16 +2698,15 @@ video {
     align-items: center;
     letter-spacing: -0.24px;
 }
-.overview-talent-modal-title{
+.overview-talent-modal-title {
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
     line-height: 22px;
     letter-spacing: -0.41px;
-
 }
 
-.overview-modal-add-talent-title{
+.overview-modal-add-talent-title {
     font-style: normal;
     font-weight: 700;
     font-size: 34px;
@@ -2708,14 +2714,14 @@ video {
     letter-spacing: 0.41px;
 }
 
-.overview-modal-add-talent-text{
-    font-family: 'Roboto';
+.overview-modal-add-talent-text {
+    font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
     font-size: 17px;
     line-height: 22px;
 }
-.overview-modal-add-talent-textarea-rule{
+.overview-modal-add-talent-textarea-rule {
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
@@ -2723,10 +2729,10 @@ video {
     text-align: right;
     letter-spacing: -0.08px;
     text-transform: uppercase;
-    color: #827C7C;
+    color: #827c7c;
 }
 
-.overview-modal-add-talent-upload-text{
+.overview-modal-add-talent-upload-text {
     font-style: normal;
     font-weight: 600;
     font-size: 13px;
@@ -2736,7 +2742,7 @@ video {
     letter-spacing: -0.24px;
 }
 
-.overview-send-title{
+.overview-send-title {
     font-style: normal;
     font-weight: 700;
     font-size: 34px;
@@ -2744,7 +2750,7 @@ video {
     letter-spacing: 0.41px;
 }
 
-.overview-send-price{
+.overview-send-price {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -2753,7 +2759,7 @@ video {
     letter-spacing: 0.38px;
 }
 
-.user-create-client-title{
+.user-create-client-title {
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -2761,21 +2767,21 @@ video {
     letter-spacing: 0.337647px;
 }
 
-.user-talent-title{
+.user-talent-title {
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 32px;
     letter-spacing: -0.04em;
 }
-.user-talent-name{
+.user-talent-name {
     font-style: normal;
     font-weight: 600;
     font-size: 17px;
     line-height: 20px;
     letter-spacing: -0.41px;
 }
-.user-talent-live{
+.user-talent-live {
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -2790,52 +2796,193 @@ video {
     right: 0;
 } */
 
-label[for="subcategory[]"], 
-label[for=family] ,
-label[for=title] ,
-label[for=description] , 
-label[for=address],
-label[for=start_time],
-label[for=end_time],
-label[for=start_date],
-label[for=end_date],
-label[for=rate],
+label[for="subcategory[]"],
+label[for="family"],
+label[for="title"],
+label[for="description"],
+label[for="address"],
+label[for="start_time"],
+label[for="end_time"],
+label[for="start_date"],
+label[for="end_date"],
+label[for="rate"],
 label[for="name_chile[]"],
 label[for="age[]"],
-label[for=agency_name],
-label[for=url_ending_legal],
-label[for=company_description],
+label[for="agency_name"],
+label[for="url_ending_legal"],
+label[for="company_description"],
 label[for="status[]"],
 label[for="chile_care[]"],
 label[for="senior_care[]"],
 label[for="home_care[]"],
-label[for=first_name],
-label[for=last_name],
-label[for=email],
-label[for=phone],
-label[for=address],
-label[for=day_of_birthday],
-label[for=type_helper],
-label[for=experience],
-label[for=languages],
-label[for=full_name],
-label[for=password],
+label[for="first_name"],
+label[for="last_name"],
+label[for="email"],
+label[for="phone"],
+label[for="address"],
+label[for="day_of_birthday"],
+label[for="type_helper"],
+label[for="experience"],
+label[for="languages"],
+label[for="full_name"],
+label[for="password"],
 label[for="status_talent[]"],
-label[for=hourly_rate],
-label[for=placement_fee],
-label[for=aplication_fee],
-label[for=location],
+label[for="hourly_rate"],
+label[for="placement_fee"],
+label[for="aplication_fee"],
+label[for="location"],
 label[id="0-error"],
-label[for=note],
-label[id="about_talent-error"]
-{
+label[for="note"],
+label[id="about_talent-error"] {
     color: red;
     font-size: 12px;
 }
 
-.dz-button{
+.dz-button {
     display: none;
 }
+
+/* Loading */
+.container-loader {
+    height: 100vh;
+    width: 100vw;
+    font-family: Helvetica;
+}
+
+.loader {
+    height: 20px;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .loader--dot {
+    -webkit-animation-name: loader;
+            animation-name: loader;
+    -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    background-color: black;
+    position: absolute;
+    border: 2px solid white;
+  }
+  .loader--dot:first-child {
+    background-color: #8cc759;
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+  }
+  .loader--dot:nth-child(2) {
+    background-color: #8c6daf;
+    -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+  }
+  .loader--dot:nth-child(3) {
+    background-color: #ef5d74;
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+  }
+  .loader--dot:nth-child(4) {
+    background-color: #f9a74b;
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+  }
+  .loader--dot:nth-child(5) {
+    background-color: #60beeb;
+    -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+  }
+  .loader--dot:nth-child(6) {
+    background-color: #fbef5a;
+    -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+  }
+  .loader--text {
+    position: absolute;
+    top: 200%;
+    left: 0;
+    right: 0;
+    width: 4rem;
+    margin: auto;
+  }
+  .loader--text:after {
+    content: "Loading";
+    font-weight: bold;
+    -webkit-animation-name: loading-text;
+            animation-name: loading-text;
+    -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+  }
+  
+  @-webkit-keyframes loader {
+    15% {
+      transform: translateX(0);
+    }
+    45% {
+      transform: translateX(230px);
+    }
+    65% {
+      transform: translateX(230px);
+    }
+    95% {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes loader {
+    15% {
+      transform: translateX(0);
+    }
+    45% {
+      transform: translateX(230px);
+    }
+    65% {
+      transform: translateX(230px);
+    }
+    95% {
+      transform: translateX(0);
+    }
+  }
+  @-webkit-keyframes loading-text {
+    0% {
+      content: "Loading";
+    }
+    25% {
+      content: "Loading.";
+    }
+    50% {
+      content: "Loading..";
+    }
+    75% {
+      content: "Loading...";
+    }
+  }
+  @keyframes loading-text {
+    0% {
+      content: "Loading";
+    }
+    25% {
+      content: "Loading.";
+    }
+    50% {
+      content: "Loading..";
+    }
+    75% {
+      content: "Loading...";
+    }
+  }
+
+/* End animate loading */
 
 .after\:absolute::after {
   content: var(--tw-content);

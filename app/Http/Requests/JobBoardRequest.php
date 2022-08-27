@@ -30,7 +30,7 @@ class JobBoardRequest extends FormRequest
             'subcategory' => 'required',
             'rate' => 'required',
             'address' => 'required|min:3',
-            'status' => 'required',
+            // 'status' => 'required',
         ];
     }
 }

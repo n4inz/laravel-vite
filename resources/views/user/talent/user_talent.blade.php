@@ -47,11 +47,18 @@
                 <div id="search_talent" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                     <div class="hidden">{{ $values->day_of_birthday}} {{ $values->experience }} {{ $values->email }} {{ $values->phone }} {{ $values->address }} {{ $values->about_talent }}</div>
                     <div>
-                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/Talent attached file/avatar/'.$values->avatar) }}" alt="">
+                        @if ($values->avatar)
+                        {{-- <img class="w-20 h-20 rounded-full" src="{{ asset('storage/avatar/'.$values->avatar) }}" alt=""> --}}
+                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/avatar/'.$values->avatar) }}" alt="">
+                        @else
+                            <div class="w-20 h-20 flex items-center justify-center bg-[{{ $values->color }}] rounded-full">
+                                <span class="text-white text-lg">{{ strtoupper(substr($values->first_name, 0, 1)) }}{{ strtoupper(substr($values->last_name, 0, 1)) }}</span>
+                            </div>
+                        @endif
                     </div>
                     <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
                         <span class="user-talent-name text-[#222222]">{{ $values->first_name }} {{ $values->last_name }}</span>
-                        <span class="user-talent-live">Age {{ Carbon\Carbon::parse($values->day_of_birthday)->age }}, in  {{ Str::limit($values->address, 20, $end='...') }}</span>
+                        <span class="user-talent-live">@if($values->day_of_birthday != 'null') Age {{ Carbon\Carbon::parse($values->day_of_birthday)->age }} @endif, in  {{ Str::limit($values->address, 20, $end='...') }}</span>
                         <span class="overview-note-body text-[#2CA6A0]">
                             <?php $helpers = '';  ?>
                             @foreach ($values->type_helper as $helper )

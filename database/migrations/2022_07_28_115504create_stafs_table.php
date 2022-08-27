@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('stafs', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('users_agency_id');
             $table->timestamps();

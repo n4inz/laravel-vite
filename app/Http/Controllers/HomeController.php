@@ -33,12 +33,22 @@ class HomeController extends Controller
 
     public function new_aplicant_store(NewAplicantsRequest $request)
     {
-       
+        $color = [
+            '#EB5757',
+            '#F2994A',
+            '#27AE60',
+            '#6AEAE3',
+            '#56CCF2',
+            '#BB6BD9',
+            '#F2C94C',
+        ];
+        $color_rand = $color[rand(0, count($color) - 1)];
         $idModels = JobModels::where('uid' , $request->uid)->firstOrFail(['id', 'users_id']);
        $newAplicants =  JobModelsNewApplicant::create([
            'first_name' => $request->first_name,
            'last_name' => $request->last_name,
            'email' => $request->email,
+           'color' => $color_rand,
            'phone' => $request->phone,
            'address' => $request->address,
            'description' => $request->description,
@@ -54,7 +64,7 @@ class HomeController extends Controller
                         'file' => $res->file ,
                         'extension' => strtolower($res->extension)
                     ]);
-                    $this->move_file('public/Files before submit/'.$res->file, 'public/File/'.$res->file);
+                    $this->move_file('public/Files before submit/'.$res->file, 'public/file/'.$res->file);
         
                     File::where('id' , $res->id)->delete();
                  });

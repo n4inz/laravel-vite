@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="overview-note-body text-[#827C7C] w-[650px] mt-[27px]">
-                    {{ $result->description }}
+                    {!! $result->description !!}
                 </div>
                 <div class=" mt-6">
                     <div class="mt-6">
@@ -39,26 +39,26 @@
                     <div class="flex space-x-4 items-center px-4 mt-4">
                         <span class="overview-when">When</span>
                                 
-                        <div class="{{ $result->availability[0]->monday  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->monday  ? 'overview-text-day' : 'overview-text-muted' }} ">MO</span>
+                        <div class="{{ isset($result->availability[0]->monday)  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->monday)  ? 'overview-text-day' : 'overview-text-muted' }} ">MO</span>
                         </div>
-                        <div class="{{ $result->availability[0]->tuesday  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->tuesday  ? 'overview-text-day' : 'overview-text-muted' }}">Tu</span>
+                        <div class="{{ isset($result->availability[0]->tuesday)  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->tuesday)  ? 'overview-text-day' : 'overview-text-muted' }}">Tu</span>
                         </div>
-                        <div class="{{ $result->availability[0]->wednesday  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->wednesday  ? 'overview-text-day' : 'overview-text-muted' }}">We</span>
+                        <div class="{{ isset($result->availability[0]->wednesday)  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->wednesday)  ? 'overview-text-day' : 'overview-text-muted' }}">We</span>
                         </div>
-                        <div class="{{ $result->availability[0]->thursday ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->thursday ? 'overview-text-day' : 'overview-text-muted' }}">Th</span>
+                        <div class="{{ isset($result->availability[0]->thursday) ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->thursday) ? 'overview-text-day' : 'overview-text-muted' }}">Th</span>
                         </div>
-                        <div class="{{ $result->availability[0]->friday ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->friday ? 'overview-text-day' : 'overview-text-muted' }}">Fr</span>
+                        <div class="{{ isset($result->availability[0]->friday) ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->friday) ? 'overview-text-day' : 'overview-text-muted' }}">Fr</span>
                         </div>
-                        <div class="{{ $result->availability[0]->saturday ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->saturday ? 'overview-text-day' : 'overview-text-muted' }}">Sa</span>
+                        <div class="{{ isset($result->availability[0]->saturday) ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->saturday) ? 'overview-text-day' : 'overview-text-muted' }}">Sa</span>
                         </div>
-                        <div class="{{ $result->availability[0]->sunday ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                            <span class="{{ $result->availability[0]->sunday ? 'overview-text-day' : 'overview-text-muted' }}">Su</span>
+                        <div class="{{ isset($result->availability[0]->sunday) ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
+                            <span class="{{ isset($result->availability[0]->sunday) ? 'overview-text-day' : 'overview-text-muted' }}">Su</span>
                         </div>
                     </div>
                     <div class="px-4 mt-4 space-y-4">

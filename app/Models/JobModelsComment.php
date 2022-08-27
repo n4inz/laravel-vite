@@ -20,4 +20,9 @@ class JobModelsComment extends Model
     {   
         return $this->hasMany(JobModelsCommentsReply::class, 'job_models_comments_id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class,'users_id');
+    }
 }

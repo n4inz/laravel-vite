@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('load-template-email-talent' , [JobboardController::class, 'load_template_email_talent'])->name('jobboard.load_template_email_talent');
     Route::post('edit-template-email' , [JobboardController::class , 'edit_template_email'])->name('jobboard.edit_template_email');
     Route::post('edit-pay-info' , [JobboardController::class , 'edit_pay_info'])->name('jobboard.edit_pay_info');
+    Route::post('sync-calendly' , [JobboardController::class , 'sync_calendly'])->name('jobboard.sync_calendly');
 
     // AJAX JOBBOARD
     Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');
@@ -94,6 +95,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('change-status-all-match-talent', [JobboardController::class, 'change_status_all_match_talent'])->name('jobboard.change_status_all_match_talent');
 
     Route::post('add-new-aplicants', [JobboardController::class , 'new_aplicant_store'])->name('jobboard.new_aplicants');
+    Route::post('add-new-aplicants-to-match-talent', [JobboardController::class , 'add_new_aplicants_to_match_talent'])->name('jobboard.add_new_aplicants_to_match_talent');
 
     // User
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');

@@ -2,9 +2,16 @@ import './bootstrap';
 
 
 window.Echo.channel("messages").listen("Comments", (event) => {
-
+    var avatar;
+    if(event.data.cek_avatar != null){
+        avatar = `<img class="w-10 h-10 border-2 border-white rounded-full " src="${event.data.avatar}" alt="">`;
+    }else{
+        avatar = event.data.avatar1;
+    }
     const template = `<div class="flex space-x-2 mt-6">
-                        <img class="w-10 h-10 border-2 border-white rounded-full " src="${event.data.avatar}" alt="">
+                            <div>
+                                ${avatar}
+                            </div>
                             <div class="w-full">
                                 <div class="flex space-x-4">
                                     <div class="flex space-x-1 justify-center items-center">
@@ -42,9 +49,16 @@ window.Echo.channel("messages").listen("Comments", (event) => {
 
 // Reply
 window.Echo.channel("reply-messages").listen("ReplyComment", (res) => {
-
+    var avatar;
+    if(res.data.cek_avatar != null){
+        avatar = `<img class="w-10 h-10 border-2 border-white rounded-full" src="${res.data.avatar}" alt="">`;
+    }else{
+        avatar = res.data.avatar1;
+    }
     const template_reply = `<div class="flex space-x-2">
-                                <img class="w-10 h-10 border-2 border-white rounded-full" src="${res.data.avatar}" alt="">
+                                <div>
+                                ${avatar}
+                                </div>
                                 <div class="max-w-xl">
                                     <div class="flex space-x-4">
                                         <div class="flex space-x-1 justify-center items-center">

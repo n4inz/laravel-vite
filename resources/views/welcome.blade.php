@@ -10,13 +10,26 @@
     <title>Fine Uploader Gallery View Demo</title>
     <script src="{{ asset('js/jQuery.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+   
 </head>
 <body>
   {{-- <form method="post" action="{{ route('upload') }}" enctype="multipart/form-data"
   class="dropzone bg-slate-400" id="dropzone">
   @csrf
   </form> --}}
-  <div id="modal-add-talent" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
+  <div class='container-loading'>
+    <div class='loader'>
+      <div class='loader--dot'></div>
+      <div class='loader--dot'></div>
+      <div class='loader--dot'></div>
+      <div class='loader--dot'></div>
+      <div class='loader--dot'></div>
+      <div class='loader--dot'></div>
+      <div class='loader--text'></div>
+    </div>
+  </div>
+  <div id="modal-add-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
     <div class="p-4 w-[852px] h-screen">
         <div class="bg-white rounded-lg shadow ">
             <div class="relative text-center pt-10">

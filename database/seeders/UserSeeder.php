@@ -25,19 +25,39 @@ class UserSeeder extends Seeder
             'domain' => 'test.'.env('DOMAIN'),
             'database' => $faker->userName(4)
         ]);
-
+        $color = [
+            '#EB5757',
+            '#F2994A',
+            '#27AE60',
+            '#6AEAE3',
+            '#56CCF2',
+            '#BB6BD9',
+            '#F2C94C',
+        ];
+        $color_rand = $color[rand(0, count($color) - 1)];
         $user_test = User::create([
             'full_name' => $faker->name,
             'email' => 'test@mail.com',
             'email_verified_at' => now(),
             'password' => Hash::make(123456),
             'tenants_id' =>  $tenant->id,
+            'color' => $color_rand,
             'remember_token' => Str::random(10),
         ]);
 
         $user_test->assignRole('agency');
 
         for($x=1;$x<=2;$x++){
+            $color1 = [
+                '#EB5757',
+                '#F2994A',
+                '#27AE60',
+                '#6AEAE3',
+                '#56CCF2',
+                '#BB6BD9',
+                '#F2C94C',
+            ];
+            $color1_rand = $color1[rand(0, count($color1) - 1)];
             $tenant =  Tenant::create([
                 'name' => $faker->name,
                 'domain' => $faker->lastName.'.'.env('DOMAIN'),
@@ -49,6 +69,7 @@ class UserSeeder extends Seeder
                 'email' => fake()->safeEmail(),
                 'email_verified_at' => now(),
                 'password' => Hash::make(123456),
+                'color' => $color1_rand,
                 'tenants_id' =>  $tenant->id,
                 'remember_token' => Str::random(10),
             ]);

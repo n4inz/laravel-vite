@@ -73,11 +73,17 @@ class JobModels extends Model
     {
         return $this->hasMany(JobModelsMatchTalentAdd::class, 'job_models_id');
     }
+    
+    public function match_talents_filters()
+    {
+        return $this->hasMany(JobModelsMatchTalentFilter::class, 'job_models_id');
+    }
 
     public function talent_new_aplicants()
     {
         return $this->hasMany(JobModelsNewApplicant::class, 'job_models_id');
     }
+
 
     public function setting_category()
     {

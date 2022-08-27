@@ -1,9 +1,19 @@
 <div class="flex justify-center space-x-10">
-    <img class="w-28 h-28 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/Talent attached file/avatar/'.$talent->avatar) }}" alt="">
+    @if ($talent->avatar)
+    
+    <img class="w-28 h-28 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->avatar) }}" alt="">
+    @else
+        <div class="w-32">
+            <div class="w-28 h-28 flex items-center justify-center bg-[{{ $talent->color }}] rounded-full">
+                <span class="text-white text-xl">{{ strtoupper(substr($talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->last_name, 0, 1)) }}</span>
+            </div>
+
+        </div>
+    @endif
     <div class="w-full flex flex-col ">
         <div class="flex flex-col">
             <span class="overview-talent-modal-title text-[#2CA6A0]">{{ $talent->first_name }} {{ $talent->last_name }}</span>
-            <span class="overview-client-detail-table">Female, {{ Carbon\Carbon::parse($talent->day_of_birthday)->age }} years old</span>
+            <span class="overview-client-detail-table">Female, @if($talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($talent->day_of_birthday)->age }} @endif  years old</span>
         </div>
         <div class="mt-6">
             <table width ="100%">
@@ -96,7 +106,7 @@
         @foreach ($talent->attached_file as $talentFile )
             @if ($talentFile->extension == 'png' or $talentFile->extension == 'jpg' or $talentFile->extension == 'jpeg')
                 <div class="flex mr-4 items-center justify-center space-x-[16.33px] w-[121px] h-32 hover:cursor-pointer">
-                    <img src="{{ asset('storage/Talent attached file/'.$talentFile->files) }}" alt="">
+                    <img src="{{ asset('storage/file/'.$talentFile->files) }}" alt="">
                 </div>
             @endif
         @endforeach
@@ -128,7 +138,7 @@
     <div class="flex flex-wrap mt-4">
         @foreach ($talent->attached_file as $talentFile )
             @if ($talentFile->extension == 'pdf')
-            <a href="{{ route('jobboard.download_file' , ['file' => $talentFile->files , 'path' => 'Talent attached file']) }}">
+            <a href="{{ route('jobboard.download_file' , ['file' => $talentFile->files , 'path' => 'file']) }}">
                 <div class="mr-4 mb-4 flex flex-col items-center justify-center hover:cursor-pointer">
                     <i class="fa fa-2x fa-file-pdf-o text-red-600" aria-hidden="true"></i>
                     <span class="text-xs text-gray-400 mt-1">{{ $talentFile->files }}</span>

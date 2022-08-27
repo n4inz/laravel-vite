@@ -50,10 +50,10 @@
             border:red;
         }
         .tagify__dropdown.users-list .tagify__dropdown__item{
-            padding: .5em .7em;
-            display: grid;
+            /* padding: .5em .7em; */
+            /* display: grid;
             grid-template-columns: auto 1fr;
-            gap: 0 1em;
+            gap: 0 1em; */
             grid-template-areas: "avatar name"
                                 "avatar email";
         }

@@ -16,13 +16,24 @@ class UserTalentRepository
         
         
         if(isset($request->avatar)){
-            $avatar = $this->uploadImageStore($request->file('avatar'), 'Talent attached file/avatar');
+            $avatar = $this->uploadImageStore($request->file('avatar'), 'avatar');
         }
         // if(isset($request->attached_file)){
         //     $name = $this->uploadImageStore($request->file('attached_file'), 'Talent attached file');
         // }
+        $color = [
+            '#EB5757',
+            '#F2994A',
+            '#27AE60',
+            '#6AEAE3',
+            '#56CCF2',
+            '#BB6BD9',
+            '#F2C94C',
+        ];
+        $color_rand = $color[rand(0, count($color) - 1)];
+
        $talent =  Talents::create([
-            'avatar' => $avatar ?? 'dummy.png',
+            'avatar' => $avatar ?? null,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'day_of_birthday' => $request->day_of_birthday,
@@ -30,6 +41,7 @@ class UserTalentRepository
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
+            'color' => $color_rand,
             'about_talent' => $request->about_talent,
             'file_documents' => $name ?? null,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
@@ -58,7 +70,7 @@ class UserTalentRepository
                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                 'extension' => strtolower($res->extension)
             ]);
-            $this->move_file('public/Files before submit/'.$res->file, 'public/Talent attached file/'.$res->file);
+            $this->move_file('public/Files before submit/'.$res->file, 'public/file/'.$res->file);
 
             File::where('id' , $res->id)->delete();
          });

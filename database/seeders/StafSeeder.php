@@ -24,9 +24,19 @@ class StafSeeder extends Seeder
                 $q->where('name', 'agency');
             }
         )->get();
-
+       
         foreach($agencys as $staf){
             for($x=1;$x<=3;$x++){
+                $color = [
+                    '#EB5757',
+                    '#F2994A',
+                    '#27AE60',
+                    '#6AEAE3',
+                    '#56CCF2',
+                    '#BB6BD9',
+                    '#F2C94C',
+                ];
+                $color_rand = $color[rand(0, count($color) - 1)];
                 $stafrole = User::create([
                     'full_name' => $faker->name,
                     'email' => fake()->safeEmail(),
@@ -34,12 +44,13 @@ class StafSeeder extends Seeder
                     'password' => Hash::make(123456),
                     'tenants_id' =>  $staf->tenants_id,
                     'remember_token' => Str::random(10),
+                    'color' => $color_rand
                 ]);
                 $stafrole->assignRole('staf');
 
                 Staf::create([
                     'type' => 'staf',
-                    'avatar' => 'dummy.png',
+                    // 'avatar' => 'dummy.png',
                     'users_id' => $stafrole->id,
                     'users_agency_id' => $staf->id
                 ]);

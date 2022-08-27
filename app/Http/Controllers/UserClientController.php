@@ -91,17 +91,29 @@ class UserClientController extends Controller
             if(isset($request->avatar)){
                 $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
             }
+
+            $color = [
+                '#EB5757',
+                '#F2994A',
+                '#27AE60',
+                '#6AEAE3',
+                '#56CCF2',
+                '#BB6BD9',
+                '#F2C94C',
+            ];
+            $color_rand = $color[rand(0, count($color) - 1)];
     
            $user = User::create([
                 'full_name' => $request->full_name,
                 'email' => $request->email,
+                'color' => $color_rand,
                 'password' => Hash::make($request->password),
                 'tenants_id' => $request->user()->tenants_id,
     
             ]);
     
             $user->staf()->create([
-                'avatar' => $avatar ?? 'dummy.png',
+                'avatar' => $avatar ?? null,
                 'type' => $request->type ?? 'staf',
                 'users_agency_id' => $request->user()->id
             ]);

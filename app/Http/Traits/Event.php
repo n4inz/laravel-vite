@@ -10,10 +10,12 @@ trait Event
 
     public function tmp_notify($request, $body, $created)
     {
-        $avatar = auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png';
+        $avatar = auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? null;
         return [
             'name' => auth()->user()->full_name ?? 'Your agency',
-            'avatar' => asset('storage/Setting/avatar/'.$avatar),
+            // 'avatar' => asset('storage/'.$avatar),
+            'avatar' => $avatar,
+
             'body' => $body,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
             'job_models_id' => $request->job_models_id,
@@ -32,7 +34,11 @@ trait Event
         $data = [
             'name' => $created->name,
             'comment' => $request->comment,
-            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
+            'avatar' => asset('storage/avatar/'.$created->avatar),
+            'cek_avatar' => $created->avatar,
+            'avatar1' => '<div class="w-10 h-10 flex items-center justify-center bg-['. auth()->user()->color.'] rounded-full">
+                                <span class="text-white text-lg">'.strtoupper(substr($created->name, 0, 1)).'</span>
+                            </div>',
             'time' =>  $date.' - '.$time,
             'id' => $created->id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
@@ -50,7 +56,11 @@ trait Event
         $data = [
             'name' => $created->name ?? 'Not Name',
             'reply' => $request->reply_comment,
-            'avatar' => asset('storage/Setting/avatar/'.$created->avatar),
+            'avatar' => asset('storage/avatar/'.$created->avatar),
+            'cek_avatar' => $created->avatar,
+            'avatar1' => '<div class="w-10 h-10 flex items-center justify-center bg-['. auth()->user()->color.'] rounded-full">
+                                <span class="text-white text-lg">'.strtoupper(substr($created->name, 0, 1)).'</span>
+                            </div>',
             'time' =>  $date.' - '.$time,
             'id_comment' => $request->job_comments_id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,

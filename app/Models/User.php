@@ -26,7 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'tenants_id',
-        'tenants_id'
+        'tenants_id',
+        'color'
     ];
 
     /**

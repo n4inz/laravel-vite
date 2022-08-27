@@ -40,10 +40,14 @@
                     @elseif (isset(auth()->user()->staf->avatar))
                         <img class="w-12 h-12 rounded-full" src='{{ asset('storage/Setting/avatar/'. auth()->user()->staf->avatar) }} ' alt="user photo">
                     @else
-                        <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
+                        {{-- <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
                             <span class="text-xs text-gray-300 ">No Images</span>
+                        </div> --}}
+                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ auth()->user()->color }}] rounded-full">
+                            <span class="text-white">{{ strtoupper(substr(auth()->user()->full_name, 0, 1)) }}</span>
                         </div>
                     @endif
+
 
                 </button>
             </div>
@@ -185,12 +189,17 @@
                 $('.counter').html('');
                 
                 res.map(function(e){
-                    console.log(res.length)
+                        var avatar ;
+                        if(e.avatar != null){
+                            avatar = `<img class="w-5 h-5 rounded-full" src="${e.avatar}" alt="">`;
+                        }else{
+                            avatar = e.avatar1
+                        }
                         const tmp = `<li>
                                          <a href="#" class="block  py-2 px-4 text-xs text-orange-300 hover:bg-hover " role="menuitem">
                                          <div class="inline-flex items-center space-x-1">
                                              <div class="w-6">
-                                                 <img class="w-5 h-5 rounded-full" src="${e.avatar}" alt="">
+                                                 
                                              </div>
                                              <div class="w-full">
                                                  <span>${e.body}</span><span class="text-palet"> ID#${e.job_models_id}</span><i class="text-xs text-gray-400"> ${e.created_at}</i>
