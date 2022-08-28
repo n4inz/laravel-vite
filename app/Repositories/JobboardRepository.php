@@ -12,6 +12,7 @@ use App\Models\JobModelsComment;
 use App\Models\JobModelsCommentsReply;
 use App\Models\JobModelsLanguages;
 use App\Models\JobModelsMatchTalent;
+use App\Models\JobModelsStripe;
 // use App\Models\JobModelsSubCategorys;
 use App\Models\JobModelsTask;
 use App\Models\SettingDefinedCheckList;
@@ -28,6 +29,17 @@ class JobboardRepository
         $jobsIdUnique = JobModels::get();
         $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('body');
         $status_job = SettingJobModelsStatus::where(['users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->get('id' , 'status_name');
+
+        // Make product Stripe
+        // $rate = $request->rate;
+        $stripe = new \Stripe\StripeClient(config('app.sk_stripe'));
+        $productStripe =  $stripe->products->create(  [
+            'name' => $request->title,
+            'default_price_data' => ['unit_amount' => $request->rate.'00', 'currency' => 'usd'],
+            'expand' => ['default_price'],
+        ]);
+
+        
         DB::beginTransaction();
         try{
             $value = json_decode($request->family);
@@ -125,6 +137,14 @@ class JobboardRepository
                     ]);
                 }
             }
+
+            $jobs->stripe()->create([
+                'prod_id' => $productStripe->id,
+                'price_id' => $productStripe->default_price->id,
+                'currency' => $productStripe->default_price->currency,
+                'unit_amount' => $productStripe->default_price->unit_amount,
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+            ]);
             DB::commit();
         }catch(\Exception $e ){
           

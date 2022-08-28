@@ -58,6 +58,7 @@ return [
     'domain' => env('DOMAIN'),
     'uri' => env('URI'),
     'asset_url' => env('ASSET_URL'),
+    'sk_stripe' => env('SK_STRIPE'),
 
     /*
     |--------------------------------------------------------------------------

@@ -51,7 +51,7 @@
                         <td> 
                             <div class="flex space-x-1">
                                 <div class="w-[39px] h-[15px] bg-[#5FCFFF] flex items-center justify-center rounded-sm"> <span class="overview-label-text">Hight</span></div>
-                                <div class="w-[39px] h-[15px] bg-[#CCD3DC] flex items-center justify-center rounded-sm"> <span class="overview-label-text">+ Add</span></div>
+                                <div data-modal-toggle="create-invoice" class=" h-[15px] bg-colorStatusCard1 px-1 hover:cursor-pointer flex items-center justify-center rounded-sm"> <span class="overview-label-text">+ Add Invoice</span></div>
                             </div>
                         </td>
                     </tr>
@@ -61,7 +61,7 @@
                         <button class="overview-tab inline-block px-2 border-b  " id="overview-tab" data-tabs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
                     </li>
                     <li class="mr-12" >
-                        <button class="overview-tab inline-block px-2 border-b" id="task-tab" data-tabs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="false">Task</button>
+                        <button class="overview-tab inline-block px-2 border-b" id="task-tab" data-tabs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="false">Invoice</button>
                     </li>
                     <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b" id="talent-tab" data-tabs-target="#talent" type="button" role="tab" aria-controls="talent" aria-selected="false">Talent</button>
@@ -1874,7 +1874,7 @@
                             <div class="flex items-center space-x-8 px-4 pt-[18.5px]">
                                 <div class="flex space-x-2 ">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
-                                    <span class="text-[#222222] font-semibold">Task</span>
+                                    <span class="text-[#222222] font-semibold">Invoice</span>
                                 </div>
                                 <div class="relative w-[340px] left-1">
                                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -1886,6 +1886,48 @@
                                 </div>
                             </div>
                             <div class="mt-[30px] px-4">
+                                <table width="100%">
+                                    <tr>
+                                        <td height="66px" width="12%">
+                                            <span class="task-text">ID</span>
+                                        </td>
+                                        <td height="66px" width="40%">
+                                            <span class="task-text">Email</span>
+                                        </td>
+                                        <td height="66px" width="25%">
+                                            <span class="task-text">Status</span>
+                                        </td>
+                                        <td height="66px">
+                                            <span class="task-text">Pdf</span>
+                                        </td>
+                                    </tr>
+                                    <tbody>
+                                        @foreach ($result->invoice as $val_inoice)
+                                            <tr class="hover:bg-[#F7F7F7] cursor-pointer">
+                                                <td height="30px" width="12%">
+                                                    <span class="task-text-body text-[#222222]">{{ $loop->iteration }}</span>
+                                                </td>
+                                                <td height="66px" width="40%">
+                                                    <a href="{{ $val_inoice->hosted_invoice_url }}" target="_blank">
+                                                        <span class="task-text-body text-[#222222]">{{ $val_inoice->email_costumer }}</span>
+                                                    </a>
+                                                </td>
+                                                <td height="66px" width="25%">
+                                                    @if ($val_inoice->status == 'PAID')
+                                                        <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $val_inoice->status }}</span>    
+                                                    @else
+                                                        <span class="task-text-body text-colorStatusCard1 ">{{$val_inoice->status}}</span>
+                                                    @endif
+
+                                                </td>
+                                                <td height="66px">
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <!--
                                 <table width="100%">
                                     <tr>
                                         <td height="66px" width="12%">
@@ -1936,12 +1978,13 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                -->
                             </div>
-                            <div class="px-4 mt-5">
+                            {{-- <div class="px-4 mt-5">
                                 <div onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md task-btn-text flex items-center justify-center hover:cursor-pointer">
                                     + Add More
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="flex mt-8"></div>
                         </div>
                     </div>
@@ -2703,6 +2746,46 @@
                         </div>
                 </div>
             </div>
+
+            {{-- Modal Create Invoice --}}
+            <div id="create-invoice" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal body -->
+                        <form class="validate_invoice" action="{{ route('jobboard.create_invoice') }}" method="POST">@csrf
+                            <div class="p-6 space-y-6 invoice-errors">
+                                @if($result->client AND $result->stripe)
+                                    <input name="client_id" type="hidden" value="{{ $result->client->id }}">
+                                    <input name="client_email" type="hidden" value="{{ $result->client->email }}">
+                                    <input name="job_models_id" type="hidden" value="{{ $result->id }}">
+                                    <input name="prod_id" type="hidden" value="{{ $result->stripe->prod_id }}">
+                                    <input name="price_id" type="hidden" value="{{ $result->stripe->price_id }}">
+                                @else
+                                    <input name="client_id" type="text" class="invisible absolute" value="">
+                                    <input name="client_email" type="text" class="invisible absolute" value="">
+                                    <input name="job_models_id" type="text" class="invisible absolute" value="">
+                                    <input name="prod_id" type="text" class="invisible absolute" value="">
+                                    <input name="price_id" type="text" class="invisible absolute" value="">
+                                @endif
+                                <div class="{{ $errors->has('description') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-full h-[221px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
+                                    <textarea name="description" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none text-[#222222]" placeholder="Description">{{ old('description') }}</textarea>
+                                    <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-center justify-center p-6 space-x-2 rounded-b  border-gray-200 ">
+                                
+                                <div data-modal-toggle="create-invoice" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
+                                    <span class="text-sm text-white">Cancel</span> 
+                                </div>
+                                <button class="flex items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
+                                    <span class="text-sm text-white">Create Invoice</span> 
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </article>
 </main>
@@ -2710,6 +2793,38 @@
 <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
 
 <script>
+    
+    $(function(){
+        var validate = $('.validate_invoice');
+        
+            if(validate.length){
+                validate.validate({
+                    rules: {
+                        client_id:{
+                            required:true
+                        },
+                    
+                    },
+                    errorPlacement: function(error, element){
+                        if (element.is(":checkbox"))
+                        {
+                           
+                            error.appendTo($('.sub_categorys_error'));
+                        }else{ 
+                            error.insertAfter( element );
+                            error.appendTo(element.parents('.invoice-errors'));
+                            
+                        }
+                    },
+                    messages: {
+                        client_id: "<span class='text-red-500'>Enter your client</span>",
+                       
+                        
+                    }
+       
+                })
+            }
+        })
 
     // Add Task
 

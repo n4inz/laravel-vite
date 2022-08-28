@@ -90,6 +90,15 @@ class JobModels extends Model
         return $this->belongsTo(SettingServiceCategory::class , 'category' , 'id');
     }
 
+    public function stripe()
+    {
+        return $this->hasOne(JobModelsStripe::class,'job_models_id');
+    }
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class ,'job_models_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

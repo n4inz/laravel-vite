@@ -40,7 +40,7 @@
             <div style="font-weight: 400; font-size: 13px; line-height: 18px; letter-spacing: -0.08px; --tw-text-opacity: 1; color: rgb(130 124 124 / var(--tw-text-opacity)); margin-top: 27px;">
                 {!! $result->description !!}
             </div>
-
+			<a href="{{ $result->url_calendly }}">Confirm Job</a>
         </div>
     </div>
 

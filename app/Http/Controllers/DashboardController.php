@@ -16,6 +16,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Stripe\Stripe;
+use Stripe\StripeClient;
 
 use function PHPUnit\Framework\classHasAttribute;
 
@@ -25,6 +27,27 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        
+        // $stripe = new StripeClient('sk_test_51JUgUdI7PA30MRlSUGu8tTozqkKZpo8WR7s3O7AdBDJwMiX7OPenaZ441V9KoWejHWJBIu8XC0Hz9eA2HMCdobqN000XpaPQhr', null);
+        // $stripe->paymentLinks->create(
+        //     ['line_items' => [['price' => '20', 'quantity' => 1]]]
+        //   );
+
+        //  Stripe\Stripe::setApiKey('sk_test_51JUgUdI7PA30MRlSUGu8tTozqkKZpo8WR7s3O7AdBDJwMiX7OPenaZ441V9KoWejHWJBIu8XC0Hz9eA2HMCdobqN000XpaPQhr');
+        // Stripe\Charge::create ([
+        //         "amount" => 100 * 150,
+        //         "currency" => "inr",
+        //         "source" => $request->stripeToken,
+        //         "description" => "Making test payment." 
+        // ]);
+
+
+
+
+
+ 
+
+        // $invoice = Stripe('sk_test_51JUgUdI7PA30MRlSUGu8tTozqkKZpo8WR7s3O7AdBDJwMiX7OPenaZ441V9KoWejHWJBIu8XC0Hz9eA2HMCdobqN000XpaPQhr');
         // Get Description
         
         // $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
@@ -85,13 +108,13 @@ class DashboardController extends Controller
         // }
 
         // return 'ok';
-        $result = JobModels::with(['availability','languages','match_talent'])->where('id' , 16)->firstOrFail();
-        $talentNeed = [];
-             // Match Talent
-        foreach ($result->match_talent as $match) {
-            array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
-        }
-        return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
+        // $result = JobModels::with(['availability','languages','match_talent'])->where('id' , 1)->firstOrFail();
+        // $talentNeed = [];
+        //      // Match Talent
+        // foreach ($result->match_talent as $match) {
+        //     array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
+        // }
+        // return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
 
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();

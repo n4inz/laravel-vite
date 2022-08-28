@@ -38,8 +38,10 @@ use App\Http\Traits\HttpGuzzle;
 use App\Http\Traits\ImageUpload;
 use App\Jobs\sendJobDescriptionToTalent;
 use App\Mail\sendingEmailDescriptionToTalent;
+use App\Models\Invoice;
 use App\Models\JobModelsNewAplicantsFile;
 use App\Models\TalentsFiles;
+use Stripe\Stripe;
 
 class JobboardController extends Controller
 {
@@ -172,7 +174,7 @@ class JobboardController extends Controller
 
         $result = JobModels::with(['comment' => function ($query){
             $query->with(['job_models_comments_reply', 'users']);
-        },'match_talent', 'languages', 'availability', 'task', 'client' => function($query){
+        },'match_talent', 'languages', 'availability', 'task', 'stripe' ,'invoice','client' => function($query){
             $query->with('attached_file');
         }, 'file' => function ($query) {
             $query->limit(5);
@@ -611,6 +613,7 @@ class JobboardController extends Controller
 
     public function add_new_aplicants_to_match_talent(Request $request)
     {
+
         JobModelsNewApplicant::where('id', $request->id)->get()->map(function($res) use($request){
            $talent = Talents::create([
                 'avatar' => $res->avatar,
@@ -645,6 +648,60 @@ class JobboardController extends Controller
 
         return response(200);
 
+    }
+
+    public function create_invoice(Request $request)
+    {
+        $request->validate([
+            'job_models_id' => 'required',
+            'client_id' => 'required',
+            'client_email' => 'required',
+            'prod_id' => 'required',
+            'price_id' => 'required'
+        ]);
+
+        Stripe::setApiKey(config('app.sk_stripe'));
+
+        // Create a new Customer
+        $customer = \Stripe\Customer::create([
+            'email' => $request->client_email,
+            'description' => $request->description ?? ' ',
+        ]);
+    
+        // Create an Invoice Item with the Price, and Customer you want to charge
+        $invoiceItem = \Stripe\InvoiceItem::create([ // You can create an invoice item after the invoice
+            'customer' => $customer->id,
+            'price' => $request->price_id,
+        ]);
+        $invoice = \Stripe\Invoice::create([
+            'customer' => $customer->id,
+            'collection_method' => 'send_invoice',
+            'days_until_due' => 7,
+            'pending_invoice_items_behavior' => 'include',
+        ]);
+
+        $stripe = new \Stripe\StripeClient(config('app.sk_stripe'));
+
+        $stripe->invoices->finalizeInvoice($invoice->id,[]);
+
+        $resultStripe = $stripe->invoices->sendInvoice($invoice->id, []);
+        Invoice::create([
+           'id_invoice' => $resultStripe->id,
+           'id_costumer' => $resultStripe->customer,
+           'id_prod' => $resultStripe->lines->data[0]->price->product,
+           'id_price' => $resultStripe->lines->data[0]->price->id,
+           'name_costumer' =>  $resultStripe->customer_name,
+           'email_costumer' => $resultStripe->customer_email,
+           'hosted_invoice_url' => $resultStripe->hosted_invoice_url,
+           'invoice_pdf' => $resultStripe->invoice_pdf,
+            'status' => 'UNPAID',
+            'clients_id' => $request->client_id,
+            'job_models_id' => $request->job_models_id,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+        ]);
+
+        return redirect()->back();
+        
     }
 
     public function send_email_to_talent(Request $request)

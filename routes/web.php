@@ -9,6 +9,7 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestStripeController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserClientController;
 use Illuminate\Support\Facades\Auth;
@@ -33,13 +34,15 @@ Route::get('test-multiselect', [TestController::class, 'test_multi_select'])->na
 Route::get('drag', [TestController::class, 'drag'])->name('test.drag');
 Route::post('test-multiselect-store', [TestController::class, 'test_multi_select_store'])->name('test.multi_select_store');
 
-
 Route::get('/test/login', function(){
     
     return auth()->guard('staf')->user();
     return view('welcome');
 });
 
+// Testing strapi
+Route::get('test-stripe', [TestStripeController::class, 'index'])->name('stripe.index');
+Route::get('test-stripe-post', [TestStripeController::class, 'post'])->name('stripe.post');
 
 // Login Agnecy
 Route::get('/tenancy', function(){
@@ -85,6 +88,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('edit-pay-info' , [JobboardController::class , 'edit_pay_info'])->name('jobboard.edit_pay_info');
     Route::post('sync-calendly' , [JobboardController::class , 'sync_calendly'])->name('jobboard.sync_calendly');
     Route::post('send-email-to-talent' , [JobboardController::class , 'send_email_to_talent'])->name('jobboard.send_email_to_talent');
+    Route::post('create-invoice' , [JobboardController::class , 'create_invoice'])->name('jobboard.create_invoice');
 
     // AJAX JOBBOARD
     Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');

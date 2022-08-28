@@ -114,7 +114,7 @@
                                                 </div>
                                                 <div class="pt-2 ">
                                                     <div class="text-xs text-[#827C7C] ">
-                                                        {{ Str::limit($value->description, 110, $end='...') }}
+                                                        {!! Str::limit($value->description, 110, $end='</strong></p>') !!}
                                                     </div>
                                                 </div>
                                             </div>
