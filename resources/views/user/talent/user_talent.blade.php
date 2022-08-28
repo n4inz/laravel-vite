@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="errors_phone">
                                     <div class="{{ $errors->has('phone') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                        <input name="phone" value="{{ old('phone') }}" type="text" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Phone">
+                                        <input name="phone" value="{{ old('phone') }}" type="tel" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-[660px] h-full rounded p-1 pl-3 outline-none" placeholder="Phone">
                                     </div>
                                     @if($errors->has('phone'))
                                         <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
@@ -260,6 +260,18 @@
         $('input#search_talents').quicksearch('div#search_talent');
         $('input#simple-search').quicksearch('div#search_talent');
     </script>
+        {{-- Format phone --}}
+        <script src="{{ asset('js/intlTelInput.js') }}"></script>
+        <script>
+          var input = document.querySelector("#phone");
+          window.intlTelInput(input, {
+            autoHideDialCode:true,
+            placeholderNumberType:"MOBILE",
+        
+        
+            utilsScript: "{{ asset('js/utils.js') }}",
+          });
+        </script>
 
     <script>
         // Validate

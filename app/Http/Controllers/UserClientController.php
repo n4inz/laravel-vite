@@ -49,7 +49,7 @@ class UserClientController extends Controller
 
     public function client_store(ClientRequest $request)
     {
-        
+        // return $request;   
         $this->UserClientRepository->created($request);
         return redirect()->route('user_client.client')->with('Success' , 'Created client successfuly');
     }

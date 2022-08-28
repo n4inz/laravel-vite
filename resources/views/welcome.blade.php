@@ -10,15 +10,25 @@
     <title>Fine Uploader Gallery View Demo</title>
     <script src="{{ asset('js/jQuery.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/demo.css') }}"> --}}
     
-   
+    <style>
+        .iti__country-list{
+            width: vw;
+        }
+    </style>
 </head>
 <body>
+    <form>
+        <input id="phone" name="phone" type="tel">
+        <button type="submit">Submit</button>
+    </form>
   {{-- <form method="post" action="{{ route('upload') }}" enctype="multipart/form-data"
   class="dropzone bg-slate-400" id="dropzone">
   @csrf
   </form> --}}
-  <div class='container-loading'>
+  {{-- <div class='container-loading'>
     <div class='loader'>
       <div class='loader--dot'></div>
       <div class='loader--dot'></div>
@@ -28,7 +38,7 @@
       <div class='loader--dot'></div>
       <div class='loader--text'></div>
     </div>
-  </div>
+  </div> --}}
   <div id="modal-add-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
     <div class="p-4 w-[852px] h-screen">
         <div class="bg-white rounded-lg shadow ">
@@ -204,6 +214,18 @@
             </div>
     </div>
 </div>
+
+<script src="{{ asset('js/intlTelInput.js') }}"></script>
+<script>
+  var input = document.querySelector("#phone");
+  window.intlTelInput(input, {
+    autoHideDialCode:true,
+    placeholderNumberType:"MOBILE",
+
+
+    utilsScript: "{{ asset('js/utils.js') }}",
+  });
+</script>
 <script type="text/javascript">
   Dropzone.options.dropzone =
   {

@@ -28,7 +28,7 @@ class SendingMailToClientsJobs extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from Ayiconnection.com')->view('email.jobboards.sendEmailToClient',[
+        return $this->subject('Mail from agency.com')->view('email.jobboards.sendEmailToClient',[
             'value' => $this->match_talent
         ]);
     }

@@ -23,13 +23,13 @@
                 </div>
             </div>
             <div class="mt-[61px] pl-[58px] w-[680px]">
-                <span class="overview-send-title text-[#4F4F4F] w-[650px]">{{ $result->title }}</span>
+                <span class="overview-send-title text-[#4F4F4F] sm:leading-[41px] text-xl sm:text-[32px] xl:w-[650px]">{{ $result->title }}</span>
                 <div class="flex items-center justify-start   rounded-md mt-4">
                     <div class="p-2 bg-hover rounded-md">
                         <span class="overview-send-price text-[#2CA6A0]">${{ $result->rate }} per Hour</span>
                     </div>
                 </div>
-                <div class="overview-note-body text-[#827C7C] w-[650px] mt-[27px]">
+                <div class="overview-note-body text-[#827C7C] sm:w-[650px]  mt-[27px]">
                     {!! $result->description !!}
                 </div>
                 <div class=" mt-6">

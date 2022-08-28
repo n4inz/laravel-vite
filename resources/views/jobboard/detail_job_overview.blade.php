@@ -88,7 +88,7 @@
                                     <div class="w-2 h-6 bg-[#5FCFFF] rounded-sm"></div>
                                     <span class="text-[#222222] font-semibold">Job Detail</span>
                                 </div>
-                                <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                <div data-modal-toggle="modal-send-email-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                     <span class="overview-send-job text-palet">Send Job</span>
                                     <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.19083 4.75179L10.5551 1.00868C10.6716 0.956912 10.8141 0.982751 10.9048 1.08638C10.9955 1.17709 11.0214 1.31947 10.9825 1.4361L7.2394 10.8004C7.18763 10.9169 7.07099 11.0076 6.94153 11.0076C6.81197 11.0076 6.69542 10.9299 6.64365 10.8004L5.14121 6.88887C5.11528 6.87595 5.08944 6.86294 5.06351 6.85002L1.20383 5.3606C1.07428 5.30883 0.996582 5.19219 0.996582 5.06272C0.996492 4.93317 1.07419 4.80371 1.19073 4.75185L1.19083 4.75179ZM5.18003 6.20248L6.86381 4.5187C6.99336 4.38915 7.20053 4.38915 7.31717 4.5187C7.43372 4.64826 7.44673 4.85543 7.31717 4.97207L5.69818 6.59106L6.92859 9.79019L10.0889 1.88951L2.18818 5.04978L5.18003 6.20248Z" fill="#3BD7CF"/>
@@ -2145,7 +2145,76 @@
                 </div>
                 <div class="flex mt-8"></div>
             </div>
-            
+
+            {{-- Main Modal Send Email To Talent --}}
+            <div id="modal-send-email-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
+                <form action="{{ route('jobboard.send_email_to_talent') }}" method="post">@csrf
+                    <input type="hidden" name="job_models_id" value="{{ $result->id }}">
+                    <div class="relative p-4 w-[672px]">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow w-[672px]">
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between  px-8 h-14 rounded-t border-b dark:border-gray-600">
+                                <span class="overview-talent-modal-title text-[#222222]">
+                                    Send Email
+                                </span>
+                                <div type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:cursor-pointer"  data-modal-toggle="modal-send-email-talent">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                                </div>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="w-[672px]">
+                                <div class="relative flex items-center justify-center w-[672px] py-[18px] px-6 border-b">
+                                    <div class="flex absolute inset-y-0 left-8 items-center  pointer-events-none">
+                                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                                        </svg> 
+                                    </div>
+                                    <input id="search_talents_match" type="text" class=" pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search">
+                                </div>
+                                <div class="space-y-8 mt-8 h-80 overflow-y-scroll w-[672px]">
+                                    @foreach ($talents as $talent_value ) 
+                                        <div id="data_di_cari" class="flex items-center justify-between px-6">
+                                            <label for="email_{{ $talent_value->id }}">
+                                                <div class="flex items-center space-x-2 hover:cursor-pointer">
+                                                    <div class="">
+                                                        <input name="id_talent_send[]" id="email_{{ $talent_value->id }}" style="color: #3BD7CF" type="checkbox" value="{{ $talent_value->email }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    </div>
+                                                    @if ($talent_value->avatar)
+                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent_value->avatar) }}" alt="">
+                                                    @else
+                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent_value->color }}] rounded-full">
+                                                            <span class="text-white">{{ strtoupper(substr($talent_value->first_name, 0, 1)) }}{{ strtoupper(substr($talent_value->last_name, 0, 1)) }}</span>
+                                                        </div>
+                                                    @endif
+                                                    <div class="flex flex-col">
+                                                        <span class="overview-name-talent text-colortext">{{ $talent_value->first_name.' '.$talent_value->last_name }}</span>
+                                                        <span class="overview-live-talent">@if($talent_value->day_of_birthday != 'null')Age {{ Carbon\Carbon::parse($talent_value->day_of_birthday)->age }} @endif , in {{ $talent_value->address }}</span>
+                                                        <span class="overview-experiance-talent">{{ $talent_value->experience }} Year Experience</span>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="flex items-center justify-end px-12 space-x-2 rounded-b  w-full h-[97px]">
+                                <div data-modal-toggle="modal-send-email-talent" class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md hover:cursor-pointer">
+                                    <span class="overview-attechment-btn-text">Cancel</span>
+                                </div>
+                                <div  class="w-40 h-[42px]">
+                                    <button  class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                        <span  class="overview-attechment-btn-text">Send</span>
+                                    </button>                          
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
             <!-- Main modal Add match talent -->
             <div id="modal-detail-add-match" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
                 <form action="{{ route('jobboard.modal_add_match_talent') }}" method="post">@csrf

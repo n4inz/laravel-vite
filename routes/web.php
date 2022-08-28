@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('edit-template-email' , [JobboardController::class , 'edit_template_email'])->name('jobboard.edit_template_email');
     Route::post('edit-pay-info' , [JobboardController::class , 'edit_pay_info'])->name('jobboard.edit_pay_info');
     Route::post('sync-calendly' , [JobboardController::class , 'sync_calendly'])->name('jobboard.sync_calendly');
+    Route::post('send-email-to-talent' , [JobboardController::class , 'send_email_to_talent'])->name('jobboard.send_email_to_talent');
 
     // AJAX JOBBOARD
     Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');

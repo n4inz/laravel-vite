@@ -9,6 +9,7 @@
     <title>Dashboard</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link  href="{{ asset('css/flowbite.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto&display=swap" rel="stylesheet">
@@ -26,6 +27,9 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="{{ asset('css/tagify/tagify.css') }}" rel="stylesheet" type="text/css" />
     <style>
+        .iti__country-list{
+            width: 310px;
+        }
         /* User Talent */
         .costum{
             --tags-focus-border-color: none;

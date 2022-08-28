@@ -11,7 +11,13 @@ class UserClientRepository
     use ImageUpload;
     public function created($request)
     {
+        $languages = json_decode($request->languages);
+        $lang = '';
+        foreach($languages as $key => $value){
 
+            $lang .= $languages[$key]->value.' ';
+
+        }
         if(isset($request->avatar)){
             $avatar = $this->uploadImageStore($request->file('avatar'), 'avatar');
         }
@@ -32,7 +38,7 @@ class UserClientRepository
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'languages' => $request->languages,
+            'languages' => $lang,
             'color' => $color_rand,
             'note' => $request->note,
             'avatar' => $avatar ?? null,

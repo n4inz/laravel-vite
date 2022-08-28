@@ -85,6 +85,13 @@ class DashboardController extends Controller
         // }
 
         // return 'ok';
+        $result = JobModels::with(['availability','languages','match_talent'])->where('id' , 16)->firstOrFail();
+        $talentNeed = [];
+             // Match Talent
+        foreach ($result->match_talent as $match) {
+            array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
+        }
+        return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
 
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();

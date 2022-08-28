@@ -52,8 +52,8 @@
                                             </div>
                                             <div class="errors_phone">
                                                 <label class="{{ $errors->has('phone') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Phone</label>
-                                                <div class="{{ $errors->has('phone') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input name="phone" value="{{ old('phone') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="">
+                                                <div class="{{ $errors->has('phone') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-start w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
+                                                    <input id="phone" name="phone" type="tel"  value="{{ old('phone') }}"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1  outline-none " placeholder="">
                                                 </div>
                                                 @if($errors->has('phone'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
@@ -61,18 +61,20 @@
                                             </div>
                                         </div>
                                         <div class="px-4 mt-4 flex space-x-4">
-                                            <div class="errors_address">
+                                            <div class="errors_address w-[650px]">
                                                 <label class="{{ $errors->has('address') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Address</label>
-                                                <div class="{{ $errors->has('address') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
+                                                <div class="{{ $errors->has('address') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center  w-[650px] h-10 border border-[#ECECEC] rounded text-[#222222]">
                                                     <input name="address" value="{{ old('address') }}" type="text" id="address" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="">
                                                 </div>
                                                 @if($errors->has('address'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
                                                 @endif
                                             </div>
+                                            <!--
                                             <div>
                                                 <label  class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
-                                                <div class="{{ $errors->has('languages') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[316px] p-3 h-10 border border-[#ECECEC] flex items-center rounded">
+                                                {{-- <div class="{{ $errors->has('languages') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[316px] p-3 h-10 border border-[#ECECEC] flex items-center rounded">
+                                                   
                                                     <select name="languages" id="category" class="text-sm overview-note-body bg-transparent border-none text-colortext appearance-none rounded-lg p-1 block w-full focus:ring-0 outline-none">
                                                         <option @if(old('languages') == 'Chinese Cantonese') selected @endif value="Chinese Cantonese">Chinese Cantonese</option>
                                                         <option @if(old('languages') == 'Chinese Mandarin') selected @endif value="Chinese Mandarin">Chinese Mandarin</option>
@@ -95,7 +97,19 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2071 0.54289C14.8166 0.15237 14.1834 0.15237 13.7929 0.54289L8 6.3358L2.2071 0.542889C1.8166 0.152369 1.1834 0.152369 0.7929 0.542889C0.4024 0.933409 0.4024 1.56658 0.7929 1.9571L6.5858 7.75C7.3668 8.531 8.6332 8.531 9.4142 7.75L15.2071 1.95711C15.5976 1.56658 15.5976 0.93342 15.2071 0.54289Z" fill="#3BD7CF"/>
                                                         </svg>    
                                                     </div>
-                                                </div>
+                                                </div> --}}
+                                                @if($errors->has('languages'))
+                                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>
+                                                @endif
+                                            </div>
+                                            -->
+                                        </div>
+                                        <div class="px-4 mt-4 flex space-x-4">
+     
+                                            <div class="w-[650px]">
+                                                <label  class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
+                                                <input class="w-full h-10 text-[#222222] text-base" name="languages" id="languages" type="text">
+                                                
                                                 @if($errors->has('languages'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>
                                                 @endif
@@ -198,7 +212,47 @@
             </div>
         </div>
     </article>
-   
+    {{-- Format phone --}}
+    <script src="{{ asset('js/intlTelInput.js') }}"></script>
+    <script>
+      var input = document.querySelector("#phone");
+      window.intlTelInput(input, {
+        autoHideDialCode:true,
+        placeholderNumberType:"MOBILE",
+    
+    
+        utilsScript: "{{ asset('js/utils.js') }}",
+      });
+    </script>
+    <script>
+        var languages = document.querySelector('#languages');
+        var tagify = new Tagify(languages, {
+        whitelist  : [
+                        { value:'Chinese Cantonese', code:'chinese_cantonese' },
+                        { value:'Chinese Mandarin', code:'chinese_mandarin' },
+                        { value:'Ethiopian', code:'Ethiopian' },
+                        { value:'French', code:'french' },
+                        { value:'Hindi', code:'hindi' },
+                        { value:'Polish', code:'polish' },
+                        { value:'Spanish', code:'spanish' },
+                        { value:'Thai', code:'thai' },
+                        { value:'Vietnamese', code:'vietnamese' },
+                        { value:'Japanese', code:'japanese' },
+                        { value:'Korean', code:'korean' },
+                        { value:'Indonesia', code:'indonesia' },
+                        { value:'English', code:'english' },
+                        { value:'Tagalog', code:'tagalog' },
+                    ],
+        maxTags: 10,
+        dropdown: {
+            maxItems: 20,           // <- mixumum allowed rendered suggestions
+            classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+            enabled: 0,             // <- show suggestions on focus
+            closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+        }
+        })
+
+    </script>
     <script>
         // Validate form
         $(function(){
@@ -352,6 +406,7 @@
         });
 
     </script>
+
      <script src="{{ asset('js/fileNameLoad.js') }}"></script>
 </main>
 

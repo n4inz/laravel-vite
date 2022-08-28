@@ -7,18 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendingEmailToTalent extends Mailable
+class sendingEmailDescriptionToTalent extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $template;
+
+    protected $result;
+    protected $talentNeed;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($template)
+    public function __construct($result, $talentNeed)
     {
-        $this->template = $template;
+        $this->result = $result;
+        $this->talentNeed = $talentNeed;
     }
 
     /**
@@ -28,8 +31,11 @@ class SendingEmailToTalent extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from agency.com')->view('email.jobboards.sendEmailToTalent', [
-            'tmp' => $this->template
+
+         
+        return $this->subject('Mail from agency.com')->view('email.jobboards.sendJobDescription',[
+            'result' => $this->result,
+            'talentNeed' => $this->talentNeed
         ]);
     }
 }

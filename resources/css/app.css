@@ -460,8 +460,8 @@
 .overview-send-title {
     font-style: normal;
     font-weight: 700;
-    font-size: 34px;
-    line-height: 41px;
+    /* font-size: 34px; */
+    /* line-height: 41px; */
     letter-spacing: 0.41px;
 }
 

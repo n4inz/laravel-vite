@@ -36,6 +36,8 @@ use App\Repositories\JobboardRepository;
 use Illuminate\Http\Request;
 use App\Http\Traits\HttpGuzzle;
 use App\Http\Traits\ImageUpload;
+use App\Jobs\sendJobDescriptionToTalent;
+use App\Mail\sendingEmailDescriptionToTalent;
 use App\Models\JobModelsNewAplicantsFile;
 use App\Models\TalentsFiles;
 
@@ -643,6 +645,26 @@ class JobboardController extends Controller
 
         return response(200);
 
+    }
+
+    public function send_email_to_talent(Request $request)
+    {
+       
+        $result = JobModels::with(['availability','languages','match_talent'])->where('id' , $request->job_models_id)->firstOrFail();
+        $talentNeed = [];
+             // Match Talent
+        foreach ($result->match_talent as $match) {
+            array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
+        }
+
+       
+
+        foreach($request->id_talent_send as $key => $value){
+            sendJobDescriptionToTalent::dispatch($request->id_talent_send[$key] , $result, $talentNeed);
+
+        }
+
+        return redirect()->back();
     }
 
     public function __destruct()
