@@ -38,6 +38,7 @@ use App\Http\Traits\HttpGuzzle;
 use App\Http\Traits\ImageUpload;
 use App\Jobs\sendJobDescriptionToTalent;
 use App\Mail\sendingEmailDescriptionToTalent;
+use App\Models\EmailAgencyTemplate;
 use App\Models\Invoice;
 use App\Models\JobModelsNewAplicantsFile;
 use App\Models\TalentsFiles;
@@ -57,7 +58,7 @@ class JobboardController extends Controller
     {
 
         $status = SettingJobModelsStatus::with(['job_models' => function($query){
-            $query->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
+            $query->with('client')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
         }])->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get();
         
 
@@ -86,6 +87,8 @@ class JobboardController extends Controller
             $status_key .= '#'.$sts_key->id.',';
         }
 
+        $tmp_email1 = EmailAgencyTemplate::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+        // $tmp_email2 = TemplateEmail::where(['type' => 1 , 'status' => 'REJECTED'])->first('body');
         $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $user_location = SettingServiceLocationFee::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first('location');
         return view('jobboard.jobboard', [
@@ -93,7 +96,9 @@ class JobboardController extends Controller
             "json" => $json,
             'user_location' => $user_location,
             'status' => $status,
-            'status_key' => rtrim($status_key, ',')
+            'status_key' => rtrim($status_key, ','),
+            'tmp_email1' => $tmp_email1,
+            // 'tmp_email2' => $tmp_email2
         ]);
     }
 
@@ -163,7 +168,8 @@ class JobboardController extends Controller
 
     public function jobs_store(JobBoardRequest $request)
     {  
-
+        
+        // return $request->dates;
         $this->jobboardRepository->created($request);
         return redirect()->back()->with('status', 'Create job succesfuly');
     }
@@ -354,6 +360,7 @@ class JobboardController extends Controller
 
     public function new_aplicant_store(UserAplicantsRequest $request)
     {
+        
         // return $request;
         // $idModels = JobModels::where('uid' , $request->uid)->firstOrFail('id');
         if(isset($request->avatar)){
@@ -437,6 +444,44 @@ class JobboardController extends Controller
     }
 
     // AJAX
+    public function save_as_email_client(Request $request)
+    {
+        EmailAgencyTemplate::updateOrCreate(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id],[
+            'body' => $request->email,
+            'type' => 0,
+            'status' => $request->status,
+            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+        ]);
+
+        return response(200);
+    }
+
+
+    public function edit_create_job_calendly(Request $request)
+    {
+        $json = [];
+        $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        foreach ($client as $value) {
+            array_push($json, [
+                'value' => $value->id,
+                'first_name' => $value->first_name,
+                'last_name' => $value->last_name,
+                // 'avatar' => $value->avatar ?? 'dummy.png',
+                'avatar' => $value->avatar,
+                'avatar1' => '  <div class="w-10 h-10 flex items-center justify-center bg-['.$value->color.'] rounded-full">
+                                    <span class="text-white text-lg text-center font-bold">'.strtoupper(substr($value->first_name, 0, 1)).strtoupper(substr($value->last_name, 0, 1)).'</span>
+                                </div>',
+                'tagTemplate' => '<div class="w-5 h-5 flex items-center justify-center bg-['.$value->color.'] rounded-full">
+                                        <span class="text-white text-[8px] text-center font-bold">'.strtoupper(substr($value->first_name, 0, 1)).strtoupper(substr($value->last_name, 0, 1)).'</span>
+                                    </div>',
+                'email' => $value->email,
+            ]);
+        }
+
+        $detailJob = JobModels::with('client')->where('id',$request->id)->firstOrFail();
+        $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        return view('modal.jobboard.edit_create_job_calendly',compact('detailJob' , 'category','json'));
+    }
     public function edit_responsibility(Request $request)
     {
         JobModelsAvailabiltyDays::updateOrCreate(['job_models_id' => $request->job_models_id],[
@@ -550,7 +595,6 @@ class JobboardController extends Controller
     public function sync_calendly()
     {
     
-        
         $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
         $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
             'organization' => $load->current_organization,
@@ -581,28 +625,38 @@ class JobboardController extends Controller
                 }
                 // $descriptionString .= '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, asperiores? <br /><br />​​​​​​​<br /></p><p><strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail->payment->external_id).';<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: '.isset($valAnswerDetail->payment->terms).'&nbsp;</p>';
                 $descriptionString .= '<p>​​​​​​<strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<strong>Payment&nbsp;:</strong><br />external_id :&nbsp;'.isset($valAnswerDetail->payment->external_id).'<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: &nbsp; '.isset($valAnswerDetail->payment->terms).'</p>';
-             }
-             //  Get URL calendly
-             $eventCalendlys = $this->getWithParams($load->token, $valCalendly->event_type);
-             $eventCalendly = json_decode($eventCalendlys);
-             $jobsIdUnique = JobModels::get('id');
-             if(!$exits){
-                 $jobs = JobModels::create([
-                     'title' => $valCalendly->name,
-                     'id_unique' => $jobsIdUnique->count()+1,
-                     'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
-                     'url_calendly' => $eventCalendly->resource->scheduling_url,
-                     'uri_api' => $valCalendly->uri,
-                     'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                     'set_job_status_id' => $idJobStatus->id
-                 ]);
-
-             }else{
-                $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([
-                    'title' => $valCalendly->name,
-                    'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
-
-                ]);
+                //  Get URL calendly
+                $eventCalendlys = $this->getWithParams($load->token, $valCalendly->event_type);
+                $eventCalendly = json_decode($eventCalendlys);
+                $jobsIdUnique = JobModels::get('id');
+                if(!$exits){
+                    $client = Client::create([
+                        'first_name' => $valAnswerDetail->name ?? $valAnswerDetail->first_name,
+                        'last_name' => $valAnswerDetail->last_name,
+                        'email' => $valAnswerDetail->email,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'create_by' => auth()->user()->id
+                    ]);
+                    $jobs = JobModels::create([
+                        'title' => $valCalendly->name,
+                        'id_unique' => $jobsIdUnique->count()+1,
+                        'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+                        'url_calendly' => $eventCalendly->resource->scheduling_url,
+                        'uri_api' => $valCalendly->uri,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'set_job_status_id' => $idJobStatus->id,
+                        'location' => $valAnswerDetail->timezone,
+                        'status_calendly' => 1,
+                        'clients_id' => $client->id
+                    ]);
+   
+                }else{
+                   $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([
+                       'title' => $valCalendly->name,
+                       'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+   
+                   ]);
+                }
              }
 
 
@@ -722,6 +776,16 @@ class JobboardController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function send_email_confirmation_to_client(Request $request)
+    {
+        // return $request->email_replace;
+        // JobBoardRequest
+        // return $request;
+        $value = json_decode($request->family);
+        // return $value[0]->email;
+        SendEmailToTalent::dispatch($value[0]->email, $request->email_replace);
     }
 
     public function __destruct()

@@ -54,6 +54,8 @@ return [
      */
     'queues_are_tenant_aware_by_default' => true,
 
+    // 'queues_are_tenant_aware_by_default' => false,
+
     /*
      * The connection name to reach the tenant database.
      *

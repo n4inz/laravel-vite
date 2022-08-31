@@ -104,6 +104,7 @@ return new class extends Migration
             $table->enum('type', ['active', 'archived']);
             $table->string('url_calendly')->nullable();
             $table->string('uri_api')->nullable();
+            $table->boolean('status_calendly')->default(0);
             $table->unsignedBigInteger('users_id');
 
             $table->unsignedBigInteger('stafs_id')->nullable();

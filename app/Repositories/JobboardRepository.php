@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Events\Actifity as EventsActifity;
 use App\Http\Traits\Actifity;
+use App\Jobs\SendEmailToTalent;
 use App\Jobs\SendMail;
 use App\Models\JobModels;
 use App\Models\JobModelsAvailabiltyDays;
@@ -18,6 +19,7 @@ use App\Models\JobModelsTask;
 use App\Models\SettingDefinedCheckList;
 use App\Models\SettingJobModelsStatus;
 use App\Models\Talents;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class JobboardRepository 
@@ -39,50 +41,135 @@ class JobboardRepository
             'expand' => ['default_price'],
         ]);
 
-        
+        $day = 0;
+        if($request->monday){
+            $day++;
+        }
+        if($request->tuesday){
+            $day++;
+        }
+        if($request->wednesday){
+            $day++;
+        }
+        if($request->thursday){
+            $day++;
+        }
+        if($request->friday){
+            $day++;
+        }
+        if($request->saturday){
+            $day++;
+        }
+        if($request->sunday){
+            $day++;
+        }
+
+        $categoryDesc = '';
+
+        foreach($request->subcategory as $keySub => $category){
+            $categoryDesc .=  str_replace('_',' ',ucfirst($request->subcategory[$keySub])).' ';
+        }
+
+        $langDesc = '';
+        foreach ($request->language as $keys => $lang) {
+            $langDesc .= $request->language[$keys].' ';
+        } 
+
+        $description = 'Hi! We are looking for a '.$categoryDesc.' for our family. This position
+                            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.' Per '.$request->pay_frequency.', '.$request->part_time.'.
+                            The ideal candidate needs to speak '.$langDesc.'.
+                            Please apply for this job if you feel you can do this job</br></br>'.$request->description;
+       
+        $value = json_decode($request->family);
         DB::beginTransaction();
         try{
-            $value = json_decode($request->family);
-            $jobs = JobModels::create([
-             'family' => $value[0]->first_name,
-             'title' => $request->title,
-             'description' => $request->description,
-             'id_unique' => $jobsIdUnique->count()+1,
- 
-             'location' => $request->address,
-             'category' => $request->category,
-             'part_time' => $request->part_time,
-             'desired_living' => $request->desired_living,
-             'english_level' => $request->english_level,
- 
-             'comfortable_with_pets' => $request->comfortable_with_pets,
-             'has_transportation' => $request->has_transportation,
-             'has_driver_license' => $request->has_driver_license,
- 
-             'start_time' => $request->start_time,
-             'end_time' => $request->end_time,
-             'duration' => $request->duration,
- 
-             'start_date' => $request->start_date,
-             'end_date' => $request->end_date,
-             'asap' => $request->asap,
-             'tbd' => $request->tbd,
- 
-             'salary_type' => $request->salary_type,
-             'rate' => $request->rate,
-             'pay_frequency' => $request->pay_frequency,
-             'pay_with' => $request->pay_with,
-             'rate_negotiable' => $request->rate_negotiable,
- 
-             'status' => $status_job[1]->status_name,
-             // 'type' => $request->type,
-             'type' => $request->onlyOneStatus,
-             'clients_id' => $value[0]->value,
-             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-             'stafs_id' => auth()->user()->staf->users_id ?? 0,
-             'set_job_status_id' => $status_job[1]->id
-             ]);
- 
+            
+            if($request->job_models_uid){
+               
+                $jobs = JobModels::updateOrCreate(['uid' => $request->job_models_uid],[
+                    'family' => $value[0]->first_name,
+                    'title' => $request->title,
+                    'description' => $description,
+                    'id_unique' => $jobsIdUnique->count()+1,
+        
+                    'location' => $request->address,
+                    'category' => $request->category,
+                    'part_time' => $request->part_time,
+                    'desired_living' => $request->desired_living,
+                    'english_level' => $request->english_level,
+        
+                    'comfortable_with_pets' => $request->comfortable_with_pets,
+                    'has_transportation' => $request->has_transportation,
+                    'has_driver_license' => $request->has_driver_license,
+        
+                    'start_time' => $request->start_time,
+                    'end_time' => $request->end_time,
+                    'duration' => $request->duration,
+        
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date,
+                    'asap' => $request->asap,
+                    'tbd' => $request->tbd,
+        
+                    'salary_type' => $request->salary_type,
+                    'rate' => $request->rate,
+                    'pay_frequency' => $request->pay_frequency,
+                    'pay_with' => $request->pay_with,
+                    'rate_negotiable' => $request->rate_negotiable,
+        
+                   
+                    // 'type' => $request->type,
+                    'type' => $request->onlyOneStatus,
+                    'clients_id' => $value[0]->value,
+                    'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                    'stafs_id' => auth()->user()->staf->users_id ?? 0,
+                    'status_calendly' => 0,
+                   
+                ]);
+            }else{
+                $jobs = JobModels::create([
+                 'family' => $value[0]->first_name,
+                 'title' => $request->title,
+                 'description' => $description,
+                 'id_unique' => $jobsIdUnique->count()+1,
+     
+                 'location' => $request->address,
+                 'category' => $request->category,
+                 'part_time' => $request->part_time,
+                 'desired_living' => $request->desired_living,
+                 'english_level' => $request->english_level,
+     
+                 'comfortable_with_pets' => $request->comfortable_with_pets,
+                 'has_transportation' => $request->has_transportation,
+                 'has_driver_license' => $request->has_driver_license,
+     
+                 'start_time' => $request->start_time,
+                 'end_time' => $request->end_time,
+                 'duration' => $request->duration,
+     
+                //  'start_date' => $request->start_date,
+                //  'end_date' => $request->end_date,
+                'start_date' =>  Carbon::parse($request->start_date),
+                'end_date' => Carbon::parse($request->end_date),
+                 'asap' => $request->asap,
+                 'tbd' => $request->tbd,
+     
+                 'salary_type' => $request->salary_type,
+                 'rate' => $request->rate,
+                 'pay_frequency' => $request->pay_frequency,
+                 'pay_with' => $request->pay_with,
+                 'rate_negotiable' => $request->rate_negotiable,
+     
+                 'status' => $status_job[1]->status_name,
+                 // 'type' => $request->type,
+                 'type' => $request->onlyOneStatus,
+                 'clients_id' => $value[0]->value,
+                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                 'stafs_id' => auth()->user()->staf->users_id ?? 0,
+                 'status_calendly' => 0,
+                 'set_job_status_id' => $status_job[1]->id
+                 ]);
+            }
             foreach($request->subcategory as $keySub => $category){
                 JobModelsMatchTalent::create([
                     'jobs_sub_category' => $request->subcategory[$keySub], 
@@ -100,6 +187,8 @@ class JobboardRepository
                     ]);
                 }
             }
+
+            
             JobModelsAvailabiltyDays::create([
                 'monday' => $request->monday,
                 'tuesday' => $request->tuesday,
@@ -149,6 +238,11 @@ class JobboardRepository
         }catch(\Exception $e ){
           
             DB::rollback();
+        }
+
+        // Send email to client
+        if($request->email_replace){
+            SendEmailToTalent::dispatch($value[0]->email, $request->email_replace);
         }
        
     }

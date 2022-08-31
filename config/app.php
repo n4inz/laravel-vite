@@ -59,6 +59,7 @@ return [
     'uri' => env('URI'),
     'asset_url' => env('ASSET_URL'),
     'sk_stripe' => env('SK_STRIPE'),
+    'stripe_webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
 
     /*
     |--------------------------------------------------------------------------

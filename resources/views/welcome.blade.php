@@ -12,7 +12,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('css/demo.css') }}"> --}}
-    
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> --}}
+    <link  href="{{ asset('css/flowbite.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <script src="https://unpkg.com/js-datepicker"></script>
+
     <style>
         .iti__country-list{
             width: vw;
@@ -24,6 +31,31 @@
         <input id="phone" name="phone" type="tel">
         <button type="submit">Submit</button>
     </form>
+
+    <div date-rangepicker class="flex items-center">
+        <div class="relative">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+          </div>
+          <input name="start" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+        </div>
+        <span class="mx-4 text-gray-500">to</span>
+        <div class="relative">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+          </div>
+          <input name="end" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+      </div>
+    </div>
+
+    {{-- <form action="{{ route('jobboard.jobs_store') }}" method="POST">@csrf
+        <input type="text" name="dates">
+        <input type="submit">
+    </form> --}}
+
+    <input id="1" type="text" class="one">
+    <input id="1" type="text" class="two">
+
   {{-- <form method="post" action="{{ route('upload') }}" enctype="multipart/form-data"
   class="dropzone bg-slate-400" id="dropzone">
   @csrf
@@ -215,8 +247,17 @@
     </div>
 </div>
 
-<script src="{{ asset('js/intlTelInput.js') }}"></script>
+
 <script>
+    const start = datepicker('.one', { id: 1 })
+const end = datepicker('.two', { id: 1 })
+
+start.getRange()
+end.getRange()
+</script>
+
+<script src="{{ asset('js/intlTelInput.js') }}"></script>
+{{-- <script>
   var input = document.querySelector("#phone");
   window.intlTelInput(input, {
     autoHideDialCode:true,
@@ -225,8 +266,11 @@
 
     utilsScript: "{{ asset('js/utils.js') }}",
   });
-</script>
+  $('input[name="dates"]').daterangepicker();
+
+</script> --}}
 <script type="text/javascript">
+
   Dropzone.options.dropzone =
   {
       maxFilesize: 12,

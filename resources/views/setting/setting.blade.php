@@ -61,7 +61,7 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div class="w-full errors_status">
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Service Job Status</label>
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Job Status</label>
                                         @if ($setting->SettingJobStatus->count() == 0)
                                         <table width="100%">
                                             <tbody class="load-task">
@@ -337,7 +337,7 @@
                                 </div>
                                 <div class="px-6 mt-6 flex space-x-4">
                                     <div class="w-full">
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Status Talents</label>
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Talent Status</label>
                                         <div class="errors_status_talent">
                                             {{-- Chile Care --}}
                                             <div class="flex space-x-7 p-4 rounded-lg" id="chile_care" role="tabpanel" aria-labelledby="chile-care">
@@ -392,7 +392,7 @@
                                 </div>
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div>
-                                        <label class="block overview-status-field text-[#222222] mb-3">Services Type</label>
+                                        <label class="block overview-status-field text-[#222222] mb-3">Service type</label>
                                         <div class="w-[316px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
                                             <select name="service_type" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                                 <option value="Placement">Placement</option>
@@ -600,7 +600,7 @@
                                 </div>
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
                                     <div class="errors_location">
-                                        <label for="first-name" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3">Services Location</label>
+                                        <label for="first-name" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3">Headquarter</label>
                                         <div class="{{ $errors->has('location') ? 'border-red-500' : '' }} w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
                                             <input type="text"value="{{ old('location' , $setting->SettingDetail->service_location_fee->location ?? null) }}"  name="location" class="placepicker-setting text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                             <div>

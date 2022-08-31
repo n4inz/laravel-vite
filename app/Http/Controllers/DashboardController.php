@@ -6,20 +6,18 @@ use App\Http\Traits\HttpGuzzle;
 use App\Models\Actifity;
 use App\Models\Client;
 use App\Models\JobModels;
-use App\Models\JobModelsMatchTalent;
-use App\Models\JobModelsPotentialClient;
+
 use App\Models\JobModelsRange;
 use App\Models\JobModelsTask;
 use App\Models\SettingCalendlyApi;
 use App\Models\SettingJobModelsStatus;
-use App\Models\User;
+use App\Models\SettingServiceCategory;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Stripe\Stripe;
-use Stripe\StripeClient;
 
-use function PHPUnit\Framework\classHasAttribute;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Stripe\Stripe;
+
 
 class DashboardController extends Controller
 {
@@ -27,87 +25,81 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        
-        // $stripe = new StripeClient('sk_test_51JUgUdI7PA30MRlSUGu8tTozqkKZpo8WR7s3O7AdBDJwMiX7OPenaZ441V9KoWejHWJBIu8XC0Hz9eA2HMCdobqN000XpaPQhr', null);
-        // $stripe->paymentLinks->create(
-        //     ['line_items' => [['price' => '20', 'quantity' => 1]]]
-        //   );
+        $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
 
-        //  Stripe\Stripe::setApiKey('sk_test_51JUgUdI7PA30MRlSUGu8tTozqkKZpo8WR7s3O7AdBDJwMiX7OPenaZ441V9KoWejHWJBIu8XC0Hz9eA2HMCdobqN000XpaPQhr');
-        // Stripe\Charge::create ([
-        //         "amount" => 100 * 150,
-        //         "currency" => "inr",
-        //         "source" => $request->stripeToken,
-        //         "description" => "Making test payment." 
-        // ]);
+        return view('modal.jobboard.edit_create_job_calendly', compact('category'));
+        $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
+        $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
+            'organization' => $load->current_organization,
+            'status' => 'active',
 
+        ]);
 
+        $response = json_decode($responses);
 
-
-
- 
-
-        // $invoice = Stripe('sk_test_51JUgUdI7PA30MRlSUGu8tTozqkKZpo8WR7s3O7AdBDJwMiX7OPenaZ441V9KoWejHWJBIu8XC0Hz9eA2HMCdobqN000XpaPQhr');
-        // Get Description
-        
-        // $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
-        // $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
-        //     'organization' => $load->current_organization,
-        //     'status' => 'active',
-
-        // ]);
-
-        // $response = json_decode($responses);
-
-        // // return $response->collection;
+        // return $response->collection;
   
-        // foreach($response->collection as $valCalendly){
-        //     $idJobStatus = SettingJobModelsStatus::where([
-        //         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        //         'status_key' => 'potential_client',
-        //         ])->first('id');
-        //     $exits = JobModels::where('uri_api', $valCalendly->uri)->first('id');
+        foreach($response->collection as $valCalendly){
+            $idJobStatus = SettingJobModelsStatus::where([
+                'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                'status_key' => 'potential_client',
+                ])->first('id');
+            $exits = JobModels::where('uri_api', $valCalendly->uri)->first('id');
            
             
-        //      // Get Description
-        //     $getQuestionPerEvents = $this->getWithParams($load->token, $valCalendly->uri.'/invitees');
-        //     $questionDetail = json_decode($getQuestionPerEvents);
-        //     $descriptionString = '';
-        //      foreach($questionDetail->collection as $valAnswerDetail) {
-        //         $question = '';
-        //         foreach ($valAnswerDetail->questions_and_answers as $val_question) {
-        //             $question .= ''.$val_question->question.' : '.$val_question->answer.'<br />';
-        //         }
-        //         // $descriptionString .= '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, asperiores? <br /><br />​​​​​​​<br /></p><p><strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail->payment->external_id).';<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: '.isset($valAnswerDetail->payment->terms).'&nbsp;</p>';
-        //         $descriptionString .= '<p>​​​​​​<strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<strong>Payment&nbsp;:</strong><br />external_id :&nbsp;'.isset($valAnswerDetail->payment->external_id).'<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: &nbsp; '.isset($valAnswerDetail->payment->terms).'</p>';
-        //      }
-        //      //  Get URL calendly
-        //      $eventCalendlys = $this->getWithParams($load->token, $valCalendly->event_type);
-        //      $eventCalendly = json_decode($eventCalendlys);
-        //      $jobsIdUnique = JobModels::get('id');
-        //      if(!$exits){
-        //          $jobs = JobModels::create([
-        //              'title' => $valCalendly->name,
-        //              'id_unique' => $jobsIdUnique->count()+1,
-        //              'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
-        //              'url_calendly' => $eventCalendly->resource->scheduling_url,
-        //              'uri_api' => $valCalendly->uri,
-        //              'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-        //              'set_job_status_id' => $idJobStatus->id
-        //          ]);
+             // Get Description
+            $getQuestionPerEvents = $this->getWithParams($load->token, $valCalendly->uri.'/invitees');
+            $questionDetail = json_decode($getQuestionPerEvents);
+            $descriptionString = '';
+             foreach($questionDetail->collection as $valAnswerDetail) {
+                $question = '';
+                foreach ($valAnswerDetail->questions_and_answers as $val_question) {
+                    $question .= ''.$val_question->question.' : '.$val_question->answer.'<br />';
+                }
+                // $descriptionString .= '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, asperiores? <br /><br />​​​​​​​<br /></p><p><strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<br /><strong>Payment&nbsp;:</strong><br />external_id :&nbsp'.isset($valAnswerDetail->payment->external_id).';<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: '.isset($valAnswerDetail->payment->terms).'&nbsp;</p>';
+                $descriptionString .= '<p>​​​​​​<strong>Name :</strong>&nbsp; '.$valAnswerDetail->name.' '.$valAnswerDetail->first_name.'<br /><strong>email </strong>:&nbsp;'.$valAnswerDetail->email.'<br /><br /><strong>Question and Answer :</strong><br />'.$question.'<strong>Payment&nbsp;:</strong><br />external_id :&nbsp;'.isset($valAnswerDetail->payment->external_id).'<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: &nbsp; '.isset($valAnswerDetail->payment->terms).'</p>';
+                //  Get URL calendly
+                $eventCalendlys = $this->getWithParams($load->token, $valCalendly->event_type);
+                $eventCalendly = json_decode($eventCalendlys);
+                $jobsIdUnique = JobModels::get('id');
+                if(!$exits){
+                    $client = Client::create([
+                        'first_name' => $valAnswerDetail->name ?? $valAnswerDetail->first_name,
+                        'last_name' => $valAnswerDetail->last_name,
+                        'email' => $valAnswerDetail->email,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'create_by' => auth()->user()->id
+                    ]);
+                    $jobs = JobModels::create([
+                        'title' => $valCalendly->name,
+                        'id_unique' => $jobsIdUnique->count()+1,
+                        'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+                        'url_calendly' => $eventCalendly->resource->scheduling_url,
+                        'uri_api' => $valCalendly->uri,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'set_job_status_id' => $idJobStatus->id,
+                        'location' => $valAnswerDetail->timezone,
+                        'status_calendly' => 1,
+                        'clients_id' => $client->id
+                    ]);
+   
+                }else{
+                   $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([
+                       'title' => $valCalendly->name,
+                       'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+   
+                   ]);
+                }
+             }
 
-        //      }else{
-        //         $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([
-        //             'title' => $valCalendly->name,
-        //             'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
 
-        //         ]);
-        //      }
+        }
 
+        return $questionDetail;
 
-        // }
-
-        // return 'ok';
+        return false;
+        
+        
         // $result = JobModels::with(['availability','languages','match_talent'])->where('id' , 1)->firstOrFail();
         // $talentNeed = [];
         //      // Match Talent
@@ -115,6 +107,8 @@ class DashboardController extends Controller
         //     array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
         // }
         // return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
+        // Log::debug('An informational message.');
+
 
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();

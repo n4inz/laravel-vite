@@ -126,6 +126,6 @@
         
     </div>
     <script src="{{ asset('js/sideNav.js') }}"></script>
-
+    
 </body>
 </html>

@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         $faker = Factory::create();
         $tenant =  Tenant::create([
             'name' => 'test',
-            'domain' => 'test.'.env('DOMAIN'),
+            'domain' => 'test.'.config('app.domain'),
             'database' => $faker->userName(4)
         ]);
         $color = [
@@ -60,7 +60,7 @@ class UserSeeder extends Seeder
             $color1_rand = $color1[rand(0, count($color1) - 1)];
             $tenant =  Tenant::create([
                 'name' => $faker->name,
-                'domain' => $faker->lastName.'.'.env('DOMAIN'),
+                'domain' => $faker->lastName.'.'.config('app.domain'),
                 'database' => $faker->userName(4)
             ]);
 

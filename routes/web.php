@@ -8,6 +8,7 @@ use App\Http\Controllers\JobboardController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestStripeController;
 use App\Http\Controllers\UploadController;
@@ -26,6 +27,7 @@ use Spatie\Multitenancy\Models\Tenant;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // Testing
 Route::get('test', [TestController::class, 'welcome']);
 Route::get('test/image-viewer', [TestController::class, 'image_viewer']);
@@ -89,6 +91,9 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('sync-calendly' , [JobboardController::class , 'sync_calendly'])->name('jobboard.sync_calendly');
     Route::post('send-email-to-talent' , [JobboardController::class , 'send_email_to_talent'])->name('jobboard.send_email_to_talent');
     Route::post('create-invoice' , [JobboardController::class , 'create_invoice'])->name('jobboard.create_invoice');
+    Route::post('edit-create-job-calendly',[JobboardController::class, 'edit_create_job_calendly'])->name('jobboard.edit_create_job_calendly');
+    Route::post('save-as-email-client',[JobboardController::class, 'save_as_email_client'])->name('jobboard.save_as_email_client');
+    Route::post('send-email-confirmation-to-client',[JobboardController::class, 'send_email_confirmation_to_client'])->name('jobboard.send_email_confirmation_to_client');
 
     // AJAX JOBBOARD
     Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');
@@ -139,3 +144,5 @@ Route::post('/home-upload', [HomeController::class , 'upload'])->name('home.uplo
 Route::get('/staf' , [AuthenticateController::class ,'staf'])->middleware('tenant')->name('login.staf');
 Route::post('/login-staf' , [AuthenticateController::class ,'login_staf'])->name('login.staf_login');
 
+// WebHook Stripe
+Route::post('/webhook-stripe', [StripeController::class, 'webhook']);

@@ -140,7 +140,7 @@
                                             <div class="flex space-x-4 items-center">
                                                 
                                                 <div class="{{ isset($result->availability[0]->monday)  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                                                    <span class="{{ isset($result->availability[0]->monday)  ? 'overview-text-day' : 'overview-text-muted' }} ">MO</span>
+                                                    <span class="{{ isset($result->availability[0]->monday)  ? 'overview-text-day' : 'overview-text-muted' }} ">Mo</span>
                                                 </div>
                                                 <div class="{{ isset($result->availability[0]->tuesday)  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
                                                     <span class="{{ isset($result->availability[0]->tuesday)  ? 'overview-text-day' : 'overview-text-muted' }}">Tu</span>
@@ -209,7 +209,7 @@
                                                 <span class="overview-when">When</span>
                                                 <label for="monday" class="hover:cursor-pointer">
                                                     <div class="monday {{ isset($result->availability[0]->monday)  ? 'overview-ring-day' : '' }} flex items-center justify-center w-8 h-[34px] rounded">
-                                                        <span class="text_monday {{ isset($result->availability[0]->monday)  ? 'overview-text-day' : 'overview-text-muted' }} ">MO</span>
+                                                        <span class="text_monday {{ isset($result->availability[0]->monday)  ? 'overview-text-day' : 'overview-text-muted' }} ">Mo</span>
                                                     </div>
                                                     <input @if(isset($result->availability[0]->monday)) checked  @endif class="availability_days hidden" onclick="availability_days()" id="monday" type="checkbox" name="monday" type="chechbox" value="1">
                                                 </label>
@@ -1914,7 +1914,7 @@
                                                 </td>
                                                 <td height="66px" width="25%">
                                                     @if ($val_inoice->status == 'PAID')
-                                                        <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $val_inoice->status }}</span>    
+                                                        <span class="task-text-body {{ $val_inoice->status == 'PAID' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $val_inoice->status }}</span>    
                                                     @else
                                                         <span class="task-text-body text-colorStatusCard1 ">{{$val_inoice->status}}</span>
                                                     @endif
@@ -2190,6 +2190,7 @@
             </div>
 
             {{-- Main Modal Send Email To Talent --}}
+            
             <div id="modal-send-email-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
                 <form action="{{ route('jobboard.send_email_to_talent') }}" method="post">@csrf
                     <input type="hidden" name="job_models_id" value="{{ $result->id }}">
