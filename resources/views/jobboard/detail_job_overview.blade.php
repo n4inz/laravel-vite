@@ -82,7 +82,7 @@
                     {{-- right --}}
                     <div class="w-[704px] xl:w-[80%] ">
                         {{-- Job Detail --}}
-                        <div class="bg-bgbody rounded ">
+                        <div class="bg-bgbody rounded w-[704px]">
                             <div class="flex justify-between px-4 pt-[18.5px]">
                                 <div class="flex space-x-2 ">
                                     <div class="w-2 h-6 bg-[#5FCFFF] rounded-sm"></div>
@@ -1049,195 +1049,158 @@
                         </div>
 
                         {{-- Matched Talent --}}
-                        <div class="bg-bgbody rounded mt-3 w-[1016px] xl:w-full">
+                        <div class="bg-bgbody rounded mt-3 w-[704px] xl:w-full  relative">
                             <div class="flex justify-between px-4 pt-[18.5px]">
-                                <div class="flex space-x-2 ">
-                                    <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm"></div>
-                                    <span class="text-[#222222] font-semibold">Matched Talent</span>
+                                <div class="flex space-x-8">
+                                    <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm "></div>
+                                    <div class="flex space-x-8 absolute" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                        <span class="text-[#222222] font-semibold border-b-2 pb-3 hover:cursor-pointer" data-tabs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">Matched Talent</span>
+                                        <span class="text-[#222222] font-semibold border-b-2 pb-3 hover:cursor-pointer" data-tabs-target="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">New applicants</span>
+                                    </div>
                                 </div>
-                                <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
-                                    <span class="overview-send-job text-palet">+ Add Talent</span>
+                        </div>
+                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                            <div id="myTabContent">
+                                <div class="hidden p-4 bg-gray-50 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <form id="form_match_talent" action="{{ route('jobboard.send_email')}}" method="POST">@csrf
+                                        <input type="hidden" name="email_client" value="{{ $result->client->email ?? null }}">
+                                        <input type="hidden" name="job_models_id" value="{{ $result->id }}">
+                                        <div class="status_all_select"></div>
+                                       
+                                        <div class="space-y-6 pb-10 match_talent_hide h-[500px] overflow-auto">
+                                            @foreach ($result->match_talents_filters as $values_filter )
+                                               <div class="flex justify-between px-4 hover:cursor-pointer">
+                                                    <div class="flex space-x-2 items-center justify-center">
+                                                        <div class="">
+                                                            <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $values_filter->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        </div>
+                                                        @if ($values_filter->talent->avatar)
+                                                            {{-- <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt=""> --}}
+                                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$values_filter->talent->avatar) }}" alt="">
+                                                        @else
+                                                            <div class="w-12 h-12 flex items-center justify-center bg-[{{ $values_filter->talent->color }}] rounded-full">
+                                                                <span class="text-white">{{ strtoupper(substr($values_filter->talent->first_name, 0, 1)) }}{{ strtoupper(substr($values_filter->talent->last_name, 0, 1)) }}</span>
+                                                            </div>
+                                                        @endif
+                                                        <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values_filter->talent->id }})"  class="flex flex-col">
+                                                            <span class="overview-name-talent text-colortext">{{ $values_filter->talent->first_name }}</span>
+                                                            <span class="overview-live-talent">Age @if($values_filter->talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($values_filter->talent->day_of_birthday)->age }} @endif, in {{ $values_filter->talent->address }}</span>
+                                                            <span class="overview-experiance-talent">{{ $values_filter->talent->experience }} Year Experience, {{ Str::limit($values_filter->talent->about_talent , 25, $end='...') }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="h-4">
+                                                        <select data-talent="{{ $values_filter->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                            <option>-- Select status --</option>
+                                                            @foreach ($status_talent as $value )
+                                                                <option @if($value->status_name === $values_filter->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @foreach ($result->match_talents_add as $key => $talent )
+                                                {{-- $talent->job_model_talent_status->status --}}
+                                                <div class="flex justify-between px-4 hover:cursor-pointer">
+                                                    <div class="flex space-x-2 items-center justify-center">
+                                                        <div class="">
+                                                            <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        </div>
+                                                        @if ($talent->talent->avatar)
+                                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                        @else
+                                                            <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
+                                                                <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
+                                                            </div>
+                                                        @endif
+                                                        <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
+                                                            <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
+                                                            <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                            <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="h-4">
+                                                        <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                            <option>-- Select status --</option>
+                                                            @foreach ($status_talent as $value )
+                                                                <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                             @endforeach
+                                            <div class="flex items-center justify-center px-6 space-x-2 rounded-b absolute -top-[5px] right-0">
+                                                <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center h-6 px-7 bg-colorStatusCard1 rounded-md hover:cursor-pointer">
+                                                    <span class="overview-attechment-btn-text">Select</span>
+                                                </div>
+                                                <div id="dropdown_select" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                                    <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
+                                                        @foreach ($status_talent as $value )
+                                                        <li>
+                                                            <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
+                                                                <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
+                                                            </label>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                                <button class="flex justify-center items-center px-7  h-6 bg-palet rounded-md">
+                                                    <span class="overview-attechment-btn-text">Send</span>
+                                                </button>   
+                                                <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                    <span class="overview-send-job text-palet">+ Add Talent</span>
+                                                </div>                       
+                                            </div>
+                                        </div>
+                                    
+                                    </form>
+                                </div>
+                                {{-- New Aplicants --}}
+                                <div class="hidden p-4 mt-4 bg-gray-50 rounded-lg dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                    <div class="space-y-6 h-[500px] overflow-auto">
+                                        @foreach ($result->talent_new_aplicants as $val_talent_new_aplicants)
+                                            <div class="flex justify-between px-8 ">
+                                                <div class="flex space-x-2">
+                                                    @if ($val_talent_new_aplicants->avatar)
+                                                        <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt="">
+                                                    @else
+                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $val_talent_new_aplicants->color }}] rounded-full">
+                                                            <span class="text-white">{{ strtoupper(substr($val_talent_new_aplicants->first_name, 0, 1)) }}{{ strtoupper(substr($val_talent_new_aplicants->last_name, 0, 1)) }}</span>
+                                                        </div>
+                                                    @endif
+                                                    <div class="flex flex-col">
+                                                        <span class="overview-name-talent text-colortext">{{ $val_talent_new_aplicants->first_name }} {{ $val_talent_new_aplicants->last_name }}</span>
+                                                        <span class="overview-live-talent">{{ $val_talent_new_aplicants->phone }}, {{ $val_talent_new_aplicants->email }}</span>
+                                                        <span class="overview-experiance-talent">{{ $val_talent_new_aplicants->address }}</span>
+                                                    </div>
+                                                </div>
+                                                <div data-dropdown-toggle="dropdown_aplying" class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#22CCE3] hover:cursor-pointer">
+                                                    <span class="overview-talent-status text-[#22CCE3]">Applying</span>
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 1.33337C7.5 1.05723 7.72386 0.833374 8 0.833374C11.958 0.833374 15.1667 4.042 15.1667 8.00004C15.1667 11.9581 11.958 15.1667 8 15.1667C7.72386 15.1667 7.5 14.9429 7.5 14.6667C7.5 14.3906 7.72386 14.1667 8 14.1667C11.4058 14.1667 14.1667 11.4058 14.1667 8.00004C14.1667 4.59428 11.4058 1.83337 8 1.83337C7.72386 1.83337 7.5 1.60952 7.5 1.33337Z" fill="#22CCE3"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.64852 0.841849C7.76499 0.836219 7.88214 0.833374 7.99992 0.833374C8.27606 0.833374 8.49992 1.05723 8.49992 1.33337C8.49992 1.60952 8.27606 1.83337 7.99992 1.83337C7.89825 1.83337 7.79719 1.83583 7.6968 1.84068C7.42098 1.85402 7.18658 1.64123 7.17325 1.36541C7.15991 1.08959 7.3727 0.855181 7.64852 0.841849ZM6.22405 1.55293C6.31709 1.81293 6.18175 2.09912 5.92176 2.19216C5.731 2.26043 5.54457 2.33784 5.36299 2.42387C5.11344 2.5421 4.81529 2.43565 4.69705 2.1861C4.57882 1.93656 4.68527 1.63841 4.93482 1.52017C5.146 1.42012 5.36287 1.33006 5.58482 1.25064C5.84482 1.15759 6.13101 1.29294 6.22405 1.55293ZM3.89323 2.72441C4.07874 2.92897 4.0633 3.24517 3.85874 3.43068C3.70914 3.56635 3.56623 3.70926 3.43056 3.85887C3.24505 4.06342 2.92884 4.07886 2.72429 3.89335C2.51974 3.70785 2.5043 3.39164 2.6898 3.18709C2.84733 3.01339 3.01326 2.84745 3.18697 2.68993C3.39152 2.50442 3.70773 2.51986 3.89323 2.72441ZM2.18598 4.69718C2.43553 4.81541 2.54198 5.11356 2.42375 5.36311C2.33772 5.54469 2.26031 5.73112 2.19204 5.92188C2.099 6.18187 1.81281 6.31722 1.55281 6.22417C1.29282 6.13113 1.15747 5.84494 1.25051 5.58494C1.32994 5.36299 1.41999 5.14612 1.52005 4.93494C1.63828 4.68539 1.93643 4.57894 2.18598 4.69718ZM1.36528 7.17337C1.6411 7.1867 1.85389 7.42111 1.84056 7.69693C1.83571 7.79732 1.83325 7.89837 1.83325 8.00004C1.83325 8.10171 1.83571 8.20277 1.84056 8.30315C1.85389 8.57897 1.6411 8.81338 1.36528 8.82671C1.08946 8.84004 0.855059 8.62726 0.841727 8.35144C0.836097 8.23497 0.833252 8.11782 0.833252 8.00004C0.833252 7.88226 0.836097 7.76511 0.841727 7.64865C0.855059 7.37283 1.08946 7.16004 1.36528 7.17337ZM1.55281 9.77591C1.81281 9.68287 2.099 9.81821 2.19204 10.0782C2.26031 10.269 2.33772 10.4554 2.42375 10.637C2.54198 10.8865 2.43553 11.1847 2.18598 11.3029C1.93643 11.4211 1.63828 11.3147 1.52005 11.0651C1.41999 10.854 1.32994 10.6371 1.25051 10.4151C1.15747 10.1551 1.29282 9.86895 1.55281 9.77591ZM2.72429 12.1067C2.92884 11.9212 3.24505 11.9367 3.43056 12.1412C3.56623 12.2908 3.70914 12.4337 3.85874 12.5694C4.0633 12.7549 4.07874 13.0711 3.89323 13.2757C3.70773 13.4802 3.39152 13.4957 3.18697 13.3102C3.01326 13.1526 2.84733 12.9867 2.6898 12.813C2.5043 12.6084 2.51974 12.2922 2.72429 12.1067ZM4.69705 13.814C4.81529 13.5644 5.11344 13.458 5.36299 13.5762C5.54457 13.6622 5.731 13.7397 5.92176 13.8079C6.18175 13.901 6.31709 14.1872 6.22405 14.4471C6.13101 14.7071 5.84482 14.8425 5.58482 14.7494C5.36287 14.67 5.146 14.58 4.93482 14.4799C4.68527 14.3617 4.57882 14.0635 4.69705 13.814ZM7.17325 14.6347C7.18658 14.3589 7.42098 14.1461 7.6968 14.1594C7.79719 14.1643 7.89825 14.1667 7.99992 14.1667C8.27606 14.1667 8.49992 14.3906 8.49992 14.6667C8.49992 14.9429 8.27606 15.1667 7.99992 15.1667C7.88214 15.1667 7.76499 15.1639 7.64852 15.1582C7.3727 15.1449 7.15991 14.9105 7.17325 14.6347Z" fill="#22CCE3"/>
+                                                    </svg>
+                                                </div>
+                                                <div id="dropdown_aplying" class="hidden z-10 w-40 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                                    <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
+                                                        @foreach ($status_talent as $value )
+                                                        <li  onclick="status_new_aplicants('{{ $value->status_name }}' , '{{ $val_talent_new_aplicants->id }}' , '{{ $result->id }}')" >
+                                                            <label class="hover:cursor-pointer">
+                                                                <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
+                                                            </label>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
+                                        {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
+                                            <span data-modal-toggle="add-new-aplicants" class="overview-send-job text-palet">+ Add Talent</span>
+                                    </div>
                                 </div>
                             </div>
-                            <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                            <form id="form_match_talent" action="{{ route('jobboard.send_email')}}" method="POST">@csrf
-                                <input type="hidden" name="email_client" value="{{ $result->client->email ?? null }}">
-                                <input type="hidden" name="job_models_id" value="{{ $result->id }}">
-                                <div class="status_all_select"></div>
-                               
-                                <div class="space-y-6 mt-6 match_talent_hide">
-                                    @foreach ($result->match_talents_filters as $values_filter )
-                                        @if($loop->iteration > 10) @break @endif
-                                        <div class="flex justify-between px-4 hover:cursor-pointer">
-                                            <div class="flex space-x-2 items-center justify-center">
-                                                <div class="">
-                                                    <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $values_filter->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                </div>
-                                                @if ($values_filter->talent->avatar)
-                                                    {{-- <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt=""> --}}
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$values_filter->talent->avatar) }}" alt="">
-                                                @else
-                                                    <div class="w-12 h-12 flex items-center justify-center bg-[{{ $values_filter->talent->color }}] rounded-full">
-                                                        <span class="text-white">{{ strtoupper(substr($values_filter->talent->first_name, 0, 1)) }}{{ strtoupper(substr($values_filter->talent->last_name, 0, 1)) }}</span>
-                                                    </div>
-                                                @endif
-                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values_filter->talent->id }})"  class="flex flex-col">
-                                                    <span class="overview-name-talent text-colortext">{{ $values_filter->talent->first_name }}</span>
-                                                    <span class="overview-live-talent">Age @if($values_filter->talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($values_filter->talent->day_of_birthday)->age }} @endif, in {{ $values_filter->talent->address }}</span>
-                                                    <span class="overview-experiance-talent">{{ $values_filter->talent->experience }} Year Experience, {{ Str::limit($values_filter->talent->about_talent , 25, $end='...') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="h-4">
-                                                <select data-talent="{{ $values_filter->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                    <option>-- Select status --</option>
-                                                    @foreach ($status_talent as $value )
-                                                        <option @if($value->status_name === $values_filter->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @foreach ($result->match_talents_add as $key => $talent )
-                                        {{-- $talent->job_model_talent_status->status --}}
-                                        @if($loop->iteration > 10) @break @endif
-                                        <div class="flex justify-between px-4 hover:cursor-pointer">
-                                            <div class="flex space-x-2 items-center justify-center">
-                                                <div class="">
-                                                    <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                </div>
-                                                @if ($talent->talent->avatar)
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
-                                                @else
-                                                    <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
-                                                        <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
-                                                    </div>
-                                                @endif
-                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
-                                                    <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
-                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
-                                                    <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="h-4">
-                                                <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                    <option>-- Select status --</option>
-                                                    @foreach ($status_talent as $value )
-                                                        <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                     @endforeach
-                                    <div class="flex items-center justify-center px-6 space-x-2 rounded-b w-full ">
-                                        <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center w-40 h-[42px] bg-colorStatusCard1 rounded-md hover:cursor-pointer">
-                                            <span class="overview-attechment-btn-text">Select</span>
-                                        </div>
-                                        <div id="dropdown_select" class="hidden z-10 w-40 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                                            <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
-                                                @foreach ($status_talent as $value )
-                                                <li>
-                                                    <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
-                                                        <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
-                                                    </label>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <button class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
-                                            <span class="overview-attechment-btn-text">Send</span>
-                                        </button>                          
-                                    </div>
-                                </div>
-                                {{-- Show more and show less match talent --}}
-                                <div  data-accordion="collapse">
-                                    <div id="acording_match_talent" class="hidden space-y-6 mt-6" aria-labelledby="accordion-collapse-heading-2">
-                                        @foreach ($result->match_talents_filters as $values_filter )
-                                        @if($loop->iteration > 10) @break @endif
-                                            <div class="flex justify-between px-4 hover:cursor-pointer">
-                                                <div class="flex space-x-2 items-center justify-center">
-                                                    <div class="">
-                                                        <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $values_filter->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    </div>
-                                                    @if ($values_filter->talent->avatar)
-                                                        {{-- <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt=""> --}}
-                                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$values_filter->talent->avatar) }}" alt="">
-                                                    @else
-                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $values_filter->talent->color }}] rounded-full">
-                                                            <span class="text-white">{{ strtoupper(substr($values_filter->talent->first_name, 0, 1)) }}{{ strtoupper(substr($values_filter->talent->last_name, 0, 1)) }}</span>
-                                                        </div>
-                                                    @endif
-                                                    <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values_filter->talent->id }})"  class="flex flex-col">
-                                                        <span class="overview-name-talent text-colortext">{{ $values_filter->talent->first_name }}</span>
-                                                        <span class="overview-live-talent">Age @if($values_filter->talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($values_filter->talent->day_of_birthday)->age }} @endif, in {{ $values_filter->talent->address }}</span>
-                                                        <span class="overview-experiance-talent">{{ $values_filter->talent->experience }} Year Experience, {{ Str::limit($values_filter->talent->about_talent , 25, $end='...') }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="h-4">
-                                                    <select data-talent="{{ $values_filter->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                        <option>-- Select status --</option>
-                                                        @foreach ($status_talent as $value )
-                                                            <option @if($value->status_name === $values_filter->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        @foreach ($result->match_talents_add as $key => $talent )
-                                            <div  class="flex justify-between px-4 hover:cursor-pointer">
-                                                <div class="flex space-x-2 items-center justify-center">
-                                                    <div class="">
-                                                        <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    </div>
-                                                    @if ($talent->talent->avatar)
-                                                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
-                                                    @else
-                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
-                                                            <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
-                                                        </div>
-                                                    @endif
-                                                <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})" class="flex flex-col">
-                                                        <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
-                                                        <span class="overview-live-talent">Age @if($talent->talent->day_of_birthday != 'null'){{ Carbon\Carbon::parse($talent->talent->day_of_birthday )->age }} @endif, in {{ $talent->talent->address }}</span>
-                                                        <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="h-4">
-                                                    <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                        <option>-- Select status --</option>
-                                                        @foreach ($status_talent as $value )
-                                                            <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        <div class="flex items-center justify-center px-6 space-x-2 rounded-b w-full ">
-                                            <div id="dropdownDefault" data-dropdown-toggle="dropdown_select2" class="flex justify-center items-center w-40 h-[42px] bg-colorStatusCard1 rounded-md hover:cursor-pointer">
-                                                <span class="overview-attechment-btn-text">Select</span>
-                                            </div>
-                                            <div id="dropdown_select2" class="hidden z-10 w-40 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                                                <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
-                                                    @foreach ($status_talent as $value )
-                                                    <li>
-                                                        <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
-                                                            <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
-                                                        </label>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                            <button class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
-                                                <span class="overview-attechment-btn-text">Send</span>
-                                            </button>                          
-                                        </div>
-                                    </div>
-                                    <hr class="bg-[#ECECEC] h-[1px] w-full mt-[73px]">
-                                    <div id="show_match_talent" class="flex justify-center items-center -space-x-1 p-2  hover:cursor-pointer" data-accordion-target="#acording_match_talent" aria-expanded="false" aria-controls="acording_match_talent">
-                                        <span  class="overview-show-more">Show more</span>
-                                        <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
-                                    </div>
-                                </div>
-                            </form>
+
                         </div>
 
                         <div class="bg-bgbody rounded mt-3 toggle_client_detail">
@@ -1992,10 +1955,6 @@
                 
                 {{-- Tabs Talent --}}
                 <div class="hidden" id="talent" role="tabpanel" aria-labelledby="talent-tab">
-               
-                    
-                    
-        
                     <div class="flex space-x-2 mt-6">
                         <div class="w-[1016px] xl:w-full ">
                             <div class="bg-bgbody rounded">
@@ -2277,13 +2236,76 @@
                             </div>
                             <!-- Modal body -->
                             <div class="w-[672px]">
-                                <div class="relative flex items-center justify-center w-[672px] py-[18px] px-6 border-b">
-                                    <div class="flex absolute inset-y-0 left-8 items-center  pointer-events-none">
-                                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
-                                        </svg> 
+                                <div class="flex border-b w-[672px]">
+                                    <div class="relative flex items-center justify-center  py-[18px] px-6">
+                                        <div class="flex absolute inset-y-0 left-8 items-center  pointer-events-none">
+                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                                            </svg> 
+                                        </div>
+                                        <input id="search_talents_match" type="text" class=" pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search">
+                                        <input id="responsibilitis_search" type="hidden">
+                                        <input id="location_search" type="hidden">
+                                        <input id="languages_search" type="hidden">
                                     </div>
-                                    <input id="search_talents_match" type="text" class=" pl-10 border-none bg-transparent overview-talent-otside-text text-[#827C7C] w-full  outline-none focus:ring-0" placeholder="Search">
+                                    <div class="flex items-center justify-center space-x-2 w-full">
+                                        <select id="location" class="bg-white border border-gray-100 focus:ring-0 outline-none text-gray-500 text-xs rounded  block w-32 p-2.5">
+                                            <option selected>Location</option>
+                                            @foreach ($talents as $val_addres )
+                                                <option value="{{ $val_addres->address }}">{{ $val_addres->address }}</option>
+                                                
+                                            @endforeach
+                                        </select>
+                                        <select id="languages" class="bg-white border border-gray-100 focus:ring-0 outline-none text-gray-500 text-xs rounded  block w-32 p-2.5">
+                                            <option selected>Language</option>
+                                            <option value="Chinese Cantonese">Chinese Cantonese</option>
+                                            <option value="Chinese Mandarin">Chinese Mandarin</option>
+                                            <option value="Ethiopian">Ethiopian</option>
+                                            <option value="French">French</option>
+                                            <option value="Hindi">Hindi</option>
+                                            <option value="Polish">Polish</option>
+                                            <option value="Spanish">Spanish</option>
+                                            <option value="Thai">Thai</option>
+                                            <option value="Vietnamese">Vietnamese</option>
+                                            <option value="Japanese">Japanese</option>
+                                            <option value="Korean">Korean</option>
+                                            <option value="Indonesia">Indonesia</option>
+                                            <option value="English">English</option>
+                                            <option value="Tagalog">Tagalog</option>
+                                        </select>
+                                        <select id="responsibilitis" class="bg-white border border-gray-100 focus:ring-0 outline-none text-gray-500 text-xs rounded  block w-32 p-2.5">
+                                            <option selected>Responsibilities</option>
+                                            <option value="Nany/ Sitter">Nany/ Sitter</option>
+                                            <option value="Au Pair">Au Pair</option>
+                                            <option value="Maternity Care">Maternity Care</option>
+                                            <option value="At Home Daycare">At Home Daycare</option>
+                                            <option value="Infant">Infant</option>
+                                            <option value="Young Baby">Young Baby</option>
+                                            <option value="Toddler">Toddler</option>
+                                            <option value="Press Schooler">Press Schooler</option>
+                                            <option value="Grade Schooler">Grade Schooler</option>
+                                            <option value="Assist Bathing">Assist Bathing</option>
+                                            <option value="Companion">Companion</option>
+                                            <option value="Personal Full Care">Personal Full Care</option>
+                                            <option value="Laundry">Laundry</option>
+                                            <option value="Prep Meal">Prep Meal</option>
+                                            <option value="Cook Meal">Cook Meal</option>
+                                            <option value="Run Errands">Run Errands</option>
+                                            <option value="Special Needs">Special Needs</option>
+                                            <option value="Simple Housework">Simple Housework</option>
+                                            <option value="Assist Feeding">Assist Feeding</option>
+                                            <option value="Hour Help">Hour Help</option>
+                                            <option value="Remind Medicine">Remind Medicine</option>
+                                            <option value="Companion Elders">Companion Elders</option>
+                                            <option value="Private Home Kitchen">Private Home Kitchen</option>
+                                            <option value="Meal Prepation Coking">Meal Prepation Coking</option>
+                                            <option value="House Cleaning">House Cleaning</option>
+                                            <option value="Provide Transportation">Provide Transportation</option>
+                                            <option value="Tutor">Tutor</option>
+                                            <option value="Pick Up Drop Off">Pick Up Drop Off</option>
+                                            <option value="Other Professional Services">Other Professional Services</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="space-y-8 mt-8 h-80 overflow-y-scroll w-[672px]">
                                     @foreach ($talents as $talent_value ) 
@@ -2294,16 +2316,32 @@
                                                         <input name="id_talent_match[]" id="{{ $talent_value->id }}" style="color: #3BD7CF" type="checkbox" value="{{ $talent_value->id }}" class="w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                     </div>
                                                     @if ($talent_value->avatar)
-                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent_value->avatar) }}" alt="">
+                                                        <div class="w-12">
+                                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent_value->avatar) }}" alt="">
+                                                        </div>
                                                     @else
-                                                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent_value->color }}] rounded-full">
-                                                            <span class="text-white">{{ strtoupper(substr($talent_value->first_name, 0, 1)) }}{{ strtoupper(substr($talent_value->last_name, 0, 1)) }}</span>
+                                                        <div class="w-12">
+                                                            <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent_value->color }}] rounded-full">
+                                                                <span class="text-white">{{ strtoupper(substr($talent_value->first_name, 0, 1)) }}{{ strtoupper(substr($talent_value->last_name, 0, 1)) }}</span>
+                                                            </div>
                                                         </div>
                                                     @endif
                                                     <div class="flex flex-col">
                                                         <span class="overview-name-talent text-colortext">{{ $talent_value->first_name.' '.$talent_value->last_name }}</span>
                                                         <span class="overview-live-talent">Age @if($talent_value->day_of_birthday != 'null') {{ Carbon\Carbon::parse($talent_value->day_of_birthday)->age }} @endif , in {{ $talent_value->address }}</span>
                                                         <span class="overview-experiance-talent">{{ $talent_value->experience }} Year Experience</span>
+                                                        <div>
+                                                            <span class="overview-experiance-talent">Languages: 
+                                                                @foreach ($talent_value->languages as $val_lang )
+                                                                    {{ $val_lang->languages }},
+                                                                @endforeach
+                                                                and Responsibilites: 
+                                                                @foreach ($talent_value->type_helper as $val_type_helper )
+                                                                    {{ $val_type_helper->name_type_helper }},
+                                                                @endforeach
+                                                            </span>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </label>
@@ -2568,7 +2606,7 @@
             </div>
 
             <!-- Main Send email talent -->
-            <div id="send_mail_talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+            <div id="send_mail_talent" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4  max-w-2xl h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="relative bg-white w-[600px] rounded-lg shadow ">
@@ -2577,13 +2615,13 @@
                             <div class="talentId"></div>
                             <div class="flex justify-center items-start p-4 rounded-t relative">
                                 <div class=" border-b border-gray-200">
-                                    <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                    <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#tabSendEamil" role="tablist">
                                         <label for="one"  for="type"  class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">Interviewing</div>
+                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2" id="interview" data-tabs-target="#interviewId" role="tab" aria-controls="interviewId" aria-selected="false">Interviewing</div>
                                             <input checked type="radio" class="hidden" name="template" id="one" value="editor_tmp_email_1">
                                         </label>
                                         <label for="two" class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">Rejected</div>
+                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="rejectad_tab" data-tabs-target="#rejectedId" role="tab" aria-controls="rejectedId" aria-selected="false">Rejected</div>
                                             <input type="radio" class="hidden" name="template" id="two" value="editor_tmp_email_2">
                                         </label>
                                         {{-- <label for="three" class="mr-2" role="presentation">
@@ -2594,11 +2632,11 @@
                                 </div>
                             </div>
                             <div class="p-6 space-y-6">
-                                <div id="myTabContent">
-                                    <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div id="tabSendEamil">
+                                    <div class="w-full rounded-md " id="interviewId" role="tabpanel" aria-labelledby="interview">
                                         <textarea id="editor_tmp_email_1" class="w-full h-full" name="editor_tmp_email_1" >{{ $tmp_email1->body }}</textarea>
                                     </div>
-                                    <div class="hidden w-full" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                    <div class="hidden w-full" id="rejectedId" role="tabpanel" aria-labelledby="rejectad_tab">
                                         <textarea id="editor_tmp_email_2" class="w-full h-full okee" name="editor_tmp_email_2">{{ $tmp_email2->body }}</textarea>
                                     </div>
                                     {{-- <div class="hidden" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -2790,8 +2828,10 @@
         </div>
     </article>
 </main>
+
 <script src="{{ asset('js/jQuery/jobBoardTab.js') }}"></script>
 <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>
+
 
 <script>
     
@@ -3179,7 +3219,6 @@
         })
     })
 
-
     // Modal modalSendEmailTalent
     const IdSendEmailTalent = document.getElementById('send_mail_talent');
     const modalSendEmailTalent = new Modal(IdSendEmailTalent, { });
@@ -3206,65 +3245,65 @@
     }
 
     // Show more and show less detail job
-    const accordionItems = [
-        {
-            id: 'show_detail_jobs',
-            triggerEl: document.querySelector('#show_detail_jobs'),
-            targetEl: document.querySelector('#job-detail'),
-            active: false
-        },
+    // const accordionItems = [
+    //     {
+    //         id: 'show_detail_jobs',
+    //         triggerEl: document.querySelector('#show_detail_jobs'),
+    //         targetEl: document.querySelector('#job-detail'),
+    //         active: false
+    //     },
 
-    ];
+    // ];
 
-    const options_show_detail_job = {
-        onOpen: (item) => {
+    // const options_show_detail_job = {
+    //     onOpen: (item) => {
 
-            const tmp = `<span  class="overview-show-more">Show less</span>
-            <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
-            $('#show_detail_jobs').html(tmp)
+    //         const tmp = `<span  class="overview-show-more">Show less</span>
+    //         <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+    //         $('#show_detail_jobs').html(tmp)
             
-        },
-        onClose: (item) => {
-            const tmp = `<span  class="overview-show-more">Show more</span>
-                        <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
-            $('#show_detail_jobs').html(tmp)
+    //     },
+    //     onClose: (item) => {
+    //         const tmp = `<span  class="overview-show-more">Show more</span>
+    //                     <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+    //         $('#show_detail_jobs').html(tmp)
           
-        },
+    //     },
 
-    };
-    new Accordion(accordionItems, options_show_detail_job);
+    // };
+    // new Accordion(accordionItems, options_show_detail_job);
 
 
     // Acording Match talent
-    const accordionItemsMatchTalent = [
-        {
-            id: 'show_match_talent',
-            triggerEl: document.querySelector('#show_match_talent'),
-            targetEl: document.querySelector('#acording_match_talent'),
-            active: false
-        },
+    // const accordionItemsMatchTalent = [
+    //     {
+    //         id: 'show_match_talent',
+    //         triggerEl: document.querySelector('#show_match_talent'),
+    //         targetEl: document.querySelector('#acording_match_talent'),
+    //         active: false
+    //     },
 
-    ];
+    // ];
 
-    const options_show_match_talent = {
-        onOpen: (item) => {
-            const tmp = `<span  class="overview-show-more">Show less</span>
-            <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+    // const options_show_match_talent = {
+    //     onOpen: (item) => {
+    //         const tmp = `<span  class="overview-show-more">Show less</span>
+    //         <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
             
-            $('#show_match_talent').html(tmp);
-        },
-        onClose: (item) => {
-            const tmp = `<span  class="overview-show-more">Show more</span>
-                        <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
+    //         $('#show_match_talent').html(tmp);
+    //     },
+    //     onClose: (item) => {
+    //         const tmp = `<span  class="overview-show-more">Show more</span>
+    //                     <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
             
-            $('#show_match_talent').html(tmp)
-        },
-        onToggle: (item) => {
-            $('.match_talent_hide').toggleClass('hidden')
-        },
+    //         $('#show_match_talent').html(tmp)
+    //     },
+    //     onToggle: (item) => {
+    //         $('.match_talent_hide').toggleClass('hidden')
+    //     },
 
-    };
-    const accordion = new Accordion(accordionItemsMatchTalent, options_show_match_talent);
+    // };
+    // const accordion = new Accordion(accordionItemsMatchTalent, options_show_match_talent);
 
 
     // Select all status match Talent
@@ -3421,49 +3460,50 @@
     // EDIT CLIENT
    
     // Tagifiy family
-    var input = document.querySelector('input[name=family]');
+    // var input = document.querySelector('input[name=family]');
 
-    console.log('aaa:',input)
+    // console.log('aaa:',input)
 
-    function tagTemplate(tagData){
-            return `
-            <div class="bg-palet h-6 flex items-center space-x-2 rounded-md pl-1 mt-[1px]">
-                <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
-                <span class="text-xs text-white pr-2">${tagData.name}</span>
-            </div>
-            `
-        }
-        function suggestionItemTemplate(tagData){
-            return `
-                <div ${this.getAttributes(tagData)}
-                    class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
-                    tabindex="0"
-                    role="option">
-                    <strong>${tagData.name}</strong>
-                    <span>${tagData.email}</span>
-                </div>
-            `
-        }
+    // function tagTemplate(tagData){
+    //         return `
+    //         <div class="bg-palet h-6 flex items-center space-x-2 rounded-md pl-1 mt-[1px]">
+    //             <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
+    //             <span class="text-xs text-white pr-2">${tagData.name}</span>
+    //         </div>
+    //         `
+    //     }
+    //     function suggestionItemTemplate(tagData){
+    //         return `
+    //             <div ${this.getAttributes(tagData)}
+    //                 class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
+    //                 tabindex="0"
+    //                 role="option">
+    //                 <strong>${tagData.name}</strong>
+    //                 <span>${tagData.email}</span>
+    //             </div>
+    //         `
+    //     }
 
-    new Tagify(input,{
-        enforceWhitelist : true,
-        whitelist : <?=  json_encode($json) ?>,
-        maxTags:1,
-        skipInvalid: true,
-        dropdown: {
-            closeOnSelect: true,
-            enabled: 0,
-            classname: 'users-list',
-            searchKeys: ['name', 'email']  // very important to set by which keys to search for suggesttions when typing
-        },
+    // new Tagify(input,{
+    //     enforceWhitelist : true,
+    //     whitelist : <?=  json_encode($json) ?>,
+    //     maxTags:1,
+    //     skipInvalid: true,
+    //     dropdown: {
+    //         closeOnSelect: true,
+    //         enabled: 0,
+    //         classname: 'users-list',
+    //         searchKeys: ['name', 'email']  // very important to set by which keys to search for suggesttions when typing
+    //     },
 
-        templates: {
-            tag: tagTemplate,
-            dropdownItem: suggestionItemTemplate,
-            // dropdownHeader: dropdownHeaderTemplate
-        },
+    //     templates: {
+    //         tag: tagTemplate,
+    //         dropdownItem: suggestionItemTemplate,
+    //         // dropdownHeader: dropdownHeaderTemplate
+    //     },
 
-    })
+    // })
+
 
     function toggle_client_detail(){
         $('.toggle_client_detail').toggleClass('hidden');
@@ -3509,10 +3549,26 @@
             }
         });
     }
+
+    // Filter
+    $('#responsibilitis').change(function(){
+        $('input#responsibilitis_search').val($(this).val())
+        $('input#responsibilitis_search').quicksearch('div#data_di_cari');
+    })
+    $('#location').change(function(){
+        $('input#location_search').val($(this).val())
+        $('input#location_search').quicksearch('div#data_di_cari');
+    })
+    $('#languages').change(function(){
+        $('input#languages_search').val($(this).val())
+        $('input#languages_search').quicksearch('div#data_di_cari');
+    })
+    
 </script>
 <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
 <script type="text/javascript">
 	$('input#search_talents_match').quicksearch('div#data_di_cari');
+    $('input#nain').quicksearch('div#data_di_cari');
 </script>
 <script>
     CKEDITOR.replace('editor1', {
@@ -3530,10 +3586,6 @@
       height: 250,
       removeButtons: 'PasteFromWord'
     });
-    // CKEDITOR.replace('editor_tmp_email_3', {
-    //   width: '100%',
-    //   height: 250,
-    //   removeButtons: 'PasteFromWord'
-    // });
+
   </script>
 @endsection

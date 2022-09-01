@@ -208,9 +208,10 @@ class JobboardController extends Controller
         }
 
         // all talent
-        $talents = Talents::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        $talents = Talents::with(['type_helper', 'languages'])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $status_talent = SettingStatusTalent::where(['users_id'  => auth()->user()->staf->users_agency_id ?? auth()->user()->id ])->get(['id', 'status_name', 'status_key']);
 
+        // return $talents;
         // $matchTalents = JobModelsMatchTalentAdd::with('talent')->where(['job_models_id' => $result->id])->orderBy('id' , 'desc')->get();
         $category = SettingServiceCategory::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $tmp_email1 = TemplateEmail::where(['type' => 2 , 'status' => 'INTERVIEW'])->first('body');

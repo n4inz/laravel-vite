@@ -91,7 +91,7 @@
                     <div class="flex justify-between">
                         <div class="flex space-x-2 ">
                             <div class="w-2 h-6 bg-[#3B83D7] rounded-sm"></div>
-                            <span class="text-[#222222] font-semibold">Agency Revenue</span>
+                            <span class="text-[#222222] font-semibold">Estimated Revenue</span>
                         </div>
                         <div class="">
                             <select  class="block p-2 mb-6 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 outline-none ">
@@ -223,7 +223,18 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="bg-bgbody p-8 rounded ">
+                    <div class=" flex space-x-2">
+                        <div class="w-2 h-6 bg-colorelips rounded-sm"></div>
+                        <span class="text-[#222222] font-semibold">Appointments</span>
+                    </div>
+
+                    <div id="calender" >
+                        
+                    </div>
+                </div>
     
+                <!--
                 <div class="bg-bgbody p-8 rounded ">
                     <div class=" flex space-x-2">
                         <div class="w-2 h-6 bg-colorelips rounded-sm"></div>
@@ -234,10 +245,10 @@
                         
                     </div>
                 </div>
-                <!-- Detail Schedule Calendly -->
+                
                 <div id="detail_schedule_calendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-                        <!-- Modal content -->
+                        
                         <div class="relative flex bg-white rounded-lg shadow pb-10 ">
                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center absolute top-2 right-2" data-modal-toggle="detail_schedule_calendly">
                                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -248,10 +259,22 @@
                         </div>
                     </div>
                 </div>
+                -->
             </div> 
         </div>
     </article>
 </main>
+    <script>
+        var events = [
+        {'Date': new Date(2022, 9, 7), 'Title': 'Doctor appointment at 3:25pm.'},
+        {'Date': new Date(2022, 9, 18), 'Title': 'New Garfield movie comes out!', 'Link': 'https://garfield.com'},
+        {'Date': new Date(2022, 9, 27), 'Title': '25 year anniversary', 'Link': 'https://www.google.com.au/#q=anniversary+gifts'},
+        ];
+        var settings = {};
+        var element = document.getElementById('calender');
+        caleandar(element, events, settings);
+
+    </script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Chart line -->
