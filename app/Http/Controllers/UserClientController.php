@@ -114,7 +114,7 @@ class UserClientController extends Controller
     
             $user->staf()->create([
                 'avatar' => $avatar ?? null,
-                'type' => $request->type ?? 'staf',
+                'type' => $request->type ?? 'staff',
                 'users_agency_id' => $request->user()->id
             ]);
             

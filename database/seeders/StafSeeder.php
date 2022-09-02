@@ -49,7 +49,7 @@ class StafSeeder extends Seeder
                 $stafrole->assignRole('staf');
 
                 Staf::create([
-                    'type' => 'staf',
+                    'type' => 'staff',
                     // 'avatar' => 'dummy.png',
                     'users_id' => $stafrole->id,
                     'users_agency_id' => $staf->id

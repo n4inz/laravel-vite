@@ -17,15 +17,17 @@ class SendEmailToTalent implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $email;
     protected $template;
+    protected $subject;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($email, $template)
+    public function __construct($email, $subject, $template)
     {
         $this->email = $email;
         $this->template = $template;
+        $this->subject = $subject;
     }
 
     /**
@@ -35,6 +37,6 @@ class SendEmailToTalent implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new SendingEmailToTalent($this->template));
+        Mail::to($this->email)->send(new SendingEmailToTalent($this->subject  ,$this->template));
     }
 }

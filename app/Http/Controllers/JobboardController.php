@@ -42,6 +42,7 @@ use App\Models\EmailAgencyTemplate;
 use App\Models\Invoice;
 use App\Models\JobModelsNewAplicantsFile;
 use App\Models\TalentsFiles;
+use SebastianBergmann\Template\Template;
 use Stripe\Stripe;
 
 class JobboardController extends Controller
@@ -88,6 +89,11 @@ class JobboardController extends Controller
         }
 
         $tmp_email1 = EmailAgencyTemplate::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+        if($tmp_email1){
+            $email = $tmp_email1;
+        }else{
+            $email =  TemplateEmail::where(['type' => 0 , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+        }
         // $tmp_email2 = TemplateEmail::where(['type' => 1 , 'status' => 'REJECTED'])->first('body');
         $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $user_location = SettingServiceLocationFee::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first('location');
@@ -97,7 +103,7 @@ class JobboardController extends Controller
             'user_location' => $user_location,
             'status' => $status,
             'status_key' => rtrim($status_key, ','),
-            'tmp_email1' => $tmp_email1,
+            'email' => $email,
             // 'tmp_email2' => $tmp_email2
         ]);
     }
@@ -214,11 +220,12 @@ class JobboardController extends Controller
         // return $talents;
         // $matchTalents = JobModelsMatchTalentAdd::with('talent')->where(['job_models_id' => $result->id])->orderBy('id' , 'desc')->get();
         $category = SettingServiceCategory::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        $tmp_email1 = TemplateEmail::where(['type' => 2 , 'status' => 'INTERVIEW'])->first('body');
-        $tmp_email2 = TemplateEmail::where(['type' => 1 , 'status' => 'REJECTED'])->first('body');
-        // $tmp_email3 = TemplateEmail::where(['type' => 3 , 'status' => 'REJECTED'])->first('body');
-        // Tagify
+        
 
+      
+        $tmp_email = EmailAgencyTemplate::whereIn('type', [1,2,3,4,5,6,7,8,9,10,11])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+ 
+        // return $tmp_email;
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
@@ -234,7 +241,7 @@ class JobboardController extends Controller
         }
 
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents'  , 'tmp_email1' ,'tmp_email2' ,'json' , 'category'));
+        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents'  , 'json' , 'category','tmp_email'));
     }
 
     public function edit_description(Request $request)
@@ -434,17 +441,36 @@ class JobboardController extends Controller
       return response(200);
     }
 
-    public function edit_template_email(Request $request)
+    public function send_email_status_to_talent(Request $request)
     {
-        $temp =  $request->template;
-        // return request()->post($temp);
-
-        $talentEmail =  Talents::where(['id' => $request->talent_id , 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id])->first();
-        SendEmailToTalent::dispatch($talentEmail->email, request()->post($temp));
+        $request->validate([
+            'email' => 'required',
+            'subject' => 'required',
+            // 'body_email' => 'required'
+        ]);
+        
+        if($request->body_email){
+            $body = $request->body_email;
+        }else{
+            $body = $request->body_email_not_edit;
+        }
+        SendEmailToTalent::dispatch($request->email, $request->subject, $body);
         return redirect()->back();
     }
 
     // AJAX
+    public function edit_send_mail_talent(Request $request)
+    {
+        
+        $request->validate([
+            'types' => 'required'
+        ]);
+
+        $email  = EmailAgencyTemplate::where('type',$request->types)->first();
+
+        return view('modal.jobboard.edit_email_talent', compact('email'));
+       
+    }
     public function save_as_email_client(Request $request)
     {
         EmailAgencyTemplate::updateOrCreate(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id],[
@@ -452,6 +478,17 @@ class JobboardController extends Controller
             'type' => 0,
             'status' => $request->status,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+        ]);
+
+        return response(200);
+    }
+
+    public function save_as_email_talent(Request $request)
+    {
+
+        
+       EmailAgencyTemplate::where('id', $request->id)->update([
+            'body' => $request->val,
         ]);
 
         return response(200);

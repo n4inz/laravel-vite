@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\HttpGuzzle;
 use App\Models\Actifity;
 use App\Models\Client;
+use App\Models\EmailAgencyTemplate;
 use App\Models\JobModels;
 
 use App\Models\JobModelsRange;
@@ -12,6 +13,7 @@ use App\Models\JobModelsTask;
 use App\Models\SettingCalendlyApi;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
+use App\Models\TemplateEmail;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Http;
@@ -25,6 +27,15 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        // TemplateEmail::query()->get()->map(function($result) use($request){
+        //     EmailAgencyTemplate::create([
+        //         'body' => $result->body,
+        //         'type' => $result->type,
+        //         'status' => $result->status,
+        //         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id
+        //     ]);
+
+        // });
         // $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
 
         // return view('modal.jobboard.edit_create_job_calendly', compact('category'));

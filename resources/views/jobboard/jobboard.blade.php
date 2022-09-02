@@ -745,7 +745,7 @@
                         <div class="p-6 space-y-6">
                             <div id="myTabContent">
                                 <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <textarea id="textarea-id"  class="w-full h-full" name="editor_tmp_email_1" >{{ $tmp_email1->body }}</textarea>
+                                    <textarea id="textarea-id"  class="w-full h-full" name="editor_tmp_email_1" >{{ $email->body }}</textarea>
                                 </div>
                                 {{-- <div class="hidden w-full" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <textarea id="editor_tmp_email_2" class="w-full h-full okee" name="editor_tmp_email_2">{{ $tmp_email2->body }}</textarea>
@@ -1365,11 +1365,7 @@
                     console.log(e)
                     // location.reload();
                 },
-                // beforeSend: function(){
-                //    const loading = ` Save as Default
-                //                     <i class="fa fa-refresh fa-spin fa-fw"></i>`;
-                //     $('.save_as_email_client').html(loading);
-                // },
+
                 success : function(val){
                     location.reload();
                     console.log(val)

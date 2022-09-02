@@ -61,274 +61,69 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div class="w-full errors_status">
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-3">Job Status</label>
+                                        <label class="block overview-status-field text-[#222222] mb-3">Job Status</label>
                                         @if ($setting->SettingJobStatus->count() == 0)
-                                        <table width="100%">
-                                            <tbody class="load-task">
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer hidden">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="50%">
-                                                        <input name="name_status_job[]" type="text" value="Potential Client" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                        
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="potential_client" class="relative inline-flex items-center cursor-pointer">
-                                                           
-                                                            <input name="0" checked value="1" type="checkbox" id="potential_client" class="sts group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="50%">
-                                                        <input name="name_status_job[]" type="text" value="Internal Matched" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                        
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="internal_matched" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="1" value="0">
-                                                            <input name="1" @if(is_array(old('status')) && in_array('internal_matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="1" type="checkbox" id="internal_matched" class="sts group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Agency Interview" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="agency_interview" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="2" value="0">
-                                                            <input name="2" @if(is_array(old('status')) && in_array('agency_interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="agency_interview" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Present to Family" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="present_to_family" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="3" value="0">
-                                                            <input name="3" @if(is_array(old('status')) && in_array('present_to_family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="1" type="checkbox" id="present_to_family" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Family Interview" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="family_interview" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="4" value="0">
-                                                            <input name="4" @if(is_array(old('status')) && in_array('family_interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="family_interview" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Family Trialing" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="family_trialing" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="5" value="0">
-                                                            <input name="5" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Rejected" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="rejected" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="6" value="0">
-                                                            <input name="6" @if(is_array(old('status')) && in_array('rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="1" type="checkbox" id="rejected" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Withdrawn" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="withdrawn" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="7" value="0">
-                                                            <input name="7"  @if(is_array(old('status')) && in_array('withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="1" type="checkbox" id="withdrawn" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                    <td height="66px" width="40%">
-                                                        <input name="name_status_job[]" type="text" value="Family Offer" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                    </td>
-                                                    <td height="66px" width="25%">
-                                                        {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                    </td>
-                                                    <td height="66px" align="center">
-                                                        <label for="family_offer" class="relative inline-flex items-center cursor-pointer">
-                                                            <input type="hidden" name="8" value="0">
-                                                            <input name="8"  @if(is_array(old('status')) && in_array('family_offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="1" type="checkbox" id="family_offer" class="group_sts sr-only peer">
-                                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                            <div class="flex px-4 flex-wrap rounded-lg " id="chile_care">
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52 hidden">
+                                                    <input type="hidden" name="0" value="0">
+                                                    <input checked name="0" @if(is_array(old('status')) && in_array('potential_client', old('status'))) checked  @endif @if(in_array('potential_client', $jobStatus)) checked @endif value="1" type="checkbox" id="potential_client" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
+                                                    <input name="name_status_job[]" type="text" value="Potential Client" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="1" value="0">
+                                                    <input name="1" @if(is_array(old('status')) && in_array('internal_matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="1" type="checkbox" id="internal_matched" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
+                                                    <input name="name_status_job[]" type="text" value="Internal Matched" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="2" value="0">
+                                                    <input name="2" @if(is_array(old('status')) && in_array('agency_interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="agency_interview"  style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Agency Interview" class="task-text-body text-[#222222] text-sm hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="3" value="0">
+                                                    <input name="3" @if(is_array(old('status')) && in_array('present_to_family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="1" type="checkbox" id="present_to_family" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Present to Family" class="task-text-body text-[#222222] text-sm hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="4" value="0">
+                                                    <input name="4" @if(is_array(old('status')) && in_array('family_interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="family_interview" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Family Interview" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="5" value="0">
+                                                    <input name="5" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Family Trialing" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="6" value="0">
+                                                    <input name="6" @if(is_array(old('status')) && in_array('rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="1" type="checkbox" id="rejected" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Rejected" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="7" value="0">
+                                                    <input name="7"  @if(is_array(old('status')) && in_array('withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="1" type="checkbox" id="withdrawn" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Withdrawn" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                    <input type="hidden" name="8" value="0">
+                                                    <input name="8"  @if(is_array(old('status')) && in_array('family_offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="1" type="checkbox" id="family_offer" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <input name="name_status_job[]" type="text" value="Family Offer" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                </div>
+                                            </div>
                                         @else
-                                            @foreach ($setting->SettingJobStatus as $val )
-                                                <table width="100%">
-                                                    <tbody class="load-task">
-                                                        @if ($val->status_key != 'potential_client')
+                                            <div class="flex flex-wrap rounded-lg" id="chile_care">
+                                                @foreach ($setting->SettingJobStatus as $val )
+                                                    @if ($val->status_key != 'potential_client')
+                                                        <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                            <input type="hidden" name="{{ $loop->iteration -2 }}" value="0">
+                                                            <input  name="{{ $loop->iteration -2 }}" @if($val->status) checked @endif value="1" type="checkbox" id="{{ $val->id }}" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
                                                         
-                                                            <tr class="hover:bg-[#F7F7F7] cursor-pointer">
-                                                                <td height="66px" width="12%">
-                                                                    <div class="flex items-center justify-center space-x-2">
-                                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                                        </svg>
-                                                                        
-                                                                    </div>
-                                                                </td>
-                                                                <td height="66px" width="50%">
-                                                                    <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
-                                                                    <input type="hidden" name="id[]" value="{{ $val->id }}">
-                                                                </td>
-                                                                <td height="66px" width="25%">
-                                                                
-                                                                    {{-- <span class="task-text-body ">CEKK</span> --}}
-                                                                </td>
-                                                                <td height="66px" align="center">
-                                                                    <label for="{{ $val->id }}" class="relative inline-flex items-center cursor-pointer">
-                                                                        <input type="hidden" name="{{ $loop->iteration -2 }}" value="0">
-                                                                        <input name="{{ $loop->iteration -2 }}" @if($val->status) checked @endif value="1" type="checkbox" id="{{ $val->id }}" class="sts group_sts sr-only peer">
-                                                                        <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    </tbody>
-                                                </table>
-                                            @endforeach
+                                                            <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                            <input type="hidden" name="id[]" value="{{ $val->id }}">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
                                         @endif
                                         @if($errors->has('status'))
                                             <p class="mt-2 text-sm text-red-600 ">{{ $errors->first('status') }}</p>
@@ -1016,6 +811,9 @@
                         'status_talent[]':{
                             required:true,
                         },
+                        // 'name_status_job[]':{
+                        //     required:true,
+                        // }
                    
                     },
                     errorPlacement: function(error, element){

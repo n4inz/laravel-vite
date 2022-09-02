@@ -1068,37 +1068,7 @@
                                         <div class="status_all_select"></div>
                                        
                                         <div class="space-y-6 pb-10 match_talent_hide h-[500px] overflow-auto">
-                                            @foreach ($result->match_talents_filters as $values_filter )
-                                               <div class="flex justify-between px-4 hover:cursor-pointer">
-                                                    <div class="flex space-x-2 items-center justify-center">
-                                                        <div class="">
-                                                            <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $values_filter->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        </div>
-                                                        @if ($values_filter->talent->avatar)
-                                                            {{-- <img class="w-12 h-12 bg-contain border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val_talent_new_aplicants->avatar) }}" alt=""> --}}
-                                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$values_filter->talent->avatar) }}" alt="">
-                                                        @else
-                                                            <div class="w-12 h-12 flex items-center justify-center bg-[{{ $values_filter->talent->color }}] rounded-full">
-                                                                <span class="text-white">{{ strtoupper(substr($values_filter->talent->first_name, 0, 1)) }}{{ strtoupper(substr($values_filter->talent->last_name, 0, 1)) }}</span>
-                                                            </div>
-                                                        @endif
-                                                        <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values_filter->talent->id }})"  class="flex flex-col">
-                                                            <span class="overview-name-talent text-colortext">{{ $values_filter->talent->first_name }}</span>
-                                                            <span class="overview-live-talent">Age @if($values_filter->talent->day_of_birthday != 'null') {{ Carbon\Carbon::parse($values_filter->talent->day_of_birthday)->age }} @endif, in {{ $values_filter->talent->address }}</span>
-                                                            <span class="overview-experiance-talent">{{ $values_filter->talent->experience }} Year Experience, {{ Str::limit($values_filter->talent->about_talent , 25, $end='...') }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="h-4">
-                                                        <select data-talent="{{ $values_filter->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                            <option>-- Select status --</option>
-                                                            @foreach ($status_talent as $value )
-                                                                <option @if($value->status_name === $values_filter->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @foreach ($result->match_talents_add as $key => $talent )
+                                           @foreach ($result->match_talents_add as $key => $talent )
                                                 {{-- $talent->job_model_talent_status->status --}}
                                                 <div class="flex justify-between px-4 hover:cursor-pointer">
                                                     <div class="flex space-x-2 items-center justify-center">
@@ -1119,7 +1089,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="h-4">
-                                                        <select data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                        <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
                                                             <option>-- Select status --</option>
                                                             @foreach ($status_talent as $value )
                                                                 <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
@@ -1130,7 +1100,7 @@
                                              @endforeach
                                             <div class="flex items-center justify-center px-6 space-x-2 rounded-b absolute -top-[5px] right-0">
                                                 <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center h-6 px-7 bg-colorStatusCard1 rounded-md hover:cursor-pointer">
-                                                    <span class="overview-attechment-btn-text">Select</span>
+                                                    <span class="overview-attechment-btn-text">Update status</span>
                                                 </div>
                                                 <div id="dropdown_select" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
                                                     <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
@@ -2606,52 +2576,62 @@
             </div>
 
             <!-- Main Send email talent -->
-            <div id="send_mail_talent" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                <div class="relative p-4  max-w-2xl h-full md:h-auto">
+            <div id="send_mail_talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative">
                     <!-- Modal content -->
-                    <div class="relative bg-white w-[600px] rounded-lg shadow ">
+                    <div class="relative bg-white w-[700px] h-[500px]  rounded-lg shadow ">
                         <!-- Modal header -->
-                        <form action="{{ route('jobboard.edit_template_email') }}" method="POST">@csrf
+                        <form action="{{ route('jobboard.send_email_status_to_talent') }}" method="POST">@csrf
+                            
                             <div class="talentId"></div>
                             <div class="flex justify-center items-start p-4 rounded-t relative">
                                 <div class=" border-b border-gray-200">
-                                    <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#tabSendEamil" role="tablist">
-                                        <label for="one"  for="type"  class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2" id="interview" data-tabs-target="#interviewId" role="tab" aria-controls="interviewId" aria-selected="false">Interviewing</div>
-                                            <input checked type="radio" class="hidden" name="template" id="one" value="editor_tmp_email_1">
-                                        </label>
-                                        <label for="two" class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="rejectad_tab" data-tabs-target="#rejectedId" role="tab" aria-controls="rejectedId" aria-selected="false">Rejected</div>
-                                            <input type="radio" class="hidden" name="template" id="two" value="editor_tmp_email_2">
-                                        </label>
-                                        {{-- <label for="three" class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="settings-tab" data-tabs-target="#settings" role="tab" aria-controls="settings" aria-selected="false">Template 3</div>
-                                            <input type="radio" class="hidden" name="template" id="three" value="editor_tmp_email_3">
-                                        </label> --}}
+                                    <div class="flex flex-wrap -mb-px font-medium text-center items-center justify-center" id="myTab" data-tabs-toggle="#tabSendEamil" role="tablist">
+                                        @foreach ($tmp_email as $val_email )
+                                            <label for="one"  for="type"  class="mr-2" >
+                                                <div class="inline-block text-xs p-4 hover:cursor-pointer rounded-t-lg border-b-2"  data-tabs-target="#a{{ $val_email->id }}" role="tab" aria-selected="false">{{ $val_email->status }}</div>
+                                            </label>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-6 space-y-6">
+                            <div class="p-6 h-52 overflow-auto">
                                 <div id="tabSendEamil">
-                                    <div class="w-full rounded-md " id="interviewId" role="tabpanel" aria-labelledby="interview">
-                                        <textarea id="editor_tmp_email_1" class="w-full h-full" name="editor_tmp_email_1" >{{ $tmp_email1->body }}</textarea>
-                                    </div>
-                                    <div class="hidden w-full" id="rejectedId" role="tabpanel" aria-labelledby="rejectad_tab">
-                                        <textarea id="editor_tmp_email_2" class="w-full h-full okee" name="editor_tmp_email_2">{{ $tmp_email2->body }}</textarea>
-                                    </div>
-                                    {{-- <div class="hidden" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                                        <textarea id="editor_tmp_email_3" class="w-full h-full" name="editor_tmp_email_3">{{ $tmp_email3->body }}</textarea>
-                                    </div> --}}
+
+                                    @foreach ($tmp_email as $val_email_body )
+                                        <div class="w-full" id="a{{ $val_email_body->id }}" >
+                                            <div class="w-ful pb-5">
+                                              {{-- <i data-modal-toggle="edit_send_mail_talent" onclick="edit_email_template('{{ $val_email_body->type }}') " class="fa fa-pencil float-right text-gray-400 hover:text-colorStatusCard1 cursor-pointer" aria-hidden="true"></i> --}}
+                                                <div data-modal-toggle="edit_send_mail_talent" onclick="edit_email_template('{{ $val_email_body->type }}') " class="absolute left-1/3 bottom-10 px-16  flex items-center justify-center  h-8 bg-palet rounded-md mt-2 hover:cursor-pointer">
+                                                    <span class="text-sm text-white">Chose template</span> 
+                                                </div>
+                                            </div>
+                                            <div class="bg-[#F5F5F5] rounded-md text-[#827C7C] text-sm p-10">
+                                                {!! $val_email_body->body !!}
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                            <!-- Modal footer -->
-                            <div class="flex items-end justify-center  p-6 space-x-2 rounded-b border-t border-gray-200 ">
+                            {{-- <div class="flex items-end justify-center  p-6 space-x-2 rounded-b border border-gray-200  relative">
                                 <div onclick="ClosemodalSendEmailTalent()" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
                                     <span class="text-sm text-white">Don't Send</span> 
                                 </div>
-                                <button class="flex items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
-                                    <span class="text-sm text-white">Send</span> 
-                                </button>
+                                
+                            </div> --}}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main edit Send email talent -->
+            <div id="edit_send_mail_talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4  max-w-2xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white w-[600px] rounded-lg shadow ">
+                        <form action="{{ route('jobboard.send_email_status_to_talent') }}" method="POST">@csrf
+                            <div class="p-6 space-y-2 load_edit_email_talent">
+                                
                             </div>
                         </form>
                     </div>
@@ -3225,6 +3205,10 @@
     $('.status_talents').change(function(){
         const status = $(this).val();
         const talent_id = $(this).attr("data-talent")
+        const talent_email = $(this).attr("data-talent-email")
+        const client_email = $(this).attr("data-client-email")
+
+        
         modalSendEmailTalent.show();
         const tmp = `<input type="hidden" value="${talent_id}" name="talent_id">`;
         $('.talentId').html(tmp);
@@ -3235,7 +3219,9 @@
             url: "{{ route('jobboard.talent_status') }}",
             data: {status, talent_id,job_models_id,  _token: '{{ csrf_token() }}'},
             success: function(res){
-                
+                localStorage.setItem('client_email', client_email);
+                localStorage.setItem('talent_email', talent_email);
+                $('.talent_email').val(localStorage.getItem("talent_email"));
             }
         })
     })
@@ -3244,69 +3230,7 @@
         modalSendEmailTalent.hide();
     }
 
-    // Show more and show less detail job
-    // const accordionItems = [
-    //     {
-    //         id: 'show_detail_jobs',
-    //         triggerEl: document.querySelector('#show_detail_jobs'),
-    //         targetEl: document.querySelector('#job-detail'),
-    //         active: false
-    //     },
-
-    // ];
-
-    // const options_show_detail_job = {
-    //     onOpen: (item) => {
-
-    //         const tmp = `<span  class="overview-show-more">Show less</span>
-    //         <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
-    //         $('#show_detail_jobs').html(tmp)
-            
-    //     },
-    //     onClose: (item) => {
-    //         const tmp = `<span  class="overview-show-more">Show more</span>
-    //                     <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
-    //         $('#show_detail_jobs').html(tmp)
-          
-    //     },
-
-    // };
-    // new Accordion(accordionItems, options_show_detail_job);
-
-
-    // Acording Match talent
-    // const accordionItemsMatchTalent = [
-    //     {
-    //         id: 'show_match_talent',
-    //         triggerEl: document.querySelector('#show_match_talent'),
-    //         targetEl: document.querySelector('#acording_match_talent'),
-    //         active: false
-    //     },
-
-    // ];
-
-    // const options_show_match_talent = {
-    //     onOpen: (item) => {
-    //         const tmp = `<span  class="overview-show-more">Show less</span>
-    //         <svg  width="25" height="15" class="rotate-180"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
-            
-    //         $('#show_match_talent').html(tmp);
-    //     },
-    //     onClose: (item) => {
-    //         const tmp = `<span  class="overview-show-more">Show more</span>
-    //                     <svg data-accordion-icon="" width="25" height="15"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#FA9D6B" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>`;
-            
-    //         $('#show_match_talent').html(tmp)
-    //     },
-    //     onToggle: (item) => {
-    //         $('.match_talent_hide').toggleClass('hidden')
-    //     },
-
-    // };
-    // const accordion = new Accordion(accordionItemsMatchTalent, options_show_match_talent);
-
-
-    // Select all status match Talent
+    
     function status_talents(val){
         const tmp = `<input class="" id="{{ $value->id }}" type="hidden" name="status_name_match" value="${val}">`;
         $('.status_all_select').html(tmp)
@@ -3457,54 +3381,7 @@
         $('.hide_body').toggleClass('hidden');
     }
 
-    // EDIT CLIENT
-   
-    // Tagifiy family
-    // var input = document.querySelector('input[name=family]');
-
-    // console.log('aaa:',input)
-
-    // function tagTemplate(tagData){
-    //         return `
-    //         <div class="bg-palet h-6 flex items-center space-x-2 rounded-md pl-1 mt-[1px]">
-    //             <x title='' class='tagify__tag__removeBtn text-white' role='button' aria-label='remove tag'></x>
-    //             <span class="text-xs text-white pr-2">${tagData.name}</span>
-    //         </div>
-    //         `
-    //     }
-    //     function suggestionItemTemplate(tagData){
-    //         return `
-    //             <div ${this.getAttributes(tagData)}
-    //                 class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'
-    //                 tabindex="0"
-    //                 role="option">
-    //                 <strong>${tagData.name}</strong>
-    //                 <span>${tagData.email}</span>
-    //             </div>
-    //         `
-    //     }
-
-    // new Tagify(input,{
-    //     enforceWhitelist : true,
-    //     whitelist : <?=  json_encode($json) ?>,
-    //     maxTags:1,
-    //     skipInvalid: true,
-    //     dropdown: {
-    //         closeOnSelect: true,
-    //         enabled: 0,
-    //         classname: 'users-list',
-    //         searchKeys: ['name', 'email']  // very important to set by which keys to search for suggesttions when typing
-    //     },
-
-    //     templates: {
-    //         tag: tagTemplate,
-    //         dropdownItem: suggestionItemTemplate,
-    //         // dropdownHeader: dropdownHeaderTemplate
-    //     },
-
-    // })
-
-
+    
     function toggle_client_detail(){
         $('.toggle_client_detail').toggleClass('hidden');
         $('.toggle_client_detail').toggleClass('relative z-50 bg-white')
@@ -3563,6 +3440,62 @@
         $('input#languages_search').val($(this).val())
         $('input#languages_search').quicksearch('div#data_di_cari');
     })
+
+    // Edit email template
+    const edit_send_mail_talent = document.getElementById('edit_send_mail_talent');
+    const editSendMailTalent = new Modal(edit_send_mail_talent, { });
+    function edit_email_template(types){
+        modalSendEmailTalent.hide();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("jobboard.edit_send_mail_talent") }}',
+            data: {types},
+            success:function(data){
+                $('.load_edit_email_talent').html(data);
+                $('.talent_email').val(localStorage.getItem("talent_email"));
+            }
+        });
+    }
+
+    function dont_send_email_confirmation(){
+        $('.load_edit_email_talent').html('');
+        editSendMailTalent.hide()
+        location.reload();
+    }
+
+    function save_as_email_talent(id){
+        const val = CKEDITOR.instances["edit_tmp_email_talent"].getData();
+       
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("jobboard.save_as_email_talent") }}',
+            data: {id,val},
+            beforeSend: function(){
+                const loading = ` Save as Default
+                                    <i class="fa fa-refresh fa-spin fa-fw"></i>`;
+                    $('.save_as_email_talent').html(loading);
+            },
+            success:function(data){
+                const success = ` Save as Default
+                                <i class="fa fa-check" aria-hidden="true"></i>`;
+                                $('.save_as_email_talent').html(success);
+                console.log(data)
+            }
+        });
+
+
+    }
+    
     
 </script>
 <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
@@ -3576,16 +3509,10 @@
       height: 350,
       removeButtons: 'PasteFromWord'
     });
-    CKEDITOR.replace('editor_tmp_email_1', {
+    CKEDITOR.replace('body_email', {
       width: '100%',
       height: 250,
       removeButtons: 'PasteFromWord'
     });
-    CKEDITOR.replace('editor_tmp_email_2', {
-      width: '100%',
-      height: 250,
-      removeButtons: 'PasteFromWord'
-    });
-
   </script>
 @endsection

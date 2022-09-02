@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TenancyRequest;
 use App\Http\Traits\Credentials;
 use App\Models\Credensial;
+use App\Models\EmailAgencyTemplate;
+use App\Models\TemplateEmail;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -87,6 +89,17 @@ class AuthenticateController extends Controller
             $user->assignRole('agency');
     
             $this->create_credentials();
+
+            // Crete template email
+            TemplateEmail::query()->get()->map(function($result) use($user){
+                EmailAgencyTemplate::create([
+                    'body' => $result->body,
+                    'type' => $result->type,
+                    'status' => $result->status,
+                    'users_id' => $user->id
+                ]);
+
+            });
             return redirect(config('app.uri').$request->sub_domain.'.'.config('app.domain').'/tenancy');
         }
         return redirect()->back()->withErrors('Error', 'Domain is exists');

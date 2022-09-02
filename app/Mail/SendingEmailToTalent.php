@@ -10,15 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class SendingEmailToTalent extends Mailable
 {
     use Queueable, SerializesModels;
+    public $subject;
     protected $template;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($template)
+    public function __construct($subject, $template)
     {
         $this->template = $template;
+        $this->subject = $subject;
     }
 
     /**
@@ -28,7 +30,7 @@ class SendingEmailToTalent extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from agency.com')->view('email.jobboards.sendEmailToTalent', [
+        return $this->subject($this->subject)->view('email.jobboards.sendEmailToTalent', [
             'tmp' => $this->template
         ]);
     }
