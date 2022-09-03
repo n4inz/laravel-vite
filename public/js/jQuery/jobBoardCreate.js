@@ -4,6 +4,10 @@ const options = {
 const targetEl = document.getElementById('create-job');
 const modal = new Modal(targetEl, options);
 
+const ELSendEmail = document.getElementById('send_mail_client');
+const modalSendEmail = new Modal(ELSendEmail, {});
+
+
 function create_jobs(sts){
    modal.show();
    // const input = `<input type="hidden" name="status" value="${sts}">`;

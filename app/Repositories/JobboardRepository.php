@@ -29,7 +29,7 @@ class JobboardRepository
     public function created($request)
     {
         $jobsIdUnique = JobModels::get();
-        $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get('body');
+        $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get(['body' , 'day']);
         $status_job = SettingJobModelsStatus::where(['users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->get('id' , 'status_name');
 
         // Make product Stripe
@@ -71,14 +71,21 @@ class JobboardRepository
         }
 
         $langDesc = '';
-        foreach ($request->language as $keys => $lang) {
-            $langDesc .= $request->language[$keys].' ';
-        } 
+        if($request->language ){
+            foreach ($request->language as $keys => $lang) {
+                $langDesc .= $request->language[$keys].' ';
+            }
+            
+            $description = 'Hi! We are looking for a '.$categoryDesc.' for our family. This position
+            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.' Per '.$request->pay_frequency.', '.$request->part_time.'.
+            The ideal candidate needs to speak '.$langDesc.'.
+            Please apply for this job if you feel you can do this job</br></br>'.$request->description;
+        }else{
+            $description = 'Hi! We are looking for a '.$categoryDesc.' for our family. This position
+            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.' Per '.$request->pay_frequency.', '.$request->part_time.'.
+            Please apply for this job if you feel you can do this job</br></br>'.$request->description; 
+        }
 
-        $description = 'Hi! We are looking for a '.$categoryDesc.' for our family. This position
-                            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.' Per '.$request->pay_frequency.', '.$request->part_time.'.
-                            The ideal candidate needs to speak '.$langDesc.'.
-                            Please apply for this job if you feel you can do this job</br></br>'.$request->description;
        
         $value = json_decode($request->family);
         DB::beginTransaction();
@@ -220,6 +227,7 @@ class JobboardRepository
                     JobModelsTask::create([
                         'task' => $tasks->body,
                         'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                        'day' => $tasks->day,
                         'job_models_id' => $jobs->id,
                         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                         'name' => auth()->user()->full_name
@@ -242,7 +250,7 @@ class JobboardRepository
 
         // Send email to client
         if($request->email_replace){
-            SendEmailToTalent::dispatch($value[0]->email, $request->email_replace);
+            SendEmailToTalent::dispatch($value[0]->email, $request->subject  ,$request->email_replace);
         }
        
     }

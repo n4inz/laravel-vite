@@ -174,7 +174,10 @@ class JobboardController extends Controller
 
     public function jobs_store(JobBoardRequest $request)
     {  
-        
+        // return $request->language;
+        // JobBoardRequest
+        // $data = json_encode($request->value);
+        // return $data;
         // return $request->dates;
         $this->jobboardRepository->created($request);
         return redirect()->back()->with('status', 'Create job succesfuly');
@@ -818,12 +821,10 @@ class JobboardController extends Controller
 
     public function send_email_confirmation_to_client(Request $request)
     {
-        // return $request->email_replace;
-        // JobBoardRequest
-        // return $request;
-        $value = json_decode($request->family);
-        // return $value[0]->email;
-        SendEmailToTalent::dispatch($value[0]->email, $request->email_replace);
+       
+        
+        SendEmailToTalent::dispatch($request->family_email, $request->subject, $request->editor_tmp_email_1);
+        return redirect()->back();
     }
 
     public function __destruct()

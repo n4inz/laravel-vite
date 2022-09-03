@@ -238,15 +238,10 @@
         </div>
 
         {{-- Modal Create job --}}
-    <form class="validations" method="post" action="{{ route('jobboard.jobs_store') }}">
+  
         <div id="create-job" tabindex="-1" aria-hidden="true"  aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">
             <div class=" w-[766px] h-screen">
-                    
-                    {{-- <div class="status">
-                        @if($errors->any())
-                            <input type="text" name="status" value="{{ old('status') }}">
-                        @endif
-                    </div> --}}
+                <form class="validations" method="post" action="{{ route('jobboard.jobs_store') }}">
                     @csrf
                     <div class=" shadow bg-white rounded mt-6">
                         <div class="load_edit_job_calendly">   
@@ -305,6 +300,7 @@
                                 @if($errors->has('description'))
                                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('description') }}</p>
                                 @endif
+                                <div class="replace_description"></div>
                             </div>
                             <div class="px-8 mt-4 address-errors">
                                 <label class="mb-2 block overview-note-body text-colortext">Address(city/state/country)</label>
@@ -429,7 +425,7 @@
                             {{-- Languages --}}
                             <div class="px-8 mt-8 ">
                                 <span class="overview-comments-name text-colortext">Languages</span>
-                                <div class="flex space-x-16 mt-4 px-2">
+                                <div class="flex space-x-16 mt-4 px-2 error_languages">
                                     <div>
                                         <div class="flex items-center space-x-3 mt-[10px]">
                                             <input id="english" name="language[]" @if(is_array(old('language')) && in_array('English', old('language')) ) checked @endif style="color: #3BD7CF" type="checkbox" value="English" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
@@ -701,61 +697,50 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="px-8 py-8 flex space-x-2 ">
-                            <button class="w-40 h-[42px] bg-palet rounded-lg flex items-center justify-center">
+                        <div class="px-8 py-8 flex space-x-2 button_show">
+                            <button class="btn_add_job w-40 h-[42px] bg-palet rounded-lg flex items-center justify-center">
                                 <span class="overview-attechment-btn-text">Add Job</span>
                             </button>
-                            <div onclick="save_and_send()" data-modal-toggle="send_mail_client" class="h-[42px] bg-colorStatusCard1 rounded-lg flex items-center justify-center px-2 hover:cursor-pointer">
+                            <button onclick="save_and_send()" class="btn_save_and_send h-[42px] bg-colorStatusCard1 rounded-lg flex items-center justify-center px-2 hover:cursor-pointer">
+                                <span class=" overview-attechment-btn-text">Save and Send Confirmation</span>
+                            </button>
+                            {{-- <button onclick="save_and_send()" data-modal-toggle="send_mail_client" class="h-[42px] bg-colorStatusCard1 rounded-lg flex items-center justify-center px-2 hover:cursor-pointer">
                                 <span class="overview-attechment-btn-text">Save and Send Confirmation</span>
+                            </button> --}}
+                        </div>
+                        <div class="px-8 py-8  button_disable hidden">
+                            <div class="flex space-x-2">
+                                <button disabled class=" bg-opacity-50 w-40 h-[42px] bg-palet rounded-lg flex items-center justify-center">
+                                    <span class="overview-attechment-btn-text">Add Job</span>
+                                </button>
+                                <button disabled onclick="save_and_send()" class="bg-opacity-50 h-[42px] bg-colorStatusCard1 rounded-lg flex items-center justify-center px-2">
+                                    <span class=" overview-attechment-btn-text">Save and Send Confirmation</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                    
-                
+                </form>
             </div>
         </div>
+    
         <!-- Send Email Client -->
         <div id="send_mail_client" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4  max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white w-[600px] rounded-lg shadow ">
-                    <!-- Modal header -->
-                   
-                        
-                        <!--
-                            <div class="flex justify-center items-start p-4 rounded-t relative">
-                                <div class=" border-b border-gray-200">
-                                    <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-                                        <label for="one"  for="type"  class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile" role="tab" aria-controls="profile" aria-selected="false">Interviewing</div>
-                                            <input checked type="radio" class="hidden" name="template" id="one" value="editor_tmp_email_1">
-                                        </label>
-                                        <label for="two" class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">Rejected</div>
-                                            <input type="radio" class="hidden" name="template" id="two" value="editor_tmp_email_2">
-                                        </label>
-                                        {{-- <label for="three" class="mr-2" role="presentation">
-                                            <div class="inline-block p-4 hover:cursor-pointer rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300" id="settings-tab" data-tabs-target="#settings" role="tab" aria-controls="settings" aria-selected="false">Template 3</div>
-                                            <input type="radio" class="hidden" name="template" id="three" value="editor_tmp_email_3">
-                                        </label> --}}
-                                    </div>
-                                </div>
-                            </div>
-                        -->
+                    <form action="{{ route('jobboard.send_email_confirmation_to_client') }}" method="POST">@csrf
+                        <input class="family_email_send" type="hidden" name="family_email">
                         <div class="p-6 space-y-6">
                             <div id="myTabContent">
+                                <div class="mb-2 flex items-center justify-center h-9 border border-[#ECECEC] rounded text-[#222222]">
+                                    <input name="subject" value="" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
+                                </div>
                                 <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <textarea id="textarea-id"  class="w-full h-full" name="editor_tmp_email_1" >{{ $email->body }}</textarea>
                                 </div>
-                                {{-- <div class="hidden w-full" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-                                    <textarea id="editor_tmp_email_2" class="w-full h-full okee" name="editor_tmp_email_2">{{ $tmp_email2->body }}</textarea>
-                                </div> --}}
-                                {{-- <div class="hidden" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                                    <textarea id="editor_tmp_email_3" class="w-full h-full" name="editor_tmp_email_3">{{ $tmp_email3->body }}</textarea>
-                                </div> --}}
-                                <div class="replace_email">
+                                {{-- <div class="replace_email">
                                     
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <!-- Modal footer -->
@@ -763,21 +748,18 @@
                         <div class="flex items-end justify-center  p-6 space-x-2 rounded-b border border-gray-200  relative">
                             <div onclick="save_as_email_client()" class="absolute left-5 text-sm text-blue-400 hover:cursor-pointer save_as_email_client">
                                 Save as Default
-                                {{-- <i class="fa fa-refresh fa-spin fa-fw"></i> --}}
-                                {{-- <i class="fa fa-check" aria-hidden="true"></i> --}}
                             </div>
-                            <div data-modal-toggle="send_mail_client" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
+                            <div onclick="location.reload()"  class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
                                 <span class="text-sm text-white">Don't Send</span> 
                             </div>
-                            <button onclick="send_email_confirmation()" class="flex items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
+                            <button class="flex btn_send_email_confirm_client items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
                                 <span class="text-sm text-white">Send</span> 
                             </button>
                         </div>
-                    
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
 
         {{-- Modal Calendly --}}
         <div id="modalCalendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -852,6 +834,7 @@
                             required:true,
                             number:true
                         },
+                       
                         'name_chile[]':{
                             required : {
                                 depends: function(element) {
@@ -873,6 +856,7 @@
                         {
                            
                             error.appendTo($('.sub_categorys_error'));
+                           
                         }else{ 
                             error.insertAfter( element );
                             error.appendTo(element.parents('.family-errors'));
@@ -885,7 +869,9 @@
                             error.appendTo(element.parents('.end-date-errors'));
                             error.appendTo(element.parents('.rate-errors'));
                             error.appendTo(element.parents('.name-chile-errors'));
-                            error.appendTo(element.parents('.age-errors'));
+                           
+                           
+                            
                         }
                     },
        
@@ -1351,38 +1337,42 @@
             });
         }
 
-        function send_email_confirmation(){
-            const email_client = $('.validations').serialize();
+        $('.costums-family').change(function(){
+            var val = JSON.parse($(this).val());
+            $('.family_email_send').val(val[0].email);
+            
+        });
 
+        
+        function save_and_send(){
+            const values = $('.validations').serialize();
+            
             $('.validations').submit(function(e){
                 e.preventDefault();
             });
             $.ajax({
                 type: "POST",
                 url: "{{ route('jobboard.jobs_store') }}",
-                data: email_client,
-                error:function(e){
-                    console.log(e)
-                    // location.reload();
-                },
+                data: values,
+                beforeSend:function(){
 
+                    $('.button_show').toggleClass('hidden'); 
+                    $('.button_disable').toggleClass('hidden');
+
+                },
+                error:function(e){
+                    $('.button_show').toggleClass('hidden'); 
+                    $('.button_disable').toggleClass('hidden');
+                },
                 success : function(val){
-                    location.reload();
-                    console.log(val)
-                
+                    modal.hide();
+                    modalSendEmail.show();
+                   
                 }
             });
+        
         }
 
-        function save_and_send(){
-            const editor1 = CKEDITOR.instances["editor1"].getData();
-            const replace = `<textarea class="hidden class_replace_email" name="description" id="" cols="30" rows="10">${editor1}</textarea>`;
-
-            $('.replace_email').html(replace)
-            modal.hide()
-        }
-
-        // end save as email client
 
 
 
@@ -1397,22 +1387,14 @@
     CKEDITOR.replace('editor1', {
       width: '100%',
       height: 100,
-      removeButtons: 'PasteFromWord'
+      removeButtons: 'PasteFromWord',
+    
     });
 
     CKEDITOR.replace('editor_tmp_email_1', {
-        on: {
-            change: function(e) {
-                const val = CKEDITOR.instances["textarea-id"].getData();
-                const editor1 = CKEDITOR.instances["editor1"].getData();
-                const replace = `<textarea class="hidden class_replace_email" name="email_replace" id="" cols="30" rows="10">${val}</textarea>
-                                <textarea class="hidden class_replace_email" name="description" id="" cols="30" rows="10">${editor1}</textarea>`;
 
-                $('.replace_email').html(replace)
-            
-            }
-        }
     })
+
     
 </script>
 </main>

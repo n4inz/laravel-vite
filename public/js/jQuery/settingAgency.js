@@ -7,6 +7,22 @@ function add_more(){
                             <div>
                                 <input name="body[]" value="" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
                             </div>
+                            <div>
+                                <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
+                                    <select id="part-time" name="day[]" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                        <option @if(old('1') == '1') selected @endif value="1">1 Day</option>
+                                        <option @if(old('2') == '2') selected @endif value="2">2 Day</option>
+                                        <option @if(old('3') == '3') selected @endif value="3">3 Day</option>
+                                        <option @if(old('7') == '7') selected @endif value="7">1 Week</option>
+                                    </select>
+                                    <div>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
+                                            <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
+                                        </svg> 
+                                    </div>
+                            </div>
+                            </div>
                         </div>`;
 
     $(".add").append(template);

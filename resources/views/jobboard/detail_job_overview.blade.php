@@ -3240,10 +3240,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        const val = CKEDITOR.instances["textarea-id"].getData();
         $.ajax({
             type:'POST',
             url:'{{ route("jobboard.change_status_all_match_talent") }}',
-            data:$('#form_match_talent').serialize(),
+            data:{val, $('#form_match_talent').serialize()},
             success:function(data){
                 location.reload()
             }

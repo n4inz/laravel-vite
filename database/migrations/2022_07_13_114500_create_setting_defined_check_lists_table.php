@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('setting_defined_check_lists', function (Blueprint $table) {
             $table->id();
             $table->string('body')->nullable();
+            $table->string('day')->nullable();
             $table->unsignedBigInteger('setting_additionals_id');
             $table->unsignedBigInteger('users_id');
 

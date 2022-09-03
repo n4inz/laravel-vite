@@ -11,6 +11,7 @@ use App\Models\JobModels;
 use App\Models\JobModelsRange;
 use App\Models\JobModelsTask;
 use App\Models\SettingCalendlyApi;
+use App\Models\SettingDefinedCheckList;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
 use App\Models\TemplateEmail;
@@ -120,16 +121,18 @@ class DashboardController extends Controller
         // return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
         // Log::debug('An informational message.');
 
+        // return now()->diffInDays('2022-08-30 11:55:34');
 
         // Past due
        $getTask = JobModelsTask::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'DONE'])->orderBy('updated_at', 'desc')->limit(5)->get();
         $array = [];
         foreach($getTask as $val){
             $pastDue =  now()->diffInDays($val->updated_at);
-            if($pastDue >= 1){
+            if($pastDue >= $val->day){
                array_push($array , [
                     'title' => 'Quote accept by'.' '.$val->name,
                     'body' => 'Due '.$pastDue.' day ago ',
+                    // 'body' => 'Due '.$val->day.' day ago ',
                     'name' => $val->name
                ]);
             }
