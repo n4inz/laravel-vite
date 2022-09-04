@@ -147,7 +147,6 @@
                         <span class="overview-comments-name text-[#222222]">Responsibilities</span>
                     </div>
                     <div class="px-4 mt-6">
-                        <span class="overview-note">Responsibilities</span>
                         <div class="flex w-full py-4 px-5 space-x-7">
                             <div class="flex flex-col items-center  space-y-2">
                                 <svg width="29" height="22" viewBox="0 0 29 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -369,7 +368,6 @@
                         <span class="overview-comments-name text-[#222222]">Pay Info</span>
                     </div>
                     <div class="px-4 mt-6">
-                        <span class="overview-note">Pay Info</span>
                         <div class="flex w-full py-4 px-5 space-x-16">
                             <div class="flex flex-col items-center  space-y-4">
                                 <svg width="31" height="22" viewBox="0 0 31 22" fill="none" xmlns="http://www.w3.org/2000/svg">

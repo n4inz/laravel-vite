@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="mt-[61px] pl-[58px] w-[680px] flex flex-col items-center">
-                <span class="overview-send-title text-palet w-[650px] text-center">Login For Agency </span>
+                <span class="overview-send-title text-palet w-[650px] text-2xl text-center">Login For Agency </span>
                 <form action="{{ route('login.tenancy') }}" method="POST">
                     @csrf
                     <div class="mt-10 w-[27rem]">

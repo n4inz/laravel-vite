@@ -318,7 +318,7 @@
                                             <div class="w-1/3">
                                                 <div>
                                                     <span class="overview-table-header-day">Job Type:</span>
-                                                    <span class="overview-tabel-body-day">{{ isset($result->setting_category->category_name) }}</span>
+                                                    <span class="overview-tabel-body-day">{{ $result->setting_category->category_name ?? $result->category }}</span>
                                                 </div>
                                                 <div>
                                                     <span class="overview-table-header-day">Location:</span>
