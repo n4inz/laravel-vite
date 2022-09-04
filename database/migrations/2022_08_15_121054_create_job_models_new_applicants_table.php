@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('job_models_new_applicants', function (Blueprint $table) {
             $table->id();
             $table->string('avatar')->nullable();
+            $table->string('color')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -23,7 +24,6 @@ return new class extends Migration
             $table->string('day_of_birthday')->nullable();
             $table->string('address');
             $table->text('description')->nullable();
-            $table->string('color')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('job_models_id');
             $table->unsignedBigInteger('users_id');

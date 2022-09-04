@@ -31,55 +31,59 @@
                         @foreach ($statusJob as $valueStatusJob )
                             @if($valueStatusJob->job_models->count() > 0)
                                 @if($valueStatusJob->status_key !== 'potential_client')
-                                    <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
-                                        <div class="flex justify-between ">
-                                            <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                                                </svg>
+                                    <a href="{{ route('jobboard') }}">
+                                        <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
+                                            <div class="flex justify-between ">
+                                                <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
                                             </div>
-                                            <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
+                                            <div>
+                                                <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
+                                            </div>
+                                            <div>
+                                            <span class="text-sm font-bold">
+                                                @if ( App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') == 0)
+                                                    <span class="text-xs">Lest then 1 day</span>
+                                                @else
+                                                    {{ App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') / App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->count() }} Day
+                                                @endif
+                                            </span>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
-                                        </div>
-                                        <div>
-                                        <span class="text-sm font-bold">
-                                            @if ( App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') == 0)
-                                                <span class="text-xs">Lest then 1 day</span>
-                                            @else
-                                                {{ App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') / App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->count() }} Day
-                                            @endif
-                                        </span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 @endif
                             @else
                                 @if($valueStatusJob->status_key !== 'potential_client')
-                                    <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
-                                        <div class="flex justify-between ">
-                                            <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
-                                                </svg>
+                                    <a href="{{ route('jobboard') }}">
+                                        <div class="w-[135px] mb-2 mr-4  border border-palet rounded-md p-4">
+                                            <div class="flex justify-between ">
+                                                <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.55279 1.77639C5.63748 1.607 5.81061 1.5 6 1.5H10C10.1894 1.5 10.3625 1.607 10.4472 1.77639L11.4472 3.77639C11.5247 3.93139 11.5164 4.11546 11.4253 4.26287C11.3342 4.41027 11.1733 4.5 11 4.5H5C4.82671 4.5 4.66578 4.41027 4.57468 4.26287C4.48357 4.11546 4.47529 3.93139 4.55279 3.77639L5.55279 1.77639ZM6.30902 2.5L5.80902 3.5H10.191L9.69098 2.5H6.30902Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.833008 4.93333C0.833008 4.10979 1.53763 3.5 2.33301 3.5H13.6663C14.4617 3.5 15.1663 4.1098 15.1663 4.93333V13.0667C15.1663 13.8902 14.4617 14.5 13.6663 14.5H2.33301C1.53763 14.5 0.833008 13.8902 0.833008 13.0667V4.93333ZM2.33301 4.5C2.02381 4.5 1.83301 4.72594 1.83301 4.93333V13.0667C1.83301 13.2741 2.02381 13.5 2.33301 13.5H13.6663C13.9755 13.5 14.1663 13.2741 14.1663 13.0667V4.93333C14.1663 4.72594 13.9755 4.5 13.6663 4.5H2.33301Z" fill="white"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
                                             </div>
-                                            <div class="w-7 h-7 rounded-full bg-gray-100 text-gray-400 font-semibold flex items-center justify-center">{{ $valueStatusJob->job_models->count() }}</div>
+                                            <div>
+                                                <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
+                                            </div>
+                                            <div>
+                                            <span class="text-sm font-bold">
+                                                @if ( App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day')  == 0)
+                                                    <span class="text-xs">Lest then 1 day</span>
+                                                @else
+                                                    {{ App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') / App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->count() }} Day
+                                                @endif
+                                            </span>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <span class="text-[#4F4F4F] text-xs font-semibold">{{ $valueStatusJob->status_name }}</span>
-                                        </div>
-                                        <div>
-                                        <span class="text-sm font-bold">
-                                            @if ( App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day')  == 0)
-                                                <span class="text-xs">Lest then 1 day</span>
-                                            @else
-                                                {{ App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->sum('day') / App\Models\JobModelsRange::query()->where('status_to' ,$valueStatusJob->id)->get()->count() }} Day
-                                            @endif
-                                        </span>
-                                        </div>
-                                    </div>
+                                    </a>
                                 @endif
                         
                             @endif

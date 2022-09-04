@@ -63,9 +63,9 @@
                     <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b" id="task-tab" data-tabs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="false">Invoice</button>
                     </li>
-                    <li class="mr-12" >
+                    {{-- <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b" id="talent-tab" data-tabs-target="#talent" type="button" role="tab" aria-controls="talent" aria-selected="false">Talent</button>
-                    </li>
+                    </li> --}}
                     <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b" id="documents-tab" data-tabs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">Documents</button>
                     </li>
@@ -99,7 +99,7 @@
                             <div class="px-4 mt-8 edit_desc">
                                 <div class="flex justify-between items-center">
                                     <span class="overview-note">DESCRIPTION</span>
-                                    <i onclick="edit_desc()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                    <i onclick="edit_desc()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                 </div>
                                 <div class="w-full bg-[#F5F5F5] rounded-md p-4 text-xs">
                                     <span class="overview-note-body text-[#827C7C]">
@@ -111,7 +111,7 @@
                             <div class="px-4 mt-8 edit_desc hidden">
                                 <div class="flex justify-between items-center">
                                     <span class="overview-note">DESCRIPTION</span>
-                                    <i onclick="edit_desc()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                    <i onclick="edit_desc()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                 </div>
                               
                                 <div class="relative w-full p-4">
@@ -162,7 +162,7 @@
                                                 </div>
                                                 
                                             </div>
-                                            <i onclick="toggle_availability_day()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer " ></i>
+                                            <i onclick="toggle_availability_day()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer " ></i>
                                         </div>
                                 </div>
                                 <div class="px-4 mt-4 space-y-4">
@@ -250,7 +250,7 @@
                                                     <input @if(isset($result->availability[0]->sunday)) checked  @endif class="availability_days hidden" onclick="availability_days()" id="sunday" type="checkbox" name="sunday" type="chechbox" value="1">
                                                 </label>
                                             </div>
-                                            {{-- <i onclick="toggle_availability_day()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i> --}}
+                                            {{-- <i onclick="toggle_availability_day()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i> --}}
                                         </div>
                                     </div>
                                     <div class="px-4 mt-4 space-y-4">
@@ -312,7 +312,7 @@
                                     <div class="px-4 mt-6 toggle_talent_ayi">
                                         <div class="flex justify-between items-center">
                                             <span class="overview-note">Talent in the Ayi</span>
-                                            <i onclick="toggle_talent_ayi()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                            <i onclick="toggle_talent_ayi()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                         </div>
                                         <div class="flex w-full p-4 space-x-12">
                                             <div class="w-1/3">
@@ -366,7 +366,7 @@
                                     <div class="px-4 mt-6 toggle_talent_ayi hidden">
                                         <div class="flex justify-between items-center">
                                             <span class="overview-note">Talent in the Ayi</span>
-                                            <i onclick="toggle_talent_ayi()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                            <i onclick="toggle_talent_ayi()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                         </div>
                                         <form action="{{ route('jobboard.edit_talents_ayi') }}" method="POST">@csrf
                                         <input type="hidden" name="job_models_id" value="{{ $result->id }}">
@@ -439,7 +439,7 @@
                                     <div class="px-4 mt-6 toggle_subcategory">
                                         <div class="flex justify-between items-center">
                                             <span class="overview-note">Responsibilities</span>
-                                            <i onclick="toggle_subcategory()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                            <i onclick="toggle_subcategory()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                         </div>
                                         <div class="flex w-full py-4 px-5 space-x-7">
                                             <div class="flex flex-col items-center  space-y-2">
@@ -666,7 +666,7 @@
                                     <div class="px-4 mt-6 toggle_subcategory hidden">
                                         <div class="flex justify-between items-center">
                                             <span class="overview-note">Responsibilities</span>
-                                            <i onclick="toggle_subcategory()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                            <i onclick="toggle_subcategory()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                         </div>
                                         <form action="{{ route('jobboard.edit_subcategory') }}" method="post">@csrf
                                             <input type="hidden" name="job_models_id" value="{{ $result->id }}">
@@ -965,7 +965,7 @@
                                     <div class="px-4 mt-6 toggle_pay_info">
                                         <div class="flex justify-between items-center">
                                             <span class="overview-note">Pay Info</span>
-                                            <i onclick="toggle_pay_info()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                            <i onclick="toggle_pay_info()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                         </div>
                                         <div class="flex w-full py-4 px-5 space-x-16">
                                             <div class="flex flex-col items-center  space-y-4">
@@ -993,7 +993,7 @@
                                     <div class="px-4 mt-6 toggle_pay_info hidden">
                                         <div class="flex justify-between items-center">
                                             <span class="overview-note">Pay Info</span>
-                                            <i onclick="toggle_pay_info()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                            <i onclick="toggle_pay_info()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                         </div>
                                         <form action="{{ route('jobboard.edit_pay_info') }}" method="POST">@csrf
                                             <input type="hidden" name="job_models_id" value="{{ $result->id }}">
@@ -1058,7 +1058,7 @@
                                         <span class="text-[#222222] font-semibold border-b-2 pb-3 hover:cursor-pointer" data-tabs-target="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false">New applicants</span>
                                     </div>
                                 </div>
-                        </div>
+                            </div>
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div id="myTabContent">
                                 <div class="hidden p-4 bg-gray-50 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -1067,38 +1067,41 @@
                                         <input type="hidden" name="job_models_id" value="{{ $result->id }}">
                                         <div class="status_all_select"></div>
                                        
-                                        <div class="space-y-6 pb-10 match_talent_hide h-[500px] overflow-auto">
-                                           @foreach ($result->match_talents_add as $key => $talent )
-                                                {{-- $talent->job_model_talent_status->status --}}
-                                                <div class="flex justify-between px-4 hover:cursor-pointer">
-                                                    <div class="flex space-x-2 items-center justify-center">
-                                                        <div class="">
-                                                            <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        </div>
-                                                        @if ($talent->talent->avatar)
-                                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
-                                                        @else
-                                                            <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
-                                                                <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
-                                                            </div>
-                                                        @endif
-                                                        <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
-                                                            <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
-                                                            <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
-                                                            <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="h-4">
-                                                        <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                            <option>-- Select status --</option>
-                                                            @foreach ($status_talent as $value )
-                                                                <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                             @endforeach
-                                            <div class="flex items-center justify-center px-6 space-x-2 rounded-b absolute -top-[5px] right-0">
+                                        <div class=" pb-10 match_talent_hide h-[500px] overflow-auto">
+                                            <div class="space-y-6 ">
+                                                @foreach ($result->match_talents_add as $key => $talent )
+                                                     {{-- $talent->job_model_talent_status->status --}}
+                                                     <div class="flex justify-between px-4 hover:cursor-pointer">
+                                                         <div class="flex space-x-2 items-center justify-center">
+                                                             <div class="">
+                                                                 <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                             </div>
+                                                             @if ($talent->talent->avatar)
+                                                                 <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                             @else
+                                                                 <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
+                                                                     <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
+                                                                 </div>
+                                                             @endif
+                                                             <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
+                                                                 <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
+                                                                 <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                                 <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
+                                                             </div>
+                                                         </div>
+                                                         <div class="h-4">
+                                                             <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
+                                                                 <option>-- Select status --</option>
+                                                                 @foreach ($status_talent as $value )
+                                                                     <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                                 @endforeach
+                                                             </select>
+                                                         </div>
+                                                     </div>
+                                                 @endforeach
+
+                                            </div>
+                                            <div class="flex items-center justify-center px-6 space-x-2 rounded-b absolute top-5 right-0">
                                                 <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center h-6 px-7 bg-colorStatusCard1 rounded-md hover:cursor-pointer">
                                                     <span class="overview-attechment-btn-text">Update status</span>
                                                 </div>
@@ -1163,11 +1166,19 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                       
                                     </div>
                                     <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
                                         {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
                                             <span data-modal-toggle="add-new-aplicants" class="overview-send-job text-palet">+ Add Talent</span>
                                     </div>
+                                    <a href="{{ route('home.send', ['uid' => $result->uid]) }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
+                                        </svg>
+                                        <span class="overview-attechment-btn-text">Copy link form add talent</span>
+                                    </a>
                                 </div>
                             </div>
 
@@ -1177,7 +1188,7 @@
                             <div class="p-4">
                                 <div class="flex items-center justify-between w-full">
                                     <span class="overview-client-detail">CLIENT DETAIL</span>
-                                    <i onclick="toggle_client_detail()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                    <i onclick="toggle_client_detail()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                 </div>
                                 <div class="w-full bg-[#F5F5F5] py-4 px-[24px]">
                                     {{-- Exists --}}
@@ -1241,7 +1252,7 @@
                                                 </div>
                                             </td>
                                             <td >
-                                                <span class="overview-client-detail-table">{{ $result->client->id }}</span>
+                                                <span class="overview-client-detail-table">A{{ sprintf("%03s", $result->client->id )}}</span>
                                             </td>
                                         </tr>
                                         <tr height="30px">
@@ -1380,7 +1391,7 @@
                                 <div class="flex items-center justify-between w-full -1">
                                     <span class="overview-client-detail">CLIENT DETAIL</span>
                                     {{-- <input name="family" type="text" class="w-1/2 h-7 outline-none border-none focus:ring-0"> --}}
-                                    <i onclick="toggle_client_detail()" class="fa fa-pencil text-hover hover:text-colorStatusCard1 cursor-pointer" ></i>
+                                    <i onclick="toggle_client_detail()" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i>
                                 </div>
                                 <form action="{{ route('jobboard.edit_client_detail') }}" method="POST">@csrf
                                     <input type="hidden" value="{{ $result->id }}" name="job_models_id">
@@ -1860,70 +1871,14 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <!--
-                                <table width="100%">
-                                    <tr>
-                                        <td height="66px" width="12%">
-
-                                        </td>
-                                        <td height="66px" width="40%">
-                                            <span class="task-text">List of task</span>
-                                        </td>
-                                        <td height="66px" width="25%">
-                                            <span class="task-text">Status of task</span>
-                                        </td>
-                                        <td height="66px">
-                                            <span class="task-text">Assignee</span>
-                                        </td>
-                                    </tr>
-                                    <tbody class="load-task">
-                                        @foreach ($result->task as $task)
-                                            <tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked{{ $task->id }}">
-                                                <td height="66px" width="12%">
-                                                    <div class="flex items-center justify-center space-x-2">
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                        </svg>
-                                                        <input onclick="check({{ $task->id }})" {{ $task->status == 'Done' ? 'checked disabled' : '' }} style="color: #3BD7CF" type="checkbox" value="{{ $task->id }}" class="check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    </div>
-                                                </td>
-                                                <td height="66px" width="40%">
-                                                    @if ($task->status == 'Done')
-                                                        <s class="task-text-body text-[#AFABAB]">{{ $task->task }}</s>                                                  
-                                                    @endif
-                                                    @if ($task->status == 'Inprogress' OR $task->status == Null)
-                                                        <span class="task-text-body text-[#222222]">{{ $task->task }}</span>
-                                                    @endif
-                                                </td>
-                                                <td height="66px" width="25%">
-                                                    @if ($task->status == null)
-                                                        <span class="task-text-body text-colorStatusCard1 ">Inprogress</span>
-                                                    @else
-                                                        <span class="task-text-body {{ $task->status == 'Done' ? 'text-palet' : 'text-colorStatusCard1' }} ">{{ $task->status }}</span>    
-                                                    @endif
-
-                                                </td>
-                                                <td height="66px">
-                                                    <span class="task-text-body text-[#222222]">{{ $task->assignee }}</span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                -->
                             </div>
-                            {{-- <div class="px-4 mt-5">
-                                <div onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md task-btn-text flex items-center justify-center hover:cursor-pointer">
-                                    + Add More
-                                </div>
-                            </div> --}}
                             <div class="flex mt-8"></div>
                         </div>
                     </div>
                 </div> 
                 
                 {{-- Tabs Talent --}}
+                <!--
                 <div class="hidden" id="talent" role="tabpanel" aria-labelledby="talent-tab">
                     <div class="flex space-x-2 mt-6">
                         <div class="w-[1016px] xl:w-full ">
@@ -1978,22 +1933,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    {{-- <div class="flex justify-between px-4">
-                                        <div class="flex space-x-2">
-                                            <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="">
-                                            <div class="flex flex-col">
-                                                <span class="overview-name-talent text-colortext">Falon Frazer</span>
-                                                <span class="overview-live-talent">Age 65, in New York, NY, USA</span>
-                                                <span class="overview-experiance-talent">10 Year Experience, Willing to relocate</span>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center justify-center rounded space-x-1 w-[94px] h-8 border border-[#5FCFFF]">
-                                            <span class="overview-talent-status text-[#5FCFFF]">Interviewing</span>
-                                            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979699 0.646447C1.17496 0.451184 1.49154 0.451184 1.68681 0.646447L5.33325 4.29289L8.9797 0.646447C9.17496 0.451184 9.49154 0.451184 9.68681 0.646447C9.88207 0.841709 9.88207 1.15829 9.68681 1.35355L5.68681 5.35355C5.49154 5.54882 5.17496 5.54882 4.9797 5.35355L0.979699 1.35355C0.784436 1.15829 0.784436 0.841709 0.979699 0.646447Z" fill="#5FCFFF"/>
-                                            </svg>
-                                        </div>
-                                    </div> --}}
+                        
                                 </div>
                                 <div class="flex items-center justify-center mx-auto mt-10 mb-6">
                                     <span class="overview-talent-otside-text text-[#222222]">Invite more talents outside the Ayiconnection system list</span>
@@ -2010,6 +1950,7 @@
                         </div>
                     </div>
                 </div>
+                -->
 
                 {{-- Document --}}
                 <div class="hidden" id="documents" role="tabpanel" aria-labelledby="documents-tab">
@@ -3240,11 +3181,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        const val = CKEDITOR.instances["textarea-id"].getData();
+        // const val = CKEDITOR.instances["textarea-id"].getData();
         $.ajax({
             type:'POST',
             url:'{{ route("jobboard.change_status_all_match_talent") }}',
-            data:{val, $('#form_match_talent').serialize()},
+            data:$('#form_match_talent').serialize(),
             success:function(data){
                 location.reload()
             }

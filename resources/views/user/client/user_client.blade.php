@@ -39,7 +39,10 @@
         <div class="grid gap-4 grid-cols-3 mt-10 mb-20 w-[1017px] xl:w-full">   
         {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
             @foreach ($client as $values )
-                <div id="search_client" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
+                <div id="search_client" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4 relative">
+                    @if (now()->diffInMinutes($values->created_at) < 1)
+                        <div class="absolute top-2 right-3 w-[39px] h-[15px] bg-red-700 animate-pulse flex items-center justify-center rounded-sm"> <span class="overview-label-text">New</span></div>
+                    @endif
                     <div class="hidden">{{ $values->phone}} {{ $values->email }} {{ $values->address }} {{ $values->languages }} {{ $values->note }}</div>
                     {{-- <div class="hidden"></div> --}}
                     <div class="w-20">
@@ -53,7 +56,7 @@
                         {{-- <img class="w-20 h-20 rounded-full" src="{{ asset('storage/avatar/'.$values->avatar) }}" alt=""> --}}
                     </div>
                     <div class="flex flex-col text-[#827C7C] space-y-[0.5px]">
-                        <span class="user-talent-name text-[#222222]">{{ $values->first_name }} {{ $values->last_name }}</span>
+                        <span class="user-talent-name text-[#222222]">A{{ sprintf("%03s", $values->id )}} {{ $values->first_name }} {{ $values->last_name }}</span>
                         <span class="user-talent-live">Live in  {{ Str::limit($values->address, 20, $end='...') }}</span>
                         <span class="overview-note-body text-[#2CA6A0]">
                             {{ $values->languages }}

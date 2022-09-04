@@ -749,7 +749,7 @@
                             <div onclick="save_as_email_client()" class="absolute left-5 text-sm text-blue-400 hover:cursor-pointer save_as_email_client">
                                 Save as Default
                             </div>
-                            <div onclick="location.reload()"  class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
+                            <div onclick="location.reload()" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
                                 <span class="text-sm text-white">Don't Send</span> 
                             </div>
                             <button class="flex btn_send_email_confirm_client items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
@@ -805,7 +805,8 @@
                         },
                         title:{
                             required:true,
-                            maxlength:25
+                            maxlength:25,
+                            minlength:3
                         },
                         description: {
                             required:true,
@@ -1308,9 +1309,10 @@
                     $('.load_edit_job_calendly').html(loader);             
                 },
                 success : function(val){
+                    
                     modal.show()
                     $('.load_edit_job_calendly').html(val)
-                
+                   
                 }
             })
         }
@@ -1340,7 +1342,6 @@
         $('.costums-family').change(function(){
             var val = JSON.parse($(this).val());
             $('.family_email_send').val(val[0].email);
-            
         });
 
         

@@ -548,7 +548,7 @@
             $('.start_date').addClass("text-gray-200");
         } else {
             $('.start_date').prop('disabled', false);
-            $('.start_date').attr("type", "text")
+            $('.start_date').attr("type", "date")
             $('.start_date').removeClass("text-gray-200");          
         }
     })
@@ -562,10 +562,12 @@
             $('.end_date').addClass("text-gray-200");
         } else {
             $('.end_date').prop('disabled', false);
-            $('.end_date').attr("type", "text")
+            $('.end_date').attr("type", "date")
             $('.end_date').removeClass("text-gray-200");      
         }
     })
+
+    $('.family_email_send').val('{{ $detailJob->client->email }}');
 
 </script>
 <script src="{{ asset('js/jQuery/jobBoardJquery.js') }}"></script>

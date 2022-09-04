@@ -174,11 +174,7 @@ class JobboardController extends Controller
 
     public function jobs_store(JobBoardRequest $request)
     {  
-        // return $request->language;
-        // JobBoardRequest
-        // $data = json_encode($request->value);
-        // return $data;
-        // return $request->dates;
+        
         $this->jobboardRepository->created($request);
         return redirect()->back()->with('status', 'Create job succesfuly');
     }
@@ -377,16 +373,28 @@ class JobboardController extends Controller
         if(isset($request->avatar)){
             $avatar = $this->uploadImageStore($request->file('avatar'), 'avatar');
         }
+        $color1 = [
+            '#EB5757',
+            '#F2994A',
+            '#27AE60',
+            '#6AEAE3',
+            '#56CCF2',
+            '#BB6BD9',
+            '#F2C94C',
+        ];
+        $color1_rand = $color1[rand(0, count($color1) - 1)];
+
        $newAplicants =  JobModelsNewApplicant::create([
             'avatar' => $avatar ?? null,
-           'first_name' => $request->first_name,
-           'last_name' => $request->last_name,
-           'email' => $request->email,
-           'phone' => $request->phone,
-           'address' => $request->address,
-           'description' => $request->description,
-           'job_models_id' =>  $request->job_models_id,
-           'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id
+            'color' => $color1_rand,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'description' => $request->description,
+            'job_models_id' =>  $request->job_models_id,
+            'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id
         ]);
 
         File::where(['users_id' => auth()->user()->id , 'type' => 'NEW_APLICANTS'])->get()->map(function($res , $key) use($newAplicants){

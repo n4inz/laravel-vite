@@ -131,7 +131,7 @@ class JobboardRepository
                     'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                     'stafs_id' => auth()->user()->staf->users_id ?? 0,
                     'status_calendly' => 0,
-                   
+                    'set_job_status_id' => $status_job[1]->id
                 ]);
             }else{
                 $jobs = JobModels::create([

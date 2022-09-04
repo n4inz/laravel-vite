@@ -73,6 +73,17 @@ class AuthenticateController extends Controller
             'password_confirmation' => 'required_with:password|same:password|min:6'
         ]);
 
+        $color1 = [
+            '#EB5757',
+            '#F2994A',
+            '#27AE60',
+            '#6AEAE3',
+            '#56CCF2',
+            '#BB6BD9',
+            '#F2C94C',
+        ];
+        $color1_rand = $color1[rand(0, count($color1) - 1)];
+
         if(empty($this->cek_tenants())){
 
             $tenant = Tenant::create([
@@ -84,6 +95,7 @@ class AuthenticateController extends Controller
             $user = $tenant->user()->create([
                 'email' =>  $request->email,
                 'password' => Hash::make($request->password),
+                'color' => $color1_rand
             ]);
 
             $user->assignRole('agency');

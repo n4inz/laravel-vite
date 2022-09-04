@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            TemplateEmailSeeder::class,
             SettingSeeder::class,
             ClientSeeder::class,
             TalentsSeeder::class,
@@ -51,7 +52,7 @@ class DatabaseSeeder extends Seeder
             JobModelsMatchTalentSeeder::class,
 
             StafSeeder::class,
-            TemplateEmailSeeder::class
+           
 
             
             // AllSeeder::class,

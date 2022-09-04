@@ -28,6 +28,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+
         // TemplateEmail::query()->get()->map(function($result) use($request){
         //     EmailAgencyTemplate::create([
         //         'body' => $result->body,

@@ -12,11 +12,11 @@
         triggerEl: document.querySelector('#task-tab'),
         targetEl: document.querySelector('#task')
     },
-    {
-        id: 'talent',
-        triggerEl: document.querySelector('#talent-tab'),
-        targetEl: document.querySelector('#talent')
-    },
+    // {
+    //     id: 'talent',
+    //     triggerEl: document.querySelector('#talent-tab'),
+    //     targetEl: document.querySelector('#talent')
+    // },
     {
         id: 'documents',
         triggerEl: document.querySelector('#documents-tab'),

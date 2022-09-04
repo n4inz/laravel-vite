@@ -36,7 +36,7 @@ class UserClientController extends Controller
     }
     public function client()
     {
-        $client = Client::get();
+        $client = Client::orderBy('id', 'desc')->get();
         // return request()->query('search');
         // return $client->count();
         return view('user.client.user_client' , compact('client'));
@@ -56,7 +56,7 @@ class UserClientController extends Controller
 
     public function talent()
     {
-        $talent = Talents::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with('type_helper')->get();
+        $talent = Talents::orderBy('id', 'desc')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->with('type_helper')->get();
 
         return view('user.talent.user_talent', compact('talent'));
     }
