@@ -29,7 +29,7 @@
                         <span class="overview-send-price text-[#2CA6A0]">${{ $result->rate }} per Hour</span>
                     </div>
                 </div>
-                <div class="overview-note-body text-[#827C7C] sm:w-[650px]  mt-[27px]">
+                <div class="overview-note-body text-[#827C7C] sm:w-[650px] mt-[27px]">
                     {!! $result->description !!}
                 </div>
                 <div class=" mt-6">

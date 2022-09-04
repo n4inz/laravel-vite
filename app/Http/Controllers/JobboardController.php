@@ -809,6 +809,7 @@ class JobboardController extends Controller
 
     public function send_email_to_talent(Request $request)
     {
+        
        
         $result = JobModels::with(['availability','languages','match_talent'])->where('id' , $request->job_models_id)->firstOrFail();
         $talentNeed = [];

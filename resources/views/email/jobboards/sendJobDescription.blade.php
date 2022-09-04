@@ -102,11 +102,11 @@
 																		<td align="left">
 																			<table border="0" cellspacing="0" cellpadding="0" class="center" style="padding-top: 20px">
 																				<tr>
-																					<td class="" style="color:#4F4F4F; font-family:'Yantramanav', Arial, sans-serif; font-size:32px; line-height:41px; text-align:left; min-width:auto !important; font-weight:500;">Lorem ipsum dolor, sit amet consectetur </td>
+																					<td class="" style="color:#4F4F4F; font-family:'Yantramanav', Arial, sans-serif; font-size:32px; line-height:41px; text-align:left; min-width:auto !important; font-weight:500;">{{ $result->title }} </td>
 																				</tr>
 																				<tr >
 																					<td  class="" style="color:#4F4F4F; font-family:'Yantramanav', Arial, sans-serif; font-size:32px; line-height:41px; text-align:left; min-width:auto !important; font-weight:500;">
-																						<span style="padding: 0.5rem; border-radius: 0.375rem; background-color: #DAF2F1; color: #2CA6A0;  font-weight: 700; font-size: 20px; letter-spacing: 0.38px; text-align: center; font-style: normal;">$30 per Hour</span>
+																						<span style="padding: 8px; border-radius: 6px; background-color: #DAF2F1; color: #2CA6A0;  font-weight: 700; font-size: 20px; letter-spacing: 0.38px; text-align: center; font-style: normal;">${{ $result->rate }} per Hour</span>
 																					</td>
 																				</tr>
 																			</table>
@@ -129,7 +129,9 @@
 															<th class="p0-15-30" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;">
 																<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																	<tr>
-																		<td  align="left" class="p0-15-30" style="padding-bottom: 25px; color:#827C7C; font-family:Roboto, sans-serif; font-size:13px; font-weight: 400;  line-height: 18px; letter-spacing: -0.08px; min-width:auto !important;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse asperiores modi consequuntur, soluta ipsum dolore cupiditate voluptatum dolorum et nisi accusantium odio aperiam dolores recusandae sit corporis doloribus! Qui, blanditiis! Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</td>
+																		<td  align="left" class="p0-15-30" style="padding-bottom: 25px; color:#827C7C; font-family:Roboto, sans-serif; font-size:13px; font-weight: 400;  line-height: 18px; letter-spacing: -0.08px; min-width:auto !important;">
+																			{!! $result->description !!}
+																		</td>
 																	</tr>
 																</table>
 															</th>
@@ -289,39 +291,443 @@
 												</td>
 											</tr>
 										</table>
+
+										<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+											<tr>
+												<td style="padding: 0px 40px 0px 40px;" class="p0-15-30">
+													<table width="100%" border="0" cellspacing="0" cellpadding="0">
+														<tr>
+															<td align="left"  style="padding-top: 10px; color:#222222; font-family:Roboto, sans-serif; font-size:15px; font-weight: 500;  line-height: 30px; letter-spacing: -0.08px; min-width:auto !important;">Responsibilities</td>
+														</tr>
+													</table>
+													<table style="padding: 10px 30px 0px 30px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+														<tr >
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['companion_elders']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['companion_elders']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/companion-elder.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/companion-elder-muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span>Companion Elders</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['hour_help']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['hour_help']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/hour_help.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/hour_help_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span>24-Hour Help</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['cook_meals']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['cook_meals']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cook_meel.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cook_meel_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Cook Meal</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['remind_medicine']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['remind_medicine']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/remine_medicine.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/remine_medicine_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Remind Medicine</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['run_errands']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['run_errands']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/run_errands.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/run_errands_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span>Run Errands</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['simple_housework']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['simple_housework']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/simpel_house_work.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/simpel_house_work_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Simple Housework</span></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+
+														<tr>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['provide_transportation']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['provide_transportation']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/provide_transportation.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/provide_transportation_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Provide Transportation</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['assist_feeding']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['assist_feeding']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/assist_feeding.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/assist_feeding_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Assist Feeding</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['laundry']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['laundry']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/laundry.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/laundry_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Laundry</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['special_needs']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['special_needs']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/special_needs.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/special_needs_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Special Needs</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['prep_meal']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['prep_meal']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/prep_meal.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/prep_meal_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Prep Meal</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['assist_bathing']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['assist_bathing']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/asist_bathing.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/asist_bathing_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Assist Bathing</span></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+
+														<tr>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['nanny/_sitter']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['nanny/_sitter']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Nanny/ Sitter</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['maternity_care']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['maternity_care']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Maternity Care</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['at_home_daycare']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['at_home_daycare']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >At Home Daycare</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['infant']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['infant']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Infant</span></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+														<tr>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['young_baby']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['young_baby']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Young Baby</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['toddler']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['toddler']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Toddler</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ isset( $talentNeed['press_schooler']) ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if(isset($talentNeed['press_schooler']))
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Press Schooler</span></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+											<tr>
+												<td style="padding: 0px 40px 0px 40px;" class="p0-15-30">
+													<table width="100%" border="0" cellspacing="0" cellpadding="0">
+														<tr>
+															<td align="left"  style="padding-top: 10px; color:#222222; font-family:Roboto, sans-serif; font-size:15px; font-weight: 500;  line-height: 30px; letter-spacing: -0.08px; min-width:auto !important;">Pay Info</td>
+														</tr>
+													</table>
+													<table style="padding: 10px 30px 0px 30px;" width="100%" border="0" cellspacing="0" cellpadding="0">
+														<tr>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ $result->pay_with === 'cash' || $result->pay_with === 'any' ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if($result->pay_with === 'cash' || $result->pay_with === 'any' )
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cash.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cash_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Cash</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ $result->pay_with === 'check' || $result->pay_with === 'any' ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if($result->pay_with === 'check' || $result->pay_with === 'any' )
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/check.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/chech_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Check</span></td>
+																	</tr>
+																</table>
+															</td>
+															<td align="left"  style=" padding-bottom: 0px;  font-family:Roboto, sans-serif; font-weight: 400; font-size: 13px; line-height: 15px; letter-spacing: -0.505882px; color: {{ $result->pay_with === 'online_payment' || $result->pay_with === 'any' ? '#4a4a4a;' : '#dddddd;' }}  min-width:auto !important;">
+																<table>
+																	@if( $result->pay_with === 'online_payment' || $result->pay_with === 'any' )
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/online_payment.svg') }}" alt=""></td>
+																		</tr>
+																	@else
+																		<tr>
+																			<td style="text-align: center;"><img src="{{ asset('icon/online_payment_muted.svg') }}" alt=""></td>
+																		</tr>
+																	@endif
+																	<tr>
+																		<td style="text-align: center;"><span >Online Payment</span></td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+
+										<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+											<tr>
+												<td style="padding: 25px 40px 20px 40px;" class="p0-15-30">
+													<table width="100%" border="0" cellspacing="0" cellpadding="0">
+														<tr>
+															<td align="center"  style="padding-top: 10px; text-align: center; color:#222222; font-family:Roboto, sans-serif; font-size:15px; font-weight: 500;  line-height: 30px; letter-spacing: -0.08px; min-width:auto !important;">
+																<a style="padding:10px 200px 10px 200px; color:white; width: 100%; height: 40px; background: #3BD7CF; border-radius: 6px; margin-top: 32px;" href="{{ route('home.apply' , ['uid' => $result->uid]) }}">
+																	<span style="text-align: center">Confirm</span>
+																</a>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td style="padding: 0px 40px 0px 40px;" class="p0-15-30">
+													<table width="100%" border="0" cellspacing="0" cellpadding="0">
+														<tr>
+															<td align="left"  style="padding-top: 10px; color:#222222; font-family:Roboto, sans-serif; font-size:15px; font-weight: 500;  line-height: 30px; letter-spacing: -0.08px; min-width:auto !important;">
+															</td>
+														</tr>
+												
+													</table>
+												</td>
+											</tr>
+										</table>
+
+
 										
 										<!-- END Article Image On The Left -->
 										
 										<!-- Title + Full-Width Image + Text Center + Button -->
-										<div mc:repeatable="Select" mc:variant="Title + Full-Width Image + Text Center + Button">
+										{{-- <div mc:repeatable="Select" mc:variant="Title + Full-Width Image + Text Center + Button">
 											<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
 												<tr>
 													<td style="padding: 0px 40px 40px 40px;" class="p0-15-30">
-														<table width="100%" border="0" cellspacing="0" cellpadding="0">
-															<tr>
-																<td class="h3 center" style="padding-bottom: 30px; color:#444444; font-family:'Yantramanav', Arial, sans-serif; font-size:28px; line-height:37px; font-weight:300; text-align:center;">Simplicity is the ultimate sophistication.</td>
-															</tr>
-															<tr>
-																<td class="fluid-img" style="padding-bottom: 30px; font-size:0pt; line-height:0pt; text-align:left;"><a href="#" target="_blank"><img src="images/image2.jpg" width="570" height="195" border="0" alt="" /></a></td>
-															</tr>
-															<tr>
-																<td class="text center" style="padding-bottom: 26px; color:#666666; font-family:Arial, sans-serif; font-size:16px; line-height:30px; min-width:auto !important; text-align:center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <span class="m-hide"><br /></span>eiusmod tempor incididunt ut labore.</td>
-															</tr>
-															<tr>
-																<td align="center">
-																	<table border="0" cellspacing="0" cellpadding="0">
-																		<tr>
-																			<td class="text-button" style="color:#ffffff; background:#6dd795; border-radius:5px; font-family:'Yantramanav', Arial, sans-serif; font-size:14px; line-height:18px; text-align:center; font-weight:500; padding:12px 25px;"><a href="#" target="_blank" class="link-white" style="color:#ffffff; text-decoration:none;"><span class="link-white" style="color:#ffffff; text-decoration:none;">FIND OUT MORE</span></a></td>
-																		</tr>
-																	</table>
-																</td>
-															</tr>
-														</table>
+														<a href="{{ route('home.apply' , ['uid' => $result->uid]) }}" class="flex justify-center items-center w-full h-10 bg-palet rounded-md mt-8">
+															<span class="overview-talent-modal-title text-[#FFFFFF]">Apply</span>
+														</a>
 													</td>
 												</tr>
 											</table>
-										</div>
-										<!-- END Title + Full-Width Image + Text Center + Button -->
+										</div> --}}
+										{{-- <!-- END Title + Full-Width Image + Text Center + Button -->
 
 										<!-- Content + Images -->
 										<div mc:repeatable="Select" mc:variant="Content + Images">
@@ -483,7 +889,7 @@
 												</td>
 											</tr>
 										</table>
-										<!-- END Footer -->
+										<!-- END Footer --> --}}
 									</td>
 								</tr>
 							</table>
