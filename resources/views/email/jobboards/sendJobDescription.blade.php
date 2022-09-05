@@ -306,11 +306,11 @@
 																<table>
 																	@if(isset($talentNeed['companion_elders']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/companion-elder.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/companion-elder.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/companion-elder-muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/companion-elder-muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -322,11 +322,11 @@
 																<table>
 																	@if(isset($talentNeed['hour_help']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/hour_help.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/hour_help.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/hour_help_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/hour_help_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -338,11 +338,11 @@
 																<table>
 																	@if(isset($talentNeed['cook_meals']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/cook_meel.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cook_meel.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/cook_meel_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cook_meel_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -354,11 +354,11 @@
 																<table>
 																	@if(isset($talentNeed['remind_medicine']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/remine_medicine.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/remine_medicine.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/remine_medicine_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/remine_medicine_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -370,11 +370,11 @@
 																<table>
 																	@if(isset($talentNeed['run_errands']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/run_errands.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/run_errands.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/run_errands_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/run_errands_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -386,11 +386,11 @@
 																<table>
 																	@if(isset($talentNeed['simple_housework']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/simpel_house_work.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/simpel_house_work.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/simpel_house_work_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/simpel_house_work_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -405,11 +405,11 @@
 																<table>
 																	@if(isset($talentNeed['provide_transportation']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/provide_transportation.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/provide_transportation.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/provide_transportation_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/provide_transportation_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -421,11 +421,11 @@
 																<table>
 																	@if(isset($talentNeed['assist_feeding']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/assist_feeding.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/assist_feeding.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/assist_feeding_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/assist_feeding_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -437,11 +437,11 @@
 																<table>
 																	@if(isset($talentNeed['laundry']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/laundry.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/laundry.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/laundry_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/laundry_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -453,11 +453,11 @@
 																<table>
 																	@if(isset($talentNeed['special_needs']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/special_needs.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/special_needs.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/special_needs_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/special_needs_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -469,11 +469,11 @@
 																<table>
 																	@if(isset($talentNeed['prep_meal']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/prep_meal.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/prep_meal.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/prep_meal_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/prep_meal_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -485,11 +485,11 @@
 																<table>
 																	@if(isset($talentNeed['assist_bathing']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/asist_bathing.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/asist_bathing.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/asist_bathing_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/asist_bathing_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -504,11 +504,11 @@
 																<table>
 																	@if(isset($talentNeed['nanny/_sitter']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -520,11 +520,11 @@
 																<table>
 																	@if(isset($talentNeed['maternity_care']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -536,11 +536,11 @@
 																<table>
 																	@if(isset($talentNeed['at_home_daycare']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -552,11 +552,11 @@
 																<table>
 																	@if(isset($talentNeed['infant']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -570,11 +570,11 @@
 																<table>
 																	@if(isset($talentNeed['young_baby']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -586,11 +586,11 @@
 																<table>
 																	@if(isset($talentNeed['toddler']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -602,11 +602,11 @@
 																<table>
 																	@if(isset($talentNeed['press_schooler']))
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/dummy_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -634,11 +634,11 @@
 																<table>
 																	@if($result->pay_with === 'cash' || $result->pay_with === 'any' )
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/cash.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cash.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/cash_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/cash_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -650,11 +650,11 @@
 																<table>
 																	@if($result->pay_with === 'check' || $result->pay_with === 'any' )
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/check.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/check.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/chech_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/chech_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>
@@ -666,11 +666,11 @@
 																<table>
 																	@if( $result->pay_with === 'online_payment' || $result->pay_with === 'any' )
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/online_payment.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/online_payment.png') }}" alt=""></td>
 																		</tr>
 																	@else
 																		<tr>
-																			<td style="text-align: center;"><img src="{{ asset('icon/online_payment_muted.svg') }}" alt=""></td>
+																			<td style="text-align: center;"><img src="{{ asset('icon/online_payment_muted.png') }}" alt=""></td>
 																		</tr>
 																	@endif
 																	<tr>

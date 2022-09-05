@@ -113,13 +113,13 @@ class DashboardController extends Controller
         // return false;
         
         
-        // $result = JobModels::with(['availability','languages','match_talent'])->where('id' , 1)->firstOrFail();
-        // $talentNeed = [];
-        //      // Match Talent
-        // foreach ($result->match_talent as $match) {
-        //     array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
-        // }
-        // return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
+        $result = JobModels::with(['availability','languages','match_talent'])->where('id' , 1)->firstOrFail();
+        $talentNeed = [];
+             // Match Talent
+        foreach ($result->match_talent as $match) {
+            array_push($talentNeed, $talentNeed[$match->jobs_sub_category] = 1);
+        }
+        return view('email.jobboards.sendJobDescription' , compact('result','talentNeed'));
         // Log::debug('An informational message.');
 
         // return now()->diffInDays('2022-08-30 11:55:34');
