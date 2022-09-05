@@ -36,9 +36,9 @@
                     <span class="sr-only">Open user menu</span>
 
                     @if (isset(auth()->user()->avatar->avatar))
-                        <img class="w-12 h-12 rounded-full" src='{{ asset('storage/Setting/avatar/'. auth()->user()->avatar->avatar) }} ' alt="user photo">
+                        <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->avatar->avatar) }} ' alt="user photo">
                     @elseif (isset(auth()->user()->staf->avatar))
-                        <img class="w-12 h-12 rounded-full" src='{{ asset('storage/Setting/avatar/'. auth()->user()->staf->avatar) }} ' alt="user photo">
+                        <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->staf->avatar) }} ' alt="user photo">
                     @else
                         {{-- <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
                             <span class="text-xs text-gray-300 ">No Images</span>

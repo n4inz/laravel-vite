@@ -763,7 +763,7 @@
                                             @if (empty($setting->avatar->avatar))
                                                 <img id="output" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
                                             @else
-                                                <img id="output" src="{{ asset('storage/Setting/avatar/'.$setting->avatar->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                                <img id="output" src="{{ asset('storage/avatar/'.$setting->avatar->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
 
                                             @endif
 

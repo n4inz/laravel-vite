@@ -215,7 +215,7 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 6.5C3.125 6.29289 3.29289 6.125 3.5 6.125H8C8.20711 6.125 8.375 6.29289 8.375 6.5C8.375 6.70711 8.20711 6.875 8 6.875H3.5C3.29289 6.875 3.125 6.70711 3.125 6.5Z" fill="#827C7C"/>
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 8.5C3.125 8.29289 3.29289 8.125 3.5 8.125H6C6.20711 8.125 6.375 8.29289 6.375 8.5C6.375 8.70711 6.20711 8.875 6 8.875H3.5C3.29289 8.875 3.125 8.70711 3.125 8.5Z" fill="#827C7C"/>
                                                         </svg>
-                                                        <span class="text-xs text-[#827C7C]">10</span>
+                                                        <span class="text-xs text-[#827C7C]">{{ $value->comment->count() }}</span>
                                                     </div>
                             
                                                     <div class="flex items-center justify-center">

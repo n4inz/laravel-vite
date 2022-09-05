@@ -84,7 +84,7 @@ class SettingController extends Controller
 
     public function upload_avatar(Request $request)
     {
-        $avatar = $this->uploadImageStore($request->file('avatar'), 'Setting/avatar');
+        $avatar = $this->uploadImageStore($request->file('avatar'), 'avatar');
         $exit = Avatar::where('users_id', auth()->guard('web')->user()->id)->first();
 
         if (empty($exit)) {

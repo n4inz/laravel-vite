@@ -59,7 +59,7 @@ class JobboardController extends Controller
     {
 
         $status = SettingJobModelsStatus::with(['job_models' => function($query){
-            $query->with('client')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
+            $query->with(['client', 'comment'])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id);
         }])->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get();
         
 
@@ -266,12 +266,12 @@ class JobboardController extends Controller
             
         ]);
 
-        JobModelsMatchTalentFilter::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
-            'status' => $request->status,
-            'talents_id' => $request->talent_id,
-            'job_models_id' => $request->job_models_id,
+        // JobModelsMatchTalentFilter::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
+        //     'status' => $request->status,
+        //     'talents_id' => $request->talent_id,
+        //     'job_models_id' => $request->job_models_id,
             
-        ]);
+        // ]);
 
         return response(200);
     }
@@ -740,7 +740,7 @@ class JobboardController extends Controller
                 ]);
             });
 
-            JobModelsMatchTalentFilter::create([
+            JobModelsMatchTalentAdd::create([
                 'talents_id' => $talent->id,
                 'status' => $request->status,
                 'job_models_id' => $request->job_models_id

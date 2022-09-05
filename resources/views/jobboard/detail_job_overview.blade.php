@@ -1060,6 +1060,7 @@
                                        
                                         <div class=" pb-10 match_talent_hide h-[500px] overflow-auto">
                                             <div class="space-y-6 ">
+                                             
                                                 @foreach ($result->match_talents_add as $key => $talent )
                                                      {{-- $talent->job_model_talent_status->status --}}
                                                      <div class="flex justify-between px-4 hover:cursor-pointer">
@@ -1076,7 +1077,10 @@
                                                              @endif
                                                              <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
                                                                  <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
-                                                                 <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                                 @if ($talent->talent->day_of_birthday != 'null')
+                                                                    {{-- <span>kososng</span> --}}
+                                                                    <span class="overview-live-talent">Age {{ Carbon\Carbon::parse($talent->talent->day_of_birthday)->age }}, in {{ $talent->talent->address }}</span>
+                                                                 @endif
                                                                  <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
                                                              </div>
                                                          </div>
