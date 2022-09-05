@@ -41,16 +41,30 @@ class DashboardController extends Controller
         // $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
 
         // return view('modal.jobboard.edit_create_job_calendly', compact('category'));
-        // $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
-        // $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
-        //     'organization' => $load->current_organization,
-        //     'status' => 'active',
+        $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
+        $calendlyEvent = [];
+        if($load){
+            $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
+                'organization' => $load->current_organization,
+                'status' => 'active',
+            ]);
+    
+            $response = json_decode($responses);
+            foreach($response->collection as $data){
+                array_push($calendlyEvent, [
+                    'date' =>  date('Y', strtotime($data->start_time)).', '.date('m', strtotime($data->start_time)).', '.date('d', strtotime($data->start_time)),
+                    'event' => $data->name,
+                ]
+                   
+                );
+            }
 
-        // ]);
+        }
 
-        // $response = json_decode($responses);
 
-        // // return $response->collection;
+        
+
+       
   
         // foreach($response->collection as $valCalendly){
         //     $idJobStatus = SettingJobModelsStatus::where([
@@ -149,7 +163,7 @@ class DashboardController extends Controller
        $average = JobModelsRange::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
        
        $taskFolowUp  = Actifity::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'type' => 'TASK CREATED'])->whereDay('created_at', date('d'))->get();
-       return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array','average'));
+       return view('dashboard.dashboard', compact('TotalJob' , 'statusJob','taskFolowUp' , 'array','average' , 'calendlyEvent'));
     }
 
     public function calendlyApi(Request $request)

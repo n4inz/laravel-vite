@@ -1097,8 +1097,8 @@
 
                                             </div>
                                             <div class="flex items-center justify-center px-6 space-x-2 rounded-b absolute top-5 right-0">
-                                                <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center h-6 px-7 bg-colorStatusCard1 rounded-md hover:cursor-pointer">
-                                                    <span class="overview-attechment-btn-text">Update status</span>
+                                                <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center px-5 h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                    <span class="overview-send-job text-palet">Update status</span>
                                                 </div>
                                                 <div id="dropdown_select" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
                                                     <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
@@ -1111,8 +1111,8 @@
                                                         @endforeach
                                                     </ul>
                                                 </div>
-                                                <button class="flex justify-center items-center px-7  h-6 bg-palet rounded-md">
-                                                    <span class="overview-attechment-btn-text">Send</span>
+                                                <button class="flex justify-center items-center px-5 h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                    <span class="overview-send-job text-palet">Send</span>
                                                 </button>   
                                                 <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                                     <span class="overview-send-job text-palet">+ Add Talent</span>
@@ -1163,9 +1163,9 @@
                                         @endforeach
                                        
                                     </div>
-                                    <div class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
+                                    <div data-modal-toggle="add-new-aplicants"  class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
                                         {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
-                                            <span data-modal-toggle="add-new-aplicants" class="overview-send-job text-palet">+ Add Talent</span>
+                                            <span class="overview-send-job text-palet">+ Add Talent</span>
                                     </div>
                                     <a href="{{ route('home.send', ['uid' => $result->uid]) }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1709,69 +1709,7 @@
                             </div>
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div class="px-2 mt-4 space-y-8 ">
-                                {{-- Task body --}}
-                                <!--
-                                @foreach ($result->actifities as $val)
-                                    @if ($val->type == 'TASK')
-                                        <div class="flex items-center space-x-3">
-                                            <div>
-                                                <div class="flex justify-center items-center w-8 h-8 bg-palet rounded-full">
-                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.83301 1.99992C1.83301 1.35559 2.35534 0.833252 2.99967 0.833252H9.66634C9.94248 0.833252 10.1663 1.05711 10.1663 1.33325C10.1663 1.60939 9.94248 1.83325 9.66634 1.83325H2.99967C2.90763 1.83325 2.83301 1.90787 2.83301 1.99992V13.9999C2.83301 14.092 2.90762 14.1666 2.99967 14.1666H12.333C12.4251 14.1666 12.4997 14.092 12.4997 13.9999V6.66812C12.4997 6.39198 12.7235 6.16812 12.9997 6.16812C13.2758 6.16812 13.4997 6.39198 13.4997 6.66812V13.9999C13.4997 14.6443 12.9774 15.1666 12.333 15.1666H2.99967C2.35535 15.1666 1.83301 14.6443 1.83301 13.9999V1.99992Z" fill="white"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 6C3.83301 5.72386 4.05687 5.5 4.33301 5.5H6.99967C7.27582 5.5 7.49967 5.72386 7.49967 6C7.49967 6.27614 7.27582 6.5 6.99967 6.5H4.33301C4.05687 6.5 3.83301 6.27614 3.83301 6Z" fill="white"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83301 9.33325C3.83301 9.05711 4.05687 8.83325 4.33301 8.83325H8.33301C8.60915 8.83325 8.83301 9.05711 8.83301 9.33325C8.83301 9.60939 8.60915 9.83325 8.33301 9.83325H4.33301C4.05687 9.83325 3.83301 9.60939 3.83301 9.33325Z" fill="white"/>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0198 1.64669C14.215 1.84195 14.215 2.15853 14.0198 2.3538L10.0215 6.35207C9.82626 6.54733 9.50968 6.54733 9.31442 6.35207C9.11915 6.15681 9.11915 5.84023 9.31441 5.64496L13.3126 1.64669C13.5079 1.45143 13.8245 1.45143 14.0198 1.64669Z" fill="white"/>
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                            <div class="space-y-1">
-
-                                                <div class="text-sm  text-[#222222] font-semibold">Quote accept by {{ $val->name }}</div>
-                                                <div class="text-sm"><span class="text-[#FA9D6B] ">{{ Carbon\Carbon::parse($val->created_at)->diffForHumans() }}</span> / {{ $val->name }}</div>
-                                            </div>
-                                        </div>
-                                    @endif  
-                                @endforeach
-                                -->
-       
-                                {{-- Button --}}
-                                <!--
-                                <a href="#" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md mb-5">
-                                    <span class="overview-attechment-btn-text">View more</span> 
-                                </a>
-                                -->
-                                <!--
-                                <table width="100%">
-                                    <tbody class="load-task">
-                                        @foreach ($result->task as $task)
-                                            
-                                                <tr class="hover:bg-[#F7F7F7] cursor-pointer loader-checked{{ $task->id }}">
-                                                    <td height="66px" width="12%">
-                                                        <div class="flex items-center justify-center space-x-2">
-                                                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                            </svg>
-                                                            <input id="{{ $task->id }}" onclick="check({{ $task->id }})"  style="color: #3BD7CF" type="checkbox" value="{{ $task->id }}" class="check  w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        </div>
-                                                    </td>
-                                                    <label for="{{ $task->id }}">
-                                                    <td height="66px" width="40%">
-                                                        @if ($task->status == 'Done')
-                                                            <s class="task-text-body text-xs text-[#AFABAB]">{{ $task->task }}  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, aspernatur.</s>                                                  
-                                                        @endif
-                                                        @if ($task->status == 'Inprogress' OR $task->status == Null)
-                                                            <span class="task-text-body text-xs text-[#222222]">{{ $task->task }}</span>
-                                                        @endif
-                                                    </td>
-                                                </label>
-    
-                                                </tr>
-
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            -->
+                                
                                 <div class="load-task">
                                     @foreach ($result->task as $task)
                                     <label for="{{ $task->id }}">
@@ -1790,7 +1728,8 @@
                                                             <s class="task-text-body  text-[#AFABAB]">{{ $task->task }} </s>                                                  
                                                         @endif
                                                         @if ($task->status == 'Inprogress' OR $task->status == Null)
-                                                            <span class="task-text-body  text-[#222222]">{{ $task->task }}</span>
+                                                            <div class="task-text-body  text-[#222222]">{{ $task->task }}</div>
+                                                            <div class="text-gray-400 text-[10px]">{{ Carbon\Carbon::parse($task->created_at)->format('m/d/Y') }}</div>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -2937,7 +2876,7 @@
                                         <div class="w-full" id="a{{ $val_email_body->id }}" >
                                             <div class="w-ful pb-5">
                                               {{-- <i data-modal-toggle="edit_send_mail_talent" onclick="edit_email_template('{{ $val_email_body->type }}') " class="fa fa-pencil float-right text-gray-400 hover:text-colorStatusCard1 cursor-pointer" aria-hidden="true"></i> --}}
-                                                <div data-modal-toggle="edit_send_mail_talent" onclick="edit_email_template('{{ $val_email_body->type }}') " class="absolute left-1/3 bottom-10 px-16  flex items-center justify-center  h-8 bg-palet rounded-md mt-2 hover:cursor-pointer">
+                                                <div data-modal-toggle="edit_send_mail_talent" onclick="edit_email_template('{{ $val_email_body->id }}') " class="absolute left-1/3 bottom-10 px-16  flex items-center justify-center  h-8 bg-palet rounded-md mt-2 hover:cursor-pointer">
                                                     <span class="text-sm text-white">Chose template</span> 
                                                 </div>
                                             </div>
@@ -3274,6 +3213,11 @@
                     success:function(data){
 
                         
+                        var tempDate = new Date(data.data.created_at);
+                        var month = tempDate.getMonth() + 1;
+                        var day = tempDate.getDate();
+                       
+                        var date1 = (('' + month).length < 2 ? '0' : '') + month + '/' +  (('' + day).length < 2 ? '0' : '') + day + '/' + tempDate.getFullYear();
                         var loader = `<label for="${data.data.id}">
                                         <div class="flex space-x-2 space-y-2 hover:bg-[#F7F7F7] cursor-pointer loader-checked${data.data.id}">
                                             <div class="flex items-center  py-2 justify-center space-x-2">
@@ -3285,7 +3229,8 @@
                                                 </div>
                                                 <input id="${data.data.id}" onclick="check(${data.data.id})" style="color: #3BD7CF" type="checkbox" value="" class="hidden check w-5 h-5 rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                 <div>
-                                                    <span class="task-text-body text-[#222222]">${data.data.task}</span>
+                                                    <div class="task-text-body  text-[#222222]">${data.data.task}</div>
+                                                    <div class="text-gray-400 text-[10px]">${date1}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3780,7 +3725,7 @@
     // Edit email template
     const edit_send_mail_talent = document.getElementById('edit_send_mail_talent');
     const editSendMailTalent = new Modal(edit_send_mail_talent, { });
-    function edit_email_template(types){
+    function edit_email_template(id){
         modalSendEmailTalent.hide();
         $.ajaxSetup({
             headers: {
@@ -3790,7 +3735,7 @@
         $.ajax({
             type:'POST',
             url:'{{ route("jobboard.edit_send_mail_talent") }}',
-            data: {types},
+            data: {id},
             success:function(data){
                 $('.load_edit_email_talent').html(data);
                 $('.talent_email').val(localStorage.getItem("talent_email"));

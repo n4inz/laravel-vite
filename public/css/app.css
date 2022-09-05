@@ -778,9 +778,6 @@ video {
 .mb-7 {
   margin-bottom: 1.75rem;
 }
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
 .mt-\[22px\] {
   margin-top: 22px;
 }
@@ -846,6 +843,9 @@ video {
 }
 .ml-\[64\.33px\] {
   margin-left: 64.33px;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 .block {
   display: block;
@@ -949,6 +949,9 @@ video {
 .h-\[60px\] {
   height: 60px;
 }
+.h-\[400px\] {
+  height: 400px;
+}
 .h-80 {
   height: 20rem;
 }
@@ -1005,9 +1008,6 @@ video {
 }
 .h-\[259px\] {
   height: 259px;
-}
-.h-\[400px\] {
-  height: 400px;
 }
 .min-h-full {
   min-height: 100%;
@@ -1311,6 +1311,9 @@ video {
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.flex-row {
+  flex-direction: row;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -1442,11 +1445,6 @@ video {
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
-}
 .-space-x-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(-1rem * var(--tw-space-x-reverse));
@@ -1476,6 +1474,11 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(2.75rem * var(--tw-space-x-reverse));
   margin-left: calc(2.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
 .space-x-\[14px\] > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1971,10 +1974,6 @@ video {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
-.px-20 {
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
 .py-2\.5 {
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -2098,6 +2097,10 @@ video {
   font-size: 0.75rem;
   line-height: 1rem;
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
@@ -2117,12 +2120,11 @@ video {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
 .text-\[11px\] {
   font-size: 11px;
+}
+.text-\[10px\] {
+  font-size: 10px;
 }
 .font-semibold {
   font-weight: 600;

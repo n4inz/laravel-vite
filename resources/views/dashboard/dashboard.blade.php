@@ -268,17 +268,7 @@
         </div>
     </article>
 </main>
-    <script>
-        var events = [
-        {'Date': new Date(2022, 9, 7), 'Title': 'Doctor appointment at 3:25pm.'},
-        {'Date': new Date(2022, 9, 18), 'Title': 'New Garfield movie comes out!', 'Link': 'https://garfield.com'},
-        {'Date': new Date(2022, 9, 27), 'Title': '25 year anniversary', 'Link': 'https://www.google.com.au/#q=anniversary+gifts'},
-        ];
-        var settings = {};
-        var element = document.getElementById('calender');
-        caleandar(element, events, settings);
 
-    </script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Chart line -->
@@ -367,4 +357,25 @@
     }
     </script>
  
+<script>
+    // var events = [
+    //     {'Date': new Date(2022, 9, 7), 'Title': 'Doctor appointment at 3:25pm.'},
+    //     {'Date': new Date(2022, 9, 18), 'Title': 'New Garfield movie comes out!', 'Link': 'https://garfield.com'},
+    //     {'Date': new Date(2022, 9, 27), 'Title': '25 year anniversary', 'Link': 'https://www.google.com.au/#q=anniversary+gifts'},
+    //     ];
+
+    // console.log(eventss);
+    var events = <?=  json_encode($calendlyEvent) ?>;
+    // console.log(events);
+
+    var datanain = [];
+    events.map(function(e){
+        datanain.push({'Date': new Date(e.date) , 'Title':e.event})
+    })
+    console.log(datanain)
+    var settings = {};
+    var element = document.getElementById('calender');
+    caleandar(element, datanain, settings);
+
+</script>
 @endsection

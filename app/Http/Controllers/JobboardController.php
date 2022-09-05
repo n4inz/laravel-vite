@@ -402,7 +402,7 @@ class JobboardController extends Controller
                 'file' => $res->file ,
                 'extension' => strtolower($res->extension)
             ]);
-            $this->move_file('public/Files before submit/'.$res->file, 'public/File/'.$res->file);
+            $this->move_file('public/Files before submit/'.$res->file, 'public/file/'.$res->file);
 
             File::where('id' , $res->id)->delete();
         });
@@ -474,10 +474,10 @@ class JobboardController extends Controller
     {
         
         $request->validate([
-            'types' => 'required'
+            'id' => 'required'
         ]);
 
-        $email  = EmailAgencyTemplate::where('type',$request->types)->first();
+        $email  = EmailAgencyTemplate::where('id',$request->id)->first();
 
         return view('modal.jobboard.edit_email_talent', compact('email'));
        
