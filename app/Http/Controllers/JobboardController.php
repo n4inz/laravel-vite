@@ -2,48 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Actifity;
-use App\Http\Requests\JobBoardRequest;
-
-use App\Http\Requests\NewAplicantsRequest;
-use App\Http\Requests\UserAplicantsRequest;
-use App\Http\Traits\Actifity as TraitsActifity;
-use App\Http\Traits\Event;
-
-use App\Jobs\SendEmailToTalent;
-use App\Models\Actifity as ModelsActifity;
-use App\Models\Client;
+use Stripe\Stripe;
 use App\Models\File;
+
+use App\Models\Client;
+use App\Models\Invoice;
+use App\Models\Talents;
+use App\Events\Actifity;
+
 use App\Models\JobModels;
-use App\Models\JobModelsAvailabiltyDays;
+use App\Http\Traits\Event;
+use App\Models\TalentsFiles;
+use Illuminate\Http\Request;
 use App\Models\JobModelsFile;
-use App\Models\JobModelsLanguages;
-use App\Models\JobModelsMatchTalent;
-use App\Models\JobModelsMatchTalentAdd;
-use App\Models\JobModelsMatchTalentFilter;
-use App\Models\JobModelsNewApplicant;
+use App\Models\TemplateEmail;
 use App\Models\JobModelsRange;
+use App\Http\Traits\HttpGuzzle;
+use App\Jobs\SendEmailToTalent;
+use App\Http\Traits\ImageUpload;
+use App\Models\TalentTypeHelper;
+use App\Models\JobModelsLanguages;
 use App\Models\SettingCalendlyApi;
+use App\Models\EmailAgencyTemplate;
+use App\Models\SettingStatusTalent;
+use App\Models\JobModelsMatchTalent;
+use App\Models\JobModelsNewApplicant;
+use App\Http\Requests\JobBoardRequest;
 use App\Models\SettingJobModelsStatus;
 use App\Models\SettingServiceCategory;
+use App\Models\JobModelsMatchTalentAdd;
+use App\Jobs\sendJobDescriptionToTalent;
+use App\Models\JobModelsAvailabiltyDays;
+use App\Repositories\JobboardRepository;
+use SebastianBergmann\Template\Template;
+use App\Models\JobModelsNewAplicantsFile;
 use App\Models\SettingServiceLocationFee;
 use App\Models\SettingServiceSubcategory;
-use App\Models\SettingStatusTalent;
-use App\Models\Talents;
-use App\Models\TalentTypeHelper;
-use App\Models\TemplateEmail;
-use App\Repositories\JobboardRepository;
-use Illuminate\Http\Request;
-use App\Http\Traits\HttpGuzzle;
-use App\Http\Traits\ImageUpload;
-use App\Jobs\sendJobDescriptionToTalent;
+use App\Http\Requests\NewAplicantsRequest;
+use App\Models\Actifity as ModelsActifity;
+use App\Models\JobModelsMatchTalentFilter;
+use App\Http\Requests\UserAplicantsRequest;
 use App\Mail\sendingEmailDescriptionToTalent;
-use App\Models\EmailAgencyTemplate;
-use App\Models\Invoice;
-use App\Models\JobModelsNewAplicantsFile;
-use App\Models\TalentsFiles;
-use SebastianBergmann\Template\Template;
-use Stripe\Stripe;
+use App\Http\Traits\Actifity as TraitsActifity;
 
 class JobboardController extends Controller
 {
@@ -660,7 +660,7 @@ class JobboardController extends Controller
                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                 'status_key' => 'potential_client',
                 ])->first('id');
-            $exits = JobModels::where('uri_api', $valCalendly->uri)->first('id');
+            $exits = JobModels::where(['uri_api' => $valCalendly->uri, 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id])->first('id');
            
             
              // Get Description

@@ -1283,7 +1283,7 @@
                    $('.display_calendly').html(tmp)
                 },
                 success: function(data){
-                    location.reload()
+                    // location.reload()
                 }
 
             });
