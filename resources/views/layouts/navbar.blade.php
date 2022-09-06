@@ -1,95 +1,94 @@
 {{-- <nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded "> --}}
     <nav id="nav" class="fixed w-[1400px] xl:w-full z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
+        <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
+            <div id="search" class="w-1/2 togle-search-desktop" >
+                {{-- <div class="relative ">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                        </svg>
+                            
+                    </div>
+                    <div class="w-[340px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
+                        <input readonly data-modal-toggle="global-search" type="text" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" autocomplete="off" required>
+                    </div>
 
-    <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
-        <div id="search" class="w-1/2 togle-search-desktop" >
-            {{-- <div class="relative ">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
-                    </svg>
-                        
-                </div>
-                <div class="w-[340px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
-                    <input readonly data-modal-toggle="global-search" type="text" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" autocomplete="off" required>
-                </div>
+                </div> --}}
+            </div>
 
-            </div> --}}
-        </div>
+            <div class="flex items-center justify-end w-1/2">
+                <div class="flex items-center justify-center space-x-11">
+                    <div class="dropdown_comment relative hover:cursor-pointer" data-dropdown-toggle="dropdown-comment">
+                        <div id="counters" class="counter counters{{ auth()->user()->id }}">
+                            @if (App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id , 'status' => 'UNREAD'])->count() > 0)
+                                <div class="count absolute w-[65%] h-[65%] top-0 right-0 flex items-center justify-center bg-red-500 rounded-full text-[8px] text-white">
+                                    {{ App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id , 'status' => 'UNREAD'])->count() }}
+                                </div>
+                            @endif
+                        </div>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.75C15.4518 2.75 18.25 5.54821 18.25 9V18.25H5.75V9C5.75 5.54821 8.54821 2.75 12 2.75ZM19.75 18.25V9C19.75 4.71979 16.2802 1.25 12 1.25C7.71979 1.25 4.25 4.71979 4.25 9V18.25H2C1.58579 18.25 1.25 18.5858 1.25 19C1.25 19.4142 1.58579 19.75 2 19.75H22C22.4142 19.75 22.75 19.4142 22.75 19C22.75 18.5858 22.4142 18.25 22 18.25H19.75Z" fill="#1C1B1E"/>
+                            <path d="M8.75 19C8.75 18.5858 9.08579 18.25 9.5 18.25H14.5C14.9142 18.25 15.25 18.5858 15.25 19V19.5C15.25 21.2949 13.7949 22.75 12 22.75C10.2051 22.75 8.75 21.2949 8.75 19.5V19ZM10.2677 19.75C10.389 20.5981 11.1184 21.25 12 21.25C12.8816 21.25 13.611 20.5981 13.7323 19.75H10.2677Z" fill="#1C1B1E"/>
+                        </svg>
+                    </div>                   
+                    <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300 "  aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
+                        <span class="sr-only">Open user menu</span>
 
-        <div class="flex items-center justify-end w-1/2">
-            <div class="flex items-center justify-center space-x-11">
-                <div class="dropdown_comment relative hover:cursor-pointer" data-dropdown-toggle="dropdown-comment">
-                    <div id="counters" class="counter counters{{ auth()->user()->id }}">
-                        @if (App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id , 'status' => 'UNREAD'])->count() > 0)
-                            <div class="count absolute w-[65%] h-[65%] top-0 right-0 flex items-center justify-center bg-red-500 rounded-full text-[8px] text-white">
-                                {{ App\Models\Notification::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'notify_to' => auth()->user()->id , 'status' => 'UNREAD'])->count() }}
+                        @if (isset(auth()->user()->avatar->avatar))
+                            <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->avatar->avatar) }} ' alt="user photo">
+                        @elseif (isset(auth()->user()->staf->avatar))
+                            <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->staf->avatar) }} ' alt="user photo">
+                        @else
+                            {{-- <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
+                                <span class="text-xs text-gray-300 ">No Images</span>
+                            </div> --}}
+                            <div class="w-12 h-12 flex items-center justify-center bg-[{{ auth()->user()->color }}] rounded-full">
+                                <span class="text-white">{{ strtoupper(substr(auth()->user()->full_name, 0, 1)) }}</span>
                             </div>
                         @endif
-                    </div>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2.75C15.4518 2.75 18.25 5.54821 18.25 9V18.25H5.75V9C5.75 5.54821 8.54821 2.75 12 2.75ZM19.75 18.25V9C19.75 4.71979 16.2802 1.25 12 1.25C7.71979 1.25 4.25 4.71979 4.25 9V18.25H2C1.58579 18.25 1.25 18.5858 1.25 19C1.25 19.4142 1.58579 19.75 2 19.75H22C22.4142 19.75 22.75 19.4142 22.75 19C22.75 18.5858 22.4142 18.25 22 18.25H19.75Z" fill="#1C1B1E"/>
-                        <path d="M8.75 19C8.75 18.5858 9.08579 18.25 9.5 18.25H14.5C14.9142 18.25 15.25 18.5858 15.25 19V19.5C15.25 21.2949 13.7949 22.75 12 22.75C10.2051 22.75 8.75 21.2949 8.75 19.5V19ZM10.2677 19.75C10.389 20.5981 11.1184 21.25 12 21.25C12.8816 21.25 13.611 20.5981 13.7323 19.75H10.2677Z" fill="#1C1B1E"/>
-                    </svg>
-                </div>                   
-                <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full  focus:ring-4 focus:ring-gray-300 "  aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
-                    <span class="sr-only">Open user menu</span>
-
-                    @if (isset(auth()->user()->avatar->avatar))
-                        <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->avatar->avatar) }} ' alt="user photo">
-                    @elseif (isset(auth()->user()->staf->avatar))
-                        <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->staf->avatar) }} ' alt="user photo">
-                    @else
-                        {{-- <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
-                            <span class="text-xs text-gray-300 ">No Images</span>
-                        </div> --}}
-                        <div class="w-12 h-12 flex items-center justify-center bg-[{{ auth()->user()->color }}] rounded-full">
-                            <span class="text-white">{{ strtoupper(substr(auth()->user()->full_name, 0, 1)) }}</span>
-                        </div>
-                    @endif
 
 
-                </button>
-            </div>
-            <!-- Dropdown menu -->
-            <div class="hidden z-50 my-4 text-sm list-none bg-white text-colorStatusCard1 rounded divide-y  shadow " id="dropdown">
-                <div class="py-3 px-4 text-palet font-semibold">
-                    <span class="block text-sm  ">
-
-                            {{ auth()->user()->full_name }}
-
-                    </span>
-                    <span class="block text-sm font-medium  truncate">{{ auth()->user()->email ?? auth()->guard('staf')->user()->email  }}</span>
+                    </button>
                 </div>
-                <ul class="py-1" aria-labelledby="dropdown">
-                    <li>
-                        <a href="{{ route('dashboard') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('user_client.client') }}" class="block py-2 px-4 text-sm  hover:bg-hover">User</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Settings</a>
-                    </li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm  hover:bg-hover">
-                            @csrf
-                            <input  type="submit" class="hover:cursor-pointer" value="Sign out">
-                        </form>
-                        {{-- <a href="#" class=""></a> --}}
-                    </li>
-                </ul>
-            </div>
+                <!-- Dropdown menu -->
+                <div class="hidden z-50 my-4 text-sm list-none bg-white text-colorStatusCard1 rounded divide-y  shadow " id="dropdown">
+                    <div class="py-3 px-4 text-palet font-semibold">
+                        <span class="block text-sm  ">
 
-            {{-- Dropdown comment --}}
-            <div class="hidden z-50 my-4 text-xs list-none  bg-white rounded divide-y  shadow" id="dropdown-comment">
-                <ul class="tmp_notify_comment py-1 w-48 h-48 " aria-labelledby="dropdown">
+                                {{ auth()->user()->full_name }}
 
-                </ul>
+                        </span>
+                        <span class="block text-sm font-medium  truncate">{{ auth()->user()->email ?? auth()->guard('staf')->user()->email  }}</span>
+                    </div>
+                    <ul class="py-1" aria-labelledby="dropdown">
+                        <li>
+                            <a href="{{ route('dashboard') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('user_client.client') }}" class="block py-2 px-4 text-sm  hover:bg-hover">User</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Settings</a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm  hover:bg-hover">
+                                @csrf
+                                <input  type="submit" class="hover:cursor-pointer" value="Sign out">
+                            </form>
+                            {{-- <a href="#" class=""></a> --}}
+                        </li>
+                    </ul>
+                </div>
+
+                {{-- Dropdown comment --}}
+                <div class="hidden z-50 my-4 text-xs list-none  bg-white rounded divide-y  shadow" id="dropdown-comment">
+                    <ul class="tmp_notify_comment py-1 w-48 h-48 " aria-labelledby="dropdown">
+
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 <!-- Main modal -->
 <div id="global-search" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">

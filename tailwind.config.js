@@ -23,6 +23,9 @@ module.exports = {
                 colorStatusCard1: "#FA9D6B",
                 colorStatusCard2: "#FFE2D2",
                 colortext: "#222222",
+                btnOrange: "#F57733",
+                btnDefault: "#3BD7CF",
+                colorFamilyText: "#000000"
             },
             fontFamily: {
                 roboto: ["Roboto", "font-sans"],

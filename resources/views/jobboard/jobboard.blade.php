@@ -52,7 +52,7 @@
                             <div class="w-[265px] flex justify-between">
                                 <div class="flex items-center space-x-1">
                                     <span class="text-base">{{ $sts_val->status_name }}</span>
-                                    <div class="{{ $sts_val->id }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">{{ $sts_val->job_models->count() }}</div>
+                                    <div class="{{ $sts_val->id }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">2</div>
                                 </div>
                                 @if($sts_val->status_key == 'potential_client')
                                     <div data-dropdown-toggle="dropdownBottom"  data-dropdown-placement="left-start" class="hover:cursor-pointer">
@@ -1392,9 +1392,7 @@
     
     });
 
-    CKEDITOR.replace('editor_tmp_email_1', {
 
-    })
 
     
 </script>

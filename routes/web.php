@@ -3,6 +3,8 @@
 use App\Events\Comments;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\Family\HomeController as FamilyHomeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobboardController;
 use App\Http\Controllers\NavbarController;
@@ -133,6 +135,7 @@ Route::group(['middleware' => 'auth'],function(){
 
     //Search
     Route::post('/search', SearchController::class)->name('search');
+
 });
 
 // Home
@@ -149,3 +152,14 @@ Route::post('/login-staf' , [AuthenticateController::class ,'login_staf'])->name
 
 // WebHook Stripe
 Route::post('/webhook-stripe', [StripeController::class, 'webhook']);
+
+
+
+// FAMILY
+Route::prefix('family')->group(function () {
+    Route::get('/home',[FamilyHomeController::class, 'index'])->name('family.home');
+    Route::get('/fill',[FamilyHomeController::class, 'fill'])->name('family.fill');
+    Route::get('/login',[FamilyHomeController::class, 'login'])->name('family.login');
+    Route::get('/login-success',[FamilyHomeController::class, 'login_success'])->name('family.success');
+    
+});
