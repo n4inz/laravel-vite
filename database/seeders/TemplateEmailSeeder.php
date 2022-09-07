@@ -24,38 +24,43 @@ class TemplateEmailSeeder extends Seeder
                 'status' => 'CLIENT CONFIRMATION'
             ],
             [
+                'body' => 'Email internal matched dummy',
+                'type' => 'internal_matched',
+                'status' => 'INTERNAL MATCHED'
+            ],
+            [
                 'body' => '<p>Hi [Helper fn],<br />Thank you for your application! We would like to schedule a quick interview with you to learn more about you and tell you about the position.<br />Please select the time that fits you the best.Thanks,<br />Agency name team</p>',
-                'type' => '1',
+                'type' => 'agency_interview',
                 'status' => 'AGENCY INTERVIEW'
             ],
             [
                 'body' => '<p>Hi [Family First Name],<br />We are able to finalize two caregivers who meet your requirements with years of experience. Please use the link below to view their info.Please note:</p><ul><li>We can hold them for<strong>&nbsp;48 hours</strong>&nbsp;without interviewing other families.</li><li>We recommend our families not to share with them that you are interviewing with other candidates.</li><li>Here are some topics we highly recommend discussing during the interview: rate, job responsibilities, specific schedule, paid vacation, payment frequency, payment method, and working style/philosophy preferences, etc. It doesn&#39;t have to be this order, just a guide.</li></ul><p><strong>Action required from you:&nbsp;</strong><br />We would like to coordinate interviews rather soon given the fast hire market. Please provide your available time/date within the portal to schedule your interviews.<br />Thanks,<br />Agency name team (edited)</p>',
-                'type' => '2',
+                'type' => 'present_to_family',
                 'status' => 'PRESENT TO FAMILY'
             ],
             [
                 'body' => '<p>Hi [family first name]/[helper first name]<br />Your interview is set up at this time. Please make sure you&#39;re on time and call via xx. Feel free to send a text to greet each other. If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
-                'type' => '3',
+                'type' => 'family_interview',
                 'status' => 'FAMILY INTERVIEW'
             ],
             [
                 'body' => '<p>Hi [family first name]/[helper first name]<br />Your trial is set up at this time. Please make sure you&#39;re on time and meet at this time at this address.<br />If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
-                'type' => '4',
+                'type' => 'family_trialing',
                 'status' => 'FAMILY TRIALLING'
             ],
             [
                 'body' => '<p>Hi [helper first name]<br />Thank you very much for your application.<br />Unfortunate, the family doesn&#39;t think this is a good fit due to the following reason: xxx<br />We will keep an eye out for another position. Please also keep us updated with your availability. Thanks,</p>',
-                'type' => '5',
+                'type' => 'rejected',
                 'status' => 'REJECTAD'
             ],
             [
                 'body' => '<p>Hi [family fn],<br />Unfortunately this helper withdrawn due to the following reason: xxx<br />We will keep searching for another candidat</p>',
-                'type' => '6',
+                'type' => 'withdrawn',
                 'status' => 'WITHDRAWN'
             ],
             [
                 'body' => '<p>Hi [family first name]/[helper first name]<br />Congratulations to you both for finalizing the relationship. If you haven&#39;t done so already, please make sure you specify the scope of work, terms, schedule and any other details.Please feel free to coordinate directly from here onwards. Let us know if you have any other questions.<br />Thanks,&nbsp;</p>',
-                'type' => '7',
+                'type' => 'family_offer',
                 'status' => 'FAMILY OFFER'
             ],
             // FEEDBACK
@@ -97,44 +102,50 @@ class TemplateEmailSeeder extends Seeder
                     'users_id' => $user->id
                 ],
                 [
+                    'body' => 'Email internal matched dummy',
+                    'type' => 'internal_matched',
+                    'status' => 'INTERNAL MATCHED',
+                    'users_id' => $user->id
+                ],
+                [
                     'body' => '<p>Hi [Helper fn],<br />Thank you for your application! We would like to schedule a quick interview with you to learn more about you and tell you about the position.<br />Please select the time that fits you the best.Thanks,<br />Agency name team</p>',
-                    'type' => '1',
+                    'type' => 'agency_interview',
                     'status' => 'AGENCY INTERVIEW',
                     'users_id' => $user->id
                 ],
                 [
                     'body' => '<p>Hi [Family First Name],<br />We are able to finalize two caregivers who meet your requirements with years of experience. Please use the link below to view their info.Please note:</p><ul><li>We can hold them for<strong>&nbsp;48 hours</strong>&nbsp;without interviewing other families.</li><li>We recommend our families not to share with them that you are interviewing with other candidates.</li><li>Here are some topics we highly recommend discussing during the interview: rate, job responsibilities, specific schedule, paid vacation, payment frequency, payment method, and working style/philosophy preferences, etc. It doesn&#39;t have to be this order, just a guide.</li></ul><p><strong>Action required from you:&nbsp;</strong><br />We would like to coordinate interviews rather soon given the fast hire market. Please provide your available time/date within the portal to schedule your interviews.<br />Thanks,<br />Agency name team (edited)</p>',
-                    'type' => '2',
+                    'type' => 'present_to_family',
                     'status' => 'PRESENT TO FAMILY',
                     'users_id' => $user->id
                 ],
                 [
                     'body' => '<p>Hi [family first name]/[helper first name]<br />Your interview is set up at this time. Please make sure you&#39;re on time and call via xx. Feel free to send a text to greet each other. If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
-                    'type' => '3',
+                    'type' => 'family_interview',
                     'status' => 'FAMILY INTERVIEW',
                     'users_id' => $user->id
                 ],
                 [
                     'body' => '<p>Hi [family first name]/[helper first name]<br />Your trial is set up at this time. Please make sure you&#39;re on time and meet at this time at this address.<br />If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
-                    'type' => '4',
+                    'type' => 'family_trialing',
                     'status' => 'FAMILY TRIALLING',
                     'users_id' => $user->id
                 ],
                 [
                     'body' => '<p>Hi [helper first name]<br />Thank you very much for your application.<br />Unfortunate, the family doesn&#39;t think this is a good fit due to the following reason: xxx<br />We will keep an eye out for another position. Please also keep us updated with your availability. Thanks,</p>',
-                    'type' => '5',
+                    'type' => 'rejected',
                     'status' => 'REJECTAD',
                     'users_id' => $user->id
                 ],
                 [
                     'body' => '<p>Hi [family fn],<br />Unfortunately this helper withdrawn due to the following reason: xxx<br />We will keep searching for another candidat</p>',
-                    'type' => '6',
+                    'type' => 'withdrawn',
                     'status' => 'WITHDRAWN',
                     'users_id' => $user->id
                 ],
                 [
                     'body' => '<p>Hi [family first name]/[helper first name]<br />Congratulations to you both for finalizing the relationship. If you haven&#39;t done so already, please make sure you specify the scope of work, terms, schedule and any other details.Please feel free to coordinate directly from here onwards. Let us know if you have any other questions.<br />Thanks,&nbsp;</p>',
-                    'type' => '7',
+                    'type' => 'family_offer',
                     'status' => 'FAMILY OFFER',
                     'users_id' => $user->id
                 ],

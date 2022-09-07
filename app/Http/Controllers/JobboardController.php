@@ -259,21 +259,17 @@ class JobboardController extends Controller
     public function talent_status(Request $request)
     {
 
-        JobModelsMatchTalentAdd::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
+        $type =  str_replace(' ', '_', strtolower($request->status));
+        $email  = EmailAgencyTemplate::where([ 'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id,'type'=> $type])->first();
+
+       JobModelsMatchTalentAdd::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
             'status' => $request->status,
             'talents_id' => $request->talent_id,
             'job_models_id' => $request->job_models_id,
             
         ]);
-
-        // JobModelsMatchTalentFilter::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
-        //     'status' => $request->status,
-        //     'talents_id' => $request->talent_id,
-        //     'job_models_id' => $request->job_models_id,
-            
-        // ]);
-
-        return response(200);
+        
+        return view('modal.jobboard.edit_email_talent', compact('email'));
     }
 
     public function detail_match_talent($id)
@@ -470,18 +466,18 @@ class JobboardController extends Controller
     }
 
     // AJAX
-    public function edit_send_mail_talent(Request $request)
-    {
+    // public function edit_send_mail_talent(Request $request)
+    // {
         
-        $request->validate([
-            'id' => 'required'
-        ]);
+    //     $request->validate([
+    //         'id' => 'required'
+    //     ]);
 
-        $email  = EmailAgencyTemplate::where('id',$request->id)->first();
+    //     $email  = EmailAgencyTemplate::where('id',$request->id)->first();
 
-        return view('modal.jobboard.edit_email_talent', compact('email'));
+    //     return view('modal.jobboard.edit_email_talent', compact('email'));
        
-    }
+    // }
     public function save_as_email_client(Request $request)
     {
         EmailAgencyTemplate::updateOrCreate(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id],[

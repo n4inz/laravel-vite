@@ -102,7 +102,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('edit-client-detail',[JobboardController::class, 'edit_client_detail'])->name('jobboard.edit_client_detail');
     Route::post('edit-subcategory',[JobboardController::class, 'edit_subcategorys'])->name('jobboard.edit_subcategory');
     Route::post('edit-talents-ayi',[JobboardController::class, 'edit_talents_ayi'])->name('jobboard.edit_talents_ayi');
-    Route::post('edit-send-mail-talent',[JobboardController::class, 'edit_send_mail_talent'])->name('jobboard.edit_send_mail_talent');
+    // Route::post('edit-send-mail-talent',[JobboardController::class, 'edit_send_mail_talent'])->name('jobboard.edit_send_mail_talent');
     Route::post('save-as-email-talent',[JobboardController::class, 'save_as_email_talent'])->name('jobboard.save_as_email_talent');
     
    

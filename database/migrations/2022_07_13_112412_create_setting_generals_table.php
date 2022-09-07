@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('setting_generals', function (Blueprint $table) {
             $table->id();
             $table->string('agency_name');
-            $table->string('url_ending_legal');
+            $table->string('url_ending_legal')->nullable();
             $table->string('company_description');
             $table->unsignedBigInteger('users_id');
             $table->timestamps();

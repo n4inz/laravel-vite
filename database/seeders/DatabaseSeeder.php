@@ -45,11 +45,11 @@ class DatabaseSeeder extends Seeder
             TalentsSeeder::class,
             TalentLanguageSeeder::class,
             TalentTypeHelperSeeder::class,
-            // JobSeeder::class,
+            JobSeeder::class,
 
-            // SeedersJobModelsAvailabiltyDaysSeeder::class,
-            // JobModelsLanguagesSeeder::class,
-            // JobModelsMatchTalentSeeder::class,
+            SeedersJobModelsAvailabiltyDaysSeeder::class,
+            JobModelsLanguagesSeeder::class,
+            JobModelsMatchTalentSeeder::class,
 
             StafSeeder::class,
            

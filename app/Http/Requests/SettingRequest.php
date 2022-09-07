@@ -25,7 +25,7 @@ class SettingRequest extends FormRequest
     {
         return [
             'agency_name' => 'required|min:3',
-            'url_ending_legal' => 'required', 
+            // 'url_ending_legal' => 'required', 
             'company_description' => 'required|min:10',
             // 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // 'chile_care_category' OR 'senior_care_category.*' OR 'home_care_category.*' OR 'other_category.*' =>  'required',

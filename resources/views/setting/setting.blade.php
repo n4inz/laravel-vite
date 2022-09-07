@@ -21,15 +21,15 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div class="errors_agency_name">
-                                        <label class="{{ $errors->has('company_description') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">Agency Name</label>
-                                        <div class="{{ $errors->has('agency_name') ? 'border-red-500' : '' }} flex items-center justify-center w-[316px] h-10 border  rounded text-[#222222]">
+                                        <label class="{{ $errors->has('agency_name') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">Agency Name</label>
+                                        <div class="{{ $errors->has('agency_name') ? 'border-red-500' : '' }} flex items-center justify-center w-[650px] h-10 border  rounded text-[#222222]">
                                             <input name="agency_name" value="{{ old('agency_name' , $setting->SettingGeneral->agency_name ?? null) }}" type="text" class="{{ $errors->has('agency_name') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " autocomplete="off">
                                         </div>
                                         @if($errors->has('agency_name'))
                                             <p class="mt-2 text-sm text-red-600">{{ $errors->first('agency_name') }}</p>
                                         @endif
                                     </div>
-                                    <div class="errors_url_ending_legal">
+                                    <div class="errors_url_ending_legal hidden">
                                         <label  class="{{ $errors->has('url_ending_legal') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-2">URL Ending Legal</label>
                                         <div class="{{ $errors->has('url_ending_legal') ? 'border-red-500' : '' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
                                             <input name="url_ending_legal" value="{{ old('url_ending_legal', $setting->SettingGeneral->url_ending_legal ?? null ) }}" type="text" class="{{ $errors->has('url_ending_legal') ? 'placeholder-red-700' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 ml-3 outline-none " autocomplete="off">
@@ -38,6 +38,21 @@
                                             <p class="mt-2 text-sm text-red-600">{{ $errors->first('url_ending_legal') }}</p>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="errors_location px-6 mt-4">
+                                    <label for="first-name" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3">Headquarter</label>
+                                    <div class="{{ $errors->has('location') ? 'border-red-500' : '' }} w-[650px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
+                                        <input type="text"value="{{ old('location' , $setting->SettingDetail->service_location_fee->location ?? null) }}"  name="location" class="placepicker-setting text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                        <div>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
+                                                <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
+                                            </svg>   
+                                        </div>
+                                    </div>
+                                    @if($errors->has('location'))
+                                        <p class="mt-2 text-sm text-red-600">{{ $errors->first('location') }}</p>
+                                    @endif
                                 </div>
                                 <div class="px-6 mt-4 errors_company_description">
                                     <label class="{{ $errors->has('company_description') ? 'text-red-500' : '' }} overview-status-field text-[#222222] mb-2">Company Description</label>
@@ -61,53 +76,53 @@
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div class="w-full errors_status">
-                                        <label class="block overview-status-field text-[#222222] mb-3">Job Status</label>
+                                        <label class="block overview-status-field text-[#222222] mb-3 ">Job Status  <i class="ml-2 text-[10px] text-red-500">editable*</i></label>
                                         @if ($setting->SettingJobStatus->count() == 0)
-                                            <div class="flex px-4 flex-wrap rounded-lg " id="chile_care">
+                                            <div class="flex flex-wrap rounded-lg " id="chile_care">
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52 hidden">
                                                     <input type="hidden" name="0" value="0">
                                                     <input checked name="0" @if(is_array(old('status')) && in_array('potential_client', old('status'))) checked  @endif @if(in_array('potential_client', $jobStatus)) checked @endif value="1" type="checkbox" id="potential_client" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
                                                     <input name="name_status_job[]" type="text" value="Potential Client" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
-                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52">
+                                                <div class="flex items-center space-x-[14px] mt-[10px] w-52 group rounded">
                                                     <input type="hidden" name="1" value="0">
                                                     <input name="1" @if(is_array(old('status')) && in_array('internal_matched', old('status'))) checked  @endif @if(in_array('internal_matched', $jobStatus)) checked @endif value="1" type="checkbox" id="internal_matched" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
-                                                    <input name="name_status_job[]" type="text" value="Internal Matched" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Internal Matched" style="font-size: 13.5px; line-height: 15px;" class=" text-colortext hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="2" value="0">
                                                     <input name="2" @if(is_array(old('status')) && in_array('agency_interview', old('status'))) checked  @endif @if(in_array('agency_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="agency_interview"  style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Agency Interview" class="task-text-body text-[#222222] text-sm hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Agency Interview" style="font-size: 13.5px; line-height: 15px;" class=" text-[#222222] text-sm hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="3" value="0">
                                                     <input name="3" @if(is_array(old('status')) && in_array('present_to_family', old('status'))) checked  @endif @if(in_array('present_to_family', $jobStatus)) checked @endif  value="1" type="checkbox" id="present_to_family" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Present to Family" class="task-text-body text-[#222222] text-sm hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Present to Family" style="font-size: 13.5px; line-height: 15px;" class=" text-[#222222] text-sm hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="4" value="0">
                                                     <input name="4" @if(is_array(old('status')) && in_array('family_interview', old('status'))) checked  @endif @if(in_array('family_interview', $jobStatus)) checked @endif value="1" type="checkbox" id="family_interview" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Family Interview" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Family Interview" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="5" value="0">
                                                     <input name="5" @if(is_array(old('status')) && in_array('family_trialing', old('status'))) checked  @endif @if(in_array('family_trialing', $jobStatus)) checked @endif value="1" type="checkbox" id="family_trialing" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Family Trialing" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Family Trialing" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="6" value="0">
                                                     <input name="6" @if(is_array(old('status')) && in_array('rejected', old('status'))) checked  @endif @if(in_array('rejected', $jobStatus)) checked @endif value="1" type="checkbox" id="rejected" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Rejected" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Rejected" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="7" value="0">
                                                     <input name="7"  @if(is_array(old('status')) && in_array('withdrawn', old('status'))) checked  @endif @if(in_array('withdrawn', $jobStatus)) checked @endif value="1" type="checkbox" id="withdrawn" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Withdrawn" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Withdrawn" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                                 <div class="flex items-center space-x-[14px] mt-[10px] w-52">
                                                     <input type="hidden" name="8" value="0">
                                                     <input name="8"  @if(is_array(old('status')) && in_array('family_offer', old('status'))) checked  @endif @if(in_array('family_offer', $jobStatus)) checked @endif value="1" type="checkbox" id="family_offer" style="color: #3BD7CF" type="checkbox"  class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                    <input name="name_status_job[]" type="text" value="Family Offer" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    <input name="name_status_job[]" type="text" value="Family Offer" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
                                                 </div>
                                             </div>
                                         @else
@@ -118,7 +133,7 @@
                                                             <input type="hidden" name="{{ $loop->iteration -2 }}" value="0">
                                                             <input  name="{{ $loop->iteration -2 }}" @if($val->status) checked @endif value="1" type="checkbox" id="{{ $val->id }}" style="color: #3BD7CF" type="checkbox" class="talent-status w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
                                                         
-                                                            <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" class="task-text-body text-sm text-[#222222] hover:bg-[#F7F7F7] w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                            <input name="name_status_job[]" type="text" value="{{ $val->status_name }}" style="font-size: 13.5px; line-height: 15px;" class="  text-colortext hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent h-7 border-none focus:ring-0" autocomplete="off">
                                                             <input type="hidden" name="id[]" value="{{ $val->id }}">
                                                         </div>
                                                     @endif
@@ -132,7 +147,7 @@
                                 </div>
                                 <div class="px-6 mt-6 flex space-x-4">
                                     <div class="w-full">
-                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Talent Status</label>
+                                        <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Talent Status <i class="ml-2 text-[10px] text-red-500">not editable*</i></label>
                                         <div class="errors_status_talent">
                                             {{-- Chile Care --}}
                                             <div class="flex space-x-7 p-4 rounded-lg" id="chile_care" role="tabpanel" aria-labelledby="chile-care">
@@ -187,13 +202,13 @@
                                 </div>
                                 <div class="px-6 mt-8 flex space-x-4">
                                     <div>
-                                        <label class="block overview-status-field text-[#222222] mb-3">Service type</label>
+                                        <label class="block overview-status-field text-[#222222] mb-3">Service Type</label>
                                         <div class="w-[316px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
                                             <select name="service_type" id="category" class="text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                <option value="Placement">Placement</option>
-                                                <option value="Test 1">Test 1</option>
-                                                <option value="Test 2">Test 1</option>
-                                                <option value="Test 3">Test 1</option>
+                                                <option @if(old('service_type') == 'Placement') selected @endif value="Placement">Placement</option>
+                                                <option @if(old('service_type') == 'Test 1') selected @endif value="Test 1">Test 1</option>
+                                                <option @if(old('service_type') == 'Test 2') selected @endif value="Test 2">Test 2</option>
+                                                <option @if(old('service_type') == 'Test 3') selected @endif value="Test 3">Test 3</option>
                                             </select>
                                             <div>
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -207,34 +222,31 @@
                                 <div class="px-6 mt-6 flex space-x-4">
                                     <div class="w-full errors_subcategory">
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Category</label>
-                                         <div class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                         <div class="flex  items-center justify-between flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile"  role="tab" aria-controls="profile" aria-selected="false">
-                                                <input disabled {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                {{-- <input disabled {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care w-5 h-5 hidden rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
                                                 <label class="overview-id-field text-colortext ">Child care</label>
                                             </div>
                                             
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 " id="dashboard-tab" data-tabs-target="#dashboard"  role="tab" aria-controls="dashboard" aria-selected="false">
-                                                <input disabled {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="senior-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                {{-- <input disabled {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="senior-care w-5 h-5 hidden rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
                                                 <label  class="overview-id-field text-colortext">Senior care</label>
                                             </div>
                                             
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 " id="settings-tab" data-tabs-target="#settings"  role="tab" aria-controls="settings" aria-selected="false">
-                                                <input disabled {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="home-care w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                {{-- <input disabled {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="home-care w-5 h-5 hidden rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
                                                 <label  class="overview-id-field text-colortext">Home care</label>
                                             </div>
                                             
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 " id="contacts-tab" data-tabs-target="#contacts"  role="tab" aria-controls="contacts" aria-selected="false">
-                                                <input disabled {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                {{-- <input disabled {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other w-5 h-5 hidden rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
                                                 <label  class="overview-id-field text-colortext">Other services</label>
                                             </div>
                                             <input name="chile_care_category" {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care hidden subcategory">
                                             <input  name="senior_care_category" {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory senior-care " >
                                             <input name="home_care_category" {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory home-care" >
                                             <input name="other_category" {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other hidden subcategory " >
-                                            </div>
-                                         
-
-                                        
+                                        </div>
                                         <div id="myTabContent">
                                  
                                             <div class="flex space-x-10 p-4 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -393,22 +405,7 @@
                                         
                                     </div>
                                 </div>
-                                <div class="px-6 mt-8 flex items-center space-x-[25px]">
-                                    <div class="errors_location">
-                                        <label for="first-name" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3">Headquarter</label>
-                                        <div class="{{ $errors->has('location') ? 'border-red-500' : '' }} w-[450px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
-                                            <input type="text"value="{{ old('location' , $setting->SettingDetail->service_location_fee->location ?? null) }}"  name="location" class="placepicker-setting text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                            <div>
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
-                                                    <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
-                                                </svg>   
-                                            </div>
-                                        </div>
-                                        @if($errors->has('location'))
-                                            <p class="mt-2 text-sm text-red-600">{{ $errors->first('location') }}</p>
-                                        @endif
-                                    </div>
+                                {{-- <div class="px-6 mt-8 flex items-center space-x-[25px]">
                                     <div>
                                         <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
@@ -416,7 +413,7 @@
                                             <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
                                     <div class="w-full errors_aplication_fee">   
                                         <div class=" flex items-center space-x-[14px]">
@@ -424,13 +421,8 @@
                                             <label for="aplication_fee_checkbox" class="{{ $errors->has('aplication_fee_checkbox') ? 'text-red-500' : '' }} hover:cursor-pointer overview-status-field text-colortext ">Application Fee ($)</label>
                                         </div>
                                         <div class="w-full pl-8 mt-2">
-                                            <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }}  {{ isset($setting->SettingDetail->service_location_fee->aplication_fee_check)  ? 'bg-gray-200' : '' }}  aplication_fee  flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input @if(isset($setting->SettingDetail->service_location_fee->aplication_fee_check)) disabled @endif name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} {{ $setting->SettingDetail->service_location_fee->aplication_fee_check ?? null  ? 'bg-gray-200' : '' }}  aplication_fee_validate  aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
-                                                {{-- <div class="flex items-center justify-center space-x-2 pr-2">
-                                                    <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
-                                                    <span class="{{ $errors->has('aplication_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                                </div> --}}
-                                               
+                                            <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }}  {{ isset($setting->SettingDetail->service_location_fee->aplication_fee_check)  ? 'bg-gray-200' : '' }} {{ old('aplication_fee_checkbox') ? 'bg-gray-200' : '' }} aplication_fee  flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input @if(old('aplication_fee_checkbox')) disabled @endif  @if(isset($setting->SettingDetail->service_location_fee->aplication_fee_check)) disabled @endif name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }} {{ $setting->SettingDetail->service_location_fee->aplication_fee_check ?? null  ? 'bg-gray-200' : '' }}  {{ old('aplication_fee_checkbox') ? 'bg-gray-200 placeholder-gray-200 text-gray-200' : '' }} aplication_fee_validate  aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -440,12 +432,8 @@
                                             <label for="placement_fee_checkbox" class="{{ $errors->has('placement_fee_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext hover:cursor-pointer">Placement Fee ($)</label>
                                         </div>
                                         <div class="w-full pl-8 mt-2">
-                                            <div class="placement_fee {{ $errors->has('placement_fee') ? 'border-red-500' : '' }} {{ isset($setting->SettingDetail->service_location_fee->placement_fee_check)  ? 'bg-gray-200' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input @if(isset($setting->SettingDetail->service_location_fee->placement_fee_check)) disabled @endif name="placement_fee" value="{{ old('placement_fee' , isset($setting->SettingDetail->service_location_fee->placement_fee)) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} {{ isset($setting->SettingDetail->service_location_fee->placement_fee_check)  ? 'bg-gray-200' : '' }} placement_fee_validate placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
-                                                {{-- <div class="flex items-center justify-center space-x-2 pr-2">
-                                                    <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
-                                                    <span class="{{ $errors->has('placement_fee') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                                </div> --}}
+                                            <div class="placement_fee {{ old('placement_fee_checkbox') ? 'bg-gray-200' : '' }} {{ $errors->has('placement_fee') ? 'border-red-500' : '' }} {{ isset($setting->SettingDetail->service_location_fee->placement_fee_check)  ? 'bg-gray-200' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input @if(old('placement_fee_checkbox')) disabled @endif @if(isset($setting->SettingDetail->service_location_fee->placement_fee_check)) disabled @endif name="placement_fee" value="{{ old('placement_fee' , isset($setting->SettingDetail->service_location_fee->placement_fee)) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }} {{ isset($setting->SettingDetail->service_location_fee->placement_fee_check)  ? 'bg-gray-200' : '' }} {{ old('placement_fee_checkbox') ? 'bg-gray-200 placeholder-gray-200 text-gray-200' : '' }} placement_fee_validate placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -455,12 +443,8 @@
                                             <label for="hourly_rate_checkbox" class="{{ $errors->has('hourly_rate_checkbox') ? 'text-red-500' : '' }} hover:cursor-pointer overview-status-field text-colortext ">Hourly Rate ($)</label>
                                         </div>
                                         <div class="w-full pl-8 mt-2">
-                                            <div class="hourly_rate {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} {{ isset($setting->SettingDetail->service_location_fee->hourly_rate_check)  ? 'bg-gray-200' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input @if(isset($setting->SettingDetail->service_location_fee->hourly_rate_check)) disabled @endif name="hourly_rate" value="{{ old('hourly_rate' , isset($setting->SettingDetail->service_location_fee->hourly_rate)) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} {{ isset($setting->SettingDetail->service_location_fee->hourly_rate_check)  ? 'bg-gray-200' : '' }} hourly_rate_validate hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
-                                                {{-- <div class="flex items-center justify-center space-x-2 pr-2">
-                                                    <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-base text-colortext hover:cursor-pointer">+</span>
-                                                    <span class="{{ $errors->has('hourly_rate') ? 'text-red-700' : '' }} text-lg text-colortext font-semibold hover:cursor-pointer">-</span>
-                                                </div> --}}
+                                            <div class="hourly_rate {{ old('hourly_rate_checkbox') ? 'bg-gray-200' : '' }} {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} {{ isset($setting->SettingDetail->service_location_fee->hourly_rate_check)  ? 'bg-gray-200' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input @if(old('hourly_rate_checkbox')) disabled @endif @if(isset($setting->SettingDetail->service_location_fee->hourly_rate_check)) disabled @endif name="hourly_rate" value="{{ old('hourly_rate' , isset($setting->SettingDetail->service_location_fee->hourly_rate)) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} {{ isset($setting->SettingDetail->service_location_fee->hourly_rate_check)  ? 'bg-gray-200' : '' }} {{ old('hourly_rate_checkbox') ? 'bg-gray-200 placeholder-gray-200 text-gray-200' : '' }} hourly_rate_validate hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -476,7 +460,7 @@
                                     </div>
                                 </div>
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                                <div class="px-6 mt-8 flex items-center space-x-4 ">
+                                {{-- <div class="px-6 mt-8 flex items-center space-x-4 ">
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Client</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
@@ -491,7 +475,7 @@
                                             <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="px-6 mt-8 flex items-center space-x-4 ">
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
@@ -508,7 +492,7 @@
                                 <div class="px-4 pt-[18.5px]">
                                     <div class="flex items-center space-x-2 ">
                                         <div class="w-2 h-6 bg-[#01A3FE] rounded-sm"></div>
-                                        <span class="text-[#222222] user-create-client-title">Additional settings</span>
+                                        <span class="text-[#222222] user-create-client-title">Additional Settings</span>
                                     </div>
                                 </div>
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
@@ -528,10 +512,17 @@
 
                                 <div class="px-8 mt-8 ">
                                     <label for="" class="overview-status-field text-colortext">Notification</label>
-                                    <div class="flex items-center justify-between border-b py-[26.5px]">
+                                    <div class="flex items-center justify-between py-5">
                                         <span class=" overview-id-field text-colortext">Allow email notifications</span>
                                         <label for="toggle-email-notif" class="relative inline-flex items-center cursor-pointer">
                                             <input name="notification_email" {{ $setting->SettingAdditionals->notification_email ?? null ? 'checked' : '' }}  value="1" type="checkbox" id="toggle-email-notif" class="sr-only peer">
+                                            <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between py-5">
+                                        <span class=" overview-id-field text-colortext">Send Notification</span>
+                                        <label for="send-notification" class="relative inline-flex items-center cursor-pointer">
+                                            <input name="send_notifcation" {{ old('send_notifcation') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->send_notifcation ?? null ? 'checked' : '' }}  value="1" type="checkbox" id="send-notification" class="sr-only peer">
                                             <div class="w-[51px] h-8 bg-gray-200 rounded-full peer peer-focus:ring-4  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:-left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all  peer-checked:bg-palet focus:ring-0 outline-none"></div>
                                         </label>
                                     </div>
@@ -687,24 +678,32 @@
                                                 <span class="task-text-body text-colortext">{{ $value->body }}</span>
                                             </div>
                                             <div class="w-full">
-                                                <span class="task-text-body text-colortext">{{ $value->day }} Day</span>
+                                                @if ($value->day == 7)
+                                                    <span class="overview-id-field text-colortext">1 Week</span>
+                                                @else
+                                                    <span class="overview-id-field text-colortext">{{ $value->day }} Day</span>
+                                                @endif
                                             </div>
+                                            <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
+                                            <input type="hidden" name="body[]" value="{{ $value->body }}">
+                                            <input type="hidden" name="day[]" value="{{ $value->day }}">
                                         </div>
-                                        
                                     @endforeach
                                     
                                    
                                     {{-- Add more --}}
                                     <div class="add">
                                         <div class="flex items-center space-x-[29.5px] mb-7">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                            </svg>
                                             <div>
-                                                <input name="body[]" value="" type="text" id="first-name" class="border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                </svg>
                                             </div>
-                                            <div>
+                                            <div class="w-full">
+                                                <input name="body[]" value="" type="text" id="first-name" class="bg-transparent border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                            </div>
+                                            <div class="w-full">
                                                 <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                                     <select id="part-time" name="day[]" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                                         <option @if(old('7') == '7') selected @endif value="7">1 Week</option>
@@ -720,13 +719,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
                                         </div>
-                                        
                                     </div>
                                     
                                     {{-- Button --}}
                                     <div onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md flex items-center justify-center hover:cursor-pointer">
-                                        <span class="task-btn-text">+ Add More</span>
+                                        <span class="task-btn-text">+ Add More </span>
                                     </div>
                                 </div>
                                 <div class="flex mt-8"></div>
@@ -793,7 +792,7 @@
     <script>
     // Validate
     $(function(){
-        var validate = $('.validate_setting');
+        var validate = $('.validate_settings');
         
             if(validate.length){
                 validate.validate({
@@ -956,34 +955,49 @@
     // FEE
     $('#aplication_fee_checkbox').click(function(){
         $('.aplication_fee').toggleClass('bg-gray-200');
+        $('.aplication_fee').removeClass('border-red-500');
+        $('.aplication_fee_input').removeClass('placeholder-red-700');
         $('.aplication_fee_input').toggleClass('bg-gray-200');
         if (this.checked) {
             $('.aplication_fee_input').prop('disabled', true);
-            $('.aplication_fee_input').val('');
+            $('.aplication_fee_input').toggleClass('border-gray-200 ');
+            $('.aplication_fee_input').addClass('placeholder-gray-200 text-gray-200');
         } else {
             $('.aplication_fee_input').prop('disabled', false);
+            $('.aplication_fee_input').addClass('placeholder-gray-200 text-colortext');
+            $('.aplication_fee_input').removeClass('text-gray-200');
         }
     })
 
     $('#placement_fee_checkbox').click(function(){
         $('.placement_fee').toggleClass('bg-gray-200');
+        $('.placement_fee').removeClass('border-red-500');
+        $('.placement_fee_input').removeClass('placeholder-red-700');
         $('.placement_fee_input').toggleClass('bg-gray-200');
         if (this.checked) {
             $('.placement_fee_input').prop('disabled', true);
-            $('.placement_fee_input').val('');
+            $('.placement_fee_input').toggleClass('border-gray-200 ');
+            $('.placement_fee_input').addClass('placeholder-gray-200 text-gray-200');
         } else {
             $('.placement_fee_input').prop('disabled', false);
+            $('.placement_fee_input').addClass('placeholder-gray-200 text-colortext');
+            $('.placement_fee_input').removeClass('text-gray-200');
         }
     })
 
     $('#hourly_rate_checkbox').click(function(){
         $('.hourly_rate').toggleClass('bg-gray-200');
+        $('.hourly_rate').removeClass('border-red-500');
+        $('.hourly_rate').removeClass('placeholder-red-700');
         $('.hourly_rate_input').toggleClass('bg-gray-200');
         if (this.checked) {
             $('.hourly_rate_input').prop('disabled', true);
-            $('.hourly_rate_input').val('');
+            $('.hourly_rate_input').toggleClass('border-gray-200 ');
+            $('.hourly_rate_input').addClass('placeholder-gray-200 text-gray-200');
         } else {
             $('.hourly_rate_input').prop('disabled', false);
+            $('.hourly_rate_input').addClass('placeholder-gray-200 text-colortext');
+            $('.hourly_rate_input').removeClass('text-gray-200');
         }
     })
     

@@ -33,6 +33,7 @@ class SettingRepository {
             'full_name' => $request->agency_name,
             ]);
             
+            
             SettingGeneral::create([
                 'agency_name' => $request->agency_name,
                 'url_ending_legal' => $request->url_ending_legal, 
@@ -351,9 +352,10 @@ class SettingRepository {
                 'notification_email' => $request->notification_email,
                 'dashboard_color_theme' => $request->dashboard_color_theme,
             ]);
-
+            SettingDefinedCheckList::where('users_id', auth()->user()->id)->delete();
             foreach($request->body as $keys => $value){
                 if($request->body[$keys] != null){
+                    
                     SettingDefinedCheckList::create([
                         'body' => $request->body[$keys],
                         'setting_additionals_id' => $sett_id->id,
@@ -364,7 +366,6 @@ class SettingRepository {
             }
 
             
-
             foreach($request->name_status_job as $key => $status){
             
                 SettingJobModelsStatus::updateOrCreate(['id' => $request->id[$key] ],[
