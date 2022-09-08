@@ -36,4 +36,5 @@ function create_jobs(sts){
 //  }
  function close_modal(){
     modal.hide();
+    localStorage.clear();
  }

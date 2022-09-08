@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('job_models_tasks', function (Blueprint $table) {
             $table->id();
             $table->string('task');
+            $table->integer('order');
             $table->string('assignee')->nullable();
             $table->string('day')->nullable();
             $table->string('status')->nullable();

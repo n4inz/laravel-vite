@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('body')->nullable();
             $table->string('day')->nullable();
+            $table->integer('order')->nullable();
             $table->unsignedBigInteger('setting_additionals_id');
             $table->unsignedBigInteger('users_id');
 

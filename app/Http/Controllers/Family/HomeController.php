@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        
         return view('family.home');
     }
 
@@ -25,5 +26,10 @@ class HomeController extends Controller
     public function login_success()
     {
         return view('family.loginSuccess');
+    }
+
+    public function on_boarding()
+    {
+        return view('family.on_boarding');
     }
 }

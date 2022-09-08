@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('talents_id');
             $table->string('status')->nullable();
+            $table->string('color_status')->nullable();
             $table->unsignedBigInteger('job_models_id');
 
             $table->foreign('job_models_id')

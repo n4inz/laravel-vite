@@ -44,7 +44,7 @@
                                             <div class="errors_email">
                                                 <label class="{{ $errors->has('email') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Email</label>
                                                 <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input name="email" value="{{ old('email') }}" type="text" id="email" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                                    <input name="email" value="{{ old('email') }}" type="text" id="email" class="email_keyup overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
                                                 </div>
                                                 @if($errors->has('email'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
@@ -404,6 +404,11 @@
                 },
             });
         });
+        
+        $('.email_keyup').keyup(function(){
+           const val = $(this).val();
+           localStorage.setItem('client_email_create', val);
+        })
 
     </script>
 

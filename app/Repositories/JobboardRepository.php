@@ -29,7 +29,7 @@ class JobboardRepository
     public function created($request)
     {
         $jobsIdUnique = JobModels::get();
-        $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get(['body' , 'day']);
+        // $task_setting = SettingDefinedCheckList::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get(['body' , 'day' , 'order']);
         $status_job = SettingJobModelsStatus::where(['users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 1])->get('id' , 'status_name');
 
         // Make product Stripe
@@ -133,6 +133,23 @@ class JobboardRepository
                     'status_calendly' => 0,
                     'set_job_status_id' => $status_job[1]->id
                 ]);
+
+                
+
+            
+                    SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
+                        JobModelsTask::create([
+                            'task' => $res->body,
+                            'order' => $res->order,
+                            'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                            'day' => $res->day,
+                            'job_models_id' => $jobs->id,
+                            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                            'name' => auth()->user()->full_name
+                        ]);
+                    });
+                
+
             }else{
                 $jobs = JobModels::create([
                  'family' => $value[0]->first_name,
@@ -176,6 +193,33 @@ class JobboardRepository
                  'status_calendly' => 0,
                  'set_job_status_id' => $status_job[1]->id
                  ]);
+
+                //  if(isset($task_setting)){
+                //     foreach($task_setting as $tasks){
+                //         JobModelsTask::create([
+                //             'task' => $tasks->body,
+                //             'order' => $tasks->order,
+                //             'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                //             'day' => $tasks->day,
+                //             'job_models_id' => $jobs->id,
+                //             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                //             'name' => auth()->user()->full_name
+                //         ]);
+                //     }
+                // }
+
+                SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
+                    JobModelsTask::create([
+                        'task' => $res->body,
+                        'order' => $res->order,
+                        'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                        'day' => $res->day,
+                        'job_models_id' => $jobs->id,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'name' => auth()->user()->full_name
+                    ]);
+                });
+
             }
             foreach($request->subcategory as $keySub => $category){
                 JobModelsMatchTalent::create([
@@ -222,19 +266,9 @@ class JobboardRepository
                 }
             }
 
-            if(isset($task_setting)){
-                foreach($task_setting as $tasks){
-                    JobModelsTask::create([
-                        'task' => $tasks->body,
-                        'assignee' => auth()->user()->full_name ?? 'Your Agency',
-                        'day' => $tasks->day,
-                        'job_models_id' => $jobs->id,
-                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                        'name' => auth()->user()->full_name
-                    ]);
-                }
-            }
 
+
+            
             $jobs->stripe()->create([
                 'prod_id' => $productStripe->id,
                 'price_id' => $productStripe->default_price->id,
@@ -279,8 +313,11 @@ class JobboardRepository
                 $request->validate([
                     'val' => 'required'
                 ]);
+
+                $order = JobModelsTask::where('job_models_id', $request->id)->get('id');
                 $data = JobModelsTask::create([
                     'task' => $request->val,
+                    'order' => $order->count(),
                     'assignee' => 'Dummy data',
                     'status' => 'Inprogress',
                     'job_models_id' => $request->id,
@@ -306,72 +343,72 @@ class JobboardRepository
        }
     }
 
-    public function search_job($request)
-    {
-        // return SettingJobModelsStatus::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-        //                             ->with(['job_models' => function ($query) use ($request) {
-        //                                 $query->orWhere('status', 'like', "%" . $request->search . "%")
-        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-        //                                 ->orWhere('id_unique', 'like', "%" . $request->search . "%")
-        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-        //                                 ->orWhere('description', 'like', "%" . $request->search . "%")
-        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-        //                                 ->orWhere('title', 'like', "%" . $request->search . "%")
-        //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-        //                                 ->get();
-        //                             }])->get();
+    // public function search_job($request)
+    // {
+    //     // return SettingJobModelsStatus::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //     //                             ->with(['job_models' => function ($query) use ($request) {
+    //     //                                 $query->orWhere('status', 'like', "%" . $request->search . "%")
+    //     //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //     //                                 ->orWhere('id_unique', 'like', "%" . $request->search . "%")
+    //     //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //     //                                 ->orWhere('description', 'like', "%" . $request->search . "%")
+    //     //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //     //                                 ->orWhere('title', 'like', "%" . $request->search . "%")
+    //     //                                 ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //     //                                 ->get();
+    //     //                             }])->get();
 
-        return JobModels::whereHas('setting_status', function($query) use($request){
-                            $query->where('status_name','like', "%" . $request->search . "%");
-                        })->orWhere('status', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-                        ->orWhere('id_unique', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-                        ->orWhere('description', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-                        ->orWhere('title', 'like', "%" . $request->search . "%")
-                        ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
-                        ->with('setting_status')->get();
+    //     return JobModels::whereHas('setting_status', function($query) use($request){
+    //                         $query->where('status_name','like', "%" . $request->search . "%");
+    //                     })->orWhere('status', 'like', "%" . $request->search . "%")
+    //                     ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //                     ->orWhere('id_unique', 'like', "%" . $request->search . "%")
+    //                     ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //                     ->orWhere('description', 'like', "%" . $request->search . "%")
+    //                     ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //                     ->orWhere('title', 'like', "%" . $request->search . "%")
+    //                     ->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)
+    //                     ->with('setting_status')->get();
 
-        // if(isset($request->search)){
-        //     $search = JobModels::orWhere('status', 'like', "%" . $request->search . "%")
-        //     ->where('users_id', auth()->guard('web')->user()->id )
-        //     ->orWhere('id_unique', 'like', "%" . $request->search . "%")
-        //     ->where('users_id', auth()->user()->id )
-        //     ->orWhere('description', 'like', "%" . $request->search . "%")
-        //     ->where('users_id', auth()->user()->id )
-        //     ->orWhere('title', 'like', "%" . $request->search . "%")
-        //     ->where('users_id', auth()->user()->id )
-        //     ->get();
+    //     // if(isset($request->search)){
+    //     //     $search = JobModels::orWhere('status', 'like', "%" . $request->search . "%")
+    //     //     ->where('users_id', auth()->guard('web')->user()->id )
+    //     //     ->orWhere('id_unique', 'like', "%" . $request->search . "%")
+    //     //     ->where('users_id', auth()->user()->id )
+    //     //     ->orWhere('description', 'like', "%" . $request->search . "%")
+    //     //     ->where('users_id', auth()->user()->id )
+    //     //     ->orWhere('title', 'like', "%" . $request->search . "%")
+    //     //     ->where('users_id', auth()->user()->id )
+    //     //     ->get();
     
-        //     return $search;
-        // }else{
-        //     $search = JobModels::where('users_id', auth()->user()->id)->get();
-        //     return $search;
-        // }
+    //     //     return $search;
+    //     // }else{
+    //     //     $search = JobModels::where('users_id', auth()->user()->id)->get();
+    //     //     return $search;
+    //     // }
 
 
-    }
+    // }
 
-    public function search_task($request)
-    {
-        return JobModelsTask::orWhere('task' , 'like', "%" . $request->search_task . "%")
-        ->where([
-            ['users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id], 
-            ['job_models_id' , $request->job_models_id],
-        ])
-        ->orWhere('status' , 'like', "%" . $request->search_task . "%")
-        ->where([
-            ['users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id], 
-            ['job_models_id' , $request->job_models_id],
-        ])
-        ->orWhere('assignee' , 'like', "%" . $request->search_task . "%")
-        ->where([
-            ['users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id], 
-            ['job_models_id' , $request->job_models_id],
-        ])
-        ->get();   
-    }
+    // public function search_task($request)
+    // {
+    //     return JobModelsTask::orWhere('task' , 'like', "%" . $request->search_task . "%")
+    //     ->where([
+    //         ['users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id], 
+    //         ['job_models_id' , $request->job_models_id],
+    //     ])
+    //     ->orWhere('status' , 'like', "%" . $request->search_task . "%")
+    //     ->where([
+    //         ['users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id], 
+    //         ['job_models_id' , $request->job_models_id],
+    //     ])
+    //     ->orWhere('assignee' , 'like', "%" . $request->search_task . "%")
+    //     ->where([
+    //         ['users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id], 
+    //         ['job_models_id' , $request->job_models_id],
+    //     ])
+    //     ->get();   
+    // }
 
     public function comment_created($request)
     {

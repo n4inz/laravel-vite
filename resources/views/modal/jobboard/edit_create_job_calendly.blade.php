@@ -304,7 +304,7 @@
             <div class="start-time-errors">
                 <label class="{{ $errors->has('start_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Start time*</label>
                 <div class="{{ $errors->has('start_time') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                    <input type="time" name="start_time" value="{{ old('start_time') }}" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="" autocomplete="off">
+                    <input type="time" name="start_time" value="{{ old('start_time') }}" style="font-weight: 400; font-size: 13.7px;line-height: 18px;letter-spacing: -0.08px;" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="" autocomplete="off">
                 </div>
                 @if($errors->has('start_time'))
                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_time') }}</p>
@@ -313,7 +313,7 @@
             <div class="end-time-errors">
                 <label  class="{{ $errors->has('end_time') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">End time*</label>
                 <div class="{{ $errors->has('end_time') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                    <input type="time" name="end_time" value="{{ old('end_time') }}" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="" autocomplete="off">
+                    <input type="time" name="end_time" value="{{ old('end_time') }}" style="font-weight: 400; font-size: 13.7px;line-height: 18px;letter-spacing: -0.08px;" class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " placeholder="" autocomplete="off">
                 </div>
                 @if($errors->has('end_time'))
                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_time') }}</p>
@@ -359,7 +359,7 @@
         <div date-rangepicker datepicker-format="mm/dd/yyyy" class="flex space-x-4 relative ">
             <div class="start-date-errors">
                 <div class="input_asap relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                    <input name="start_date" type="date" value="{{ old('start_date') }}" class="start_date overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " autocomplete="off">
+                    <input name="start_date" type="date" value="{{ old('start_date') }}" style="font-weight: 400; font-size: 13.7px;line-height: 18px;letter-spacing: -0.08px;" class="start_date overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " autocomplete="off">
                 </div>
                 @if($errors->has('start_date'))
                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_date') }}</p>
@@ -367,7 +367,7 @@
             </div>
             <div class="end-date-errors">
                 <div class="input_tbd relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                    <input name="end_date" type="date" value="{{ old('end_date') }}" class="end_date overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none" autocomplete="off">
+                    <input name="end_date" type="date" value="{{ old('end_date') }}" style="font-weight: 400; font-size: 13.7px;line-height: 18px;letter-spacing: -0.08px;" class="end_date overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none" autocomplete="off">
                 </div>
                 @if($errors->has('end_date'))
                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_date') }}</p>

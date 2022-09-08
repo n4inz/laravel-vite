@@ -36,6 +36,7 @@ class UserClientController extends Controller
     }
     public function client()
     {
+
         $client = Client::orderBy('id', 'desc')->get();
         // return request()->query('search');
         // return $client->count();
@@ -51,7 +52,14 @@ class UserClientController extends Controller
     {
         // return $request;   
         $this->UserClientRepository->created($request);
-        return redirect()->route('user_client.client')->with('Success' , 'Created client successfuly');
+        return redirect()->route('jobboard')->with('Success' , 'Created client successfuly');
+    }
+
+    public function user_client_datail_modal(Request $request)
+    {
+        $client = Client::with('attached_file')->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id, 'id' => $request->id])->with('attached_file')->first();
+        // return $client;
+        return view('modal.user.detail_client', compact('client'));
     }
 
     public function talent()

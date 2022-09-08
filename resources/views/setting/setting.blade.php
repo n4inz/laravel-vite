@@ -451,7 +451,8 @@
                                 </div>
                                 <div class="mt-8 flex"></div>
                             </div>
-    
+                            
+                            <!--
                             <div class="bg-bgbody rounded mt-3">
                                 <div class="px-4 pt-[18.5px]">
                                     <div class="flex items-center space-x-2 ">
@@ -460,7 +461,7 @@
                                     </div>
                                 </div>
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
-                                {{-- <div class="px-6 mt-8 flex items-center space-x-4 ">
+                                <div class="px-6 mt-8 flex items-center space-x-4 ">
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Client</label>
                                         <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
@@ -475,7 +476,7 @@
                                             <label for="" class="overview-id-field text-colortext">Can sign up and create a job</label>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="px-6 mt-8 flex items-center space-x-4 ">
                                     <div>
                                         <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
@@ -487,6 +488,7 @@
                                 </div>
                                 <div class="flex mt-8"></div>
                             </div>
+                            -->
     
                             <div class="bg-bgbody rounded mt-3">
                                 <div class="px-4 pt-[18.5px]">
@@ -496,6 +498,13 @@
                                     </div>
                                 </div>
                                 <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-8 mt-8">
+                                    <label for="" class="overview-status-field text-colortext">Are you interested in being as a part of public pool?</label>
+                                    <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px]">
+                                        <input name="interested_public_pool" {{ old('interested_public_pool') ? 'checked' : ''  }} {{ $setting->SettingUsers->interested_public_pool ?? null ? 'checked' : '' }} value="1" id="" style="color: #3BD7CF" type="checkbox"  class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <label for="" class="overview-id-field text-colortext">We want to share our work with other agencies and caregives</label>
+                                    </div>
+                                </div>
                                 <div class="px-8 mt-8 ">
                                     <label for="" class="overview-status-field text-colortext">Calendly API</label>
                                     <div class=" w-full errors_calendly">
@@ -664,33 +673,32 @@
                                 </div>
                                 <div class="px-8 mt-4 ">
                                     <label for="" class="overview-status-field text-colortext mb-[26px]">Pre-defined check list</label>
-                                    @foreach ($defined_list as $value )
-                                        
-                                        <div class="flex items-center space-x-[29.5px] mb-7">
-                                            <div>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                </svg>
-                                            
+                                    <div id="sortable_predifine">
+                                        @foreach ($defined_list as $value )
+                                            <div id="item_{{ $value->id }}" class="flex items-center space-x-[29.5px] mb-7 hover:cursor-pointer">
+                                                <div>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
+                                                    </svg>
+                                                
+                                                </div>
+                                                <div class="w-full">
+                                                    <span class="task-text-body text-colortext">{{ $value->body }}</span>
+                                                </div>
+                                                <div class="w-full">
+                                                    @if ($value->day == 7)
+                                                        <span class="overview-id-field text-colortext">1 Week</span>
+                                                    @else
+                                                        <span class="overview-id-field text-colortext">{{ $value->day }} Day</span>
+                                                    @endif
+                                                </div>
+                                                <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
+                                                <input type="hidden" name="body[]" value="{{ $value->body }}">
+                                                <input type="hidden" name="day[]" value="{{ $value->day }}">
                                             </div>
-                                            <div class="w-full">
-                                                <span class="task-text-body text-colortext">{{ $value->body }}</span>
-                                            </div>
-                                            <div class="w-full">
-                                                @if ($value->day == 7)
-                                                    <span class="overview-id-field text-colortext">1 Week</span>
-                                                @else
-                                                    <span class="overview-id-field text-colortext">{{ $value->day }} Day</span>
-                                                @endif
-                                            </div>
-                                            <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
-                                            <input type="hidden" name="body[]" value="{{ $value->body }}">
-                                            <input type="hidden" name="day[]" value="{{ $value->day }}">
-                                        </div>
-                                    @endforeach
-                                    
-                                   
+                                        @endforeach
+                                    </div>
                                     {{-- Add more --}}
                                     <div class="add">
                                         <div class="flex items-center space-x-[29.5px] mb-7">
@@ -789,6 +797,31 @@
     </article>
     <script src="{{ asset('js/jQuery/jobBoard.js') }}"></script>
     <script src="{{ asset('js/jQuery/settingAgency.js') }}"></script>
+    <script>
+        $(function(){
+            $( "#sortable_predifine" ).sortable({
+                   update : function (event, ui) {
+                    var data = $(this).sortable('serialize');
+
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('setting.order_predefined') }}",
+                        data: data,
+                        success: function(res){
+                            
+                        }
+                    })
+                    
+                }
+            });
+        });
+        </script>
     <script>
     // Validate
     $(function(){

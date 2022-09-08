@@ -10,11 +10,19 @@
             <div class="h-[228px] w-[1016px] xl:w-full bg-bgbody px-6 rounded">
                 <div class="flex items-center justify-between w-full mb-1">
                     <span class="overview-title text-colortext mt-6">{{ $result->title }}</span>
-                    <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 18.5C9.10457 18.5 10 17.6046 10 16.5C10 15.3954 9.10457 14.5 8 14.5C6.89543 14.5 6 15.3954 6 16.5C6 17.6046 6.89543 18.5 8 18.5Z" fill="#827C7C"/>
-                        <path d="M16 18.5C17.1046 18.5 18 17.6046 18 16.5C18 15.3954 17.1046 14.5 16 14.5C14.8954 14.5 14 15.3954 14 16.5C14 17.6046 14.8954 18.5 16 18.5Z" fill="#827C7C"/>
-                        <path d="M24 18.5C25.1046 18.5 26 17.6046 26 16.5C26 15.3954 25.1046 14.5 24 14.5C22.8954 14.5 22 15.3954 22 16.5C22 17.6046 22.8954 18.5 24 18.5Z" fill="#827C7C"/>
-                    </svg>    
+                    <div class="hover:cursor-pointer" data-dropdown-toggle="dropdown_send_email_"  data-dropdown-placement="left-start">
+                        <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 18.5C9.10457 18.5 10 17.6046 10 16.5C10 15.3954 9.10457 14.5 8 14.5C6.89543 14.5 6 15.3954 6 16.5C6 17.6046 6.89543 18.5 8 18.5Z" fill="#827C7C"/>
+                            <path d="M16 18.5C17.1046 18.5 18 17.6046 18 16.5C18 15.3954 17.1046 14.5 16 14.5C14.8954 14.5 14 15.3954 14 16.5C14 17.6046 14.8954 18.5 16 18.5Z" fill="#827C7C"/>
+                            <path d="M24 18.5C25.1046 18.5 26 17.6046 26 16.5C26 15.3954 25.1046 14.5 24 14.5C22.8954 14.5 22 15.3954 22 16.5C22 17.6046 22.8954 18.5 24 18.5Z" fill="#827C7C"/>
+                        </svg>
+                    </div>
+                    <div id="dropdown_send_email_" class="hidden z-10  bg-white rounded divide-y divide-gray-100 shadow">
+                        <div data-modal-toggle="send_mail_client" class="bg-hover px-2 space-x-1 text-xs text-gray-700 flex items-center justify-center hover:bg-gray-100 ">
+                            <button  class="block py-2 font-semibold">Send Confirmation</button>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-palet" enable-background="new 0 0 24 24"  viewBox="0 0 24 24" fill="#3BD7CF"><g><rect fill="none" height="24" width="24"/><path d="M20,4H4C2.9,4,2,4.9,2,6v12c0,1.1,0.9,2,2,2h9v-2H4V8l8,5l8-5v5h2V6C22,4.9,21.1,4,20,4z M12,11L4,6h16L12,11z M19,15l4,4 l-4,4v-3h-4v-2h4V15z"/></g></svg>
+                        </div>
+                    </div>    
                 </div>
                 <table width="500px">
                     <tr>
@@ -1069,11 +1077,15 @@
                                                                  <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                              </div>
                                                              @if ($talent->talent->avatar)
-                                                                 <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                                <div>
+                                                                    <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$talent->talent->avatar) }}" alt="">
+                                                                </div>
                                                              @else
-                                                                 <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
-                                                                     <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
-                                                                 </div>
+                                                                <div>
+                                                                    <div class="w-12 h-12 flex items-center justify-center bg-[{{ $talent->talent->color }}] rounded-full">
+                                                                        <span class="text-white">{{ strtoupper(substr($talent->talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->talent->last_name, 0, 1)) }}</span>
+                                                                    </div>
+                                                                </div>
                                                              @endif
                                                              <div data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $talent->talent->id }})"  class="flex flex-col">
                                                                  <span class="overview-name-talent text-colortext">{{ $talent->talent->first_name }}</span>
@@ -1084,14 +1096,23 @@
                                                                  <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
                                                              </div>
                                                          </div>
-                                                         <div class="h-4">
-                                                             <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[#5FCFFF] focus:ring-0 bg-gray-50 rounded border border-[#5FCFFF] outline-none hover:cursor-pointer">
-                                                                 <option>-- Select status --</option>
-                                                                 @foreach ($status_talent as $value )
-                                                                     <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                                 @endforeach
-                                                             </select>
-                                                         </div>
+                                                         <div>
+                                                            @if ($talent->color_status)
+                                                                <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[{{$talent->color_status}}] focus:ring-0 bg-gray-50 rounded border border-[{{$talent->color_status}}] outline-none hover:cursor-pointer">
+                                                                    <option>-- Select status --</option>
+                                                                    @foreach ($status_talent as $value )
+                                                                        <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            @else
+                                                                <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-palet focus:ring-0 bg-gray-50 rounded border border-palet outline-none hover:cursor-pointer">
+                                                                    <option>-- Select status --</option>
+                                                                    @foreach ($status_talent as $value )
+                                                                        <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            @endif
+                                                        </div>
                                                      </div>
                                                  @endforeach
 
@@ -2849,52 +2870,6 @@
                 </div>
             </div>
 
-            <!-- Main Send email talent -->
-            {{-- HAPUS INI --}}
-            <!--
-            <div id="send_mail_talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                <div class="relative">
-                    
-                    <div class="relative bg-white w-[700px] h-[500px]  rounded-lg shadow ">
-                       
-                        <form action="{{ route('jobboard.send_email_status_to_talent') }}" method="POST">@csrf
-                            
-                            <div class="talentId"></div>
-                            <div class="flex justify-center items-start p-4 rounded-t relative">
-                                <div class=" border-b border-gray-200">
-                                    <div class="flex flex-wrap -mb-px font-medium text-center items-center justify-center" id="myTab" data-tabs-toggle="#tabSendEamil" role="tablist">
-                                        @foreach ($tmp_email as $val_email )
-                                            <label for="one"  for="type"  class="mr-2" >
-                                                <div class="inline-block text-xs p-4 hover:cursor-pointer rounded-t-lg border-b-2"  data-tabs-target="#a{{ $val_email->id }}" role="tab" aria-selected="false">{{ $val_email->status }}</div>
-                                            </label>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-6 h-52 overflow-auto">
-                                <div id="tabSendEamil">
-
-                                    @foreach ($tmp_email as $val_email_body )
-                                        <div class="w-full" id="a{{ $val_email_body->id }}" >
-                                            <div class="w-ful pb-5">
-                                            
-                                                <div data-modal-toggle="edit_send_mail_talent" onclick="edit_email_template('{{ $val_email_body->id }}') " class="absolute left-1/3 bottom-10 px-16  flex items-center justify-center  h-8 bg-palet rounded-md mt-2 hover:cursor-pointer">
-                                                    <span class="text-sm text-white">Chose template</span> 
-                                                </div>
-                                            </div>
-                                            <div class="bg-[#F5F5F5] rounded-md text-[#827C7C] text-sm p-10">
-                                                {!! $val_email_body->body !!}
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                  </form>
-                    </div>
-                </div>
-            </div>
-            -->
-
             <!-- Main edit Send email talent -->
             <div id="edit_send_mail_talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4  max-w-2xl h-full md:h-auto">
@@ -3082,6 +3057,45 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Send Email Confirmation Client -->
+            <div id="send_mail_client" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4  max-w-2xl h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white w-[600px] rounded-lg shadow ">
+                        <form action="{{ route('jobboard.send_email_confirmation_to_client') }}" method="POST">@csrf
+                            <input type="hidden" name="family_email" value="{{ $result->client->email }}">
+                            <div class="p-6 space-y-6">
+                                <div id="myTabContent">
+                                    <div class="mb-2 flex items-center justify-center h-9 border border-[#ECECEC] rounded text-[#222222]">
+                                        <input name="subject" value="" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
+                                    </div>
+                                    <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <textarea id="textarea-id"  class="w-full h-full" name="editor_tmp_email_1" >{{ $email->body }}</textarea>
+                                    </div>
+                                    {{-- <div class="replace_email">
+                                        
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            
+                            <div class="flex items-end justify-center  p-6 space-x-2 rounded-b border border-gray-200  relative">
+                                <div onclick="save_as_email_client()" class="absolute left-5 text-sm text-blue-400 hover:cursor-pointer save_as_email_client">
+                                    Save as Default
+                                </div>
+                                <div onclick="location.reload()" class="flex items-center justify-center w-28 h-8 bg-colorStatusCard1 rounded-md mt-2 hover:cursor-pointer">
+                                    <span class="text-sm text-white">Don't Send</span> 
+                                </div>
+                                <button class="flex btn_send_email_confirm_client items-center justify-center w-28 h-8 bg-palet rounded-md mt-2">
+                                    <span class="text-sm text-white">Send</span> 
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </article>
 </main>
@@ -3786,6 +3800,28 @@
             }
         });
     }
+
+        // save_as_email_client
+        function save_as_email_client(){
+            const email = CKEDITOR.instances["textarea-id"].getData();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('jobboard.save_as_email_client') }}",
+                data: { email , status:'CLIENT CONFIRMATION' , _token: '{{ csrf_token() }}' },
+                beforeSend: function(){
+                   const loading = ` Save as Default
+                                    <i class="fa fa-refresh fa-spin fa-fw"></i>`;
+                    $('.save_as_email_client').html(loading);
+                },
+                success : function(val){
+                    const success = ` Save as Default
+                                <i class="fa fa-check" aria-hidden="true"></i>`;
+                                $('.save_as_email_client').html(success);
+                    console.log(val)
+                
+                }
+            });
+        }
     
     
 </script>
@@ -3805,5 +3841,8 @@
       height: 250,
       removeButtons: 'PasteFromWord'
     });
+    CKEDITOR.replace('editor_tmp_email_1', {
+        
+    })
   </script>
 @endsection

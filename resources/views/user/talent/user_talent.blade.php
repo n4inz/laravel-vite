@@ -44,7 +44,7 @@
         <div class="grid gap-4 grid-cols-3 mt-10 mb-20 w-[1017px] xl:w-full">   
             {{-- <div class="flex flex-wrap space-x-2 space-y-2  mt-10 mb-20 xl:w-full">    --}}
             @foreach ($talent as $values )
-                <div id="search_talent" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4 relative">
+                <div id="search_talent" data-modal-toggle="modal-overview-detail-talent" onclick="detail({{ $values->id }})" class="flex hover:cursor-pointer items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4 relative">
                     <div class="hidden">{{ $values->day_of_birthday}} {{ $values->experience }} {{ $values->email }} {{ $values->phone }} {{ $values->address }} {{ $values->about_talent }}</div>
                     @if (now()->diffInMinutes($values->created_at) < 1)
                         <div class="absolute top-2 right-3 w-[39px] h-[15px] bg-red-700 animate-pulse flex items-center justify-center rounded-sm"> <span class="overview-label-text">New</span></div>
@@ -255,6 +255,22 @@
                     </div>
             </div>
         </div>
+
+        <!-- Main modal overview detail Talent -->
+        <div id="modal-overview-detail-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
+            <div class="p-4 w-[666px] h-screen">
+                <div class="bg-white rounded-lg shadow ">
+                    <div class="relative py-3 border-b border-[#EFEFEF]">
+                        <span class="overview-talent-modal-title mt-10 ml-[45px] text-[#222222]">Detail Talent</span>
+                        <button type="button" class="absolute top-2 right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"  data-modal-toggle="modal-overview-detail-talent">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                        </button>
+                    </div>
+                    <hr>
+                    <div id="loads" class="px-[42px] mt-8"></div>
+                </div>
+            </div>
+        </div>
     </article>
     <script src="{{ asset('js/fileNameLoad.js') }}"></script>
 
@@ -434,64 +450,28 @@
           }
         };
 
-        // Upload FIle
-        // $('#talent_filea').change(function(e){
-        //     var val = $(this).val();
-        //     e.preventDefault();
-           
-        //     var formData = new FormData($(".talent_submit_file")[0]);
-                    
-        //    $.ajax({
-        //         url: $('.talent_submit_file').attr("action"),
-        //         type: 'POST',
-        //         data: formData,
-        //         cache: false,
-        //         contentType: false,
-        //         processData: false,
-        //         beforeSend : function(xhr ,a){
-        //             $('.errors_uploaded').html('')
-        //         const tmp = `<div class="w-full h-full bg-gray-200">
-        //                         <div id="progress-bar" class="bg-hover h-full flex items-center justify-center text-5xl  font-medium text-white text-center p-0.5 leading-none " style="width: 1%"> </div>
-        //                     </div>`;
-        //             $('.files-kept').html(tmp)
-        //         },
-
-        //         xhr: function(){
-        //         //upload Progress
-        //         var xhr = $.ajaxSettings.xhr();
-        //         if (xhr.upload) {
-        //             xhr.upload.addEventListener('progress', function(event) {
-        //             var percent = 0;
-        //             var position = event.loaded || event.position;
-        //             var total = event.total;
-        //             if (event.lengthComputable){
-        //             percent = Math.ceil(position / total * 100);
-        //             }                   
-        //             $("#progress-bar").css("width", + percent +"%");
-        //             $("#progress-bar").text(percent +"%");
-        //             }, true);
-        //         }
-        //         return xhr;
-        //         },
-        //         error: function(e){
-        //             console.log(e)
-        //             const tmp = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 18.6528C2.25 18.2386 2.58579 17.9028 3 17.9028H21C21.4142 17.9028 21.75 18.2386 21.75 18.6528C21.75 19.067 21.4142 19.4028 21 19.4028H3C2.58579 19.4028 2.25 19.067 2.25 18.6528Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 21.5C2.25 21.0858 2.58579 20.75 3 20.75H21C21.4142 20.75 21.75 21.0858 21.75 21.5C21.75 21.9142 21.4142 22.25 21 22.25H3C2.58579 22.25 2.25 21.9142 2.25 21.5Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.46967 11.4697C8.76256 11.1768 9.23744 11.1768 9.53033 11.4697L12 13.9393L14.4697 11.4697C14.7626 11.1768 15.2374 11.1768 15.5303 11.4697C15.8232 11.7626 15.8232 12.2374 15.5303 12.5303L12.5303 15.5303C12.2374 15.8232 11.7626 15.8232 11.4697 15.5303L8.46967 12.5303C8.17678 12.2374 8.17678 11.7626 8.46967 11.4697Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-        //                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C12.4142 2.75 12.75 3.08579 12.75 3.5V15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V3.5C11.25 3.08579 11.5858 2.75 12 2.75Z" fill="{{ $errors->has('talent_file') ? '#e80f00' : '#827C7C' }}"/>
-        //                         </svg>
-        //                         <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} overview-modal-add-talent-upload-text text-[#827C7C]">Click to upload.</span>
-        //                         <span class="{{ $errors->has('talent_file') ? 'text-red-600' : '' }} name-file text-xs text-gray-400">Max 10MB</span>`;
-        //                         $('.files-kept').html(tmp)
-        //             const errors = `<p class="mt-2 text-sm text-red-600 dark:text-red-500">${e.responseJSON.message}</p>`;
-        //             $('.errors_uploaded').html(errors)
-        //         },
-        //         success: function (mdata) {
-        //             console.log(mdata)
-        //         },
-        //     });
-        // });
+        function detail(id){
+            $.ajax({ 
+                type:'GET',
+                // url: '{{ route("jobboard.detail_match_talent", ["id" => '+data+']) }}',
+                url:'/detail-match-talent/'+id,
+                beforeSend: function(){
+                    const loader = `<div class="flex justify-center w-full h-screen pt-24">
+                                        <div role="status mt-12">
+                                            <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                            </svg>
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>`;
+                    $('#loads').html(loader);             
+                },
+                success:function(res){
+                    $('#loads').html(res);
+                }
+            });
+        }
 
         // Dropzone config
         Dropzone.options.dropzone =

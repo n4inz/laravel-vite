@@ -116,7 +116,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/user/client', [UserClientController::class, 'client'])->name('user_client.client');
     Route::get('/user/client/created', [UserClientController::class, 'client_created'])->name('user_client.client_created');
     Route::post('/user-client-store', [UserClientController::class, 'client_store'])->name('user_client.store');
-
+    Route::post('/user-client-datail-modal', [UserClientController::class, 'user_client_datail_modal'])->name('user_client.user_client_datail_modal');
     Route::get('/user/staf', [UserClientController::class, 'staf'])->name('user_staf.staf');
     Route::post('/user-staf-store', [UserClientController::class, 'staf_store'])->name('user_staf.staf_store');
 
@@ -124,11 +124,11 @@ Route::group(['middleware' => 'auth'],function(){
     // Route::post('/user-client-attached-file', [UserClientController::class, 'attached_file'])->name('user_client. attached_file');
     Route::post('/user-talent-store', [UserClientController::class, 'telent_store'])->name('user_talent.store');
     
-    // Talent
+    // Setting
     Route::get('/setting', [SettingController::class, 'setting'])->name('setting.setting');
     Route::post('setting-store', [SettingController::class, 'setting_store'])->name('setting.store');
     Route::post('upload-avatar', [SettingController::class, 'upload_avatar'])->name('setting.upload.avatar');
-    
+    Route::post('/order-predefined',[SettingController::class, 'order_predefined'])->name('setting.order_predefined');
     // Upload FIle
     Route::post('/upload',[UploadController::class , 'upload'])->name('upload');
     Route::post('/upload-with-db',[UploadController::class , 'uploadWithDb'])->name('uploadWithDb');
@@ -161,5 +161,6 @@ Route::prefix('family')->group(function () {
     Route::get('/fill',[FamilyHomeController::class, 'fill'])->name('family.fill');
     Route::get('/login',[FamilyHomeController::class, 'login'])->name('family.login');
     Route::get('/login-success',[FamilyHomeController::class, 'login_success'])->name('family.success');
+    Route::get('/on-boarding',[FamilyHomeController::class, 'on_boarding'])->name('family.on_boarding');
     
 });

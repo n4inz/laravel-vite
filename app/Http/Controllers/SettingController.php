@@ -28,9 +28,7 @@ class SettingController extends Controller
     {
         $setting = User::where('id', auth()->user()->id)->with(['avatar', 'SettingDetail' => function ($query) {
             $query->with(['service_location_fee'])->first();
-        }, 'SettingAdditionals' => function ($query) {
-            $query->with('defined_check_list')->first();
-        }, 'SettingUsers', 'SettingGeneral', 'SettingCategory', 'SettingJobStatus', 'SettingTalentStatus', 'SettingCalendly'])->first();
+        }, 'SettingAdditionals', 'SettingUsers', 'SettingGeneral', 'SettingCategory', 'SettingJobStatus', 'SettingTalentStatus', 'SettingCalendly'])->first();
 
         // return $setting->SettingJobStatus;
         // In array catagory and subcategory
@@ -61,7 +59,7 @@ class SettingController extends Controller
             }
         }
 
-        $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->get();
+        $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->orderBy('order', 'asc')->get();
         return view('setting.setting', compact('setting', 'defined_list', 'category', 'subCategory', 'jobStatus', 'talentStatus'));
     }
 
@@ -99,5 +97,15 @@ class SettingController extends Controller
         }
 
         return redirect()->back()->with('Success', 'Profile Update Success');
+    }
+
+    public function order_predefined(Request $request)
+    {
+        foreach($request->item as $key => $value){
+            SettingDefinedCheckList::where(['users_id' => auth()->user()->id , 'id' => $value])->update([
+                'order' => $key
+            ]);
+        }
+        
     }
 }

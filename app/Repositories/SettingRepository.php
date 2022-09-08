@@ -168,7 +168,8 @@ class SettingRepository {
                     $setting_additionals->defined_check_list()->create([
                         'body' => $request->body[$key],
                         'users_id' => auth()->user()->id,
-                        'day' => $request->day[$key]
+                        'day' => $request->day[$key],
+                        'order' => $key
                     ]);
                 }
             }
@@ -359,6 +360,7 @@ class SettingRepository {
                     SettingDefinedCheckList::create([
                         'body' => $request->body[$keys],
                         'setting_additionals_id' => $sett_id->id,
+                        'order' => $keys,
                         'users_id' => auth()->user()->id,
                         'day' => $request->day[$keys]
                     ]);

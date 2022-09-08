@@ -44,6 +44,8 @@ use App\Models\JobModelsMatchTalentFilter;
 use App\Http\Requests\UserAplicantsRequest;
 use App\Mail\sendingEmailDescriptionToTalent;
 use App\Http\Traits\Actifity as TraitsActifity;
+use App\Models\JobModelsTask;
+use App\Models\SettingDefinedCheckList;
 
 class JobboardController extends Controller
 {
@@ -63,7 +65,7 @@ class JobboardController extends Controller
         }])->where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => true])->get();
         
 
-        // return $status;
+        
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $json = [];
         foreach ($client as $value) {
@@ -174,7 +176,7 @@ class JobboardController extends Controller
 
     public function jobs_store(JobBoardRequest $request)
     {  
-        
+       
         $this->jobboardRepository->created($request);
         return redirect()->back()->with('status', 'Create job succesfuly');
     }
@@ -185,7 +187,9 @@ class JobboardController extends Controller
 
         $result = JobModels::with(['comment' => function ($query){
             $query->with(['job_models_comments_reply', 'users']);
-        },'match_talent', 'languages', 'availability', 'task', 'stripe' ,'invoice','client' => function($query){
+        },'match_talent', 'languages', 'availability', 'task' => function($query){
+            $query->orderBy('order','asc');
+        }, 'stripe' ,'invoice','client' => function($query){
             $query->with('attached_file');
         }, 'file' => function ($query) {
             $query->limit(5);
@@ -214,15 +218,13 @@ class JobboardController extends Controller
 
         // all talent
         $talents = Talents::with(['type_helper', 'languages'])->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        $status_talent = SettingStatusTalent::where(['users_id'  => auth()->user()->staf->users_agency_id ?? auth()->user()->id ])->get(['id', 'status_name', 'status_key']);
+        $status_talent = SettingStatusTalent::where(['users_id'  => auth()->user()->staf->users_agency_id ?? auth()->user()->id ])->get(['id', 'status_name', 'status_key' ,'color']);
 
         // return $talents;
         // $matchTalents = JobModelsMatchTalentAdd::with('talent')->where(['job_models_id' => $result->id])->orderBy('id' , 'desc')->get();
         $category = SettingServiceCategory::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         
-
-      
-        $tmp_email = EmailAgencyTemplate::whereIn('type', [1,2,3,4,5,6,7,8,9,10,11])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        // $tmp_email = EmailAgencyTemplate::whereIn('type', [1,2,3,4,5,6,7,8,9,10,11])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
  
         // return $tmp_email;
         $client = Client::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
@@ -239,8 +241,15 @@ class JobboardController extends Controller
             ]);
         }
 
+        $tmp_email1 = EmailAgencyTemplate::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+        if($tmp_email1){
+            $email = $tmp_email1;
+        }else{
+            $email =  TemplateEmail::where(['type' => 0 , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+        }
+
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents'  , 'json' , 'category','tmp_email'));
+        return view('jobboard.detail_job_overview', compact('result', 'talentNeed', 'actifity' ,'status_talent' , 'talents'  , 'json' , 'category','email'));
     }
 
     public function edit_description(Request $request)
@@ -261,9 +270,13 @@ class JobboardController extends Controller
 
         $type =  str_replace(' ', '_', strtolower($request->status));
         $email  = EmailAgencyTemplate::where([ 'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id,'type'=> $type])->first();
-
+        $color_status = SettingStatusTalent::where([
+            'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            'status_key' => $type
+            ])->first('color');
        JobModelsMatchTalentAdd::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
             'status' => $request->status,
+            'color_status' => $color_status->color,
             'talents_id' => $request->talent_id,
             'job_models_id' => $request->job_models_id,
             
@@ -694,6 +707,18 @@ class JobboardController extends Controller
                         'status_calendly' => 1,
                         'clients_id' => $client->id
                     ]);
+
+                    // SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
+                    //     JobModelsTask::create([
+                    //         'task' => $res->body,
+                    //         'order' => $res->order,
+                    //         'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                    //         'day' => $res->day,
+                    //         'job_models_id' => $jobs->id,
+                    //         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                    //         'name' => auth()->user()->full_name
+                    //     ]);
+                    // });
    
                 }else{
                    $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([

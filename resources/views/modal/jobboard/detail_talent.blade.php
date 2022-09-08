@@ -7,7 +7,6 @@
             <div class="w-28 h-28 flex items-center justify-center bg-[{{ $talent->color }}] rounded-full">
                 <span class="text-white text-xl">{{ strtoupper(substr($talent->first_name, 0, 1)) }}{{ strtoupper(substr($talent->last_name, 0, 1)) }}</span>
             </div>
-
         </div>
     @endif
     <div class="w-full flex flex-col ">

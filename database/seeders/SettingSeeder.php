@@ -36,29 +36,61 @@ class SettingSeeder extends Seeder
             ]);
 
             $status = [
-                // 'Potential Client',
-                'Internal Matched',
-                'Agency Interview',
-                'Present to Family',
-                'Family Interview',
-                'Family Trialing',
-                'Rejected',
-                'Withdrawn',
-                'Family Offer'
+                [
+                    'name' => 'Potential Client',
+                    'color' => '#FFFF'
+                ],
+
+                [
+                    'name' => 'Internal Matched',
+                    'color' => '#34a1eb',
+                ],
+                [
+                    'name' =>  'Agency Interview',
+                    'color' => '#5FCFFF'
+                ],
+                [
+                    'name' => 'Present to Family',
+                    'color' => '#3BD7CF'
+                ],
+                [
+                    'name' => 'Family Interview',
+                    'color' => '#5FCFFF'
+                ],
+                [
+                    'name' => 'Family Trialing',
+                    'color' => '#2F2CA6'
+                ],
+                [
+                    'name' => 'Rejected',
+                    'color' => '#E32222'
+                ],
+                [
+                    'name' => 'Withdrawn',
+                    'color' => '#FA9D6B'
+                ],
+                [
+                    'name' => 'Family Offer',
+                    'color' => '#FEC001'
+                ]
             ];
+           
             foreach($status as $val_status){
                 SettingJobModelsStatus::create([
-                    'status_name' => $val_status,
-                    'status_key' => str_replace(' ', '_', strtolower($val_status)),
+                    'status_name' => $val_status['name'],
+                    'status_key' => str_replace(' ', '_', strtolower($val_status['name'])),
                     'status' => (bool)rand(0,1),
                     'users_id' => $users->id
                 ]);
 
-                SettingStatusTalent::create([
-                    'status_name' => $val_status,
-                    'status_key' => str_replace(' ', '_', strtolower($val_status)),
-                    'users_id' => $users->id
-                ]);
+                if($val_status['name'] != 'Potential Client'){
+                    SettingStatusTalent::create([
+                        'status_name' => $val_status['name'],
+                        'status_key' => str_replace(' ', '_', strtolower($val_status['name'])),
+                        'color' => $val_status['color'],
+                        'users_id' => $users->id
+                    ]);
+                }
             }
 
             $subcategory_chile = [
