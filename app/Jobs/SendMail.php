@@ -15,6 +15,7 @@ class SendMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $email;
+    protected $name;
     protected $match_talent;
 
     /**
@@ -22,9 +23,10 @@ class SendMail implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($email, $match_talent)
+    public function __construct($email,$name,  $match_talent)
     {
         $this->email = $email;
+        $this->name = $name;
         $this->match_talent = $match_talent;
     }
 
@@ -37,6 +39,6 @@ class SendMail implements ShouldQueue
     {
         // return $this->email;
         
-        Mail::to($this->email)->send(new SendingMailToClientsJobs($this->match_talent));
+        Mail::to($this->email)->send(new SendingMailToClientsJobs($this->name,$this->match_talent));
     }
 }

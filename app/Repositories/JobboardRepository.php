@@ -299,7 +299,7 @@ class JobboardRepository
 
         // return $talent;
         $match_talent =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
-        SendMail::dispatch($request->email_client, $match_talent);
+        SendMail::dispatch($request->email_client, $request->name_client, $match_talent);
 
         
     }

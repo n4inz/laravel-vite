@@ -10,7 +10,7 @@
                         <div class="w-2 h-6 bg-palet rounded-sm"></div>
                         <span class="text-[#222222] font-semibold">Job Status</span>
                     </div>
-                    <div class="flex flex-wrap items-center w-full ">
+                    <div class="flex flex-wrap items-center w-full">
                             
                         <div class="w-[135px] mb-2 mr-4 h-[126px] border border-palet rounded-md p-4">
                             <div class="w-7 h-7 flex justify-center items-center bg-colorelips rounded-full mb-2">

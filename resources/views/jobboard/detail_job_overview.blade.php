@@ -1063,6 +1063,7 @@
                                 <div class="hidden p-4 bg-gray-50 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <form id="form_match_talent" action="{{ route('jobboard.send_email')}}" method="POST">@csrf
                                         <input type="hidden" name="email_client" value="{{ $result->client->email ?? null }}">
+                                        <input type="hidden" name="name_client" value="{{ $result->client->first_name.' '.$result->client->last_name ?? null }}">
                                         <input type="hidden" name="job_models_id" value="{{ $result->id }}">
                                         <div class="status_all_select"></div>
                                        

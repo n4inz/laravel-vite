@@ -38,9 +38,9 @@ class SettingRequest extends FormRequest
             // 'status' => 'required',
             'status_talent' => 'required',
             'location' => 'required',
-            'aplication_fee' => 'numeric',
-            'placement_fee' => 'numeric',
-            'hourly_rate' => 'numeric'
+            // 'aplication_fee' => 'numeric',
+            // 'placement_fee' => 'numeric',
+            // 'hourly_rate' => 'numeric'
         ];
     }
 }

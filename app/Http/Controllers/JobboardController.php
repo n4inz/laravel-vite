@@ -335,8 +335,11 @@ class JobboardController extends Controller
         $request->validate([
             'talent_name' => 'required',
             'email_client' => 'required',
+            'name_client' => 'required',
             'job_models_id' => 'required'
         ]);
+
+        // return $request;
         $this->jobboardRepository->email($request);
         $actifity = $this->actifity('Matched Email has sent to Client' , 'ACTIVITIES');
         Actifity::dispatch($actifity);
