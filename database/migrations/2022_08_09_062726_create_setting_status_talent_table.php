@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('status_name');
             $table->string('status_key');
             $table->string('color')->nullable();
+            $table->boolean('status')->default(0);
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
             $table->foreign('users_id')

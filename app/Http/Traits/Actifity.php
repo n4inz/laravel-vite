@@ -9,7 +9,8 @@ trait Actifity
     {
        return [
             'name' => auth()->user()->full_name ?? 'Your Agency',
-            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? 'dummy.png',
+            'avatar' => auth()->user()->staf->avatar ?? auth()->user()->avatar->avatar ?? null,
+            'color' => auth()->user()->color,
             'body' => $body,
             'create_by' => auth()->user()->id,
             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,

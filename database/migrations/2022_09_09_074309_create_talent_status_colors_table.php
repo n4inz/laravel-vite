@@ -13,20 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('email_agency_templates', function (Blueprint $table) {
+        Schema::create('talent_status_colors', function (Blueprint $table) {
             $table->id();
-            $table->string('subject')->nullable();
-            $table->text('body');
-            $table->string('type');
             $table->string('status');
-            $table->unsignedBigInteger('users_id');
-
-            $table->foreign('users_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
-            
+            $table->string('status_key');
+            $table->string('color');
             $table->timestamps();
-           
         });
     }
 
@@ -37,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('email_agency_templates');
+        Schema::dropIfExists('talent_status_colors');
     }
 };

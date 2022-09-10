@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\EmailAgencyTemplate;
+use App\Models\TalentStatusColor;
 use App\Models\TemplateEmail;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,67 +20,80 @@ class TemplateEmailSeeder extends Seeder
     {
         $array = [
             [
+                'subject' => 'Follow-up: [Type of Care] Requirement Confirmation Concierge Service Call - [First Name]',
                 'body' => '<p>Hi [Family First Name],<br />Thank you for your time to chat with me earlier. We have gathered a list of requirements and your family information in the link below.<br />Please confirm and let me know if there is anything else especially the must haves in the job.<br />If you have any questions, please let me know. [insert link] - please review:</p><ul><li>family info</li><li>notes</li><li>our process (additional documents)</li></ul><p>If you don&#39;t have any questions and would like to proceed with us, please review the agreement and sign where indicated. We also included the invoice for payment.<br />Once received, we will get the process started. Thanks,<br />Agency name team</p>',
                 'type' => '0',
                 'status' => 'CLIENT CONFIRMATION'
             ],
             [
+                'subject' => 'internal match dummy subject',
                 'body' => 'Email internal matched dummy',
                 'type' => 'internal_matched',
                 'status' => 'INTERNAL MATCHED'
             ],
             [
+                'subject' => 'Can we interview?',
                 'body' => '<p>Hi [Helper fn],<br />Thank you for your application! We would like to schedule a quick interview with you to learn more about you and tell you about the position.<br />Please select the time that fits you the best.Thanks,<br />Agency name team</p>',
                 'type' => 'agency_interview',
                 'status' => 'AGENCY INTERVIEW'
             ],
             [
+                'subject' => ' [Important - please read] Follow-up: Helper Candidate Present - [First Name]',
                 'body' => '<p>Hi [Family First Name],<br />We are able to finalize two caregivers who meet your requirements with years of experience. Please use the link below to view their info.Please note:</p><ul><li>We can hold them for<strong>&nbsp;48 hours</strong>&nbsp;without interviewing other families.</li><li>We recommend our families not to share with them that you are interviewing with other candidates.</li><li>Here are some topics we highly recommend discussing during the interview: rate, job responsibilities, specific schedule, paid vacation, payment frequency, payment method, and working style/philosophy preferences, etc. It doesn&#39;t have to be this order, just a guide.</li></ul><p><strong>Action required from you:&nbsp;</strong><br />We would like to coordinate interviews rather soon given the fast hire market. Please provide your available time/date within the portal to schedule your interviews.<br />Thanks,<br />Agency name team (edited)</p>',
                 'type' => 'present_to_family',
                 'status' => 'PRESENT TO FAMILY'
             ],
             [
+                'subject' => 'Set up interview with Family x caregiver',
                 'body' => '<p>Hi [family first name]/[helper first name]<br />Your interview is set up at this time. Please make sure you&#39;re on time and call via xx. Feel free to send a text to greet each other. If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
                 'type' => 'family_interview',
                 'status' => 'FAMILY INTERVIEW'
             ],
             [
+                'subject' => 'Set up trial with Family x caregiver',
                 'body' => '<p>Hi [family first name]/[helper first name]<br />Your trial is set up at this time. Please make sure you&#39;re on time and meet at this time at this address.<br />If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
                 'type' => 'family_trialing',
                 'status' => 'FAMILY TRIALLING'
             ],
             [
+                'subject' => "Sorry, this doesn't work out...Withdrawn",
                 'body' => '<p>Hi [helper first name]<br />Thank you very much for your application.<br />Unfortunate, the family doesn&#39;t think this is a good fit due to the following reason: xxx<br />We will keep an eye out for another position. Please also keep us updated with your availability. Thanks,</p>',
                 'type' => 'rejected',
                 'status' => 'REJECTAD'
             ],
             [
+                'subject' => "Sorry, this doesn't work out...Withdrawn",
                 'body' => '<p>Hi [family fn],<br />Unfortunately this helper withdrawn due to the following reason: xxx<br />We will keep searching for another candidat</p>',
                 'type' => 'withdrawn',
                 'status' => 'WITHDRAWN'
             ],
             [
+                'subject' => 'Congratulations on your match!',
                 'body' => '<p>Hi [family first name]/[helper first name]<br />Congratulations to you both for finalizing the relationship. If you haven&#39;t done so already, please make sure you specify the scope of work, terms, schedule and any other details.Please feel free to coordinate directly from here onwards. Let us know if you have any other questions.<br />Thanks,&nbsp;</p>',
                 'type' => 'family_offer',
                 'status' => 'FAMILY OFFER'
             ],
             // FEEDBACK
             [
+                'subject' => null,
                 'body' => '<p>Hi [Family FN],<br />How was your interview?<br />Please provide us some feedback and whether you would like to move to the next step with this helper. Thanks.<br />Agency name team<br />&nbsp;</p>',
                 'type' => '8',
                 'status' => 'FAMILY INTERVIEW FEEDBACK'
             ],
             [
+                'subject' => null,
                 'body' => '<p>Hi [Helper FN],<br /><br />How was your interview?<br />Please provide us some feedback and we will follow up with the family.<br />Thanks.<br /><br />Agency name team</p>',
                 'type' => '9',
                 'status' => 'TALENT INTERVIEW FEEDBACK'
             ],
             [
+                'subject' => null,
                 'body' => '<p>Hi [Family FN],<br />How was your trial? Please provide us some feedback and whether you would like to move to the next step with this helper.<br />Thanks.<br />&nbsp;</p>',
                 'type' => '10',
                 'status' => 'FAMILY TRIALLING FEEDBACK'
             ],
             [
+                'subject' => null,
                 'body' => '<p>Hi [Helper FN],<br />How was your trial? Please provide us some feedback and we will follow up with the family. Thanks.<br />Agency name team</p>',
                 'type' => '11',
                 'status' => 'TALENT FAMILY TRIALLING FEEDBACK'
@@ -96,54 +110,63 @@ class TemplateEmailSeeder extends Seeder
         User::query()->get()->map(function($user){
             $array = [
                 [
+                    'subject' => 'Follow-up: [Type of Care] Requirement Confirmation Concierge Service Call - [First Name]',
                     'body' => '<p>Hi [Family First Name],<br />Thank you for your time to chat with me earlier. We have gathered a list of requirements and your family information in the link below.<br />Please confirm and let me know if there is anything else especially the must haves in the job.<br />If you have any questions, please let me know. [insert link] - please review:</p><ul><li>family info</li><li>notes</li><li>our process (additional documents)</li></ul><p>If you don&#39;t have any questions and would like to proceed with us, please review the agreement and sign where indicated. We also included the invoice for payment.<br />Once received, we will get the process started. Thanks,<br />Agency name team</p>',
                     'type' => '0',
                     'status' => 'CLIENT CONFIRMATION',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => 'internal match dummy subject',
                     'body' => 'Email internal matched dummy',
                     'type' => 'internal_matched',
                     'status' => 'INTERNAL MATCHED',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => 'Can we interview?',
                     'body' => '<p>Hi [Helper fn],<br />Thank you for your application! We would like to schedule a quick interview with you to learn more about you and tell you about the position.<br />Please select the time that fits you the best.Thanks,<br />Agency name team</p>',
                     'type' => 'agency_interview',
                     'status' => 'AGENCY INTERVIEW',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => ' [Important - please read] Follow-up: Helper Candidate Present - [First Name]',
                     'body' => '<p>Hi [Family First Name],<br />We are able to finalize two caregivers who meet your requirements with years of experience. Please use the link below to view their info.Please note:</p><ul><li>We can hold them for<strong>&nbsp;48 hours</strong>&nbsp;without interviewing other families.</li><li>We recommend our families not to share with them that you are interviewing with other candidates.</li><li>Here are some topics we highly recommend discussing during the interview: rate, job responsibilities, specific schedule, paid vacation, payment frequency, payment method, and working style/philosophy preferences, etc. It doesn&#39;t have to be this order, just a guide.</li></ul><p><strong>Action required from you:&nbsp;</strong><br />We would like to coordinate interviews rather soon given the fast hire market. Please provide your available time/date within the portal to schedule your interviews.<br />Thanks,<br />Agency name team (edited)</p>',
                     'type' => 'present_to_family',
                     'status' => 'PRESENT TO FAMILY',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => 'Set up interview with Family x caregiver',
                     'body' => '<p>Hi [family first name]/[helper first name]<br />Your interview is set up at this time. Please make sure you&#39;re on time and call via xx. Feel free to send a text to greet each other. If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
                     'type' => 'family_interview',
                     'status' => 'FAMILY INTERVIEW',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => 'Set up trial with Family x caregiver',
                     'body' => '<p>Hi [family first name]/[helper first name]<br />Your trial is set up at this time. Please make sure you&#39;re on time and meet at this time at this address.<br />If you need to reschedule it, please let each other know ahead of time.<br />Thanks,</p>',
                     'type' => 'family_trialing',
                     'status' => 'FAMILY TRIALLING',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => "Sorry, this doesn't work out...Withdrawn",
                     'body' => '<p>Hi [helper first name]<br />Thank you very much for your application.<br />Unfortunate, the family doesn&#39;t think this is a good fit due to the following reason: xxx<br />We will keep an eye out for another position. Please also keep us updated with your availability. Thanks,</p>',
                     'type' => 'rejected',
                     'status' => 'REJECTAD',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => "Sorry, this doesn't work out...Withdrawn",
                     'body' => '<p>Hi [family fn],<br />Unfortunately this helper withdrawn due to the following reason: xxx<br />We will keep searching for another candidat</p>',
                     'type' => 'withdrawn',
                     'status' => 'WITHDRAWN',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => 'Congratulations on your match!',
                     'body' => '<p>Hi [family first name]/[helper first name]<br />Congratulations to you both for finalizing the relationship. If you haven&#39;t done so already, please make sure you specify the scope of work, terms, schedule and any other details.Please feel free to coordinate directly from here onwards. Let us know if you have any other questions.<br />Thanks,&nbsp;</p>',
                     'type' => 'family_offer',
                     'status' => 'FAMILY OFFER',
@@ -151,24 +174,28 @@ class TemplateEmailSeeder extends Seeder
                 ],
                 // FEEDBACK
                 [
+                    'subject' => null,
                     'body' => '<p>Hi [Family FN],<br />How was your interview?<br />Please provide us some feedback and whether you would like to move to the next step with this helper. Thanks.<br />Agency name team<br />&nbsp;</p>',
                     'type' => '8',
                     'status' => 'FAMILY INTERVIEW FEEDBACK',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => null,
                     'body' => '<p>Hi [Helper FN],<br /><br />How was your interview?<br />Please provide us some feedback and we will follow up with the family.<br />Thanks.<br /><br />Agency name team</p>',
                     'type' => '9',
                     'status' => 'TALENT INTERVIEW FEEDBACK',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => null,
                     'body' => '<p>Hi [Family FN],<br />How was your trial? Please provide us some feedback and whether you would like to move to the next step with this helper.<br />Thanks.<br />&nbsp;</p>',
                     'type' => '10',
                     'status' => 'FAMILY TRIALLING FEEDBACK',
                     'users_id' => $user->id
                 ],
                 [
+                    'subject' => null,
                     'body' => '<p>Hi [Helper FN],<br />How was your trial? Please provide us some feedback and we will follow up with the family. Thanks.<br />Agency name team</p>',
                     'type' => '11',
                     'status' => 'TALENT FAMILY TRIALLING FEEDBACK',
@@ -177,6 +204,64 @@ class TemplateEmailSeeder extends Seeder
             ];
             EmailAgencyTemplate::insert($array);
         });
+
+        // Talent status color
+        $status = [
+            [
+                'name' => 'Potential Client',
+                'key' => 'potential_client',
+                'color' => '#FFFF'
+            ],
+
+            [
+                'name' => 'Internal Matched',
+                'key' => 'internal_matched',
+                'color' => '#34A1EB',
+            ],
+            [
+                'name' =>  'Agency Interview',
+                'key' => 'agency_interview',
+                'color' => '#5FCFFF'
+            ],
+            [
+                'name' => 'Present to Family',
+                'key' => 'present_to_family',
+                'color' => '#3BD7CF'
+            ],
+            [
+                'name' => 'Family Interview',
+                'key' => 'family_interview',
+                'color' => '#5FCFFF'
+            ],
+            [
+                'name' => 'Family Trialing',
+                'key' => 'family_trialing',
+                'color' => '#2F2CA6'
+            ],
+            [
+                'name' => 'Rejected',
+                'key' => 'rejected',
+                'color' => '#E32222'
+            ],
+            [
+                'name' => 'Withdrawn',
+                'key' => 'withdrawn',
+                'color' => '#FA9D6B'
+            ],
+            [
+                'name' => 'Family Offer',
+                'name' => 'family_offer',
+                'color' => '#FEC001'
+            ]
+        ];
+
+        foreach($status as $val_status){
+            TalentStatusColor::create([
+                'status' => $val_status['name'],
+                'status_key' => str_replace(' ', '_', strtolower($val_status['name'])),
+                'color' => $val_status['color'],
+            ]);
+        }
 
         
     }

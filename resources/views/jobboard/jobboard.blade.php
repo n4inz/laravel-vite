@@ -632,7 +632,7 @@
                                             </div>
                                         </div>
                                         <div class="rate-errors">
-                                            <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Rate*</label>
+                                            <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Range*</label>
                                             <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                                                 <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " autocomplete="off">
                                             </div>

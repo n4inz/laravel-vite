@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        return view('email.duplicatTalentRekomendation');
+        // return view('email.duplicatTalentRekomendation');
         // TemplateEmail::query()->get()->map(function($result) use($request){
         //     EmailAgencyTemplate::create([
         //         'body' => $result->body,

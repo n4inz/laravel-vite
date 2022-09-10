@@ -9,6 +9,7 @@ use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
 use App\Models\SettingServiceSubcategory;
 use App\Models\SettingStatusTalent;
+use App\Models\TalentStatusColor;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,39 +39,48 @@ class SettingSeeder extends Seeder
             $status = [
                 [
                     'name' => 'Potential Client',
+                    'key' => 'potential_client',
                     'color' => '#FFFF'
                 ],
 
                 [
                     'name' => 'Internal Matched',
-                    'color' => '#34a1eb',
+                    'key' => 'internal_matched',
+                    'color' => '#34A1EB',
                 ],
                 [
                     'name' =>  'Agency Interview',
+                    'key' => 'agency_interview',
                     'color' => '#5FCFFF'
                 ],
                 [
                     'name' => 'Present to Family',
+                    'key' => 'present_to_family',
                     'color' => '#3BD7CF'
                 ],
                 [
                     'name' => 'Family Interview',
+                    'key' => 'family_interview',
                     'color' => '#5FCFFF'
                 ],
                 [
                     'name' => 'Family Trialing',
+                    'key' => 'family_trialing',
                     'color' => '#2F2CA6'
                 ],
                 [
                     'name' => 'Rejected',
+                    'key' => 'rejected',
                     'color' => '#E32222'
                 ],
                 [
                     'name' => 'Withdrawn',
+                    'key' => 'withdrawn',
                     'color' => '#FA9D6B'
                 ],
                 [
                     'name' => 'Family Offer',
+                    'name' => 'family_offer',
                     'color' => '#FEC001'
                 ]
             ];
@@ -91,9 +101,15 @@ class SettingSeeder extends Seeder
                         'users_id' => $users->id
                     ]);
                 }
+
+                // TalentStatusColor::create([
+                //     'status' => $val_status['name'],
+                //     'status_key' => str_replace(' ', '_', strtolower($val_status['name'])),
+                //     'color' => $val_status['color'],
+                // ]);
             }
 
-            $subcategory_chile = [
+            $subcategory_child = [
                 'Nanny/ Sister',
                 // 'Sister',
                 'Au Pair',
@@ -134,20 +150,20 @@ class SettingSeeder extends Seeder
                 'Other Professional Services'
             ];
 
-            // Chile
-            $chile = SettingServiceCategory::create([
-                'category_name' => 'Chile Care',
-                'category_key' => str_replace(' ', '_', strtolower('Chile Care')),
+            // Child
+            $child = SettingServiceCategory::create([
+                'category_name' => 'Child Care',
+                'category_key' => str_replace(' ', '_', strtolower('Child Care')),
                 'users_id' => $users->id
             ]);
 
-            foreach($subcategory_chile as $val_sub_chile){
+            foreach($subcategory_child as $val_sub_child){
                 SettingServiceSubcategory::create([
-                    'category' => 'Chile Care',
-                    'sub_category_name' => $val_sub_chile,
-                    'sub_category_key' => str_replace(' ', '_', strtolower($val_sub_chile)),
+                    'category' => 'Child Care',
+                    'sub_category_name' => $val_sub_child,
+                    'sub_category_key' => str_replace(' ', '_', strtolower($val_sub_child)),
                     'users_id' => $users->id,
-                    'service_categories_id' => $chile->id
+                    'service_categories_id' => $child->id
                 ]);
             }
 

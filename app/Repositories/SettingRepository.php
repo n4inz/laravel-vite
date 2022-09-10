@@ -15,6 +15,7 @@ use App\Models\SettingServiceCategory;
 use App\Models\SettingServiceLocationFee;
 use App\Models\SettingStatusTalent;
 use App\Models\SettingUsers;
+use App\Models\TalentStatusColor;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -60,10 +61,10 @@ class SettingRepository {
             ]);
            
             // Chile care
-            if(isset($request->chile_care_category)){
+            if(isset($request->child_care_category)){
                 $serviceCaregoryChileCare =  SettingServiceCategory::create([
-                    'category_name' => 'Chile Care',
-                    'category_key' => $request->chile_care_category,
+                    'category_name' => 'Child Care',
+                    'category_key' => $request->child_care_category,
                     'users_id' => auth()->user()->id
                 ]);
 
@@ -187,11 +188,19 @@ class SettingRepository {
             }
 
             foreach($request->status_talent as $key => $value){
-                SettingStatusTalent::create([
-                    'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
-                    'status_key' =>  $request->status_talent[$key],
-                    'users_id' => auth()->user()->id
-                ]);
+
+                TalentStatusColor::query()->get()->map(function($res) use($request, $key){
+                    if($res->status_key == $request->status_talent[$key]){
+                        SettingStatusTalent::create([
+                            'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
+                            'status_key' =>  $request->status_talent[$key],
+                            'color' => $res->color,
+                            'users_id' => auth()->user()->id
+                        ]);
+
+                    }
+
+                });
     
             }
 
@@ -242,10 +251,10 @@ class SettingRepository {
 
 
              //Chile care
-             if(isset($request->chile_care_category)){
+             if(isset($request->child_care_category)){
                 $serviceCaregoryChileCare =  SettingServiceCategory::create([
-                    'category_name' => 'Chile Care',
-                    'category_key' => $request->chile_care_category,
+                    'category_name' => 'Child Care',
+                    'category_key' => $request->child_care_category,
                     'users_id' => auth()->user()->id
                 ]);
 
@@ -383,11 +392,18 @@ class SettingRepository {
             SettingStatusTalent::where('users_id', auth()->user()->id)->delete();
 
             foreach($request->status_talent as $key => $value){
-                SettingStatusTalent::create([
-                    'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
-                    'status_key' =>  $request->status_talent[$key],
-                    'users_id' => auth()->user()->id
-                ]);
+                TalentStatusColor::query()->get()->map(function($res) use($request, $key){
+                    if($res->status_key == $request->status_talent[$key]){
+                        SettingStatusTalent::create([
+                            'status_name' => str_replace('_', ' ', ucfirst($request->status_talent[$key])),
+                            'status_key' =>  $request->status_talent[$key],
+                            'color' => $res->color,
+                            'users_id' => auth()->user()->id
+                        ]);
+
+                    }
+
+                });
     
             }
 

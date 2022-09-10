@@ -1099,11 +1099,14 @@
                                                          </div>
                                                          <div>
                                                             @if ($talent->color_status)
-                                                                <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-[{{$talent->color_status}}] focus:ring-0 bg-gray-50 rounded border border-[{{$talent->color_status}}] outline-none hover:cursor-pointer">
-                                                                    <option>-- Select status --</option>
-                                                                    @foreach ($status_talent as $value )
-                                                                        <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                                    @endforeach
+                                                                <select style="color:{{$talent->color_status}}; border-color:{{$talent->color_status}}; " data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs focus:ring-0 bg-gray-50 rounded border outline-none hover:cursor-pointer">
+                                                                        <option>-- Select status --</option>
+                                                                        <option @if($talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{$talent->status }}" >{{$talent->status }}</option>
+                                                                            @foreach ($status_talent as $value )
+                                                                                @if ($value->status_name != $talent->status)
+                                                                                    <option  class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                                                @endif
+                                                                            @endforeach
                                                                 </select>
                                                             @else
                                                                 <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-palet focus:ring-0 bg-gray-50 rounded border border-palet outline-none hover:cursor-pointer">
@@ -1201,7 +1204,7 @@
 
                         </div>
 
-                        <div class="bg-bgbody rounded mt-3 toggle_client_detail">
+                        <div class="bg-bgbody rounded mt-3 toggle_client_detail w-[704px]">
                             <div class="p-4">
                                 <div class="flex items-center justify-between w-full">
                                     <span class="overview-client-detail">CLIENT DETAIL</span>
@@ -1524,7 +1527,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-bgbody  rounded mt-3 mb-7">
+                        <div class="bg-bgbody  rounded mt-3 mb-7 w-[704px]">
                             <span class="overview-client-detail border-b border-b-[#ECECEC] px-4 pt-[18.5px] pb-[14.5px]">Comments</span>
                             <div id="comment{{ $result->id }}" class="p-4">
                                 {{-- Messages --}}
@@ -1989,7 +1992,13 @@
                                                 <tr class="hover:bg-gray-100 hover:cursor-pointer">
                                                     <td height="66px" class="border-b overview-talent-otside-text text-[#222222]">
                                                     <div class="flex items-center justify-start space-x-3">
-                                                            <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt="">
+                                                            @if ($val->avatar)
+                                                                <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt="">
+                                                            @else
+                                                                <div class="w-8 h-8 flex items-center justify-center bg-[{{ $val->color }}] rounded-full">
+                                                                    <span class="text-white text-lg">{{ strtoupper(substr($val->name, 0, 1)) }}</span>
+                                                                </div>
+                                                            @endif
                                                             <span class="overview-comments-name text-[#222222]">{{ $val->name }}</span>
                                                             <span class="overview-comments-name text-[#827C7C]">{{ Carbon\Carbon::parse($val->created_at)->diffForHumans() }} at {{ $val->created_at->format('H:i'); }} ({{ $val->body }})</span>
                                                         </div>

@@ -1367,9 +1367,6 @@ video {
 .cursor-pointer {
   cursor: pointer;
 }
-.cursor-move {
-  cursor: move;
-}
 .list-none {
   list-style-type: none;
 }
@@ -2490,14 +2487,6 @@ video {
 .placeholder-red-600::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(220 38 38 / var(--tw-placeholder-opacity));
-}
-.placeholder-gray-200::-moz-placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-placeholder-opacity));
-}
-.placeholder-gray-200::placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-placeholder-opacity));
 }
 .placeholder-gray-500::-moz-placeholder {
   --tw-placeholder-opacity: 1;

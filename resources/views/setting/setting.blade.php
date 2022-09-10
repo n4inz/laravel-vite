@@ -149,7 +149,7 @@
                                     <div class="w-full">
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Talent Status <i class="ml-2 text-[10px] text-red-500">not editable*</i></label>
                                         <div class="errors_status_talent">
-                                            {{-- Chile Care --}}
+                                            
                                             <div class="flex space-x-7 p-4 rounded-lg" id="chile_care" role="tabpanel" aria-labelledby="chile-care">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
@@ -192,7 +192,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- End chile care --}}
+                                            
                                             @if($errors->has('status_talent'))
                                                 <p class="mt-2 text-sm text-red-600">{{ $errors->first('status_talent') }}</p>
                                             @endif
@@ -242,7 +242,7 @@
                                                 {{-- <input disabled {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other w-5 h-5 hidden rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
                                                 <label  class="overview-id-field text-colortext">Other services</label>
                                             </div>
-                                            <input name="chile_care_category" {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care hidden subcategory">
+                                            <input name="child_care_category" {{ old('child_care_category') ? 'checked' : ''  }} @if(in_array('child_care', $category)) checked @endif value="child_care" style="color: #3BD7CF" type="checkbox" class="child-care hidden subcategory">
                                             <input  name="senior_care_category" {{ old('senior_care_category') ? 'checked' : ''  }} @if(in_array('senior_care', $category)) checked @endif value="senior_care" id="senior-care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory senior-care " >
                                             <input name="home_care_category" {{ old('home_care_category') ? 'checked' : ''  }} @if(in_array('home_care', $category)) checked @endif value="home_care" style="color: #3BD7CF" type="checkbox" class="hidden subcategory home-care" >
                                             <input name="other_category" {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other hidden subcategory " >

@@ -105,6 +105,7 @@ class AuthenticateController extends Controller
             // Crete template email
             TemplateEmail::query()->get()->map(function($result) use($user){
                 EmailAgencyTemplate::create([
+                    'subject' => $result->subject,
                     'body' => $result->body,
                     'type' => $result->type,
                     'status' => $result->status,

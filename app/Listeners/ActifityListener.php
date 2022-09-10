@@ -30,6 +30,7 @@ class ActifityListener
        Actifity::create([
         'name' => $event->data['name'],
         'avatar' => $event->data['avatar'],
+        'color' => $event->data['color'],
         'body' => $event->data['body'],
         'create_by' => $event->data['create_by'],
         'users_id' => $event->data['users_id'],

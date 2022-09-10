@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('actifities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
+            $table->string('color')->nullable();
             $table->string('body');
             $table->unsignedBigInteger('create_by');
             $table->unsignedBigInteger('users_id');
