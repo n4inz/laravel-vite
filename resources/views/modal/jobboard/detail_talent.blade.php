@@ -303,16 +303,16 @@
 
     })
 
-    // var $image = $('#image');
+    var $image = $('#image');
 
-    // $image.viewer({
-    // inline: true,
-    // viewed: function() {
-    //     $image.viewer('zoomTo', 1);
-    // }
-    // });
-    // var viewer = $image.data('viewer');
-    // $('#images').viewer();
+    $image.viewer({
+    inline: true,
+    viewed: function() {
+        $image.viewer('zoomTo', 1);
+    }
+    });
+    var viewer = $image.data('viewer');
+    $('#images').viewer();
 
 
 </script>

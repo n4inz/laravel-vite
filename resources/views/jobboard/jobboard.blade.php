@@ -633,9 +633,15 @@
                                         </div>
                                         <div class="rate-errors">
                                             <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Range*</label>
-                                            <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                                <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " autocomplete="off">
-                                            </div>
+                                           <div class="flex justify-center items-center space-x-2">
+                                                <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16  h-8 border border-[#ECECEC] flex items-center rounded">
+                                                    <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                                                </div>
+                                                <span>-</span>
+                                                <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16 h-8 border border-[#ECECEC] flex items-center rounded">
+                                                    <input type="text" name="rate2" value="{{ old('rate2') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                                                </div>
+                                           </div>
                                             @if($errors->has('family'))
                                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('rate') }}</p>
                                             @endif
@@ -746,6 +752,10 @@
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button onclick="modalCalendly.hide()" type="button" class="text-gray-400 absolute top-2 right-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
                     <div class="h-80 flex items-center justify-center space-x-24 display_calendly">
                         <div class='container-loading'>
                             <div class="loader">
@@ -859,9 +869,7 @@
                             error.appendTo(element.parents('.end-date-errors'));
                             error.appendTo(element.parents('.rate-errors'));
                             error.appendTo(element.parents('.name-chile-errors'));
-                           
-                           
-                            
+                            error.appendTo(element.parents('.age-errors'));
                         }
                     },
        
@@ -1280,6 +1288,8 @@
 
             });
         })
+
+
 
          // Edit job for calendly
         function edit_create_job_calendly(id){

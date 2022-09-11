@@ -227,7 +227,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="bg-bgbody p-8 rounded ">
+                {{-- <div class="bg-bgbody p-8 rounded ">
                     <div class=" flex space-x-2">
                         <div class="w-2 h-6 bg-colorelips rounded-sm"></div>
                         <span class="text-[#222222] font-semibold">Appointments</span>
@@ -236,9 +236,9 @@
                     <div id="calender" >
                         
                     </div>
-                </div>
+                </div> --}}
     
-                <!--
+                
                 <div class="bg-bgbody p-8 rounded ">
                     <div class=" flex space-x-2">
                         <div class="w-2 h-6 bg-colorelips rounded-sm"></div>
@@ -263,7 +263,7 @@
                         </div>
                     </div>
                 </div>
-                -->
+            
             </div> 
         </div>
     </article>
@@ -365,17 +365,17 @@
     //     ];
 
     // console.log(eventss);
-    var events = <?=  json_encode($calendlyEvent) ?>;
-    // console.log(events);
+    // var events = ;
+    // // console.log(events);
 
-    var datanain = [];
-    events.map(function(e){
-        datanain.push({'Date': new Date(e.date) , 'Title':e.event})
-    })
-    console.log(datanain)
-    var settings = {};
-    var element = document.getElementById('calender');
-    caleandar(element, datanain, settings);
+    // var datanain = [];
+    // events.map(function(e){
+    //     datanain.push({'Date': new Date(e.date) , 'Title':e.event})
+    // })
+    // console.log(datanain)
+    // var settings = {};
+    // var element = document.getElementById('calender');
+    // caleandar(element, datanain, settings);
 
 </script>
 @endsection

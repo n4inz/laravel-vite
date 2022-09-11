@@ -456,9 +456,26 @@ class JobboardController extends Controller
 
     public function change_status_all_match_talent(Request $request)
     {
+
+    //    JobModelsMatchTalentAdd::updateOrCreate(['talents_id' => $request->talent_id , 'job_models_id' => $request->job_models_id,],[
+    //         'status' => $request->status,
+    //         'color_status' => $color_status->color,
+    //         'talents_id' => $request->talent_id,
+    //         'job_models_id' => $request->job_models_id,
+            
+    //     ]);
+
+        $type =  str_replace(' ', '_', strtolower($request->status_name_match));
+
+        $color_status = SettingStatusTalent::where([
+            'users_id' =>  auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+            'status_key' => $type
+            ])->first('color');
         foreach($request->talent_name as $key => $val){
+
             JobModelsMatchTalentAdd::updateOrCreate(['job_models_id' => $request->job_models_id, 'talents_id' =>  $request->talent_name[$key],],[
                 'status' => $request->status_name_match,
+                'color_status' => $color_status->color,
             ]);
         }
       return response(200);

@@ -34,7 +34,7 @@
 <div class="px-8 mt-4 title-errors">
     <label class="{{ $errors->has('title') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Title*</label>
     <div class="{{ $errors->has('title') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} relative flex flex-col items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-        <input name="title" value="{{ old('title' , $detailJob->title) }}" type="text" class="h-8  block border-none bg-transparent focus:ring-0 w-full outline-none rounded" autocomplete="off">
+        <input name="title" value="{{ old('title' , $detailJob->title) }}" type="text" class="h-8 text-xs block border-none bg-transparent focus:ring-0 w-full outline-none rounded" autocomplete="off">
     </div>
     @if($errors->has('title'))
         <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('title') }}</p>
@@ -61,7 +61,7 @@
             </svg> 
         </div>
         <div class="flex relative items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
-            <input name="address" value="{{ old('address' ,$detailJob->location ) }}" type="text" class="placepicker overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location" autocomplete="off">
+            <input name="address" value="{{ old('address' ,$detailJob->location ) }}" type="text" class="placepicker overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location" autocomplete="off">
         </div>
         @if($errors->has('address'))
             <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
@@ -405,10 +405,19 @@
                 </div>
             </div>
             <div class="rate-errors">
-                <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Rate*</label>
-                <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
+                <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Range*</label>
+                {{-- <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
                     <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " autocomplete="off">
-                </div>
+                </div> --}}
+                <div class="flex justify-center items-center space-x-2">
+                    <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16  h-8 border border-[#ECECEC] flex items-center rounded">
+                        <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                    </div>
+                    <span>-</span>
+                    <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16 h-8 border border-[#ECECEC] flex items-center rounded">
+                        <input type="text" name="rate2" value="{{ old('rate2') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                    </div>
+               </div>
                 @if($errors->has('family'))
                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('rate') }}</p>
                 @endif
@@ -546,6 +555,7 @@
             $('.start_date').prop('disabled', true);
             $('.start_date').attr("type", "date")
             $('.start_date').addClass("text-gray-200");
+            $('#start_date-error').html('')
         } else {
             $('.start_date').prop('disabled', false);
             $('.start_date').attr("type", "date")
@@ -560,6 +570,7 @@
             $('.end_date').prop('disabled', true);
             $('.end_date').attr("type", "date")
             $('.end_date').addClass("text-gray-200");
+            $('#end_date-error').html('')
         } else {
             $('.end_date').prop('disabled', false);
             $('.end_date').attr("type", "date")
@@ -567,6 +578,8 @@
         }
     })
 
+
+    
     $('.family_email_send').val('{{ $detailJob->client->email }}');
 
 </script>

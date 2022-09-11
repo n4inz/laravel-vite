@@ -117,6 +117,7 @@
       
     </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
     <script src="{{ asset('js/placePicker.js') }}"></script>

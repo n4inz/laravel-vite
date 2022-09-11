@@ -1,4 +1,5 @@
 <form class="form_edit_email" action="" method="POST">@csrf
+    <div class="text-xs flex text-colortext mt-5 justify-between"><i>Subject :</i></div>
     <div class="mb-2 mt flex items-center justify-center h-9 border-b border-[#ECECEC] rounded text-[#222222]">
         <input name="subject" value="{{ $email->subject }}" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject:">
     </div>
