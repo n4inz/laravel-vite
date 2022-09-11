@@ -127,7 +127,7 @@
 <body class="bg-backround font-roboto ">
    
     @include('layouts.navbar')
-    <div class="inset-0 bg-gray-800 opacity-30 fixed z-20 hide_body hidden"></div>
+    <div class="inset-0 bg-gray-800 opacity-30 fixed z-[60] hide_body hidden"></div>
 
     <div>
        

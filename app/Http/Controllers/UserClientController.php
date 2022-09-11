@@ -134,6 +134,21 @@ class UserClientController extends Controller
       
     }
 
+    public function user_talent_edit_detail(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+        Talents::where('id' , $request->id)->update([
+            'email_verified' => $request->email_verified,
+            'background_check' => $request->background_check,
+            'vaccination' => $request->vaccination
+        ]);
+        
+        return redirect()->back();
+    }
+
     public function __destruct()
     {
         File::where(['type' => 'TALENT'])->delete();

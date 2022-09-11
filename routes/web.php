@@ -123,7 +123,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/user/talent', [UserClientController::class, 'talent'])->name('user_talent.talent');
     // Route::post('/user-client-attached-file', [UserClientController::class, 'attached_file'])->name('user_client. attached_file');
     Route::post('/user-talent-store', [UserClientController::class, 'telent_store'])->name('user_talent.store');
-    
+    Route::post('/user-talent-edit-detail', [UserClientController::class, 'user_talent_edit_detail'])->name('user_talent.user_talent_edit_detail');
     // Setting
     Route::get('/setting', [SettingController::class, 'setting'])->name('setting.setting');
     Route::post('setting-store', [SettingController::class, 'setting_store'])->name('setting.store');

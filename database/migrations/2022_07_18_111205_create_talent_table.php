@@ -26,6 +26,9 @@ return new class extends Migration
 
             $table->string('address');
             $table->string('about_talent');
+            $table->integer('email_verified')->nullable();
+            $table->integer('background_check')->nullable();
+            $table->integer('vaccination')->nullable();
             $table->string('file_documents')->nullable();
             $table->unsignedBigInteger('users_id');
 
