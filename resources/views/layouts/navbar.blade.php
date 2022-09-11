@@ -1,5 +1,5 @@
 {{-- <nav id="nav" class="fixed left-60 right-0 z-10 bg-bgbody border border-gray-200 px-2 sm:px-4 py-2.5 rounded "> --}}
-    <nav id="nav" class="fixed w-[1400px] xl:w-full z-10 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
+    <nav id="nav" class="fixed w-[1400px] xl:w-full z-20 bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
         <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
             <div id="search" class="w-1/2 togle-search-desktop" >
                 {{-- <div class="relative ">

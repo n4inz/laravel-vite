@@ -6,6 +6,7 @@ use App\Http\Requests\SettingRequest;
 use App\Http\Traits\HttpGuzzle;
 use App\Http\Traits\ImageUpload;
 use App\Models\Avatar;
+use App\Models\EmailAgencyTemplate;
 use App\Models\SettingDefinedCheckList;
 use App\Models\SettingGeneral;
 use App\Models\SettingJobModelsStatus;
@@ -59,8 +60,9 @@ class SettingController extends Controller
             }
         }
 
+        $tmp_email = EmailAgencyTemplate::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
         $defined_list = SettingDefinedCheckList::where('users_id', auth()->guard('web')->user()->id)->orderBy('order', 'asc')->get();
-        return view('setting.setting', compact('setting', 'defined_list', 'category', 'subCategory', 'jobStatus', 'talentStatus'));
+        return view('setting.setting', compact('setting', 'defined_list', 'category', 'subCategory', 'jobStatus', 'talentStatus','tmp_email'));
     }
 
     public function setting_store(SettingRequest $request)
@@ -106,6 +108,29 @@ class SettingController extends Controller
                 'order' => $key
             ]);
         }
-        
+    }
+
+    public function get_editor_email(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+        $email = EmailAgencyTemplate::where('id', $request->id)->first();
+        return view('modal.setting.editorEmail', compact('email'));
+    }
+
+    public function edit_email_store(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'edit_email' => 'required'
+        ]);
+
+        EmailAgencyTemplate::where('id' , $request->id)->update([
+            'body' => $request->edit_email,
+            'subject' => $request->subject,
+        ]);
+        return response(200);
     }
 }

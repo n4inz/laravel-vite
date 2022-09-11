@@ -1075,7 +1075,7 @@
                                                      <div class="flex justify-between px-4 hover:cursor-pointer">
                                                          <div class="flex space-x-2 items-center justify-center">
                                                              <div class="">
-                                                                 <input  style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                                 <input style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="select_talent w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                              </div>
                                                              @if ($talent->talent->avatar)
                                                                 <div>
@@ -1122,26 +1122,32 @@
 
                                             </div>
                                             <div class="flex items-center justify-center px-6 space-x-2 rounded-b absolute top-5 right-0">
-                                                <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center px-5 h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
-                                                    <span class="overview-send-job text-palet">Update status</span>
+                                                <div class="select_talent_action hidden">
+                                                    <div class="flex space-x-2 ">
+                                                        <div id="dropdownDefault" data-dropdown-toggle="dropdown_select" class="flex justify-center items-center px-5 h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                            <span class="overview-send-job text-palet">Update status</span>
+                                                        </div>
+                                                        <div id="dropdown_select" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                                            <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
+                                                                @foreach ($status_talent as $value )
+                                                                <li>
+                                                                    <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
+                                                                        <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
+                                                                    </label>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                        <div onclick="preview_email_client()" data-modal-toggle="preview_email_client" class="flex justify-center items-center px-5 h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                            <span class="overview-send-job text-palet">Send</span>
+                                                        </div>   
+                                                    </div>
                                                 </div>
-                                                <div id="dropdown_select" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                                                    <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownDefault">
-                                                        @foreach ($status_talent as $value )
-                                                        <li>
-                                                            <label onclick="status_talents('{{ $value->status_name }}')" for="{{ $value->id }}"  class="hover:cursor-pointer">
-                                                                <span class="block py-2 px-4 hover:bg-gray-100 ">{{ $value->status_name }}</span>
-                                                            </label>
-                                                        </li>
-                                                        @endforeach
-                                                    </ul>
+                                                <div class="add_talent_action">
+                                                    <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                        <span class="overview-send-job text-palet">+ Add Talent</span>
+                                                    </div>                       
                                                 </div>
-                                                <button class="flex justify-center items-center px-5 h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
-                                                    <span class="overview-send-job text-palet">Send</span>
-                                                </button>   
-                                                <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
-                                                    <span class="overview-send-job text-palet">+ Add Talent</span>
-                                                </div>                       
                                             </div>
                                         </div>
                                     
@@ -1714,7 +1720,7 @@
                                         @endif
                                     @endif
                                 {{-- Button --}}
-                                <button data-modal-toggle="upload_progress" class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md">
+                                <button  class="flex items-center justify-center w-full xl:w-[268px] h-[42px] bg-palet rounded-md">
                                     <span class="overview-attechment-btn-text">View more</span> 
                                 </button>
                                 <div class="flex mt-2"></div>
@@ -2424,6 +2430,47 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Modal Prewiew email client --}}
+            <div id="preview_email_client" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-[700px] h-full md:h-auto">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex justify-center items-center p-4 rounded-t border-b dark:border-gray-600">
+                            <h3 class="text-xl text-center font-semibold text-gray-900 dark:text-white">
+                                Preview
+                            </h3>
+                        </div>
+                        <!-- Modal body -->
+                        <div class=" h-[400px] overflow-x-hidden overflow-auto">
+                            <div class="mt-2 load_preview_email_client text-center pt-10">
+                                <div role="status">
+                                    <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-palet" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                    </svg>
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex justify-center items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                            {{-- <button data-modal-toggle="preview_email_talent" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                            <button data-modal-toggle="preview_email_talent" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button> --}}
+                            <div data-modal-toggle="preview_email_client" class="flex justify-center items-center w-40 h-[42px] bg-[#DCDCDC] rounded-md hover:cursor-pointer">
+                                <span class="overview-attechment-btn-text">Cancel</span>
+                            </div>
+                            <div  class="w-40 h-[42px]">
+                                <button onclick="send_email_client()" class="flex justify-center items-center w-40 h-[42px] bg-palet rounded-md">
+                                    <span  class="overview-attechment-btn-text">Send</span>
+                                </button>                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- Main Modal Send Email To Talent --}}
             <div id="modal-send-email-talent" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full h-modal md:h-full">
                 <form action="{{ route('jobboard.send_email_to_talent') }}" method="post">
@@ -3078,7 +3125,7 @@
                             <div class="p-6 space-y-6">
                                 <div id="myTabContent">
                                     <div class="mb-2 flex items-center justify-center h-9 border border-[#ECECEC] rounded text-[#222222]">
-                                        <input name="subject" value="" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
+                                        <input name="subject" value="{{ $email->subject }}" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
                                     </div>
                                     <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <textarea id="textarea-id"  class="w-full h-full" name="editor_tmp_email_1" >{{ $email->body }}</textarea>
@@ -3811,27 +3858,95 @@
         });
     }
 
-        // save_as_email_client
-        function save_as_email_client(){
-            const email = CKEDITOR.instances["textarea-id"].getData();
-            $.ajax({
-                type: "POST",
-                url: "{{ route('jobboard.save_as_email_client') }}",
-                data: { email , status:'CLIENT CONFIRMATION' , _token: '{{ csrf_token() }}' },
-                beforeSend: function(){
-                   const loading = ` Save as Default
-                                    <i class="fa fa-refresh fa-spin fa-fw"></i>`;
-                    $('.save_as_email_client').html(loading);
-                },
-                success : function(val){
-                    const success = ` Save as Default
-                                <i class="fa fa-check" aria-hidden="true"></i>`;
-                                $('.save_as_email_client').html(success);
-                    console.log(val)
-                
-                }
-            });
+    // save_as_email_client
+    function save_as_email_client(){
+        const email = CKEDITOR.instances["textarea-id"].getData();
+        $.ajax({
+            type: "POST",
+            url: "{{ route('jobboard.save_as_email_client') }}",
+            data: { email , status:'CLIENT CONFIRMATION' , _token: '{{ csrf_token() }}' },
+            beforeSend: function(){
+                const loading = ` Save as Default
+                                <i class="fa fa-refresh fa-spin fa-fw"></i>`;
+                $('.save_as_email_client').html(loading);
+            },
+            success : function(val){
+                const success = ` Save as Default
+                            <i class="fa fa-check" aria-hidden="true"></i>`;
+                            $('.save_as_email_client').html(success);
+                console.log(val)
+            
+            }
+        });
+    }
+
+    $('.select_talent').change(function(){
+        var a =  document.getElementsByName('talent_name[]');
+        var allChecked = false;
+        a.forEach((item) => {
+            if(item.checked){
+                allChecked = true;
+                return false;
+            }          
+        })
+        if(allChecked){
+            $('.select_talent_action').removeClass('hidden');
+            $('.add_talent_action').addClass('hidden');
+        }else{
+            $('.select_talent_action').addClass('hidden');
+            $('.add_talent_action').removeClass('hidden');
         }
+
+    })
+
+    // Piview email send to client
+    function preview_email_client(){
+        
+        const data = $('#form_match_talent').serialize();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("jobboard.priview_email_client") }}',
+            data: data,
+            beforeSend: function(){
+                // const loading = ` Save as Default
+                //                     <i class="fa fa-refresh fa-spin fa-fw"></i>`;
+                //     $('.save_as_email_talent').html(loading);
+            },
+            success:function(data){
+                $('.load_preview_email_client').html(data)
+               
+            }
+        });
+    }
+
+    function send_email_client(){
+        const data = $('#form_match_talent').serialize();
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url: $('#form_match_talent').attr('action'),
+            data: data,
+            success:function(data){
+               location.reload()
+               
+            }
+        });
+
+        $('#form_match_talent').submit(function(){
+            alert('ok')
+        });
+    }
+
+     // End Piview email send to client
     
     
 </script>

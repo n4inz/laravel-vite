@@ -93,7 +93,7 @@
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
                     </div>
-                    <form action="{{ route('user_talent.store') }}" method="post" class="validate_talent" enctype="multipart/form-data">
+                    <form autocomplete="false" action="{{ route('user_talent.store') }}" method="post" class="validate_talent" enctype="multipart/form-data">
                         @csrf
                         <div class="px-[91px] mt-10">
                             <div class="flex justify-center  items-center space-x-10">
@@ -115,7 +115,7 @@
                                         <div class="mb-6 w-[249px] errors_first_name">
                                             <label for="first-name" class="{{ $errors->has('first_name') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Full Name</label>
                                             <div class="{{ $errors->has('first_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="first_name" value="{{ old('first_name') }}" type="text" class="{{ $errors->has('first_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
+                                                <input name="first_name" value="{{ old('first_name') }}" type="text" class="{{ $errors->has('first_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name" autocomplete="none" />
                                             </div>
                                             @if($errors->has('first_name'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('first_name') }}</p>
@@ -127,7 +127,7 @@
                                         <div class="mb-6 w-[249px] errors_last_name">
                                             <label for="last-name" class="{{ $errors->has('last_name') ? 'text-red-600' : '' }} invisible block mb-2 overview-modal-add-talent-text text-[#222222]">Last Name</label>
                                             <div class="{{ $errors->has('last_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="last_name" value="{{ old('last_name') }}" type="text" class="{{ $errors->has('last_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Last Name">
+                                                <input name="last_name" value="{{ old('last_name') }}" type="text" class="{{ $errors->has('last_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Last Name"  autocomplete="none">
                                             </div>
                                             @if($errors->has('last_name'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
@@ -142,7 +142,7 @@
                                         <div class="mb-6 w-[249px] errors_day_of_birthday">
                                             <label  class="{{ $errors->has('day_of_birthday') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">DoB</label>
                                             <div class="{{ $errors->has('day_of_birthday') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="day_of_birthday" value="{{ old('day_of_birthday') }}" type="date" class="{{ $errors->has('day_of_birthday') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50">
+                                                <input datepicker type="text" name="day_of_birthday" value="{{ old('day_of_birthday') }}" class="{{ $errors->has('day_of_birthday') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222]" placeholder="mm/dd/YYY" autocomplete="none">
                                             </div>
                                             @if($errors->has('day_of_birthday'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('day_of_birthday') }}</p>
@@ -154,7 +154,7 @@
                                         <div class="mb-6 w-[249px] errors_experience">
                                             <label  class="{{ $errors->has('experience') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Experience</label>
                                             <div class="{{ $errors->has('experience') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[249px] h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                                <input name="experience" value="{{ old('experience') }}" type="text" class="{{ $errors->has('experience') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="10">
+                                                <input name="experience" value="{{ old('experience') }}" type="text" class="{{ $errors->has('experience') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="10" autocomplete="none">
                                             </div>
                                             @if($errors->has('experience'))
                                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('experience') }}</p>
@@ -172,7 +172,7 @@
                                 <div class="errors_email">
                                     <span class="{{ $errors->has('email') ||  $errors->has('phone') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Your contact information</span>
                                     <div class="{{ $errors->has('email') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                        <input name="email" value="{{ old('email') }}" type="text" id="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Email">
+                                        <input name="email" value="{{ old('email') }}" type="text" id="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="Email" autocomplete="none">
                                     </div>
                                     @if($errors->has('email'))
                                         <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="errors_phone">
                                     <div class="{{ $errors->has('phone') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                        <input name="phone" value="{{ old('phone') }}" type="tel" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-[660px] h-full rounded p-1 pl-3 outline-none" placeholder="Phone">
+                                        <input name="phone" value="{{ old('phone') }}" type="tel" id="phone" class="{{ $errors->has('phone') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-[660px] h-full rounded p-1 pl-3 outline-none" placeholder="Phone" autocomplete="none">
                                     </div>
                                     @if($errors->has('phone'))
                                         <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
@@ -189,10 +189,10 @@
                             </div>
                             <div class="mt-6 errors_type_helper">
                                 <span class="{{ $errors->has('type_helper') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Type of Help Needed</span>
-                                <div class="{{ $errors->has('type_helper') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-28 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                <div id="input_tagifiy_helper" onchange="input_tagifiy($(this))" class="{{ $errors->has('type_helper') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] {{ old('type_helper') ? '' :'h-10' }} flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
                                     <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
                                 </div>
-                                {{-- <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum overview-modal-add-talent-text border-none focus:ring-0 w-full p-1 outline-none" placeholder=""> --}}
+                                {{-- <input id="type_helper" name='type_helper' value="{{ old('type_helper') }}" type="text" id="email" class="costum focus:ring-0 w-[670px] rounded  outline-none" placeholder="" > --}}
 
                                 @if($errors->has('type_helper'))
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('type_helper') }}</p>
@@ -200,8 +200,8 @@
                             </div>
                             <div class="mt-6 errors_languages">
                                 <span class="{{ $errors->has('languages') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Languages</span>
-                                <div class="{{ $errors->has('languages') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input name='languages' value="{{ old('languages') }}" id="languages" type="text" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="">
+                                <div id="input_tagifiy_languages" onchange="input_tagifiy($(this))" class="{{ $errors->has('languages') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] {{ old('languages') ? '' : 'h-10' }} flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                    <input name='languages' value="{{ old('languages') }}" id="languages" type="text" class="costum overview-modal-add-talent-text  border-none focus:ring-0 w-full p-1 outline-none" placeholder="" >
                                 </div>
                                 @if($errors->has('languages'))
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>
@@ -210,7 +210,7 @@
                             <div class="mt-6 errors_address">
                                 <span class="{{ $errors->has('address') ? 'text-red-600' : '' }} overview-modal-add-talent-text text-[#222222]">Address</span>
                                 <div class="{{ $errors->has('address') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px] h-10 flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
-                                    <input name="address" value="{{ old('address') }}" type="text" id="address" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" placeholder="">
+                                    <input  autocomplete="address" name="address" value="{{ old('address') }}" type="text" id="address" class="{{ $errors->has('address') ? 'placeholder-red-600' : '' }} placepicker  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none" autocomplete="off" />
                                 </div>
                                 @if($errors->has('address'))
                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
@@ -273,13 +273,14 @@
         </div>
     </article>
     <script src="{{ asset('js/fileNameLoad.js') }}"></script>
-
+    <script src="{{ asset('js/placePicker.js') }}"></script>
     {{-- Quick search --}}
     <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
     <script type="text/javascript">
         $('input#search_talents').quicksearch('div#search_talent');
         $('input#simple-search').quicksearch('div#search_talent');
     </script>
+    
         {{-- Format phone --}}
         <script src="{{ asset('js/intlTelInput.js') }}"></script>
         <script>
@@ -441,6 +442,7 @@
 
 
     <script>
+        
         // Priview images
         var loadFile = function(event) {
           var output = document.getElementById('output');
@@ -510,6 +512,16 @@
             }
         };
 
+        function input_tagifiy(a){
+            const id = a.attr('id')
+            $('#'+id).removeClass('h-10');
+            // console.log(a.children('input').val())
+            if(a.children('input').val() == ''){
+                $('#'+id).addClass('h-10');
+            }
+        }
+
+        
     </script>
     <script>
         const options = {
@@ -534,5 +546,10 @@
             modal.show()
         </script>    
     @endif
+    <script>
+        $(document).ready(function() {
+            $(".placepicker").placepicker();
+        }); 
+    </script>
 </main>
 @endsection

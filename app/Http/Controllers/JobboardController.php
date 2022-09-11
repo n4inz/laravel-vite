@@ -241,11 +241,11 @@ class JobboardController extends Controller
             ]);
         }
 
-        $tmp_email1 = EmailAgencyTemplate::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+        $tmp_email1 = EmailAgencyTemplate::where(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id , 'status' => 'CLIENT CONFIRMATION'])->first(['body' ,'subject']);
         if($tmp_email1){
             $email = $tmp_email1;
         }else{
-            $email =  TemplateEmail::where(['type' => 0 , 'status' => 'CLIENT CONFIRMATION'])->first('body');
+            $email =  TemplateEmail::where(['type' => 0 , 'status' => 'CLIENT CONFIRMATION'])->first(['body' ,'subject']);
         }
 
         $actifity = ModelsActifity::where('type' , 'TASK')->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
@@ -494,6 +494,24 @@ class JobboardController extends Controller
     //     return view('modal.jobboard.edit_email_talent', compact('email'));
        
     // }
+
+    public function priview_email_client(Request $request)
+    {
+        
+        
+        $talent = [];
+        $filter = array_unique($request->talent_name);
+        foreach($request->talent_name as $key =>$val){
+            array_push($talent, $request->talent_name[$key]);
+        }
+
+        // return $talent;
+        $value =  Talents::whereIn('id', $talent)->where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        $client = $request->name_client;
+        
+        return view('modal.jobboard.priview_email_client', compact('value', 'client'));
+    }
+
     public function save_as_email_client(Request $request)
     {
         EmailAgencyTemplate::updateOrCreate(['users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id],[

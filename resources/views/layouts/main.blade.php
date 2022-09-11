@@ -38,6 +38,8 @@
         }
         /* User Talent */
         .costum{
+            /* --tag--max-width:500px;
+            height: 200%; */
             --tags-focus-border-color: none;
             --tags-border-color : none;
             --tags-hover-border-color	:none;

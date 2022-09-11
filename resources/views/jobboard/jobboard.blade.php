@@ -265,7 +265,7 @@
                             <div class="px-8 mt-4 title-errors">
                                 <label class="{{ $errors->has('title') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Title*</label>
                                 <div class="{{ $errors->has('title') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} relative flex flex-col items-center justify-center space-x-3 w-[670px] h-8 border border-[#CCD3DC] rounded py-4">
-                                    <input name="title" value="{{ old('title') }}" type="text" class="h-8  block border-none bg-transparent focus:ring-0 w-full outline-none rounded" autocomplete="off">
+                                    <input  name="title" value="{{ old('title') }}" type="text" class="h-8 block text-xs border-none bg-transparent focus:ring-0 w-full outline-none rounded" autocomplete="off">
                                 </div>
                                 @if($errors->has('title'))
                                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('title') }}</p>
@@ -275,7 +275,7 @@
                                 <label for="description-label" class="{{ $errors->has('description') ? 'text-red-600' : '' }} mb-2 block overview-note-body text-colortext">Description*</label>
                                 <div class="{{ $errors->has('description') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-[670px]  flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
                                     {{-- <input name="description" value="{{ old('description') }}" type="text" id="description" class="h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder=""> --}}
-                                    <textarea id="editor1" name="description" rows="3" class="{{ $errors->has('description') ? 'placeholder-red-600' : '' }}  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none">{{ old('description') }}</textarea>
+                                    <textarea id="editor1" name="description" rows="3" class="{{ $errors->has('description') ? 'placeholder-red-600' : '' }} text-xl  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none">{{ old('description') }}</textarea>
                                 </div>
                                 @if($errors->has('description'))
                                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('description') }}</p>
@@ -293,7 +293,7 @@
                                         </svg> 
                                     </div>
                                     <div class="flex relative items-center justify-center space-x-3 w-[638px] h-8 border border-[#CCD3DC] rounded-r py-4">
-                                        <input name="address" value="{{ old('address' ) }}" type="text" class="placepicker overview-note-body text-sm block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location" autocomplete="off">
+                                        <input name="address" value="{{ old('address' ) }}" type="text" class="placepicker overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full outline-none " placeholder="Enter Location" autocomplete="off">
                                     </div>
                                     @if($errors->has('address'))
                                         <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
@@ -567,17 +567,17 @@
                                     </div>
 
                                     <div class="flex space-x-[165px] mt-6">
-                                        <div>
-                                            <label for="start-date" class="{{ $errors->has('start_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">Start date*</label>
+                                        <div class="">
+                                            <label class="{{ $errors->has('start_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">Start date*</label>
                                             <div class="flex items-center space-x-3 py-2 ">
-                                                <input id="asap" name="asap" @if(old('asap')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <input id="asap" name="asap" @if(old('asap')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 asap_check rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                 <label for="asap" class="overview-note-body text-colortext">ASAP</label>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div class="">
                                             <label for="end-date" class="{{ $errors->has('end_date') ? 'text-red-600' : '' }} overview-note-body text-colortext block">End date*</label>
                                             <div class="flex items-center space-x-3 py-2 ">
-                                                <input id="tbd" name="tbd" @if(old('tbd')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                <input id="tbd" name="tbd" @if(old('tbd')) checked @endif style="color: #3BD7CF" type="checkbox" value="1" class="w-5 h-5 tbd_check rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                 <label for="tbd" class="overview-note-body text-colortext">TBD</label>
                                             </div>
                                         </div>
@@ -585,7 +585,7 @@
                                     <div date-rangepicker datepicker-format="mm/dd/yyyy" class="flex space-x-4 relative ">
                                         <div class="start-date-errors">
                                             <div class="input_asap relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                                <input style="font-weight: 400; font-size: 13px;line-height: 18px;letter-spacing: -0.08px;" name="start_date" type="text" value="{{ old('start_date') }}" class="start_date block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " autocomplete="off">
+                                                <input style="font-weight: 400; font-size: 13px;line-height: 18px;letter-spacing: -0.08px;" name="start_date" type="text" value="{{ old('start_date') }}" class="start_date nainzzz block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none " autocomplete="off">
                                             </div>
                                             @if($errors->has('start_date'))
                                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('start_date') }}</p>
@@ -593,7 +593,7 @@
                                         </div>
                                         <div class="end-date-errors">
                                             <div class="input_tbd relative w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center justify-center rounded">
-                                                <input style="font-weight: 400; font-size: 13px;line-height: 18px;letter-spacing: -0.08px;" name="end_date" type="text" value="{{ old('end_date') }}" class="end_date block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none" autocomplete="off">
+                                                <input style="font-weight: 400; font-size: 13px;line-height: 18px;letter-spacing: -0.08px;" name="end_date" type="text" value="{{ old('end_date') }}" class="end_date start_end_date block border-none bg-transparent focus:ring-0 w-full -ml-5 outline-none" autocomplete="off">
                                             </div>
                                             @if($errors->has('end_date'))
                                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('end_date') }}</p>
@@ -634,7 +634,7 @@
                                         <div class="rate-errors">
                                             <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Range*</label>
                                             <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-[167px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                                <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " autocomplete="off">
+                                                <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full -ml-3 outline-none " autocomplete="off">
                                             </div>
                                             @if($errors->has('family'))
                                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('rate') }}</p>
@@ -805,6 +805,12 @@
                         end_time:{
                             required:true,
                         },
+                        // asaps :{
+                        //     require_from_group: [1, ".nainzzz"]
+                        // },
+                        // tbd :{
+                        //     require_from_group: [1, ".end_date"]
+                        // },
                         start_date:{
                             required:true,
                         },
@@ -837,6 +843,9 @@
                         {
                            
                             error.appendTo($('.sub_categorys_error'));
+                            // error.appendTo($('.start-date-errors'));
+                            // error.appendTo($('.errors_tbd'));
+
                            
                         }else{ 
                             error.insertAfter( element );
@@ -1120,7 +1129,9 @@
             if (this.checked) {
                 $('.start_date').prop('disabled', true);
                 $('.start_date').attr("type", "date")
+                $('.start_date').val('09/06/2022')
                 $('.start_date').addClass("text-gray-200");
+                $('#start_date-error').html('')
             } else {
                 $('.start_date').prop('disabled', false);
                 $('.start_date').attr("type", "text")
@@ -1135,6 +1146,7 @@
                 $('.end_date').prop('disabled', true);
                 $('.end_date').attr("type", "date")
                 $('.end_date').addClass("text-gray-200");
+                $('#end_date-error').html('')
             } else {
                 $('.end_date').prop('disabled', false);
                 $('.end_date').attr("type", "text")
@@ -1171,7 +1183,7 @@
                             </div>
                             <div class="px-4 mt-4 name-chile-errors">
                                 <div class="{{ $errors->has('name_chile') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 h-8 border border-[#CCD3DC] rounded py-4">
-                                    <input name="name_chile[]" value="{{ old('name_chile') }}" type="text"  class="name_chile h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="Name" autocomplete="off">
+                                    <input name="name_chile[]" value="{{ old('name_chile') }}" type="text"  class="name_chile h-8  text-xs block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="Name" autocomplete="off">
                                 </div>
                                 @if($errors->has('name_chile'))
                                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('name_chile') }}</p>
@@ -1190,7 +1202,7 @@
                             </div>
                             <div class="px-4 mt-2 age-errors">
                                 <div class="{{ $errors->has('age') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} flex items-center justify-center space-x-3 h-8 border border-[#CCD3DC] rounded py-4">
-                                    <input name="age[]" value="{{ old('age') }}" type="text" class="age_chile h-8 overview-note-body block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="Age" autocomplete="off">
+                                    <input name="age[]" value="{{ old('age') }}" type="text" class="age_chile h-8 text-xs block border-none bg-transparent focus:ring-0 w-full outline-none rounded" placeholder="Age" autocomplete="off">
                                 </div>
                                 @if($errors->has('age'))
                                     <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('age') }}</p>

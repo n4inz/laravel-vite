@@ -6,7 +6,7 @@
     <article id="article" class="ml-[310px] space-x-2 mt-[85px] px-5 xl:w-[75%]">
         <div>            
             <div id="myTabContent" class="text-teal-500">
-                <form id="validate_clients" action="{{ route('user_client.store') }}" class="validate_client" method="POST" enctype="multipart/form-data">
+                <form autocomplete="off" id="validate_clients" action="{{ route('user_client.store') }}" method="POST" enctype="multipart/form-data">
                         <div class=" flex space-x-2 mt-11">
                             {{-- right --}}
                             <div class="w-[704px] xl:w-[80%] ">
@@ -24,7 +24,7 @@
                                             <div class="errors_first_name">
                                                 <label class="{{ $errors->has('first_name') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">First Name</label>
                                                 <div class="{{ $errors->has('first_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input name="first_name" value="{{ old('first_name') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                                    <input name="first_name" value="{{ old('first_name') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="" autocomplete="off">
                                                 </div>
                                                 @if($errors->has('first_name'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('first_name') }}</p>
@@ -33,7 +33,7 @@
                                             <div class="errors_last_name">
                                                 <label class="{{ $errors->has('last_name') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Last Name</label>
                                                 <div class="{{ $errors->has('last_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input name="last_name" value="{{ old('last_name') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                                    <input name="last_name" value="{{ old('last_name') }}" type="text" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="" autocomplete="off">
                                                 </div>
                                                 @if($errors->has('last_name'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('last_name') }}</p>
@@ -44,7 +44,7 @@
                                             <div class="errors_email">
                                                 <label class="{{ $errors->has('email') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Email</label>
                                                 <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input name="email" value="{{ old('email') }}" type="text" id="email" class="email_keyup overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="">
+                                                    <input name="email" value="{{ old('email') }}" type="text" id="email" class="email_keyup overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="" autocomplete="off">
                                                 </div>
                                                 @if($errors->has('email'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
@@ -53,7 +53,7 @@
                                             <div class="errors_phone">
                                                 <label class="{{ $errors->has('phone') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Phone</label>
                                                 <div class="{{ $errors->has('phone') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-start w-[316px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input id="phone" name="phone" type="tel"  value="{{ old('phone') }}"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1  outline-none " placeholder="">
+                                                    <input id="phone" name="phone" type="tel"  value="{{ old('phone') }}"  class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1  outline-none " placeholder="" autocomplete="off">
                                                 </div>
                                                 @if($errors->has('phone'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('phone') }}</p>
@@ -64,52 +64,20 @@
                                             <div class="errors_address w-[650px]">
                                                 <label class="{{ $errors->has('address') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Address</label>
                                                 <div class="{{ $errors->has('address') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex items-center justify-center  w-[650px] h-10 border border-[#ECECEC] rounded text-[#222222]">
-                                                    <input name="address" value="{{ old('address') }}" type="text" id="address" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="">
+                                                    <input name="address" value="{{ old('address') }}" type="text" id="address" class="placepicker overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none " placeholder="" autocomplete="off">
                                                 </div>
                                                 @if($errors->has('address'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('address') }}</p>
                                                 @endif
                                             </div>
-                                            <!--
-                                            <div>
-                                                <label  class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
-                                                {{-- <div class="{{ $errors->has('languages') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[316px] p-3 h-10 border border-[#ECECEC] flex items-center rounded">
-                                                   
-                                                    <select name="languages" id="category" class="text-sm overview-note-body bg-transparent border-none text-colortext appearance-none rounded-lg p-1 block w-full focus:ring-0 outline-none">
-                                                        <option @if(old('languages') == 'Chinese Cantonese') selected @endif value="Chinese Cantonese">Chinese Cantonese</option>
-                                                        <option @if(old('languages') == 'Chinese Mandarin') selected @endif value="Chinese Mandarin">Chinese Mandarin</option>
-                                                        <option @if(old('languages') == 'English') selected @endif value="English">English</option>
-                                                        <option @if(old('languages') == 'Ethiopian') selected @endif value="Ethiopian">Ethiopian</option>
-                                                        
-                                                        <option @if(old('languages') == 'French') selected @endif value="French">French</option>
-                                                        <option @if(old('languages') == 'Hindi') selected @endif value="Hindi">Hindi</option>
-                                                        <option @if(old('languages') == 'Japanese') selected @endif value="Japanese">Japanese</option>
-                                                        <option @if(old('languages') == 'Korean') selected @endif value="Korean">Korean</option>
-                                                        <option @if(old('languages') == 'Tagalog') selected @endif value="Tagalog">Tagalog</option>
-                                                        <option @if(old('languages') == 'Polish') selected @endif value="Polish">Polish</option>
-                                                        <option @if(old('languages') == 'Russian') selected @endif value="Russian">Russian</option>
-                                                        <option @if(old('languages') == 'Spanish') selected @endif value="Spanish">Spanish</option>
-                                                        <option @if(old('languages') == 'Thai') selected @endif value="Thai">Thai</option>
-                                                        <option @if(old('languages') == 'Vietnamese') selected @endif value="Vietnamese">Vietnamese</option>
-                                                    </select>
-                                                    <div>
-                                                        <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2071 0.54289C14.8166 0.15237 14.1834 0.15237 13.7929 0.54289L8 6.3358L2.2071 0.542889C1.8166 0.152369 1.1834 0.152369 0.7929 0.542889C0.4024 0.933409 0.4024 1.56658 0.7929 1.9571L6.5858 7.75C7.3668 8.531 8.6332 8.531 9.4142 7.75L15.2071 1.95711C15.5976 1.56658 15.5976 0.93342 15.2071 0.54289Z" fill="#3BD7CF"/>
-                                                        </svg>    
-                                                    </div>
-                                                </div> --}}
-                                                @if($errors->has('languages'))
-                                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>
-                                                @endif
-                                            </div>
-                                            -->
                                         </div>
                                         <div class="px-4 mt-4 flex space-x-4">
-     
-                                            <div class="w-[650px]">
-                                                <label  class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
-                                                <input class="w-full h-10 text-[#222222] text-base" name="languages" id="languages" type="text">
-                                                
+                                            <div  class="w-[650px]">
+                                                <label class="{{ $errors->has('languages') ? 'text-red-600' : '' }} block overview-status-field text-[#222222] mb-2">Languages</label>
+                                                {{-- <input  class="w-full  text-[#222222] text-base" value="{{ old('languages') }}" name="languages" id="languages" type="text"> --}}
+                                                <div id="input_tagifiy_languages" onchange="input_tagifiy($(this))" class="{{ $errors->has('languages') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full {{ old('languages') ? '' : 'h-10' }} flex items-center justify-center border border-[#CCD3DC] mt-2 rounded">
+                                                    <input name='languages' value="{{ old('languages') }}" id="languages" type="text" class="costum overview-modal-add-talent-text text-colortext border-none focus:ring-0 w-full p-1 outline-none" placeholder="" >
+                                                </div>
                                                 @if($errors->has('languages'))
                                                     <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('languages') }}</p>
                                                 @endif
@@ -118,7 +86,7 @@
                                         <div class="px-4 mt-4 errors_note">
                                             <label class="{{ $errors->has('note') ? 'text-red-600' : '' }} overview-status-field text-[#222222] mb-2">Note</label>
                                             <div class="{{ $errors->has('note') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-[650px] h-[221px] flex items-center justify-center border border-[#CCD3DC] mt-2 rounded relative">
-                                                <textarea name="note" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none text-[#222222]" placeholder="">{{ old('note') }}</textarea>
+                                                <textarea name="note" rows="9" class="overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3  outline-none text-[#222222]" placeholder="" autocomplete="off">{{ old('note') }}</textarea>
                                                 <span class="overview-modal-add-talent-textarea-rule absolute bottom-2 right-2">125 characters</span>
                                             </div>
                                             @if($errors->has('note'))
@@ -214,6 +182,7 @@
     </article>
     {{-- Format phone --}}
     <script src="{{ asset('js/intlTelInput.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>
     <script>
       var input = document.querySelector("#phone");
       window.intlTelInput(input, {
@@ -410,9 +379,21 @@
            localStorage.setItem('client_email_create', val);
         })
 
+        function input_tagifiy(a){
+            const id = a.attr('id')
+            $('#'+id).removeClass('h-10');
+            // console.log(a.children('input').val())
+            if(a.children('input').val() == ''){
+                $('#'+id).addClass('h-10');
+            }
+        }
     </script>
-
-     <script src="{{ asset('js/fileNameLoad.js') }}"></script>
+    <script src="{{ asset('js/fileNameLoad.js') }}"></script>
+     <script>
+        $(document).ready(function() {
+            $(".placepicker").placepicker();
+        }); 
+    </script>
 </main>
 
 @endsection

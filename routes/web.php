@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('edit-create-job-calendly',[JobboardController::class, 'edit_create_job_calendly'])->name('jobboard.edit_create_job_calendly');
     Route::post('save-as-email-client',[JobboardController::class, 'save_as_email_client'])->name('jobboard.save_as_email_client');
     Route::post('send-email-confirmation-to-client',[JobboardController::class, 'send_email_confirmation_to_client'])->name('jobboard.send_email_confirmation_to_client');
-
+    Route::post('priview-email-client',[JobboardController::class,'priview_email_client'])->name('jobboard.priview_email_client');
     // AJAX JOBBOARD
     Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');
     Route::post('edit-client-detail',[JobboardController::class, 'edit_client_detail'])->name('jobboard.edit_client_detail');
@@ -129,6 +129,9 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('setting-store', [SettingController::class, 'setting_store'])->name('setting.store');
     Route::post('upload-avatar', [SettingController::class, 'upload_avatar'])->name('setting.upload.avatar');
     Route::post('/order-predefined',[SettingController::class, 'order_predefined'])->name('setting.order_predefined');
+    Route::post('/get-editor-email', [SettingController::class,'get_editor_email'])->name('setting.get_editor_email');
+    Route::post('/edit-email-store', [SettingController::class,'edit_email_store'])->name('setting.edit_email_store');
+    
     // Upload FIle
     Route::post('/upload',[UploadController::class , 'upload'])->name('upload');
     Route::post('/upload-with-db',[UploadController::class , 'uploadWithDb'])->name('uploadWithDb');

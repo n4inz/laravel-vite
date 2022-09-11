@@ -3,7 +3,7 @@
         <input name="email" value="{{ old('email') }}" type="text" class="talent_email text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="To: Example@mail.com">
     </div>
     <div class=" flex items-center justify-center h-9 border border-[#ECECEC] rounded text-[#222222]">
-        <input name="subject" value="" type="text" class="text-sm  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
+        <input name="subject" value="{{ $email->subject }}" type="text" class="text-sm  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
     </div>
 </div>
 

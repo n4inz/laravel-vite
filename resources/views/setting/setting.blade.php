@@ -42,7 +42,7 @@
                                 <div class="errors_location px-6 mt-4">
                                     <label for="" class="{{ $errors->has('location') ? 'text-red-500' : '' }} block overview-status-field text-[#222222] mb-3 ">Headquarter</label>
                                     <div class="{{ $errors->has('location') ? 'border-red-500' : '' }} w-[650px] p-1 h-10 border border-[#ECECEC] flex items-center rounded">
-                                        <input type="text"value="{{ old('location' , $setting->SettingDetail->service_location_fee->location ?? null) }}"  name="location" class="placepicker-setting text-sm overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                        <input type="text"value="{{ old('location' , $setting->SettingDetail->service_location_fee->location ?? null) }}"  name="location" class="placepicker-setting overview-modal-add-talent-text bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
                                         <div>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
@@ -222,7 +222,7 @@
                                 <div class="px-6 mt-6 flex space-x-4">
                                     <div class="w-full errors_subcategory">
                                         <label for="first-name" class="block overview-status-field text-[#222222] mb-2">Services Category</label>
-                                         <div class="flex  items-center justify-between flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                                        <div class="flex  items-center justify-between flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                                             <div class="flex items-center space-x-[14px] hover:cursor-pointer mt-[10px] mr-6 p-4 rounded-t-lg border-b-2" id="profile-tab" data-tabs-target="#profile"  role="tab" aria-controls="profile" aria-selected="false">
                                                 {{-- <input disabled {{ old('chile_care_category') ? 'checked' : ''  }} @if(in_array('chile_care', $category)) checked @endif value="chile_care" style="color: #3BD7CF" type="checkbox" class="child-care w-5 h-5 hidden rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" > --}}
                                                 <label class="overview-id-field text-colortext ">Child care</label>
@@ -248,7 +248,6 @@
                                             <input name="other_category" {{ old('other_category') ? 'checked' : ''  }} @if(in_array('other', $category)) checked @endif style="color: #3BD7CF" type="checkbox" value="other" class="other hidden subcategory " >
                                         </div>
                                         <div id="myTabContent">
-                                 
                                             <div class="flex space-x-10 p-4 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
@@ -405,15 +404,7 @@
                                         
                                     </div>
                                 </div>
-                                {{-- <div class="px-6 mt-8 flex items-center space-x-[25px]">
-                                    <div>
-                                        <label for="" class="invisible block overview-status-field text-[#222222] mb-3">Services Location</label>
-                                        <div class="flex items-center space-x-[14px] mt-[10px] mr-[76px] w-full">
-                                            <input name="send_notifcation" {{ old('send_notifcation') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->send_notifcation ?? null ? 'checked' : '' }} value="1" id="send-notification" style="color: #3BD7CF" type="checkbox" class="w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                            <label for="send-notification" class="overview-id-field text-colortext ">Send Notification</label>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                                <!--
                                 <div class="px-6 mt-8 flex items-center space-x-[25px]">
                                     <div class="w-full errors_aplication_fee">   
                                         <div class=" flex items-center space-x-[14px]">
@@ -445,6 +436,42 @@
                                         <div class="w-full pl-8 mt-2">
                                             <div class="hourly_rate {{ old('hourly_rate_checkbox') ? 'bg-gray-200' : '' }} {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} {{ isset($setting->SettingDetail->service_location_fee->hourly_rate_check)  ? 'bg-gray-200' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
                                                 <input @if(old('hourly_rate_checkbox')) readonly @endif @if(isset($setting->SettingDetail->service_location_fee->hourly_rate_check)) readonly @endif name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} {{ isset($setting->SettingDetail->service_location_fee->hourly_rate_check)  ? 'bg-gray-200 text-gray-500 hover:cursor-not-allowed' : '' }} {{ old('hourly_rate_checkbox') ? 'bg-gray-200 placeholder-gray-500 text-gray-500' : '' }} hourly_rate_validate hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="px-6 mt-8 flex items-center space-x-[25px]">
+                                    <div class="w-full errors_aplication_fee">   
+                                        <div class=" flex items-center space-x-[14px]">
+                                            <input id="aplication_fee_checkbox" name="aplication_fee_checkbox" {{ old('aplication_fee_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="aplication_fee_validate w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="aplication_fee_checkbox" class=" {{ $errors->has('aplication_fee_checkbox') ? 'text-red-500' : '' }} hover:cursor-pointer overview-status-field text-colortext ">Application Fee ($)</label>
+                                        </div>
+                                        <div class="w-full pl-8 mt-2 ">
+                                            <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }}   {{ old('aplication_fee_checkbox') ? 'bg-gray-200' : '' }} aplication_fee  flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input  name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }}  aplication_fee_validate  aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full errors_placement_fee">
+                                        <div class=" flex items-center space-x-[14px]">
+                                            <input id="placement_fee_checkbox" name="placement_fee_checkbox" {{ old('placement_fee_checkbox') ? 'checked' : ''  }}  {{ $setting->SettingDetail->service_location_fee->placement_fee_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="placement_fee_validate placement_fee w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="placement_fee_checkbox" class="{{ $errors->has('placement_fee_checkbox') ? 'text-red-500' : '' }} overview-status-field text-colortext hover:cursor-pointer">Placement Fee ($)</label>
+                                        </div>
+                                        <div class="w-full pl-8 mt-2">
+                                            <div class="placement_fee {{ old('placement_fee_checkbox') ? 'bg-gray-200' : '' }} {{ $errors->has('placement_fee') ? 'border-red-500' : '' }}  flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null ) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }}  {{ old('placement_fee_checkbox') ? 'bg-gray-200 placeholder-gray-500 text-gray-500' : '' }} placement_fee_validate placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full errors_hourly_rate">
+                                        <div class=" flex items-center space-x-[14px]">
+                                            <input id="hourly_rate_checkbox" name="hourly_rate_checkbox" {{ old('hourly_rate_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->hourly_rate_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="1" class="hourly_rate_validate hourly_rate w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                            <label for="hourly_rate_checkbox" class="{{ $errors->has('hourly_rate_checkbox') ? 'text-red-500' : '' }} hover:cursor-pointer overview-status-field text-colortext ">Hourly Rate ($)</label>
+                                        </div>
+                                        <div class="w-full pl-8 mt-2">
+                                            <div class="hourly_rate {{ old('hourly_rate_checkbox') ? 'bg-gray-200' : '' }} {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
+                                                <input  name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }}  {{ old('hourly_rate_checkbox') ? 'bg-gray-200 placeholder-gray-500 text-gray-500' : '' }} hourly_rate_validate hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -489,6 +516,68 @@
                                 <div class="flex mt-8"></div>
                             </div>
                             -->
+                            <!-- Main Send email talent -->
+
+                            <div class="bg-bgbody rounded mt-3">
+                                <div class="px-4 pt-[18.5px]">
+                                    <div class="flex items-center justify-between ">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-2 h-6 bg-[#01A3FE] rounded-sm"></div>
+                                            <span class="text-[#222222] user-create-client-title">Email Settings</span>
+                                        </div>
+                                        <div id="dropdown_email_tamplate"  class="text-white bg-palet hover:cursor-pointer focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center">
+                                            Template Email
+                                            <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </div>
+                                        <!-- Dropdown menu -->
+                                        <div id="dropdownEmailTemplate" class="hidden z-10 w-44 bg-gray-50 rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 h-60 overflow-auto" aria-labelledby="dropdown_email_tamplate">
+                                                @foreach ($tmp_email as $val_email)
+                                                    <li onclick="template_email('{{ $val_email->id }}')">
+                                                        <a class="block py-2 px-4 hover:cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ ucwords(strtolower($val_email->status)) }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
+                                <div class="px-8 mt-2 ">
+                                    <div class="editor"></div>
+                                    <div class="view_email pt-2 ">
+                                        @foreach ($tmp_email as $val_email_body )
+                                            @if ($val_email_body->status == 'CLIENT CONFIRMATION')
+                                                <div id="default" class="w-full">
+                                                    <div class="text-gray-500 pt-4 user-create-client-title  text-center w-full">{{ $val_email_body->status }}</div>
+                                                    <div class="text-gray-500 mb-2 mt-8">
+                                                        <div class="text-xs flex justify-between"><i>Subject :</i><i onclick="edit_email('{{ $val_email_body->id }}')" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i></div>
+                                                        <div class="subject_view_{{ $val_email_body->id }} text-sm text-gray-600">{{  $val_email_body->subject }}</div>
+                                                    </div>
+                                                    <div class="email_body_view_{{ $val_email_body->id }} bg-[#F5F5F5] rounded-md text-[#827C7C] text-sm p-10">
+                                                        {!! $val_email_body->body !!}
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div id="emailBody_{{ $val_email_body->id }}" class="emailBody hidden w-full"  >
+                                                <div class="text-gray-500 pt-4 user-create-client-title  text-center w-full">{{ $val_email_body->status }}</div>
+                                                <div class="text-gray-500 mb-2 mt-8">
+                                                    <div class="text-xs flex justify-between"><i>Subject :</i><i onclick="edit_email('{{ $val_email_body->id }}')" class="fa fa-pencil text-gray-400 hover:text-colorStatusCard1 cursor-pointer" ></i></div>
+                                                    <div class="subject_view_{{ $val_email_body->id }} text-sm text-gray-600">{{  $val_email_body->subject }}</div>
+                                                </div>
+                                                <div class="email_body_view_{{ $val_email_body->id }} bg-[#F5F5F5] rounded-md text-[#827C7C] text-sm p-10">
+                                                    {!! $val_email_body->body !!}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+
+
+                                <div class="flex mt-8"></div>
+                            </div>
     
                             <div class="bg-bgbody rounded mt-3">
                                 <div class="px-4 pt-[18.5px]">
@@ -986,53 +1075,53 @@
     }
 
     // FEE
-    $('#aplication_fee_checkbox').click(function(){
-        $('.aplication_fee').toggleClass('bg-gray-200');
-        $('.aplication_fee').removeClass('border-red-500');
-        $('.aplication_fee_input').removeClass('placeholder-red-700');
-        $('.aplication_fee_input').toggleClass('bg-gray-200');
-        if (this.checked) {
-            $('.aplication_fee_input').prop('readonly', true);
-            $('.aplication_fee_input').toggleClass('border-gray-200 ');
-            $('.aplication_fee_input').addClass('placeholder-gray-500 text-gray-500 hover:cursor-not-allowed');
-        } else {
-            $('.aplication_fee_input').prop('readonly', false);
-            $('.aplication_fee_input').addClass('placeholder-gray-500 text-colortext');
-            $('.aplication_fee_input').removeClass('text-gray-500 hover:cursor-not-allowed');
-        }
-    })
+    // $('#aplication_fee_checkbox').click(function(){
+    //     $('.aplication_fee').toggleClass('bg-gray-200');
+    //     $('.aplication_fee').removeClass('border-red-500');
+    //     $('.aplication_fee_input').removeClass('placeholder-red-700');
+    //     $('.aplication_fee_input').toggleClass('bg-gray-200');
+    //     if (this.checked) {
+    //         $('.aplication_fee_input').prop('readonly', true);
+    //         $('.aplication_fee_input').toggleClass('border-gray-200 ');
+    //         $('.aplication_fee_input').addClass('placeholder-gray-500 text-gray-500 hover:cursor-not-allowed');
+    //     } else {
+    //         $('.aplication_fee_input').prop('readonly', false);
+    //         $('.aplication_fee_input').addClass('placeholder-gray-500 text-colortext');
+    //         $('.aplication_fee_input').removeClass('text-gray-500 hover:cursor-not-allowed');
+    //     }
+    // })
 
-    $('#placement_fee_checkbox').click(function(){
-        $('.placement_fee').toggleClass('bg-gray-200');
-        $('.placement_fee').removeClass('border-red-500');
-        $('.placement_fee_input').removeClass('placeholder-red-700');
-        $('.placement_fee_input').toggleClass('bg-gray-200');
-        if (this.checked) {
-            $('.placement_fee_input').prop('readonly', true);
-            $('.placement_fee_input').toggleClass('border-gray-200 ');
-            $('.placement_fee_input').addClass('placeholder-gray-500 text-gray-500 hover:cursor-not-allowed');
-        } else {
-            $('.placement_fee_input').prop('readonly', false);
-            $('.placement_fee_input').addClass('placeholder-gray-500 text-colortext');
-            $('.placement_fee_input').removeClass('text-gray-500 hover:cursor-not-allowed');
-        }
-    })
+    // $('#placement_fee_checkbox').click(function(){
+    //     $('.placement_fee').toggleClass('bg-gray-200');
+    //     $('.placement_fee').removeClass('border-red-500');
+    //     $('.placement_fee_input').removeClass('placeholder-red-700');
+    //     $('.placement_fee_input').toggleClass('bg-gray-200');
+    //     if (this.checked) {
+    //         $('.placement_fee_input').prop('readonly', true);
+    //         $('.placement_fee_input').toggleClass('border-gray-200 ');
+    //         $('.placement_fee_input').addClass('placeholder-gray-500 text-gray-500 hover:cursor-not-allowed');
+    //     } else {
+    //         $('.placement_fee_input').prop('readonly', false);
+    //         $('.placement_fee_input').addClass('placeholder-gray-500 text-colortext');
+    //         $('.placement_fee_input').removeClass('text-gray-500 hover:cursor-not-allowed');
+    //     }
+    // })
 
-    $('#hourly_rate_checkbox').click(function(){
-        $('.hourly_rate').toggleClass('bg-gray-200');
-        $('.hourly_rate').removeClass('border-red-500');
-        $('.hourly_rate').removeClass('placeholder-red-700');
-        $('.hourly_rate_input').toggleClass('bg-gray-200');
-        if (this.checked) {
-            $('.hourly_rate_input').prop('readonly', true);
-            $('.hourly_rate_input').toggleClass('border-gray-200 ');
-            $('.hourly_rate_input').addClass('placeholder-gray-500 text-gray-500 hover:cursor-not-allowed');
-        } else {
-            $('.hourly_rate_input').prop('readonly', false);
-            $('.hourly_rate_input').addClass('placeholder-gray-500 text-colortext');
-            $('.hourly_rate_input').removeClass('text-gray-500 hover:cursor-not-allowed');
-        }
-    })
+    // $('#hourly_rate_checkbox').click(function(){
+    //     $('.hourly_rate').toggleClass('bg-gray-200');
+    //     $('.hourly_rate').removeClass('border-red-500');
+    //     $('.hourly_rate').removeClass('placeholder-red-700');
+    //     $('.hourly_rate_input').toggleClass('bg-gray-200');
+    //     if (this.checked) {
+    //         $('.hourly_rate_input').prop('readonly', true);
+    //         $('.hourly_rate_input').toggleClass('border-gray-200 ');
+    //         $('.hourly_rate_input').addClass('placeholder-gray-500 text-gray-500 hover:cursor-not-allowed');
+    //     } else {
+    //         $('.hourly_rate_input').prop('readonly', false);
+    //         $('.hourly_rate_input').addClass('placeholder-gray-500 text-colortext');
+    //         $('.hourly_rate_input').removeClass('text-gray-500 hover:cursor-not-allowed');
+    //     }
+    // })
     
 
     // Calenly show and hide
@@ -1046,6 +1135,48 @@
         }
     });
 
+    // Templaet Email
+
+   
+    const targetEl = document.getElementById('dropdownEmailTemplate');
+    const triggerEl = document.getElementById('dropdown_email_tamplate');
+    const dropdown = new Dropdown(targetEl, triggerEl, {});
+
+    $('#dropdown_email_tamplate').click(function(){
+        dropdown.show();
+    })
+    function template_email(id){
+        $('#default').addClass('hidden');
+        
+        $('.emailBody').addClass('hidden');
+        $('#emailBody_'+id).toggleClass('hidden');
+        dropdown.hide();
+    }
+
+    function edit_email(id){
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:'POST',
+            url:'{{ route("setting.get_editor_email") }}',
+            data:{id},
+            success:function(editor){
+                $('.editor').html(editor)
+                $('.view_email').toggleClass('hidden');
+            }
+        });
+    }
+
+    function cancel_edit_email(){
+        $('.editor').html('')
+        $('.view_email').toggleClass('hidden');
+    }
+
+
+    
     </script>
 </main>
 

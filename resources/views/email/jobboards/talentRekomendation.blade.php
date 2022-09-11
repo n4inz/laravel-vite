@@ -169,17 +169,26 @@
 																				<td class="text" style="border-bottom: 1px solid #d1d5db; background: white; padding: 5px 32px 20px 32px; color:#000000; font-family:'Yantramanav', Arial, sans-serif; font-size:16px; line-height:20px; min-width:auto !important;">
 																				<table width="100%">
 																						<tr>
-																							<td rowspan="2">
-																								@if ($val->avatar)
+																							<td  width="10%" rowspan="2">
+																								{{-- @if ($val->avatar)
 																									<img style="width:48px; height: 48px; border-radius: 999px;" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt="avatar">
 																								@else
 																									<span style="padding: 10px; border-radius: 99px; background: {{ $val->color }}; color: white; font-size:12px">
 																										{{ strtoupper(substr($val->first_name, 0, 1)) }}{{ strtoupper(substr($val->last_name, 0, 1)) }}
 																									</span>
+																								@endif --}}
+																								@if ($val->avatar)
+																									<div>
+																										<img style="width:48px; height: 48px; border-radius: 999px;" src="{{ asset('storage/avatar/'.$val->avatar) }}" alt="avatar">
+																									</div>
+																								@else
+																									<div style="text-align: center; padding: 12px 0; border-radius: 99px; background: {{ $val->color }}; color: white; font-size:11px;">
+																										{{ strtoupper(substr($val->first_name, 0, 1)) }}{{ strtoupper(substr($val->last_name, 0, 1)) }}
+																									</div>
 																								@endif
 																							</td>
 																							<td align="left" style=" font-size: 20px; line-height: 28px; font-weight: 500; font-style: normal;">{{ $val->first_name }} {{ $val->last_name }}</td>
-																							<td width="17%" rowspan="2" style="font-size: 12px; line-height: 16px; font-weight: 600; font-style: normal;">
+																							<td width="25%" rowspan="2" style="font-size: 12px; line-height: 16px; font-weight: 600; font-style: normal;">
 																								5 Days / Week
 																							</td>
 																							<td width="15%" rowspan="2" style="font-size: 12px; line-height: 16px; font-weight: 600; font-style: normal;">
