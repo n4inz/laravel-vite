@@ -1,6 +1,8 @@
 
 @extends('family.layoutFamily.main')
 @section('container')
+    <link  href="{{ asset('css/flowbite.css') }}" rel="stylesheet">
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <main>
         <article class="pb-[207px]">
             <nav class="bg-white h-16 flex items-center fixed w-[1400px] xl:w-full z-20 top-0 left-0 border-b border-gray-200">

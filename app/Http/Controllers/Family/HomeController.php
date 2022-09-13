@@ -32,4 +32,29 @@ class HomeController extends Controller
     {
         return view('family.on_boarding');
     }
+
+    public function on_boarding_add()
+    {
+        return view('family.on_boarding_add');
+    }
+
+    public function on_boarding_billing()
+    {
+        return view('family.on_boarding_billing');
+    }
+
+    public function add_person()
+    {
+        return view('family.add_person');
+    }
+
+    public function rekomendation()
+    {
+        return view('family.rekomendation');
+    }
+
+    public function sign_document()
+    {
+        return view('family.sign_document');
+    }
 }

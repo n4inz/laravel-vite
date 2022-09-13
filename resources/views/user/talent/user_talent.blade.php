@@ -472,6 +472,7 @@
                     $('#loads').html(loader);             
                 },
                 success:function(res){
+                    $('#loads').html('');
                     $('#loads').html(res);
                 }
             });

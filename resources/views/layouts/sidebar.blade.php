@@ -1,6 +1,6 @@
-<aside class="z-30" aria-label="Sidebar">
+<aside class="z-10" aria-label="Sidebar">
     {{-- Desktop --}}
-    <div id="sidebar-desktop" class="fixed top-0 bottom-0 px-5 w-[300px] z-30 bg-bgbody rounded border">
+    <div id="sidebar-desktop" class="fixed top-0 bottom-0 px-5 w-[300px] bg-bgbody rounded border">
         <div class="flex items-center justify-start mt-2 relative">
             <span class=" text-palet title-logo leading-[22px] opacity-80 ">
                 {{ App\Models\SettingGeneral::where('users_id',auth()->user()->staf->users_agency_id ?? auth()->user()->id )->first()->agency_name ?? 'Your Agency' }}

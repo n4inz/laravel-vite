@@ -166,4 +166,11 @@ Route::prefix('family')->group(function () {
     Route::get('/login-success',[FamilyHomeController::class, 'login_success'])->name('family.success');
     Route::get('/on-boarding',[FamilyHomeController::class, 'on_boarding'])->name('family.on_boarding');
     
+    Route::get('/on-boarding-add',[FamilyHomeController::class, 'on_boarding_add'])->name('family.on_boarding_add');
+    Route::get('/on-boarding-billing',[FamilyHomeController::class, 'on_boarding_billing'])->name('family.on_boarding_billing');
+    Route::get('/add-person',[FamilyHomeController::class, 'add_person'])->name('family.add_person');
+    Route::get('/rekomendation',[FamilyHomeController::class, 'rekomendation'])->name('family.rekomendation');
+    Route::get('/sign-document',[FamilyHomeController::class, 'sign_document'])->name('family.sign_document');
+
+
 });

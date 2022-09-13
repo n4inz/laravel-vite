@@ -25,7 +25,7 @@ class TalentRequest extends FormRequest
     {
         return [
             // 'avatar' => 'required',
-            'first_name' => 'required|min:3',
+            'first_name' => 'required',
             'last_name' => 'required',
             'day_of_birthday' => 'required',
             'experience' => 'required',
