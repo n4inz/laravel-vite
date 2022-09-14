@@ -65,9 +65,10 @@
                                     <div id="dropdownBottom" class="hidden z-10  bg-white rounded divide-y divide-gray-100 shadow">
                                         <div class=" px-2 space-x-1 text-xs text-gray-700 flex items-center justify-center hover:bg-gray-100 ">
                                           
-                                            <form class="sync-calendly" action="{{ route('jobboard.sync_calendly') }}" method="POST">@csrf
+                                            {{-- <form class="sync-calendly" action="{{ route('jobboard.sync_calendly') }}" method="POST">@csrf
                                                 <button class="block py-2 justify-">Sync To Calendly</button>
-                                            </form>
+                                            </form> --}}
+                                            <button data-modal-toggle="filter-date-calendly" class="block py-2 justify-">Sync To Calendly</button>
                                             <i class="fa fa-refresh text-palet" aria-hidden="true"></i>
 
                                         </div>
@@ -747,6 +748,50 @@
             </div>
         </div>
 
+        <!-- Main filter range calendly -->
+        <div id="filter-date-calendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                <!-- Modal content -->
+                <form class="validate-calendlys" method="POST" action="{{ route('jobboard.sync_calendly') }}">@csrf
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Select Range To Sync
+                            </h3>
+                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="filter-date-calendly">
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        
+                        <div class="p-6 space-y-6">
+                            <div class="flex items-center justify-center space-x-5">
+                                <div class="from_date-errors">
+                                    <div class="w-44 h-12 border flex items-center justify-center">
+                                        <input type="date" name="from_date" class="border-none outline-none focus:ring-0 w-full">
+                                    </div>
+
+                                </div>
+                                <div>TO</div>
+                                <div class="to_date-errors">
+                                    <div class="w-44 h-12 border flex items-center justify-center">
+                                        <input type="date" name="to_date" class="border-none outline-none focus:ring-0 w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 ">
+                            <button  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Sync To Calendly</button>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+
         {{-- Modal Calendly --}}
         <div id="modalCalendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -876,6 +921,37 @@
                 })
             }
         })
+
+        // $(function(){
+        // var validate = $('.validate-calendly');
+            
+        //     if(validate.length){
+        //         validate.validate({
+        //             rules: {
+        //                 from_date:{
+        //                     required:true
+        //                 },
+        //                 to_date:{
+        //                     required:true,
+                          
+        //                 },
+                       
+        //             },
+        //             errorPlacement: function(error, element){
+        //                 if (element.is(":checkbox"))
+        //                 {
+        //                    error.appendTo($('.sub_categorys_error'));
+        //                 }else{ 
+        //                     error.insertAfter( element );
+        //                     error.appendTo(element.parents('.from_date-errors'));
+        //                     error.appendTo(element.parents('.to_date-errors'));
+        //                 }
+        //             },
+       
+        //         })
+        //     }
+        // })
+        
 
         var input = document.querySelector('input[name=family]');
 
@@ -1259,39 +1335,7 @@
            ++no;
         }
 
-        // Sync Calendly
-        const targetElCalendly = document.getElementById('modalCalendly');
-        const modalCalendly = new Modal(targetElCalendly, {});
-        $('.sync-calendly').submit(function(e){
-            e.preventDefault();
-            var form = $(this);
-            var actionUrl = form.attr('action');
-            
-            $.ajax({
-                type: "POST",
-                url: actionUrl,
-                data: form.serialize(),
-                beforeSend: function(){
-                    modalCalendly.show()
-                },
-                error : function(e){
-                    const tmp = `<div class="flex flex-col items-center justify-center">
-                                    <i class="fa fa-5x text-red-600 fa-exclamation-triangle" aria-hidden="true"></i>
-                                    <span class="text-red-500 mt-2 font-semibold">Failed to sync to calendly </span>
-                                    <span class="text-red-500 font-semibold">Check your api key</span>
-                                </div>`;
-                   $('.display_calendly').html(tmp)
-                },
-                success: function(data){
-                    location.reload()
-                }
-
-            });
-        })
-
-
-
-         // Edit job for calendly
+        // Edit job for calendly
         function edit_create_job_calendly(id){
             $.ajax({
                 type: "POST",
@@ -1389,6 +1433,63 @@
             $('.family_email_send').val(email);
             modalSendEmail.show();
         }
+
+        // Sync Calendly
+        const targetElCalendly = document.getElementById('modalCalendly');
+        const modalCalendly = new Modal(targetElCalendly, {});
+        $('.sync-calendly').submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            
+            $.ajax({
+                type: "POST",
+                url: actionUrl,
+                data: form.serialize(),
+                beforeSend: function(){
+                    modalCalendly.show()
+                },
+                error : function(e){
+                    const tmp = `<div class="flex flex-col items-center justify-center">
+                                    <i class="fa fa-5x text-red-600 fa-exclamation-triangle" aria-hidden="true"></i>
+                                    <span class="text-red-500 mt-2 font-semibold">Failed to sync to calendly </span>
+                                    <span class="text-red-500 font-semibold">Check your api key</span>
+                                </div>`;
+                   $('.display_calendly').html(tmp)
+                },
+                success: function(data){
+                    location.reload()
+                }
+
+            });
+        })
+
+        $('.validate-calendly').submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            
+            $.ajax({
+                type: "POST",
+                url: actionUrl,
+                data: form.serialize(),
+                beforeSend: function(){
+                    modalCalendly.show()
+                },
+                error : function(e){
+                    const tmp = `<div class="flex flex-col items-center justify-center">
+                                    <i class="fa fa-5x text-red-600 fa-exclamation-triangle" aria-hidden="true"></i>
+                                    <span class="text-red-500 mt-2 font-semibold">Failed to sync to calendly </span>
+                                    <span class="text-red-500 font-semibold">Check your api key</span>
+                                </div>`;
+                   $('.display_calendly').html(tmp)
+                },
+                success: function(data){
+                    location.reload()
+                }
+
+            });
+        })
 
 </script>
 

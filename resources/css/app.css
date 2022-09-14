@@ -548,6 +548,8 @@ label[for="aplication_fee"],
 label[for="location"],
 label[id="0-error"],
 label[for="note"],
+label[for="from_date"],
+label[for="to_date"],
 label[id="about_talent-error"] {
     color: red;
     font-size: 12px;

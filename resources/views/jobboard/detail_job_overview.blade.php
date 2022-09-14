@@ -59,7 +59,7 @@
                         <td> 
                             <div class="flex space-x-1">
                                 <div class="w-[39px] h-[15px] bg-[#5FCFFF] flex items-center justify-center rounded-sm"> <span class="overview-label-text">Hight</span></div>
-                                <div data-modal-toggle="create-invoice" class=" h-[15px] bg-colorStatusCard1 px-1 hover:cursor-pointer flex items-center justify-center rounded-sm"> <span class="overview-label-text">+ Add Invoice</span></div>
+                                {{-- <div data-modal-toggle="create-invoice" class=" h-[15px] bg-colorStatusCard1 px-1 hover:cursor-pointer flex items-center justify-center rounded-sm"> <span class="overview-label-text">+ Add Invoice</span></div> --}}
                             </div>
                         </td>
                     </tr>
@@ -68,9 +68,7 @@
                     <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b  " id="overview-tab" data-tabs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
                     </li>
-                    <li class="mr-12" >
-                        <button class="overview-tab inline-block px-2 border-b" id="task-tab" data-tabs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="false">Invoice</button>
-                    </li>
+                    
                     {{-- <li class="mr-12" >
                         <button class="overview-tab inline-block px-2 border-b" id="talent-tab" data-tabs-target="#talent" type="button" role="tab" aria-controls="talent" aria-selected="false">Talent</button>
                     </li> --}}
@@ -79,6 +77,9 @@
                     </li>
                     <li >
                         <button class="overview-tab inline-block px-2 border-b" id="activities-tab" data-tabs-target="#activities" type="button" role="tab" aria-controls="activities" aria-selected="false">Activities</button>
+                    </li>
+                    <li class="mr-12" >
+                        <button class="hidden overview-tab px-2 border-b" id="task-tab" data-tabs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="false">Invoice</button>
                     </li>
                     
                 </ul>
@@ -96,12 +97,12 @@
                                     <div class="w-2 h-6 bg-[#5FCFFF] rounded-sm"></div>
                                     <span class="text-[#222222] font-semibold">Job Detail</span>
                                 </div>
-                                <div data-modal-toggle="preview_email_talent" class="flex justify-center items-center px-5  h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                {{-- <div data-modal-toggle="preview_email_talent" class="flex justify-center items-center px-5  h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                     <span class="overview-send-job text-palet">Send Job</span>
                                     <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.19083 4.75179L10.5551 1.00868C10.6716 0.956912 10.8141 0.982751 10.9048 1.08638C10.9955 1.17709 11.0214 1.31947 10.9825 1.4361L7.2394 10.8004C7.18763 10.9169 7.07099 11.0076 6.94153 11.0076C6.81197 11.0076 6.69542 10.9299 6.64365 10.8004L5.14121 6.88887C5.11528 6.87595 5.08944 6.86294 5.06351 6.85002L1.20383 5.3606C1.07428 5.30883 0.996582 5.19219 0.996582 5.06272C0.996492 4.93317 1.07419 4.80371 1.19073 4.75185L1.19083 4.75179ZM5.18003 6.20248L6.86381 4.5187C6.99336 4.38915 7.20053 4.38915 7.31717 4.5187C7.43372 4.64826 7.44673 4.85543 7.31717 4.97207L5.69818 6.59106L6.92859 9.79019L10.0889 1.88951L2.18818 5.04978L5.18003 6.20248Z" fill="#3BD7CF"/>
                                     </svg> 
-                                </div>
+                                </div> --}}
                             </div>
                             <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                             <div class="px-4 mt-8 edit_desc">
@@ -1048,7 +1049,7 @@
                         </div>
 
                         {{-- Matched Talent --}}
-                        <div class="bg-bgbody rounded mt-3 w-[704px] relative">
+                        <div class="bg-bgbody rounded-t mt-3 w-[704px] relative">
                             <div class="flex justify-between px-4 pt-[18.5px]">
                                 <div class="flex space-x-8">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm "></div>
@@ -1075,7 +1076,7 @@
                                                      <div class="flex justify-between px-4 hover:cursor-pointer">
                                                          <div class="flex space-x-2 items-center justify-center">
                                                              <div class="">
-                                                                 <input style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="select_talent w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-none outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                                 <input style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="select_talent w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-gray-300 outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                              </div>
                                                              @if ($talent->talent->avatar)
                                                                 <div>
@@ -1100,7 +1101,7 @@
                                                          <div>
                                                             @if ($talent->color_status)
                                                                 <select style="color:{{$talent->color_status}}; border-color:{{$talent->color_status}}; " data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs focus:ring-0 bg-gray-50 rounded border outline-none hover:cursor-pointer">
-                                                                        <option>-- Select status --</option>
+                                                                       
                                                                         <option @if($talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{$talent->status }}" >{{$talent->status }}</option>
                                                                             @foreach ($status_talent as $value )
                                                                                 @if ($value->status_name != $talent->status)
@@ -1110,7 +1111,7 @@
                                                                 </select>
                                                             @else
                                                                 <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-palet focus:ring-0 bg-gray-50 rounded border border-palet outline-none hover:cursor-pointer">
-                                                                    <option>-- Select status --</option>
+                                                                    
                                                                     @foreach ($status_talent as $value )
                                                                         <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
                                                                     @endforeach
@@ -1143,7 +1144,13 @@
                                                         </div>   
                                                     </div>
                                                 </div>
-                                                <div class="add_talent_action">
+                                                <div class="add_talent_action flex space-x-2">
+                                                    <div data-modal-toggle="preview_email_talent" class="flex justify-center items-center px-5  h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
+                                                        <span class="overview-send-job text-palet">Send Job</span>
+                                                        <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M1.19083 4.75179L10.5551 1.00868C10.6716 0.956912 10.8141 0.982751 10.9048 1.08638C10.9955 1.17709 11.0214 1.31947 10.9825 1.4361L7.2394 10.8004C7.18763 10.9169 7.07099 11.0076 6.94153 11.0076C6.81197 11.0076 6.69542 10.9299 6.64365 10.8004L5.14121 6.88887C5.11528 6.87595 5.08944 6.86294 5.06351 6.85002L1.20383 5.3606C1.07428 5.30883 0.996582 5.19219 0.996582 5.06272C0.996492 4.93317 1.07419 4.80371 1.19073 4.75185L1.19083 4.75179ZM5.18003 6.20248L6.86381 4.5187C6.99336 4.38915 7.20053 4.38915 7.31717 4.5187C7.43372 4.64826 7.44673 4.85543 7.31717 4.97207L5.69818 6.59106L6.92859 9.79019L10.0889 1.88951L2.18818 5.04978L5.18003 6.20248Z" fill="#3BD7CF"/>
+                                                        </svg> 
+                                                    </div>
                                                     <div onclick="load_talent()" data-modal-toggle="modal-detail-add-match" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer">
                                                         <span class="overview-send-job text-palet">+ Add Talent</span>
                                                     </div>                       
@@ -1198,16 +1205,27 @@
                                         {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
                                             <span class="overview-send-job text-palet">+ Add Talent</span>
                                     </div>
-                                    <a href="{{ route('home.send', ['uid' => $result->uid]) }}" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
+                                    {{-- <input id="copy" type="text" value="{{ route('home.send', ['uid' => $result->uid]) }}" />
+                                    <a onclick="copy_text()" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
                                         </svg>
                                         <span class="overview-attechment-btn-text">Copy link form add talent</span>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="bg-bgbody rounded-b toggle_client_detail w-[704px] pb-4 relative">
+                            <input id="copy" type="text" class="hidden link bg-bgbody border-none focus:ring-0 text-xs text-gray-500" value="{{ route('home.send', ['uid' => $result->uid]) }}" />
+                            <span id="status_copy" class="text-sm copy-link text-gray-500 flex justify-center invisible">Copy Link Succeess</span>
+                            <a onclick="copy_text()" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2 hover:cursor-pointer" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
+                                </svg>
+                                <span class="overview-attechment-btn-text">Copy link form add talent</span>
+                            </a>
                         </div>
 
                         <div class="bg-bgbody rounded mt-3 toggle_client_detail w-[704px]">
@@ -3947,7 +3965,21 @@
     }
 
      // End Piview email send to client
-    
+    function copy_text() {
+       var hidden = document.getElementById("copy");
+        // hidden.style.display = 'block';
+        var copyText = $('#copy').siblings('.link');
+        copyText.select();
+
+        // document.getElementById("copy").select();
+        document.execCommand("copy");
+
+        $('#status_copy').toggleClass('invisible');
+        setTimeout(function(){
+            $('#status_copy').toggleClass('invisible');
+        }, 1000);
+        // alert("Text berhasil dicopy");
+    }
     
 </script>
 <script type="text/javascript" src="{{ asset('js/jquery.quicksearch.js') }}"></script>

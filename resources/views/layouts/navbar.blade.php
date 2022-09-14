@@ -68,7 +68,7 @@
                             <a href="{{ route('user_client.client') }}" class="block py-2 px-4 text-sm  hover:bg-hover">User</a>
                         </li>
                         <li>
-                            <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Settings</a>
+                            <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Setting</a>
                         </li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm  hover:bg-hover">

@@ -28,6 +28,9 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+
+        // return Carbon::now('2022-09-08')->addDay(1);
+        // return now()->toDateTimeString();
         // return view('email.duplicatTalentRekomendation');
         // TemplateEmail::query()->get()->map(function($result) use($request){
         //     EmailAgencyTemplate::create([
@@ -47,9 +50,16 @@ class DashboardController extends Controller
         //     $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
         //         'organization' => $load->current_organization,
         //         'status' => 'active',
+        //         'count' => 100,
+        //         'min_start_time' => '2021-01-13',
+        //         'max_start_time' => '2021-02-13',
         //     ]);
     
         //     $response = json_decode($responses);
+        //     // $page = json_decode($response);
+
+        //     // return $page->pagination;
+        //     return $response;
         //     foreach($response->collection as $data){
         //         array_push($calendlyEvent, [
         //             'date' =>  date('Y', strtotime($data->start_time)).', '.date('m', strtotime($data->start_time)).', '.date('d', strtotime($data->start_time)),
@@ -57,6 +67,13 @@ class DashboardController extends Controller
         //         ]
                    
         //         );
+        //     }
+
+        //     // Cek count 
+        //     if($response->pagination !== null){
+        //         return 'masih ada';
+        //     }else{
+        //         'retuns habis';
         //     }
 
         // }

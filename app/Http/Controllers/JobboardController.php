@@ -688,13 +688,16 @@ class JobboardController extends Controller
         return redirect()->back();
     }
 
-    public function sync_calendly()
+    public function sync_calendly(Request $request)
     {
     
+        // return $request;
         $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
         $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
             'organization' => $load->current_organization,
             'status' => 'active',
+            'min_start_time' => $request->from_date,
+            'max_start_time' => $request->to_date,
 
         ]);
 
@@ -726,25 +729,40 @@ class JobboardController extends Controller
                 $eventCalendly = json_decode($eventCalendlys);
                 $jobsIdUnique = JobModels::get('id');
                 if(!$exits){
-                    $client = Client::create([
-                        'first_name' => $valAnswerDetail->name ?? $valAnswerDetail->first_name,
-                        'last_name' => $valAnswerDetail->last_name,
-                        'email' => $valAnswerDetail->email,
-                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                        'create_by' => auth()->user()->id
-                    ]);
-                    $jobs = JobModels::create([
-                        'title' => $valCalendly->name,
-                        'id_unique' => $jobsIdUnique->count()+1,
-                        'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
-                        'url_calendly' => $eventCalendly->resource->scheduling_url,
-                        'uri_api' => $valCalendly->uri,
-                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                        'set_job_status_id' => $idJobStatus->id,
-                        'location' => $valAnswerDetail->timezone,
-                        'status_calendly' => 1,
-                        'clients_id' => $client->id
-                    ]);
+                    $color = [
+                        '#EB5757',
+                        '#F2994A',
+                        '#27AE60',
+                        '#6AEAE3',
+                        '#56CCF2',
+                        '#BB6BD9',
+                        '#F2C94C',
+                    ];
+                    $color_rand = $color[rand(0, count($color) - 1)];
+                    $cekEmail = Client::where('email',$valAnswerDetail->email)->first('email');
+                    if(!$cekEmail){
+                        $client = Client::create([
+                            'first_name' => $valAnswerDetail->name ?? $valAnswerDetail->first_name,
+                            'last_name' => $valAnswerDetail->last_name,
+                            'email' => $valAnswerDetail->email,
+                            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                            'create_by' => auth()->user()->id,
+                            'color' => $color_rand,
+                        ]);
+
+                        $jobs = JobModels::create([
+                            'title' => $valCalendly->name,
+                            'id_unique' => $jobsIdUnique->count()+1,
+                            'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+                            'url_calendly' => $eventCalendly->resource->scheduling_url,
+                            'uri_api' => $valCalendly->uri,
+                            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                            'set_job_status_id' => $idJobStatus->id,
+                            'location' => $valAnswerDetail->timezone,
+                            'status_calendly' => 1,
+                            'clients_id' => $client->id
+                        ]);
+                    }
 
                     // SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
                     //     JobModelsTask::create([
