@@ -27,7 +27,6 @@ class SettingRepository {
     {
         
         DB::beginTransaction();
- 
         try{
 
             User::where('id', auth()->user()->id)->update([
@@ -75,6 +74,8 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->chile_care[$key])),
                                 'sub_category_key' => $request->chile_care[$key],
                                 'category' => 'Chile Care',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -98,6 +99,8 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->senior_care[$key])),
                                 'sub_category_key' => $request->senior_care[$key],
                                 'category' => 'Senior Care',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -120,6 +123,8 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->home_care[$key])),
                                 'sub_category_key' => $request->home_care[$key],
                                 'category' => 'Home Care',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -144,6 +149,42 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->other[$key])),
                                 'sub_category_key' => $request->other[$key],
                                 'category' => 'Other',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
+                                'users_id' => auth()->user()->id
+                            ]);
+                        }
+                    }
+                }
+
+                // Add costum service category
+                if($request->other_service){
+                    foreach($request->other_service as $key_other => $val_other){
+                        if($request->other_service[$key_other] != null){
+                            $name = $request->other_service_key[$key_other];
+                           
+                            $other->service_subcategorys()->create([
+                                'sub_category_name' => $request->other_service[$key_other],
+                                'sub_category_key' => str_replace(' ','_',strtolower($request->other_service[$key_other])),
+                                'category' => 'Other',
+                                'status' => 'COSTUM',
+                                'checkbox' => $request->$name ,
+                                'users_id' => auth()->user()->id
+                            ]);
+                        }
+                    }
+                }
+
+                if($request->other_service_js){
+                    foreach($request->other_service_js as $key_other => $val_other){
+                        if($request->other_service_js[$key_other] != null){
+                            $number = 'number_'.$key_other;
+                            $other->service_subcategorys()->create([
+                                'sub_category_name' => $request->other_service_js[$key_other],
+                                'sub_category_key' => str_replace(' ','_',strtolower($request->other_service_js[$key_other])),
+                                'category' => 'Other',
+                                'status' => 'COSTUM',
+                                'checkbox' => $request->$number,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -216,15 +257,17 @@ class SettingRepository {
                 ]);
 
             }
-
-
+        
             DB::commit(); 
- 
+           
         }catch(\Exception $e){
- 
+            
             DB::rollback();
- 
-        }   
+           
+        }
+
+          
+
     }
 
     public function updated($request)
@@ -265,6 +308,8 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->chile_care[$key])),
                                 'sub_category_key' => $request->chile_care[$key],
                                 'category' => 'Chile Care',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -288,6 +333,8 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->senior_care[$key])),
                                 'sub_category_key' => $request->senior_care[$key],
                                 'category' => 'Senior Care',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -309,7 +356,9 @@ class SettingRepository {
                             $serviceCaregoryHomeCare->service_subcategorys()->create([
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->home_care[$key])),
                                 'sub_category_key' => $request->home_care[$key],
+                                'status' => 'NOTCOSTUM',
                                 'category' => 'Home Care',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
@@ -334,11 +383,50 @@ class SettingRepository {
                                 'sub_category_name' => str_replace('_',' ',ucfirst($request->other[$key])),
                                 'sub_category_key' => $request->other[$key],
                                 'category' => 'Other',
+                                'status' => 'NOTCOSTUM',
+                                'checkbox' => true,
                                 'users_id' => auth()->user()->id
                             ]);
                         }
                     }
                 }
+
+
+                // Costum
+                if($request->other_service){
+                    foreach($request->other_service as $key_other => $val_other){
+                        if($request->other_service[$key_other] != null){
+                            $name = $request->other_service_key[$key_other];
+                           
+                            $other->service_subcategorys()->create([
+                                'sub_category_name' => $request->other_service[$key_other],
+                                'sub_category_key' => str_replace(' ','_',strtolower($request->other_service[$key_other])),
+                                'category' => 'Other',
+                                'status' => 'COSTUM',
+                                'checkbox' => $request->$name ,
+                                'users_id' => auth()->user()->id
+                            ]);
+                        }
+                    }
+                }
+
+                if($request->other_service_js){
+                    foreach($request->other_service_js as $key_other => $val_other){
+                        if($request->other_service_js[$key_other] != null){
+                            $number = 'number_'.$key_other;
+                            $other->service_subcategorys()->create([
+                                'sub_category_name' => $request->other_service_js[$key_other],
+                                'sub_category_key' => str_replace(' ','_',strtolower($request->other_service_js[$key_other])),
+                                'category' => 'Other',
+                                'status' => 'COSTUM',
+                                'checkbox' => $request->$number,
+                                'users_id' => auth()->user()->id
+                            ]);
+                        }
+                    }
+                }
+
+                
             }
 
             SettingServiceLocationFee::where('users_id' , auth()->user()->id)->update([
@@ -420,13 +508,14 @@ class SettingRepository {
                 
             }
 
-            DB::commit(); 
+        DB::commit(); 
            
         }catch(\Exception $e){
             
             DB::rollback();
            
         }
+
      
 
     }

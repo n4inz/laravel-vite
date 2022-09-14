@@ -57,4 +57,9 @@ class HomeController extends Controller
     {
         return view('family.sign_document');
     }
+
+    public function all_contract()
+    {
+        return view('family.all_contract');
+    }
 }

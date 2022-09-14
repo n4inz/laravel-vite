@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('category');
             $table->string('sub_category_name');
             $table->string('sub_category_key');
+            $table->enum('status', ['COSTUM','NOTCOSTUM']);
+            $table->boolean('checkbox');
             $table->unsignedBigInteger('users_id');
 
             $table->unsignedBigInteger('service_categories_id');

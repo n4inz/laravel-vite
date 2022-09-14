@@ -382,23 +382,39 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="flex space-x-16 p-4 rounded-lg" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-                                                <div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px] w-full">
-                                                        <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('tutor', old('other')) ) checked @endif @if(in_array('tutor', $subCategory)) checked @endif value="tutor" id="tutor" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="tutor" class="overview-id-field text-colortext hover:cursor-pointer">Tutor</label>
-                                                    </div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('pick_up_frop_off', old('other')) ) checked @endif @if(in_array('pick_up_frop_off', $subCategory)) checked @endif value="pick_up_frop_off" id="pick_up_frop_off" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="pick_up_frop_off" class="overview-id-field text-colortext hover:cursor-pointer">Pick Up Drop Off</label>
-                                                    </div>
+                                            <div class="load_other_service flex flex-wrap px-4 pt-2 rounded-lg relative" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                                                <div onclick="add_other_service()" class="absolute top-5 right-0 hover:cursor-pointer">
+                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0.75C9.41421 0.75 9.75 1.08579 9.75 1.5V8.25H16.5C16.9142 8.25 17.25 8.58579 17.25 9C17.25 9.41421 16.9142 9.75 16.5 9.75H9.75V16.5C9.75 16.9142 9.41421 17.25 9 17.25C8.58579 17.25 8.25 16.9142 8.25 16.5V9.75H1.5C1.08579 9.75 0.75 9.41421 0.75 9C0.75 8.58579 1.08579 8.25 1.5 8.25H8.25V1.5C8.25 1.08579 8.58579 0.75 9 0.75Z" fill="#0F172A"/>
+                                                    </svg>
                                                 </div>
-                                                <div>
-                                                    <div class="flex items-center space-x-[14px] mt-[10px]">
-                                                        <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('other_professional_services', old('other')) ) checked @endif @if(in_array('other_professional_services', $subCategory)) checked @endif value="other_professional_services" id="other_professional_services" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
-                                                        <label for="other_professional_services" class="overview-id-field text-colortext hover:cursor-pointer">Other Professional Services</label>
-                                                    </div>
+                                        
+                                                <div class="mr-5 mt-5 flex items-center space-x-[14px] w-44 ">
+                                                    <input type="hidden">
+                                                    <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('tutor', old('other')) ) checked @endif @if(in_array('tutor', $subCategory)) checked @endif value="tutor" id="tutor" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <label for="tutor" class="overview-id-field text-colortext hover:cursor-pointer">Tutor</label>
                                                 </div>
+                                                <div class="mr-5 mt-5 flex items-center space-x-[14px] w-44 ">
+                                                    <input type="hidden">
+                                                    <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('pick_up_frop_off', old('other')) ) checked @endif @if(in_array('pick_up_frop_off', $subCategory)) checked @endif value="pick_up_frop_off" id="pick_up_frop_off" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <label for="pick_up_frop_off" class="overview-id-field text-colortext hover:cursor-pointer">Pick Up Drop Off</label>
+                                                </div>
+                                                <div class="mr-5 mt-5 flex items-center space-x-[14px] w-44 ">
+                                                    <input type="hidden">
+                                                    <input onclick="otherCare()" data-type="other" name="other[]" @if(is_array(old('other')) && in_array('other_professional_services', old('other')) ) checked @endif @if(in_array('other_professional_services', $subCategory)) checked @endif value="other_professional_services" id="other_professional_services" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                    <label for="other_professional_services" class="overview-id-field text-colortext hover:cursor-pointer">Other Professional Services</label>
+                                                </div> 
+
+                                                @foreach ($setting->SettingSubCategory as $val_sub_category)
+                                                    <div class="mr-5 mt-5 flex items-center space-x-[14px] w-44 ">
+                                                        <input type="hidden" name="{{ $val_sub_category->sub_category_key }}" value="0">
+                                                        <input name="{{ $val_sub_category->sub_category_key }}" @if($val_sub_category->checkbox ) checked  @endif onclick="otherCare()" data-type="other"  value="1" id="{{ $val_sub_category->sub_category_key }}" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                                        <label for="{{ $val_sub_category->sub_category_key }}" class="overview-id-field text-colortext hover:cursor-pointer">{{ $val_sub_category->sub_category_name }}</label>
+                                                        <input name="other_service[]" type="hidden" value="{{ $val_sub_category->sub_category_name  }}" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] bg-gray-200 focus:bg-gray-200 w-full border-none focus:ring-0" autocomplete="off">
+                                                        <input name="other_service_key[]" type="hidden" value="{{ $val_sub_category->sub_category_key  }}" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] bg-gray-200 focus:bg-gray-200 w-full border-none focus:ring-0" autocomplete="off">
+                                                    </div>
+                                                @endforeach
+
                                             </div>
                                         </div>
                                         
@@ -442,7 +458,7 @@
                                     </div>
                                 </div>
                                 -->
-                                <div class="px-6 mt-8 flex items-center space-x-[25px]">
+                                <div class="px-6 mt-20 flex items-center space-x-[25px]">
                                     <div class="w-full errors_aplication_fee">   
                                         <div class=" flex items-center space-x-[14px]">
                                             <input id="aplication_fee_checkbox" name="aplication_fee_checkbox" {{ old('aplication_fee_checkbox') ? 'checked' : ''  }} {{ $setting->SettingDetail->service_location_fee->aplication_fee_check  ?? null ? 'checked' : '' }} value="1" style="color: #3BD7CF" type="checkbox" value="" class="aplication_fee_validate w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
@@ -450,7 +466,7 @@
                                         </div>
                                         <div class="w-full pl-8 mt-2 ">
                                             <div class="{{ $errors->has('aplication_fee') ? 'border-red-500' : '' }}    aplication_fee  flex items-center  w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input  name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? null) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }}  aplication_fee_validate  aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
+                                                <input  name="aplication_fee" value="{{ old('aplication_fee', $setting->SettingDetail->service_location_fee->aplication_fee ?? 0) }}" type="number"  class="{{ $errors->has('aplication_fee') ? 'placeholder-red-700' : '' }}  aplication_fee_validate  aplication_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -461,7 +477,7 @@
                                         </div>
                                         <div class="w-full pl-8 mt-2">
                                             <div class="placement_fee {{ $errors->has('placement_fee') ? 'border-red-500' : '' }}  flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? null ) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }}  placement_fee_validate placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
+                                                <input name="placement_fee" value="{{ old('placement_fee' , $setting->SettingDetail->service_location_fee->placement_fee ?? 0 ) }}" type="number"  class="{{ $errors->has('placement_fee') ? 'placeholder-red-700' : '' }}  placement_fee_validate placement_fee_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -472,7 +488,7 @@
                                         </div>
                                         <div class="w-full pl-8 mt-2">
                                             <div class="hourly_rate  {{ $errors->has('hourly_rate') ? 'border-red-500' : '' }} flex items-center w-40 h-10 border border-[#ECECEC] rounded-md">
-                                                <input  name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? null) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} hourly_rate_validate hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
+                                                <input  name="hourly_rate" value="{{ old('hourly_rate' , $setting->SettingDetail->service_location_fee->hourly_rate ?? 0) }}" type="number"  class="{{ $errors->has('hourly_rate') ? 'placeholder-red-700' : '' }} hourly_rate_validate hourly_rate_input overview-modal-add-talent-text text-colortext  border-none focus:ring-0 w-full p-1 ml-3 outline-none " placeholder="0" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -951,7 +967,7 @@
     <script>
     // Validate
     $(function(){
-        var validate = $('.validate_settings');
+        var validate = $('.validate_setting');
         
             if(validate.length){
                 validate.validate({
@@ -970,16 +986,16 @@
                         location:{
                             required:true,
                         },
-                        aplication_fee:{
-                            require_from_group: [1, ".aplication_fee_validate"]
+                        // aplication_fee:{
+                        //     require_from_group: [1, ".aplication_fee_validate"]
                            
-                        },
-                        placement_fee:{
-                            require_from_group: [1, ".placement_fee_validate"]
-                        },
-                        hourly_rate:{
-                            require_from_group: [1, ".hourly_rate_validate"]
-                        },
+                        // },
+                        // placement_fee:{
+                        //     require_from_group: [1, ".placement_fee_validate"]
+                        // },
+                        // hourly_rate:{
+                        //     require_from_group: [1, ".hourly_rate_validate"]
+                        // },
                         'chile_care[]': {   
                             require_from_group: [1, ".subcategory"]
                         },
@@ -990,11 +1006,15 @@
                             require_from_group: [1, ".subcategory"]
                         },
                         'other[]': {
-                            required:true,
+                            require_from_group: [1, ".subcategory"]
                         },
                         'status_talent[]':{
                             required:true,
                         },
+                        'name_status_job[]':{
+                            // required:true,
+                            maxlength:25
+                        }
                         // 'name_status_job[]':{
                         //     required:true,
                         // }
@@ -1011,6 +1031,7 @@
                             
                         }else{ 
                             error.insertAfter( element );
+                            error.appendTo(element.parents('.errors_status'));
                             error.appendTo(element.parents('.errors_agency_name'));
                             error.appendTo(element.parents('.errors_url_ending_legal'));
                             error.appendTo(element.parents('.errors_company_description'));
@@ -1214,8 +1235,19 @@
         $('.view_email').toggleClass('hidden');
     }
 
+    var index = 0;
+    function add_other_service(){
+        $('.other').prop('checked', true)
+        const tmp_other_service = `<div class="mr-10 mt-3 flex items-center space-x-[14px] w-1/4">
+                                        <input type="hidden" name="number_${index}" value="0">
+                                        <input checked onclick="otherCare()" data-type="other" name="number_${index}" value="1" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
+                                        <input name="other_service_js[]" type="text" value="" style="font-size: 13.5px; line-height: 15px;" class=" text-sm text-[#222222] bg-gray-200 focus:bg-gray-200 w-full border-none focus:ring-0" autocomplete="off">
+                                    </div>`;
 
-    
+        $('.load_other_service').append(tmp_other_service);
+
+        index++
+    }
     </script>
 </main>
 

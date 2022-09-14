@@ -42,23 +42,7 @@
                             {{$client->note }}
                         </div>
                     </div>
-                    <div class="flex items-center justify-between mt-6">
-                        <div class="flex items-center space-x-[17.71px] ">
-                            <img width="30" height="32" src="{{ asset('images/icon/email-verifed.png') }}" alt="404">
-                            <span class="overview-note-body">Email Verified</span>                                        
-                        </div>
-                        <div class="flex items-center space-x-[17.71px] ">
-                            <img width="31" height="31" src="{{ asset('images/icon/bg-check.png') }}" alt="404">
-                            <span class="overview-note-body max-w-[120px]">Background Check Self Reported</span>                                        
-                        </div>
-                        <div class="flex items-center space-x-[17.71px] ">
-                            <img width="32" height="32" src="{{ asset('images/icon/vacination.png') }}" alt="404">
-                            <span class="overview-note-body  max-w-[80px]">Vaccination Up-to-date</span>                                        
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="mt-8">
+                   <div class="mt-8">
                         <span class="overview-talent-modal-title">Document</span>
                         <div class="flex flex-wrap mt-4">
                             @isset($client->attached_file)

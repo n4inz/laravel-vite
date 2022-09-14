@@ -52,7 +52,13 @@
                             <div class="w-[265px] flex justify-between">
                                 <div class="flex items-center space-x-1">
                                     <span class="text-base">{{ $sts_val->status_name }}</span>
-                                    <div class="{{ $sts_val->id }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl">{{ $sts_val->job_models->count() }}</div>
+                                    <div class="{{ $sts_val->id }} flex items-center justify-center w-6 h-5 border text-[#827C7C] border-[#827C7C] rounded-xl text-xs">
+                                        @if ($sts_val->job_models->count() > 98)
+                                            99+
+                                        @else
+                                            {{ $sts_val->job_models->count() }}
+                                        @endif
+                                    </div>
                                 </div>
                                 @if($sts_val->status_key == 'potential_client')
                                     <div data-dropdown-toggle="dropdownBottom"  data-dropdown-placement="left-start" class="hover:cursor-pointer">
@@ -90,18 +96,36 @@
                                     
                                     @foreach ($sts_val->job_models as $value )
                                         @if ($value->status_calendly)
-                                            <div onclick="edit_create_job_calendly('{{ $value->id }}')" class="hover:cursor-move" id="data_{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
+                                            <div class="hover:cursor-move" id="data_{{ $value->id }}" href="{{ route('jobboard.overview', ['uid' => $value->uid] )}}">
                                                 <div id="search_list" class="relative w-full h-[211px] bg-bgbody mt-3 rounded">
                                                     <div class="hidden">{{ $sts_val->status_name }} {{ $value->family }} {{ $value->title }} {{ $value->description }} {{ $value->location }}</div>
-                                                    <div class="h-40 px-4">
-                                                        <div class="flex items-center justify-between pt-[11px]">
+                                                    <div class=" px-4">
+                                                        <div class="flex items-center justify-between pt-[11px] relative">
                                                             <div class="text-xs font-semibold text-[#2CA6A0] flex items-center space-x-2">
                                                                 <span>#{{ $value->id_unique }} </span>
                                                                 @if (now()->diffInMinutes($value->created_at) < 1)
                                                                         <div class="w-[39px] h-[15px] bg-red-700 animate-pulse flex items-center justify-center rounded-sm"> <span class="overview-label-text">New</span></div>
                                                                 @endif
                                                             </div>
+                                                            <div data-dropdown-toggle="dropdownDelete_{{  $value->id }}"  data-dropdown-placement="left-start" class="absolute right-0 z-30 hover:cursor-pointer">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
+                                                                    <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
+                                                                    <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
+                                                                </svg>
+                                                            </div>
+                                                            <div id="dropdownDelete_{{  $value->id }}" class="hidden z-10  bg-red-500 rounded divide-y divide-gray-100 shadow">
+                                                                <form method="POST" action="{{ route('jobboard.delete_job') }}">@csrf
+                                                                    <div class=" px-2 space-x-1 text-xs text-gray-700 flex items-center justify-center hover:bg-red-400 rounded ">
+                                                                        <input type="hidden" name="uid" value="{{ $value->uid }}">
+                                                                        <button class="block py-2 text-white font-semibold">Delete Job</button>
+                                                                        <i class="fa fa-trash text-white" aria-hidden="true"></i>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
+                                                    </div>
+                                                    <div onclick="edit_create_job_calendly('{{ $value->id }}')" class="h-[132px] px-4">
                                                         <div class="pt-[7px]">
                                                             <div class="text-sm max-w-[200px] font-medium text-[#222222]">
                                                                 {{Str::limit($value->title, 45, $end='...')}}
@@ -752,7 +776,7 @@
         <div id="filter-date-calendly" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
-                <form class="validate-calendlys" method="POST" action="{{ route('jobboard.sync_calendly') }}">@csrf
+                <form class="validate-calendly" method="POST" action="{{ route('jobboard.sync_calendly') }}">@csrf
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <!-- Modal header -->
                         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
@@ -797,7 +821,7 @@
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <button onclick="modalCalendly.hide()" type="button" class="text-gray-400 absolute top-2 right-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
+                    <button onclick="window.location.reload()" type="button" class="text-gray-400 absolute top-2 right-2 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center ">
                         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         <span class="sr-only">Close modal</span>
                     </button>

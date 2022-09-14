@@ -251,7 +251,7 @@ class TemplateEmailSeeder extends Seeder
             [
                 'name' => 'Family Offer',
                 'name' => 'family_offer',
-                'color' => '#FEC001'
+                'color' => '#3FBF5F'
             ]
         ];
 

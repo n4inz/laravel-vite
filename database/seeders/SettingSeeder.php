@@ -80,8 +80,8 @@ class SettingSeeder extends Seeder
                 ],
                 [
                     'name' => 'Family Offer',
-                    'name' => 'family_offer',
-                    'color' => '#FEC001'
+                    'key' => 'family_offer',
+                    'color' => '#3FBF5F'
                 ]
             ];
            
@@ -110,7 +110,7 @@ class SettingSeeder extends Seeder
             }
 
             $subcategory_child = [
-                'Nanny/ Sister',
+                'Nanny/ Sitter',
                 // 'Sister',
                 'Au Pair',
                 'Maternity Care',
@@ -162,6 +162,8 @@ class SettingSeeder extends Seeder
                     'category' => 'Child Care',
                     'sub_category_name' => $val_sub_child,
                     'sub_category_key' => str_replace(' ', '_', strtolower($val_sub_child)),
+                    'status' => 'NOTCOSTUM',
+                    'checkbox' => true,
                     'users_id' => $users->id,
                     'service_categories_id' => $child->id
                 ]);
@@ -179,6 +181,8 @@ class SettingSeeder extends Seeder
                     'category' => 'Senior Care',
                     'sub_category_name' => $val_sub_senior,
                     'sub_category_key' => str_replace(' ', '_', strtolower($val_sub_senior)),
+                    'status' => 'NOTCOSTUM',
+                    'checkbox' => true,
                     'users_id' => $users->id,
                     'service_categories_id' => $senior->id
                 ]);
@@ -196,6 +200,8 @@ class SettingSeeder extends Seeder
                     'category' => 'Home Care',
                     'sub_category_name' => $val_sub_home,
                     'sub_category_key' => str_replace(' ', '_', strtolower($val_sub_home)),
+                    'status' => 'NOTCOSTUM',
+                    'checkbox' => true,
                     'users_id' => $users->id,
                     'service_categories_id' => $home->id
                 ]);
@@ -213,6 +219,8 @@ class SettingSeeder extends Seeder
                     'category' => 'Other services',
                     'sub_category_name' => $val_sub_other,
                     'sub_category_key' => str_replace(' ', '_', strtolower($val_sub_other)),
+                    'status' => 'NOTCOSTUM',
+                    'checkbox' => true,
                     'users_id' => $users->id,
                     'service_categories_id' => $other->id
                 ]);

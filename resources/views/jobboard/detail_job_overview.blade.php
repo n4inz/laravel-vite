@@ -1074,7 +1074,7 @@
                                                 @foreach ($result->match_talents_add as $key => $talent )
                                                      {{-- $talent->job_model_talent_status->status --}}
                                                      <div class="flex justify-between px-4 hover:cursor-pointer">
-                                                         <div class="flex space-x-2 items-center justify-center">
+                                                        <div class="flex space-x-2 items-center justify-center">
                                                              <div class="">
                                                                  <input style="color: #3BD7CF" name="talent_name[]" type="checkbox" value="{{ $talent->talent->id }}" class="select_talent w-5 h-5 hover:cursor-pointer rounded bg-gray-100 border-gray-300 outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                              </div>
@@ -1097,27 +1097,26 @@
                                                                  @endif
                                                                  <span class="overview-experiance-talent">{{ $talent->talent->experience }} Year Experience, {{ Str::limit($talent->talent->about_talent , 25, $end='...') }}</span>
                                                              </div>
-                                                         </div>
-                                                         <div>
+                                                        </div>
+                                                        <div>
                                                             @if ($talent->color_status)
-                                                                <select style="color:{{$talent->color_status}}; border-color:{{$talent->color_status}}; " data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs focus:ring-0 bg-gray-50 rounded border outline-none hover:cursor-pointer">
-                                                                       
-                                                                        <option @if($talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{$talent->status }}" >{{$talent->status }}</option>
-                                                                            @foreach ($status_talent as $value )
-                                                                                @if ($value->status_name != $talent->status)
-                                                                                    <option  class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
-                                                                                @endif
-                                                                            @endforeach
+                                                                <select style="color:{{$talent->color_status}}; border-color:{{$talent->color_status}}; " data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs focus:ring-0 font-semibold leading-10 bg-gray-50 rounded border-2 outline-none hover:cursor-pointer">
+                                                                       <option @if($talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{$talent->status }}" >{{$talent->status }}</option>
+                                                                        @foreach ($status_talent as $value )
+                                                                            @if ($value->status_name != $talent->status)
+                                                                                <option  class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
+                                                                            @endif
+                                                                        @endforeach
                                                                 </select>
                                                             @else
-                                                                <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs text-palet focus:ring-0 bg-gray-50 rounded border border-palet outline-none hover:cursor-pointer">
+                                                                <select data-talent-email="{{ $talent->talent->email }}" data-client-email="{{ $result->client->email }}" data-talent="{{ $talent->talent->id }}" data-job-id="{{ $result->id }}" name="status_talents" class="status_talents p-2 text-xs font-semibold leading-10 text-palet focus:ring-0 bg-gray-50 rounded border-2 border-palet outline-none hover:cursor-pointer">
                                                                     
                                                                     @foreach ($status_talent as $value )
                                                                         <option @if($value->status_name === $talent->status) selected @endif class="text-gray-500  border rounded-lg hover:cursor-pointer" value="{{ $value->status_name }}" >{{ $value->status_name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             @endif
-                                                        </div>
+                                                    </div>
                                                      </div>
                                                  @endforeach
 
@@ -1201,19 +1200,10 @@
                                         @endforeach
                                        
                                     </div>
-                                    <div data-modal-toggle="add-new-aplicants"  class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
-                                        {{-- <div data-modal-toggle="modal-add-talent" class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer"> --}}
-                                            <span class="overview-send-job text-palet">+ Add Talent</span>
-                                    </div>
-                                    {{-- <input id="copy" type="text" value="{{ route('home.send', ['uid' => $result->uid]) }}" />
-                                    <a onclick="copy_text()" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2" target="_blank">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
-                                        </svg>
-                                        <span class="overview-attechment-btn-text">Copy link form add talent</span>
-                                    </a> --}}
-                                </div>
+                                    {{-- <div data-modal-toggle="add-new-aplicants"  class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
+                                        <span class="overview-send-job text-palet">+ Add Talent</span>
+                                    </div> --}}
+                              </div>
                             </div>
                         </div>
                         <div class="bg-bgbody rounded-b toggle_client_detail w-[704px] pb-4 relative">
@@ -2566,14 +2556,16 @@
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow w-[672px]">
                             <!-- Modal header -->
-                            <div class="flex items-center justify-between  px-8 h-14 rounded-t border-b dark:border-gray-600">
-                                <span class="overview-talent-modal-title text-[#222222]">
-                                    Add Talent
-                                </span>
-                                <div type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:cursor-pointer"  data-modal-toggle="modal-detail-add-match">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                            <div class="flex items-center  px-8 h-14 rounded-t border-b dark:border-gray-600">
+                                <div class="">
+                                    <div class="overview-talent-modal-title text-[#222222]">
+                                        Add Talent
+                                    </div>
+                                    <div data-modal-toggle="add-new-aplicants"  class="flex justify-center items-center px-5 w-[99px] h-6 bg-hover rounded space-x-1 hover:cursor-pointer absolute top-[19px] right-6">
+                                        <span class="overview-send-job text-palet">+ Add Talent</span>
+                                    </div>
                                 </div>
-                            </div>
+                      </div>
                             <!-- Modal body -->
                             <div class="w-[672px]">
                                 <div class="flex border-b w-[672px]">

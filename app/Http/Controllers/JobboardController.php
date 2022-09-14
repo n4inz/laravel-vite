@@ -97,7 +97,11 @@ class JobboardController extends Controller
             $email =  TemplateEmail::where(['type' => 0 , 'status' => 'CLIENT CONFIRMATION'])->first('body');
         }
         // $tmp_email2 = TemplateEmail::where(['type' => 1 , 'status' => 'REJECTED'])->first('body');
-        $category = SettingServiceCategory::with(['service_subcategorys'])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+        $category = SettingServiceCategory::with(['service_subcategorys' => function($query){
+            $query->where('checkbox', 1);
+        }])->where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get();
+
+        // return $category;
         $user_location = SettingServiceLocationFee::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first('location');
         return view('jobboard.jobboard', [
             "category" => $category,
@@ -116,7 +120,7 @@ class JobboardController extends Controller
             'id' => 'required'
         ]);
 
-       $subCategory = SettingServiceSubcategory::where('service_categories_id', $request->id)->where('users_id', auth()->user()->id)->get();
+       $subCategory = SettingServiceSubcategory::where(['service_categories_id' => $request->id, 'checkbox' => true])->where('users_id', auth()->user()->id)->get();
         
 
        return response()->json([
@@ -179,6 +183,17 @@ class JobboardController extends Controller
        
         $this->jobboardRepository->created($request);
         return redirect()->back()->with('status', 'Create job succesfuly');
+    }
+
+    public function delete_job(Request $request)
+    {
+        $request->validate([
+            'uid' => 'required'
+        ]);
+        JobModels::where('uid' , $request->uid)->delete();
+
+        return redirect()->back();
+
     }
 
     public function overview($uid)
@@ -705,7 +720,7 @@ class JobboardController extends Controller
 
         // return $response->collection;
   
-        foreach($response->collection as $valCalendly){
+        foreach(array_reverse($response->collection) as $valCalendly){
             $idJobStatus = SettingJobModelsStatus::where([
                 'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                 'status_key' => 'potential_client',
@@ -739,7 +754,7 @@ class JobboardController extends Controller
                         '#F2C94C',
                     ];
                     $color_rand = $color[rand(0, count($color) - 1)];
-                    $cekEmail = Client::where('email',$valAnswerDetail->email)->first('email');
+                    $cekEmail = Client::where('email',$valAnswerDetail->email)->first(['email', 'id']);
                     if(!$cekEmail){
                         $client = Client::create([
                             'first_name' => $valAnswerDetail->name ?? $valAnswerDetail->first_name,
@@ -749,7 +764,6 @@ class JobboardController extends Controller
                             'create_by' => auth()->user()->id,
                             'color' => $color_rand,
                         ]);
-
                         $jobs = JobModels::create([
                             'title' => $valCalendly->name,
                             'id_unique' => $jobsIdUnique->count()+1,
@@ -762,20 +776,21 @@ class JobboardController extends Controller
                             'status_calendly' => 1,
                             'clients_id' => $client->id
                         ]);
+                    }else{
+                        $jobs = JobModels::create([
+                            'title' => $valCalendly->name,
+                            'id_unique' => $jobsIdUnique->count()+1,
+                            'description' => '<p>'.$eventCalendly->resource->description_plain.'</p>'.$descriptionString,
+                            'url_calendly' => $eventCalendly->resource->scheduling_url,
+                            'uri_api' => $valCalendly->uri,
+                            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                            'set_job_status_id' => $idJobStatus->id,
+                            'location' => $valAnswerDetail->timezone,
+                            'status_calendly' => 1,
+                            'clients_id' => $cekEmail->id
+                        ]);
                     }
 
-                    // SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
-                    //     JobModelsTask::create([
-                    //         'task' => $res->body,
-                    //         'order' => $res->order,
-                    //         'assignee' => auth()->user()->full_name ?? 'Your Agency',
-                    //         'day' => $res->day,
-                    //         'job_models_id' => $jobs->id,
-                    //         'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                    //         'name' => auth()->user()->full_name
-                    //     ]);
-                    // });
-   
                 }else{
                    $jobs = JobModels::where('uri_api' ,$valCalendly->uri)->update([
                        'title' => $valCalendly->name,

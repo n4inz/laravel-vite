@@ -88,6 +88,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(SettingServiceCategory::class ,'users_id');
     }
+    public function SettingSubCategory()
+    {
+        return $this->hasMany(SettingServiceSubcategory::class ,'users_id');
+    }
 
     public function SettingCalendly()
     {

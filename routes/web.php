@@ -97,6 +97,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('save-as-email-client',[JobboardController::class, 'save_as_email_client'])->name('jobboard.save_as_email_client');
     Route::post('send-email-confirmation-to-client',[JobboardController::class, 'send_email_confirmation_to_client'])->name('jobboard.send_email_confirmation_to_client');
     Route::post('priview-email-client',[JobboardController::class,'priview_email_client'])->name('jobboard.priview_email_client');
+    Route::post('/delete-job', [JobboardController::class, 'delete_job'])->name('jobboard.delete_job');
+    
     // AJAX JOBBOARD
     Route::post('edit-responsibility',[JobboardController::class, 'edit_responsibility'])->name('jobboard.edit_responsibility');
     Route::post('edit-client-detail',[JobboardController::class, 'edit_client_detail'])->name('jobboard.edit_client_detail');
@@ -171,6 +173,7 @@ Route::prefix('family')->group(function () {
     Route::get('/add-person',[FamilyHomeController::class, 'add_person'])->name('family.add_person');
     Route::get('/rekomendation',[FamilyHomeController::class, 'rekomendation'])->name('family.rekomendation');
     Route::get('/sign-document',[FamilyHomeController::class, 'sign_document'])->name('family.sign_document');
+    Route::get('/all-contract',[FamilyHomeController::class, 'all_contract'])->name('family.all_contract');
 
 
 });

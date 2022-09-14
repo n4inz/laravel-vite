@@ -29,8 +29,12 @@ class SettingController extends Controller
     {
         $setting = User::where('id', auth()->user()->id)->with(['avatar', 'SettingDetail' => function ($query) {
             $query->with(['service_location_fee'])->first();
-        }, 'SettingAdditionals', 'SettingUsers', 'SettingGeneral', 'SettingCategory', 'SettingJobStatus', 'SettingTalentStatus', 'SettingCalendly'])->first();
+        }, 'SettingAdditionals', 'SettingUsers', 'SettingGeneral', 'SettingCategory' ,'SettingSubCategory' => function($query){
+            $query->where(['category' => 'Other', 'status' => 'COSTUM']);
+        }, 'SettingJobStatus', 'SettingTalentStatus', 'SettingCalendly'])->first();
 
+
+        // return $setting;
         // return $setting->SettingJobStatus;
         // In array catagory and subcategory
         $category = [];
@@ -67,9 +71,7 @@ class SettingController extends Controller
 
     public function setting_store(SettingRequest $request)
     {
-
         // return $request;
-
         $cek_setting = SettingGeneral::where('users_id', auth()->user()->id)->first();
 
         if (empty($cek_setting)) {
