@@ -41,7 +41,7 @@
                 <div id="search_staf" class="flex items-center w-[310px] h-[130px] bg-white rounded-lg pl-3 space-x-4">
                     <div class="hidden">{{ $values->user->email }} {{ $values->user->full_name }}</div>
                     <div>
-                        @if ($values->user->avatar)
+                        @if ($values->avatar)
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/avatar/'.$values->avatar) }}" alt="">
                         @else
                             <div class="w-20 h-20 flex items-center justify-center bg-[{{ $values->user->color }}] rounded-full">
@@ -83,16 +83,16 @@
                         <div class="px-[91px] mt-10">
                             <div class="flex justify-center  items-center space-x-10">
                                 <div>
-                                    <label for="avatar">
-                                        <div class="{{ $errors->has('avatar') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex relative justify-center  items-center w-28 h-28 bg-hover rounded-full hover:cursor-pointer">
-                                            <img id="output" class="absolute rounded-full w-28 h-28"/>
+                                    <label for="avatar-staff">
+                                        <div class="{{ $errors->has('avatar-staff') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} flex relative justify-center  items-center w-28 h-28 bg-hover rounded-full hover:cursor-pointer">
+                                            <img id="output-staff" class="absolute rounded-full w-28 h-28"/>
                                             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M3 6C3 4.34315 4.34315 3 6 3H26C27.6569 3 29 4.34316 29 6V26C29 27.6569 27.6569 29 26 29H6C4.34316 29 3 27.6569 3 26V6ZM6 5C5.44772 5 5 5.44772 5 6V26C5 26.5523 5.44771 27 6 27H26C26.5523 27 27 26.5523 27 26V6C27 5.44771 26.5523 5 26 5H6Z" fill="{{ $errors->has('avatar') ? '#e80f00' : '#3BD7CF' }}"/>
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M7.66675 12C7.66675 9.60674 9.60686 7.66663 12.0001 7.66663C14.3933 7.66663 16.3334 9.60674 16.3334 12C16.3334 14.3932 14.3933 16.3333 12.0001 16.3333C9.60686 16.3333 7.66675 14.3932 7.66675 12ZM12.0001 9.66663C10.7114 9.66663 9.66675 10.7113 9.66675 12C9.66675 13.2886 10.7114 14.3333 12.0001 14.3333C13.2887 14.3333 14.3334 13.2886 14.3334 12C14.3334 10.7113 13.2887 9.66663 12.0001 9.66663Z" fill="{{ $errors->has('avatar') ? '#e80f00' : '#3BD7CF' }}"/>
                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9978 16.5901C20.3795 16.2465 20.9594 16.248 21.3394 16.5934L28.6727 23.2601C29.0814 23.6316 29.1115 24.2641 28.74 24.6727C28.3685 25.0814 27.736 25.1115 27.3274 24.74L20.6634 18.6818L14.669 24.0767C14.2956 24.4128 13.7307 24.4196 13.3493 24.0926L9.29165 20.6147L4.60006 24.1334C4.15823 24.4647 3.53143 24.3752 3.20006 23.9334C2.86869 23.4915 2.95823 22.8647 3.40006 22.5334L8.73339 18.5334C9.10835 18.2522 9.62832 18.2691 9.98418 18.5741L13.984 22.0025L19.9978 16.5901Z" fill="{{ $errors->has('avatar') ? '#c7270e' : '#3BD7CF' }}"/>
                                             </svg>
                                         </div>
-                                        <input onchange="loadFile(event)" type="file" id="avatar" name="avatar" class="hidden">
+                                        <input onchange="loadFile(event)" type="file" id="avatar-staff" name="avatar" class="hidden">
                                     </label>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                                     <div class="mb-6 w-full errors_full_name">
                                         <label for="full-name" class="{{ $errors->has('full_name') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Full Name</label>
                                         <div class="{{ $errors->has('full_name') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="full_name" value="{{ old('full_name') }}" type="text" class="{{ $errors->has('full_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name">
+                                            <input name="full_name" value="{{ old('full_name') }}" type="text" class="{{ $errors->has('full_name') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="First Name" autocomplete="nope">
                                         </div>
                                         @if($errors->has('full_name'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('full_name') }}</p>
@@ -110,7 +110,7 @@
                                     <div class="mb-6 w-full errors_last_name">
                                         <label class="{{ $errors->has('email') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Email</label>
                                         <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="email" value="{{ old('email') }}" type="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Email">
+                                            <input name="email" value="{{ old('email') }}" type="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Email" autocomplete="nope">
                                         </div>
                                         @if($errors->has('email'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
@@ -122,25 +122,13 @@
                                     <div class="mb-6 w-full errors_password">
                                         <label class="{{ $errors->has('password') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Password</label>
                                         <div class="{{ $errors->has('password') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <input name="password" value="{{ old('password') }}" type="password" id="password" class="{{ $errors->has('password') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" placeholder="Password">
-                                            <span toggle="#password" class="fa fa-eye-slash toggle-password mr-2"></span>
+                                            <input name="password" value="{{ old('password') }}" type="password" id="password-staff" class="{{ $errors->has('password') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" placeholder="Password">
+                                            <span toggle="#password-staff" class="fa fa-eye-slash toggle-password-staff mr-2"></span>
                                         </div>
                                         @if($errors->has('password'))
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password') }}</p>
                                         @endif
                                     </div>
-                                    {{-- <div class="mb-6 w-full">
-                                        <label for="type" class="{{ $errors->has('type') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Type</label>
-                                        <div class="{{ $errors->has('type') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
-                                            <select name="type"  class="bg-transparent border-none focus:ring-0 text-[#222222] block w-full p-2.5">
-                                                <option selected>Choose a type</option>
-                                                <option value="staf">Staf</option>
-                                            </select>
-                                        </div>
-                                        @if($errors->has('type'))
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('type') }}</p>
-                                        @endif
-                                    </div> --}}
                                 </div>
                             </div>
                             <div class="py-12">
@@ -209,7 +197,7 @@
             {
                 modal.show();
             }
-            $(".toggle-password").click(function() {
+            $(".toggle-password-staff").click(function() {
 
                 $(this).toggleClass("fa-eye-slash fa-eye");
                 var input = $($(this).attr("toggle"));
@@ -228,7 +216,7 @@
 
     <script>
         var loadFile = function(event) {
-          var output = document.getElementById('output');
+          var output = document.getElementById('output-staff');
           output.src = URL.createObjectURL(event.target.files[0]);
           output.onload = function() {
             URL.revokeObjectURL(output.src)

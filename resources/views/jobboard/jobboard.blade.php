@@ -61,22 +61,24 @@
                                     </div>
                                 </div>
                                 @if($sts_val->status_key == 'potential_client')
-                                    <div data-dropdown-toggle="dropdownBottom"  data-dropdown-placement="left-start" class="hover:cursor-pointer">
+                                    <div data-dropdown-toggle="dropdownBottom"  data-dropdown-placement="bottom" class="hover:cursor-pointer">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M6 13.5C6.82843 13.5 7.5 12.8284 7.5 12C7.5 11.1716 6.82843 10.5 6 10.5C5.17157 10.5 4.5 11.1716 4.5 12C4.5 12.8284 5.17157 13.5 6 13.5Z" fill="#827C7C"/>
                                             <path d="M12 13.5C12.8284 13.5 13.5 12.8284 13.5 12C13.5 11.1716 12.8284 10.5 12 10.5C11.1716 10.5 10.5 11.1716 10.5 12C10.5 12.8284 11.1716 13.5 12 13.5Z" fill="#827C7C"/>
                                             <path d="M18 13.5C18.8284 13.5 19.5 12.8284 19.5 12C19.5 11.1716 18.8284 10.5 18 10.5C17.1716 10.5 16.5 11.1716 16.5 12C16.5 12.8284 17.1716 13.5 18 13.5Z" fill="#827C7C"/>
                                         </svg>
                                     </div>
-                                    <div id="dropdownBottom" class="hidden z-10  bg-white rounded divide-y divide-gray-100 shadow">
-                                        <div class=" px-2 space-x-1 text-xs text-gray-700 flex items-center justify-center hover:bg-gray-100 ">
-                                          
-                                            {{-- <form class="sync-calendly" action="{{ route('jobboard.sync_calendly') }}" method="POST">@csrf
-                                                <button class="block py-2 justify-">Sync To Calendly</button>
-                                            </form> --}}
-                                            <button data-modal-toggle="filter-date-calendly" class="block py-2 justify-">Sync To Calendly</button>
+                                    <div id="dropdownBottom" class="hidden z-10 bg-transparent rounded divide-y pr-32">
+                                        <div class="px-2 space-x-1 text-xs text-gray-700 flex items-center justify-center w-ful bg-white shadow rounded-t hover:bg-hover hover:text-gray-500">
+                                            <form class="get_new_data_calendly" method="POST" action="{{ route('jobboard.sync_calendly') }}">@csrf
+                                                <input type="hidden" name="latest" value="latest">
+                                                <button  class="block py-2 justify-">Get New Data Calendly</button>
+                                            </form>
                                             <i class="fa fa-refresh text-palet" aria-hidden="true"></i>
-
+                                        </div>
+                                        <div class=" space-x-1 text-xs text-gray-700 flex items-center justify-center  w-full bg-white shadow rounded-b hover:bg-hover hover:text-gray-500">
+                                            <button data-modal-toggle="filter-date-calendly" class="block py-2 justify-">Get Old Data Calendly</button>
+                                            <i class="fa fa-refresh text-palet" aria-hidden="true"></i>
                                         </div>
                                     </div>
                                 @else
@@ -656,17 +658,20 @@
                                                 <label for="rate-negotible" class="overview-note-body text-colortext">Rate negotiable</label>
                                             </div>
                                         </div>
-                                        <div class="rate-errors">
+                                        <div class="rate-errors range-errors flex flex-col">
                                             <label class="{{ $errors->has('rate') ? 'text-red-600' : '' }} overview-note-body text-colortext mb-2 block">Range*</label>
                                            <div class="flex justify-center items-center space-x-2">
                                                 <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16  h-8 border border-[#ECECEC] flex items-center rounded">
-                                                    <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                                                    <input id="rate" type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
                                                 </div>
                                                 <span>-</span>
-                                                <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16 h-8 border border-[#ECECEC] flex items-center rounded">
-                                                    <input type="text" name="rate2" value="{{ old('rate2') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                                                <div class="{{ $errors->has('range') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16 h-8 border border-[#ECECEC] flex items-center rounded">
+                                                    <input id="range" type="text" name="range" value="{{ old('range') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
                                                 </div>
                                            </div>
+                                           {{-- <div class=" flex flex-col">
+
+                                           </div> --}}
                                             @if($errors->has('family'))
                                                 <p class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $errors->first('rate') }}</p>
                                             @endif
@@ -744,7 +749,7 @@
                         <div class="p-6 space-y-6">
                             <div id="myTabContent">
                                 <div class="mb-2 flex items-center justify-center h-9 border border-[#ECECEC] rounded text-[#222222]">
-                                    <input name="subject" value="" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
+                                    <input name="subject" value="{{ $email->subject }}" type="text" class="subject text-sm border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Subject">
                                 </div>
                                 <div class="w-full rounded-md " id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <textarea id="textarea-id"  class="w-full h-full" name="editor_tmp_email_1" >{{ $email->body }}</textarea>
@@ -900,7 +905,10 @@
                             required:true,
                             number:true
                         },
-                       
+                        range:{
+                            required:true,
+                            number:true
+                        },
                         'name_chile[]':{
                             required : {
                                 depends: function(element) {
@@ -918,6 +926,7 @@
                         },
                     },
                     errorPlacement: function(error, element){
+                        // console.log(error)
                         if (element.is(":checkbox"))
                         {
                            
@@ -927,6 +936,9 @@
 
                            
                         }else{ 
+                            // if(element.attr('id') == 'range'){
+                            //     $('#rate-error').toggleClass('hidden')
+                            // }
                             error.insertAfter( element );
                             error.appendTo(element.parents('.family-errors'));
                             error.appendTo(element.parents('.title-errors'));
@@ -937,10 +949,15 @@
                             error.appendTo(element.parents('.start-date-errors'));
                             error.appendTo(element.parents('.end-date-errors'));
                             error.appendTo(element.parents('.rate-errors'));
+                            error.appendTo(element.parents('.range-errors'));
                             error.appendTo(element.parents('.name-chile-errors'));
                             error.appendTo(element.parents('.age-errors'));
                         }
                     },
+                    messages:{
+                        rate: "Enter your first rate",
+                        range: "Enter your second rate",
+                    }
        
                 })
             }
@@ -1418,7 +1435,7 @@
         function save_and_send(){
             const values = $('.validations').serialize();
             $('.validations').submit(function(e){
-                        e.preventDefault();
+                e.preventDefault();
             });
            $.ajax({
                 type: "POST",
@@ -1435,7 +1452,7 @@
                     $('.button_disable').toggleClass('hidden');
                 },
                 success : function(val){
-
+                    // toastr.success("Create Job Succesfully", 'Success')
                     modal.hide();
                     modalSendEmail.show();
                    
@@ -1449,18 +1466,47 @@
             $('.costums-family').val(localStorage.getItem("client_email_create"))
         }
 
-        $('.validations').submit(function(){
-            localStorage.clear();
-        })
-
         function send_email_confirmation(email){
             $('.family_email_send').val(email);
             modalSendEmail.show();
         }
 
+        $('.validations').submit(function(){
+            localStorage.clear();
+
+        })
         // Sync Calendly
+
         const targetElCalendly = document.getElementById('modalCalendly');
         const modalCalendly = new Modal(targetElCalendly, {});
+
+        $('.get_new_data_calendly').submit(function(e){
+            
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                beforeSend: function(){
+                    modalCalendly.show()
+                },
+                error : function(e){
+                    const tmp = `<div class="flex flex-col items-center justify-center">
+                                    <i class="fa fa-5x text-red-600 fa-exclamation-triangle" aria-hidden="true"></i>
+                                    <span class="text-red-500 mt-2 font-semibold">Failed to sync to calendly </span>
+                                    <span class="text-red-500 font-semibold">Check your api key</span>
+                                </div>`;
+                   $('.display_calendly').html(tmp)
+                },
+                success: function(data){
+                    toastr.success("Sync Calendly Successfully", 'Success')
+                    setTimeout(() => {
+                         location.reload()
+                    }, 2000)
+                }
+
+            });
+        });
         $('.sync-calendly').submit(function(e){
             e.preventDefault();
             var form = $(this);
@@ -1482,7 +1528,10 @@
                    $('.display_calendly').html(tmp)
                 },
                 success: function(data){
-                    location.reload()
+                    toastr.success("Sync Calendly Successfully", 'Success')
+                    setTimeout(() => {
+                         location.reload()
+                    }, 2000)
                 }
 
             });
@@ -1509,7 +1558,11 @@
                    $('.display_calendly').html(tmp)
                 },
                 success: function(data){
-                    location.reload()
+                    toastr.success("Sync Calendly Successfully", 'Success')
+                    setTimeout(() => {
+                         location.reload()
+                    }, 2000)
+                   
                 }
 
             });

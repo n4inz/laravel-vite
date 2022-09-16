@@ -1048,8 +1048,20 @@
                            
                         </div>
 
+                        <div class="bg-bgbody rounded toggle_client_detail w-[704px] pb-4 relative mt-3">
+                            <input id="copy" type="text" class="absolute -z-[9990] -top-[9999] -left-[9999] bg-bgbody border-none focus:ring-0 text-xs text-gray-100" value="{{ route('home.send', ['uid' => $result->uid]) }}" />
+                            <span id="status_copy" class="text-sm copy-link text-gray-500 flex justify-center invisible">Copy Link Succeess</span>
+                            <a onclick="copy_text()" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2 hover:cursor-pointer" target="_blank">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
+                                </svg>
+                                <span class="overview-attechment-btn-text">Copy link form add talent</span>
+                            </a>
+                        </div>
+
                         {{-- Matched Talent --}}
-                        <div class="bg-bgbody rounded-t mt-3 w-[704px] relative">
+                        <div class="bg-bgbody rounded mt-3 w-[704px] relative">
                             <div class="flex justify-between px-4 pt-[18.5px]">
                                 <div class="flex space-x-8">
                                     <div class="w-2 h-6 bg-colorStatusCard1 rounded-sm "></div>
@@ -1206,17 +1218,7 @@
                               </div>
                             </div>
                         </div>
-                        <div class="bg-bgbody rounded-b toggle_client_detail w-[704px] pb-4 relative">
-                            <input id="copy" type="text" class="hidden link bg-bgbody border-none focus:ring-0 text-xs text-gray-500" value="{{ route('home.send', ['uid' => $result->uid]) }}" />
-                            <span id="status_copy" class="text-sm copy-link text-gray-500 flex justify-center invisible">Copy Link Succeess</span>
-                            <a onclick="copy_text()" class="flex mx-auto items-center justify-center w-[268px] h-[42px] bg-palet rounded-md space-x-2 hover:cursor-pointer" target="_blank">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.90625 3.25C7.54381 3.25 7.25 3.54381 7.25 3.90625V6.2158C7.25 6.63001 6.91421 6.9658 6.5 6.9658C6.08579 6.9658 5.75 6.63001 5.75 6.2158V3.90625C5.75 2.71539 6.71539 1.75 7.90625 1.75H20.0938C21.2846 1.75 22.25 2.71539 22.25 3.90625V16.0938C22.25 17.2846 21.2846 18.25 20.0938 18.25H17.7582C17.3439 18.25 17.0082 17.9142 17.0082 17.5C17.0082 17.0858 17.3439 16.75 17.7582 16.75H20.0938C20.4562 16.75 20.75 16.4562 20.75 16.0938V3.90625C20.75 3.54381 20.4562 3.25 20.0938 3.25H7.90625Z" fill="white"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 7.90625C1.75 6.71539 2.71539 5.75 3.90625 5.75H16.0938C17.2846 5.75 18.25 6.71539 18.25 7.90625V20.0938C18.25 21.2846 17.2846 22.25 16.0938 22.25H3.90625C2.71539 22.25 1.75 21.2846 1.75 20.0938V7.90625ZM3.90625 7.25C3.54381 7.25 3.25 7.54381 3.25 7.90625V20.0938C3.25 20.4562 3.54381 20.75 3.90625 20.75H16.0938C16.4562 20.75 16.75 20.4562 16.75 20.0938V7.90625C16.75 7.54381 16.4562 7.25 16.0938 7.25H3.90625Z" fill="white"/>
-                                </svg>
-                                <span class="overview-attechment-btn-text">Copy link form add talent</span>
-                            </a>
-                        </div>
+
 
                         <div class="bg-bgbody rounded mt-3 toggle_client_detail w-[704px]">
                             <div class="p-4">
@@ -3958,10 +3960,12 @@
 
      // End Piview email send to client
     function copy_text() {
-       var hidden = document.getElementById("copy");
-        // hidden.style.display = 'block';
-        var copyText = $('#copy').siblings('.link');
+       var copyText = document.getElementById("copy");
+ 
+      
         copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
 
         // document.getElementById("copy").select();
         document.execCommand("copy");

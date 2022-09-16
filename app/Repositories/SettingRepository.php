@@ -204,17 +204,20 @@ class SettingRepository {
                 'dashboard_color_theme' => $request->dashboard_color_theme,
                 'users_id' => auth()->user()->id
             ]);
-    
-            foreach($request->body as $key => $value){
-                if($request->body[$key] != null){
-                    $setting_additionals->defined_check_list()->create([
-                        'body' => $request->body[$key],
-                        'users_id' => auth()->user()->id,
-                        'day' => $request->day[$key],
-                        'order' => $key
-                    ]);
+
+            if($request->body){
+                foreach($request->body as $key => $value){
+                    if($request->body[$key] != null){
+                        $setting_additionals->defined_check_list()->create([
+                            'body' => $request->body[$key],
+                            'users_id' => auth()->user()->id,
+                            'day' => $request->day[$key],
+                            'order' => $key
+                        ]);
+                    }
                 }
             }
+    
 
             foreach($request->name_status_job as $keyStatus => $status){
             
@@ -451,17 +454,21 @@ class SettingRepository {
                 'dashboard_color_theme' => $request->dashboard_color_theme,
             ]);
             SettingDefinedCheckList::where('users_id', auth()->user()->id)->delete();
-            foreach($request->body as $keys => $value){
-                if($request->body[$keys] != null){
-                    
-                    SettingDefinedCheckList::create([
-                        'body' => $request->body[$keys],
-                        'setting_additionals_id' => $sett_id->id,
-                        'order' => $keys,
-                        'users_id' => auth()->user()->id,
-                        'day' => $request->day[$keys]
-                    ]);
+
+            if($request->body){
+                foreach($request->body as $keys => $value){
+                    if($request->body[$keys] != null){
+                        
+                        SettingDefinedCheckList::create([
+                            'body' => $request->body[$keys],
+                            'setting_additionals_id' => $sett_id->id,
+                            'order' => $keys,
+                            'users_id' => auth()->user()->id,
+                            'day' => $request->day[$keys]
+                        ]);
+                    }
                 }
+
             }
 
             

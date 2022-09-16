@@ -521,6 +521,7 @@ label[for="end_time"],
 label[for="start_date"],
 label[for="end_date"],
 label[for="rate"],
+label[for="range"],
 label[for="name_chile[]"],
 label[for="age[]"],
 label[for="agency_name"],
@@ -628,6 +629,12 @@ label[id="about_talent-error"] {
     animation-duration: 3s;
     animation-iteration-count: infinite;
   }
+
+    .toast-success{
+        background: #10b981;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
   
   @keyframes loader {
     15% {

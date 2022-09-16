@@ -77,12 +77,12 @@ class JobboardRepository
             }
             
             $description = 'Hi! We are looking for a '.$categoryDesc.' for our family. This position
-            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.' Per '.$request->pay_frequency.', '.$request->part_time.'.
+            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.'-'.$request->range.' Per '.$request->pay_frequency.', '.$request->part_time.'.
             The ideal candidate needs to speak '.$langDesc.'.
             Please apply for this job if you feel you can do this job</br></br>'.$request->description;
         }else{
             $description = 'Hi! We are looking for a '.$categoryDesc.' for our family. This position
-            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.' Per '.$request->pay_frequency.', '.$request->part_time.'.
+            is in '.$request->address.', '.$request->desired_living.' '.$day.' Days per week, rate $'.$request->rate.'-'.$request->range.' Per '.$request->pay_frequency.', '.$request->part_time.'.
             Please apply for this job if you feel you can do this job</br></br>'.$request->description; 
         }
 
@@ -97,7 +97,7 @@ class JobboardRepository
                     'family' => $value[0]->first_name,
                     'title' => $request->title,
                     'description' => $description,
-                    'id_unique' => $jobsIdUnique->count()+1,
+                    // 'id_unique' => $jobsIdUnique->count()+1,
         
                     'location' => $request->address,
                     'category' => $request->category,
@@ -120,6 +120,7 @@ class JobboardRepository
         
                     'salary_type' => $request->salary_type,
                     'rate' => $request->rate,
+                    'range' => $request->range,
                     'pay_frequency' => $request->pay_frequency,
                     'pay_with' => $request->pay_with,
                     'rate_negotiable' => $request->rate_negotiable,
@@ -131,23 +132,20 @@ class JobboardRepository
                     'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                     'stafs_id' => auth()->user()->staf->users_id ?? 0,
                     'status_calendly' => 0,
-                    'set_job_status_id' => $status_job[1]->id
+                    // 'set_job_status_id' => $status_job[1]->id
                 ]);
 
-                
-
-            
-                    SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
-                        JobModelsTask::create([
-                            'task' => $res->body,
-                            'order' => $res->order,
-                            'assignee' => auth()->user()->full_name ?? 'Your Agency',
-                            'day' => $res->day,
-                            'job_models_id' => $jobs->id,
-                            'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
-                            'name' => auth()->user()->full_name
-                        ]);
-                    });
+                SettingDefinedCheckList::where('users_id', auth()->user()->staf->users_agency_id ?? auth()->user()->id)->get()->map(function($res) use($jobs){
+                    JobModelsTask::create([
+                        'task' => $res->body,
+                        'order' => $res->order,
+                        'assignee' => auth()->user()->full_name ?? 'Your Agency',
+                        'day' => $res->day,
+                        'job_models_id' => $jobs->id,
+                        'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
+                        'name' => auth()->user()->full_name
+                    ]);
+                });
                 
 
             }else{
@@ -180,6 +178,7 @@ class JobboardRepository
      
                  'salary_type' => $request->salary_type,
                  'rate' => $request->rate,
+                 'range' => $request->range,
                  'pay_frequency' => $request->pay_frequency,
                  'pay_with' => $request->pay_with,
                  'rate_negotiable' => $request->rate_negotiable,

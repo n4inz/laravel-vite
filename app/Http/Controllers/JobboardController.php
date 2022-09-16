@@ -46,6 +46,7 @@ use App\Mail\sendingEmailDescriptionToTalent;
 use App\Http\Traits\Actifity as TraitsActifity;
 use App\Models\JobModelsTask;
 use App\Models\SettingDefinedCheckList;
+use Illuminate\Support\Facades\Session;
 
 class JobboardController extends Controller
 {
@@ -182,7 +183,7 @@ class JobboardController extends Controller
     {  
        
         $this->jobboardRepository->created($request);
-        return redirect()->back()->with('status', 'Create job succesfuly');
+        return redirect()->back()->with('Success', 'Create job Successfully');
     }
 
     public function delete_job(Request $request)
@@ -192,7 +193,7 @@ class JobboardController extends Controller
         ]);
         JobModels::where('uid' , $request->uid)->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Delete job Successfully');
 
     }
 
@@ -277,7 +278,7 @@ class JobboardController extends Controller
             'description' => $request->edit_description
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Edit Description Successfully');
     }
 
     public function talent_status(Request $request)
@@ -358,7 +359,7 @@ class JobboardController extends Controller
         $this->jobboardRepository->email($request);
         $actifity = $this->actifity('Matched Email has sent to Client' , 'ACTIVITIES');
         Actifity::dispatch($actifity);
-        return redirect()->back()->with('success', 'Send email to talent Succesfuly');
+        return redirect()->back()->with('Success', 'Send email to talent Successfully');
     }
 
     public function comment(Request $request)
@@ -449,7 +450,7 @@ class JobboardController extends Controller
         // }
 
 
-        return redirect()->back()->with('success' , 'success apply');
+        return redirect()->back()->with('Success' , 'Create New Aplicants Successfully');
     }
 
     public function modal_add_match_talent(Request $request)
@@ -466,7 +467,7 @@ class JobboardController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Add Match Talent Successfully');
     }
 
     public function change_status_all_match_talent(Request $request)
@@ -510,7 +511,7 @@ class JobboardController extends Controller
             $body = $request->body_email_not_edit;
         }
         SendEmailToTalent::dispatch($request->email, $request->subject, $body);
-        return redirect()->back();
+        return redirect()->back()-with('Success', 'Send Email To Talent Successfully');
     }
 
     // AJAX
@@ -615,7 +616,7 @@ class JobboardController extends Controller
             'tbd' => $request->tbd
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Edit Responsibility Successfully');
     }
 
     public function edit_client_detail(Request $request)
@@ -643,7 +644,7 @@ class JobboardController extends Controller
             'clients_id' => $client->id
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Edit Client Successfully');
     }
 
     public function edit_subcategorys(Request $request)
@@ -662,7 +663,7 @@ class JobboardController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('Success' , 'Edit Subcategory Successfully');
     }
 
     public function edit_talents_ayi(Request $request)
@@ -691,7 +692,7 @@ class JobboardController extends Controller
             'job_models_id' => $request->job_models_id,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('Success' , 'Edit Talent Ayi Successfully');
     }
 
     public function edit_pay_info(Request $request)
@@ -700,21 +701,29 @@ class JobboardController extends Controller
             'pay_with' => $request->pay_info
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Edit Payment Successfully');
     }
 
     public function sync_calendly(Request $request)
     {
-    
-        // return $request;
+        $fromDate = date('Y-m-d', strtotime('+1 days' , strtotime($request->from_date)));
+        $toDate = date('Y-m-d', strtotime('+2 days' , strtotime($request->to_date)));
         $load =  SettingCalendlyApi::where('users_id' , auth()->user()->staf->users_agency_id ?? auth()->user()->id)->first(['token','current_organization']);
-        $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
-            'organization' => $load->current_organization,
-            'status' => 'active',
-            'min_start_time' => $request->from_date,
-            'max_start_time' => $request->to_date,
-
-        ]);
+        if($request->latest){
+            $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
+                'organization' => $load->current_organization,
+                'status' => 'active',
+                'min_start_time' => date('Y-m-d', strtotime("-10 days")),
+            ]);
+        }else{
+            $responses = $this->getWithParams($load->token, 'https://api.calendly.com/scheduled_events',[
+                'organization' => $load->current_organization,
+                'status' => 'active',
+                'min_start_time' => $fromDate,
+                'max_start_time' => $toDate,
+    
+            ]);
+        }
 
         $response = json_decode($responses);
 
@@ -762,6 +771,7 @@ class JobboardController extends Controller
                             'email' => $valAnswerDetail->email,
                             'users_id' => auth()->user()->staf->users_agency_id ?? auth()->user()->id,
                             'create_by' => auth()->user()->id,
+                            'note' => '<strong>Question and Answer :</strong><br />'.$question.'<strong>Payment&nbsp;:</strong><br />external_id :&nbsp;'.isset($valAnswerDetail->payment->external_id).'<br />provider : '.isset($valAnswerDetail->payment->provider).'<br />amount : '.isset($valAnswerDetail->payment->amount).'<br />currency : '.isset($valAnswerDetail->payment->currency).'<br />terms: &nbsp; '.isset($valAnswerDetail->payment->terms),
                             'color' => $color_rand,
                         ]);
                         $jobs = JobModels::create([
@@ -802,8 +812,8 @@ class JobboardController extends Controller
 
 
         }
-
-        return redirect()->back();
+        
+        return redirect()->back()->with('Success', 'Sync Calendly Successfully');
     }
 
     public function add_new_aplicants_to_match_talent(Request $request)
@@ -917,7 +927,7 @@ class JobboardController extends Controller
 
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Send Email Successfully');
     }
 
     public function send_email_confirmation_to_client(Request $request)
@@ -925,7 +935,7 @@ class JobboardController extends Controller
        
         
         SendEmailToTalent::dispatch($request->family_email, $request->subject, $request->editor_tmp_email_1);
-        return redirect()->back();
+        return redirect()->back()->with('Success', 'Send Email Successfully');
     }
 
     public function __destruct()

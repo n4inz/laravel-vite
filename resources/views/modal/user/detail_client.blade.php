@@ -39,7 +39,7 @@
                     <div class="py-6 mt-6 border-t">
                         <span class="overview-talent-modal-title text-[#4F4F4F]"> <span class="text-[#CCD3DC]">&ldquo;</span> Note <span class="text-[#CCD3DC]">&rdquo;</span> </span>
                         <div class="overview-note-body text-[#827C7C] text-start mt-4">
-                            {{$client->note }}
+                            {!! $client->note !!}
                         </div>
                     </div>
                    <div class="mt-8">

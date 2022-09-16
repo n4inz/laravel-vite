@@ -414,8 +414,8 @@
                         <input type="text" name="rate" value="{{ old('rate') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
                     </div>
                     <span>-</span>
-                    <div class="{{ $errors->has('rate') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16 h-8 border border-[#ECECEC] flex items-center rounded">
-                        <input type="text" name="rate2" value="{{ old('rate2') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
+                    <div class="{{ $errors->has('range') ? 'border-red-500 ' : 'border-[#CCD3DC]'}} w-16 h-8 border border-[#ECECEC] flex items-center rounded">
+                        <input type="text" name="range" value="{{ old('range') }}"  class="overview-note-body text-xs block border-none bg-transparent focus:ring-0 w-full  outline-none " autocomplete="off">
                     </div>
                </div>
                 @if($errors->has('family'))

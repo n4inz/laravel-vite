@@ -80,6 +80,8 @@ class UserClientController extends Controller
     {
         if(auth()->user()->hasRole('agency')){
             $staf = Staf::with('user')->where('users_agency_id' , auth()->user()->id)->get();
+
+          
             return view('user.staf.staf', compact('staf'));
         }
 
@@ -92,12 +94,12 @@ class UserClientController extends Controller
         if(auth()->user()->hasRole('agency')){
             $request->validate([
                 'full_name' => 'required|min:3',
-                'email' => 'required|unique:users,email|unique:clients,email|unique:talents,email',
+                'email' => 'required|unique:users,email|unique:clients,email|unique:talents,email|email',
                 // 'type' => 'required|min:3',
                 'password' => 'required',
             ]);
             if(isset($request->avatar)){
-                $avatar = $this->uploadImageStore($request->file('avatar') , 'Setting/avatar');
+                $avatar = $this->uploadImageStore($request->file('avatar') , 'avatar');
             }
 
             $color = [
@@ -129,7 +131,7 @@ class UserClientController extends Controller
     
             $user->assignRole('staf');
     
-            return redirect()->back()->with('success', 'Create staff successfuly');
+            return redirect()->back()->with('Success', 'Create staff successfuly');
         }
       
     }

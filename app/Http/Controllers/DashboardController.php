@@ -19,6 +19,7 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+
 use Stripe\Stripe;
 
 
@@ -28,6 +29,9 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        
+
+        // return date('Y-m-d', strtotime("-30 days"));
 
         // return Carbon::now('2022-09-08')->addDay(1);
         // return now()->toDateTimeString();
@@ -204,7 +208,7 @@ class DashboardController extends Controller
 
             $invite = json_decode($invites);
             array_push($array, [
-                'start_time' => Carbon::parse($val->start_time)->format('d/m/Y').' '.Carbon::parse($val->start_time)->format('g:i A'),
+                'start_time' => Carbon::parse($val->start_time)->format('m/d/Y').' '.Carbon::parse($val->start_time)->format('g:i A'),
                 // 'start_time' => $val->start_time,
                 'end_time' => $val->end_time,
                 'location_meet' => $val->location,

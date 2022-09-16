@@ -2,18 +2,6 @@
     <nav id="nav" class="fixed w-[1400px] z-10 xl:w-full  bg-bgbody border border-gray-200 px-6 py-2.5 rounded ">
         <div class="container flex flex-nowrap xl:flex-wrap  items-center mx-auto ">
             <div id="search" class="w-1/2 togle-search-desktop" >
-                {{-- <div class="relative ">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
-                        </svg>
-                            
-                    </div>
-                    <div class="w-[340px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
-                        <input readonly data-modal-toggle="global-search" type="text" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" autocomplete="off" required>
-                    </div>
-
-                </div> --}}
             </div>
 
             <div class="flex items-center justify-end w-1/2">
@@ -35,9 +23,9 @@
                         <span class="sr-only">Open user menu</span>
 
                         @if (isset(auth()->user()->avatar->avatar))
-                            <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->avatar->avatar) }} ' alt="user photo">
+                            <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->avatar->avatar) }} ' alt="avatar">
                         @elseif (isset(auth()->user()->staf->avatar))
-                            <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->staf->avatar) }} ' alt="user photo">
+                            <img class="w-12 h-12 rounded-full" src='{{ asset('storage/avatar/'. auth()->user()->staf->avatar) }} ' alt="avatar">
                         @else
                             {{-- <div class="w-12 h-12 rounded-full bg-slate-500 flex items-center justify-center">
                                 <span class="text-xs text-gray-300 ">No Images</span>
@@ -52,11 +40,9 @@
                 </div>
                 <!-- Dropdown menu -->
                 <div class="hidden z-50 my-4 text-sm list-none bg-white text-colorStatusCard1 rounded divide-y  shadow " id="dropdown">
-                    <div class="py-3 px-4 text-palet font-semibold">
-                        <span class="block text-sm  ">
-
-                                {{ auth()->user()->full_name }}
-
+                    <div data-modal-toggle="modal-change-email" class="py-3 px-4 text-palet font-semibold hover:cursor-pointer">
+                        <span  class="block text-sm  ">
+                            {{ auth()->user()->full_name }}
                         </span>
                         <span class="block text-sm font-medium  truncate">{{ auth()->user()->email ?? auth()->guard('staf')->user()->email  }}</span>
                     </div>
@@ -68,7 +54,7 @@
                             <a href="{{ route('user_client.client') }}" class="block py-2 px-4 text-sm  hover:bg-hover">User</a>
                         </li>
                         <li>
-                            <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Setting</a>
+                            <a href="{{ route('setting.setting') }}" class="block py-2 px-4 text-sm  hover:bg-hover">Settings</a>
                         </li>
                         <li>
                             <form method="POST" action="{{ route('logout') }}" class=" block py-2 px-4 text-sm  hover:bg-hover">
@@ -89,72 +75,159 @@
             </div>
         </div>
     </nav>
-<!-- Main modal -->
-<div id="global-search" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow ">
-            <!-- Modal header -->
-            <div class="flex justify-center items-start p-4 rounded-t border-b relative">
-                <div class="relative ">
-                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
-                        </svg>
-                            
+    <!-- Main modal -->
+    <div id="global-search" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow ">
+                <!-- Modal header -->
+                <div class="flex justify-center items-start p-4 rounded-t border-b relative">
+                    <div class="relative ">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 12.866 12.866 16 9 16C5.13401 16 2 12.866 2 9C2 5.13401 5.13401 2 9 2C12.866 2 16 5.13401 16 9ZM16.0319 14.6177C17.2635 13.078 18 11.125 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18C11.125 18 13.078 17.2635 14.6177 16.0319L17.2929 18.7071C17.6834 19.0976 18.3166 19.0976 18.7071 18.7071C19.0976 18.3166 19.0976 17.6834 18.7071 17.2929L16.0319 14.6177Z" fill="#827C7C"/>
+                            </svg>
+                                
+                        </div>
+                        <div class="w-[440px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
+                            <input type="text" id="simple-search" value="{{ request()->query('search') }}" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" autocomplete="off" required>
+                        </div>
+        
                     </div>
-                    <div class="w-[440px] h-12 border-[2px] border-[#EFEFEF] rounded-lg flex items-center">
-                        <input type="text" id="simple-search" value="{{ request()->query('search') }}" class="text-base rounded-lg outline-none border-transparent bg-transparent border-none block w-full pl-10 p-2 focus:ring-0" placeholder="Search anything" autocomplete="off" required>
-                    </div>
-    
+                    <button type="button" class="absolute top-2 right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-toggle="global-search">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
                 </div>
-                <button type="button" class="absolute top-2 right-5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-toggle="global-search">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="result_global_search p-6 space-y-6 h-96 overflow-auto ">
-                <div class="text-lg text-gray-500 flex items-center justify-center">Enter a search term to find results</div>
-                {{-- <div>
-                    <span class="text-lg text-colortext font-semibold overview-note-body">Job</span>
-                    <div class="pl-5 space-y-1 text-gray-400 text-sm">
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Lorem ipsum dolor sit amet.</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, asperiores.</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Lorem, ipsum dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit fuga praesentium aliquid labore iste error quae quod? Necessitatibus, vel maiores.</div>
+                <!-- Modal body -->
+                <div class="result_global_search p-6 space-y-6 h-96 overflow-auto ">
+                    <div class="text-lg text-gray-500 flex items-center justify-center">Enter a search term to find results</div>
+                    {{-- <div>
+                        <span class="text-lg text-colortext font-semibold overview-note-body">Job</span>
+                        <div class="pl-5 space-y-1 text-gray-400 text-sm">
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Lorem ipsum dolor sit amet.</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, asperiores.</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Lorem, ipsum dolor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit fuga praesentium aliquid labore iste error quae quod? Necessitatibus, vel maiores.</div>
+                        </div>
                     </div>
+                    <div>
+                        <span class="text-lg text-colortext font-semibold overview-note-body">Client</span>
+                        <div class="pl-5 space-y-1 text-gray-400 text-sm">
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Zulkarnain</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Fadil</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># nainmo@ymail.com</div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-lg text-colortext font-semibold overview-note-body">Talent</span>
+                        <div class="pl-5 space-y-1 text-gray-400 text-sm">
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Zulkarnain</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Fadil</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># nainmo@ymail.com</div>
+                        </div>
                 </div>
-                <div>
-                    <span class="text-lg text-colortext font-semibold overview-note-body">Client</span>
-                    <div class="pl-5 space-y-1 text-gray-400 text-sm">
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Zulkarnain</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Fadil</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># nainmo@ymail.com</div>
-                    </div>
+                    <div>
+                        <span class="text-lg text-colortext font-semibold overview-note-body">Staff</span>
+                        <div class="pl-5 space-y-1 text-gray-400 text-sm">
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Zulkarnain</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Fadil</div>
+                            <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># nainmo@ymail.com</div>
+                        </div>
+                    </div> --}}
+                
                 </div>
-                <div>
-                    <span class="text-lg text-colortext font-semibold overview-note-body">Talent</span>
-                    <div class="pl-5 space-y-1 text-gray-400 text-sm">
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Zulkarnain</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Fadil</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># nainmo@ymail.com</div>
-                    </div>
-               </div>
-                <div>
-                    <span class="text-lg text-colortext font-semibold overview-note-body">Staff</span>
-                    <div class="pl-5 space-y-1 text-gray-400 text-sm">
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Zulkarnain</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># Fadil</div>
-                        <div class="p-1 pl-4 hover:bg-hover hover:text-gray-600 hover:cursor-pointer rounded-md"># nainmo@ymail.com</div>
-                    </div>
-                </div> --}}
-               
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Main modal Change Password-->
+    <div id="modal-change-email" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 w-full ">  
+        <div class="p-4 w-[552px] h-screen">
+            <div class="bg-white rounded-lg shadow pt-5">
+                
+                <form action="{{ route('navbar.change_email_password') }}" class="validate_staff" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="px-[91px] mt-10">
+                        <div class="flex justify-center  items-center space-x-10">
+                            
+                                <label class="hover:cursor-pointer" for="avatar">
+                                    @if (isset(auth()->user()->avatar->avatar))
+                                        <div class="w-24 h-24 rounded-full ">
+                                            <img id="output-avatar" class="w-24 h-24 rounded-full border-2" src='{{ asset('storage/avatar/'. auth()->user()->avatar->avatar) }} ' alt="avatar">
+                                        </div>
+                                    @elseif (isset(auth()->user()->staf->avatar))
+                                        <img id="output-avatar" class="w-24 h-24 rounded-full border-2" src='{{ asset('storage/avatar/'. auth()->user()->staf->avatar) }} ' alt="avatar">
+                                    @else
+                                        <div class="w-24 h-24 flex items-center justify-center bg-[{{ auth()->user()->color }}] rounded-full">
+                                            <img id="output-avatar" class="absolute rounded-full w-28 h-28"/>
+                                            <span class="text-white text-xl">{{ strtoupper(substr(auth()->user()->full_name, 0, 1)) }}</span>
+                                        </div>
+                                    @endif
+                                    <input onchange="changeAvatar(event)" type="file" id="avatar" name="avatar" class="hidden">
+                                </label>
+                            
+                        </div>
+                        <div class="w-full flex flex-col mt-6">
+                            <div class="flex items-center space-x-2">
+                                <div class="mb-6 w-full errors_email">
+                                    <label class="{{ $errors->has('email') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">Email</label>
+                                    <div class="{{ $errors->has('email') ? 'border-red-500 bg-red-100' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                        <input name="email" value="{{ old('email', auth()->user()->email) }}" type="email" class="{{ $errors->has('email') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none " placeholder="Email">
+                                    </div>
+                                    @if($errors->has('email'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('email') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+   
+                            <div class="flex items-center space-x-2">
+                                <div class="mb-6 w-full errors_password">
+                                    <label class="{{ $errors->has('password') ? 'text-red-600' : '' }} block mb-2 overview-modal-add-talent-text text-[#222222]">New Password</label>
+                                    <div class="{{ $errors->has('password') ? 'border-red-500 ' : 'border-[#CCD3DC]' }} w-full h-[40px] border border-[#CCD3DC] flex items-center justify-center rounded">
+                                        <input name="password" value="{{ old('password') }}" type="password" id="password-nav" class="{{ $errors->has('password') ? 'placeholder-red-600' : '' }} overview-modal-add-talent-text  border-none focus:ring-0 w-full h-full rounded p-1 pl-3 outline-none text-[#222222] opacity-50" placeholder="Password">
+                                        <span toggle="#password-nav" class="fa fa-eye-slash toggle-password-nav mr-2"></span>
+                                    </div>
+                                    @if($errors->has('password'))
+                                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $errors->first('password') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-4 flex space-x-2">
+                            <div data-modal-toggle="modal-change-email" class="w-full h-[40px] bg-gray-200 flex items-center justify-center rounded hover:cursor-pointer">
+                                <span class="overview-talent-modal-title text-gray-500">Cancel</span>
+                            </div>
+                            <button class="w-full h-[40px] bg-palet rounded">
+                                <span class="overview-talent-modal-title text-white">Save</span>
+                            </button>
+                        </div>
+                        
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
 <script>
+    var changeAvatar = function(event) {
+        var output = document.getElementById('output-avatar');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+        URL.revokeObjectURL(output.src)
+        }
+    };
+    $(".toggle-password-nav").click(function() {
+
+    $(this).toggleClass("fa-eye-slash fa-eye");
+    var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+         input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+
     $('.dropdown_comment').click(function(){
 
         $.ajax({
@@ -215,6 +288,7 @@
     })
 </script>
 <script>
+
     $('#simple-search').keyup(function(){
         $.ajaxSetup({
             headers: {

@@ -64,7 +64,7 @@ Route::get('/fail', [AuthenticateController::class, 'fail'])->name('fail');
 Route::group(['middleware' => 'auth'],function(){
     // Navbar
     Route::post('/comment-notify' ,[NavbarController::class, 'comment_notify'])->name('navbar.comment_notify');
-
+    Route::post('/change-email-password', [NavbarController::class, 'change_email_password'])->name('navbar.change_email_password');
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/calendly' , [DashboardController::class,'calendlyApi'])->name('dashboard.calendly');

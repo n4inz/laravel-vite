@@ -252,8 +252,8 @@
                                             <div class="flex space-x-10 p-4 rounded-lg" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px] w-full">
-                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('nanny/_sitter', old('chile_care')) ) checked @endif @if(in_array('nanny/_sitter', $subCategory)) checked @endif value="nanny/_sitter" id="nany-sitter" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
-                                                        <label for="nany-sitter" class="overview-id-field text-colortext hover:cursor-pointer">Nany/ Sitter</label>
+                                                        <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('nanny', old('chile_care')) ) checked @endif @if(in_array('nanny', $subCategory)) checked @endif value="nanny" id="nany-sitter" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0">
+                                                        <label for="nany-sitter" class="overview-id-field text-colortext hover:cursor-pointer">Nanny</label>
                                                     </div>
                                                     <div class="flex items-center space-x-[14px] mt-[10px]">
                                                         <input onclick="chileCare()" data-type="chile_care"  name="chile_care[]" @if(is_array(old('chile_care')) && in_array('au_pair', old('chile_care')) ) checked @endif  @if(in_array('au_pair', $subCategory)) checked @endif  value="au_pair" id="au-pair" style="color: #3BD7CF" type="checkbox"  class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
@@ -382,7 +382,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="load_other_service flex flex-wrap px-4 pt-2 rounded-lg relative" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                                            <div class="load_other_service flex flex-wrap px-4 pt-1 rounded-lg relative" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
                                                 <div onclick="add_other_service()" class="absolute top-5 right-0 hover:cursor-pointer">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0.75C9.41421 0.75 9.75 1.08579 9.75 1.5V8.25H16.5C16.9142 8.25 17.25 8.58579 17.25 9C17.25 9.41421 16.9142 9.75 16.5 9.75H9.75V16.5C9.75 16.9142 9.41421 17.25 9 17.25C8.58579 17.25 8.25 16.9142 8.25 16.5V9.75H1.5C1.08579 9.75 0.75 9.41421 0.75 9C0.75 8.58579 1.08579 8.25 1.5 8.25H8.25V1.5C8.25 1.08579 8.58579 0.75 9 0.75Z" fill="#0F172A"/>
@@ -406,7 +406,7 @@
                                                 </div> 
 
                                                 @foreach ($setting->SettingSubCategory as $val_sub_category)
-                                                    <div class="mr-5 mt-5 flex items-center space-x-[14px] w-44 ">
+                                                    <div class="mr-5 mt-1 flex items-center space-x-[14px] w-44 ">
                                                         <input type="hidden" name="{{ $val_sub_category->sub_category_key }}" value="0">
                                                         <input name="{{ $val_sub_category->sub_category_key }}" @if($val_sub_category->checkbox ) checked  @endif onclick="otherCare()" data-type="other"  value="1" id="{{ $val_sub_category->sub_category_key }}" style="color: #3BD7CF" type="checkbox" class="subcategory w-5 h-5 rounded bg-white border border-[#DADADA] outline-none focus:outline:none focus:ring-transparent focus:border-current focus:ring-0" >
                                                         <label for="{{ $val_sub_category->sub_category_key }}" class="overview-id-field text-colortext hover:cursor-pointer">{{ $val_sub_category->sub_category_name }}</label>
@@ -778,7 +778,7 @@
                                     </div>
                                 </div>
                                 <div class="px-8 mt-4 ">
-                                    <label for="" class="overview-status-field text-colortext mb-[26px]">Pre-defined check list</label>
+                                    <label for="" class="overview-status-field text-colortext mb-[26px]">Pre-defined checklist <i class="ml-2 text-[10px] text-red-500">editable*</i></label>
                                     <div id="sortable_predifine">
                                         @foreach ($defined_list as $value )
                                             <div id="item_{{ $value->id }}" class="flex items-center space-x-[29.5px] mb-7 hover:cursor-move">
@@ -790,89 +790,32 @@
                                                 
                                                 </div>
                                                 <div class="w-full">
-                                                    <span class="task-text-body text-colortext">{{ $value->body }}</span>
+                                                    <input name="body[]" type="text" value="{{ $value->body }}" style="font-size: 13.5px; line-height: 15px;" class=" text-colortext hover:bg-gray-200 focus:bg-gray-200 w-full bg-transparent border-none focus:ring-0" autocomplete="off">
+                                                    {{-- <span class="task-text-body text-colortext">{{ $value->body }}</span> --}}
                                                 </div>
                                                 <div class="w-full">
-                                                    @if ($value->day == 7)
-                                                        <span class="overview-id-field text-colortext">1 Week</span>
-                                                    @else
-                                                        <span class="overview-id-field text-colortext">{{ $value->day }} Day</span>
-                                                    @endif
+                                                    <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
+                                                        <select id="part-time" name="day[]" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
+                                                            <option @if(old('7', $value->day) == '7') selected @endif value="7">1 Week</option>
+                                                            <option @if(old('3', $value->day) == '3') selected @endif value="3">3 Day</option>
+                                                            <option @if(old('2' , $value->day) == '2') selected @endif value="2">2 Day</option>
+                                                            <option @if(old('1', $value->day) == '1') selected @endif value="1">1 Day</option>
+                                                        </select>
+                                                        <div>
+                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
+                                                                <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
+                                                            </svg> 
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
-                                                <input type="hidden" name="body[]" value="{{ $value->body }}">
-                                                <input type="hidden" name="day[]" value="{{ $value->day }}">
+                                            
                                             </div>
                                         @endforeach
                                     </div>
                                     {{-- Add more --}}
-                                    <div class="add">
-                                        
-                                        <div class="flex items-center space-x-[29.5px] mb-7">
-                                            <div>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                </svg>
-                                            </div>
-                                            <div class="w-full">
-                                                <input name="body[]" value="" type="text" id="first-name" class="bg-transparent border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
-                                            </div>
-                                            <div class="w-full">
-                                                <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                                    <select id="part-time" name="day[]" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                        <option @if(old('7') == '7') selected @endif value="7">1 Week</option>
-                                                        <option @if(old('3') == '3') selected @endif value="3">3 Day</option>
-                                                        <option @if(old('2') == '2') selected @endif value="2">2 Day</option>
-                                                        <option @if(old('1') == '1') selected @endif value="1">1 Day</option>
-                                                    </select>
-                                                    <div>
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
-                                                            <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
-                                                        </svg> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
-                                        </div>
-                                        <!--
-                                        <div class="flex items-center space-x-[29.5px] mb-7">
-                                            @if (old('body'))
-                                                @foreach (old('body') as $val_body_old )
-                                                    <div>
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5C9.5 6.10455 8.60455 7 7.5 7C6.39545 7 5.5 6.10455 5.5 5C5.5 3.89543 6.39545 3 7.5 3C8.60455 3 9.5 3.89543 9.5 5ZM7.5 14C8.60455 14 9.5 13.1046 9.5 12C9.5 10.8955 8.60455 10 7.5 10C6.39545 10 5.5 10.8955 5.5 12C5.5 13.1046 6.39545 14 7.5 14ZM7.5 21C8.60455 21 9.5 20.1045 9.5 19C9.5 17.8954 8.60455 17 7.5 17C6.39545 17 5.5 17.8954 5.5 19C5.5 20.1045 6.39545 21 7.5 21Z" fill="#827C7C"/>
-                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5 5C18.5 6.10455 17.6045 7 16.5 7C15.3954 7 14.5 6.10455 14.5 5C14.5 3.89543 15.3954 3 16.5 3C17.6045 3 18.5 3.89543 18.5 5ZM16.5 14C17.6045 14 18.5 13.1046 18.5 12C18.5 10.8955 17.6045 10 16.5 10C15.3954 10 14.5 10.8955 14.5 12C14.5 13.1046 15.3954 14 16.5 14ZM16.5 21C17.6045 21 18.5 20.1045 18.5 19C18.5 17.8954 17.6045 17 16.5 17C15.3954 17 14.5 17.8954 14.5 19C14.5 20.1045 15.3954 21 16.5 21Z" fill="#827C7C"/>
-                                                        </svg>
-                                                    </div>
-                                                    <div class="w-full">
-                                                        <input name="body[]" value="" type="text" id="first-name" class="bg-transparent border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
-                                                    </div>
-                                                    <div class="w-full">
-                                                        <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">
-                                                            <select id="part-time" name="day[]" class="overview-note-body bg-transparent border-none text-gray-900 appearance-none rounded-lg block w-full focus:ring-0 outline-none">
-                                                                <option @if(old('7') == '7') selected @endif value="7">1 Week</option>
-                                                                <option @if(old('3') == '3') selected @endif value="3">3 Day</option>
-                                                                <option @if(old('2') == '2') selected @endif value="2">2 Day</option>
-                                                                <option @if(old('1') == '1') selected @endif value="1">1 Day</option>
-                                                            </select>
-                                                            <div>
-                                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M3.99312 5.80669C3.76419 6.04169 3.4001 6.0417 3.17116 5.80671C2.94768 5.57732 2.94235 5.19978 3.15927 4.96344C3.16318 4.95922 4.49742 3.58936 7.16198 0.853876L7.99005 0L8.82187 0.849745L12.8284 4.96674C13.0525 5.19676 13.0578 5.57532 12.8403 5.81228C12.599 6.06042 12.234 6.06046 12.0045 5.82485L7.98992 1.70379L3.99312 5.80669Z" fill="#3BD7CF"/>
-                                                                    <path d="M12.0069 10.1933C12.2358 9.95831 12.5999 9.9583 12.8288 10.1933C13.0523 10.4227 13.0576 10.8002 12.8407 11.0366C12.8368 11.0408 11.5026 12.4106 8.83802 15.1461L8.00995 16L7.17813 15.1503L3.1716 11.0333C2.94753 10.8032 2.9422 10.4247 3.15972 10.1877C3.40099 9.93958 3.76603 9.93954 3.99554 10.1751L8.01008 14.2962L12.0069 10.1933Z" fill="#3BD7CF"/>
-                                                                </svg> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span onclick="$(this).parent().remove();" class="material-symbols-outlined  hover:cursor-pointer text-xs">delete</span>
-                                                    
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                        -->
-                                    </div>
-                                    
+                                    <div class="add"></div>
                                     {{-- Button --}}
                                     <div onclick="add_more()" class="w-[133px] h-10 bg-palet rounded-md flex items-center justify-center hover:cursor-pointer">
                                         <span class="task-btn-text">+ Add More </span>
@@ -907,12 +850,12 @@
                                 {{-- Upload --}}
                                 <form action="{{ route('setting.upload.avatar') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <label for="avatar" class="group">
+                                    <label for="avatar-setting" class="group">
                                         <div id="bg-avatar" class="relative  w-[186px] flex justify-center h-[186px] bg-[#E8E8E8] rounded-full border-[2px] hover:cursor-pointer">
                                             @if (empty($setting->avatar->avatar))
-                                                <img id="output" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                                <img id="output-setting" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
                                             @else
-                                                <img id="output" src="{{ asset('storage/avatar/'.$setting->avatar->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                                <img id="output-setting" src="{{ asset('storage/avatar/'.$setting->avatar->avatar) }}" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
 
                                             @endif
 
@@ -925,7 +868,7 @@
                                             </div>                           
                                         </div>
                                     </label>
-                                    <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
+                                    <input type="file" id="avatar-setting" name="avatar" class="hidden" onchange="loadFileSetting(event)">
                                 </form>
                             </div>
                             <div class="flex mt-[51px]"></div>
@@ -1055,8 +998,8 @@
         $(document).ready(function() {
             $(".placepicker-setting").placepicker();
         }); 
-        var loadFile = function(event) {
-          var output = document.getElementById('output');
+        var loadFileSetting = function(event) {
+          var output = document.getElementById('output-setting');
           output.src = URL.createObjectURL(event.target.files[0]);
           output.onload = function() {
             URL.revokeObjectURL(output.src)

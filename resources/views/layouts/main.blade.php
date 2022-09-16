@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link  href="{{ asset('css/flowbite.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/intlTelInput.css') }}">
@@ -14,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
     {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Roboto&display=swap" rel="stylesheet"> --}}
@@ -28,6 +30,7 @@
     <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script>
     <script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    
     <script src="{{ asset('js/tagify/tagify.js') }}"></script>
     <script src="{{ asset('js/tagify/tagify-min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -114,6 +117,11 @@
         .tagify__input{
             font-size: 11px
         }
+
+        /* .toast-success{
+            background: #10b981;
+            font-family: Roboto;
+        } */
       
     </style>
     <script src="{{ asset('js/jQuery.js') }}"></script>
@@ -123,7 +131,7 @@
     <script src="{{ asset('js/placePicker.js') }}"></script>
     <script src="{{ asset('js/jQuery/jQueryUi/jquery-ui.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/celender/caleandar.min.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body class="bg-backround font-roboto ">
    
@@ -136,6 +144,10 @@
         
     </div>
     <script src="{{ asset('js/sideNav.js') }}"></script>
-    
+    @if (session('Success'))
+    <script>
+       toastr.success("{{ session('Success') }}", 'Success')
+    </script>
+    @endif
 </body>
 </html>

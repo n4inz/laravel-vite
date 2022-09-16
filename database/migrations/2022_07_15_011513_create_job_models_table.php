@@ -96,6 +96,7 @@ return new class extends Migration
 
             $table->string('salary_type')->nullable();
             $table->string('rate')->nullable();
+            $table->string('range')->nullable();
             $table->string('pay_frequency')->nullable();
             $table->string('pay_with')->nullable();
             $table->boolean('rate_negotiable')->nullable()->default(false);

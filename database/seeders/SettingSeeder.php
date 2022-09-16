@@ -110,7 +110,7 @@ class SettingSeeder extends Seeder
             }
 
             $subcategory_child = [
-                'Nanny/ Sitter',
+                'Nanny',
                 // 'Sister',
                 'Au Pair',
                 'Maternity Care',

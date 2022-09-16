@@ -118,9 +118,9 @@
                                     <hr class="bg-[#ECECEC] h-[1px] w-full mt-[14.5px]">
                                     <div class="px-4 mt-6 flex items-center justify-center">
                                         {{-- Upload --}}
-                                        <label for="avatar" class="group">
+                                        <label for="avatar-client" class="group">
                                             <div id="bg-avatar" class="relative  w-[186px] flex justify-center h-[186px] bg-[#E8E8E8] rounded-full border-[2px] hover:cursor-pointer">
-                                                <img id="output" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
+                                                <img id="output-client" alt="" class="w-full rounded-full ring-0 bg-opacity-80 hover:animate-pulse">
                                                 <div class="absolute -bottom-3 w-9 h-9 bg-palet rounded-full flex items-center justify-center">
                                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M1.6875 3.375C1.6875 2.44302 2.44302 1.6875 3.375 1.6875H14.625C15.557 1.6875 16.3125 2.44303 16.3125 3.375V14.625C16.3125 15.557 15.557 16.3125 14.625 16.3125H3.375C2.44303 16.3125 1.6875 15.557 1.6875 14.625V3.375ZM3.375 2.8125C3.06434 2.8125 2.8125 3.06434 2.8125 3.375V14.625C2.8125 14.9357 3.06434 15.1875 3.375 15.1875H14.625C14.9357 15.1875 15.1875 14.9357 15.1875 14.625V3.375C15.1875 3.06434 14.9357 2.8125 14.625 2.8125H3.375Z" fill="white"/>
@@ -130,7 +130,7 @@
                                                 </div>                           
                                             </div>
                                         </label>
-                                        <input type="file" id="avatar" name="avatar" class="hidden" onchange="loadFile(event)">
+                                        <input type="file" id="avatar-client" name="avatar" class="hidden" onchange="loadFileClient(event)">
                                     </div>
                                     <span class="{{ $errors->has('avatar') ? 'text-red-600' : '' }} text-center text-xs mt-4 mb-4 flex items-center justify-center text-gray-400">Max 126Kb</span>
                                     <div class="flex mt-4"></div>
@@ -279,9 +279,9 @@
         })
 
         // Priview image
-        var loadFile = function(event) {
+        var loadFileClient = function(event) {
 
-          var output = document.getElementById('output');
+          var output = document.getElementById('output-client');
           output.src = URL.createObjectURL(event.target.files[0]);
           output.onload = function() {
             URL.revokeObjectURL(output.src)

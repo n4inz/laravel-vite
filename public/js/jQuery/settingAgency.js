@@ -7,7 +7,7 @@ function add_more(){
                                 </svg>
                             </div>
                             <div class="w-full">
-                                <input name="body[]" value="" type="text" id="first-name" class="bg-transparent border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task">
+                                <input name="body[]" value="" type="text" id="first-name" class="bg-transparent border-none task-text-body text-colortext focus:ring-0 w-full p-1 outline-none" placeholder="Enter a title for this task" autocomplete="nope">
                             </div>
                             <div class="w-full">
                                 <div class="w-[214px] p-3 h-8 border border-[#ECECEC] flex items-center rounded">

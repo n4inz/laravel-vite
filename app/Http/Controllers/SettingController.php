@@ -78,10 +78,11 @@ class SettingController extends Controller
 
             $this->settingRepository->created($request);
         } else {
+
             $a = $this->settingRepository->updated($request);
 
         }
-        return redirect()->back()->with('success', 'Setting was success update');
+        return redirect()->back()->with('Success', 'Settings saved successfully');
     }
 
     public function upload_avatar(Request $request)
@@ -100,7 +101,7 @@ class SettingController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('Success', 'Profile Update Success');
+        return redirect()->back()->with('Success', 'Avatar Updated Success');
     }
 
     public function order_predefined(Request $request)
