@@ -15,6 +15,7 @@
     <title>Family</title>
 </head>
 <body class="bg-backround font-roboto">
+    @include('family.layoutFamily.navbar')
     <div>
        @yield('container')
     </div>

@@ -174,6 +174,7 @@ Route::prefix('family')->group(function () {
     Route::get('/rekomendation',[FamilyHomeController::class, 'rekomendation'])->name('family.rekomendation');
     Route::get('/sign-document',[FamilyHomeController::class, 'sign_document'])->name('family.sign_document');
     Route::get('/all-contract',[FamilyHomeController::class, 'all_contract'])->name('family.all_contract');
-
+    Route::get('/document',[FamilyHomeController::class, 'document'])->name('family.document');
+    Route::get('/messages',[FamilyHomeController::class, 'messages'])->name('family.messages');
 
 });

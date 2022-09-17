@@ -62,4 +62,14 @@ class HomeController extends Controller
     {
         return view('family.all_contract');
     }
+
+    public function document()
+    {
+        return view('family.document');
+    }
+
+    public function messages()
+    {
+        return view('family.messages');
+    }
 }
